@@ -1,0 +1,46 @@
+.custome-msg{
+	text-align: center;
+font-style: italic;
+font-weight: bold;
+}
+.row.clearfix.cus_flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*--------Lead Css---------*/
+.cursor_pointer {
+	cursor: pointer !important;
+}
+.add-remove-button, .form-control, .selectpicker, .btn {
+	/*border-radius: 10px;*/
+	/*line-height: 1px;*/
+}
+.add-remove-button {
+	/*border-radius: 10px;*/
+	line-height: 1px;
+}
+.d-none {
+	display: none !important;
+}
+.swal2-popup {
+	font-size: 1.5rem !important;
+}
+.nav-stacked>li.active>a, .nav-stacked>li.active>a:hover {
+	color: #ee0909 !important;
+	border-left-color: #ee0909 !important;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+	background-color: transparent !important;
+}
+.box .nav-stacked>li {
+	border-bottom: none !important;
+}
+
+#allRows, .leads_rows {
+    cursor: pointer;
+}
+
+.daterangepicker .calendar th, .daterangepicker .calendar td {
+    min-width: 25px !important;
+}

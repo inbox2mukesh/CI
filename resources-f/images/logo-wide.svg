@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1177.285" height="331.087" viewBox="0 0 1177.285 331.087">
+  <defs>
+    <filter id="Rectangle_42" x="391.285" y="267.375" width="201" height="22" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_43" x="391.285" y="277.375" width="201" height="22" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="immigration" x="391.285" y="160.375" width="488" height="122" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Western_Overseas" x="379.285" y="65.375" width="798" height="135" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-4"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_200" x="190.55" y="97.958" width="137.062" height="177.936" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-5"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-5"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_1" x="118.285" y="156.375" width="118" height="103" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-6"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-6"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Intersection_2" x="41.067" y="0" width="331.087" height="331.087" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-7"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-7"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_199" x="0" y="89.019" width="163.439" height="196.46" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-8"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-8"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_96" data-name="Group 96" transform="translate(-341.677 -3723.913)">
+    <g transform="matrix(1, 0, 0, 1, 341.68, 3723.91)" filter="url(#Rectangle_42)">
+      <rect id="Rectangle_42-2" data-name="Rectangle 42" width="183" height="4" rx="2" transform="translate(400.29 273.37)" fill="#bf0505"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 341.68, 3723.91)" filter="url(#Rectangle_43)">
+      <rect id="Rectangle_43-2" data-name="Rectangle 43" width="183" height="4" rx="2" transform="translate(400.29 283.37)" fill="#bf0505"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 341.68, 3723.91)" filter="url(#immigration)">
+      <text id="immigration-2" data-name="immigration" transform="translate(400.29 244.37)" fill="#484848" font-size="74" font-family="Poppins-Medium, Poppins" font-weight="500" letter-spacing="0.008em"><tspan x="0" y="0">Immigration</tspan></text>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 341.68, 3723.91)" filter="url(#Western_Overseas)">
+      <text id="Western_Overseas-2" data-name="Western Overseas" transform="translate(388.29 159.37)" fill="#484848" font-size="84" font-family="Poppins-Medium, Poppins" font-weight="500" letter-spacing="0.008em"><tspan x="0" y="0">Western Overseas</tspan></text>
+    </g>
+    <g id="Group_94" data-name="Group 94">
+      <g transform="matrix(1, 0, 0, 1, 341.68, 3723.91)" filter="url(#Path_200)">
+        <path id="Path_200-2" data-name="Path 200" d="M52.036,1.408,67.811,0,52.674,117.132c-1.67,12.923-18.19,24.753-36.9,26.423L0,144.963,15.137,27.832C16.807,14.908,33.328,3.078,52.036,1.408Z" transform="matrix(0.92, 0.39, -0.39, 0.92, 256.19, 103.96)" fill="#bf0505"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 341.68, 3723.91)" filter="url(#Polygon_1)">
+        <path id="Polygon_1-2" data-name="Polygon 1" d="M47.414,4.4a3,3,0,0,1,5.172,0L97.341,80.479A3,3,0,0,1,94.755,85H5.245a3,3,0,0,1-2.586-4.521Z" transform="translate(227.29 247.37) rotate(180)" fill="#484848"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 341.68, 3723.91)" filter="url(#Intersection_2)">
+        <path id="Intersection_2-2" data-name="Intersection 2" d="M-9795.761,311.757a141.4,141.4,0,0,0,28.045,2.8c77.9,0,141.268-63.372,141.268-141.266S-9689.82,32.02-9767.716,32.02c-75.925,0-138.054,60.216-141.146,135.4q-.117-3.05-.117-6.13A156.543,156.543,0,0,1-9752.436,4.743a156.542,156.542,0,0,1,156.544,156.544A156.542,156.542,0,0,1-9752.436,317.83,156.671,156.671,0,0,1-9795.761,311.757Z" transform="translate(9959.05 1.26)" fill="#484848"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 341.68, 3723.91)" filter="url(#Path_199)">
+        <path id="Path_199-2" data-name="Path 199" d="M24.533,9.711,52.75,6.987C-78.124-16.185,75.536,24.619,77.206,37.542L92.344,154.674l-15.775-1.408c-18.709-1.67-35.229-13.5-36.9-26.423Z" transform="matrix(0.92, -0.39, 0.39, 0.92, 9, 131.1)" fill="#484848"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,50 @@
+<?php
+/**
+ * @package         WOSA
+ * @subpackage      IELTS/PTE..
+ * @author          Haroon
+ *
+ **/
+use Restserver\Libraries\REST_Controller;
+defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH . 'libraries/REST_Controller.php';   
+     
+class Free_resource_section extends REST_Controller {  
+     
+    public function __construct() {
+      parent::__construct();
+      $this->load->database();        
+      $this->load->model('Free_resources_modal');
+    } 
+    
+    public function index_get()
+    { 
+        if(!$this->Authenticate($this->input->get_request_header('API-KEY'))) {            
+            $data['error_message'] = [ "success" => 2, "message" => UNAUTHORIZED, "data"=>''];
+        }else{        
+          $id = $this->input->get_request_header('ID');
+          $bData['basic']['content'] = $this->Free_resources_modal->getFreeResourceContentSpecific($id);
+          foreach ($bData as $key => $c) {
+              $data2['c'] = $this->Free_resources_modal->getFreeResourceContentsTopic($id);
+              $bData[$key]['Course']= $data2['c'];                      
+          }
+          $frs = $this->Free_resources_modal->getFreeResourceSections($id);
+          foreach ($frs as $d) {
+              //$data2['c'] = $this->Free_resources_modal->getFreeResourceContentsCourse($id);
+              $bData['allSection'][]= $d;                      
+          }
+
+
+          //$bData = array_merge($bData,$frs);
+
+          if(!empty($bData)){
+            $data['error_message'] = [ "success" => 1, "message" => "success", "data"=> $bData];    
+          }else{
+            $data['error_message'] = [ "success" => 0, "message" => "No section found!", "data"=> $bData];     
+          }
+        }        
+        $this->set_response($data, REST_Controller::HTTP_CREATED);
+        
+    }
+        
+}
