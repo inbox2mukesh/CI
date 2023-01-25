@@ -5,13 +5,13 @@
 
 # Node artifact files//
 #system/
-uploads/
-.htaccess/
-application/config/config.php
-application/config/database.php
-application/cache/
-cache/
-index.php
+#uploads/
+#.htaccess/
+#application/config/config.php
+#application/config/database.php
+#application/cache/
+#cache/
+#index.php
 
 # Compiled Java class files
 *.class
