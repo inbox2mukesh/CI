@@ -8,12 +8,12 @@
 global $customJS;
 define('JS_CSS_VERSION', '0.0.1');
 define('ADMIN', 'Super Admin');
-define('BASEURL', 'http://localhost/ca/');
+define('BASEURL', 'http://localhost/aus/');
 ///////////////////////////////////settings start///////////////////////////////////////
 define('WOSA_ONLINE_DOMAIN', 0);
 define('INDIA_ID', 101);
-define('DEFAULT_COUNTRY', '38');//canada
-//define('DEFAULT_COUNTRY', '13');//Australia
+//define('DEFAULT_COUNTRY', '38');//canada
+define('DEFAULT_COUNTRY', '13');//Australia
 //define('DEFAULT_COUNTRY', '101');//india
 
 if(DEFAULT_COUNTRY==38){

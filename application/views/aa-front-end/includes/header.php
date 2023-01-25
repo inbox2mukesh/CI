@@ -148,7 +148,7 @@
 															<ul class="sub-menu">
 																<li class="back"><a href="#">Back</a></li>
 																<div class="submenu-scroll scroll-v">
-																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('why_canada');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/why-canada.svg');?>" alt="">Why Canada?</a> </li>
+																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('why_australia');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/why-canada.svg');?>" alt="">Why Australia?</a> </li>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('gallery');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/gallery.svg');?>" alt="">Image Gallery</a> </li>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('videos');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/video-gallery.svg');?>" alt="">Video Gallery</a> </li>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('contact_us');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/contact.svg');?>" alt="">Contact</a> </li>
@@ -210,11 +210,11 @@
 												</ul>
 											</div>
 										</div>
-										<div class="rts-btn mob-display">
+										<!-- <div class="rts-btn mob-display">
 											<ul>
 												<li class="enq-btn" onClick="location.replace('<?php echo base_url('counseling');?>');"><a>Book Counseling</a></li>
 											</ul>
-										</div>
+										</div> -->
 										<div class="hamburger-menu">
 											<div class="bar"></div>
 										</div>

@@ -287,7 +287,7 @@
     <li> <a href="<?php echo site_url('adminController/gallery/index');?>"><i class="fa fa-list-ul"></i> Gallery</a> </li><?php } ?> 
   </ul>
 </li>
-
+<!-- 
 <li> <a href="#"> <i class="fa fa-desktop text-light"></i> <span> Counseling Sessions </span> </i> </a>
   <ul class="treeview-menu">
   <?php 
@@ -318,18 +318,10 @@
       <a href="<?php echo site_url('adminController/counseling_session/counselling_booking_completed_list/');?>"><i class="fa fa-list-ul"></i>Success booking Lead</a>
       </li>
       <?php }?> 
-    
-    <?php /*
-        if($this->Role_model->_has_access_('counseling_session','index')){
-    ?>
-    <li> <a href="<?php echo site_url('adminController/counseling_session/index');?>"><i class="fa fa-list"></i> Demo/Counseling</a> </li><?php } ?>
-    <?php
-        if($this->Role_model->_has_access_('counseling_session','counselling_booking_list')){
-    ?>
-    <li> <a href="<?php echo site_url('adminController/counseling_session/counselling_booking_list');?>"><i class="fa fa-list"></i> Demo/Counseling booking</a> </li><?php } */?>
+   
   </ul>
 </li>
-
+ -->
 <li> <a href="#"> <i class="fa fa-newspaper-o text-light"></i> <span>Mock Test </span> </a>
   <ul class="treeview-menu">
     <?php

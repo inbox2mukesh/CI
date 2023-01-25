@@ -35,7 +35,7 @@
 			<div class="column">
 				<h4>More</h4>
 				<ul>
-					<li><a href="<?php echo base_url('why_canada');?>">Why Canada?</a></li>
+					<li><a href="<?php echo base_url('why_australia');?>">Why Australia?</a></li>
 					<li><a href="<?php echo base_url('gallery');?>">Image Gallery</a></li>
 					<li><a href="<?php echo base_url('videos');?>">Video Gallery</a></li>
 					<li><a href="<?php echo base_url('contact_us');?>">Contact</a></li>

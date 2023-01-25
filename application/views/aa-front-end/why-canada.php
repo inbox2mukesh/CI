@@ -11,14 +11,13 @@
 			<div class="vd-border">
 				<div class="embed-responsive embed-responsive-16by9">
 					<video autoplay preload="auto" loop="loop" muted="muted">
-						<source src="<?php echo base_url('resources-f/video/why-canada.webm'); ?>">
+						<source src="<?php echo base_url('resources-f/video/aus-vid.mp4'); ?>">
 					</video>
 				</div>
 			</div>
 			<div class="wraper-content">
-				<h2 class="font-weight-400 text-uppercase text-center mt-40">Why <span class="text-red font-weight-600">Canada</span></h2>
-				<p class="text-center mb-50">Hosting nearly half a million international students, Canada is known to offer high quality education at an affordable tuition fee which individuals can easily afford and global recognition of degrees is also a plus point for their personal growth. Not only does Canada have a well deserved reputation for being the most welcoming places on earth but it's also considered to be one of the safest places to live. When most countries have shut their immigration programs due to coronavirus pandemic, Canada has been quick to open migration opportunities in 2021.
-					Before making plans to live in Canada make sure that you are well-aware of the major provinces so as to carefully choose the one to reside in. Below are Canada’s major provinces that form the part of the second largest country in the world, endowing employment opportunities, high quality lifestyle, safety and security and much more.
+				<h2 class="font-weight-400 text-uppercase text-center mt-40">Why <span class="text-red font-weight-600">Australia</span></h2>
+				<p class="text-center mb-50">Hosting nearly half a million international students, Australia is known to offer high quality education at an affordable tuition fee which individuals can easily afford and global recognition of degrees is also a plus point for their personal growth. Not only does Australia have a well deserved reputation for being the most welcoming places on earth but it's also considered to be one of the safest places to live. When most countries have shut their immigration programs due to coronavirus pandemic, Australia has been quick to open migration opportunities in 2021. Before making plans to live in Australia make sure that you are well-aware of the major provinces so as to carefully choose the one to reside in. Below are Australia’s major provinces that form the part of the second largest country in the world, endowing employment opportunities, high quality lifestyle, safety and security and much more.
 				</p>
 				<!--  <div class="mt-20 text-center"><a class="btn btn-blue btn-flat view-btn" href="about.html">More About Us →</a></div>-->
 				<?php
