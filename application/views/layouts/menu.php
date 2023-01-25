@@ -123,11 +123,11 @@
       <a href="<?php echo site_url('adminController/agent'); ?>"><i class="fa fa-list-ul"></i> Become An Agent (ALL)</a>
     </li><?php } ?>
     <?php
-        if($this->Role_model->_has_access_('lead_management','crs_list')){
+       /* if($this->Role_model->_has_access_('lead_management','crs_list')){
     ?>
     <li>
       <a href="<?php echo site_url('adminController/lead_management/crs_list'); ?>"><i class="fa fa-plus"></i>Leads From CRS</a>
-    </li><?php } ?>
+    </li><?php } */?>
   </ul>
 </li>
 

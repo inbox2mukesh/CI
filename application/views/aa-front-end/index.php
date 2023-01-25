@@ -50,9 +50,9 @@
 
 		<div class="container">
 			<div class="about-content">
-					<div class="text-center" style="text-align: -webkit-center;">
+					<!-- <div class="text-center" style="text-align: -webkit-center;">
 
-							<img src="<?php echo base_url('resources-f/images/iccrc.webp');?>" alt="rcic logo" title="rcic logo" class="image_iccrc" loading="lazy">
+							<img src="<?php// echo base_url('resources-f/images/iccrc.webp');?>" alt="rcic logo" title="rcic logo" class="image_iccrc" loading="lazy">
 
 						</div>
 
@@ -64,7 +64,7 @@
 
 						</h4>						
 
-						</div>
+						</div> -->
 				
 
 				<div style="margin-top:40px;">
