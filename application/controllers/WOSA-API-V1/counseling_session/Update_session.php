@@ -30,7 +30,7 @@ public function index_post()
                
             $idd = $this->Counseling_session_model->update_student_session($id,$std_data);
             $session_data = $this->Counseling_session_model->get_student_session($id);
-             if($std_data->email_send_flag == 1)
+             if($std_data1->email_send_flag == 1)
              {
                 $mailData = [];  
                 $subject='SESSION BOOKING CONFIRMATION - Western Overseas Immigration';
@@ -57,7 +57,7 @@ public function index_post()
                 $mailData1['student_name']        =$session_data['fname'].' '.$session_data['lname'];                        
                 $mailData1['refno']               = $session_data['sessBookingNo']; 
                 $mailData1['email']               = CU_EMAIL2;   
-                //$mailData1['email']               = "navjeet2008@gmail.com";  
+              //  $mailData1['email']               = "navjeet2008@gmail.com";  
                 $mailData1['session_type']         = $session_data['session_type'];
                 $mailData1['service_id']         = $session_data['enquiry_purpose_name'];                 
                 $mailData1['booked_date']         = $session_data['booking_date'].' '.$session_data['booking_time_slot'];                            
@@ -65,10 +65,10 @@ public function index_post()
                 $mailData1['total_amount']       =$session_data['payment_gross'];
                 $mailData1['payment_status']       = $session_data['payment_status'];
                 $mailData1['email_message']       = $email_message;
-                $mailData['mobile']               = $session_data['mobile']; 
-                $mailData['useremail']               = $session_data['email']; 
+                $mailData1['mobile']               = $session_data['mobile']; 
+                $mailData1['useremail']               = $session_data['email']; 
                 $mailData1['thanks']              = THANKS;
-                $mailData1['team']                = WOSA; 
+                $mailData1['team']                = WOSA;                 
                 $this->sendEmailTostd_Aptbooking_admin($subject,$mailData1);
             } 
         $data['error_message'] = [ "success" => 1, "message" => 'Dear '.$session_data['fname'].' '.'Payment successfully done'];                

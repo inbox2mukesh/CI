@@ -24,7 +24,7 @@
             <?php echo $booked_date; ?>
             </p>
             <p style="font-size: 15px; padding: 0px; margin-top:20px;">Amount: 
-            $<?php echo $amount; ?> USD
+            <?php echo CURRENCY; ?> <?php echo $amount; ?>
             </p>
               <p style="font-size: 15px; padding: 0px; margin-top:20px;">Payment status: 
             <?php echo $payment_status; ?>
