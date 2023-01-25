@@ -191,7 +191,7 @@ if (!empty($OnlinePack->error_message->data)) {
                             </div>
                           </div>
                           <div class="col-md-6 col-sm-6">
-                          <div class="form-group">
+                          <div class="form-group selectpicker-auto">
                               <label class="font-weight-600">Country Code<span class="text-red">*</span></label>
                               <?php if($this->session->userdata('student_login_data')->id){ ?>
                               <select class="selectpicker form-control" <?php echo $readOnly_dis; ?> data-live-search="true" name="online_country_code" id="online_country_code<?php echo $package_id ?>">
@@ -258,7 +258,7 @@ echo '<option value="' . $this->session->userdata('student_login_data')->country
                         <li style="pointer-events: none;" data-step-target="step2_<?php echo $p->package_id ?>">2</li>
                         <li style="pointer-events: none;" data-step-target="step3_<?php echo $p->package_id ?>">3</li>
                       </ul>
-                      <span class="pull-right">
+                      <span class="pull-right ft-right">
                         <span class="pac-price">
                           <?php
                           if ($flag == 1) { ?>
@@ -448,31 +448,46 @@ echo '<option value="' . $this->session->userdata('student_login_data')->country
 
 
 
+	$(".selectpicker-auto .bootstrap-select").each(function(i) {
+	   $(this).addClass("pick"+i)
+	   $(".pick"+i).on("click", function(e) {
+		   e.preventDefault();
+		   var minw = $(this).width();
+		   var hgg = $(this).offset().top;
+		   var hg2 = $(this).parents().find(".scroll-select-picker").offset().top;
+		  var offt = hgg-hg2 + 10;   
+		   var hggwa = $(this).offset();
+		   //var countmdl = mdlw - mdlw1;
+		   var mdlw = $(".scroll-select-picker").width();
+		   var hglft = hggwa.left;
+		   var jhd = $(window).width();
+		//    alert(hglft);
+		   var mdlw1 = $(".scroll-select-picker .modal-lg").width();
+		   var hgdr = jhd - mdlw1;
+		   var countmdlfinal = hglft - hgdr / 2;
+		   if ($(window).width() > 900) {
+			   $(this).children(".dropdown-menu.open").css({
+				   "position": "fixed",
+				   "top": offt,
+				   "left": countmdlfinal,
+				   "min-width": minw,
+				   "max-width": minw
+			   });
+		   } else {
+			   $(this).children(".dropdown-menu.open").css({
+				   "position": "fixed",
+				   "top": offt + 20,
+				   "left": countmdlfinal,
+				   "min-width": minw,
+				   "max-width": minw
+			   });
+		   }
+		   $(".scroll-select-picker .pp-scroll").toggleClass("active");
+	   })
+   })
 
-  $(".selectpicker-auto .bootstrap-select").each(function() {
-			
-      $(this).click(function(e) { 	
-
-          e.preventDefault();
-          var minw = $(this).width();
-          var hgg = $(this).offset();
-          var offt = hgg.top;
-          var hggwa = $(this).offset();
-          //var countmdl = mdlw - mdlw1;
-          var mdlw = $(".scroll-select-picker").width();
-          var hglft = hggwa.left;
-          var jhd = $(window).width();
-          var mdlw1 = $(this).parents(".modal-dialog").width();
-          var hgdr = jhd - mdlw1;
-          var countmdlfinal = hglft - hgdr/2;
-          if ( $(window).width() > 900 ){
-              $(this).children(".dropdown-menu.open").css({"position" : "fixed","top" : offt + 16,"left" : countmdlfinal + 9, "min-width": minw});
-          }else{
-              $(this).children(".dropdown-menu.open").css({"position" : "fixed","top" : offt + 20,"left" : countmdlfinal, "min-width": minw});
-          }
-          $(".scroll-select-picker .modal-body").toggleClass("active");
-      })
-  })
-
+   $(window).click(function() {
+	   $(".scroll-select-picker .pp-scroll").removeClass("active");
+   });
 
 </script>

@@ -86,9 +86,10 @@
 								<div class="book-title">Time Slot<span class="text-red">*</span></div>
 								<div class="font-13 text-grey mb-10"><i class="fa fa-spinner fa-spin mr-10"></i> Select Date and Load Time Slots</div>
 								<div class="time-slot-row" id="time_slot_row"></div>
-
-							<div class="ft-stp">
+                               <div class="row">
+							<div class="col-md-12">
 								<div class="font-13 text-grey mb-10">Date and Time according to Toronto Canada (UTC - 5)</div>
+										</div>
 										</div>
 							</div>
 							<!-- End Right info -->
@@ -115,11 +116,11 @@
 							<!-- end left info -->
 							<!-- Start Right info -->
 							<div class="right-info-sec" id="up">
-								<div class="row">
+								<div class="row mb-20">
 									<div class="col-md-6 col-sm-6">
 										<div class="form-group">
 											<label>Full Name<span class="red-text">*</span></label>
-											<input type="text" name="cs_fname" id="cs_fname" class="fstinput allow_alphabets length_validate removeerrmessage" placeholder="" autocomplete="off" value="<?php if (isset($this->session->userdata('student_login_data')->fname)) {
+											<input type="text" name="cs_fname" id="cs_fname" class="fstinput allow_alphabets length_validate removeerrmessage" placeholder="Full Name" autocomplete="off" value="<?php if (isset($this->session->userdata('student_login_data')->fname)) {
 																																																			echo $this->session->userdata('student_login_data')->fname . ' ' . $this->session->userdata('student_login_data')->lname;;
 																																																		} else {
 																																																			echo "";
@@ -131,10 +132,7 @@
 										<div class="form-group">
 											<label>Email<span class="red-text">*</span></label>
 											<input type="email" class="fstinput allow_email removeerrmessage" value="<?php if (isset($this->session->userdata('student_login_data')->email)) {
-																															echo $this->session->userdata('student_login_data')->email;
-																														} else {
-																															echo "";
-																														} ?>" placeholder="" autocomplete="off" name="cs_email" id="cs_email" maxlength="60" onchange="echeck(this.value)">
+												echo $this->session->userdata('student_login_data')->email;} else {echo "";} ?>" placeholder="Email" autocomplete="off" name="cs_email" id="cs_email" maxlength="60" onchange="echeck(this.value)">
 											<div class="valid-validation cs_email_error" id="cs_email_error"></div>
 										</div>
 									</div>
@@ -170,7 +168,7 @@
 														}
 														?>
 													</select>
-													<input type="tel" name="cs_phoneno" class="phoneNo" id="cs_phoneno" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" value="<?php if (isset($this->session->userdata('student_login_data')->mobile)) {
+													<input type="tel" placeholder="Phone Number" name="cs_phoneno" class="phoneNo" id="cs_phoneno" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" value="<?php if (isset($this->session->userdata('student_login_data')->mobile)) {
 																																																										echo $this->session->userdata('student_login_data')->mobile;
 																																																									} else {
 																																																										echo "";
@@ -185,7 +183,7 @@
 										<div class="form-group service">
 											<label>Service<span class="red-text">*</span></label>
 											<select class="selectpicker form-control select_removeerrmessagep" data-live-search="true" name="service_id" id="service_id">
-												<option value="">Select</option>
+												<option value="">Select the Service </option>
 												<?php foreach ($serviceDataAll->error_message->data  as $d) { ?>
 													<option value="<?php echo $d->id; ?>"><?php echo $d->enquiry_purpose_name; ?></option>
 												<?php } ?>
@@ -197,7 +195,7 @@
 									<div class="col-md-12">
 										<div class="form-group" style="margin-bottom:35px!important">
 											<label>Message<span class="red-text">*</span></label>
-											<textarea placeholder="Message" rows="7" class="t-area form-control removeerrmessage" name="message" id="message" style="height:inherit;max-height:inherit" onblur="getWordCount(this.value);"></textarea>
+											<textarea placeholder="Message" rows="7" class="t-area form-control removeerrmessage" name="message" id="message" style="height:inherit;max-height:inherit"  maxlength=""></textarea>
 											<div class="valid-validation message_err cl_message_err" id="cl_message_err"></div>
 										</div>
 									</div>
@@ -231,11 +229,11 @@
 
 						<!-- Start Right info -->
 						<div class="right-info-sec" id="up">
-							<div class="form-row row">
+							<div class="form-row row mb-20">
 							
 									<div class='col-md-6 col-sm-6 form-group required'>
 										<label class='control-label'>Name on Card<span class="text-red">*</span></label>
-										<input class='fstinput allow_alphabets removeerrmessage' type='text' id="card_holder_name">
+										<input class='fstinput allow_alphabets removeerrmessage' type='text' id="card_holder_name" placeholder="Name on Card">
 										<p class="validation card_holder_name_err" id="card_holder_name_err"></p>
 									</div>
 
@@ -325,6 +323,23 @@
 	})
 </script>
 <script>
+var wordLen = 2000,
+len; // Maximum word length
+$('#message').keydown(function(event) {	
+	len = $('#message').val().split(/[\s]+/);
+	if (len.length > wordLen) { 
+		if ( event.keyCode == 46 || event.keyCode == 8 ) {// Allow backspace and delete buttons
+    } else if (event.keyCode < 48 || event.keyCode > 57 ) {//all other buttons
+    	event.preventDefault();
+    }
+	$(".cl_message_err").text("The maximium length for message is upto "+wordLen+ " words!");			
+			//return false;
+	}	
+	//wordsLeft = (wordLen) - len.length;
+	//$('.message_err').html(wordsLeft+ ' words left');
+	});
+
+
 	var steps = $('#demo').steps({
 		//onChange:function(){alert("change")},
 		onFinish: function() {}
@@ -358,7 +373,7 @@
       // $('.complaintBtn').prop('disabled', false);
       return true;
     } else {
-      $(".cs_email_error").text("Please enter the valid Email Id");
+      $(".cs_email_error").text("Please enter the valid email ");
       // $('#online_email' + id).focus();
       // $('.complaintBtn').prop('disabled', true);
       return false;
@@ -378,31 +393,31 @@
 			$("#cs_fname_error").text('');
 		} else if (fname == "") {
 			//$("#cs_fname").focus();
-			$("#cs_fname_error").text("Please enter Full Name");
+			$("#cs_fname_error").text("Please enter the full name");
 			flag = 0;
 		} else {
 			//$("#cs_fname").focus();
-			$("#cs_fname_error").text("Please enter valid Name. Numbers not allowed!");
+			$("#cs_fname_error").text("Please enter the full name");
 			flag = 0;
 		}
 		if (email != "") {
 			$("#cs_email_error").text('');
 		} else {
 			//$("#cs_email").focus();
-			$("#cs_email_error").text('Please enter valid Email Id');
+			$("#cs_email_error").text('Please enter the valid email');
 			flag = 0;
 		}
 
 		if (mobile.length > 10 || mobile.length < 10) {
 			//$("#cs_phoneno").focus();
-			$("#cs_phoneno_error").text('Please enter valid Number of 10 digit');
+			$("#cs_phoneno_error").text('Please enter the valid number');
 			flag = 0;
 		} else {
 			$("#cs_phoneno_error").text('');
 		}
 		if (service_id == "") {
 			//$("#service_id").focus();
-			$("#service_id_error").text('Please select service');
+			$("#service_id_error").text('Please select the service');
 			flag = 0;
 		} else {
 			$("#service_id_error").text('');
@@ -411,7 +426,7 @@
 
 		if (message == "") {
 			//$("#message").focus();
-			$(".cl_message_err").text('Please enter message');
+			$(".cl_message_err").text('Please enter the message');
 			flag = 0;
 		} else {
 			$(".cl_message_err").text('');
@@ -433,27 +448,27 @@
 		var flag=1;
   if($('#card_holder_name').val() == "")
   {
-    $('#card_holder_name_err').text("Please Enter Name on Card")
+    $('#card_holder_name_err').text("Please enter name on card")
     flag=0
   }
   if($('#card_number').val() == "")
   {
-    $('#card_number_err').text("Please Enter Card Number")
+    $('#card_number_err').text("Please enter card number")
     flag=0
   }
   if($('#card_cvc').val() == "")
   {
-    $('#card_cvc_err').text("Please Enter CVC")
+    $('#card_cvc_err').text("Please enter CVC")
     flag=0
   }
   if($('#exp_month').val() == "")
   {
-    $('#exp_month_err').text("Please Enter Expiration Month")
+    $('#exp_month_err').text("Please enter expiration month")
     flag=0
   }
   if($('#exp_year').val() == "")
   {
-    $('#exp_year_err').text("Please Enter Expiration Year")
+    $('#exp_year_err').text("Please enter expiration year")
     flag=0
   }
   if (flag == 1) {
@@ -534,9 +549,10 @@
 		words = words.filter(function(words) {
 			return words.length > 0
 		}).length;
-		//alert(words)
-		if (words > 150) {
-			$(".cl_message_err").text("Please enter max. 150 words only!");
+		
+		if (words > 5) {
+			
+			$(".cl_message_err").text("Please enter max.10 words only!");			
 			return false;
 		} else {
 			$(".cl_message_err").text("");
@@ -567,7 +583,8 @@
 			success: function(data) {
 				$("#sessiongroupid").val(data.counseling_sessions_group_id)
 				$("#bookid").val(data.id)
-				$("#btnNext").removeClass("hide");
+				
+				action_btn_handle();
 			},
 			beforeSend: function() {},
 		});
@@ -587,23 +604,36 @@
 			success: function(data) {
 				$("#time_slot_row").html(data);
 				$("#bookedsessiontype").val(sessionType);
-
-
-			},
+				action_btn_handle();
+				},
 			beforeSend: function() {},
 		});
 	}
 
+	function action_btn_handle()
+	{
+		var sessionDates = $(".cs_bookingdate:checked").val();
+		var cs_bookingtime = $(".cs_bookingtime:checked").val();
+		if($(".cs_bookingdate:checked").length >0 && $(".cs_bookingtime:checked").length>0)
+		{
+			$("#btnNext").removeClass("hide");
+		}
+		else {
+			$("#btnNext").addClass("hide");
+		}
+		
+	}
+	
 	if ($(window).width() <= 768) {
 		$(".text-limit").each(function(i, v) {
 			let tml = $(this).text();
 			let tmlem = tml.replace(/ /g, "");
 			//console.log(i+":" +tml.length +":"+ tml );
 			if (tmlem.length > 375) {
-				$(this).html('<span class="mx-height-20 index' + i + '">' + tml.substr(0, 375) + '...' + '</span>').append("<span class='readmore-btn rd" + i + "'>Read More</span>");
+				$(this).html('<p class="mx-height-20 index' + i +'">' + '<p> </p>' + tml.substr(0, 375) + '...' + '</p>').append("<div class='readmore-btn rd" + i + "'>Read More</div>");
 				$(".rd" + i).click(function() {
 					$(this).toggleClass("active");
-					$(this).parent().toggleClass("ht-auto");
+					$(this).parent().toggleClass("p");
 					if ($(".rd" + i).hasClass("active")) {
 						$(".index" + i).text(tml);
 						$(this).text(" Read Less");

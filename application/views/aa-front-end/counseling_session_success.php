@@ -3,13 +3,11 @@
             <div class="rw-flex">
                 <!-- Start Checkout Details-->
                 <div class="main-box" style="width: 100%;">
-                    <div class="success-box">
+                    <div class="success-box font-16">
                         <p>Your booking successfully & Our team will shortly get in touch with you.</p>
                         <p>Our Team Will Contact You Shortly.</p>
                         <p>Thank You!</p>
-                        <p><a href="<?php echo site_url(); ?>" style="color: blue;font-size: 12px;">
-                                << Back</a>
-                        </p>
+                       
                         <!--End Login Popup-->
                     </div>
                 </div>
@@ -24,7 +22,7 @@
         $(function() {
             setTimeout(function() {
                  window.location.replace("<?php echo site_url() ?>");
-            }, 5000);
+            }, 10000);
         });
         // disable right click 
         if (document.layers) {

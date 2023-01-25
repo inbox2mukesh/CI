@@ -33,7 +33,7 @@ class Counseling extends MY_Controller
         $data['newsData'] = json_decode($this->_curlGetData(base_url(GET_NEWS_DATA_URL), $headers));
         $data['serviceData'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers));
         $data['generalInfo'] = $this->Counseling_session_model->get_general_info();
-        $data['serviceDataAll'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_All_URL), $headers));
+        $data['serviceDataAll'] =json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers));
         /* $data['GET_SESSION_TYPE_URL'] = json_decode($this->_curlGetData(base_url(GET_SESSION_TYPE_URL), $headers));
         if(empty($data['GET_SESSION_TYPE_URL']->error_message->data)) {
             redirect('/');
@@ -48,34 +48,7 @@ class Counseling extends MY_Controller
         //$this->load->view('aa-front-end/booking_counselling_html');
         $this->load->view('aa-front-end/includes/footer');
     }
-    function old()
-    {
-        if (isset($_SESSION['sessionBookingId'])) {
-            unset($_SESSION['sessionBookingId']);
-        }
-        $headers = array(
-            'API-KEY:' . WOSA_API_KEY,
-        );
-        $data['title'] = 'Counseling';
-        $data['newsData'] = json_decode($this->_curlGetData(base_url(GET_NEWS_DATA_URL), $headers));
-        $data['serviceData'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers));
-        $data['generalInfo'] = $this->Counseling_session_model->get_general_info();
-        $data['serviceDataAll'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_All_URL), $headers));
-        $data['GET_SESSION_TYPE_URL'] = json_decode($this->_curlGetData(base_url(GET_SESSION_TYPE_URL), $headers));
-        if (empty($data['GET_SESSION_TYPE_URL']->error_message->data)) {
-            redirect('/');
-            die();
-        }
-        $data['countryCode'] = json_decode($this->_curlGetData(base_url(GET_ALL_CNT_CODE_URL), $headers));
-        $current_DateTime = date("d-m-Y G:i:0");
-        $current_DateTimeStr = strtotime($current_DateTime);
-        //$current_DateTimeStr_after = $current_DateTimeStr + 3600; #1 Hr
-        $current_DateTimeStr_after = $current_DateTimeStr;
-        $this->Counseling_session_model->deactivate_shedule($current_DateTimeStr_after);
-        $this->load->view('aa-front-end/includes/header', $data);
-        $this->load->view('aa-front-end/counseling_session_old', $data);
-        $this->load->view('aa-front-end/includes/footer');
-    }
+    
     /*--get session time slot data via ajax*/
     function getSessionTimeSlot()
     {

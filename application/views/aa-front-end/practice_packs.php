@@ -223,7 +223,7 @@
                                 </div>
                               </div>
                               <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group selectpicker-auto">
                                   <label class="font-weight-600">Country Code<span class="text-red">*</span></label>
                                   <?php if ($this->session->userdata('student_login_data')->id) { ?>
                                     <select class="selectpicker form-control" <?php echo $readOnly_dis; ?> data-live-search="true" data-dropup-auto="true" name="online_country_code" id="online_country_code<?php echo $package_id ?>">
@@ -297,7 +297,7 @@
                           <li style="pointer-events: none;" data-step-target="step2_<?php echo $p->package_id ?>">2</li>
                         </ul>
 
-                        <span class="pull-right">
+                        <span class="pull-right ft-right">
                           <span class="pac-price">
                             <?php
                             if ($flag == 1) { ?>

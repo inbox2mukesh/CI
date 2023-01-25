@@ -194,7 +194,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Message<span class="red-text">*</span></label>
-							<textarea name="address" id="address_ba" placeholder="" rows="5" class="t-area form-control removeerrmessage" onkeyup="getWordCount(this.value);" style="height:inherit!important;max-height:inherit!important"></textarea>
+							<textarea name="address" id="address_ba" placeholder="" rows="5" class="t-area form-control removeerrmessage"  style="height:inherit!important;max-height:inherit!important"></textarea>
 							<div class="valid-validation address_ba_err"></div>
 						</div>
 					</div>
@@ -241,6 +241,21 @@
 </section>
 <!--End FAQ Section-->
 <script>
+	var wordLen = 2000,
+len; // Maximum word length
+$('#address_ba').keydown(function(event) {	
+	len = $('#address_ba').val().split(/[\s]+/);
+	if (len.length > wordLen) { 
+		if ( event.keyCode == 46 || event.keyCode == 8 ) {// Allow backspace and delete buttons
+    } else if (event.keyCode < 48 || event.keyCode > 57 ) {//all other buttons
+    	event.preventDefault();
+    }
+	$(".address_ba_err").text("The maximium length for message is upto "+wordLen+ " words!");			
+			//return false;
+	}	
+	//wordsLeft = (wordLen) - len.length;
+	//$('.message_err').html(wordsLeft+ ' words left');
+	});
 	function getWordCount(wordString) {
 		var words = wordString.split(" ");
 		words = words.filter(function(words) {
