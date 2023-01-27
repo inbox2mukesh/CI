@@ -7,7 +7,9 @@ $session_type=$counseling_session_group['session_type'];
 		    <div class="box-header bg-danger">
                 <h3 class="box-title text-primary"><?php echo 'Counseling Session Time Slot List';?></h3>
             	<div class="box-tools">
+                    <?php if($GLOBALS['csg_Active'] == 1){?>
                     <a href="<?php echo site_url('adminController/counseling_session/addTimeSlotSingleDate_/'.$counseling_session_group['id']); ?>" class="btn btn-danger btn-sm">Add Time Slot</a> 
+                    <?php }?>
                 </div>
             </div>
 			
@@ -29,7 +31,7 @@ $session_type=$counseling_session_group['session_type'];
                     <?php
 					//$sessiontypeList=getSessionType();
 					$sr=0;
-					//print_r($counseling_session);
+					
 					foreach($counseling_session as $p){ $zero=0;$one=1;$pk='id'; $table='counseling_sessions';$sr++; ?>
                     <tr>
 						<td><?php echo $sr; ?></td>
@@ -60,7 +62,10 @@ $session_type=$counseling_session_group['session_type'];
 							 <a href="javascript:void(0)" onclick="CopyToClipboard('<?php echo $p['zoom_link']?>', true, 'zoom link copied')" title="copy zoom link"><span class="fa fa-clone"></span> </a>
 							<?php 
 							}?>
+<?php if($p['active'] == 1) {?>
+
                             <a href="<?php echo site_url('adminController/Counseling_session/edit/'.$p['id']); ?>" class="btn btn-info btn-xs" data-toggle="tooltip" title="Edit"><span class="fa fa-pencil"></span> </a>
+                            <?php }?>
 							
 							<!--<a href="<?php echo site_url('adminController/Counseling_session/view_details_/'.$p['id']); ?>" class="btn btn-info btn-xs" data-toggle="tooltip" title="view"><span class="fa fa-eye"></span> </a>
 							

@@ -116,6 +116,16 @@
 							<!-- end left info -->
 							<!-- Start Right info -->
 							<div class="right-info-sec" id="up">
+								<?php
+								 if (isset($this->session->userdata('student_login_data')->id)) {
+									$readOnly = 'readonly="readonly" ';
+									$readOnly_dis = 'disabled="disabled" ';
+									//$disabled_sel="disabled='disabled'";
+								  } else {
+									$readOnly = '';
+									$readOnly_dis = "";
+								  }
+								?>
 								<div class="row mb-20">
 									<div class="col-md-6 col-sm-6">
 										<div class="form-group">
@@ -124,7 +134,7 @@
 																																																			echo $this->session->userdata('student_login_data')->fname . ' ' . $this->session->userdata('student_login_data')->lname;;
 																																																		} else {
 																																																			echo "";
-																																																		} ?>">
+																																																		} ?>" <?php echo $readOnly; ?>>
 											<div class="valid-validation cs_fname_err" id="cs_fname_error"></div>
 										</div>
 									</div>
@@ -132,8 +142,8 @@
 										<div class="form-group">
 											<label>Email<span class="red-text">*</span></label>
 											<input type="email" class="fstinput allow_email removeerrmessage" value="<?php if (isset($this->session->userdata('student_login_data')->email)) {
-												echo $this->session->userdata('student_login_data')->email;} else {echo "";} ?>" placeholder="Email" autocomplete="off" name="cs_email" id="cs_email" maxlength="60" onchange="echeck(this.value)">
-											<div class="valid-validation cs_email_error" id="cs_email_error"></div>
+												echo $this->session->userdata('student_login_data')->email;} else {echo "";} ?>" placeholder="Email" autocomplete="off" name="cs_email" id="cs_email" maxlength="60" onchange="echeck(this.value)" <?php echo $readOnly; ?>>
+											<div class="valid-validation cs_email_err cs_email_error" id="cs_email_error"></div>
 										</div>
 									</div>
 									<div class="col-md-6 col-sm-6">
@@ -168,14 +178,14 @@
 														}
 														?>
 													</select>
-													<input type="tel" placeholder="Phone Number" name="cs_phoneno" class="phoneNo" id="cs_phoneno" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" value="<?php if (isset($this->session->userdata('student_login_data')->mobile)) {
+													<input type="tel"  placeholder="Phone Number" name="cs_phoneno" class="phoneNo removeerrmessage" id="cs_phoneno" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" value="<?php if (isset($this->session->userdata('student_login_data')->mobile)) {
 																																																										echo $this->session->userdata('student_login_data')->mobile;
 																																																									} else {
 																																																										echo "";
-																																																									} ?>">
+																																																									} ?>" <?php echo $readOnly; ?>>
 
 												</div>
-												<div class="valid-validation cs_country_code_err" id="cs_phoneno_error"></div>
+												<div class="valid-validation cs_phoneno_err" id="cs_phoneno_error"></div>
 											</div>
 										</div>
 									</div>

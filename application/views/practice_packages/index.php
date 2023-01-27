@@ -172,18 +172,20 @@
             <div class="box-body">
             <div class="col-md-12" style="margin-top:10px">
                 <?php $listRecordActionArray = LIST_RECORD_ACTIONS; ?>
-                <?php if($this->Role_model->_has_access_('practice_master','active_deactive_') || $this->Role_model->_has_access_('practice_master','publish_unpublish_')){ ?>
+                <?php 
+            
+                if($this->Role_model->_has_access_('practice_packages','active_deactive_') || $this->Role_model->_has_access_('practice_packages','publish_unpublish_')){ ?>
                     <div class="col-md-4 no-padding">
                         <select class="form-control listCheckboxAction selectpicker selectpicker-ui-100">
                             <option value="">Select Action</option>
                             <?php if(LIST_RECORD_ACTIONS) { ?>
                                 <?php 
-                                    if(!$this->Role_model->_has_access_('practice_master','active_deactive_')) {
+                                    if(!$this->Role_model->_has_access_('practice_packages','active_deactive_')) {
                                         unset($listRecordActionArray[0]);
                                         unset($listRecordActionArray[1]);
                                     }
 
-                                    if(!$this->Role_model->_has_access_('practice_master','publish_unpublish_')) {
+                                    if(!$this->Role_model->_has_access_('practice_packages','publish_unpublish_')) {
                                         unset($listRecordActionArray[2]);
                                         unset($listRecordActionArray[3]);
                                     }

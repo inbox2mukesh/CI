@@ -24,6 +24,9 @@ border-radius: 10px;
             </div>
           	<div class="box-body">
 			<?php
+			 $GLOBALS['csg_Active']=$counseling_session_group['active'];
+			//echo $csg_Active=;
+			//print_r($counseling_session_group);
 				$session_type=$counseling_session_group['session_type'];
 				//$sessiontypeList=getSessionType();
 				//pr($counseling_session);

@@ -65,20 +65,7 @@
                             </select>
                         </div>
                     </div>
-                   <!--  <div class="col-md-3">
-                        <label for="date" class="control-label"><span class="text-danger">*</span>Payment Type </label>
-                        <div class="form-group">
-                            <select name="payment_type" id="payment_type" class="form-control selectpicker selectpicker-ui-100">
-                                <option value="">Select <?php echo $this->input->post('payment_type'); ?> </option>
-                                <option value="paypal" <?php if ($this->input->post('payment_type') == 'paypal') {
-                                                            echo "selected";
-                                                        } ?>>Paypal </option>
-                                <option value="email" <?php if ($this->input->post('payment_type') == 'email') {
-                                                            echo "selected";
-                                                        } ?>>Email </option>
-                            </select>
-                        </div>
-                    </div> -->
+                 
                     <div class="col-md-3">
                         <label for="date" class="control-label"><span class="text-danger">*</span>Payment Date </label>
                         <div class="form-group has-feedback">
@@ -91,6 +78,7 @@
                         <button type="submit" class="btn btn-danger rd-20" name="search_btn">
                             <i class="fa fa-search"></i> <?php echo SEARCH_LABEL; ?>
                         </button>
+                        <a href="<?php echo site_url('adminController/counseling_session/counselling_booking_completed_list');?>" class="btn btn-reset rd-20"> Reset</a>
                     </div>
                 </div>
                 <?php echo form_close(); ?>

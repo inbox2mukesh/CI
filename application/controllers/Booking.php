@@ -694,11 +694,12 @@ class Booking extends MY_Controller{
                    redirect('booking/fail_view'); 
                 } 
         }
-        
+      // echo $res_create->status;
+       // die();
         //check response for next process
-        if($res_create->charges->data[0]['captured'] ==1  && $res_create->charges->data[0]['status'] =="succeeded")
+        if($res_create->status =="succeeded")
         {  
-      
+           
           // 1=Enrollment api   2=Re-Enrollment api 3=Add-program api
           if(isset($_SESSION['fourmodule_identify_api']))
           {
@@ -792,8 +793,8 @@ class Booking extends MY_Controller{
             /* ---update the pack status and other necessary fields */         
             $params = array(    
             "active"=>$active,                        
-            "status"=>$res_create->charges->data[0]['status'],
-            "captured"=> $res_create->charges->data[0]['captured'],
+            "status"=>$res_create['status'],
+            "captured"=> $res_create['captured'],
             "method"=>$res_create->payment_method_types[0],           
             "payment_id"=>$res_create->id,      
             "payment_full_response"=>json_encode($res_create),                 
@@ -802,7 +803,7 @@ class Booking extends MY_Controller{
             "fourmodule_response"=>$response_fourmodule,                 
             "fourmodule_api_called"=>$_SESSION['fourmodule_identify_api'],   
             "fourmodule_json"=>$params_fourmoduleh,               
-            );  
+            );             
             $update_pack=$this->update_pack($params);  
             if($update_pack) 
             {
@@ -952,7 +953,7 @@ class Booking extends MY_Controller{
         }
         
        //fetch current status      
-        if($res_retrieve->charges->data[0]['status'] =='succeeded'){    
+        if($res_retrieve->status =='succeeded'){    
                
             /*
             Success payment 
@@ -1051,8 +1052,8 @@ class Booking extends MY_Controller{
             /* ---update the pack status and other necessary fields */           
             $params = array(    
                 "active"=>$active,                        
-                "status"=>$res_retrieve->charges->data[0]['status'],
-                "captured"=> $res_retrieve->charges->data[0]['captured'],
+                "status"=>$res_retrieve['status'],
+                "captured"=> $res_retrieve['captured'],
                 "method"=>$res_retrieve->payment_method_types[0],           
                 "payment_id"=>$res_retrieve->id,      
                 "payment_full_response"=>json_encode($res_retrieve),    
@@ -1102,7 +1103,7 @@ class Booking extends MY_Controller{
             {
                 $this->session->set_flashdata('exception_msg', $res_retrieve->last_payment_error['message']);  
             } */            
-            $custom_fail_status=$res_retrieve->charges->data[0]['status'];
+            $custom_fail_status=$res_retrieve['status'];
             if($custom_fail_status == ""){
                 $custom_fail_status="failed"; //custom added status 'fail' if not received any status
             }

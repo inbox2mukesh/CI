@@ -75,7 +75,12 @@
                                 <option value="">Select</option>
                                 <?php
                                 foreach ($serviceData  as $p) {
-                                    echo '<option value="' . $p['id'] . '" >' . ucfirst($p['enquiry_purpose_name']) . '</option>';
+                                    if ($p['id'] == $this->input->post('service_id')) {
+                                        $selectp = "selected";
+                                    } else {
+                                        $selectp = "";
+                                    }
+                                    echo '<option value="' . $p['id'] . '" '.$selectp.' >' . ucfirst($p['enquiry_purpose_name']) . '</option>';
                                 }
                                 ?>
                             </select>
@@ -123,6 +128,7 @@
                         <button type="submit" class="btn btn-danger rd-20" name="search_btn">
                             <i class="fa fa-search"></i> <?php echo SEARCH_LABEL; ?>
                         </button>
+                        <a href="<?php echo site_url('adminController/counseling_session/counselling_booking_list');?>" class="btn btn-reset rd-20"> Reset</a>
                     </div>
                 </div>
                 <?php echo form_close(); ?>
