@@ -2153,7 +2153,7 @@ class Package_master_model extends CI_Model
         $this->db->order_by('spkg.status','ASC');
         return $this->db->get('')->result_array();        
     }
-    function Get_onlineCourse_type($test_module_id,$programe_id){
+    function Get_onlineCourse_type($test_module_id,$programe_id,$category_id){
         $this->db->distinct('');
         $this->db->select('cat_time.course_timing,cat_time.id');
         $this->db->from('package_masters pkg');
@@ -2164,7 +2164,11 @@ class Package_master_model extends CI_Model
         }
         if($programe_id){
             $this->db->where(array('pkg.programe_id'=>$programe_id));
-        }      
+        }   
+        if($category_id){
+        $this->db->join('`package_category` pkg_cat', 'pkg_cat.`package_id`= pkg.`package_id`');
+        $this->db->where(array('pkg_cat.category_id'=>$category_id));   
+        }
         $this->db->order_by('cat_time.course_timing', 'ASC');
         return $this->db->get()->result_array();      
     }

@@ -24,7 +24,8 @@ class Get_onlineCourse_type extends REST_Controller {
         }else{
         $test_module_id = $this->input->get_request_header('TEST-MODULE-ID');
         $programe_id = $this->input->get_request_header('PROGRAME-ID');      
-        $bData = $this->Package_master_model->Get_onlineCourse_type($test_module_id,$programe_id);
+        $category_id = $this->input->get_request_header('CATEGORY-ID');      
+        $bData = $this->Package_master_model->Get_onlineCourse_type($test_module_id,$programe_id,$category_id);
         if(!empty($bData)){
         $data['error_message'] = [ "success" => 1, "message" => "success", "data"=> $bData];    
         }else{

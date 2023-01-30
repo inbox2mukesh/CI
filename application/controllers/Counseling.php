@@ -161,10 +161,11 @@ class Counseling extends MY_Controller
             $bookid = $this->input->post('bookid', true);
             $bData = $this->Counseling_session_model->Get_session_detail($bookid);
             $bookingdatestring = strtotime($this->input->post('cs_bookingdate', true));
+            $piece=explode('|',$this->input->post('cs_country_code'));
             $params = array(
                 'fname' => $this->input->post('cs_fname', true),
                 'email'    => $this->input->post('cs_email', true),
-                'country_code' => $this->input->post('cs_country_code', true),
+                'country_code' => $piece[0],
                 'mobile' => $this->input->post('cs_phoneno', true),
                 'session_id' => $this->input->post('sessiongroupid', true),
                 'session_type' => $this->input->post('cs_session_type', true),

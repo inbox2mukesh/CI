@@ -14,7 +14,7 @@
       <div class="fltr-row-5clmn">
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
-            <select class="selectpicker form-control " data-live-search="true" name="test_module_id" id="test_module_id" onChange="disableEnablepgm(this.value);GetDuation(this.value);GetOnlinePack();GetCourseType();">
+            <select class="selectpicker form-control " data-live-search="true" name="test_module_id" id="test_module_id" onChange="Getprograme(this.value)">
               <option value="">Select Course</option>
               <?php
               foreach ($allOnlineCourseTestModule->error_message->data as $p) {
@@ -26,19 +26,20 @@
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
-            <select class="selectpicker form-control" data-live-search="true" name="programe_id" id="programe_id" onChange="GetDuation(this.value);GetOnlinePack();Getcategory();GetCourseType();">
+            <select class="selectpicker form-control" data-live-search="true" name="programe_id" id="programe_id" onChange="GetDuation(this.value);Getcategory();GetCourseType();GetOnlinePack();">
               <option value="">Select Program</option>
               <?php
-              foreach ($allOnlineCoursePgm->error_message->data as $p) {
+              
+              /*foreach ($allOnlineCoursePgm->error_message->data as $p) {
               ?>
                 <option value="<?php echo $p->programe_id; ?>"><?php echo $p->programe_name; ?></option>
-              <?php } ?>
+              <?php } */?>
             </select>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
-            <select class="selectpicker form-control catOption" name="category_id" id="category_id" onChange="GetOnlinePack();GetDuation(this.value);" disabled="disabled">
+            <select class="selectpicker form-control catOption" name="category_id" id="category_id" onChange="GetDuation(this.value);GetCourseType();GetOnlinePack();" disabled="disabled">
               <option value=''>Select Module</option>
             </select>
           </div>
@@ -53,7 +54,7 @@
 
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
-            <select class="selectpicker form-control" name="duration" id="duration" onChange="GetOnlinePack();Getcategory();" disabled="disabled" data-live-search="true">
+            <select class="selectpicker form-control" name="duration" id="duration" onChange="GetOnlinePack();" disabled="disabled" data-live-search="true">
               <option value="">Select Duration</option>
               <?php
               foreach ($allOnlineCourseDuration->error_message->data as $p) {
@@ -565,7 +566,7 @@
   }
 </script>
 <script type="text/javascript">
-  function disableEnablepgm(test_module_id) {
+  function disableEnablepgmp(test_module_id) {
     //1,2,6 ielts- 3,4 pte,spoken
     $('#duration').prop('selectedIndex', 0);
     $('#course_type').prop('disabled', false);
@@ -596,6 +597,32 @@
     // $('.catOption').selectpicker('refresh');
   }
 
+  function Getprograme()
+  {
+    var test_module_id = $("#test_module_id").val();
+    $.ajax({
+      url: "<?php echo site_url('online_courses/GetPrograme'); ?>",
+      async: true,
+      type: 'post',
+      data: {
+        test_module_id: test_module_id,
+        
+      },
+      success: function(data) {
+        //alert(data)
+        $('#programe_id').html(data);
+        $('#programe_id').selectpicker('refresh');
+        Getcategory()
+        GetDuation();
+        GetOnlinePack();
+        GetCourseType();
+        $('#category_id').prop('disabled', false);
+        $('#course_type').prop('disabled', false);
+        $('#duration').prop('disabled', false);
+      },
+      beforeSend: function() {},
+    });
+  }
   function GetDuation() {
     var test_module_id = $("#test_module_id").val();
     var programe_id = $("#programe_id").val();
@@ -659,7 +686,7 @@
     var newoffset = limit_v + offset_v;
 
 
-    if (test_module_id == <?php echo IELTS_ID; ?> || test_module_id == <?php echo PTE_ID; ?> || test_module_id == <?php echo UKVI_CD_IELTS; ?>) {
+    /* if (test_module_id == <?php echo IELTS_ID; ?> || test_module_id == <?php echo PTE_ID; ?> || test_module_id == <?php echo UKVI_CD_IELTS; ?>) {
       $('#programe_id').prop('disabled', false);
       $('#duration').prop('disabled', false);
       $('#category_id').prop('disabled', false);
@@ -678,7 +705,7 @@
       $('#duration').prop('disabled', true);
       $('#category_id').prop('disabled', true);
       $('.selectpicker').selectpicker('refresh')
-    }
+    } */
     $.ajax({
       url: "<?php echo site_url('online_courses/GetOnlinePack'); ?>",
       //async: true,
@@ -720,13 +747,14 @@
   function GetCourseType() {
     var test_module_id = $("#test_module_id").val();
     var programe_id = $("#programe_id").val();
+    var category_id = $("#category_id").val();
     $.ajax({
       url: "<?php echo site_url('online_courses/GetCourseType'); ?>",
       async: true,
       type: 'post',
       data: {
         test_module_id: test_module_id,
-        programe_id: programe_id
+        programe_id: programe_id,category_id:category_id
       },
       success: function(data) {
         $('#course_type').html(data);

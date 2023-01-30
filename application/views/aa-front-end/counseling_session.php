@@ -1,3 +1,4 @@
+
 <link href="<?php echo site_url('resources-f/css/steps.css'); ?>" rel="stylesheet" type="text/css">
 <link href="<?php echo site_url('resources-f/css/card-slider.css'); ?>" rel="stylesheet" type="text/css">
 <link href="<?php echo site_url('resources-f/css/event-booking.css'); ?>" rel="stylesheet" type="text/css">
@@ -7,7 +8,7 @@
 		<h2 class="font-weight-300 text-uppercase text-center mb-30 font-28">Book Visa <span class="text-red font-weight-600">Counseling</span></h2>
 		<!-- Start Main step section -->
 		<form method="post" action="<?php echo site_url('counseling/book_session'); ?>" enctype="multipart/form-data" class="form-validation" id="studentPostForm" data-cc-on-file="false" data-stripe-publishable-key="<?php echo $this->config->item('stripe_key_cc') ?>">
-			<div class="step-app event-booking" id="demo" style="position: relative;">
+			<div class="step-app event-booking" id="demo" style="position: relative;display:-moz-deck;">
 				<ul class="step-steps" style="display:none;">
 					<li data-step-target="step1">Step 1</li>
 					<li data-step-target="step2">Step 2</li>
@@ -120,6 +121,17 @@
 								 if (isset($this->session->userdata('student_login_data')->id)) {
 									$readOnly = 'readonly="readonly" ';
 									$readOnly_dis = 'disabled="disabled" ';
+									?>
+									
+<style>
+.input-rel .bootstrap-select>.dropdown-toggle{
+	pointer-events: none;
+    color: #757575;
+
+}
+
+</style>
+									<?php 
 									//$disabled_sel="disabled='disabled'";
 								  } else {
 									$readOnly = '';
@@ -151,7 +163,8 @@
 											<label>Phone Number<span class="red-text">*</span></label>
 											<div class="group-flex">
 												<div class="input-rel">
-													<select class="phone-code selectpicker" data-show-subtext="true" data-live-search="true" style="display: none" name="cs_country_code" id="cs_country_code">
+													<select class="phone-code selectpicker" data-show-subtext="true" data-live-search="true" style="display: none; pointer-events: none;
+    color: #757575;" name="cs_country_code" id="cs_country_code">
 														<?php
 														if (DEFAULT_COUNTRY == 38) {
 															$c = 'CA';
@@ -624,9 +637,11 @@ $('#message').keydown(function(event) {
 	{
 		var sessionDates = $(".cs_bookingdate:checked").val();
 		var cs_bookingtime = $(".cs_bookingtime:checked").val();
+		//alert(cs_bookingtime)
 		if($(".cs_bookingdate:checked").length >0 && $(".cs_bookingtime:checked").length>0)
 		{
 			$("#btnNext").removeClass("hide");
+			getFinalSession(cs_bookingtime)
 		}
 		else {
 			$("#btnNext").addClass("hide");

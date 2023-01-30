@@ -1,4 +1,3 @@
->
 <div class="row">
 	<input type="hidden" id="prev_session_date_from" value="<?php echo $counseling_session_group['session_date_from']?>">
 	<input type="hidden" id="prev_session_date_to" value="<?php echo $counseling_session_group['session_date_to']?>">

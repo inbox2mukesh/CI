@@ -390,12 +390,14 @@ class Classroom_documents extends MY_Controller{
 									if($section_type=='text'){
 										$section=$this->input->post('classroom_documents_section'.$i,false);
 									}else if($section_type=='image'){
+                                        
 										if(!file_exists(CLASSROOM_DOCUMENTS_IMAGE_PATH)){
                                             mkdir(CLASSROOM_DOCUMENTS_IMAGE_PATH, 0777, true);
                                         }
 										$config['upload_path']   = CLASSROOM_DOCUMENTS_IMAGE_PATH;
 										$config['allowed_types'] = WEBP_FILE_TYPES;
 										$config['encrypt_name']  = FALSE;
+                                        $this->upload->initialize($config);
 										$this->load->library('upload',$config);
 										$section=$old_section;
 										

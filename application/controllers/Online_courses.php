@@ -249,10 +249,12 @@ class Online_courses extends MY_Controller
     {       
         $test_module_id   = $this->input->post('test_module_id', true);
         $programe_id = $this->input->post('programe_id', true);        
+        $category_id = $this->input->post('category_id', true);        
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
             'TEST-MODULE-ID:' . $test_module_id,
             'PROGRAME-ID:' . $programe_id,          
+            'CATEGORY-ID:' . $category_id,          
         );
         $catOption = '<option value="">Select Course Type</option>';
         $Getcoursetype= json_decode($this->_curlGetData(base_url(GET_ONN_COURSE_TYPE), $headers));
@@ -261,4 +263,27 @@ class Online_courses extends MY_Controller
         }
         echo $catOption;
     }
+    function GetPrograme()
+    {       
+        $test_module_id   = $this->input->post('test_module_id', true);            
+        $headers = array(
+            'API-KEY:' . WOSA_API_KEY,
+            'TEST-MODULE-ID:' . $test_module_id,
+                
+        );
+      
+        $catOption = '<option value="">Select Program</option>';
+        $Getcoursetype= json_decode($this->_curlGetData(base_url(GET_ONL_PGM), $headers));
+        $count=count($Getcoursetype->error_message->data);
+        foreach ($Getcoursetype->error_message->data as $p) {
+            if($count == 1)
+            {
+                $op_sel="selected";
+            }
+            else {$op_sel="";}
+            $catOption .= '<option value=' . $p->programe_id . ' '.$op_sel.'>' . $p->programe_name.'</option>';
+        }
+        echo $catOption;
+    }
+
 }
