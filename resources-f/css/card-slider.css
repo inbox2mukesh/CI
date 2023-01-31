@@ -131,6 +131,12 @@
 
   .ft-step .pull-right{float:right;}
   .ft-step .pull-right{margin-top: 0px; line-height: inherit;}
+
+  .glider {
+     overflow-x:scroll!important;
+    scrollbar-width: none;
+  
+    }
   }
   .glider-contain {
   width: 100%;
@@ -146,7 +152,7 @@
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
    padding-bottom: 15px;
-   overflow-x:scroll;
+   overflow-x: hidden;
 	scrollbar-width: none;
 
   }

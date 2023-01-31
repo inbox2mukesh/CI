@@ -3,49 +3,49 @@
 jQuery(function($){
 
 	setTimeout(function(){
-
-		$(".selectpicker-auto .bootstrap-select").each(function() {
-
-		   $(this).on("click", function(e) {
-
+	
+		$(".selectpicker-auto .bootstrap-select").each(function(i) {
+		   $(this).addClass("pick"+i)
+		   $(".pick"+i).on("click", function(e) {
 			   e.preventDefault();
 			   var minw = $(this).width();
-			   var hgg = $(this).offset();
-			   var offt = hgg.top;
+			   var hgg = $(this).offset().top;
+			   var hg2 = $(this).parents().find(".scroll-select-picker").offset().top;
+			  var offt = hgg-hg2 + 10;   
 			   var hggwa = $(this).offset();
 			   //var countmdl = mdlw - mdlw1;
 			   var mdlw = $(".scroll-select-picker").width();
 			   var hglft = hggwa.left;
 			   var jhd = $(window).width();
-			   var mdlw1 = $(this).parents(".modal-dialog").width();
+			//    alert(hglft);
+			   var mdlw1 = $(".scroll-select-picker .modal-lg").width();
 			   var hgdr = jhd - mdlw1;
-			   var countmdlfinal = hglft - hgdr/2;
-			   if ( $(window).width() > 900 ){
-				$(this).children(".dropdown-menu.open").css({"position" : "fixed","top" : offt + 16,"left" : countmdlfinal, "min-width": minw});
-				}else{
-				$(this).children(".dropdown-menu.open").css({"position" : "fixed","top" : offt + 20,"left" : countmdlfinal, "min-width": minw});
-		      }
-
+			   var countmdlfinal = hglft - hgdr / 2;
+			   if ($(window).width() > 900) {
+				   $(this).children(".dropdown-menu.open").css({
+					   "position": "fixed",
+					   "top": offt,
+					   "left": countmdlfinal,
+					   "min-width": minw,
+					   "max-width": minw
+				   });
+			   } else {
+				   $(this).children(".dropdown-menu.open").css({
+					   "position": "fixed",
+					   "top": offt + 20,
+					   "left": countmdlfinal,
+					   "min-width": minw,
+					   "max-width": minw
+				   });
+			   }
 			   $(".scroll-select-picker .pp-scroll").toggleClass("active");
-
 		   })
-
 	   })
-
-   },1000);
-
-
-   $(window).click(function(){
-
-	   	$(".scroll-select-picker .pp-scroll").removeClass("active");
-
-   });
-
-
-})
-
-
-
+	},1000);
+	   $(window).click(function() {
+		   $(".scroll-select-picker .pp-scroll").removeClass("active");
+	   });
+	})
 
 
 $(".lecture-video-box  > a").each(function(i) {

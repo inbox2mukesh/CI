@@ -153,8 +153,8 @@
 									<div class="col-md-6 col-sm-6">
 										<div class="form-group">
 											<label>Email<span class="red-text">*</span></label>
-											<input type="email" class="fstinput allow_email removeerrmessage" value="<?php if (isset($this->session->userdata('student_login_data')->email)) {
-												echo $this->session->userdata('student_login_data')->email;} else {echo "";} ?>" placeholder="Email" autocomplete="off" name="cs_email" id="cs_email" maxlength="60" onchange="echeck(this.value)" <?php echo $readOnly; ?>>
+											<input type="email" class="fstinput removeerrmessage" value="<?php if (isset($this->session->userdata('student_login_data')->email)) {
+												echo $this->session->userdata('student_login_data')->email;} else {echo "";} ?>" placeholder="Email" autocomplete="off" name="cs_email" id="cs_email" maxlength="60" onBlur="echeck(this.value)" <?php echo $readOnly; ?>>
 											<div class="valid-validation cs_email_err cs_email_error" id="cs_email_error"></div>
 										</div>
 									</div>
@@ -312,7 +312,7 @@
 							<input type="hidden" id="bookedsessiontype" name="cs_session_type">
 							<input type="hidden" id="stepindexcount" name="stepindexcount">
 							<span data-step-action="prev" class="step-btn pull-left text-grey font-weight-600" id="btnPrev"><i class="fa fa-chevron-left btn-circle-back mr-5"></i> Back </span>
-							<span data-step-action="next" class="step-btn pull-right font-weight-600 hide" id="btnNext" >Next <i class="fa fa-chevron-right btn-circle text-white ml-5"></i></span>
+							<span data-step-action="next" class="step-btn pull-right font-weight-600 hide"  onclick="topFunction()" id="btnNext" >Next <i class="fa fa-chevron-right btn-circle text-white ml-5"></i></span>
 							<span data-step-action="finish" class="step-btn font-bold pull-right font-weight-600" onclick="return Send_demo_counelling_post();">Pay Now <i class="fa fa-chevron-right btn-paynow text-white ml-5"></i></span>
 						</div>
 					</div>
@@ -388,19 +388,30 @@ $('#message').keydown(function(event) {
 
 	});
 </script>
+
+
+<script>
+if ($(window).width() <= 990) {
+	let mybutton = document.getElementById("btnNext");
+	function topFunction() {
+	document.body.scrollTop =200;
+	document.documentElement.scrollTop =200;
+ }
+}
+</script>
 <script>
 	function echeck(email) {
-		var mailformat = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,12}\b$/i
-    if (email.match(mailformat)) {
-      $(".cs_email_error").text('');
-      // $('.complaintBtn').prop('disabled', false);
-      return true;
-    } else {
-      $(".cs_email_error").text("Please enter the valid email ");
-      // $('#online_email' + id).focus();
-      // $('.complaintBtn').prop('disabled', true);
-      return false;
-    }
+	var mailformat = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,10}\b$/i
+	if (email.match(mailformat)) {
+	$("#cs_email_error" ).text('');
+	// $('.complaintBtn').prop('disabled', false);
+	return true;
+	} else {
+	$("#cs_email_error" ).text("Please enter the valid Email Id");
+	$('#cs_email').focus();
+	// $('.complaintBtn').prop('disabled', true);
+	return false;
+	}
 	}
 	function validate_step2() {
 		var flag = 1;
@@ -655,7 +666,7 @@ $('#message').keydown(function(event) {
 			let tmlem = tml.replace(/ /g, "");
 			//console.log(i+":" +tml.length +":"+ tml );
 			if (tmlem.length > 375) {
-				$(this).html('<p class="mx-height-20 index' + i +'">' + '<p> </p>' + tml.substr(0, 375) + '...' + '</p>').append("<div class='readmore-btn rd" + i + "'>Read More</div>");
+				$(this).html('<p class="mx-height-20 index' + i +'">' + tml.substr(0, 375) + '...' + '</p>').append("<div class='readmore-btn rd" + i + "'>Read More</div>");
 				$(".rd" + i).click(function() {
 					$(this).toggleClass("active");
 					$(this).parent().toggleClass("p");
