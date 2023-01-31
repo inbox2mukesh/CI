@@ -39,14 +39,14 @@
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
-            <select class="selectpicker form-control catOption" name="category_id" id="category_id" onChange="GetDuation(this.value);GetCourseType();GetOnlinePack();" disabled="disabled">
+            <select class="selectpicker form-control catOption" name="category_id" id="category_id" onChange="reset_picker('0','0','0','1','1');GetCourseType();GetDuation(this.value);GetOnlinePack();" disabled="disabled">
               <option value=''>Select Module</option>
             </select>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
-            <select class="selectpicker form-control" name="course_type" id="course_type" onChange="GetOnlinePack(),GetDuation(this.value);" disabled="disabled">
+            <select class="selectpicker form-control" name="course_type" id="course_type" onChange="reset_picker('0','0','0','0','1');GetDuation(this.value);GetOnlinePack()" disabled="disabled">
               <option value=''>Select Course Type</option>
             </select>
           </div>
@@ -597,6 +597,35 @@
     // $('.catOption').selectpicker('refresh');
   }
 
+  function reset_picker(a,b,c,d,e)
+  {
+     if(a==1)
+    {
+      $('#test_module_id').prop('selectedIndex', 0);     
+      $('.selectpicker').selectpicker('refresh')
+    }
+    if(b==1)
+    {
+      $('#programe_id').prop('selectedIndex', 0);     
+      $('.selectpicker').selectpicker('refresh')
+    }
+    if(c==1)
+    {
+      $('#category_id').prop('selectedIndex', 0);     
+      $('.selectpicker').selectpicker('refresh')
+    }
+    if(d==1)
+    {
+      $('#course_type').prop('selectedIndex', 0);     
+      $('.selectpicker').selectpicker('refresh')
+    }
+    if(e==1)
+    {
+      $('#duration').prop('selectedIndex', 0);     
+      $('.selectpicker').selectpicker('refresh')
+    }    
+  }
+
   function Getprograme()
   {
     var test_module_id = $("#test_module_id").val();
@@ -628,6 +657,7 @@
     var programe_id = $("#programe_id").val();
     var category_id = $("#category_id").val();
     var course_type = $("#course_type").val();
+    
     $.ajax({
       url: "<?php echo site_url('online_courses/GetDuation'); ?>",
       async: true,
@@ -684,7 +714,6 @@
     var limit_v = parseInt(<?php echo LOAD_MORE_LIMIT_8; ?>);
     var offset_v = parseInt($('#offset').val());
     var newoffset = limit_v + offset_v;
-
 
     /* if (test_module_id == <?php echo IELTS_ID; ?> || test_module_id == <?php echo PTE_ID; ?> || test_module_id == <?php echo UKVI_CD_IELTS; ?>) {
       $('#programe_id').prop('disabled', false);
@@ -748,6 +777,7 @@
     var test_module_id = $("#test_module_id").val();
     var programe_id = $("#programe_id").val();
     var category_id = $("#category_id").val();
+   
     $.ajax({
       url: "<?php echo site_url('online_courses/GetCourseType'); ?>",
       async: true,

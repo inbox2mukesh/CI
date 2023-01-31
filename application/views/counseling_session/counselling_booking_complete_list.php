@@ -106,6 +106,7 @@
                                     <th>Payment Method</th>
                                     <th>Last Visit Page</th>
                                     <th>Response</th>
+                                    <th>Remarks</th>
                                     <th>Has attended?</th>
                                     
                                 </tr>
@@ -144,7 +145,7 @@
                                             <td><?php echo $sp['payment_id']; ?></td>
                                             <td><?php echo ucfirst($sp['method']) ?></td>
                                             <td><?php echo ucfirst($sp['page']) ?> Page</td>
-                                          
+                                            
                                             <td>
                                                 <a data-toggle="modal" data-target="#exampleModalshortview<?php echo $sr; ?>">Short View</a>
                                                 <a data-toggle="modal" data-target="#exampleModal<?php echo $sr; ?>">Detail View</a>
@@ -203,6 +204,7 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td><?php echo ucfirst($sp['remark']) ?></td>
                                             <td>
                                             <?php 
                                             if($sp['attended'] == 0)
@@ -243,7 +245,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="refresh_page();">
                     <span aria-hidden="true">×</span></button>
-                <h4 class="modal-heading text-info">Add session status</h4>
+                <h4 class="modal-heading text-info">Attended status</h4>
                 <h5 class="msg_session"></h5>
             </div>
             <div class="modal-body">
@@ -251,7 +253,8 @@
                     <div class="col-md-12">
                         <label for="session_booking_remarks" class="control-label"><span class="text-danger">*</span>Remarks</label>
                         <div class="form-group">
-                            <textarea name="session_booking_remarks" class="form-control" id="session_booking_remarks"></textarea>
+                            <textarea name="session_booking_remarks" class="form-control removeerrmessage" id="session_booking_remarks"></textarea>
+                            <div class="validation font-11 text-red session_booking_remarks_err" id="session_booking_remarks_err"></div>
                         </div>
                     </div>
                     <div class="clearfix">
@@ -278,6 +281,7 @@
 <script src="<?php echo site_url() ?>resources/js/jquery.min.js"></script>
 <script>
     function saveSessionStatuscc() {
+        var flag = 1;
         var session_booking_remarks = document.getElementById("session_booking_remarks").value;
         var session_booking_id = document.getElementById("session_booking_id").value;
         if ($("#is_attended").prop('checked') == true) {
@@ -285,6 +289,16 @@
         } else {
             is_attended = 0;
         }
+        if(session_booking_remarks == "")
+        {
+            $("#session_booking_remarks_err").text('Please enter the remarks');
+            flag = 0;
+        }
+        else {  $("#session_booking_remarks_err").text('') }      
+        if(flag == 0)
+        {
+        return false;
+        }       
         $.ajax({
             url: "<?php echo site_url('adminController/counseling_session/add_session_status_'); ?>",
             async: true,

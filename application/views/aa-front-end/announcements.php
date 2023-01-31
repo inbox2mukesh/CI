@@ -144,11 +144,16 @@
         offset: $('#offset').val()
       },
       success: function(data) {
+		alert(data["count"])
         $('#ajax_refresh_loader').addClass('hide')
         $('.announcement').html(data['html']);      
         if (data["count"] == 0) {
           $('.loadmore').addClass('hide')
         }
+		else if(data["count"] <=parseInt(<?php echo LOAD_MORE_LIMIT_10; ?>))
+		{
+			$('.loadmore').addClass('hide')
+		}
         else{
           $('.loadmore').removeClass('hide')
         }
