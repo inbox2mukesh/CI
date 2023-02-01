@@ -62,12 +62,14 @@
           $btn_pointerevent = '';
           $bgColor = "live-Cl";
           $class = "l-class-card";
+          $hreflink = $p->conf_URL;
         } else {
           $liveIn = 'Status <i class="fa fa-circle text-red" aria-hidden="true"></i>';
           $btnDisabled = 'disabled';
          // $btn_pointerevent = 'pointer-events: none;';
           $bgColor = "coming-Cl";
           $class = "class-card";
+          $hreflink = "javascript:void(0)";
         }
       ?>      
       <?php include('classroom_schedule_html.php');?>          

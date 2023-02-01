@@ -670,22 +670,28 @@ function imagePreview(id){
     
 }
 
+
 function isImage(i){
 	
 	var file=$('#classroom_documents_section'+i)[0].files[0];
 	size=file.size;
-	type2=file.type;
+	type=file.type;
 	name=file.name;
-	var type = $('#classroom_documents_section'+i).val().split('.').pop().toLowerCase();	   
+    //return file['type'].split('/')[0]=='image');//returns true or false 
 	FREE_RESOURCES_IMAGE_TYPES='<?php echo WEBP_FILE_TYPES ?>';
-	FREE_RESOURCES_IMAGE_TYPES=FREE_RESOURCES_IMAGE_TYPES.split("|");	
-	if(FREE_RESOURCES_IMAGE_TYPES.includes(type)){		
-		if(type != "pptx" || type != "ppt" )
-	        var reader = new FileReader();			
-			reader.onload = function(){				
+	FREE_RESOURCES_IMAGE_TYPES=FREE_RESOURCES_IMAGE_TYPES.split("|");
+	var type = type.replace('image/','');
+	//console.log(FREE_RESOURCES_IMAGE_TYPES);
+	
+	if(FREE_RESOURCES_IMAGE_TYPES.includes(type)){
+		
+	        var reader = new FileReader();
+			
+			reader.onload = function(){
+				
 			   $("#previewImg"+i).attr("src", reader.result);
-			   reader.readAsDataURL(file);
-		    }			
+		    }
+			reader.readAsDataURL(file);
 	}else{
 		alert('Allowed type only: <?php echo WEBP_FILE_TYPES ?>');
 		$('#classroom_documents_section'+i).val('');

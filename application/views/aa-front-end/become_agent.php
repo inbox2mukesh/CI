@@ -256,6 +256,20 @@ $('#address_ba').keydown(function(event) {
 	//wordsLeft = (wordLen) - len.length;
 	//$('.message_err').html(wordsLeft+ ' words left');
 	});
+
+	$('#address_ba').blur(function(event) {	
+	len = $('#address_ba').val().split(/[\s]+/);
+	if (len.length > wordLen) { 
+		if ( event.keyCode == 46 || event.keyCode == 8 ) {// Allow backspace and delete buttons
+    } else if (event.keyCode < 48 || event.keyCode > 57 ) {//all other buttons
+    	event.preventDefault();
+    }
+	$(".address_ba_err").text("The maximium length for message is upto "+wordLen+ " words!");			
+			//return false;
+	}	
+	//wordsLeft = (wordLen) - len.length;
+	//$('.message_err').html(wordsLeft+ ' words left');
+	});
 	function getWordCount(wordString) {
 		var words = wordString.split(" ");
 		words = words.filter(function(words) {

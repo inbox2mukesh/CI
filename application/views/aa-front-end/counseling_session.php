@@ -219,7 +219,7 @@
 										<div class="form-group" style="margin-bottom:35px!important">
 											<label>Message<span class="red-text">*</span></label>
 											<textarea placeholder="Message" rows="7" class="t-area form-control removeerrmessage" name="message" id="message" style="height:inherit;max-height:inherit"  maxlength=""></textarea>
-											<div class="valid-validation message_err cl_message_err" id="cl_message_err"></div>
+											<div class="valid-validation message_err cl_message_err" id="hcl_message_err"></div>
 										</div>
 									</div>
 								</div>
@@ -346,9 +346,10 @@
 	})
 </script>
 <script>
-var wordLen = 2000,
+var wordLen = 10,
 len; // Maximum word length
-$('#message').keydown(function(event) {	
+
+$('#message').keyup(function(event) {	
 	len = $('#message').val().split(/[\s]+/);
 	if (len.length > wordLen) { 
 		if ( event.keyCode == 46 || event.keyCode == 8 ) {// Allow backspace and delete buttons
@@ -358,9 +359,31 @@ $('#message').keydown(function(event) {
 	$(".cl_message_err").text("The maximium length for message is upto "+wordLen+ " words!");			
 			//return false;
 	}	
+	else {
+		$(".cl_message_err").text("");
+	}
 	//wordsLeft = (wordLen) - len.length;
 	//$('.message_err').html(wordsLeft+ ' words left');
 	});
+	$('#message').blur(function(event) {	
+	len = $('#message').val().split(/[\s]+/);
+	if (len.length > wordLen) { 
+		if ( event.keyCode == 46 || event.keyCode == 8 ) {// Allow backspace and delete buttons
+    } else if (event.keyCode < 48 || event.keyCode > 57 ) {//all other buttons
+    	event.preventDefault();
+    }
+	$(".cl_message_err").text("The maximium length for message is upto "+wordLen+ " words!");
+	$('#message').focus();	
+			//return false;
+	}
+	else {
+		$(".cl_message_err").text("");
+	}	
+	//wordsLeft = (wordLen) - len.length;
+	//$('.message_err').html(wordsLeft+ ' words left');
+	});
+
+
 
 
 	var steps = $('#demo').steps({
@@ -407,8 +430,8 @@ if ($(window).width() <= 990) {
 	// $('.complaintBtn').prop('disabled', false);
 	return true;
 	} else {
-	$("#cs_email_error" ).text("Please enter the valid Email Id");
-	$('#cs_email').focus();
+	$("#cs_email_error" ).text("Please enter the valid email");
+	//$('#cs_email').focus();
 	// $('.complaintBtn').prop('disabled', true);
 	return false;
 	}
@@ -417,7 +440,7 @@ if ($(window).width() <= 990) {
 		var flag = 1;
 		var numberes = /^[0-9-+]+$/;
 		var letters = /^[A-Za-z ]+$/;
-		var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
+		var mailformat = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,10}\b$/i
 		var fname = $("#cs_fname").val();
 		var email = $("#cs_email").val();
 		var mobile = $("#cs_phoneno").val();
@@ -440,6 +463,14 @@ if ($(window).width() <= 990) {
 			//$("#cs_email").focus();
 			$("#cs_email_error").text('Please enter the valid email');
 			flag = 0;
+		}
+		if (email.match(mailformat)) {
+		        $("#cs_email_error" ).text('');		
+		} else {
+			$("#cs_email_error").text('Please enter the valid email');
+		//$('#cs_email').focus();
+		// $('.complaintBtn').prop('disabled', true);
+		flag = 0;
 		}
 
 		if (mobile.length > 10 || mobile.length < 10) {

@@ -17,8 +17,11 @@
                                 <option value="">Select <?php echo $this->input->post('session_type'); ?></option>
                                 <?php foreach ($sessiontypeList as $key => $val) {
                                     $selec;
-                                    if ($val == $this->input->post('session_type')) {
+                                    if (strtolower($val) == strtolower($this->input->post('session_type'))) {
                                         $selec = "selected";
+                                    }
+                                    else {
+                                        $selec = "";
                                     }
                                 ?>
                                     <option value="<?php echo $key ?>" <?php echo $selec; ?>>
@@ -31,7 +34,7 @@
                     <div class="col-md-3">
                         <label for="date" class="control-label"><span class="text-danger">*</span>Booking Date </label>
                         <div class="form-group has-feedback">
-                            <input type="text" readonly name="booking_pdate" value="" class="form-control date_range input-ui-100" id="booking_pdate" />
+                            <input type="text" readonly name="booking_pdate" value="<?php echo $this->input->post('booking_pdate'); ?>" class="form-control date_rangedemo input-ui-100" id="booking_pdate" />
                             <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                             <span class="text-danger date_err"><?php echo form_error('booking_pdate'); ?></span>
                         </div>
@@ -39,7 +42,7 @@
                     <div class="col-md-3">
                         <label for="date" class="control-label"><span class="text-danger">*</span>Session Date </label>
                         <div class="form-group has-feedback">
-                            <input type="text" readonly name="session_datew" value="<?php echo $this->input->post('session_datew'); ?>" class="form-control date_range input-ui-100" id="session_datew" />
+                            <input type="text" readonly name="session_datew" value="<?php echo $this->input->post('session_datew'); ?>" class="form-control date_rangedemo input-ui-100" id="session_datew" />
                             <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                             <span class="text-danger date_err"><?php echo form_error('session_datew'); ?></span>
                         </div>
@@ -96,7 +99,7 @@
                             </select>
                         </div>
                     </div> -->
-                    <div class="col-md-3">
+                    <div class="col-md-3 hide">
                         <label for="date" class="control-label"><span class="text-danger">*</span>Payment Date </label>
                         <div class="form-group has-feedback">
                             <input type="text" readonly name="session_pdate" value="<?php echo $this->input->post('session_pdate'); ?>" class="form-control date_range input-ui-100" id="session_pdate" />
@@ -328,8 +331,23 @@
     </div>
 </div>
 <!-- modal box for add session ends-->
+
 <?php ob_start(); ?>
 <script>
+  $('.date_rangedemo').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+      format: 'YYYY-MM-DD'
+    },
+      
+  });
+  $('.date_rangedemo').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+  });
+
+  $('.date_rangedemo').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+  });
     function UpdatePaymentStatusPay(booking_id) {
         if (confirm("Confirm!") == true) {
             $.ajax({
@@ -347,3 +365,8 @@
         //$("#session_booking_id").val(booking_id)
     }
 </script>
+
+<?php 
+global $customJs;
+$customJs = ob_get_clean();
+?>

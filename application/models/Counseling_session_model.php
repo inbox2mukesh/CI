@@ -190,18 +190,18 @@
         if($session_date !=NULL){
             $psession_date= explode(' - ',$session_date);        
             $minvaluepsession_date=$psession_date[0];
-            $minvaluepsession_date=date_create($minvaluepsession_date);
-            $minvaluepsession_date=date_format($minvaluepsession_date,"d-m-Y");
+           // $minvaluepsession_date=date_create($minvaluepsession_date);
+           // $minvaluepsession_date=date_format($minvaluepsession_date,"d-m-Y");
             $maxvaluepsession_date=$psession_date[1];
-            $maxvaluepsession_date=date_create($maxvaluepsession_date);
-            $maxvaluepsession_date=date_format($maxvaluepsession_date,"d-m-Y");
-            $this->db->where("sess.booking_date BETWEEN '$minvaluepsession_date' AND '$maxvaluepsession_date'");            
+            //$maxvaluepsession_date=date_create($maxvaluepsession_date);
+          //  $maxvaluepsession_date=date_format($maxvaluepsession_date,"d-m-Y");
+            $this->db->where("sess.booking_date >= '$minvaluepsession_date' AND sess.booking_date<='$maxvaluepsession_date'");            
         }
         if($booking_pdate !=NULL){
         $book_p= explode(' - ',$booking_pdate);
         $minvalue_book_p=$book_p[0]."T00:00:00Z";
         $maxvalue_book_p=$book_p[1]."T23:59:59Z";
-        $this->db->where("sess.created BETWEEN '$minvalue_book_p' AND '$maxvalue_book_p'");            
+        $this->db->where("DATE(sess.created) BETWEEN '$minvalue_book_p' AND '$maxvalue_book_p'");            
         }
         if($session_pdate !=NULL){
         $p= explode(' - ',$session_pdate);
@@ -219,7 +219,7 @@
     }
 
 
-    function get_all_booked_counselling_list($session_type=NULL,$session_paymentStatus=NULL,$session_date=NULL,$session_pdate=NULL,$service_id=NULL,$payment_type=NULL,$params = array()){
+    function get_all_booked_counselling_list($session_type=NULL,$session_paymentStatus=NULL,$session_date=NULL,$session_pdate=NULL,$service_id=NULL,$booking_pdate=NULL,$payment_type=NULL,$params = array()){
 
        if(isset($params) && !empty($params))
         {
@@ -243,12 +243,18 @@
         if($session_date !=NULL){
         $psession_date= explode(' - ',$session_date);
         $minvaluepsession_date=$psession_date[0];
-        $minvaluepsession_date=date_create($minvaluepsession_date);
-        $minvaluepsession_date=date_format($minvaluepsession_date,"d-m-Y");
+       // $minvaluepsession_date=date_create($minvaluepsession_date);
+       // $minvaluepsession_date=date_format($minvaluepsession_date,"d-m-Y");
         $maxvaluepsession_date=$psession_date[1];
-        $maxvaluepsession_date=date_create($maxvaluepsession_date);
-        $maxvaluepsession_date=date_format($maxvaluepsession_date,"d-m-Y");          
-        $this->db->where("sess.booking_date BETWEEN '$minvaluepsession_date' AND '$maxvaluepsession_date'");
+        //$maxvaluepsession_date=date_create($maxvaluepsession_date);
+       // $maxvaluepsession_date=date_format($maxvaluepsession_date,"d-m-Y");          
+       if($booking_pdate !=NULL){
+        $book_p= explode(' - ',$booking_pdate);
+        $minvalue_book_p=$book_p[0]."T00:00:00Z";
+        $maxvalue_book_p=$book_p[1]."T23:59:59Z";
+        $this->db->where("DATE(sess.created) BETWEEN '$minvalue_book_p' AND '$maxvalue_book_p'");            
+        }
+        $this->db->where("sess.booking_date >= '$minvaluepsession_date' AND sess.booking_date<='$maxvaluepsession_date'");
         }
         if($session_pdate !=NULL){
          $p= explode(' - ',$session_pdate);        
@@ -256,17 +262,12 @@
             $maxvalue=$p[1]."T23:59:59Z";          
            $this->db->where("payment_date BETWEEN '$minvalue' AND '$maxvalue'");            
         }
-          if($booking_pdate !=NULL){
-            $book_p= explode(' - ',$booking_pdate);       
-            $minvalue_book_p=$book_p[0];
-            $maxvalue_book_p=$book_p[1];      
-            $this->db->where("sess.created BETWEEN '$minvalue_book_p' AND '$maxvalue_book_p'");            
-        }
+       
         $this->db->join('checkout_page_history_counselling cphc', 'cphc.checkout_token_no= sess.checkout_token_no');
         $this->db->join('enquiry_purpose_masters service', 'service.id= sess.service_id','left');
         $this->db->join('counseling_sessions cs', 'cs.id= sess.session_id');
         $this->db->order_by('sess.`created` DESC');
-        return $this->db->get('')->result_array();
+       return $this->db->get('')->result_array();
         //print_r($this->db->last_query());exit;   
     }
     function get_all_booked_counselling_list_count($session_type=NULL,$session_paymentStatus=NULL,$session_date=NULL,$session_pdate=NULL,$service_id=NULL,$payment_type=NULL,$params = array()){

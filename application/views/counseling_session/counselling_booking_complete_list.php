@@ -19,8 +19,11 @@
                                 <option value="">Select </option>
                                 <?php foreach ($sessiontypeList as $key => $val) {
                                     $selec;
-                                    if ($val == $this->input->post('session_type')) {
+                                    if (strtolower($val) == strtolower($this->input->post('session_type'))) {
                                         $selec = "selected";
+                                    }
+                                    else {
+                                        $selec = "";
                                     }
                                 ?>
                                     <option value="<?php echo $key ?>" <?php echo $selec; ?>>
@@ -33,7 +36,7 @@
                     <div class="col-md-3">
                         <label for="date" class="control-label"><span class="text-danger">*</span>Booking Date </label>
                         <div class="form-group has-feedback">
-                            <input type="text" readonly name="booking_pdate" value="<?php echo $this->input->post('booking_pdate'); ?>" class="form-control date_range input-ui-100" id="booking_pdate" />
+                            <input type="text" readonly name="booking_pdate" value="<?php echo $this->input->post('booking_pdate'); ?>" class="form-control date_rangedemo input-ui-100" id="booking_pdate" />
                             <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                             <span class="text-danger date_err"><?php echo form_error('booking_pdate'); ?></span>
                         </div>
@@ -41,7 +44,7 @@
                     <div class="col-md-3">
                         <label for="date" class="control-label"><span class="text-danger">*</span>Session Date </label>
                         <div class="form-group has-feedback">
-                            <input type="text" readonly name="session_datew" value="<?php echo $this->input->post('session_datew'); ?>" class="form-control date_range input-ui-100" id="session_datew" />
+                            <input type="text" readonly name="session_datew" value="<?php echo $this->input->post('session_datew'); ?>" class="form-control date_rangedemo input-ui-100" id="session_datew" />
                             <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                             <span class="text-danger date_err"><?php echo form_error('session_datew'); ?></span>
                         </div>
@@ -66,10 +69,10 @@
                         </div>
                     </div>
                  
-                    <div class="col-md-3">
+                    <div class="col-md-3 hide">
                         <label for="date" class="control-label"><span class="text-danger">*</span>Payment Date </label>
                         <div class="form-group has-feedback">
-                            <input type="text" readonly name="session_pdate" value="<?php echo $this->input->post('session_pdate'); ?>" class="form-control date_range input-ui-100" id="session_pdate" />
+                            <input type="text" readonly name="session_pdate" value="<?php echo $this->input->post('session_pdate'); ?>" class="form-control date_rangedemo input-ui-100" id="session_pdate" />
                             <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                             <span class="text-danger date_err"><?php echo form_error('date'); ?></span>
                         </div>
@@ -277,9 +280,26 @@
         </div>
     </div>
 </div>
+
 <!-- modal box for add session ends-->
-<script src="<?php echo site_url() ?>resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+<?php ob_start(); ?>
 <script>
+  $('.date_rangedemo').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+      format: 'YYYY-MM-DD'
+    },
+      
+  });
+  $('.date_rangedemo').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+  });
+
+  $('.date_rangedemo').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+  });
     function saveSessionStatuscc() {
         var flag = 1;
         var session_booking_remarks = document.getElementById("session_booking_remarks").value;
@@ -353,3 +373,9 @@
         window.location = dd;
     });
 </script>
+
+
+<?php 
+global $customJs;
+$customJs = ob_get_clean();
+?>

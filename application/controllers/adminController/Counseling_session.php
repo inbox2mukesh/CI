@@ -34,7 +34,7 @@ class Counseling_session extends MY_Controller{
         $config['base_url'] = site_url('adminController/counseling_session/counselling_booking_list?');       
         //Filter form data
         if($this->input->server('REQUEST_METHOD') === 'POST')
-    	{
+    	{    
     		$session_type = $this->input->post('session_type');
     		$session_otp = $this->input->post('session_otp');
     		$session_paymentStatus = $this->input->post('session_paymentStatus');
@@ -42,10 +42,11 @@ class Counseling_session extends MY_Controller{
 			$session_pdate = $this->input->post('session_pdate',true);
 			$service_id = $this->input->post('service_id',true);
 			$payment_type = $this->input->post('payment_type',true);
+			$booking_pdate = $this->input->post('booking_pdate',true);
 			//$ser_event_title = $this->input->post('ser_event_title');	
 			$config['total_rows'] = $this->Counseling_session_model->get_all_booked_counselling_list_count($_SESSION['roleName'],$userBranch);
 			$this->pagination->initialize($config); 
-            $data['counselling_booking_list'] = $this->Counseling_session_model->get_all_booked_counselling_list($session_type,$session_paymentStatus,$session_date,$session_pdate,$service_id,$payment_type,$params);
+            $data['counselling_booking_list'] = $this->Counseling_session_model->get_all_booked_counselling_list($session_type,$session_paymentStatus,$session_date,$session_pdate,$service_id,$booking_pdate,$payment_type,$params);
 
     	}
     	else {
@@ -56,9 +57,10 @@ class Counseling_session extends MY_Controller{
     		$session_pdate="";
     		$service_id="";
     		$payment_type="";
+    		$booking_pdate="";
 			$config['total_rows'] = $this->Counseling_session_model->get_all_booked_counselling_list_count($_SESSION['roleName'],$userBranch);
 			$this->pagination->initialize($config); 
-    		 $data['counselling_booking_list'] = $this->Counseling_session_model->get_all_booked_counselling_list($session_type,$session_paymentStatus,$session_date,$session_pdate,$service_id,$payment_type,$params);
+    		 $data['counselling_booking_list'] = $this->Counseling_session_model->get_all_booked_counselling_list($session_type,$session_paymentStatus,$session_date,$session_pdate,$service_id,$booking_pdate,$payment_type,$params);
     	}   	
         $data['payment_status'] = $this->Counseling_session_model->get_all_payment_status();
         $data['serviceData'] = $this->Enquiry_purpose_model->get_enquiry_purpose_based_on_session_booking();
