@@ -33,7 +33,7 @@
     .filter-wht-box{display:table!important;}
 }
 
-@media screen and (min-width:220px) and (max-width:990px){
+@media screen and (min-width:220px) and (max-width:991px){
     .maximage-slider .fullscreen-controls{top:15%;}
     .desktop-slider{display:none;}
     .mobile-slider{display:block;}

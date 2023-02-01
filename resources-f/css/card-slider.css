@@ -108,7 +108,7 @@
   background: #a89cc8;
   }
 
-  @media(max-width:990px){	  
+  @media(max-width:991px){	  
 	  .glider-prev, .glider-next {
 		  display: none;		  
 	  } 

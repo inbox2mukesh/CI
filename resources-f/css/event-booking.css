@@ -416,9 +416,9 @@
 
 .text-limit p span{font-weight: 400!important;}
 
+.input-rel .bootstrap-select>.dropdown-toggle{font-weight:500;}
 
-
-@media screen and (min-width:220px) and (max-width:990px) {
+@media screen and (min-width:220px) and (max-width:992px) {
 	
 	.event-booking .date-and-time-wrapper{
 	display:inherit;
@@ -444,6 +444,9 @@
 	.book-visa-counselling .step-tab-panel{padding-bottom: 15px;}
 	.ft-stp{bottom: 0px; position:initial;}
 
+	.glider{margin-bottom: 15px;padding-bottom: 10px;}
+	.evnt-btn{height: 0px;}
+
 
 }
 
@@ -464,9 +467,11 @@
 
 }
 
-@media screen and (min-width:990px) and (max-width:1200px) {
-.event-booking .time-card {
-	width:auto!important;
-	min-width:auto!important;
+
+
+@media screen and (min-width:992px) and (max-width:1200px) {
+.event-booking .time-card {	width:auto!important;	min-width:auto!important;}
+.event-booking .timeslot-card-row .card{ min-width:135px;width: 135px!important;}
 }
-}
+
+

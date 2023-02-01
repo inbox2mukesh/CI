@@ -1637,10 +1637,10 @@ select[multiple].input-lg,textarea.input-lg {
 
 .btn.disabled,.btn[disabled],fieldset[disabled] .btn {
     cursor: not-allowed;
-    filter: alpha(opacity=65);
+    /* filter: alpha(opacity=65); */
     -webkit-box-shadow: none;
     box-shadow: none;
-    opacity: .55
+    /* opacity: .55 */
 }
 
 a.btn.disabled,fieldset[disabled] a.btn {
