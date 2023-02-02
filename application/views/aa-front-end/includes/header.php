@@ -213,7 +213,7 @@
 												</ul>
 											</div>
 										</div>
-										<div class="rts-btn mob-display">
+										<div class="rts-btn mob-display hide">
 											<ul>
 												<li class="enq-btn" onClick="location.replace('<?php echo base_url('counseling');?>');"><a>Book Counseling</a></li>
 											</ul>
