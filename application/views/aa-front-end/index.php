@@ -3,18 +3,23 @@
 <div class="carousel slide" data-ride="carousel">
   <div class="owl-carousel-slider">
     <div class="carousel-item active">
-      <img class="d-block w-100 desktop-slider lazyload" src="<?php echo base_url('resources-f/images/slider/desktop-slider-1.webp');?>" alt="" loading="lazy">
-	  <img class="d-block w-100 mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/mobile-slider-1.webp');?>" alt="" loading="lazy">
+      <img class="d-block w-100 desktop-slider lazyload" src="<?php echo base_url('resources-f/images/slider/aus-slider-1.webp');?>" alt="" loading="lazy">
+	  <img class="d-block w-100 mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/aus-mob-slider-1.webp');?>" alt="" loading="lazy">
     </div>
 
 	<div class="carousel-item">
-      <img class="d-block w-100 desktop-slider " src="<?php echo base_url('resources-f/images/slider/desktop-slider-2.webp');?>" alt="" loading="lazy">	 
-	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/mobile-slider-2.webp');?>" alt="" loading="lazy">	 
+      <img class="d-block w-100 desktop-slider " src="<?php echo base_url('resources-f/images/slider/aus-slider-2.webp');?>" alt="" loading="lazy">	 
+	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/aus-mob-slider-2.webp');?>" alt="" loading="lazy">	 
     </div>
 
 	<div class="carousel-item">
-      <img class="d-block w-100 desktop-slider" src="<?php echo base_url('resources-f/images/slider/desktop-slider-3.webp');?>" alt="" loading="lazy">	
-	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/mobile-slider-3.webp');?>" alt="" loading="lazy">
+      <img class="d-block w-100 desktop-slider" src="<?php echo base_url('resources-f/images/slider/aus-slider-3.webp');?>" alt="" loading="lazy">	
+	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/aus-mob-slider-3.webp');?>" alt="" loading="lazy">
+    </div>
+
+	<div class="carousel-item">
+      <img class="d-block w-100 desktop-slider" src="<?php echo base_url('resources-f/images/slider/aus-slider-4.webp');?>" alt="" loading="lazy">	
+	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/aus-mob-slider-4.webp');?>" alt="" loading="lazy">
     </div>
   
   </div>
