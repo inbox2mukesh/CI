@@ -154,7 +154,7 @@
             <?php
             if ($stdInfo->error_message->data->profileUpdate == 0) {
             ?>
-              <div class="form-group col-md-3 text-right">
+              <div class="form-group col-md-12 text-right">
                 <button type="submit" class="btn btn-black">UPDATE</button>
               </div>
             <?php } ?>

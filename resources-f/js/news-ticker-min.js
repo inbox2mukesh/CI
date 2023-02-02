@@ -2,7 +2,7 @@
     a.fn.jConveyorTicker = function(b) {
         if (void 0 === this || 0 === this.length) return console.log(""), !1;
         var c = {
-                anim_duration:400,
+                anim_duration:200,
                 reverse_elm: !1,
                 force_loop: !1,
                 start_paused: !1
@@ -84,10 +84,10 @@
                         f = "+", g = "reverse"
                     } else if (b = c / 4 * -1, e < b) {
                         var h = -1 * (b - e);
-                        return i.css("left", h + "0px"), void j.conveyorAnimate(g)
+                        return i.css("left", h + "px"), void j.conveyorAnimate(g)
                     }
                     i.stop().animate({
-                        left: f + "=20px"
+                        left: f + "=10px"
                     }, d, "linear", function() {
                         j.conveyorAnimate(g)
                     })
