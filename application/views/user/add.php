@@ -245,7 +245,7 @@
 						<div class="col-md-3">
 							<label for="division_id" class="control-label"><span class="text-danger">*</span>Division</label>
 							<div class="form-group">
-								<select name="division_id[]" id="division_id" class="form-control selectpicker selectpicker-ui-100" data-show-subtext="true" data-live-search="true" multiple="multiple" onchange="loadFuntionalBranchListByDivision();">
+								<select name="division_id[]" id="division_id" class="form-control selectpicker selectpicker-ui-100" data-show-subtext="true" data-live-search="true" data-actions-box="true" multiple="multiple" onchange="loadFuntionalBranchListByDivision();">
 									<option value="" disabled="disabled">Select Division</option>
 									<?php
 									foreach($all_division as $b){

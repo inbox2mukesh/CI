@@ -85,13 +85,19 @@
 					} ?>
 				</div>
 				</div>
-				<?php
-        if ($announcements_count > LOAD_MORE_LIMIT_10) { ?>
+			<?php
+			if ($announcements_count > LOAD_MORE_LIMIT_10) { 
+			$addcl="";
+			}
+			else {
+			$addcl="hide";
+			}
+			?>		
           <div class="text-center mb-10">
-            <button class="btn btn-primary btn-sm loadmore" id="loadmore" onclick="loadmore();">Load More</button>
+            <button class="btn btn-primary btn-sm <?php echo $addcl;?> loadmore" id="loadmore" onclick="loadmore();">Load More</button>
             <img id="ajax_loader" class="hide" src="<?php echo site_url() ?>resources-f/images/ajax-loader1.gif" width="20px">
           </div>
-        <?php } ?>
+        
 			</div>
 			<!-- End Content Part -->
 			
@@ -144,18 +150,16 @@
         offset: $('#offset').val()
       },
       success: function(data) {
-		alert(data["count"])
+	
         $('#ajax_refresh_loader').addClass('hide')
         $('.announcement').html(data['html']);      
-        if (data["count"] == 0) {
-          $('.loadmore').addClass('hide')
-        }
-		else if(data["count"] <=parseInt(<?php echo LOAD_MORE_LIMIT_10; ?>))
+		if(data["count"] >parseInt(<?php echo LOAD_MORE_LIMIT_10; ?>))
 		{
-			$('.loadmore').addClass('hide')
-		}
+			//alert('greater')
+			$('.loadmore').removeClass('hide')
+		}        
         else{
-          $('.loadmore').removeClass('hide')
+           $('.loadmore').addClass('hide')
         }
         return false;
       }

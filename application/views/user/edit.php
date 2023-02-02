@@ -219,8 +219,8 @@
 									'.$c["division_name"].'<i class="fa fa-close cross-icn"></i></button>&nbsp;';
 								} ?>
 								<div class="form-group">
-									<select name="division_id[]" id="division_id" class="form-control selectpicker selectpicker-ui-100" data-show-subtext="true" data-live-search="true" multiple="multiple" onchange="loadFuntionalBranchListByDivision();">
-										<option value="">Select Division</option>
+									<select name="division_id[]" id="division_id" class="form-control selectpicker selectpicker-ui-100"data-show-subtext="true" data-live-search="true" data-actions-box="true" multiple="multiple" onchange="loadFuntionalBranchListByDivision();">
+										<option value="" disabled="disabled">Select Division</option>
 										<?php
 										foreach($all_division as $b){
 											$selected ='';

@@ -3,7 +3,7 @@
 <tr><td> <br><br><br></td> </tr>
 <tr>
     <td>
-        <a href="https://westernoverseas.ca/canada-development/"><img width="220px" style="display: block; margin: 0 auto;" src="https://westernoverseas.ca/canada-development/resources-f/images/logo-sm.png" alt="Western Overseas"></a>
+        <a href="https://westernoverseas.ca/"><img width="220px" style="display: block; margin: 0 auto;" src="https://westernoverseas.ca/resources-f/images/logo-sm.png" alt="Western Overseas"></a>
     </td>
 </tr>
 <tr><td> <br><br></td> </tr>
