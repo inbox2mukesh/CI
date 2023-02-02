@@ -222,7 +222,7 @@
                               <div class="form-group">
                                 <lable class="font-weight-600">Select Package Start Date<span class="text-red">*</span></lable>
                                 <div class="has-feedback">
-                                  <input class="fstinput removeerrmessage datepicker" name="packstartdate" placeholder="DD-MM-YYYY" autocomplete="off" id="packagestartdate_<?php echo $p->package_id; ?>" readonly>
+                                  <input class="fstinput removeerrmessage datepicker_dynamic" name="packstartdate" placeholder="DD-MM-YYYY" autocomplete="off" id="packagestartdate_<?php echo $p->package_id; ?>" readonly>
                                   <span class="fa fa-calendar form-group-icon"></span>
                                   <div class="validation font-11 red-text packagestartdate_<?php echo $p->package_id; ?>_err"></div>
                                 </div>
@@ -283,7 +283,16 @@
                                 <?php } else { ?>
                                   <select class="selectpicker form-control" <?php echo $readOnly_dis; ?> data-live-search="true" name="online_country_code" id="online_country_code<?php echo $package_id ?>">
                                     <?php
-                                    $c = 'CA';
+                                  //  $c = 'CA';
+                                    if(DEFAULT_COUNTRY==38){
+                                      $c = 'CA';
+                                    }elseif(DEFAULT_COUNTRY==13){
+                                      $c = 'AU';
+                                    }elseif(DEFAULT_COUNTRY==101){
+                                      $c = 'IN';
+                                    }else{
+                                      $c = 'IN';
+                                    }
                                     foreach ($countryCode->error_message->data as $pcc) {
                                       $selected = ($pcc->iso3 == $c) ? ' selected="selected"' : "";
                                       $disabled_se = ($pcc->iso3 == $c) ? '' : ' disabled="disabled"';
@@ -507,7 +516,7 @@
       if (dt[1] == '02') {
         if (dt[0] > 29) {
           //  $('.dob_mask_n').focus();
-          $(idd).text('Please enter the valid Date Of Birth');
+          $(idd).text('Please enter the valid date of birth');
           return false;
         } else {
           $(idd).text('');
@@ -516,7 +525,7 @@
       var pattern = /^([0-9]{2})\-([0-9]{2})\-([0-9]{4})$/;
       if (pattern.test(data) == false) {
         //  $('.dob_mask_n').focus();
-        $(idd).text('Please enter the valid Date Of Birth');
+        $(idd).text('Please enter the valid date of birth');
         return false;
       } else {
         $(idd).text('');
@@ -540,7 +549,7 @@
     if (data != "") {
       var pattern = /^([0-9]{2})\-([0-9]{2})\-([0-9]{4})$/;
       if (pattern.test(data) == false) {
-        $(".dob_error" + package_id).text('Please enter the valid Date Of Birth');
+        $(".dob_error" + package_id).text('Please enter the valid date of birth');
         return false;
       } else {
         dt = dt[2] + '-' + dt[1] + '-' + dt[0];
@@ -814,25 +823,25 @@
       $(".online_fname_err" + package_id).text('');
     } else {
       //$("#online_fname" + package_id).focus();
-      $(".online_fname_err" + package_id).text("Please enter the valid Name");
+      $(".online_fname_err" + package_id).text("Please enter the valid name");
       flag = 0;
     }
     if (mobile.length > 10 || mobile.length < 10) {
       //$("#online_mobile" + package_id).focus();
-      $(".online_mobile_error" + package_id).text('Please enter the valid Number');
+      $(".online_mobile_error" + package_id).text('Please enter the valid number');
       flag = 0; // return false;
     } else {
       $(".online_mobile_error" + package_id).text('');
     }
     if (onlineemail == "") {
-      $(".online_email_error" + package_id).text('Please enter the valid Email Id');
+      $(".online_email_error" + package_id).text('Please enter the valid email');
       flag = 0;
     } else {
       if (onlineemail.match(mailformat)) {
         $(".online_email_error" + package_id).text('');
       } else {
         //$("#online_email" + package_id).focus();
-        $(".online_email_error" + package_id).text('Please enter the valid Email Id');
+        $(".online_email_error" + package_id).text('Please enter the valid email');
         flag = 0;
       }
     }
@@ -863,7 +872,7 @@
     }*/
 
     if (dob == "") {
-      $(".dob_error" + package_id).text('Please enter the valid Date Of Birth');
+      $(".dob_error" + package_id).text('Please enter the valid date of birth');
       flag = 0
     } else {
       if (checkdob_aa(dob, package_id) == false) {
@@ -977,7 +986,7 @@
       // $('.complaintBtn').prop('disabled', false);
       return true;
     } else {
-      $(".online_email_error" + id).text("Please enter the valid Email Id");
+      $(".online_email_error" + id).text("Please enter the valid email");
       // $('#online_email' + id).focus();
       // $('.complaintBtn').prop('disabled', true);
       return false;

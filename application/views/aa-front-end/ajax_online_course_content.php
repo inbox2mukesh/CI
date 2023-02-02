@@ -202,7 +202,15 @@ echo '<option value="' . $this->session->userdata('student_login_data')->country
                               <?php }else{ ?>
                                 <select class="selectpicker form-control" <?php echo $readOnly_dis; ?> data-live-search="true" name="online_country_code" id="online_country_code<?php echo $package_id ?>">
                                 <?php
+                               if(DEFAULT_COUNTRY==38){
                                 $c = 'CA';
+                              }elseif(DEFAULT_COUNTRY==13){
+                                $c = 'AU';
+                              }elseif(DEFAULT_COUNTRY==101){
+                                $c = 'IN';
+                              }else{
+                                $c = 'IN';
+                              }
                                 foreach ($countryCode->error_message->data as $pcc) {
                                   $selected = ($pcc->iso3 == $c) ? ' selected="selected"' : "";
                                   $disabled_se = ($pcc->iso3 == $c) ? '' : ' disabled="disabled"';

@@ -143,7 +143,7 @@ $(".allow_numeric").on("input", function (evt) {
 });
 function checkdob(data,id)
 {
-  var idd = '.' + id+'_err';
+ var idd = '.' + id+'_err';
  var id_m = '#' + id;
  var dt= data.split("/");
  //if(dt[1])
@@ -153,7 +153,7 @@ function checkdob(data,id)
     {
     	 // $('.dob_mask').focus();
     	 //$(id_m).focus();
-        $(idd).text('Invalid Date format');
+        $(idd).text('Invalid date format');
     return false;
     }
   }
@@ -161,7 +161,7 @@ function checkdob(data,id)
     if(pattern.test(data) == false)
     {
    // $('.dob_mask').focus();
-    $(idd).text('Invalid Date format');
+    $(idd).text('Invalid date format');
     return false;
     }
     else {
@@ -255,7 +255,7 @@ function validate_complaint_email(email){
         $('.complaintBtn').prop('disabled', false);  
         return true;
     }else{
-        $(".email_err_comp").text("Please enter valid email Id!");
+        $(".email_err_comp").text("Please enter valid email");
        //$('#email').focus();
         $('.complaintBtn').prop('disabled', true);
         return false;
@@ -269,32 +269,32 @@ function echeck(str)
 		var lstr=str.length
 		var ldot=str.indexOf(dot)
 		if (str.indexOf(at)==-1){
-		   $(".email_err").text('Please enter valid Email Id');
+		   $(".email_err").text('Please enter valid email');
 		   return false
 		}
 		if (str.indexOf(at)==-1 || str.indexOf(at)==0 || str.indexOf(at)==lstr){
-		  $(".email_err").text('Please enter valid Email Id');
+		  $(".email_err").text('Please enter valid email');
 		   return false
 		}
 		if (str.indexOf(dot)==-1 || str.indexOf(dot)==0 || str.indexOf(dot)==lstr){
-		    $(".email_err").text('Please enter valid Email Id');
+		    $(".email_err").text('Please enter valid email');
 		    return false
 		}
 		 if (str.indexOf(at,(lat+1))!=-1){
-		    $(".email_err").text('Please enter valid Email Id');
+		    $(".email_err").text('Please enter valid email');
 		    return false
 		 }
 		 if (str.substring(lat-1,lat)==dot || str.substring(lat+1,lat+2)==dot){
-		    $(".email_err").text('Please enter valid Email Id');
+		    $(".email_err").text('Please enter valid email');
 		    return false
 		 }
 		 if (str.indexOf(dot,(lat+2))==-1){
-		    $(".email_err").text('Please enter valid Email Id');
+		    $(".email_err").text('Please enter valid email');
 		    return false
 		 }
 		 if (str.indexOf(" ")!=-1){
 		    //alert("Invalid E-mail ID")
-			$(".email_err").text('Please enter valid Email Id');
+			$(".email_err").text('Please enter valid email');
 		    return false
 		 }
  		 return true					
@@ -315,19 +315,19 @@ function Send_registration()
       $(".fname_err").text('');
     }else{
      // $("#fname").focus();
-      $(".fname_err").text("Please enter First Name");
+      $(".fname_err").text("Please enter first name");
       return false;
     }	
     if(mobile.match(numberes)){
       $(".mobile_err").text('');
     }else{
 //$("#mobile").focus();
-      $(".mobile_err").text("Please enter valid Number of 10 digit");
+      $(".mobile_err").text("Please enter valid number");
       return false;
     }
     if(mobile.length ==0 || mobile =="" || mobile.length>10 || mobile.length<10){
       //$("#mobile").focus();
-      $(".mobile_err").text('Please enter valid Number of 10 digit');
+      $(".mobile_err").text('Please enter valid number');
       return false;
     }else{ 
      $(".mobile_err").text('');
@@ -367,12 +367,12 @@ function Send_registration()
 		if(email == "" || email == null)
 		{
 		//$("#email").focus();
-		$(".email_err").text('Please enter valid Email Id');
+		$(".email_err").text('Please enter valid email');
 		return false;
 		}
 		if (echeck(email)==false){
 		//$("#email").focus();
-		$(".email_err").text('Please enter valid Email Id');
+		$(".email_err").text('Please enter valid email');
 		return false;
 		}
 		else {

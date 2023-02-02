@@ -35,7 +35,7 @@
 			<div class="column">
 				<h4>More</h4>
 				<ul>
-					<li><a href="<?php echo base_url('why_australia');?>">Why Australia?</a></li>
+					<li><a href="<?php echo base_url('why_canada');?>">Why Canada?</a></li>
 					<li><a href="<?php echo base_url('gallery');?>">Image Gallery</a></li>
 					<li><a href="<?php echo base_url('videos');?>">Video Gallery</a></li>
 					<li><a href="<?php echo base_url('contact_us');?>">Contact</a></li>
@@ -125,6 +125,7 @@ gtag('config', 'G-1E5CHNNQ1L');
 <!--Added by Vikram 6 dec 2022 -->
 <script src="<?php echo site_url(DESIGN_VERSION . '/js/sweetalert2.all.min.js?v='.JS_CSS_VERSION_F); ?>"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/news-ticker-min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
+
 <script type="text/javascript">
 
 $('.js-conveyor-1').jConveyorTicker();
@@ -169,7 +170,22 @@ $(document).keypress("u",function(e) {
 	$('#newsTicker').breakingNews();
 	});
 </script>
+
 <script type="text/javascript">
+
+function subtractMinutes(numOfMinutes, date = new Date()) {
+  		date.setMinutes(date.getMinutes() - numOfMinutes);
+  		return date;
+	}
+	const date = new Date();
+	let caDate = subtractMinutes(630, date);
+
+	$('.datepicker_dynamic').datepicker({
+	format: 'dd-mm-yyyy',
+	startDate: caDate,
+	todayHighlight: true
+	});
+
 	var today = new Date();
 	$('.datepickerpack').datepicker({
 	format: 'dd-mm-yyyy',
@@ -263,7 +279,7 @@ $(document).keypress("u",function(e) {
 			$("#" + id_err).text('');
 			return true;
 		} else {
-			$("#" + id_err).text("Please enter the valid Email Id");
+			$("#" + id_err).text("Please enter the valid email Id");
 			///$("#" + id).focus();
 			return false;
 		}
@@ -375,7 +391,7 @@ function validatedob(data, id)
 		var dt = data.split("/");
 		if (dt[1] == '02') {
 			if (dt[0] > 29) {
-				$(idd).text('Please enter the valid Date Of Birth');
+				$(idd).text('Please enter the valid date of birth');
 				return false;
 			} else {
 				$(idd).text('');
@@ -383,7 +399,7 @@ function validatedob(data, id)
    		}
 		var pattern = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
 		if (pattern.test(data) == false) {
-			$(idd).text('Please enter the valid Date Of Birth');
+			$(idd).text('Please enter the valid date of birth');
 			return false;
 		} else {
 			$(idd).text('');

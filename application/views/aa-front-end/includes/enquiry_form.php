@@ -133,7 +133,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
     //otp
     if (otp == '') {
       //$("#otp").focus();
-      $(".otp_err").text("Please enter correct Verification code!");
+      $(".otp_err").text("Please enter correct verification code!");
       return false;
     } else {
       $(".otp_err").text('');
@@ -149,7 +149,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
         $('.proBtn2').hide();
         $('.otp_form').show();
         if (response.status == 1) {
-          $('.finalMsg').html('<div class="alert alert-success alert-dismissible"><a href="<?php echo site_url(''); ?>" class="close" data-dismiss="alert" aria-label="close">&times;</a> Verification code Verified & enquiry sent successfully. Please check your Email for more details.<a href="#" class="alert-link"></a>.</div>');
+          $('.finalMsg').html('<div class="alert alert-success alert-dismissible"><a href="<?php echo site_url(''); ?>" class="close" data-dismiss="alert" aria-label="close">&times;</a> Verification code verified & enquiry sent successfully. Please check your email for more details.<a href="#" class="alert-link"></a>.</div>');
           $('.otp_form').hide();
           $('.otpMsg').hide();
         
@@ -168,10 +168,10 @@ if(isset($this->session->userdata('student_login_data')->id)){
           //window.location.href='<?php echo current_url(); ?>'
         } 
         else if(response.status == 2){
-          $('.finalMsg').html('<div class="alert alert-danger alert-dismissible"><a href="<?php echo site_url(''); ?>" class="close" data-dismiss="alert" aria-label="close">&times;</a> OOps..Error occur. Please try again!<a href="#" class="alert-link"></a>.</div>');
+          $('.finalMsg').html('<div class="alert alert-danger alert-dismissible"><a href="<?php echo site_url(''); ?>" class="close" data-dismiss="alert" aria-label="close">&times;</a> OOps..error occur. Please try again!<a href="#" class="alert-link"></a>.</div>');
         }
         else {
-          $('.finalMsg').html('<div class="alert alert-danger alert-dismissible"><a href="<?php echo site_url(''); ?>" class="close" data-dismiss="alert" aria-label="close">&times;</a> OOps..Wrong Verification code entered. Please try again!<a href="#" class="alert-link"></a>.</div>');
+          $('.finalMsg').html('<div class="alert alert-danger alert-dismissible"><a href="<?php echo site_url(''); ?>" class="close" data-dismiss="alert" aria-label="close">&times;</a> OOps..Wrong verification code entered. Please try again!<a href="#" class="alert-link"></a>.</div>');
         }
       },
       beforeSend: function() {
@@ -193,28 +193,28 @@ if(isset($this->session->userdata('student_login_data')->id)){
     var message = $("#message_qnform").val();
     if (fname == '') {
      // $("#fname_qnform").focus();
-      $(".fname_qnform_err").text("Please enter First Name!");     
+      $(".fname_qnform_err").text("Please enter first name");     
       return false;
     } else if (!(fname.match(letters))) {
      // $("#fname_qnform").focus();
-      $(".fname_qnform_err").text("Please enter valid Name.Numbers not allowed!");     
+      $(".fname_qnform_err").text("Please enter valid Name. Numbers not allowed");     
       return false;
     } else {
       $(".fname_qnform_err").text('');      
     }
     if (country_code == '') {
       //$("#country_code_qnform").focus();
-      $(".country_code__qnform_err").text("Please select country code!");
+      $(".country_code__qnform_err").text("Please select country code");
       return false;
     } else {
       $(".country_code__qnform_err").text('');
     }
     if (!filter.test(mobile)) {
-      $('.mobile_qnform_err').text('Please enter valid Number!');
+      $('.mobile_qnform_err').text('Please enter valid number');
       //$('#mobile_qnform').focus();
       return false;
     } else if (mobile.length > 13) {
-      $(".mobile_qnform_err").text('Please enter valid Number of 13 digit');      
+      $(".mobile_qnform_err").text('Please enter valid number of 13 digit');      
       return false;
     } else {
       $('.mobile_qnform_err').text('');
@@ -223,18 +223,18 @@ if(isset($this->session->userdata('student_login_data')->id)){
     var dotposition = email.lastIndexOf(".");
     if (email == '') {
      // $("#email_qnform").focus();
-      $(".email_qnform_err").text("Please enter email Id!");     
+      $(".email_qnform_err").text("Please enter email");     
       return false;
     } else if (atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= email.length) {
       //$("#email_qnform").focus();
-      $(".email_qnform_err").text("Please enter valid email Id!");
+      $(".email_qnform_err").text("Please enter valid email");
       return false;
     } else {
       $(".email_qnform_err").text('');      
     }    
     if (dob == '') {
      // $("#dob_qnform").focus();
-      $(".dob_qnform_err").text("Please enter valid Date of Birth!");
+      $(".dob_qnform_err").text("Please enter valid date of birth");
       return false;
     } else {
       $(".dob_qnform_err").text('');
@@ -242,7 +242,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
     var patterndob = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
     if (patterndob.test(dob) == false) {
       //$('.dob_mask').focus();
-      $('.dob_qnform_err').text('Invalid Date format');
+      $('.dob_qnform_err').text('Invalid date format');
       return false;
     } else {
       $('.dob_qnform_err').text('');
@@ -251,7 +251,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
     if (dt[1] == '02') {
       if (dt[0] > 29) {
       //  $('.dob_mask').focus();
-        $('.dob_qnform_err').text('Invalid Date format');
+        $('.dob_qnform_err').text('Invalid date format');
         return false;
       } else {
         $('.dob_qnform_err').text('');
@@ -266,7 +266,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
     }  
     if (message == '') {
       //$("#message_qnform").focus();
-      $(".message_qnform_err").text("Please Enter message!");
+      $(".message_qnform_err").text("Please enter message!");
       return false;
     } else {
       $(".message_qnform_err").text('');      
@@ -315,7 +315,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
           $('.otpMsg').html('<div class="alert alert-info alert-dismissible">Verification code has been sent on your email.<a href="#" class="alert-link"></a>.</div>');
         }
         else {
-          $('.finalMsg').html('<div class="alert alert-danger alert-dismissible">OOps..Failed to send Verification code. Please try again!<a href="#" class="alert-link"></a>.</div>');
+          $('.finalMsg').html('<div class="alert alert-danger alert-dismissible">OOps..Failed to send verification code. Please try again!<a href="#" class="alert-link"></a>.</div>');
         }
 
       },
@@ -340,7 +340,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
         $('.proBtn3').hide();
         if (response.status == 1) {
           $('.otpMsg').show();
-          $('.otpMsg').html('<div class="alert alert-info alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Verification code Resent on your email. Please enter.<a href="#" class="alert-link"></a>.</div>');
+          $('.otpMsg').html('<div class="alert alert-info alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Verification code resent on your email. Please enter.<a href="#" class="alert-link"></a>.</div>');
         } else {
           $('.otpMsg').hide();
         }
