@@ -177,8 +177,22 @@ function subtractMinutes(numOfMinutes, date = new Date()) {
   		date.setMinutes(date.getMinutes() - numOfMinutes);
   		return date;
 	}
+	function addMinutes(numOfMinutes, date = new Date()) 
+{
+	date.setMinutes(date.getMinutes() + numOfMinutes);
+	return date;
+}
 	const date = new Date();
-	let caDate = subtractMinutes(630, date);
+	<?php
+	if(DEFAULT_COUNTRY==38){ ?>
+	let caDate = subtractMinutes(<?php echo TIME_DIFF;?>, date);
+	<?php }	else if(DEFAULT_COUNTRY==13) {
+	?>
+	let caDate = addMinutes(<?php echo TIME_DIFF;?>, date);
+	<?php 
+	} else { ?>
+	let caDate = addMinutes(<?php echo TIME_DIFF;?>, date);
+	<?php }?>
 
 	$('.datepicker_dynamic').datepicker({
 	format: 'dd-mm-yyyy',
@@ -192,7 +206,7 @@ function subtractMinutes(numOfMinutes, date = new Date()) {
 	});
 	$('.datepicker').datepicker({
 	format: 'dd-mm-yyyy',
-	startDate: new Date(),
+	startDate: caDate,
 	todayHighlight: true
 	});
 	$('#class_date').datepicker({

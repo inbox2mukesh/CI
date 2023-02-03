@@ -8329,10 +8329,8 @@ function validateMockTestScore(val,fieldId) {
 		return false;
 	}	
 }
-function subtractMinutes(numOfMinutes, date = new Date()) {
-  		date.setMinutes(date.getMinutes() - numOfMinutes);
-  		return date;
-	}
+
+
 
 function get_lead_detail(id)
 { 

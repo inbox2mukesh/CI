@@ -358,9 +358,7 @@ function check_duplicate_sch(){
 	}	
 }
 
-	
-	const date = new Date();
-	let caDate = subtractMinutes(630, date);
+
  	$(".user_activity_report_datetimepicker").datetimepicker({
         format: 'DD-MM-YYYY HH:mm',
 		minDate:caDate

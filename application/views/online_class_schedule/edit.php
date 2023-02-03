@@ -346,8 +346,7 @@ if($('#dateTime').val() !="")
 	
 }
 
-const date = new Date();
-let caDate = subtractMinutes(630, date);
+
  $(".user_activity_report_datetimepicker").datetimepicker({
         format: 'YYYY-MM-DD HH:mm',
 		minDate:caDate

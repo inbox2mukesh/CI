@@ -310,6 +310,36 @@ if( browserName == 'Chrome' || browserName == 'Mozilla Firefox' ||  browserName 
 } else {
     window.location.href = '<?php echo base_url("/support_browser");?>';
 }
+
+
+function subtractMinutes(numOfMinutes, date = new Date()) 
+{
+	date.setMinutes(date.getMinutes() - numOfMinutes);
+	return date;
+}
+function addMinutes(numOfMinutes, date = new Date()) 
+{
+	date.setMinutes(date.getMinutes() + numOfMinutes);
+	return date;
+}
+const date = new Date();
+	<?php
+	if(DEFAULT_COUNTRY==38){ ?>
+	let caDate = subtractMinutes(<?php echo TIME_DIFF;?>, date);
+	<?php }	else if(DEFAULT_COUNTRY==13) {
+	?>
+	let caDate = addMinutes(<?php echo TIME_DIFF;?>, date);
+	<?php 
+	} else { ?>
+	let caDate = addMinutes(<?php echo TIME_DIFF;?>, date);
+	<?php }?>
+
+$('.datepicker_timezone').datepicker({
+startDate: new Date(),
+autoclose:true,
+});
+
+
 </script>
 <?php
 global $customJs;

@@ -8,16 +8,11 @@
 global $customJS;
 define('JS_CSS_VERSION', '0.0.1');
 define('ADMIN', 'Super Admin');
-define('BASEURL', 'http://localhost/aus/');
 ///////////////////////////////////settings start///////////////////////////////////////
-define('WOSA_ONLINE_DOMAIN', 0);
-define('INDIA_ID', 101);
-//define('DEFAULT_COUNTRY', '38');//canada
-define('DEFAULT_COUNTRY', '13');//Australia
-//define('DEFAULT_COUNTRY', '101');//india
-
+include_once(FCPATH.'application/config/setting-constants.php');
 if(DEFAULT_COUNTRY==38){
-
+	define('TIME_DIFF', 630);
+	define('TIME_DIFF_NATURE', '-');
 	if(ENVIRONMENT=='development'){
 		define('SESSION_VAR', 'admin_login_data_ca_development');
 		define('COOKIE_USERNAME', 'wosa_username_ca_development');
@@ -74,7 +69,8 @@ if(DEFAULT_COUNTRY==38){
 	define('LIVEURL', 'https://westernoverseas.ca/adminController/dashboard');
 
 }else if(DEFAULT_COUNTRY==13){
-
+	define('TIME_DIFF', 330);
+	define('TIME_DIFF_NATURE', '+');
 	if(ENVIRONMENT=='development'){
 		define('SESSION_VAR', 'admin_login_data_au_development');
 		define('COOKIE_USERNAME', 'wosa_username_au_development');
@@ -130,7 +126,8 @@ if(DEFAULT_COUNTRY==38){
 	define('LIVEURL', 'https://westernoverseas.com.au/adminController/dashboard');
 
 }else if(DEFAULT_COUNTRY==101){
-
+	define('TIME_DIFF', 0);
+	define('TIME_DIFF_NATURE', '-');
 	if(ENVIRONMENT=='development'){
 		define('SESSION_VAR', 'admin_login_data_in_development');
 		define('COOKIE_USERNAME', 'wosa_username_in_development');
@@ -1150,6 +1147,7 @@ define('SOURCE_MASTER_DELETE', 'Source deleted');
  include_once(FCPATH.'application/config/navjeet-constants.php');
  include_once(FCPATH.'application/config/rajan-constants.php');
  include_once(FCPATH.'application/config/vikram-constants.php');
+
 /*****************Code End By Neelu*******/
 
 define('SERVICE_IMAGE_ALLOWED_TYPES', 'jpg|png|jpeg|webp');

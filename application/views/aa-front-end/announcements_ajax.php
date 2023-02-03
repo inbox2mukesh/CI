@@ -44,7 +44,7 @@ $custom_class="";
 																		?>
 								<img src="<?php echo site_url(str_replace("./","",ANNOUNCEMENT_FILE_PATH). '' . $p->media_file); ?>" class="pull-left img-responsive col-md-5 no-padding-left">
 												<?php } ?>
-												<?php echo $p->body; ?>
+												<section><?php echo $p->body; ?></section>
 											</div>
 										</div>
 										<?php }?>
