@@ -17,10 +17,7 @@
 	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/aus-mob-slider-3.webp');?>" alt="" loading="lazy">
     </div>
 
-	<div class="carousel-item">
-      <img class="d-block w-100 desktop-slider" src="<?php echo base_url('resources-f/images/slider/aus-slider-4.webp');?>" alt="" loading="lazy">	
-	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/aus-mob-slider-4.webp');?>" alt="" loading="lazy">
-    </div>
+
   
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
