@@ -1918,7 +1918,7 @@ a:hover.change-btn {
     border-radius:4px!important;
 }
 
-.announcement .panel-group .panel:last-child {margin-bottom: 0px!important;}
+/* .announcement .panel-group .panel:last-child {margin-bottom: 0px!important;} */
 
 .announcement .panel-heading {
     padding: 0!important;

@@ -152,7 +152,7 @@
 	margin-top: 5px;
 	text-align: center;
 	min-width:150px;
-	width: 170px!important;
+	width: 170px;
 	background-color: transparent;
 	margin:2px 16px 2px 0px;
 }
@@ -443,11 +443,8 @@
 
 }
 
-@media screen and (min-width:220px) and (max-width:350px) {
-	.event-booking .time-card{min-width: 110px!important;}
-	/* .ft-stp{bottom:inherit!important;} */
-
-
+@media screen and (min-width:220px) and (max-width:370px) {
+	.event-booking .timeslot-card-row .card{min-width:143px!important;}
 }
 
 
@@ -455,16 +452,16 @@
 @media screen and (min-width:601px) and (max-width:768px) {	.time-slot-row [class*="col-"]{width:33%;float: left;}}
 @media screen and (min-width:769px) and (max-width:990px) {	.time-slot-row [class*="col-"]{width:25%;float: left;}}
 
-@media screen and (min-width:351px) and (max-width:420px) {
-	.event-booking .time-card{min-width: 130px!important;}
-
+@media screen and (min-width:390px) and (max-width:400px) {
+	.event-booking .timeslot-card-row .card{min-width:153px!important;width:153px!important;}
 }
 
 
 
 @media screen and (min-width:992px) and (max-width:1200px) {
-.event-booking .time-card {	width:auto!important;	min-width:auto!important;}
+.event-booking .time-card {	width:auto!important;min-width:auto!important;}
 .event-booking .timeslot-card-row .card{ min-width:135px;width: 135px!important;}
+
 }
 
 

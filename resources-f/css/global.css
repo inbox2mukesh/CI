@@ -27,6 +27,7 @@ input:read-only{color: #757575!important;}
 
 .mp-btn.disabled, .mp-btn[disabled], fieldset[disabled] .mp-btn {
     opacity: .55;
+    color:rgba(255,255,255, 0.9)
 }
 
 .modal-open .modal{overflow-x: hidden!important;overflow-y: hidden!important;}
