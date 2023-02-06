@@ -130,7 +130,7 @@ if (!empty($OnlinePack->error_message->data)) {
                       <div class="PP-box-info">
                       <div class="pp-scroll">
                         <div class="row">
-                          <div class="col-md-3"></div>
+                        <div class="col-md-3 ht-0">&nbsp;</div>
                           <div class="col-md-6">
                             <div class="form-group">
                             <div id="batch_option_sec_<?php echo $p->package_id; ?>">
@@ -148,7 +148,7 @@ if (!empty($OnlinePack->error_message->data)) {
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-3"></div>
+                          <div class="col-md-3 ht-0">&nbsp;</div>
                           <div class="col-md-12 text-center font-weight-600" id="upcomingclasstext_<?php echo $p->package_id ?>">
                           </div>
                         </div>

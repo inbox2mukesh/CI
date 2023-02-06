@@ -1733,7 +1733,7 @@ class Package_master_model extends CI_Model
         $this->db->join('`programe_masters` pgm','pgm.`programe_id`=spkg.`programe_id`','left');  
         $this->db->where(array('spkg.student_id'=>$id));
         if($orderdate){
-            $this->db->where(array('DATE(spkg.requested_on)'=>$orderdate));
+            $this->db->like('spkg.requested_on',$orderdate);
         }
         $this->db->where(array('spkg.status'=>'succeeded'));         
         $this->db->group_start();
@@ -1762,7 +1762,7 @@ class Package_master_model extends CI_Model
         $this->db->from('`student_package` spkg');
         $this->db->join('`practice_package_masters` pkg', 'pkg.`package_id`= spkg.`package_id`'); 
         if($orderdate){
-            $this->db->where(array('DATE(spkg.requested_on)'=>$orderdate));
+            $this->db->like('spkg.requested_on',$orderdate);
         } 
         $this->db->where(array('spkg.status'=>'succeeded'));               
         $this->db->where(array('spkg.student_id'=>$id,'spkg.pack_type'=>'practice'));        
@@ -2056,7 +2056,7 @@ class Package_master_model extends CI_Model
 
     function getAllOrderDate($id)
     {
-        $this->db->select('DATE(`requested_on`) as requested_on');
+        $this->db->select('SUBSTRING(requested_on, 1,10) AS requested_on');
         $this->db->from('`student_package` spkg');
         $this->db->join('`package_masters` pkg', 'pkg.`package_id`= spkg.`package_id`');        
         $this->db->where(array('spkg.student_id'=>$id));
@@ -2064,18 +2064,18 @@ class Package_master_model extends CI_Model
         $this->db->or_where(array('spkg.pack_type'=>'offline'));
         $this->db->or_where(array('spkg.pack_type'=>'online'));
         $this->db->group_end();
-        $this->db->order_by('DATE(spkg.`requested_on`) DESC');
+        $this->db->order_by('spkg.`requested_on` DESC');
         $this->db->group_by('spkg.requested_on');
         // $this->db->limit(5);
         return  $this->db->get('')->result_array();
     }
     function getAllOrderDate_pp($id){
 
-        $this->db->select('DATE(`requested_on`) as requested_on');
+        $this->db->select('SUBSTRING(requested_on, 1,10) AS requested_on');
         $this->db->from('`student_package` spkg');
         $this->db->join('`practice_package_masters` pkg', 'pkg.`package_id`= spkg.`package_id`');        
         $this->db->where(array('spkg.student_id'=>$id,'spkg.pack_type'=>'practice'));                     
-        $this->db->order_by('DATE(spkg.`requested_on`) DESC');
+        $this->db->order_by('spkg.`requested_on` DESC');
         $this->db->group_by('spkg.requested_on');
         //$this->db->limit(5);
         return $this->db->get('')->result_array();
@@ -2170,7 +2170,8 @@ class Package_master_model extends CI_Model
         $this->db->where(array('pkg_cat.category_id'=>$category_id));   
         }
         $this->db->order_by('cat_time.course_timing', 'ASC');
-        return $this->db->get()->result_array();      
+        return $this->db->get()->result_array(); 
+             
     }
 
     function get_failed_fourmodule_data()

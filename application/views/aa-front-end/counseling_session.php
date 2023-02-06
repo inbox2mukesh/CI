@@ -346,7 +346,7 @@
 	})
 </script>
 <script>
-var wordLen = 10,
+var wordLen = 2000,
 len; // Maximum word length
 
 $('#message').keyup(function(event) {	
@@ -414,11 +414,11 @@ $('#message').keyup(function(event) {
 
 
 <script>
-if ($(window).width() <= 990) {
+if ($(window).width() <= 1024) {
 	let mybutton = document.getElementById("btnNext");
 	function topFunction() {
-	document.body.scrollTop =200;
-	document.documentElement.scrollTop =200;
+	document.body.scrollTop =0;
+	document.documentElement.scrollTop =0;
  }
 }
 </script>
@@ -495,6 +495,12 @@ if ($(window).width() <= 990) {
 			flag = 0;
 		} else {
 			$(".cl_message_err").text('');
+		}
+		if (message.length > wordLen) { 
+		
+		$(".cl_message_err").text("The maximium length for message is upto "+wordLen+ " words!");			
+		//return false;
+		flag = 0;
 		}
 		return flag;
 		if (flag == 1) {

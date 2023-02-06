@@ -124,12 +124,10 @@ gtag('config', 'G-1E5CHNNQ1L');
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/webp-hero.bundle.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <!--Added by Vikram 6 dec 2022 -->
 <script src="<?php echo site_url(DESIGN_VERSION . '/js/sweetalert2.all.min.js?v='.JS_CSS_VERSION_F); ?>"></script>
-<script src="<?php echo base_url(DESIGN_VERSION_F.'/js/news-ticker-min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
+<script src="<?php echo base_url(DESIGN_VERSION_F.'/js/news-ticker.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 
-<script type="text/javascript">
 
-$('.js-conveyor-1').jConveyorTicker();
-  </script>
+
 
 
 

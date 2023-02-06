@@ -26,7 +26,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
     <div class="form-group col-md-6 col-sm-6">     
       <label>Country Code<span class="text-red">*</span></label> 
       <select class="form-control selectpicker" name="country_code" id="country_code_qnform" data-live-search="true"  <?php echo $disabled_sel;?>>
-        <option value="">Select Country Code </option>
+       
         <?php
         if(DEFAULT_COUNTRY==38){
           $c = 'CA';
@@ -181,6 +181,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
     });
   }
   function validate_enq() {
+    var flag = 1;
     var letters = /^[A-Za-z ]+$/;
     var filter = /^[0-9-+]+$/;
     var fname = $("#fname_qnform").val();
@@ -194,28 +195,28 @@ if(isset($this->session->userdata('student_login_data')->id)){
     if (fname == '') {
      // $("#fname_qnform").focus();
       $(".fname_qnform_err").text("Please enter first name");     
-      return false;
+      flag = 0;
     } else if (!(fname.match(letters))) {
      // $("#fname_qnform").focus();
       $(".fname_qnform_err").text("Please enter valid Name. Numbers not allowed");     
-      return false;
+      flag = 0;
     } else {
       $(".fname_qnform_err").text('');      
     }
     if (country_code == '') {
       //$("#country_code_qnform").focus();
       $(".country_code__qnform_err").text("Please select country code");
-      return false;
+      flag = 0;
     } else {
       $(".country_code__qnform_err").text('');
     }
     if (!filter.test(mobile)) {
       $('.mobile_qnform_err').text('Please enter valid number');
       //$('#mobile_qnform').focus();
-      return false;
+      flag = 0;
     } else if (mobile.length > 13) {
       $(".mobile_qnform_err").text('Please enter valid number of 13 digit');      
-      return false;
+      flag = 0;
     } else {
       $('.mobile_qnform_err').text('');
     }    
@@ -224,18 +225,18 @@ if(isset($this->session->userdata('student_login_data')->id)){
     if (email == '') {
      // $("#email_qnform").focus();
       $(".email_qnform_err").text("Please enter email");     
-      return false;
+      flag = 0;
     } else if (atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= email.length) {
       //$("#email_qnform").focus();
       $(".email_qnform_err").text("Please enter valid email");
-      return false;
+      flag = 0;
     } else {
       $(".email_qnform_err").text('');      
     }    
     if (dob == '') {
      // $("#dob_qnform").focus();
       $(".dob_qnform_err").text("Please enter valid date of birth");
-      return false;
+      flag = 0;
     } else {
       $(".dob_qnform_err").text('');
     }
@@ -243,7 +244,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
     if (patterndob.test(dob) == false) {
       //$('.dob_mask').focus();
       $('.dob_qnform_err').text('Invalid date format');
-      return false;
+      flag = 0;
     } else {
       $('.dob_qnform_err').text('');
     }
@@ -252,7 +253,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
       if (dt[0] > 29) {
       //  $('.dob_mask').focus();
         $('.dob_qnform_err').text('Invalid date format');
-        return false;
+        flag = 0;
       } else {
         $('.dob_qnform_err').text('');
       }
@@ -260,17 +261,23 @@ if(isset($this->session->userdata('student_login_data')->id)){
     if (enquiry_purpose_id == '') {
      // $("#enquiry_purpose_id").focus();
       $(".purpose_err").text("Please select services!");
-      return false;
+      flag = 0;
     } else {
       $(".purpose_err").text('');      
     }  
     if (message == '') {
       //$("#message_qnform").focus();
       $(".message_qnform_err").text("Please enter message!");
-      return false;
+      flag = 0;
     } else {
       $(".message_qnform_err").text('');      
     }  
+
+    if (flag == 0) {
+      return false;
+    }
+    else {    
+    
     $.ajax({
       url: "<?php echo site_url('enquiry/enquiry_submit'); ?>",
       type: 'post',
@@ -324,6 +331,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
         //$('.enqBtn').hide();
       },
     });
+  }
   }
   function resendOTP() {
     var enquiry_id = $("#enquiry_id").val();

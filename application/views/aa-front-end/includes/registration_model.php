@@ -32,7 +32,7 @@
 									<div class="form-group selectpicker-auto">
 										<lable>Country Code<span class="text-red">*</span></lable>
 										<select class="selectpicker form-control" data-live-search="true" id="country_code" name="country_code">
-											<option value="">Choose Country Code</option>
+											
 											<?php
 												if(DEFAULT_COUNTRY==38){
 													$c = 'CA';
@@ -129,7 +129,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="<?php echo site_url('resources-f/'); ?>js/date-mask.js"></script>
+<script src="<?php echo site_url('resources-f/'); ?>js/date-mask.js"></script>
 <script id="rendered-js">
 $(".dob_mask:input").inputmask();
 </script> 
@@ -151,21 +151,18 @@ function checkdob(data,id)
   {
     if(dt[0] >29)
     {
-    	 // $('.dob_mask').focus();
-    	 //$(id_m).focus();
         $(idd).text('Invalid date format');
-    return false;
+    	return false;
     }
   }
   var pattern =/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
     if(pattern.test(data) == false)
-    {
-   // $('.dob_mask').focus();
-    $(idd).text('Invalid date format');
-    return false;
+    {  
+    	$(idd).text('Invalid date format');
+    	return false;
     }
     else {
-    $('.dob_qnform_err').text('');
+		$('.dob_qnform_err').text('');
     }
 }
 function Verify_Complaints()
@@ -174,10 +171,9 @@ function Verify_Complaints()
   if(reg_otp!=''){
       $(".reg_otp_err").text('');
   }else{
-     // $("#reg_otp").focus();
-     $('#reg_opt_danger').removeClass('hide'); 
-     $('#reg_opt_danger').html("<div class='alert alert-danger alert-dismissible'><strong>Please Enter Verification code</strong> <a href='#' class='alert-link'> </a> </div>"); 
-      return false;
+   		$('#reg_opt_danger').removeClass('hide'); 
+     	$('#reg_opt_danger').html("<div class='alert alert-danger alert-dismissible'><strong>Please Enter Verification code</strong> <a href='#' class='alert-link'> </a> </div>"); 
+      	return false;
   }
   $.ajax({
         url: "<?php echo site_url('our_students/student_otp');?>",
@@ -185,66 +181,66 @@ function Verify_Complaints()
         data: {otp: reg_otp},                              
         success: function(response)
         {  
-			      if(response.status=='true')
-			      {
-								$('#main_sec').addClass('hide');
-								$('#reg_opt_danger').addClass('hide');             
-								$('#reg_opt_success').removeClass('hide'); 
-								$('#reg_opt_success').html(response.msg); 
-								setTimeout(function(){
-								window.location.href = "<?php echo site_url('our_students/student_dashboard');?>";
-								}, 2000);                  
-	          }
-					  else if(response.status==2)
-					  {
-								window.location.href = "<?php echo site_url('booking/checkout');?>"
-					  }
-					  else if(response.status==3)
-					  {
-								$.ajax({
-								url: "<?php echo site_url('demo_counselling_session/post_book_session');?>",
-								async : true,
-								type: 'post',								
-								success: function(data)
-								{								
-								  if(data.status==1)// for success popup
-									{
-								   	$('#modal-reg-OTP').modal('hide'); 								 	
-										$('#checkout_popup_modal').modal('show'); 
-										$('#checkout_success_msg').removeClass('hide');   
-										$('#checkout_fail_msg').addClass('hide');
-										$('#studentPostForm')[0].reset();
-										$('select').prop('selectedIndex',0);
-										setTimeout(function()
-										{
-										window.location.href = "<?php echo site_url('my_login/');?>";
-										}, 2000);
-								 } 
-									else if(response.status==2) // for login popup
-									{
-										$('#onlinecoursemodel'+package_id).modal('hide');
-										$('#modal-reg-OTP').modal('show');       
-									}
-									else
-									{
-										$('#checkout_popup_modal').modal('show');
-										$('#checkout_success_msg').addClass('hide');
-										$('#checkout_fail_msg').removeClass('hide');     
-									} 
-								},
-								beforeSend: function()
-								{
-								},
-								});
-					  }
-						else
+			if(response.status=='true')
+			{
+				$('#main_sec').addClass('hide');
+				$('#reg_opt_danger').addClass('hide');             
+				$('#reg_opt_success').removeClass('hide'); 
+				$('#reg_opt_success').html(response.msg); 
+				setTimeout(function(){
+				window.location.href = "<?php echo site_url('our_students/student_dashboard');?>";
+				}, 2000);                  
+	        }
+			else if(response.status==2)
+			{
+				window.location.href = "<?php echo site_url('booking/checkout');?>"
+			}
+			else if(response.status==3)
+			{
+				$.ajax({
+				url: "<?php echo site_url('demo_counselling_session/post_book_session');?>",
+				async : true,
+				type: 'post',								
+				success: function(data)
+				{								
+					if(data.status==1)// for success popup
+					{
+					$('#modal-reg-OTP').modal('hide'); 								 	
+						$('#checkout_popup_modal').modal('show'); 
+						$('#checkout_success_msg').removeClass('hide');   
+						$('#checkout_fail_msg').addClass('hide');
+						$('#studentPostForm')[0].reset();
+						$('select').prop('selectedIndex',0);
+						setTimeout(function()
 						{
-							$('#reg_otp').val(''); 
-							$('#reg_opt_success').addClass('hide');   
-							$('#reg_opt_danger').removeClass('hide'); 
-							$('#reg_opt_danger').html(response.msg); 
-							//$('.otpform').show(); 
-						}                  
+						window.location.href = "<?php echo site_url('my_login/');?>";
+						}, 2000);
+					} 
+					else if(response.status==2) // for login popup
+					{
+						$('#onlinecoursemodel'+package_id).modal('hide');
+						$('#modal-reg-OTP').modal('show');       
+					}
+					else
+					{
+						$('#checkout_popup_modal').modal('show');
+						$('#checkout_success_msg').addClass('hide');
+						$('#checkout_fail_msg').removeClass('hide');     
+					} 
+				},
+				beforeSend: function()
+				{
+				},
+				});
+			}
+			else
+			{
+				$('#reg_otp').val(''); 
+				$('#reg_opt_success').addClass('hide');   
+				$('#reg_opt_danger').removeClass('hide'); 
+				$('#reg_opt_danger').html(response.msg); 
+				//$('.otpform').show(); 
+			}                  
         }       
     });
 }
@@ -301,6 +297,7 @@ function echeck(str)
 	}
 function Send_registration()
 {
+	var flag = 1;
     var numberes = /^[0-9-+]+$/;
     var letters = /^[A-Za-z ]+$/;
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
@@ -316,19 +313,19 @@ function Send_registration()
     }else{
      // $("#fname").focus();
       $(".fname_err").text("Please enter first name");
-      return false;
+	  flag = 0;
     }	
     if(mobile.match(numberes)){
       $(".mobile_err").text('');
     }else{
 //$("#mobile").focus();
       $(".mobile_err").text("Please enter valid number");
-      return false;
+	  flag = 0;
     }
     if(mobile.length ==0 || mobile =="" || mobile.length>10 || mobile.length<10){
       //$("#mobile").focus();
       $(".mobile_err").text('Please enter valid number');
-      return false;
+	  flag = 0;
     }else{ 
      $(".mobile_err").text('');
     }
@@ -336,7 +333,7 @@ function Send_registration()
 		{
 		//$("#regdob").focus();
 		$(".regdob_err").text('Please select DOB');
-		return false;
+		flag = 0;
 		}
  var dt= dob.split("/");
  //if(dt[1])
@@ -347,7 +344,7 @@ function Send_registration()
     	 // $('.dob_mask').focus();
     	//$("#regdob").focus();
 		$(".regdob_err").text('Invalid DOB');
-    return false;
+		flag = 0;
     }
     else{
     	$(".regdob_err").text('');
@@ -359,7 +356,7 @@ function Send_registration()
    // $('.dob_mask').focus();
   // 	$("#regdob").focus();
 		$(".regdob_err").text('Invalid DOB');
-    return false;
+		flag = 0;
     }
     else {
     $('.dob_qnform_err').text('');
@@ -368,18 +365,20 @@ function Send_registration()
 		{
 		//$("#email").focus();
 		$(".email_err").text('Please enter valid email');
-		return false;
+		flag = 0;
 		}
 		if (echeck(email)==false){
 		//$("#email").focus();
 		$(".email_err").text('Please enter valid email');
-		return false;
+		flag = 0;
 		}
 		else {
 			$(".email_err").text('');
 		}
 
-		
+if (flag == 0) {
+return false;
+} else {		
     $.ajax({
         url: "<?php echo site_url('our_students/registration');?>",
         type: 'post',
@@ -404,5 +403,6 @@ function Send_registration()
           $('#reg_button').prop('disabled', true);
         }
     });
+}
   }
 </script>

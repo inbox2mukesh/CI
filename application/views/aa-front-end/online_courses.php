@@ -212,12 +212,11 @@
                       <div class="PP-box-info">
                         <div class="pp-scroll">
                           <div class="row">
-                            <div class="col-md-3">&nbsp;</div>
+                            <div class="col-md-3 ht-0">&nbsp;</div>
                             <div class="col-md-6">
-                              <div class="form-group">
-                                <div id="batch_option_sec_<?php echo $p->package_id; ?>">
-                                </div>
-                                <div class="validation font-11 red-text batch_option_<?php echo $p->package_id; ?>_err"></div>
+                              <div id="batch_option_sec_<?php echo $p->package_id; ?>">
+                                
+                                
                               </div>
                               <div class="form-group">
                                 <lable class="font-weight-600">Select Package Start Date<span class="text-red">*</span></lable>
@@ -228,7 +227,7 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="col-md-3">&nbsp;</div>
+                            <div class="col-md-3 ht-0">&nbsp;</div>
                             <div class="col-md-12 text-center font-weight-600" id="upcomingclasstext_<?php echo $p->package_id ?>">
                             </div>
                           </div>

@@ -360,7 +360,13 @@ $('#address_ba').keydown(function(event) {
 		} else {
 			$(".address_ba_err").text("");
 		}
-
+		if (address.length > wordLen) { 
+		
+		$(".address_ba_err").text("The maximium length for message is upto "+wordLen+ " words!");			
+		//return false;
+		flag = 0;
+		}	
+		
 		if (flag == 0) {
 			return false;
 		}
