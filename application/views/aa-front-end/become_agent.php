@@ -243,7 +243,7 @@
 <script>
 	var wordLen = 2000,
 len; // Maximum word length
-$('#address_ba').keydown(function(event) {	
+$('#address_ba').keyup(function(event) {	
 	len = $('#address_ba').val().split(/[\s]+/);
 	if (len.length > wordLen) { 
 		if ( event.keyCode == 46 || event.keyCode == 8 ) {// Allow backspace and delete buttons

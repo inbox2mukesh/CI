@@ -96,37 +96,26 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <!-- Footer Scripts -->
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1E5CHNNQ1L"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag() {
-	dataLayer.push(arguments);
-}
-gtag('js', new Date());
-gtag('config', 'G-1E5CHNNQ1L');
-</script>
 
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/fixed-footer.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
-
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/jquery-2.2.4.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
-
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/bootstrap.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript" ></script>
-
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/custom.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/bootstrap-select.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/bootstrap-datepicker.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/sidebar.menu.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/wosa-header.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
-<!-- <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/news-ticker.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script> -->
-
+<script src="<?php echo base_url(DESIGN_VERSION_F.'/js/news-ticker.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/jquery-plugin-collection.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/polyfills.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/webp-hero.bundle.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <!--Added by Vikram 6 dec 2022 -->
 <script src="<?php echo site_url(DESIGN_VERSION . '/js/sweetalert2.all.min.js?v='.JS_CSS_VERSION_F); ?>"></script>
-<script src="<?php echo base_url(DESIGN_VERSION_F.'/js/news-ticker.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
-
-
+<script type="text/javascript">
+		jQuery(document).ready(function($){
+			$('#newsTicker').breakingNews();
+		});
+	</script>
 
 
 
@@ -163,11 +152,11 @@ $(document).keypress("u",function(e) {
 <?php } ?>
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	jQuery(document).ready(function($){
 	$('#newsTicker').breakingNews();
 	});
-</script>
+</script> -->
 
 <script type="text/javascript">
 

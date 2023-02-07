@@ -1,5 +1,7 @@
 <style>
 	td{border:solid 1px #e9e9e9;}
+
+  
 	</style>
 <?php include('email-header.php');?>
 <!--Header-->
@@ -18,7 +20,7 @@
 
 <table width="100%" cellpadding="0" cellspacing="1" style="margin-bottom: 10px;font-size: 13px; border:solid 1px #f3eedd">
 <tr>
-	<td width="20%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Course</td>
+	<td width="35%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Course</td>
 	<td valign="top"><?php echo $test_module_name;?></td>
 </tr>
 
@@ -39,11 +41,12 @@
 	<td valign="top"><?php echo $batch_name;?></td>
 </tr>
 <?php } ?>
-
+<?php if($pack_type !="practice") {?>
 <tr>
 	<td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Branch</td>
 	<td valign="top"><?php if($center_name){echo $center_name;}else{echo NA;}?></td>
 </tr>
+<?php }?>
 
 </table>
 
@@ -52,7 +55,7 @@
 
 <table width="100%" cellpadding="0" cellspacing="1" style="margin-bottom: 10px;font-size: 13px; border:solid 1px #f3eedd">
   <tr>
-    <td width="15%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Package</td>
+    <td width="35%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Package</td>
     <td valign="top"><?php echo $package_name;?></td>
   </tr>
   
@@ -91,7 +94,7 @@
 
 <table width="100%" cellpadding="0" cellspacing="1" style="margin-bottom: 10px;font-size: 13px; border:solid 1px #f3eedd">
   <tr>
-    <td width="15%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Amount paid</td>
+    <td width="35%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Amount paid</td>
     <td valign="top"><?php echo $currency.' '. $amount_paid;?></td>
   </tr>
 

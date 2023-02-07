@@ -6,8 +6,9 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="description" content="Online/Offline english learning" />
     <meta name="keywords" content="VISA, Canada, Study abroad, Immigration" />
-    <meta name="author" content="" />
-    <meta name="google-site-verification" content="" />
+    <meta name="keywords" content="VISA, Canada, Study abroad, Immigration" />
+	<meta name="google-site-verification" content="TApYsq7UsonG0PLyqa7zIma_Fy6qgiYmHIw7TjulIE0" />
+    <meta name="author" content="" />   
     <title><?php echo $title;?></title>
     <link href="<?php echo base_url(DESIGN_VERSION_F.'/images/favicon.png');?>" rel="shortcut icon" type="image/png">
     <!-- Stylesheet -->
@@ -29,12 +30,11 @@
     <style>
 	    body {opacity: 0}
 	    body.active {opacity: 1}
-		.lt-news ul{  margin:0px 0px 0px 0px;padding: 0;height:20px;overflow: hidden;white-space: nowrap;display: inline-block;width:100%;}
-		.lt-news li{  list-style: none;margin:0px;padding:0;display: inline-block;line-height:20px;vertical-align: middle;color:#fff;font-size:13px!important;}
-		.lt-news li a{color:#fff;font-size:13px!important;}
-		.lt-news li .date{color:#fff;margin-bottom:0px!important}
-		.lt-news span{display: inline-block;
-}
+	    .news-headline {overflow: hidden;font-size: 12px;display: list-item;height: 26px;line-height: 26px;}
+	    .news-headline span {margin: 5px 0px;line-height: 23px;}
+	    .news-headline span a {color: #fff;}
+	    .news-headline span a span.date {font-style: italic;font-weight: bold;font-size: .70rem;margin-left: 10px;}
+	    .news-headline span.spacer {color: rgb(255, 255, 255, 0.3); margin: 0px 10px;}
     </style>
     <script>
 	    $(document).ready(function() {
@@ -50,8 +50,30 @@
 <script type="text/javascript"> 
 (function() { var css = document.createElement('link'); css.href = '<?php echo base_url(DESIGN_VERSION_F.'/css/font-awesome.min.css?v='.JS_CSS_VERSION_F);?>'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); 
 </script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KDB482Q');</script>
+<!-- End Google Tag Manager -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1E5CHNNQ1L"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag() {
+	dataLayer.push(arguments);
+}
+gtag('js', new Date());
+gtag('config', 'G-1E5CHNNQ1L');
+</script>
 </head>
 <body>
+	<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDB482Q"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 	<?php include_once('login_model.php');?>
 	<?php include_once('registration_model.php');?>
 	<?php include_once('forgot_password_model.php');?>
@@ -60,31 +82,7 @@
 					<div class="w-menu-container">
 						<div class="lt-news">
 
-
-
-
-					
-
-<ul class="ticker">  
-										<?php
-											foreach ($newsData->error_message->data as $d){
-											$date=date_create($d->news_date);
-											$news_date = date_format($date,"M d, Y");
-											$news_id = $d->id;
-										?>
-											<li><a href="<?php echo base_url('news_article/index/'.$news_id);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
-												</li>
-										<?php }?>
-									</ul>
-
-
-
-
-
-
-
-
-							<!-- <div class="breaking-news-ticker bn-effect-scroll bn-direction-ltr" id="newsTicker">
+							<div class="breaking-news-ticker bn-effect-scroll bn-direction-ltr" id="newsTicker">
 								<div class="bn-news">
 									<ul class="marquee-clone">
 										<?php
@@ -98,7 +96,7 @@
 										<?php }?>
 									</ul>
 								</div>
-							</div> -->
+							</div>
 						</div>
 								<div class="rt-btns mob-display-none">
 									<ul>
