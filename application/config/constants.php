@@ -6,7 +6,7 @@
  *
  **/
 global $customJS;
-define('JS_CSS_VERSION', '0.0.1');
+define('JS_CSS_VERSION', '0.0.2');
 define('ADMIN', 'Super Admin');
 ///////////////////////////////////settings start///////////////////////////////////////
 include_once(FCPATH.'application/config/setting-constants.php');
@@ -110,17 +110,17 @@ if(DEFAULT_COUNTRY==38){
 	define('ADMIN_NAME', 'Mr. Anil Kumar');
 	define('Licence_No', '<span class="text-red">Licence No.</span> xxxxxxx');
 
-	define('WOSA', 'Team Western Overseas Study & Immigration');
-	define('COMPANY', 'Western Overseas Study & Immigration');
+	define('WOSA', 'Team Western Overseas Education & Migration Consultant');
+	define('COMPANY', 'Western Overseas Education & Migration Consultant');
 	define('COMPANY_URL', 'https://westernoverseas.com.au/');
 	define('COMPANY_ADDRESS', "Level 1, Suit 102, 2Queen St, Melbourne CBD 3000");
 	define('SUPPORT_CONTACT','+61-430-439-035');
 	define('PAN_ACCOUNT_NUMBER', '1010101010');
 	define('GST_NUMBER', '1111122222');
 
-	define('ADMIN_EMAIL','info@westernoverseas.ca');
-	define('ADMISSION_EMAIL', 'info@westernoverseas.ca');
-	define('FROM_NAME','Western Overseas Immigration');
+	define('ADMIN_EMAIL','info@westernoverseas.com.au');
+	define('ADMISSION_EMAIL', 'info@westernoverseas.com.au');
+	define('FROM_NAME','Western Overseas Education & Migration Consultant');
 
 	define('TESTINGURL', 'https://westernoverseas.com.au/au-production-testing/adminController/dashboard');
 	define('LIVEURL', 'https://westernoverseas.com.au/adminController/dashboard');

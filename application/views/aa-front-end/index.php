@@ -94,9 +94,11 @@
 				<div style="margin-top:40px;">
 				<h2 class="font-weight-400 text-uppercase css1" style="text-align:center;">Who we <span class="text-red font-weight-600 mr-5">Are</span></h2>
 				<?php if(DEFAULT_COUNTRY==13) { ?>
-				<p class="text-center">
+				<p class="text-justify">
 				We aim to become your most trusted partner and ally in your journey to a better life through relevant education, a modern curriculum, and state-of-the-art methodologies. Young minds and aspiring seekers of knowledge who hold their aim to imbibe education overseas at the highest in their life are more than welcome. Western Overseas Australia will turn this dream of yours to migrate and settle abroad into a reality.
+<br><br>
 Western Overseas is where your talents are valued and dreams are nurtured. Indian students seeking global education and immigration have begun to rely on just one name, Western Overseas. Founded in 2016, with a vision to provide young minds with world-class education across the globe, we specialize in facilitating studies and immigration in not just Australia but several other destinations that you can think of. Western Overseas is the name of affordable, quick, and convenient immigration solutions and expert immigration advice and assistance 24/7. Our teams abide by every single Australian immigration law. All our experts go through a very strict training and testing module to develop a superbly high standard of expertise in every aspect of Australian immigration policies and legislation.
+<br><br>
 We take the MARA professional Code of Conduct very seriously and make sure that young and skilled people aspiring to immigrate to Australia in search of a great lifestyle and excellent job opportunities are never disappointed. If you are a skilled migrant looking to move to Australia, your suitability will be assessed on a points system. Your work experience, qualifications, and language proficiency will be expressed in points. Alternatively, you can obtain an immigration visa to Australia through the Australian Family Migration and Humanitarian Programs as well.
 
 				</p>

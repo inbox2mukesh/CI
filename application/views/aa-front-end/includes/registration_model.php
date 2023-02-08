@@ -29,7 +29,7 @@
 
 								<div class="row">
 								<div class="col-sm-6">
-									<div class="form-group selectpicker-auto">
+									<div class="form-group">
 										<lable>Country Code<span class="text-red">*</span></lable>
 										<select class="selectpicker form-control" data-live-search="true" id="country_code" name="country_code">
 											

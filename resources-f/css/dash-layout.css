@@ -2288,9 +2288,9 @@ a:hover.change-btn {
 .register-modal {
     padding: 0px;
     margin: 0px;
-    max-height: 500px;
+  /*   max-height: 500px;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: hidden; */
 }
 
 .registration .modal-header {
