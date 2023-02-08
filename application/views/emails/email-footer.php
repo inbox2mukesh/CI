@@ -19,7 +19,11 @@
 		<a href="<?php echo TWT;?>"><img src="<?php echo base_url('resources/img/t-icn.png');?>"width="25" height="25" style="margin-right:0px;"></a>
 		<a href="<?php echo INST;?>"><img src="<?php echo base_url('resources/img/i-icn.png');?>" width="25" height="25" style="margin-right:0px;"></a>
 		<a href="<?php echo YTD;?>"><img src="<?php echo base_url('resources/img/y-icn.png');?>" width="25" height="25" style="margin-right:0px;"></a>
+		<?php 
+		if(DEFAULT_COUNTRY !='13') { //not Australia
+		?>
 		<a href="<?php echo TTK;?>"><img src="<?php echo base_url('resources/img/tiktok.png');?>" width="25" height="25" style="margin-right:0px;"></a>
+		<?php }?>
 			   </div>
 		 </div>
 	 </div>
