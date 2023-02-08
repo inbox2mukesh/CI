@@ -12,7 +12,7 @@
 <tr>
 <td style="font-size:16px; color:#333; line-height:24px; text-align: justify">
 <p style="padding:5px 0px;margin:0px;">Dear <?php echo $fname;?>,</p>	
-<p> 
+<p style="word-break: break-all;"> 
 	<?php echo $email_message.'<br/>'; ?>	
 </p>
 	
@@ -20,7 +20,7 @@
 
 <table width="100%" cellpadding="0" cellspacing="1" style="margin-bottom: 10px;font-size: 13px; border:solid 1px #f3eedd">
 <tr>
-	<td width="35%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Course</td>
+	<td width="42%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Course</td>
 	<td valign="top"><?php echo $test_module_name;?></td>
 </tr>
 
@@ -48,14 +48,14 @@
 </tr>
 <?php }?>
 
-</table>
+</table> 
 
 
 <p  style="padding: 0px; margin: 0px; color: #d72a22; font-weight:500">Package Information:</p>
 
 <table width="100%" cellpadding="0" cellspacing="1" style="margin-bottom: 10px;font-size: 13px; border:solid 1px #f3eedd">
   <tr>
-    <td width="35%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Package</td>
+    <td width="42%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Package</td>
     <td valign="top"><?php echo $package_name;?></td>
   </tr>
   
@@ -94,7 +94,7 @@
 
 <table width="100%" cellpadding="0" cellspacing="1" style="margin-bottom: 10px;font-size: 13px; border:solid 1px #f3eedd">
   <tr>
-    <td width="35%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Amount paid</td>
+    <td width="42%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Amount paid</td>
     <td valign="top"><?php echo $currency.' '. $amount_paid;?></td>
   </tr>
 
