@@ -87,12 +87,13 @@
 			<div class="col-md-12 web">
 				<div class="btm-info">
 					<h4>Our Websites</h4> <span><a href="https://western-overseas.com/" target="_blank">www.western-overseas.com</a></span> <span><a href="https://www.westernoverseas.online/" target="_blank">www.westernoverseas.online</a></span> <span><a href="https://www.westernoverseas.events/" target="_blank">www.westernoverseas.events</a></span>
+				
 					<?php if(DEFAULT_COUNTRY==13) { ?> 
 					<span><a href="https://westernoverseas.ca/" target="_blank">www.westernoverseas.ca</a></span> 
 					<?php } else {?>
 						<span><a href="https://westernoverseas.com.au/" target="_blank">www.westernoverseas.com.au</a></span> 
 						<?php }?>
-			</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -104,18 +105,10 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <!-- Footer Scripts -->
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1E5CHNNQ1L"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag() {
-	dataLayer.push(arguments);
-}
-gtag('js', new Date());
-gtag('config', 'G-1E5CHNNQ1L');
-</script>
-<script src="<?php echo base_url(DESIGN_VERSION_F.'/js/news-ticker.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
+
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/fixed-footer.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/jquery-2.2.4.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
+<script src="<?php echo base_url(DESIGN_VERSION_F.'/js/news-ticker.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/bootstrap.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript" ></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/custom.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/bootstrap-select.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
@@ -127,6 +120,13 @@ gtag('config', 'G-1E5CHNNQ1L');
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/webp-hero.bundle.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <!--Added by Vikram 6 dec 2022 -->
 <script src="<?php echo site_url(DESIGN_VERSION . '/js/sweetalert2.all.min.js?v='.JS_CSS_VERSION_F); ?>"></script>
+
+
+<script type="text/javascript">
+		jQuery(document).ready(function($){
+			$('#newsTicker').breakingNews();
+		});
+	</script>
 
 
 <?php if(ENVIRONMENT=="production" or ENVIRONMENT=="production_testing"){ ?>
@@ -161,11 +161,7 @@ $(document).keypress("u",function(e) {
 <?php } ?>
 </script>
 
-<!-- <script>		
-if (typeof Android === "undefined") { alert("not a webViwer browser") } else {		   
-alert("webViwer browser")	   
-}
-</script> -->
+
 
 <script type="text/javascript">
 
@@ -501,6 +497,17 @@ echo $customJs;
 
 </script>
 
+<!-- <script>
+var ua = navigator.userAgent.toLowerCase();
+ var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+if(isAndroid) {
+document.write("");
+alert("Android browser")
+} else {
+document.write("");
+alert("Not an Android browser ")
+} 
+</script> -->
 
 <script>
 	var webpMachine = new webpHero.WebpMachine()

@@ -10,7 +10,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
   ?>
 
   <div class="qury-form-row">
-    <div class="font-20 text-center mt-0 mb-5 text-uppercase">
+    <div class="font-20 text-center mt-0 text-uppercase">
       Quick <span class="text-theme-color-2 font-weight-600">Enquiry</span>
     </div>
     <div class="form-group col-md-6 col-sm-6">
@@ -115,7 +115,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
         <button type="button" class="enqBtn_processin2 btn btn-red" data-loading-text="Please wait...">Please wait..</button>
         <i class="fa fa-spinner fa-spin mr-10"></i>
       </div>
-      <div class="small finalMsg mt-10"></div>
+      <div class="small finalMsg"></div>
     </div>
   </div>
   </div>

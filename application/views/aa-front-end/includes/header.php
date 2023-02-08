@@ -28,17 +28,17 @@
     <style>
 	    body {opacity: 0}
 	    body.active {opacity: 1}
-/* 
+
 		.news-headline {overflow: hidden;font-size: 12px;display: list-item;height: 26px;line-height: 26px;}
 	    .news-headline span {margin: 5px 0px;line-height: 23px;}
 	    .news-headline span a {color: #fff;}
 	    .news-headline span a span.date {font-style: italic;font-weight: bold;font-size: .70rem;margin-left: 10px;}
-	    .news-headline span.spacer {color: rgb(255, 255, 255, 0.3); margin: 0px 10px;} */
-		.lt-news ul{  margin:0px 0px 0px 0px;padding: 0;height:20px;overflow: hidden;white-space: nowrap;display: inline-block;width:100%;}
+	    .news-headline span.spacer {color: rgb(255, 255, 255, 0.3); margin: 0px 10px;}
+		/* .lt-news ul{  margin:0px 0px 0px 0px;padding: 0;height:20px;overflow: hidden;white-space: nowrap;display: inline-block;width:100%;}
 		.lt-news li{  list-style: none;margin:0px;padding:0;display: inline-block;line-height:20px;vertical-align: middle;color:#fff;font-size:13px!important;}
 		.lt-news li a{color:#fff;font-size:13px!important;}
 		.lt-news li .date{color:#fff;margin-bottom:0px!important}
-		.lt-news span{display: inline-block;}
+		.lt-news span{display: inline-block;} */
     </style>
     <script>
 	    $(document).ready(function() {
@@ -62,7 +62,7 @@
 				<div class="top-hdr">
 					<div class="w-menu-container">
 						<div class="lt-news">
-<ul class="ticker">  
+<!-- <ul class="ticker">  
 										<?php
 											foreach ($newsData->error_message->data as $d){
 											$date=date_create($d->news_date);
@@ -72,8 +72,8 @@
 											<li><a href="<?php echo base_url('news_article/index/'.$news_id);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
 												</li>
 										<?php }?>
-									</ul>
-							<!-- <div class="breaking-news-ticker bn-effect-scroll bn-direction-ltr" id="newsTicker">
+									</ul> -->
+							<div class="breaking-news-ticker bn-effect-scroll bn-direction-ltr" id="newsTicker">
 								<div class="bn-news">
 									<ul class="marquee-clone">
 										<?php
@@ -87,7 +87,7 @@
 										<?php }?>
 									</ul>
 								</div>
-							</div> -->
+							</div>
 						</div>
 								<div class="rt-btns mob-display-none">
 									<ul>
