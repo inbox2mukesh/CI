@@ -129,7 +129,15 @@
 							<select class="form-control selectpicker select_removeerrmessagep" name="country_code" id="country_code_ba" data-live-search="true">
 								<option value="">Select Country Code</option>
 								<?php
-								$c = 'CA';
+								 if(DEFAULT_COUNTRY==38){
+									$c = 'CA';
+								  }elseif(DEFAULT_COUNTRY==13){
+									$c = 'AU';
+								  }elseif(DEFAULT_COUNTRY==101){
+									$c = 'IN';
+								  }else{
+									$c = 'IN';
+								  }
 								foreach ($countryCode->error_message->data as $p) {
 									$sel = "";
 
