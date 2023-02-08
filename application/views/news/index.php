@@ -20,6 +20,7 @@
                     <tr>
 						<th><?php echo SR;?></th>
 					    <th>Title</th>
+					    <th>URL Slug</th>
 						<th>Date</th>
 						<th>Card Image</th>
                         <th>File</th>
@@ -43,6 +44,7 @@
                     <tr>
                         <td><?php echo $sr; ?></td>                   
                         <td><?php echo $l['title']; ?></td>					
+                        <td><?php echo $l['URLslug']; ?></td>					
 						<td><?php echo $l['news_date']; ?></td>			
 						<td>
                             <?php 

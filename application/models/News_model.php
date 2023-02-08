@@ -24,6 +24,7 @@ class News_model extends CI_Model
             media_file,
             card_image,
             is_pinned,
+            URLslug,
         ');
         $this->db->from('`news`'); 
         $this->db->where('`active`',1); 
@@ -32,11 +33,14 @@ class News_model extends CI_Model
         $this->db->order_by('`created` DESC');     
         return $this->db->get('')->result_array();
     }
-    
+    function get_newsid($id)
+    {
+        return $this->db->get_where('news',array('id'=>$id))->row_array();
+    }
     
     function get_news($id)
     {
-        return $this->db->get_where('news',array('id'=>$id))->row_array();
+        return $this->db->get_where('news',array('URLslug'=>$id))->row_array();
     }
 
     function get_all_news_count($tags){
@@ -75,6 +79,7 @@ class News_model extends CI_Model
             card_image,
             active,
             is_pinned,
+            URLslug,
         ');
         $this->db->from('`news`'); 
         $this->db->order_by('`created` DESC');     
@@ -114,6 +119,7 @@ class News_model extends CI_Model
                 n.media_file,
                 n.is_pinned,
                 n.card_image,
+                n.URLslug,
             ');
             $this->db->from('`news` n');
             $this->db->join('news_tags nt', 'n.id = nt.news_id');
@@ -129,6 +135,7 @@ class News_model extends CI_Model
                 media_file,
                 is_pinned,
                 card_image,
+                URLslug,
             ');
             $this->db->from('`news`'); 
             $this->db->where('active',1);
@@ -145,7 +152,7 @@ class News_model extends CI_Model
             id, 
             title,
             news_date,
-           
+            URLslug,
             is_pinned
         ');
         $this->db->from('`news`'); 

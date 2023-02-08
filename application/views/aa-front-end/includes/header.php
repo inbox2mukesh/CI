@@ -6,9 +6,8 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="description" content="Online/Offline english learning" />
     <meta name="keywords" content="VISA, Canada, Study abroad, Immigration" />
-    <meta name="keywords" content="VISA, Canada, Study abroad, Immigration" />
-	<meta name="google-site-verification" content="TApYsq7UsonG0PLyqa7zIma_Fy6qgiYmHIw7TjulIE0" />
-    <meta name="author" content="" />   
+    <meta name="author" content="" />
+    <meta name="google-site-verification" content="" />
     <title><?php echo $title;?></title>
     <link href="<?php echo base_url(DESIGN_VERSION_F.'/images/favicon.png');?>" rel="shortcut icon" type="image/png">
     <!-- Stylesheet -->
@@ -24,17 +23,22 @@
     <link href="<?php echo base_url(DESIGN_VERSION_F.'/css/wosa-header.css?v='.JS_CSS_VERSION_F);?>" rel="stylesheet" type="text/css" media="all">   
     <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/jquery-min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200&display=swap" rel="stylesheet">
-
 	<!--Added by Vikram 6 dec 2022 -->
     <?php echo callCommonJSFileVariables(); ?>
     <style>
 	    body {opacity: 0}
 	    body.active {opacity: 1}
-	    .news-headline {overflow: hidden;font-size: 12px;display: list-item;height: 26px;line-height: 26px;}
+/* 
+		.news-headline {overflow: hidden;font-size: 12px;display: list-item;height: 26px;line-height: 26px;}
 	    .news-headline span {margin: 5px 0px;line-height: 23px;}
 	    .news-headline span a {color: #fff;}
 	    .news-headline span a span.date {font-style: italic;font-weight: bold;font-size: .70rem;margin-left: 10px;}
-	    .news-headline span.spacer {color: rgb(255, 255, 255, 0.3); margin: 0px 10px;}
+	    .news-headline span.spacer {color: rgb(255, 255, 255, 0.3); margin: 0px 10px;} */
+		.lt-news ul{  margin:0px 0px 0px 0px;padding: 0;height:20px;overflow: hidden;white-space: nowrap;display: inline-block;width:100%;}
+		.lt-news li{  list-style: none;margin:0px;padding:0;display: inline-block;line-height:20px;vertical-align: middle;color:#fff;font-size:13px!important;}
+		.lt-news li a{color:#fff;font-size:13px!important;}
+		.lt-news li .date{color:#fff;margin-bottom:0px!important}
+		.lt-news span{display: inline-block;}
     </style>
     <script>
 	    $(document).ready(function() {
@@ -46,34 +50,11 @@
 	        }, 1);
 	    };
     </script>
-
 <script type="text/javascript"> 
 (function() { var css = document.createElement('link'); css.href = '<?php echo base_url(DESIGN_VERSION_F.'/css/font-awesome.min.css?v='.JS_CSS_VERSION_F);?>'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); 
 </script>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KDB482Q');</script>
-<!-- End Google Tag Manager -->
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1E5CHNNQ1L"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag() {
-	dataLayer.push(arguments);
-}
-gtag('js', new Date());
-gtag('config', 'G-1E5CHNNQ1L');
-</script>
 </head>
 <body>
-	<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDB482Q"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
 	<?php include_once('login_model.php');?>
 	<?php include_once('registration_model.php');?>
 	<?php include_once('forgot_password_model.php');?>
@@ -81,8 +62,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<div class="top-hdr">
 					<div class="w-menu-container">
 						<div class="lt-news">
-
-							<div class="breaking-news-ticker bn-effect-scroll bn-direction-ltr" id="newsTicker">
+<ul class="ticker">  
+										<?php
+											foreach ($newsData->error_message->data as $d){
+											$date=date_create($d->news_date);
+											$news_date = date_format($date,"M d, Y");
+											$news_id = $d->id;
+										?>
+											<li><a href="<?php echo base_url('news_article/index/'.$news_id);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
+												</li>
+										<?php }?>
+									</ul>
+							<!-- <div class="breaking-news-ticker bn-effect-scroll bn-direction-ltr" id="newsTicker">
 								<div class="bn-news">
 									<ul class="marquee-clone">
 										<?php
@@ -96,7 +87,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 										<?php }?>
 									</ul>
 								</div>
-							</div>
+							</div> -->
 						</div>
 								<div class="rt-btns mob-display-none">
 									<ul>
@@ -122,9 +113,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 										<div class="logo"> <a href="<?php echo base_url('');?>"><img src="<?php echo base_url(LOGO);?>" alt="logo" ></a> </div>
 										<div class="header-container">
 											<div class="menu-header-container">
-										
 												<ul id="cd-primary-nav" class="menu">
-																									
 													<li style="margin-bottom:10px!important;" class="mob-enq-btn no-lg-display" onClick="location.replace('<?php echo base_url('counseling');?>');"><a>Book Counseling</a></li>	
 													<li class="menu-item leave-mouse"> <a href="<?php echo base_url('visa_services');?>">Visa &amp; Immigration Services</a> </li>
 													<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Online coaching</a>
@@ -150,7 +139,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 															<ul class="sub-menu">
 																<li class="back"><a href="#">Back</a></li>
 																<div class="submenu-scroll scroll-v">
+																<?php if(DEFAULT_COUNTRY!=13) { ?>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('why_canada');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/why-canada.svg');?>" alt="">Why Canada?</a> </li>
+																<?php }?>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('gallery');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/gallery.svg');?>" alt="">Image Gallery</a> </li>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('videos');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/video-gallery.svg');?>" alt="">Video Gallery</a> </li>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('contact_us');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/contact.svg');?>" alt="">Contact</a> </li>
@@ -174,24 +165,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																			<div><a href="<?php echo TWT;?>" target="_blank"><i class="fa fa-twitter s-icn twitter"></i>Twitter</a></div>
 																			<div><a href="<?php echo INST;?>" target="_blank"><i class="fa fa-instagram s-icn instagram"></i>Instagram</a></div>
 																			<div><a href="<?php echo YTD;?>" target="_blank"><i class="fa fa-youtube s-icn y-tb"></i>Youtube</a></div>
+																			<?php if(DEFAULT_COUNTRY!=13) { ?>
 																			<div><a href="<?php echo TTK;?>" target="_blank" style="display: -webkit-box!important;"><img class="s-icn tik" style="padding: 10px;"src="<?php echo base_url(DESIGN_VERSION_F.'/images/tiktok.svg');?>" alt=""><span style="margin-top:7px; display: block;"> Tiktok</span></a></div>
+																			<?php } ?>
 																		</div>
-
 																	</ul>
 																</li>
 											</div>
 															</ul>
 														</li>
 														<?php
-
 															if($this->session->userdata('student_login_data')){
-
 															?>
 															<li class="menu-item"><a href="<?php echo base_url('our_students/student_dashboard');?>">Dashboard</a> </li>
 															<?php }
-
 															if(!$this->session->userdata('student_login_data')){
-
 															?>
 																	<li class="menu-item no-lg-display">
 																		<div class="logn-btn"><a href="javascript:void(0)" data-toggle="modal" data-target="#modal-login">Login</a></div>
@@ -207,7 +195,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																			<div class="crt-btn"><a title="Logout" class="" href="<?php echo base_url('my_login/student_logout');?>">Logout</a></div>
 																		</li>
 																		<?php }?>
-
 																			<li class="line"></li>
 												</ul>
 											</div>

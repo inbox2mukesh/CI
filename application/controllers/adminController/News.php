@@ -51,6 +51,7 @@ class News extends MY_Controller{
 		$this->form_validation->set_rules('title','News Title','required|trim');
         $this->form_validation->set_rules('body','News Body','required|trim');
         $this->form_validation->set_rules('news_date','News Date','required|trim');
+        $this->form_validation->set_rules('URLslug', 'URL ', 'required|max_length[140]');
         if (empty($_FILES['card_image']['name']))
         {
         $this->form_validation->set_rules('card_image', 'Document', 'required');
@@ -98,6 +99,7 @@ class News extends MY_Controller{
                             'media_file' => $image,
                              'card_image' => $card_image,
                             'news_date'=>$this->input->post('news_date'), 
+                            'URLslug'=>$this->input->post('URLslug'), 
                             'active' => $this->input->post('active') ? $this->input->post('active') : 0,
                             'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
                             'by_user' => $by_user,
@@ -140,7 +142,7 @@ class News extends MY_Controller{
         //access control ends       
 
         $data['title'] = 'Edit Immigration News';
-        $data['news'] = $this->News_model->get_news($id);
+        $data['news'] = $this->News_model->get_newsid($id);
         $bookingData=$data['news'];        
         foreach ($bookingData as $key => $c) {
             $mData = $this->News_model->getNewsTags($data['news']['id']);
@@ -149,13 +151,15 @@ class News extends MY_Controller{
             }               
         }
         $data['news']=$bookingData;
-        
+      
         if(isset($data['news']['id']))
         {
+           
             $this->load->library('form_validation');
             $this->form_validation->set_rules('title','News Title','required|trim');
             $this->form_validation->set_rules('body','News Body','required|trim');
-            $this->form_validation->set_rules('news_date','News Date','required|trim');		
+            $this->form_validation->set_rules('news_date','News Date','required|trim');	
+            $this->form_validation->set_rules('URLslug', 'URL ', 'required|max_length[140]');	
             if($this->input->post('hid_card_image') == "")
             {
                 $this->form_validation->set_rules('card_image','Card image','required');
@@ -176,6 +180,7 @@ class News extends MY_Controller{
                             'body' => $this->input->post('body',false),                    
                             'media_file' => $image,
                             'news_date'=>$this->input->post('news_date'), 
+                            'URLslug'=>$this->input->post('URLslug'), 
                             'active' => $this->input->post('active') ? $this->input->post('active') : 0,
                             'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
                             'by_user' => $by_user,
@@ -204,6 +209,7 @@ class News extends MY_Controller{
                             'active' => $this->input->post('active') ? $this->input->post('active') : 0,
                             'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
                             'by_user' => $by_user,
+                            'URLslug'=>$this->input->post('URLslug'), 
                         );
                         unlink(NEWS_FILE_PATH.$this->input->post('hid_media_file')); 
 
@@ -217,6 +223,7 @@ class News extends MY_Controller{
                                 'active' => $this->input->post('active') ? $this->input->post('active') : 0,
                                 'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
                                 'by_user' => $by_user,
+                                'URLslug'=>$this->input->post('URLslug'), 
                             );
                         }
 
@@ -296,7 +303,7 @@ class News extends MY_Controller{
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         //access control ends
 
-        $news = $this->News_model->get_news($id);
+        $news = $this->News_model->get_newsid($id);
         if(isset($news['id']))
         {
             $del1 = $this->News_model->delete_news($id);

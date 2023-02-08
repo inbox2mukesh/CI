@@ -8,6 +8,7 @@
 			<?php 
 			$attributes = ['name' => 'news_edit_form', 'id' => 'news_edit_form'];
 			echo form_open_multipart('adminController/news/edit/'.$news['id'],$attributes); ?>
+				<input type="hidden"  value="<?php echo $news['id'];?>" name="hid_id" id="hid_id"/>
 			<div class="box-body">
 				<div class="">
 					
@@ -19,6 +20,13 @@
 							<span class="text-danger title_err"><?php echo form_error('title');?></span>
 						</div>
 					</div>
+					<div class="col-md-4 margin-bottom-20">
+							<label for="event_title" class="control-label"><span class="text-danger">*</span>Url Slug</label>
+							<div class="form-group">
+								<input type="text" name="URLslug" value="<?php echo ($this->input->post('URLslug') ? $this->input->post('URLslug') : $news['URLslug']); ?>" class="form-control removeerrmessage allow_url_slug" id="URLslug" placeholder="URL" onKeyPress="return noNumbers(event)" maxlength="140" autocomplete="off" onchange="checkUrl('news',this.id)" onpaste="return false" />
+								<span class="text-danger URLslug_err"><?php echo form_error('URLslug'); ?></span>
+							</div>
+						</div>
 
 					<div class="col-md-4">
 						<label for="card_image" class="control-label"><span class="text-danger">*</span>Card Image</label>
@@ -136,13 +144,17 @@ $('#news_edit_form').on('submit', function(e){
 		var body=$('#body').val();		
 		var hid_card_image=$('#hid_card_image').val();		
 		var hid_media_file=$('#hid_media_file').val();		
-		
+		var URLslug=$('#URLslug').val();
 		if(title == "")
 		{			
 			$(".title_err").html('The Title field is required.');
 			flag=0;
 		} else { $(".title_err").html(''); }
-
+		if(URLslug == "")
+		{			
+			$(".URLslug_err").html('The Url Slug is required.');
+			flag=0;
+		} else { $(".URLslug_err").html(''); }
 		if(hid_card_image == "" && card_image == "")
 		{			
 			$(".card_image_err").html('The Card Image field is required.');

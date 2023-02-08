@@ -1,7 +1,8 @@
 <!-- Main Slider -->
 <section class="bg-lighter">
 <div class="carousel slide" data-ride="carousel">
-  <div class="owl-carousel-slider">
+<?php if(DEFAULT_COUNTRY==13) { ?>
+	<div class="owl-carousel-slider">
     <div class="carousel-item active">
       <img class="d-block w-100 desktop-slider lazyload" src="<?php echo base_url('resources-f/images/slider/aus-slider-1.webp');?>" alt="" loading="lazy">
 	  <img class="d-block w-100 mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/aus-mob-slider-1.webp');?>" alt="" loading="lazy">
@@ -20,6 +21,26 @@
 
   
   </div>
+  <?php } else {?>
+	<div class="owl-carousel-slider">
+    <div class="carousel-item active">
+      <img class="d-block w-100 desktop-slider lazyload" src="<?php echo base_url('resources-f/images/slider/desktop-slider-1.webp');?>" alt="" loading="lazy">
+	  <img class="d-block w-100 mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/mobile-slider-1.webp');?>" alt="" loading="lazy">
+    </div>
+
+	<div class="carousel-item">
+      <img class="d-block w-100 desktop-slider " src="<?php echo base_url('resources-f/images/slider/desktop-slider-2.webp');?>" alt="" loading="lazy">	 
+	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/mobile-slider-2.webp');?>" alt="" loading="lazy">	 
+    </div>
+
+	<div class="carousel-item">
+      <img class="d-block w-100 desktop-slider" src="<?php echo base_url('resources-f/images/slider/desktop-slider-3.webp');?>" alt="" loading="lazy">	
+	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/mobile-slider-3.webp');?>" alt="" loading="lazy">
+    </div>
+  
+  </div>
+	
+	<?php }?>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>   
   </a>
@@ -52,9 +73,10 @@
 
 		<div class="container">
 			<div class="about-content">
-					<!-- <div class="text-center" style="text-align: -webkit-center;">
+			<?php if(DEFAULT_COUNTRY!=13) { ?>
+					<div class="text-center" style="text-align: -webkit-center;">
 
-							<img src="<?php// echo base_url('resources-f/images/iccrc.webp');?>" alt="rcic logo" title="rcic logo" class="image_iccrc" loading="lazy">
+							<img src="<?php echo base_url('resources-f/images/iccrc.webp');?>" alt="rcic logo" title="rcic logo" class="image_iccrc" loading="lazy">
 
 						</div>
 
@@ -66,19 +88,26 @@
 
 						</h4>						
 
-						</div> -->
-				
+						</div>
+				<?php }?>
 
 				<div style="margin-top:40px;">
 				<h2 class="font-weight-400 text-uppercase css1" style="text-align:center;">Who we <span class="text-red font-weight-600 mr-5">Are</span></h2>
-
+				<?php if(DEFAULT_COUNTRY==13) { ?>
 				<p class="text-center">
+				We aim to become your most trusted partner and ally in your journey to a better life through relevant education, a modern curriculum, and state-of-the-art methodologies. Young minds and aspiring seekers of knowledge who hold their aim to imbibe education overseas at the highest in their life are more than welcome. Western Overseas Australia will turn this dream of yours to migrate and settle abroad into a reality.
+Western Overseas is where your talents are valued and dreams are nurtured. Indian students seeking global education and immigration have begun to rely on just one name, Western Overseas. Founded in 2016, with a vision to provide young minds with world-class education across the globe, we specialize in facilitating studies and immigration in not just Australia but several other destinations that you can think of. Western Overseas is the name of affordable, quick, and convenient immigration solutions and expert immigration advice and assistance 24/7. Our teams abide by every single Australian immigration law. All our experts go through a very strict training and testing module to develop a superbly high standard of expertise in every aspect of Australian immigration policies and legislation.
+We take the MARA professional Code of Conduct very seriously and make sure that young and skilled people aspiring to immigrate to Australia in search of a great lifestyle and excellent job opportunities are never disappointed. If you are a skilled migrant looking to move to Australia, your suitability will be assessed on a points system. Your work experience, qualifications, and language proficiency will be expressed in points. Alternatively, you can obtain an immigration visa to Australia through the Australian Family Migration and Humanitarian Programs as well.
+
+				</p>
+<?php } else {?>
+	<p class="text-center">
 					 Western Overseas Immigration is proudly serving migrants with student visa services and after study immigration services. Working directly with a widespread network of colleges, agents and official channel partners, Western Overseas Immigration brings not only the vast experience but also the rich values to the international grounds. We believe in providing the best services while being completely transparent with our clients. We uphold the client's confidentiality and provide solutions based on correct assessment.<br/><br/>
 
 The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizenship Consultants), being of an immigrant origin himself understands the value of genuine and right guidance. It is these values that has led Western Overseas Immigration to establish not just local but an international network of agents and working partnerships with well established education providers worldwide.
 
 				</p>
-
+	<?php }?>
 			</div>
 
 	

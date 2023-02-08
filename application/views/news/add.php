@@ -22,7 +22,14 @@
 							<input type="text" name="title" value="<?php echo $this->input->post('title'); ?>" class="form-control input-ui-100 removeerrmessage" id="title" maxlength="100"/>
 							<span class="text-danger title_err"><?php echo form_error('title');?></span>
 						</div>
-					</div>					
+					</div>	
+					<div class="col-md-4 margin-bottom-20">
+							<label for="event_title" class="control-label"><span class="text-danger">*</span>Url Slug</label>
+							<div class="form-group">
+								<input type="text" name="URLslug" value="<?php echo $URLslug; ?>" class="form-control removeerrmessage allow_url_slug" id="URLslug" placeholder="URL" onKeyPress="return noNumbers(event)" maxlength="140" autocomplete="off" onchange="checkUrl('news',this.id)" onpaste="return false" />
+								<span class="text-danger URLslug_err"><?php echo form_error('URLslug'); ?></span>
+							</div>
+						</div>				
 
 					<div class="col-md-4">
 						<label for="" class="control-label"><span class="text-danger">*</span>Card Image</label>
@@ -98,6 +105,7 @@
 
 <?php ob_start(); ?>
 <script>
+
 $('#news_add_form').on('submit', function(e){
         e.preventDefault();
 		var flag=1;
@@ -105,6 +113,7 @@ $('#news_add_form').on('submit', function(e){
 		var card_image=$('#card_image').val();
 		var media_file=$('#media_file').val();
 		var news_date=$('#news_date').val();
+		var URLslug=$('#URLslug').val();
 		//var body=$('#body').val();		
 		var body=CKEDITOR.instances.body.getData();		
 		if(title == "")
@@ -112,6 +121,11 @@ $('#news_add_form').on('submit', function(e){
 			$(".title_err").html('The Title field is required.');
 			flag=0;
 		} else { $(".title_err").html(''); }
+		if(URLslug == "")
+		{			
+			$(".URLslug_err").html('The Url Slug is required.');
+			flag=0;
+		} else { $(".URLslug_err").html(''); }
 		if(card_image == "")
 		{			
 			$(".card_image_err").html('The Card Image field is required.');

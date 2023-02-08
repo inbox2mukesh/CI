@@ -18,11 +18,12 @@ class Latest_news extends MY_Controller{
     }
     function index($tags=NULL)
     {
+       
         $uri = $this->_getURI3();
-        if($tags !=NULL)
+         if($tags !=NULL)
         {
             $tags=base64_decode($tags);
-        }
+        } 
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
         );
