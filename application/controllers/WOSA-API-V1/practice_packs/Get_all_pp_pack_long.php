@@ -33,8 +33,9 @@ class Get_all_pp_pack_long extends REST_Controller {
             $limit = $this->input->get_request_header('LIMIT');
             $offset = $this->input->get_request_header('OFFSET');
             $category_id = $this->input->get_request_header('CATEGORY-ID');
-           
+            $this->auto_loadCaching(CACHE_ENGINE);
           $bData = $this->Practice_package_model->get_all_package_active($country_id,$test_module_id,$programe_id,$duration,$limit,$offset,$category_id);
+          $this->auto_cacheOff();  
           if(!empty($bData)){
             $data['error_message'] = [ "success" => 1, "message" => "success", "data"=> $bData];    
           }else{

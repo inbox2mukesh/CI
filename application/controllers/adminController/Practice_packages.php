@@ -228,12 +228,15 @@ class Practice_packages extends MY_Controller{
                     }
                     
                     if($idd){
+                        $this->auto_loadCaching(CACHE_ENGINE);
+                        $this->auto_cacheUpdate_front(WOSA_API_DIR,'practice_packs'); 
                         $category_id = $this->input->post('category_id');
                         if(!empty($category_id)){
                         foreach($category_id as $c){
                                 $params3 = array('package_id'=>$idd, 'category_id'=>$c);
                                 $this->Practice_package_model->add_package_category($params3);
-                        } 
+                        }
+                       
                         }
                         //activity update start              
                             $activity_name= PRACTICE_PACKAGE_ADD;
@@ -349,12 +352,15 @@ class Practice_packages extends MY_Controller{
                 }
                 $category_id = $this->input->post('category_id');
                 if($idd){
+                    $this->auto_loadCaching(CACHE_ENGINE);
+                    $this->auto_cacheUpdate_front(WOSA_API_DIR,'practice_packs');
                     if(!empty($category_id)){
                         $this->Practice_package_model->delete_package_category($package_id);
                         foreach($category_id as $c){
                             $params3 = array('package_id'=>$package_id, 'category_id'=>$c);
                             $this->Practice_package_model->add_package_category($params3);
                         } 
+                       
                     }
                     $package_name = $data['practice_packages']['package_name'];
                     $discounted_amount = $data['practice_packages']['discounted_amount'];
