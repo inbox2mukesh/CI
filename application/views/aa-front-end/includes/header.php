@@ -80,9 +80,9 @@
 											foreach ($newsData->error_message->data as $d){
 											$date=date_create($d->news_date);
 											$news_date = date_format($date,"M d, Y");
-											$news_id = $d->id;
+											$news_id = $d->id;											
 										?>
-											<li><a href="<?php echo base_url('news_article/index/'.$news_id);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
+											<li><a href="<?php echo base_url('news_article/'.$d->URLslug);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
 												</li>
 										<?php }?>
 									</ul>

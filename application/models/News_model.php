@@ -28,6 +28,7 @@ class News_model extends CI_Model
         ');
         $this->db->from('`news`'); 
         $this->db->where('`active`',1); 
+        $this->db->where('URLslug IS NOT NULL');
         $this->db->like('title', $searchText);
         $this->db->or_like('body', $searchText);
         $this->db->order_by('`created` DESC');     
@@ -48,7 +49,8 @@ class News_model extends CI_Model
         if($tags){           
             $this->db->from('`news` n');
             $this->db->join('news_tags nt', 'n.id = nt.news_id');
-            $this->db->where('nt.tags',$tags);          
+            $this->db->where('nt.tags',$tags); 
+            $this->db->where('URLslug IS NOT NULL');  
            // $this->db->limit(30); 
         }else {
             $this->db->from('news'); 
@@ -60,6 +62,7 @@ class News_model extends CI_Model
     function get_all_news_count_backend(){
       
        $this->db->from('news');
+       $this->db->where('URLslug IS NOT NULL');
         return $this->db->count_all_results();      
         
     }
@@ -83,6 +86,7 @@ class News_model extends CI_Model
         ');
         $this->db->from('`news`'); 
         $this->db->order_by('`created` DESC');     
+        $this->db->where('URLslug IS NOT NULL');
         return $this->db->get('')->result_array();
     } 
 
@@ -95,10 +99,13 @@ class News_model extends CI_Model
             body,
             media_file,
             card_image,
+             URLslug,
         ');
         $this->db->from('`news`'); 
         $this->db->where('active',1);
+        $this->db->where('URLslug IS NOT NULL');
         $this->db->order_by('`created` DESC'); 
+        
         $this->db->limit(4);       
         return $this->db->get('')->result_array();
     } 
@@ -124,6 +131,7 @@ class News_model extends CI_Model
             $this->db->from('`news` n');
             $this->db->join('news_tags nt', 'n.id = nt.news_id');
             $this->db->where('nt.tags',$tags);
+            $this->db->where('URLslug IS NOT NULL');
             $this->db->order_by('`created` DESC');
            // $this->db->limit(30); 
         }else{
@@ -139,6 +147,7 @@ class News_model extends CI_Model
             ');
             $this->db->from('`news`'); 
             $this->db->where('active',1);
+            $this->db->where('URLslug IS NOT NULL');
             $this->db->order_by('`created` DESC');
             //$this->db->limit(30); 
         }        
@@ -157,6 +166,7 @@ class News_model extends CI_Model
         ');
         $this->db->from('`news`'); 
         $this->db->where(array('active'=>1, 'is_pinned'=>1));
+        $this->db->where('URLslug IS NOT NULL');
         $this->db->order_by('`created` DESC');
         $this->db->limit(15);
         return $this->db->get('')->result_array();
@@ -175,9 +185,11 @@ class News_model extends CI_Model
 
         $this->db->distinct('');
         $this->db->select('tags');
-        $this->db->from('`news_tags`'); 
+        $this->db->from('`news_tags`');
+        $this->db->join('news n', 'n.id = news_tags.news_id','left'); 
         $this->db->where(array('tags!='=>''));
-        $this->db->order_by('`id` DESC');
+        $this->db->where('URLslug IS NOT NULL');
+        $this->db->order_by('`news_tags.id` DESC');
         $this->db->limit(30);
         return $this->db->get('')->result_array();
 
