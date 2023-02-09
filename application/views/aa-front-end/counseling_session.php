@@ -191,7 +191,7 @@
 														}
 														?>
 													</select>
-													<input type="tel"  placeholder="Phone Number" name="cs_phoneno" class="phoneNo removeerrmessage" id="cs_phoneno" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" value="<?php if (isset($this->session->userdata('student_login_data')->mobile)) {
+													<input type="tel"  placeholder="Phone Number" name="cs_phoneno" class="phoneNo removeerrmessage" autocomplete="off" id="cs_phoneno" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" value="<?php if (isset($this->session->userdata('student_login_data')->mobile)) {
 																																																										echo $this->session->userdata('student_login_data')->mobile;
 																																																									} else {
 																																																										echo "";
@@ -256,13 +256,13 @@
 							
 									<div class='col-md-6 col-sm-6 form-group required'>
 										<label class='control-label'>Name on Card<span class="text-red">*</span></label>
-										<input class='fstinput allow_alphabets removeerrmessage' type='text' id="card_holder_name" placeholder="Name on Card">
+										<input class='fstinput allow_alphabets removeerrmessage' type='text' id="card_holder_name" placeholder="Name on Card" autocomplete="off">
 										<p class="validation card_holder_name_err" id="card_holder_name_err"></p>
 									</div>
 
 									<div class='col-md-6 col-sm-6 form-group required'>
 										<label class='pull-left'>Card Number<span class="text-red">*</span></label>
-										<input autocomplete='off' class='fstinput dob_mask_n card-number  removeerrmessage' data-inputmask="'mask': '9999 9999 9999 9999'" size='20' type='text' name="number" placeholder="xxxx xxxx xxxx xxxx" id="card_number" maxlength="20">
+										<input autocomplete='off' class='fstinput dob_mask_n card-number  removeerrmessage' data-inputmask="'mask': '9999 9999 9999 9999'" size='20' type='text' name="number" placeholder="xxxx xxxx xxxx xxxx" id="card_number" maxlength="20" >
 										<p class="validation card_number_err" id="card_number_err"></p>
 									</div>
 								
@@ -275,12 +275,12 @@
 									</div>
 									<div class='col-xs-12 col-md-4 form-group expiration required'>
 										<label class='control-label'>Expiration Month<span class="text-red">*</span></label>
-										<input class='fstinput card-expiry-month allow_numeric change_focus removeerrmessage' placeholder='MM' size='2' type='text' name="exp_month" maxlength="2" id="exp_month">
+										<input class='fstinput card-expiry-month allow_numeric change_focus removeerrmessage' placeholder='MM' size='2' type='text' name="exp_month" maxlength="2" id="exp_month" autocomplete="off">
 										<p class="validation exp_month_err" id="exp_month_err"></p>
 									</div>
 									<div class='col-xs-12 col-md-4 form-group expiration required'>
 										<label class='control-label'>Expiration Year<span class="text-red">*</span></label>
-										<input class='fstinput card-expiry-year allow_numeric removeerrmessage' placeholder='YYYY' size='4' type='text' name="exp_year" maxlength="4" id="exp_year">
+										<input class='fstinput card-expiry-year allow_numeric removeerrmessage' placeholder='YYYY' autocomplete="off" size='4' type='text' name="exp_year" maxlength="4" id="exp_year">
 										<p class="validation exp_year_err" id="exp_year_err"></p>
 									</div>
 
@@ -313,7 +313,10 @@
 							<input type="hidden" id="stepindexcount" name="stepindexcount">
 							<span data-step-action="prev" class="step-btn pull-left text-grey font-weight-600" id="btnPrev"><i class="fa fa-chevron-left btn-circle-back mr-5"></i> Back </span>
 							<span data-step-action="next" class="step-btn pull-right font-weight-600 hide"  onclick="topFunction()" id="btnNext" >Next <i class="fa fa-chevron-right btn-circle text-white ml-5"></i></span>
-							<span data-step-action="finish" class="step-btn font-bold pull-right font-weight-600" onclick="return Send_demo_counelling_post();">Pay Now <i class="fa fa-chevron-right btn-paynow text-white ml-5"></i></span>
+							<span data-step-action="finish" class="step-btn font-bold pull-right finalbtn font-weight-600" onclick="return Send_demo_counelling_post();">Pay Now <i class="fa fa-chevron-right btn-paynow text-white ml-5"></i></span>
+							<span class="step-btn font-bold pull-right font-weight-600 hide" id="loader">
+								<img src="<?php echo base_url('resources-f/images/ajax-loader1.gif');?>" style="width: 23px;margin-right: 6px;"> Processing....
+							</span>
 						</div>
 					</div>
 				</div>
@@ -513,10 +516,10 @@ if ($(window).width() <= 1024) {
 
 	}
 
-	function Send_demo_counelling_post() {
+function Send_demo_counelling_post() {
 
-
-		var flag=1;
+  var flag=1;
+  $('.finalbtn').addClass("hide");
   if($('#card_holder_name').val() == "")
   {
     $('#card_holder_name_err').text("Please enter name on card")
@@ -542,13 +545,17 @@ if ($(window).width() <= 1024) {
     $('#exp_year_err').text("Please enter expiration year")
     flag=0
   }
-  if (flag == 1) {
-			var form = $('#studentPostForm');
-			form.submit();
-			return true;
-		} else {
-			return false;
-		}
+	if (flag == 1) {
+		$('.finalbtn').addClass("hide");
+		$('#loader').removeClass("hide");
+		var form = $('#studentPostForm');
+		form.submit();
+		return true;
+	} else {
+		$('.finalbtn').removeClass("hide");
+		$('#loader').addClass("hide");
+		return false;
+	}
 
 /* 
 
@@ -777,6 +784,8 @@ if ($(window).width() <= 1024) {
 					.removeClass('hide')
 					.find('.alert')
 					.text(res.error.message);
+					$('.finalbtn').removeClass("hide");
+					$('#loader').addClass("hide");
 			} else {
 				$('#make_payment').addClass('hide');
 				$('#pleasewaitpayment').removeClass("hide");

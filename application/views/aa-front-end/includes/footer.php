@@ -42,7 +42,11 @@
 					<li><a href="<?php echo base_url('videos');?>">Video Gallery</a></li>
 					<li><a href="<?php echo base_url('contact_us');?>">Contact</a></li>
 					<li><a href="<?php echo base_url('faq');?>">FAQ</a></li>
+					<?php
+					if(!$this->session->userdata('student_login_data')){
+					?>
 					<li><a href="<?php echo base_url();?>become_agent">Join Agent Network</a></li>
+					<?php }?>
 				</ul>
 			</div>
 		</div>

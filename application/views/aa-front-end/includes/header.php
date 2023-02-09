@@ -146,7 +146,11 @@
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('videos');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/video-gallery.svg');?>" alt="">Video Gallery</a> </li>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('contact_us');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/contact.svg');?>" alt="">Contact</a> </li>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('faq');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/faq.svg');?>" alt="">FAQ</a> </li>
+																<?php
+															if(!$this->session->userdata('student_login_data')){
+															?>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url();?>become_agent" class="blink"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/network.svg');?>" alt="">Join Agent Network</a> </li>
+																<?php }?>
 																<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/partners.svg');?>" alt="">Our Partners</a>
 																	<ul class="sub-menu">
 																		<li class="back"><a href="#">Back</a></li>
