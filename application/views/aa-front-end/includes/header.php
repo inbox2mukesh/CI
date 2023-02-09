@@ -119,8 +119,8 @@
 													<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Online coaching</a>
 														<ul class="sub-menu">
 															<li class="back"><a href="#">Back</a></li>
-															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('online_courses');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/online-course.svg');?>" alt="">Online Course</a> </li>
-															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('practice_packs');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/practice-pack.svg');?>" alt="">Practice Pack</a> </li>
+															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('online-courses');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/online-course.svg');?>" alt="">Online Course</a> </li>
+															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('practice-packs');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/practice-pack.svg');?>" alt="">Practice Pack</a> </li>
 															<li class="menu-item menu-item-has-children header-sub-menu">
 														</ul>
 														</li>

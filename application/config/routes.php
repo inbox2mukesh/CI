@@ -11,6 +11,8 @@ $route['handlePayment']['post'] = "booking/handlePayment";
 //$route['Second-event/(:any)'] = "Second-event/$1";// dynamic rewritting
 $route['news_article/(:any)'] = "news_article/index/$1";// dynamic rewritting
 $route['latest_news/(:any)'] = "latest_news/index/$1";// dynamic rewritting
+$route['online-courses'] = "online_courses";
+$route['practice-packs'] = "practice_packs";
 
 if(CheckEventUrl()){
 	

@@ -17,8 +17,8 @@
 			<div class="column">
 				<h4>Online Coaching</h4>
 				<ul>
-					<li><a href="<?php echo base_url('online_courses');?>">Online Course</a></li>
-					<li><a href="<?php echo base_url('practice_packs');?>">Practice Pack</a></li>
+					<li><a href="<?php echo base_url('online-courses');?>">Online Course</a></li>
+					<li><a href="<?php echo base_url('practice-packs');?>">Practice Pack</a></li>
 				</ul>
 			</div>
 			<div class="column">
@@ -481,7 +481,16 @@ echo $customJs;
 	});
 	}
 	});
-	var browserName = (function (agent) {
+	
+</script>
+
+
+
+<script>
+
+if ($(window).width() >= 500) {
+
+ var browserName = (function (agent) {
 	switch (true) {
 	case agent.indexOf("edge") > -1: return "MS Edge";
 	case agent.indexOf("edg/") > -1: return "Edge ( chromium based)";
@@ -501,19 +510,9 @@ echo $customJs;
 	window.location.href = "https://westernoverseas.ca/canada-development/support_browser";
 	}
 
-</script>
+}
 
-<!-- <script>
-var ua = navigator.userAgent.toLowerCase();
- var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
-if(isAndroid) {
-document.write("");
-alert("Android browser")
-} else {
-document.write("");
-alert("Not an Android browser ")
-} 
-</script> -->
+</script>
 
 <script>
 	var webpMachine = new webpHero.WebpMachine()

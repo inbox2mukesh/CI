@@ -96,7 +96,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
     <div class="col-sm-12 otp_form" style="display: none;">
       <div class="form-group mb-10">
         <input name="otp" id="otp" class="fstinput form-control" type="text" placeholder="Enter Verification code" aria-required="true" maxlength="4">
-        <span class="text-danger small otp_err"></span>
+        <span class="valid-validation small otp_err"></span>
       </div>
     </div>
     <div class="text-right col-md-12">
@@ -105,11 +105,13 @@ if(isset($this->session->userdata('student_login_data')->id)){
         <button type="button" class="enqBtn_processin btn btn-red" data-loading-text="Please wait...">Sending..</button>
         <i class="fa fa-spinner fa-spin mr-10"></i>
       </div>
-      <a href="javascript:void(0);" class="otp_form" style="display: none;float: left;color: #d93025;" onclick="resendOTP()">Resend Verification code?
+      <a href="javascript:void(0);" class="otp_form" style="display: none;float: left;color: #d93025; font-size:13px; font-weight:500" onclick="resendOTP()">Resend Verification code?
       </a>
-      <div class="proBtn3" style="display: none;">
+
+      <span class="proBtn3" style="display: none;">
         <i class="fa fa-spinner fa-spin mr-10"></i>
-      </div>
+        </span>
+
       <button type="button" class="otp_form btn btn-red" data-loading-text="Please wait..." onclick="return verifyNsubmit();" style="display: none;">Verify & Submit</button>
       <div class="proBtn2" style="display: none;">
         <button type="button" class="enqBtn_processin2 btn btn-red" data-loading-text="Please wait...">Please wait..</button>
@@ -319,7 +321,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
           $('.otp_form').show();
           $('.enqBtn').hide();
           $('#enquiry_id').val(response.enquiry_id);
-          $('.otpMsg').html('<div class="alert alert-info alert-dismissible">Verification code has been sent on your email.<a href="#" class="alert-link"></a>.</div>');
+          $('.otpMsg').html('<div style="margin-top:-5px" class="alert alert-info alert-dismissible">Verification code has been sent on your email.<a href="#" class="alert-link"></a>.</div>');
         }
         else {
           $('.finalMsg').html('<div class="alert alert-danger alert-dismissible">OOps..Failed to send verification code. Please try again!<a href="#" class="alert-link"></a>.</div>');

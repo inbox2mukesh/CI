@@ -68,23 +68,25 @@ border-radius: 10px;
 					  <div class="col-md-4"  id="amount" >
 						<label for="amount" class="control-label">Price<span class="text-danger">*</span></label>
 						<div class="form-group">
-                            <input type="text" name="amount" value="<?php echo $amount ?>" class="form-control" id="amount" onKeyPress="return nochar(event)"/>
+                            <input type="text" name="amount" value="<?php echo $amount ?>" class="form-control" id="amount" onKeyPress="return nochar(event)" maxlength="5"/>
 							<span class="text-danger"><?php echo form_error('amount');?></span>
 							
 						</div>
 					</div>
+					<?php if($session_type == "online") {?>
                     <div class="col-md-4"  id="zoomLinkDiv" >
 						<label for="zoom_link" class="control-label">Meeting Link<span class="text-danger">*</span></label>
 						<div class="form-group">
-                            <input type="text" name="zoom_link" value="<?php echo $zoom_link ?>" class="form-control" id="zoom_link"/>
-							<span class="text-danger"><?php echo form_error('zoom_link');?></span>
+                            <input type="text" name="zoom_link" value="<?php echo $zoom_link ?>" class="form-control validate_url" id="zoom_link"/>
+							<span class="text-danger zoom_link_err"><?php echo form_error('zoom_link');?></span>
 							
 						</div>
 					</div>
+					<?php }?>
 					<div class="col-md-4" id="duration" >
-						<label for="duration" class="control-label">Duration<span class="text-danger">*</span></label>
+						<label for="duration" class="control-label">Duration(In Minutes)<span class="text-danger">*</span></label>
 						<div class="form-group">
-                            <input type="text" name="duration" value="<?php echo $counseling_session['duration'] ?>" class="form-control" id="duration" />
+                            <input type="text" name="duration" value="<?php echo $counseling_session['duration'] ?>" class="form-control" id="duration" maxlength="3"/>
 							<span class="text-danger"><?php echo form_error('duration');?></span>
 							
 						</div>

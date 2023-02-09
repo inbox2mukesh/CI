@@ -428,13 +428,13 @@ class Counseling_session extends MY_Controller{
        		$this->load->library('form_validation');
 			$this->form_validation->set_rules('session_title','Session title','required|trim');
 			$this->form_validation->set_rules('session_date','session date','required|trim');
-			$this->form_validation->set_rules('counseling_session_time_slot','time slot','required|trim');
-			$this->form_validation->set_rules('session_date','session date','required|trim');	
-			if($this->input->post('session_title') == 'online')	
+			$this->form_validation->set_rules('counseling_session_time_slot','time slot','required|trim');	
+				
+			if($this->input->post('session_title') =="online")
 			{
-			$this->form_validation->set_rules('meeting_link','meeting link','required|trim');	
+				$this->form_validation->set_rules('zoom_link','zoom link','required|trim');
 			}
-
+			
 			$this->form_validation->set_rules('duration','Duration','required|trim');	
 			//$this->form_validation->set_rules('paypal_link','paypal link','required|trim');
 			$this->form_validation->set_rules('amount','amount','required|trim');	
@@ -442,7 +442,8 @@ class Counseling_session extends MY_Controller{
 			$counseling_sessions_group_id= $data['counseling_session']['counseling_sessions_group_id'];
 			
 			if($this->form_validation->run())
-            {   
+            {  
+				
 	
                 $by_user=$_SESSION['UserId'];
 				$session_date=$this->input->post('session_date');			

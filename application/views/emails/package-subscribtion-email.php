@@ -20,7 +20,7 @@
 
 <table width="100%" cellpadding="0" cellspacing="1" style="margin-bottom: 10px;font-size: 13px; border:solid 1px #f3eedd">
 <tr>
-	<td width="42%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Course</td>
+	<td width="50%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Course</td>
 	<td valign="top"><?php echo $test_module_name;?></td>
 </tr>
 
@@ -55,7 +55,7 @@
 
 <table width="100%" cellpadding="0" cellspacing="1" style="margin-bottom: 10px;font-size: 13px; border:solid 1px #f3eedd">
   <tr>
-    <td width="42%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Package</td>
+    <td width="50%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Package</td>
     <td valign="top"><?php echo $package_name;?></td>
   </tr>
   
@@ -94,7 +94,7 @@
 
 <table width="100%" cellpadding="0" cellspacing="1" style="margin-bottom: 10px;font-size: 13px; border:solid 1px #f3eedd">
   <tr>
-    <td width="42%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Amount paid</td>
+    <td width="50%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Amount paid</td>
     <td valign="top"><?php echo $currency.' '. $amount_paid;?></td>
   </tr>
 
