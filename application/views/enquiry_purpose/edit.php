@@ -20,6 +20,7 @@ border-radius: 10px;
             </div>
             <?php echo $this->session->flashdata('flsh_msg'); ?>
 			<?php echo form_open_multipart('adminController/enquiry_purpose/edit/'.$enquiry_purpose['id']); ?>
+			<input type="hidden"  value="<?php echo $enquiry_purpose['id'];?>" name="hid_id" id="hid_id"/>
 			<div class="box-body">
 				<div class="">
 					
@@ -30,6 +31,13 @@ border-radius: 10px;
 							<span class="text-danger"><?php echo form_error('enquiry_purpose_name');?></span>
 						</div>
 					</div>	
+					<div class="col-md-4 margin-bottom-20">
+							<label for="event_title" class="control-label"><span class="text-danger">*</span>Url Slug</label>
+							<div class="form-group">
+								<input type="text" name="URLslug" value="<?php echo ($this->input->post('URLslug') ? $this->input->post('URLslug') : $enquiry_purpose['URLslug']); ?>" class="form-control removeerrmessage allow_url_slug" id="URLslug" placeholder="URL" onKeyPress="return noNumbers(event)" maxlength="140" autocomplete="off" onchange="checkUrl('visaservice',this.id)" onpaste="return false" />
+								<span class="text-danger URLslug_err"><?php echo form_error('URLslug'); ?></span>
+							</div>
+						</div>
                     
                     <?php
                     $division_id =$this->input->post('division_id');
@@ -121,13 +129,13 @@ border-radius: 10px;
 			</div>
 			<div class="box-footer">
 				<div class="col-md-12">
-            	<button type="submit" class="btn btn-danger rd-20">
+            	<button type="submit" class="btn btn-danger rd-20 submit_btn">
 					 <?php echo UPDATE_LABEL;?>
 				</button>
                 &nbsp; 
-                <button type="button" class="btn btn-reset rd-20" onclick="return location.replace('<?php echo site_url('adminController/enquiry_purpose/index'); ?>');">
+                <!-- <button type="button" class="btn btn-reset rd-20" onclick="return location.replace('<?php echo site_url('adminController/enquiry_purpose/index'); ?>');">
 					<?php echo CANCEL_LABEL;?>
-				</button>
+				</button> -->
 	        </div>			
 			</div>		
 			<?php echo form_close(); ?>

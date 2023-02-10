@@ -55,6 +55,7 @@ class Free_resources extends MY_Controller{
         $this->form_validation->set_rules('title','title','required|trim');
 		$this->form_validation->set_rules('free_resources_topic[]','test type','required|trim');
 		$this->form_validation->set_rules('description','description','required|trim');
+		$this->form_validation->set_rules('URLslug','URL slug','required|trim');
 		if (empty($_FILES['image']['name']))
 		{
 			$this->form_validation->set_rules('image', 'image', 'required');
@@ -87,6 +88,7 @@ class Free_resources extends MY_Controller{
 				'content_type_id' => $this->input->post('content_type_id'),
 				'title' => $this->input->post('title'),
 				'description'=>$this->input->post('description',false),
+				'URLslug'=>$this->input->post('URLslug'),
 				'image'=>$image
             );
 			
@@ -225,7 +227,7 @@ class Free_resources extends MY_Controller{
 			$this->form_validation->set_rules('title','title','required|trim');
 			//$this->form_validation->set_rules('free_resources_topic[]','test type','required|trim');
 			$this->form_validation->set_rules('description','description','required|trim');
-			
+			$this->form_validation->set_rules('URLslug','URL slug','required|trim');			
 			$data['free_resources_test_list'] = $this->Free_resources_modal->getTestByFreeResourcesId($id);			
 			$data['free_resources_section_list']=$this->Free_resources_modal->getSectionByFreeResourcesId($id);			
 			if(empty($data['free_resources_test_list'])){
@@ -261,6 +263,7 @@ class Free_resources extends MY_Controller{
 					'content_type_id' => $this->input->post('content_type_id'),
 					'title' => $this->input->post('title'),
 					'description'=>$this->input->post('description',false),
+					'URLslug'=>$this->input->post('URLslug'),
 					'image'=>$image
 				);
 			

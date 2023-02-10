@@ -314,9 +314,9 @@
 							<span data-step-action="prev" class="step-btn pull-left text-grey font-weight-600" id="btnPrev"><i class="fa fa-chevron-left btn-circle-back mr-5"></i> Back </span>
 							<span data-step-action="next" class="step-btn pull-right font-weight-600 hide"  onclick="topFunction()" id="btnNext" >Next <i class="fa fa-chevron-right btn-circle text-white ml-5"></i></span>
 							<span data-step-action="finish" class="step-btn font-bold pull-right finalbtn font-weight-600" onclick="return Send_demo_counelling_post();">Pay Now <i class="fa fa-chevron-right btn-paynow text-white ml-5"></i></span>
-							<span class="step-btn font-bold pull-right font-weight-600 hide" id="loader">
+							<div class="step-btn font-bold pull-right font-weight-600 hide" id="loader">
 								<img src="<?php echo base_url('resources-f/images/ajax-loader1.gif');?>" style="width: 23px;margin-right: 6px;"> Processing....
-							</span>
+							</div>
 						</div>
 					</div>
 				</div>

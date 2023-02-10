@@ -24,11 +24,13 @@ class Free_resource_section extends REST_Controller {
         }else{        
           $id = $this->input->get_request_header('ID');
           $bData['basic']['content'] = $this->Free_resources_modal->getFreeResourceContentSpecific($id);
+          $idd= $bData['basic']['content'][0]['id'];
           foreach ($bData as $key => $c) {
-              $data2['c'] = $this->Free_resources_modal->getFreeResourceContentsTopic($id);
+          
+              $data2['c'] = $this->Free_resources_modal->getFreeResourceContentsTopic($idd);
               $bData[$key]['Course']= $data2['c'];                      
           }
-          $frs = $this->Free_resources_modal->getFreeResourceSections($id);
+          $frs = $this->Free_resources_modal->getFreeResourceSections($idd);
           foreach ($frs as $d) {
               //$data2['c'] = $this->Free_resources_modal->getFreeResourceContentsCourse($id);
               $bData['allSection'][]= $d;                      

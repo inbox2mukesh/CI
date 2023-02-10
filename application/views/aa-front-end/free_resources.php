@@ -134,7 +134,7 @@ foreach($FREE_RESOURCE_CONTENT->error_message->data as $p){
 
 					<div class="col-md-4 col-sm-6">
 
-						<a href="<?php echo base_url()?>free_resources/free_resource_post/<?php echo base64_encode($p->id); ?>">
+						<a href="<?php echo base_url()?>free_resources/free-resource-post/<?php echo $p->URLslug; ?>">
 
 							<div class="latest-img">
 

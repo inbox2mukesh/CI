@@ -121,7 +121,7 @@
 			</div>
 			<div class="box-footer">
 				<div class="col-md-12">
-            	<button type="submit" class="btn btn-danger rd-20">
+            	<button type="submit" class="btn btn-danger rd-20 submit_btn">
 				<?php echo UPDATE_LABEL;?>
 				</button>
 	        </div>	

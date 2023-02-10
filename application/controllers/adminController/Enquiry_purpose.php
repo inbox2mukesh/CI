@@ -52,7 +52,7 @@ class Enquiry_purpose extends MY_Controller{
 		$this->form_validation->set_rules('enquiry_purpose_name','enquiry purpose name','required|trim|is_unique[enquiry_purpose_masters.enquiry_purpose_name]|max_length[50]');
 		
         $this->form_validation->set_rules('division_id[]','Division','required');
-		
+        $this->form_validation->set_rules('URLslug','Url Slug','required|trim|');
 		if($this->form_validation->run())     
         {   
             $by_user=$_SESSION['UserId'];
@@ -61,6 +61,7 @@ class Enquiry_purpose extends MY_Controller{
 				'enquiry_purpose_name'=> trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('enquiry_purpose_name')))),
                 'image'  => $this->input->post('image'),
                 'about_service' => $this->input->post('about_service',false),
+                'URLslug' => $this->input->post('URLslug'),
                 'by_user'             =>$by_user,
             );
             $config['upload_path']   = SERVICE_IMAGE_PATH;
@@ -79,6 +80,7 @@ class Enquiry_purpose extends MY_Controller{
                     'image'  => $image,
                     'about_service' => $this->input->post('about_service',false),
                     'by_user' => $by_user,
+                    'URLslug' => $this->input->post('URLslug'),
                 );                     
         }else{           
             $params = array(
@@ -86,6 +88,7 @@ class Enquiry_purpose extends MY_Controller{
                 'enquiry_purpose_name'=> trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('enquiry_purpose_name')))),
                 'about_service' => $this->input->post('about_service',false),
                 'by_user' => $by_user,
+                 'URLslug' => $this->input->post('URLslug'),
                 );
         }
         $id = $this->Enquiry_purpose_model->add_enquiry_purpose($params);
@@ -156,6 +159,7 @@ class Enquiry_purpose extends MY_Controller{
 				
 		        $this->form_validation->set_rules('division_id[]','division','required');
 		    }
+            $this->form_validation->set_rules('URLslug','Url Slug','required|trim');
 			
 			if($this->form_validation->run())
             {   
@@ -167,6 +171,7 @@ class Enquiry_purpose extends MY_Controller{
                     'image'  => $this->input->post('image'),
                     'about_service' => $this->input->post('about_service',false),
                     'by_user'             =>$by_user,
+                    'URLslug' => $this->input->post('URLslug'),
                 );
                 if(!file_exists(SERVICE_IMAGE_PATH)){
 					mkdir(SERVICE_IMAGE_PATH, 0777, true);
@@ -185,6 +190,7 @@ class Enquiry_purpose extends MY_Controller{
                         'image'  => $image,
                         'about_service' => $this->input->post('about_service',false),
                         'by_user' => $by_user,
+                        'URLslug' => $this->input->post('URLslug'),
                     );                     
             }else{
                //echo $this->upload->display_errors();
@@ -194,6 +200,7 @@ class Enquiry_purpose extends MY_Controller{
                         //'image'  => $image,
                         'about_service' => $this->input->post('about_service',false),
                         'by_user' => $by_user,
+                        'URLslug' => $this->input->post('URLslug'),
                     );
             }
 				$result = $this->Enquiry_purpose_model->update_enquiry_purpose($id,$params);

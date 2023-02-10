@@ -13,9 +13,9 @@
     }
 
     function free_resource_check($id){
-
+        
         $this->db->from('free_resources');
-        $this->db->where(array('id'=> $id,'active'=>1));
+        $this->db->where(array('URLslug'=> $id,'active'=>1));
         return $this->db->count_all_results();
     }
 
@@ -76,6 +76,7 @@
             fr.isPinned,
             fr.title,
             fr.description,
+            fr.URLslug,
             CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
             date_format(fr.modified, "%D %b %Y") as `created`,
         ');
@@ -270,6 +271,7 @@
 
         $this->db->select('
             ctm.content_type_name,
+            fr.id,
             fr.title,
             fr.isPinned,
             fr.description,
@@ -278,7 +280,7 @@
         ');
         $this->db->from('free_resources fr');
         $this->db->join('content_type_masters ctm', 'ctm.id= fr.content_type_id');
-        $this->db->where('fr.id', $id);
+        $this->db->where('fr.URLslug', $id);
         return $this->db->get()->result_array();
 
     }

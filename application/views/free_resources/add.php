@@ -67,7 +67,14 @@
 			            $free_resources_topic=$this->input->post('free_resources_topic[]');
 						#pr($time_slots);
 			        ?>
-                    <div class="col-md-12">
+					<div class="col-md-6 margin-bottom-20">
+						<label for="event_title" class="control-label"><span class="text-danger">*</span>Url Slug</label>
+						<div class="form-group">
+						<input type="text" name="URLslug" value="<?php echo $URLslug; ?>" class="form-control input-ui-100 removeerrmessage allow_url_slug" id="URLslug" placeholder="URL" onKeyPress="return noNumbers(event)" maxlength="140" autocomplete="off" onchange="checkUrl('freeresourse',this.id)" onpaste="return false" />
+						<span class="text-danger URLslug_err"><?php echo form_error('URLslug'); ?></span>
+						</div>
+					</div>	
+                    <div class="col-md-6">
 						<label for="free_resources_topic" class="control-label">Topic<span class="text-danger">*</span></label>						
 						<div class="form-group">
 					    <select name="free_resources_topic[]" id="free_resources_topic" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep" data-show-subtext="true" data-live-search="true" data-actions-box="true" multiple="multiple">
@@ -223,7 +230,7 @@
 			</div>
           	<div class="box-footer">
 				<div class="col-md-12">
-            	<button type="submit" class="btn btn-danger rd-20" >
+            	<button type="submit" class="btn btn-danger rd-20 submit_btn" >
             		<i class="fa fa-check"></i> <?php echo SAVE_LABEL;?>
             	</button>
 				</div>

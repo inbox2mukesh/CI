@@ -4,7 +4,7 @@
 		
 			<div class="row">
 				<div class="col-md-8">
-				<span class="news-article-reset">	<a href="<?php echo base_url('latest_news');?>" ><i class="fa fa-refresh text-red"></i> Reset all news</a></span>
+				<span class="news-article-reset">	<a href="<?php echo base_url('latest-news');?>" ><i class="fa fa-refresh text-red"></i> Reset all news</a></span>
 					<div class="news-article-info">
 						<div><img src="<?php echo base_url('uploads/news/'.$newsArticleData->error_message->data->media_file);?>" alt="" title="" class="img-rounded mb-15"></div>
 							<?php

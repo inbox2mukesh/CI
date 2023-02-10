@@ -9,10 +9,11 @@
 				<div class="grid-container">
 					<div class="grid-flex-cont4">						
 						<!--Start Grid Items-->
-						<?php foreach ($serviceData->error_message->data as $d) { ?>
+						<?php
+						foreach ($serviceData->error_message->data as $d) { ?>
 						<div class="grid-card-container">
 							<div class="grid-card">
-								<a href="<?php echo base_url('visa_service_details/index/'.$d->id);?>">
+								<a href="<?php echo base_url('visa-service-details/'.$d->URLslug);?>">
 									<div class="services">
 										<div class="img-area"> <img src="<?php echo base_url('uploads/service_image/'.$d->image);?>" class="img-responsive" alt="" title=""> </div>
 										<div class="img-text">

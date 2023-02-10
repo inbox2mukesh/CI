@@ -29,7 +29,7 @@ border-radius: 10px;
 		    <?php				
 			   
 					
-				$session_type=$counseling_session['session_type'];
+			  $session_type=$counseling_session['session_type'];
 				
 				$counseling_session_id=$counseling_session['id'];
 				
@@ -68,12 +68,12 @@ border-radius: 10px;
 					  <div class="col-md-4"  id="amount" >
 						<label for="amount" class="control-label">Price<span class="text-danger">*</span></label>
 						<div class="form-group">
-                            <input type="text" name="amount" value="<?php echo $amount ?>" class="form-control" id="amount" onKeyPress="return nochar(event)" maxlength="5"/>
-							<span class="text-danger"><?php echo form_error('amount');?></span>
+                            <input type="text" name="amount" value="<?php echo $amount ?>" class="form-control allow_numeric numeric_without_zero removeerrmessage" id="amount" />
+							<span class="text-danger amount_err"><?php echo form_error('amount');?></span>
 							
 						</div>
 					</div>
-					<?php if($session_type == "online") {?>
+					<?php if($session_type !="In-Person"){?>
                     <div class="col-md-4"  id="zoomLinkDiv" >
 						<label for="zoom_link" class="control-label">Meeting Link<span class="text-danger">*</span></label>
 						<div class="form-group">
@@ -86,8 +86,8 @@ border-radius: 10px;
 					<div class="col-md-4" id="duration" >
 						<label for="duration" class="control-label">Duration(In Minutes)<span class="text-danger">*</span></label>
 						<div class="form-group">
-                            <input type="text" name="duration" value="<?php echo $counseling_session['duration'] ?>" class="form-control" id="duration" maxlength="3"/>
-							<span class="text-danger"><?php echo form_error('duration');?></span>
+                            <input type="text" name="duration" value="<?php echo $counseling_session['duration'] ?>" class="form-control allow_numeric numeric_without_zero removeerrmessage" id="duration" />
+							<span class="text-danger duration_err"><?php echo form_error('duration');?></span>
 							
 						</div>
 					</div>		

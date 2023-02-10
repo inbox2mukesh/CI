@@ -203,7 +203,7 @@ class Counseling_session extends MY_Controller{
 			$add_data=false;
 				
 			$params = array(
-				'active' => $this->input->post('active'),
+				'active' =>$this->input->post('active') ? $this->input->post('active') : 0,
 				'session_type' => $this->input->post('session_title'),
 				'amount' => $this->input->post('amount'),				
 				'by_user' => $by_user,
@@ -231,7 +231,7 @@ class Counseling_session extends MY_Controller{
 							$session_date_time=date('Y-m-d H:i:0',$session_date_time_str);
 							
 							$params = array(
-							'active' => $this->input->post('active'),
+							'active' =>$this->input->post('active') ? $this->input->post('active') : 0,
 							'session_type' => $this->input->post('session_title'),
 				            'amount' => $this->input->post('amount'),
 							'by_user' => $by_user,
@@ -348,7 +348,7 @@ class Counseling_session extends MY_Controller{
 							$session_date_time=date('Y-m-d H:i:0',$session_date_time_str);
 							
 							$params = array(
-							'active' => $this->input->post('active'),
+							'active' =>$this->input->post('active') ? $this->input->post('active') : 0,
 							'session_title' =>$session_type,
 							'amount' =>$this->input->post('amount'),
 							'by_user' => $by_user,
@@ -457,7 +457,7 @@ class Counseling_session extends MY_Controller{
 				$session_date_time=date('Y-m-d H:i:0',$session_date_time_str);
 				$nameOfDay = date('D', strtotime($session_date));				
 				$params = array(
-						'active' => $this->input->post('active'),
+						'active' => $this->input->post('active') ? $this->input->post('active') : 0,
 						'amount' => $this->input->post('amount'),
 						'session_type' =>$session_title,
 						'by_user' => $by_user,

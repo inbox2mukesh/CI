@@ -23,6 +23,7 @@
 						<th>Content Type</th>
 						<th>Topic</th>
 						<th>Title</th>
+						<th>URl Slug</th>
                         <th>Featured?</th>
 						<th><?php echo STATUS;?></th>
                         <th><?php echo ACTION;?></th>
@@ -66,6 +67,7 @@
 						?>
 						</td>
 						 <td><?php echo $p['title']; ?></td>
+						 <td><?php echo $p['URLslug']; ?></td>
                          <td>
                             
                             <?php 

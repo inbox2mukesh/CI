@@ -69,7 +69,7 @@
 											$news_date = date_format($date,"M d, Y");
 											$news_id = $d->id;
 										?>
-											<li><a href="<?php echo base_url('news_article/index/'.$news_id);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
+											<li><a href="<?php echo base_url('news-article/index/'.$news_id);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
 												</li>
 										<?php }?>
 									</ul> -->
@@ -82,7 +82,7 @@
 											$news_date = date_format($date,"M d, Y");
 											$news_id = $d->id;											
 										?>
-											<li><a href="<?php echo base_url('news_article/'.$d->URLslug);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
+											<li><a href="<?php echo base_url('news-article/'.$d->URLslug);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
 												</li>
 										<?php }?>
 									</ul>
@@ -115,7 +115,7 @@
 											<div class="menu-header-container">
 												<ul id="cd-primary-nav" class="menu">
 													<li style="margin-bottom:10px!important;" class="mob-enq-btn no-lg-display" onClick="location.replace('<?php echo base_url('counseling');?>');"><a>Book Counseling</a></li>	
-													<li class="menu-item leave-mouse"> <a href="<?php echo base_url('visa_services');?>">Visa &amp; Immigration Services</a> </li>
+													<li class="menu-item leave-mouse"> <a href="<?php echo base_url('visa-services');?>">Visa &amp; Immigration Services</a> </li>
 													<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Online coaching</a>
 														<ul class="sub-menu">
 															<li class="back"><a href="#">Back</a></li>
@@ -127,8 +127,8 @@
 														<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Resources</a>
 															<ul class="sub-menu">
 																<li class="back"><a href="#">Back</a></li>
-																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('free_resources');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/article.svg');?>" alt="">Article & Tutorials</a> </li>
-																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('latest_news');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/immigration-news.svg');?>" alt="">Latest Immigration News</a> </li>
+																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('free-resources');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/article.svg');?>" alt="">Article & Tutorials</a> </li>
+																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('latest-news');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/immigration-news.svg');?>" alt="">Latest Immigration News</a> </li>
 																<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/assessment-tools/english-level-assessment" target="_blank"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/english-level-assesment.svg');?>" alt="">English Level Assessment</a> </li>
 																<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/assessment-tools/visa-assessment" target="_blank"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/study-visa-eligibility.svg');?>" alt="">Study Visa Eligibility</a> </li>
 																<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/assessment-tools/crs-calculator" target="_blank"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/crs-calculator.svg');?>" alt="">CRS Calculator</a> </li>

@@ -7,7 +7,7 @@
 				$date=date_create($d->news_date);
 				$news_date = date_format($date,"M d, Y");
 			?>
-			<li><a href="<?php echo base_url('news_article/'.$d->URLslug);?>"><?php echo $d->title;?><p><?php echo $news_date;?></p></a></li>
+			<li><a href="<?php echo base_url('news-article/'.$d->URLslug);?>"><?php echo $d->title;?><p><?php echo $news_date;?></p></a></li>
 		<?php } ?>
 		</ul>
 </div>
@@ -16,7 +16,7 @@
 	<h3>Topics in News</h3>
 	<ul>
 		<?php foreach ($newsTag->error_message->data as $d){ ?>
-			<li><a href="<?php echo base_url('latest_news/'.base64_encode($d->tags));?>"><?php echo $d->tags;?></a></li>
+			<li><a href="<?php echo base_url('latest-news/'.base64_encode($d->tags));?>"><?php echo $d->tags;?></a></li>
 		<?php } ?>	
 	</ul>
 	</div>

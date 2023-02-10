@@ -23,7 +23,7 @@ class Get_service_data_by_id extends REST_Controller {
             $data['error_message'] = [ "success" => 2, "message" => UNAUTHORIZED, "data"=>''];
         }else{            
             $id = $this->input->get_request_header('SERVICE_ID');
-            $bData =  $this->Enquiry_purpose_model->get_enquiry_purpose($id);
+            $bData =  $this->Enquiry_purpose_model->get_enquiry_purposefront($id);
             if(!empty($bData)){
               $data['error_message'] = [ "success" => 1, "message" => "success", "data"=> $bData];    
             }else{

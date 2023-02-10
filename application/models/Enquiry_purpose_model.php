@@ -16,6 +16,11 @@
     /*
      * Get enquiry_purpose_master by id
      */
+    function get_enquiry_purposefront($id)
+    {
+        return $this->db->get_where('enquiry_purpose_masters',array('URLslug'=>$id))->row_array();
+    }
+
     function get_enquiry_purpose($id)
     {
         return $this->db->get_where('enquiry_purpose_masters',array('id'=>$id))->row_array();
@@ -46,10 +51,11 @@
 
     function get_all_enquiry_purpose_active(){       
         
-        $this->db->select('enquiry_purpose_masters.id,enquiry_purpose_name,about_service,image');
+        $this->db->select('enquiry_purpose_masters.id,enquiry_purpose_name,about_service,image,URLslug');
         $this->db->from('enquiry_purpose_masters');    
         $this->db->join('`enquiry_purpose_division`', 'enquiry_purpose_division.enquiry_purpose_id= enquiry_purpose_masters.id', 'left');
         $this->db->where(array('active'=>1,'division_id'=>2));
+        $this->db->where('URLslug IS NOT NULL');
         $this->db->order_by('enquiry_purpose_name', 'ASC');
          return $this->db->get()->result_array();
        // print_r($this->db->last_query());exit;

@@ -14,7 +14,7 @@
 							</span>
 						</div>
 						<?php if($uri){ ?>
-						<span class="lt-news-reset"><a href="<?php echo base_url('latest_news');?>" ><i class="fa fa-refresh text-red"></i> Reset all news</a></span>
+						<span class="lt-news-reset"><a href="<?php echo base_url('latest-news');?>" ><i class="fa fa-refresh text-red"></i> Reset all news</a></span>
 						<?php } ?>
 					</div>
 
@@ -30,7 +30,7 @@
                         }
 					//	echo $d->URLslug;
 					?>
-					<a href="<?php echo base_url('news_article/'.$d->URLslug);?>"> 
+					<a href="<?php echo base_url('news-article/'.$d->URLslug);?>"> 
 						<div class="news-panel-info">
 							<div class="disc">
 								<img src="<?php echo base_url('uploads/news/'.$d->card_image);?>" alt="" title="" class="pull-right img-responsive ml-15">

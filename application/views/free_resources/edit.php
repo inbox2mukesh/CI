@@ -29,6 +29,7 @@ border-radius: 10px;
 		   echo form_open_multipart('adminController/Free_resources/edit/'.$free_resources['id'],$attributes);
 		
 			?>
+			<input type="hidden"  value="<?php echo $free_resources['id'];?>" name="hid_id" id="hid_id"/>
 			<!-- <form action="<?php echo site_url();?>adminController/Free_resources/edit/<?php echo $free_resources['id']?>" method="post" enctype="multipart/form-data" onsubmit="return valiform();"> -->
 			<?php 	
 			    $content_type_id=$this->input->post('content_type_id');
@@ -96,7 +97,14 @@ border-radius: 10px;
 						#pr($time_slots);
 						
 			        ?>
-                    <div class="col-md-12">
+					<div class="col-md-6 margin-bottom-20">
+						<label for="event_title" class="control-label"><span class="text-danger">*</span>Url Slug</label>
+						<div class="form-group">
+						<input type="text" name="URLslug" value="<?php echo ($this->input->post('URLslug') ? $this->input->post('URLslug') : $free_resources['URLslug']); ?>" class="form-control input-ui-100 removeerrmessage allow_url_slug" id="URLslug" placeholder="URL" onKeyPress="return noNumbers(event)" maxlength="140" autocomplete="off" onchange="checkUrl('freeresourse',this.id)" onpaste="return false" />
+						<span class="text-danger URLslug_err"><?php echo form_error('URLslug'); ?></span>
+						</div>
+					</div>	
+                    <div class="col-md-6">
 						<label for="free_resources_test" class="control-label">Test Type<span class="text-danger">*</span></label>
 						<?php
 							foreach ($free_resources_test_list as $c) {
@@ -301,7 +309,7 @@ border-radius: 10px;
 			</div>
           	<div class="box-footer">
 				<div class="col-md-12">
-            	<button type="submit" class="btn btn-danger rd-20">
+            	<button type="submit" class="btn btn-danger rd-20 submit_btn">
             		<i class="fa fa-check"></i> <?php echo SAVE_LABEL;?>
             	</button>
 				</div>

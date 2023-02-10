@@ -30,7 +30,7 @@ class Free_resources extends MY_Controller
     }
     function free_resource_post($id = 0)
     {
-        $id = base64_decode($id);
+        //$id = base64_decode($id);
         $headers1 = array(
             'API-KEY:' . WOSA_API_KEY,
             'ID:' . $id,
@@ -54,6 +54,7 @@ class Free_resources extends MY_Controller
             'API-KEY:' . WOSA_API_KEY,
             'ID:' . $id,
         );
+        
         $data['FREE_RESOURCE_SECTION'] = json_decode($this->_curlGetData(base_url(FREE_RESOURCE_SECTION), $headers));
         $this->load->view('aa-front-end/includes/header', $data);
         $this->load->view('aa-front-end/free_resources_post');

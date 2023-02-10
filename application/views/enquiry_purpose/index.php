@@ -19,6 +19,7 @@
                         <th><?php echo SR;?></th>
 						<th>Enquiry Purpose</th>
 						<th>Division</th>
+						<th>URL Slug</th>
 						<th><?php echo STATUS;?></th>
                         <th><?php echo ACTION;?></th>
                     </tr>
@@ -48,6 +49,7 @@
                             echo rtrim($div_name,', ');
 							?>
 						</td>
+                        <td><?php echo $p['URLslug']; ?></td>
                         <td>
                             <?php 
                             if($p['active']==1){
