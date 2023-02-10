@@ -25,7 +25,7 @@ body.modal-open + .modal-open{overflow: hidden;padding: 0px!important;}
 .w-container{width: 1170px;}
 .w-menu-container{width: 1170px!important;padding: 0px!important;margin: auto;}}
 .w-menu-container{align-items: center;display: flex;left: 0;padding: 0 52px!important;position: relative;right: 0;transition: .3s ease;width: 100%!important;}
-.wosa-header{position: relative;-moz-box-shadow: 0px 0px 8px #a9a9a9;-webkit-box-shadow: 0px 0px 8px #a9a9a9;box-shadow: 0px 0px 8px #a9a9a9;z-index: 1;}
+.wosa-header{position: relative;-moz-box-shadow: 0px 0px 8px #a9a9a9;-webkit-box-shadow: 0px 0px 8px #a9a9a9;box-shadow: 0px 0px 8px #a9a9a9;z-index:99;}
 .top-hdr{background-color: #073255;padding:1px;display: flex;}
 .top-hdr .lt-news{float: left;width:80%;letter-spacing: 2px;padding-left: 21%;}
 .top-hdr .rt-btns{float: right;width:20%;}.top-hdr .rt-btns ul{padding: 0px;margin: 0px;text-align: right;}
