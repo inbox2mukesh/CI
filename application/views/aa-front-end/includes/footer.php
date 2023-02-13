@@ -36,16 +36,16 @@
 				<h4>More</h4>
 				<ul>
 				<?php if(DEFAULT_COUNTRY!=13) { ?> 
-					<li><a href="<?php echo base_url('why_canada');?>">Why Canada?</a></li>
+					<li><a href="<?php echo base_url('why-canada');?>">Why Canada?</a></li>
 					<?php }?>
 					<li><a href="<?php echo base_url('gallery');?>">Image Gallery</a></li>
 					<li><a href="<?php echo base_url('videos');?>">Video Gallery</a></li>
-					<li><a href="<?php echo base_url('contact_us');?>">Contact</a></li>
+					<li><a href="<?php echo base_url('contact-us');?>">Contact</a></li>
 					<li><a href="<?php echo base_url('faq');?>">FAQ</a></li>
 					<?php
 					if(!$this->session->userdata('student_login_data')){
 					?>
-					<li><a href="<?php echo base_url();?>become_agent">Join Agent Network</a></li>
+					<li><a href="<?php echo base_url();?>become-agent">Join Agent Network</a></li>
 					<?php }?>
 				</ul>
 			</div>
@@ -87,7 +87,7 @@
 						<li><a href="tel:+91-9115-017-017"><i class="fa fa fa-phone text-red"></i><?php echo CU_PHONE;?></a></li>
 						<li><a href="mailto:<?php echo CU_EMAIL;?>"><i class="fa fa-envelope-o text-red"></i><?php echo CU_EMAIL;?></a></li>
 					</ul>
-					<div class="terms"><a href="<?php echo base_url();?>term_condition">Terms and Condition</a></div>
+					<div class="terms"><a href="<?php echo base_url();?>term-condition">Terms and Condition</a></div>
 				</div>
 			</div>
 			<div class="col-md-12 web">

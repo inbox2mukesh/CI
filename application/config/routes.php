@@ -18,6 +18,10 @@ $route['latest-news'] = "latest_news";
 $route['visa-services'] = "visa_services";
 $route['online-courses'] = "online_courses";
 $route['practice-packs'] = "practice_packs";
+$route['why-canada'] = "why_canada";
+$route['contact-us'] = "contact_us";
+$route['become-agent'] = "become_agent";
+$route['term-condition'] = "term_condition";
 
 if(CheckEventUrl()){
 	
