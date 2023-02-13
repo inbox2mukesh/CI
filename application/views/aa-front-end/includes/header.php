@@ -114,7 +114,9 @@
 										<div class="header-container">
 											<div class="menu-header-container">
 												<ul id="cd-primary-nav" class="menu">
+												<?php if(DEFAULT_COUNTRY!=13) { ?>
 													<li style="margin-bottom:10px!important;" class="mob-enq-btn no-lg-display" onClick="location.replace('<?php echo base_url('counseling');?>');"><a>Book Counseling</a></li>	
+													<?php }?>
 													<li class="menu-item leave-mouse"> <a href="<?php echo base_url('visa-services');?>">Visa &amp; Immigration Services</a> </li>
 													<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Online coaching</a>
 														<ul class="sub-menu">
