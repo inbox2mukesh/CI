@@ -178,6 +178,7 @@ foreach($xml->url as $x)
 <li><a href="https://westernoverseas.ca/contact-us">Contact</a></li>
 <li><a href="https://westernoverseas.ca/faq">FAQ</a></li>
 <li><a href="https://westernoverseas.ca/become-agent">Join Agent Network</a></li>
+<li><a href="https://westernoverseas.ca/term-condition">Terms and Condition</a></li>
 
  
 </ul>  

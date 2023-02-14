@@ -12,16 +12,7 @@
 													echo "active-text";
 												} ?>">Dashboard</a>
 </li>
-<li class="list-item"><a href="#" class="link-arrow text-uppercase link-current">Practice Portal</a>
-<ul class="list-unstyled list-hidden mt-5">
-<div class="submenu link-current">
-<ul>
-<li><a href="https://www.westernoverseas.ca/practice/" target="_blank">IELTS Practice Portal</a></li>
-<li><a href="https://westernoverseas.org/login" target="_blank">PTE Practice Portal</a></li>
-</ul>
-</div>
-</ul>
-</li>
+<li><a href="https://practice.western-overseas.com" class="text-uppercase" target="_blank">Practice Portal</a></li>
 <?php
 if (count($curPack->error_message->data) > 1) {
 ?>
