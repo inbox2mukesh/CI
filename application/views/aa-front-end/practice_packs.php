@@ -13,7 +13,8 @@
       <div class="row">
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
-            <select class="selectpicker form-control" data-live-search="true" name="test_module_id" id="test_module_id" onchange="disableEnablepgm(this.value),GetDuation(this.value),GetOnlinePack();">
+            <!-- //disableEnablepgm(this.value),GetDuation(this.value),GetOnlinePack(); -->
+            <select class="selectpicker form-control" data-live-search="true" name="test_module_id" id="test_module_id" onchange="Getprograme(this.value)">
               <option value="">Select Course</option>
               <?php
               foreach ($allppTestModule->error_message->data as $p) {
@@ -28,10 +29,17 @@
             <select class="selectpicker form-control" data-live-search="true" name="programe_id" id="programe_id" onchange="GetDuation(this.value);GetOnlinePack();Getcategory();">
               <option value="">Select Program</option>
               <?php
-              foreach ($allppCoursePgm->error_message->data as $p) {
+             /* foreach ($allppCoursePgm->error_message->data as $p) {
               ?>
                 <option value="<?php echo $p->programe_id; ?>"><?php echo $p->programe_name; ?></option>
-              <?php } ?>
+              <?php } */?>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="form-group">
+            <select class="selectpicker form-control catOption" name="category_id" id="category_id" onchange="GetOnlinePack();" disabled="disabled">
+              <option value=''>Select Module</option>
             </select>
           </div>
         </div>
@@ -47,13 +55,7 @@
             </select>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="form-group">
-            <select class="selectpicker form-control catOption" name="category_id" id="category_id" onchange="GetOnlinePack();" disabled="disabled">
-              <option value=''>Select Module</option>
-            </select>
-          </div>
-        </div>
+       
 
         <div class="col-md-12" id="flter-btm-info">
           <span class="text-left font-weight-600 pull-left loader_load_data_m " id="up"> <i class="fa fa-spinner fa-spin mr-10"></i> <span class="loader_load_data">Showing All | Adjust Filters to change the view</span></span>
@@ -479,6 +481,33 @@
   }
 </script>
 <script type="text/javascript">
+  function Getprograme()
+  {
+    var test_module_id = $("#test_module_id").val();
+    $.ajax({
+      url: "<?php echo site_url('online_courses/GetPrograme'); ?>",
+      async: true,
+      type: 'post',
+      data: {
+        test_module_id: test_module_id,
+        
+      },
+      success: function(data) {
+        //alert(data)
+        $('#programe_id').html(data);
+        $('#programe_id').selectpicker('refresh');
+        Getcategory()
+        /* Getcategory()
+        GetDuation();
+        GetOnlinePack();
+        GetCourseType();
+        $('#category_id').prop('disabled', false);
+        $('#course_type').prop('disabled', false);
+        $('#duration').prop('disabled', false); */
+      },
+      beforeSend: function() {},
+    });
+  }
   function disableEnablepgm(test_module_id) {
     //alert('k')
     $('#duration').prop('selectedIndex', 0);

@@ -233,6 +233,10 @@ margin-bottom: 5px;
 							
 				            $total_section=$classroom_documents['total_section'];
 				        }
+						if($total_section =="")
+						{
+					   $total_section=0;	
+						}
 					?>
 					<input type="hidden" name="total_section" id="total_section" value="<?php echo  $total_section?>">
 					<div id="EmployeeTierId">
@@ -440,6 +444,10 @@ $('#classroomdoc_edit_form').on('submit', function(e){
 			//return true;
 		}
 		var total_section=$("#total_section").val();
+		if(total_section == 0)
+		{
+			flag=0;
+		}
 		if(total_section  == 0)
 		{
 			flag=0;

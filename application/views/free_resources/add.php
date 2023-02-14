@@ -147,6 +147,10 @@
 					<?php 
 					
 					 $total_section=$this->input->post('total_section');
+					 if($total_section =="")
+					 {
+					$total_section=0;	
+					 }
 					?>
 					<input type="hidden" name="total_section" id="total_section" value="<?php echo  $total_section?>">
 					<div id="EmployeeTierId">
@@ -332,7 +336,11 @@ $('#freeresourse_add_form').on('submit', function(e){
 			//return true;
 		}
 
-		var total_section=$("#total_section").val();
+		var total_section=$("#total_section").val();		
+		if(total_section == 0)
+		{
+			flag=0;
+		}
 		for (i = 1; i <= total_section; i++) 
 		{
 			var section_no1=$('#section_no'+i).val();
@@ -387,7 +395,8 @@ $('#freeresourse_add_form').on('submit', function(e){
 		   }
 		 } */
 
-		}		
+		}	
+		
 	
 		if(flag == 1)
 		{

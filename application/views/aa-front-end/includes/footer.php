@@ -114,7 +114,7 @@
 
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/fixed-footer.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/jquery-2.2.4.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
-<script src="<?php echo base_url(DESIGN_VERSION_F.'/js/news-ticker.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
+<script src="<?php echo site_url(DESIGN_VERSION_F . '/js/marquee-ticker.js?v='.JS_CSS_VERSION_F); ?>"  type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/bootstrap.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript" ></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/custom.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/bootstrap-select.min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
@@ -127,12 +127,13 @@
 <!--Added by Vikram 6 dec 2022 -->
 <script src="<?php echo site_url(DESIGN_VERSION . '/js/sweetalert2.all.min.js?v='.JS_CSS_VERSION_F); ?>"></script>
 
-
 <script type="text/javascript">
-		jQuery(document).ready(function($){
-			$('#newsTicker').breakingNews();
-		});
-	</script>
+	$(function() {
+		$('.marquee-news-ticker').jConveyorTicker({
+		force_loop: true
+		}); 
+	});
+  </script>
 
 
 <?php if(ENVIRONMENT=="production" or ENVIRONMENT=="production_testing"){ ?>

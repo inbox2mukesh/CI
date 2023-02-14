@@ -20,8 +20,10 @@
     <link href="<?php echo base_url(DESIGN_VERSION_F.'/css/bootstrap-select.css?v='.JS_CSS_VERSION_F);?>" rel="stylesheet" type="text/css" media="all">
     <link href="<?php echo base_url(DESIGN_VERSION_F.'/css/datepicker.css?v='.JS_CSS_VERSION_F);?>" rel="stylesheet" type="text/css" media="all">
     <link href="<?php echo base_url(DESIGN_VERSION_F.'/css/dash-layout.css?v='.JS_CSS_VERSION_F);?>" rel="stylesheet" type="text/css" media="all">
-    <link href="<?php echo base_url(DESIGN_VERSION_F.'/css/wosa-header.css?v='.JS_CSS_VERSION_F);?>" rel="stylesheet" type="text/css" media="all">   
+    <link href="<?php echo base_url(DESIGN_VERSION_F.'/css/wosa-header.css?v='.JS_CSS_VERSION_F);?>" rel="stylesheet" type="text/css" media="all">  
+	<link href="<?php echo base_url(DESIGN_VERSION_F.'/css/marquee-ticker.css?v='.JS_CSS_VERSION_F);?>" rel="stylesheet" type="text/css" media="all">  
     <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/jquery-min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
+
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200&display=swap" rel="stylesheet">
 	<!--Added by Vikram 6 dec 2022 -->
     <?php echo callCommonJSFileVariables(); ?>
@@ -29,11 +31,11 @@
 	    body {opacity: 0}
 	    body.active {opacity: 1}
 
-		.news-headline {overflow: hidden;font-size: 12px;display: list-item;height: 26px;line-height: 26px;}
+		/* .news-headline {overflow: hidden;font-size: 12px;display: list-item;height: 26px;line-height: 26px;}
 	    .news-headline span {margin: 5px 0px;line-height: 23px;}
 	    .news-headline span a {color: #fff;}
 	    .news-headline span a span.date {font-style: italic;font-weight: bold;font-size: .70rem;margin-left: 10px;}
-	    .news-headline span.spacer {color: rgb(255, 255, 255, 0.3); margin: 0px 10px;}
+	    .news-headline span.spacer {color: rgb(255, 255, 255, 0.3); margin: 0px 10px;} */
 		/* .lt-news ul{  margin:0px 0px 0px 0px;padding: 0;height:20px;overflow: hidden;white-space: nowrap;display: inline-block;width:100%;}
 		.lt-news li{  list-style: none;margin:0px;padding:0;display: inline-block;line-height:20px;vertical-align: middle;color:#fff;font-size:13px!important;}
 		.lt-news li a{color:#fff;font-size:13px!important;}
@@ -62,32 +64,22 @@
 				<div class="top-hdr">
 					<div class="w-menu-container">
 						<div class="lt-news">
-<!-- <ul class="ticker">  
-										<?php
-											foreach ($newsData->error_message->data as $d){
-											$date=date_create($d->news_date);
-											$news_date = date_format($date,"M d, Y");
-											$news_id = $d->id;
-										?>
-											<li><a href="<?php echo base_url('news-article/index/'.$news_id);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
-												</li>
-										<?php }?>
-									</ul> -->
-							<div class="breaking-news-ticker bn-effect-scroll bn-direction-ltr" id="newsTicker">
-								<div class="bn-news">
-									<ul class="marquee-clone">
-										<?php
+					
+							<div class="marquee-news-ticker">
+									<ul>
+											<?php
 											foreach ($newsData->error_message->data as $d){
 											$date=date_create($d->news_date);
 											$news_date = date_format($date,"M d, Y");
 											$news_id = $d->id;											
-										?>
-											<li><a href="<?php echo base_url('news-article/'.$d->URLslug);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
-												</li>
-										<?php }?>
+											?>
+											<li><span><a href="<?php echo base_url('news-article/'.$d->URLslug);?>"> <?php echo $d->title;?> <span class="date"><?php echo $news_date;?></span></a><span class="bn-seperator">|</span>
+											</span></li>
+											<?php }?>
+
 									</ul>
-								</div>
 							</div>
+					
 						</div>
 								<div class="rt-btns mob-display-none">
 									<ul>
