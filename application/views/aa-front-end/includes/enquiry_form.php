@@ -137,7 +137,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
 							<div class="reg-otp-info text-center text-white ">
 								<h3>ENTER VERIFICATION CODE</h3>
 								<p class="mb-10 font-12">Verification Code has been sent on your email.</p>
-									<div class="form-group">
+									<div class="form-group" id="formsection">
 									
 									<div class="subs-group" id="main_sec">
 										<input type="text" class="form-control allow_numeric removeerrmessage" name="otp" id="otp" maxlength="4" placeholder="Please Enter 4-digit Verification Code" autocomplete="off">
@@ -146,7 +146,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
 									<div class="validation hide otp_err" > Wrong Verification Code!</div>
 									<div class="countdown" style="text-align: left;margin-top: 5px"></div>
 									<a href="javascript:void(0);" class="hide" style="float: left;color: #fdfdfd;margin-top: 5px;" onclick="resendOTP()" btn-border="" id="enq_resend_btn">Resend OTP?</a>
-									<div class="proBtn3 " style="display:none;    text-align: initial;">Please wait....</div>
+									<div class="proBtnresend hide" style="text-align: initial;">Please wait....</div>
 									</div>
 									<div class="hide font-12 col-md-12 reg_otp_err alert alert-success alert-dismissible" id="enq_reg_opt_success" role="alert"><strong>SUCCESS:</strong>	
                   <span id="enq_reg_opt_success_message"> </span>
@@ -191,14 +191,15 @@ $(".hide-btn").click(function()
         seconds = (seconds < 0) ? 59 : seconds;
         seconds = (seconds < 10) ? '0' + seconds : seconds;
         $('.countdown').html("");
-        $('#enq_resend_btn').removeClass('hide');
+        $('#enq_resend_btn').removeClass('hide');     
+       
         $('#reg_opt_success').addClass('hide');
         $('.reg_otp_err').addClass('hide');
         $('#reg_opt_success').html('');
       } else {
         seconds = (seconds < 0) ? 59 : seconds;
         seconds = (seconds < 10) ? '0' + seconds : seconds;
-
+        $('.proBtnresend').addClass("hide");
         minutes = (minutes = 0) ? '0' + minutes : minutes;
         $('.countdown').html('<i class="fa fa-clock-o" aria-hidden="true"></i> 00:' + seconds);
         timer2 = minutes + ':' + seconds;
@@ -225,11 +226,10 @@ $(".hide-btn").click(function()
         otp: otp,
         enquiry_id: enquiry_id
       },
-      success: function(response) {       
+      success: function(response) {              
         if (response.status == 1) 
-        {
-          
-          $('#main_sec').addClass('hide');
+        {          
+          $('#formsection').addClass('hide');
           $('#enq_reg_opt_success').removeClass('hide');
           $('#enq_reg_opt_success_message').text('Verification Code sent on your email. Please Enter Verification Code');
           $('#enq_reg_opt_danger').addClass('hide');
@@ -247,7 +247,7 @@ $(".hide-btn").click(function()
           $('#country_code_qnform').val('');
           $('#message_qnform').val('');
           setTimeout(function() {
-            location.reload();
+           location.reload();
             }, 10000);
           //window.location.href='<?php echo current_url(); ?>'
         } 
@@ -267,6 +267,7 @@ $(".hide-btn").click(function()
   }
   
    function validate_enq() {  
+      
     var flag = 1;
     var letters = /^[A-Za-z ]+$/;
     var filter = /^[0-9-+]+$/;
@@ -363,7 +364,8 @@ $(".hide-btn").click(function()
       return false;
     }
     else {    
-    
+      $('.enqBtn').prop('disabled', true);
+      $('.enqBtn').text('Please wait...'); 
     $.ajax({
       url: "<?php echo site_url('enquiry/enquiry_submit'); ?>",
       type: 'post',
@@ -378,10 +380,10 @@ $(".hide-btn").click(function()
         message: message
       },
       success: function(response) { 
-        //$('.proBtn').hide();
-       $('.enqBtn').prop('disabled', true);
+        
         if (response.status == 1) {
-          $('.enqBtn').prop('disabled', true);
+          $('.enqBtn').prop('disabled', false);
+          $('.enqBtn').text('Send'); 
           $('.finalMsg').html('<div class="alert alert-success alert-dismissible">Enquiry sent successfully. Please check your Email for more details.<a href="#" class="alert-link"></a>.</div>');
           $('.otp_form').hide();
           $('.otpMsg').hide();
@@ -402,6 +404,8 @@ $(".hide-btn").click(function()
         } 
         else if(response.status == 2)
         {
+          $('.enqBtn').prop('disabled', true);
+          $('.enqBtn').text('Please wait...'); 
           optcountdown();
           $('#enquiry_id').val(response.enquiry_id);
           $('#enqmodal-OTP').modal('show');
@@ -413,6 +417,8 @@ $(".hide-btn").click(function()
           $('.otpMsg').html('<div style="margin-top:-5px" class="alert alert-info alert-dismissible">Verification code has been sent on your email.<a href="#" class="alert-link"></a>.</div>'); */
         }
         else {
+          $('.enqBtn').prop('disabled', false);
+          $('.enqBtn').text('Send'); 
           $('.finalMsg').html('<div class="alert alert-danger alert-dismissible">OOps..Failed to send verification code. Please try again!<a href="#" class="alert-link"></a>.</div>');
         }
 
@@ -426,6 +432,7 @@ $(".hide-btn").click(function()
   }
   function resendOTP() {
     $('#enq_resend_btn').addClass("hide");
+    $('.proBtnresend').removeClass("hide");    
     var enquiry_id = $("#enquiry_id").val();
     var resend_for = 'students_enquiry';
     $.ajax({
