@@ -15,15 +15,15 @@
 
 
 
-@media screen and (min-width:1366px) and (max-width:1439px){
+@media screen and (min-width:1366px) and (max-width:1440px){
     .pp-scroll{max-height:265px!important;min-height:265px!important;}
     .sl-form{top:-38vw;}
 }
 
 
-@media screen and (min-width:1440px) and (max-width:2560px){
+@media screen and (min-width:1441px) and (max-width:2560px){
     .pp-scroll{max-height:265px!important;min-height:265px!important;}
-    .sl-form{top:-38vw;}
+    .sl-form{top:-35vw;}
 }
 
 
