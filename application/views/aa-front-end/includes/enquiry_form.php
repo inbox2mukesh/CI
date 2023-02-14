@@ -8,11 +8,15 @@ if(isset($this->session->userdata('student_login_data')->id)){
     $disabled_sel="";
   }
   ?>
+ 
+
+  
 
   <div class="qury-form-row">
-    <div class="font-20 text-center mt-0 text-uppercase">
+  <div class="font-20 text-center mt-0 text-uppercase">
       Quick <span class="text-theme-color-2 font-weight-600">Enquiry</span>
     </div>
+   
     <div class="form-group col-md-6 col-sm-6">
       <label>First Name<span class="text-red">*</span></label>
       <input type="text" name="fname" id="fname_qnform" class="fstinput form-control allow_alphabets length_validate" placeholder="First Name" value="<?php if(isset($this->session->userdata('student_login_data')->fname)) {   echo $this->session->userdata('student_login_data')->fname; } else { echo "";}?>" autocomplete="off" <?php echo $readOnly;?> maxlength="30">
@@ -93,12 +97,12 @@ if(isset($this->session->userdata('student_login_data')->id)){
     </div>
     <input type="hidden" name="enquiry_id" id="enquiry_id" class="form-control">
     <div class="col-sm-12 small otpMsg"></div>
-    <div class="col-sm-12 otp_form" style="display: none;">
+   <!--  <div class="col-sm-12 otp_form" style="display: none;">
       <div class="form-group mb-10">
         <input name="otp" id="otp" class="fstinput form-control" type="text" placeholder="Enter Verification code" aria-required="true" maxlength="4">
         <span class="valid-validation small otp_err"></span>
       </div>
-    </div>
+    </div> -->
     <div class="text-right col-md-12">
       <button class="enqBtn btn btn-red" onclick="return validate_enq();">SEND</button>
       <div class="proBtn" style="display: none;">
@@ -120,19 +124,92 @@ if(isset($this->session->userdata('student_login_data')->id)){
       <div class="small finalMsg"></div>
     </div>
   </div>
+    </div>
   </div>
    </div>
+
+   <div class="reg-otp" >
+		<div class="modal fade" id="enqmodal-OTP" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="reg-modal clearfix"> <span class="cross-btn pull-right text-white hide-btn" data-dismiss="modal"><i class="fa fa-close font-20"></i></span>
+							<div class="reg-otp-info text-center text-white ">
+								<h3>ENTER VERIFICATION CODE</h3>
+								<p class="mb-10 font-12">Verification Code has been sent on your email.</p>
+									<div class="form-group">
+									
+									<div class="subs-group" id="main_sec">
+										<input type="text" class="form-control allow_numeric removeerrmessage" name="otp" id="otp" maxlength="4" placeholder="Please Enter 4-digit Verification Code" autocomplete="off">
+										 <button class="btn btn-red btn-subs"  onclick="return verifyNsubmit(this.value);" id="verifyBtn" type="button">Verify</button>			
+									</div>
+									<div class="validation hide otp_err" > Wrong Verification Code!</div>
+									<div class="countdown" style="text-align: left;margin-top: 5px"></div>
+									<a href="javascript:void(0);" class="hide" style="float: left;color: #fdfdfd;margin-top: 5px;" onclick="resendOTP()" btn-border="" id="enq_resend_btn">Resend OTP?</a>
+									<div class="proBtn3 " style="display:none;    text-align: initial;">Please wait....</div>
+									</div>
+									<div class="hide font-12 col-md-12 reg_otp_err alert alert-success alert-dismissible" id="enq_reg_opt_success" role="alert"><strong>SUCCESS:</strong>	
+                  <span id="enq_reg_opt_success_message"> </span>
+									</div>
+										<div class="hide font-12 col-md-12 alert alert-danger alert-dismissible reg_otp_err " id="enq_reg_opt_danger" role="alert">
+									<strong>WRONG:</strong>Ohh.Wrong Verification Code entered!. Please try again!
+									</div>
+									
+							</div>
+							<!--End Login Popup-->
+						</div>
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+
+
 
 <script src="<?php echo site_url('resources-f/'); ?>js/date-mask.js"></script>
 <script id="rendered-js">
   $(".dob_mask:input").inputmask();
 </script>
 <script type="text/javascript">
-  
+
+$(".hide-btn").click(function()
+{
+  location.reload();
+});
+  function optcountdown() {
+    var timer2 = "0:30";
+    var interval = setInterval(function() {
+      var timer = timer2.split(':');
+      //by parsing integer, I avoid all extra string processing
+      var minutes = parseInt(timer[0], 10);
+      var seconds = parseInt(timer[1], 10);
+      --seconds;
+      minutes = (seconds < 0) ? --minutes : minutes;
+      if (seconds <= 0) {
+        clearInterval(interval);
+        seconds = (seconds < 0) ? 59 : seconds;
+        seconds = (seconds < 10) ? '0' + seconds : seconds;
+        $('.countdown').html("");
+        $('#enq_resend_btn').removeClass('hide');
+        $('#reg_opt_success').addClass('hide');
+        $('.reg_otp_err').addClass('hide');
+        $('#reg_opt_success').html('');
+      } else {
+        seconds = (seconds < 0) ? 59 : seconds;
+        seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+        minutes = (minutes = 0) ? '0' + minutes : minutes;
+        $('.countdown').html('<i class="fa fa-clock-o" aria-hidden="true"></i> 00:' + seconds);
+        timer2 = minutes + ':' + seconds;
+      }
+    }, 1000);
+  }
+
   function verifyNsubmit() {
     var otp = $("#otp").val();
     var enquiry_id = $("#enquiry_id").val();
-    //otp
+    //otp   
     if (otp == '') {
       //$("#otp").focus();
       $(".otp_err").text("Please enter correct verification code!");
@@ -140,6 +217,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
     } else {
       $(".otp_err").text('');
     }
+
     $.ajax({
       url: "<?php echo site_url('enquiry/verify_otp'); ?>",
       type: 'post',
@@ -148,14 +226,15 @@ if(isset($this->session->userdata('student_login_data')->id)){
         enquiry_id: enquiry_id
       },
       success: function(response) {       
-        $('.proBtn2').hide();
-        $('.otp_form').show();
-        if (response.status == 1) {
-          $('.finalMsg').html('<div class="alert alert-success alert-dismissible"><a href="<?php echo site_url(''); ?>" class="close" data-dismiss="alert" aria-label="close">&times;</a> Verification code verified & enquiry sent successfully. Please check your email for more details.<a href="#" class="alert-link"></a>.</div>');
-          $('.otp_form').hide();
-          $('.otpMsg').hide();
-        
-          <?php
+        if (response.status == 1) 
+        {
+          
+          $('#main_sec').addClass('hide');
+          $('#enq_reg_opt_success').removeClass('hide');
+          $('#enq_reg_opt_success_message').text('Verification Code sent on your email. Please Enter Verification Code');
+          $('#enq_reg_opt_danger').addClass('hide');
+          $('.enqBtn').prop('disabled', true);
+         <?php
          if(empty($this->session->userdata('student_login_data')))
          { ?>
           $('#fname_qnform').val('');
@@ -167,22 +246,27 @@ if(isset($this->session->userdata('student_login_data')->id)){
           $('#enquiry_purpose_id').val('');
           $('#country_code_qnform').val('');
           $('#message_qnform').val('');
+          setTimeout(function() {
+            location.reload();
+            }, 10000);
           //window.location.href='<?php echo current_url(); ?>'
         } 
         else if(response.status == 2){
-          $('.finalMsg').html('<div class="alert alert-danger alert-dismissible"><a href="<?php echo site_url(''); ?>" class="close" data-dismiss="alert" aria-label="close">&times;</a> OOps..error occur. Please try again!<a href="#" class="alert-link"></a>.</div>');
+          $('#otp').val('');
+          $('#enq_reg_opt_success').addClass('hide');
+          $('#enq_reg_opt_danger').removeClass('hide');         
         }
         else {
-          $('.finalMsg').html('<div class="alert alert-danger alert-dismissible"><a href="<?php echo site_url(''); ?>" class="close" data-dismiss="alert" aria-label="close">&times;</a> OOps..Wrong verification code entered. Please try again!<a href="#" class="alert-link"></a>.</div>');
+          $('#otp').val('');
+           $('#enq_reg_opt_success').addClass('hide');
+          $('#enq_reg_opt_danger').removeClass('hide');         
         }
       },
-      beforeSend: function() {
-        $('.proBtn2').show();
-        $('.otp_form').hide();
-      }
+      beforeSend: function() { }
     });
   }
-  function validate_enq() {
+  
+   function validate_enq() {  
     var flag = 1;
     var letters = /^[A-Za-z ]+$/;
     var filter = /^[0-9-+]+$/;
@@ -294,9 +378,10 @@ if(isset($this->session->userdata('student_login_data')->id)){
         message: message
       },
       success: function(response) { 
-        $('.proBtn').hide();
-        $('.enqBtn').hide();
+        //$('.proBtn').hide();
+       $('.enqBtn').prop('disabled', true);
         if (response.status == 1) {
+          $('.enqBtn').prop('disabled', true);
           $('.finalMsg').html('<div class="alert alert-success alert-dismissible">Enquiry sent successfully. Please check your Email for more details.<a href="#" class="alert-link"></a>.</div>');
           $('.otp_form').hide();
           $('.otpMsg').hide();
@@ -317,11 +402,15 @@ if(isset($this->session->userdata('student_login_data')->id)){
         } 
         else if(response.status == 2)
         {
-          $('.enqForm').hide();
+          optcountdown();
+          $('#enquiry_id').val(response.enquiry_id);
+          $('#enqmodal-OTP').modal('show');
+          
+         /*  $('.enqForm').hide();
           $('.otp_form').show();
           $('.enqBtn').hide();
           $('#enquiry_id').val(response.enquiry_id);
-          $('.otpMsg').html('<div style="margin-top:-5px" class="alert alert-info alert-dismissible">Verification code has been sent on your email.<a href="#" class="alert-link"></a>.</div>');
+          $('.otpMsg').html('<div style="margin-top:-5px" class="alert alert-info alert-dismissible">Verification code has been sent on your email.<a href="#" class="alert-link"></a>.</div>'); */
         }
         else {
           $('.finalMsg').html('<div class="alert alert-danger alert-dismissible">OOps..Failed to send verification code. Please try again!<a href="#" class="alert-link"></a>.</div>');
@@ -336,6 +425,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
   }
   }
   function resendOTP() {
+    $('#enq_resend_btn').addClass("hide");
     var enquiry_id = $("#enquiry_id").val();
     var resend_for = 'students_enquiry';
     $.ajax({
@@ -347,16 +437,22 @@ if(isset($this->session->userdata('student_login_data')->id)){
       },
       success: function(response) {
        
-        $('.proBtn3').hide();
+       // $('.proBtn3').hide();
         if (response.status == 1) {
-          $('.otpMsg').show();
-          $('.otpMsg').html('<div class="alert alert-info alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Verification code resent on your email. Please enter.<a href="#" class="alert-link"></a>.</div>');
+          optcountdown();
+          $('#reg_opt_success').removeClass('hide');
+          $('#reg_opt_danger').addClass('hide');
+          $('#enq_reg_opt_success').removeClass('hide');
+          $('#enq_reg_opt_success_message').text('Verification Code Resent on your email. Please Enter Verification Code');
+          $('#enq_reg_opt_danger').addClass('hide');
+          
         } else {
-          $('.otpMsg').hide();
+          $('#enq_reg_opt_success').addClass('hide');
+          $('#enq_reg_opt_danger').addClass('hide');
         }
       },
       beforeSend: function() {
-        $('.proBtn3').show();
+      //  $('.proBtn3').show();
       }
     });
   }

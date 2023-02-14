@@ -82,7 +82,7 @@
         ');
         $this->db->from('free_resources fr');
         $this->db->join('content_type_masters ctm', 'ctm.id= fr.content_type_id');
-       
+        $this->db->where('URLslug IS NOT NULL');
         $this->db->where('fr.active', 1);
         $this->db->order_by('fr.id', 'DESC');
         $this->db->limit(12);
@@ -458,6 +458,7 @@
         $this->db->from('free_resources fr');
         $this->db->join('content_type_masters ctm', 'ctm.id= fr.content_type_id');
         $this->db->where('fr.active', 1);
+      
         $this->db->order_by('fr.id', 'DESC');
         $this->db->limit(3);
         return $this->db->get()->result_array();

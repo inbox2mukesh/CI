@@ -68,7 +68,7 @@ border-radius: 10px;
 					  <div class="col-md-4"  id="amount" >
 						<label for="amount" class="control-label">Price<span class="text-danger">*</span></label>
 						<div class="form-group">
-                            <input type="text" name="amount" value="<?php echo $amount ?>" class="form-control allow_numeric numeric_without_zero removeerrmessage" id="amount" />
+                            <input type="text" name="amount" value="<?php echo $amount ?>" class="form-control allow_numeric numeric_without_zero removeerrmessage" id="amount" maxlength="5" />
 							<span class="text-danger amount_err"><?php echo form_error('amount');?></span>
 							
 						</div>
@@ -86,7 +86,7 @@ border-radius: 10px;
 					<div class="col-md-4" id="duration" >
 						<label for="duration" class="control-label">Duration(In Minutes)<span class="text-danger">*</span></label>
 						<div class="form-group">
-                            <input type="text" name="duration" value="<?php echo $counseling_session['duration'] ?>" class="form-control allow_numeric numeric_without_zero removeerrmessage" id="duration" />
+                            <input type="text" name="duration" value="<?php echo $counseling_session['duration'] ?>" class="form-control allow_numeric numeric_without_zero removeerrmessage" id="duration" maxlength="3" />
 							<span class="text-danger duration_err"><?php echo form_error('duration');?></span>
 							
 						</div>

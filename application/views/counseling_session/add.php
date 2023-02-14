@@ -78,9 +78,10 @@
 					
 					
 					<div class="col-md-6" style="line-height: 72px;">
-						<div class="form-group">
-							<label for="active" class="control-label">Active</label>
-							<input type="checkbox" name="active" value="1"  id="active" checked="checked"/>
+						<div class="form-group ">
+						<label for="active" class="control-label">Active</label>
+							<input type="checkbox" name="active" value="1"  id="active" checked="checked" disabled/>
+							
 						</div>
 					</div>
 					
