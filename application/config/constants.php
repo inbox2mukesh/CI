@@ -122,7 +122,7 @@ if(DEFAULT_COUNTRY==38){
 	define('ADMISSION_EMAIL', 'info@westernoverseas.com.au');
 	define('FROM_NAME','Western Overseas Education & Migration Consultant');
 
-	define('TESTINGURL', 'https://westernoverseas.com.au/au-production-testing/adminController/dashboard');
+	define('TESTINGURL', 'https://westernoverseas.com.au/aus-production-testing/adminController/dashboard');
 	define('LIVEURL', 'https://westernoverseas.com.au/adminController/dashboard');
 
 }else if(DEFAULT_COUNTRY==101){
