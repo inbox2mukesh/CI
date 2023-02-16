@@ -127,7 +127,7 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 	
 	
 	<div class="service-card">
-	<a href="<?php echo site_url()?>visa_services"> 
+	<a href="<?php echo site_url()?>visa-services"> 
 			<div class="rt-img up">
 							<div class="video-popup">
 								<img src="<?php echo BASE_URL();?>resources-f/images/immigration-services.webp" alt="">
@@ -175,7 +175,7 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 
 	
 	<div class="service-card">
-	<a href="<?php echo site_url()?>online_courses">
+	<a href="<?php echo site_url()?>online-courses">
 		<div class="rt-img up">
 							<div class="video-popup">
 								<img src="<?php echo BASE_URL();?>resources-f/images/online-coachings.webp" alt="">
@@ -224,7 +224,7 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 
 	
 <div class="service-card">
-<a href="<?php echo site_url()?>practice_packs">
+<a href="<?php echo site_url()?>practice-packs">
 		<div class="rt-img up">
 			<div class="video-popup">
 			<img src="<?php echo BASE_URL();?>resources-f/images/test-prap.webp" alt="">
@@ -292,7 +292,7 @@ foreach($FREE_RESOURCE_CONTENT->error_message->data as $p){
 ?>
 					<!--Start Items-->
 					<div class="card-item-3">
-						<a href="<?php echo base_url()?>free_resources/free_resource_post/<?php echo base64_encode($p->id); ?>">
+						<a href="<?php echo base_url()?>articles/post/<?php echo $p->URLslug; ?>">
 							<div class="lt-post-img">
 								<div class="img-area"> <img src="<?php echo $p->image;?>" class="img-responsive" alt=""> </div>
 								<div class="img-text">
@@ -317,7 +317,7 @@ $type="";
 					<?php }?>				
 				</div>
 			</div>	
-			<div class="mt-20 text-center"><a class="btn btn-red btn-flat view-btn" href="<?php echo base_url();?>free_resources">View More →</a></div>		
+			<div class="mt-20 text-center"><a class="btn btn-red btn-flat view-btn" href="<?php echo base_url();?>articles">View More →</a></div>		
   		</div>	
 		</section>
 <?php }?>
@@ -388,7 +388,7 @@ if(!empty($newsData->error_message->data))
 					?>
 					<!--Start Items-->
 					<div class="card-item-3">
-						<a href="<?php echo base_url('news_article/index/'.$d->id);?>">
+						<a href="<?php echo base_url('news-article/'.$d->URLslug);?>">
 							<div class="lt-post-img lt-bg">
 								<div class="img-area"> <img src="<?php echo base_url('uploads/news/'.$d->card_image);?>" class="img-responsive" alt=""> </div>
 								<div class="img-text">
@@ -405,7 +405,7 @@ if(!empty($newsData->error_message->data))
 				</div>
 			</div>
 				<!--End Thumb GRID CONTAINER -->
-				<div class="mt-20 text-center"><a class="btn btn-red btn-flat view-btn" href="<?php echo base_url();?>latest_news">View More →</a></div>
+				<div class="mt-20 text-center"><a class="btn btn-red btn-flat view-btn" href="<?php echo base_url();?>latest-news">View More →</a></div>
 			</div>
 		</div>
 	</section>

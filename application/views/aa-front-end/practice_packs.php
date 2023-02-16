@@ -14,7 +14,7 @@
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
             <!-- //disableEnablepgm(this.value),GetDuation(this.value),GetOnlinePack(); -->
-            <select class="selectpicker form-control" data-live-search="true" name="test_module_id" id="test_module_id" onchange="Getprograme(this.value)">
+            <select class="selectpicker form-control" data-live-search="true" name="test_module_id" id="test_module_id" onchange="reset_picker('0','0','0','1');Getprograme(this.value)">
               <option value="">Select Course</option>
               <?php
               foreach ($allppTestModule->error_message->data as $p) {
@@ -26,7 +26,8 @@
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
-            <select class="selectpicker form-control" data-live-search="true" name="programe_id" id="programe_id" onchange="GetDuation(this.value);GetOnlinePack();Getcategory();">
+          <!-- onchange="GetDuation(this.value);GetOnlinePack();Getcategory();" -->
+            <select class="selectpicker form-control" data-live-search="true" name="programe_id" id="programe_id" onchange="GetDuation(this.value);Getcategory(this.value);GetOnlinePack();">
               <option value="">Select Program</option>
               <?php
              /* foreach ($allppCoursePgm->error_message->data as $p) {
@@ -38,20 +39,20 @@
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
-            <select class="selectpicker form-control catOption" name="category_id" id="category_id" onchange="GetOnlinePack();" disabled="disabled">
+            <select class="selectpicker form-control catOption" name="category_id" id="category_id" onchange="GetDuation(this.value);GetOnlinePack();" disabled="disabled">
               <option value=''>Select Module</option>
             </select>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="form-group">
-            <select class="selectpicker form-control" name="duration" id="duration" onchange="GetOnlinePack();Getcategory();" disabled="disabled" data-live-search="true">
+            <select class="selectpicker form-control" name="duration" id="duration" onchange="GetOnlinePack();" disabled="disabled" data-live-search="true">
               <option value="">Select Duration</option>
               <?php
-              foreach ($allppDuration->error_message->data as $p) {
+              /* foreach ($allppDuration->error_message->data as $p) {
               ?>
                 <option value="<?php echo $p->duration; ?>"><?php echo $p->duration . ' ' . $p->duration_type; ?></option>
-              <?php } ?>
+              <?php } */ ?>
             </select>
           </div>
         </div>
@@ -481,6 +482,32 @@
   }
 </script>
 <script type="text/javascript">
+   function reset_picker(a,b,c,d)
+  {
+     if(a==1)
+    {
+      $('#test_module_id').prop('selectedIndex', 0);     
+      $('.selectpicker').selectpicker('refresh')
+    }
+    if(b==1)
+    {
+      $('#programe_id').prop('selectedIndex', 0);     
+      $('.selectpicker').selectpicker('refresh')
+    }
+    if(c==1)
+    {
+      $('#category_id').prop('selectedIndex', 0);     
+      $('.selectpicker').selectpicker('refresh')
+    }
+    if(d==1)
+    {
+      //$('#duration').prop('selectedIndex', 0);     
+     // $('.selectpicker').selectpicker('refresh')
+      $('#duration').html("<option value=''>Select Duration</option>");
+      $('#duration').selectpicker('refresh')
+    }
+       
+  }
   function Getprograme()
   {
     var test_module_id = $("#test_module_id").val();
@@ -497,62 +524,32 @@
         $('#programe_id').html(data);
         $('#programe_id').selectpicker('refresh');
         Getcategory()
-        /* Getcategory()
-        GetDuation();
         GetOnlinePack();
-        GetCourseType();
-        $('#category_id').prop('disabled', false);
-        $('#course_type').prop('disabled', false);
-        $('#duration').prop('disabled', false); */
+       $('#category_id').prop('disabled', false);
+       // $('#course_type').prop('disabled', false);
+        $('#duration').prop('disabled', false);
       },
       beforeSend: function() {},
     });
   }
-  function disableEnablepgm(test_module_id) {
-    //alert('k')
-    $('#duration').prop('selectedIndex', 0);
-    //1,2,6 ielts- 3,4 pte,spoken
-    if (test_module_id == <?php echo IELTS_ID; ?> || test_module_id == <?php echo PTE_ID; ?> || test_module_id == <?php echo UKVI_CD_IELTS; ?>) {
-      $('#programe_id').prop('selectedIndex', 0);
-      $('#programe_id').prop('disabled', false);
-      $('.selectpicker').selectpicker('refresh')
-    } else if (test_module_id == <?php echo IELTS_CD_ID; ?>) {
-      $('#programe_id').prop('selectedIndex', 1);
-      $('#programe_id').prop('disabled', true);
-      $('.selectpicker').selectpicker('refresh')
-    } else if (test_module_id == <?php echo TOEFL_ID; ?>) {
-      $('#programe_id').prop('selectedIndex', 0);
-      $('#programe_id').prop('disabled', false);
-      $('.selectpicker').selectpicker('refresh')
-    } else if (test_module_id == '') {
-      $('#programe_id').prop('selectedIndex', 0);
-      $('#programe_id').prop('disabled', false);
-      $('.selectpicker').selectpicker('refresh')
-    } else {
-      $('#programe_id').prop('selectedIndex', 0);
-      $('#programe_id').prop('disabled', false);
-      $('.selectpicker').selectpicker('refresh')
-    }
-    //$('.catOption').selectpicker('refresh');
-    //  $('.catOption').html('<option value="">All Module</option>');
-    // $('.catOption').selectpicker('refresh');
-  }
+
 
   function GetDuation() {
     var test_module_id = $("#test_module_id").val();
     var programe_id = $("#programe_id").val();
+    var category_id = $("#category_id").val();
     $.ajax({
       url: "<?php echo site_url('practice_packs/GetDuation'); ?>",
       async: true,
       type: 'post',
       data: {
         test_module_id: test_module_id,
-        programe_id: programe_id
+        programe_id: programe_id,category_id:category_id
       },
       success: function(data) {
         $('#duration').html(data);
         $('#duration').selectpicker('refresh');
-        Getcategory()
+       
       },
       beforeSend: function() {},
     });
@@ -575,6 +572,7 @@
         success: function(data) {
           $('#category_id').html(data);
           $('#category_id').selectpicker('refresh');
+          
         },
         beforeSend: function() {},
       });
@@ -593,37 +591,7 @@
     var limit_v = parseInt(<?php echo LOAD_MORE_LIMIT_8; ?>);
     var offset_v = parseInt($('#offset').val());
     var newoffset = limit_v + offset_v;
-    // if(test_module_id){
-    //   $('#programe_id').prop('disabled', false);
-    //   $('#duration').prop('disabled', false);
-    //   $('#category_id').prop('disabled', false);
-    //   $('.selectpicker').selectpicker('refresh')
-    // }else{
-    //   $('#programe_id').prop('disabled', true);
-    //   $('#duration').prop('disabled', true);
-    //   $('#category_id').prop('disabled', true);
-    //   $('.selectpicker').selectpicker('refresh')
-    // }
-    if (test_module_id == <?php echo IELTS_ID; ?> || test_module_id == <?php echo PTE_ID; ?> || test_module_id == <?php echo UKVI_CD_IELTS; ?>) {
-      $('#programe_id').prop('disabled', false);
-      $('#duration').prop('disabled', false);
-      $('#category_id').prop('disabled', false);
-      $('.selectpicker').selectpicker('refresh')
-    } else if (test_module_id == <?php echo IELTS_CD_ID; ?>) {
-      $('#programe_id').prop('disabled', true);
-      $('#duration').prop('disabled', false);
-      $('#category_id').prop('disabled', false);
-      $('.selectpicker').selectpicker('refresh')
-    } else if (test_module_id == <?php echo TOEFL_ID; ?>) {
-      $('#programe_id').prop('selectedIndex', 0);
-      $('#programe_id').prop('disabled', false);
-      $('.selectpicker').selectpicker('refresh')
-    } else {
-      $('#programe_id').prop('disabled', true);
-      $('#duration').prop('disabled', true);
-      $('#category_id').prop('disabled', true);
-      $('.selectpicker').selectpicker('refresh')
-    }
+    
     $.ajax({
       url: "<?php echo site_url('practice_packs/GetPracticePack'); ?>",
       // async: true,
@@ -670,7 +638,35 @@
       },
     });
   }
-
+  function disableEnablepgm(test_module_id) {
+    //alert('k')
+    $('#duration').prop('selectedIndex', 0);
+    //1,2,6 ielts- 3,4 pte,spoken
+    if (test_module_id == <?php echo IELTS_ID; ?> || test_module_id == <?php echo PTE_ID; ?> || test_module_id == <?php echo UKVI_CD_IELTS; ?>) {
+      $('#programe_id').prop('selectedIndex', 0);
+      $('#programe_id').prop('disabled', false);
+      $('.selectpicker').selectpicker('refresh')
+    } else if (test_module_id == <?php echo IELTS_CD_ID; ?>) {
+      $('#programe_id').prop('selectedIndex', 1);
+      $('#programe_id').prop('disabled', true);
+      $('.selectpicker').selectpicker('refresh')
+    } else if (test_module_id == <?php echo TOEFL_ID; ?>) {
+      $('#programe_id').prop('selectedIndex', 0);
+      $('#programe_id').prop('disabled', false);
+      $('.selectpicker').selectpicker('refresh')
+    } else if (test_module_id == '') {
+      $('#programe_id').prop('selectedIndex', 0);
+      $('#programe_id').prop('disabled', false);
+      $('.selectpicker').selectpicker('refresh')
+    } else {
+      $('#programe_id').prop('selectedIndex', 0);
+      $('#programe_id').prop('disabled', false);
+      $('.selectpicker').selectpicker('refresh')
+    }
+    //$('.catOption').selectpicker('refresh');
+    //  $('.catOption').html('<option value="">All Module</option>');
+    // $('.catOption').selectpicker('refresh');
+  }
   function check_booking(package_id) {
     var flag = 1;
     var numberes = /^[0-9-+]+$/;

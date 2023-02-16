@@ -19,7 +19,7 @@ class News_model extends CI_Model
         $this->db->select('
             id, 
             title,
-            news_date,
+            news_date,           
             body,
             media_file,
             card_image,

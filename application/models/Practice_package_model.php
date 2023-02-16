@@ -828,7 +828,7 @@ class Practice_package_model extends CI_Model
         $this->db->order_by('pgm.programe_name', 'ASC');
         return $this->db->get()->result_array();
     }
-    function Get_pp_duration($country_id,$test_module_id, $programe_id){       
+    function Get_pp_duration($country_id,$test_module_id, $programe_id,$category_id){       
 
         $this->db->distinct('');
         $this->db->select('pkg.duration,dt.duration_type');
@@ -840,6 +840,11 @@ class Practice_package_model extends CI_Model
         }
         if ($programe_id) {
             $this->db->where(array('pkg.programe_id' => $programe_id));
+        }
+        if($category_id)
+        {
+            $this->db->join('`practice_package_category` pkg_cat', 'pkg_cat.`package_id`= pkg.`package_id`');
+            $this->db->where(array('pkg_cat.category_id' => $category_id));
         }
         $this->db->order_by('pkg.duration', 'ASC');
         return $this->db->get()->result_array();

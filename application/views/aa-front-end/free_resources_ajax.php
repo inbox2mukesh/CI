@@ -3,7 +3,7 @@ if(count($FREE_RESOURCE_CONTENT->error_message->data)>0){
 foreach($FREE_RESOURCE_CONTENT->error_message->data as $p){
 ?>
           <div class="col-md-4 col-sm-6">
-            <a href="<?php echo base_url()?>free_resources/free_resource_post/<?php echo base64_encode($p->id); ?>">
+          <a href="<?php echo base_url()?>articles/post/<?php echo $p->URLslug; ?>">
               <div class="latest-img">
                 <div class="img-area"> <img src="<?php echo $p->image;?>" class="img-responsive" alt=""> </div>
                 <div class="img-text">

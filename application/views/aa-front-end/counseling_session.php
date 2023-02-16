@@ -704,29 +704,52 @@ function Send_demo_counelling_post() {
 		
 	}
 	
+	// if ($(window).width() <= 768) {
+	// 	$(".text-limit").each(function(i, v) {
+	// 		let tml = $(this).text();
+	// 		let tmlem = tml.replace(/ /g, "");
+	// 		//console.log(i+":" +tml.length +":"+ tml );
+	// 		if (tmlem.length > 375) {
+	// 			$(this).html('<p class="mx-height-20 index' + i +'">' + tml.substr(0, 375) + '...' + '</p>').append("<div class='readmore-btn rd" + i + "'>Read More</div>");
+	// 			$(".rd" + i).click(function() {
+	// 				$(this).toggleClass("active");
+	// 				$(this).parent().toggleClass("p");
+	// 				if ($(".rd" + i).hasClass("active")) {
+	// 					$(".index" + i).text(tml);
+	// 					$(this).text(" Read Less");
+	// 					//console.log(this);
+	// 				} else {
+	// 					$(".index" + i).text(tml.substr(0, 375) + '...');
+	// 					$(this).text("Read More");
+	// 					// console.log(this);
+	// 				}
+	// 			});
+	// 		}
+	// 	});
+	// }
+
+
+
 	if ($(window).width() <= 768) {
-		$(".text-limit").each(function(i, v) {
-			let tml = $(this).text();
-			let tmlem = tml.replace(/ /g, "");
-			//console.log(i+":" +tml.length +":"+ tml );
-			if (tmlem.length > 375) {
-				$(this).html('<p class="mx-height-20 index' + i +'">' + tml.substr(0, 375) + '...' + '</p>').append("<div class='readmore-btn rd" + i + "'>Read More</div>");
-				$(".rd" + i).click(function() {
-					$(this).toggleClass("active");
-					$(this).parent().toggleClass("p");
-					if ($(".rd" + i).hasClass("active")) {
-						$(".index" + i).text(tml);
-						$(this).text(" Read Less");
-						//console.log(this);
-					} else {
-						$(".index" + i).text(tml.substr(0, 375) + '...');
-						$(this).text("Read More");
-						// console.log(this);
-					}
-				});
+			$('.text-limit').each(function(){
+			var show_char =377;
+			var ellipses = "... ";
+			var content = $(this).html(); 
+			if (content.trim().length > show_char) {
+			var a = content.trim().substr(3, show_char); // use 3 to avoid <p>
+			var b = content.trim().substr(show_char = 380 - content.trim().length).replace('</p>' , '');  // replace the last </p>
+			var html = a + "<span class='truncated'>" + ellipses + "</span><span class='truncated' style='display:none'>" + b + "</span><a class='read-more' href='#'>Read more</a>";
+			// wrap the a into `<p></p>` then append the read more to it
+			$(this).html('<div>' + html  + '</div>'); 
 			}
-		});
+			});
+			$(".read-more").click(function(e) {
+			e.preventDefault();
+			$(this).text( ( i , v) => v == "Read more" ? "Read Less" : "Read more"); //change here..
+			$(this).closest(".text-limit").find(".truncated").toggle();
+			});		
 	}
+	
 	
 	function validate_email(email) {
     var mailformat = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,10}\b$/i

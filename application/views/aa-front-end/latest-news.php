@@ -80,8 +80,10 @@
 		        async : true,
 		        type: 'post',
 		        data: {searchText: searchText},
-		        dataType: 'json',                
+		    //dataType: 'json',                
 		        success: function(data){ 
+					$('.resp').html(data);
+					return false;
 		            if(data.length>0){
 			            for(i=0; i<data.length; i++){
 			                if(data[i]['is_pinned']==1){
@@ -91,11 +93,16 @@
 			                }
 			                var id = data[i]['URLslug'];	
 			                imagePath='<?php echo base_url();?>' + 'uploads/news/' +data[i]['card_image'];
+							
 			                href= '<?php echo base_url();?>' + 'news_article/' + id;
 			                body = data[i]['body'];							
 			                body= $(body).text().substring(0,120);
 							news_date= data[i]['news_date']; 
-			                html += '<div class="news-panel-info"><div class="disc"><a href='+href+'> <img src='+imagePath+' alt="'+data[i]['title']+'" title="'+data[i]['title']+'" class="pull-right img-responsive ml-15"><h3>'+pin+' '+data[i]['title']+'</h3> <span class="date">'+news_date+'</span><p> '+body+'</p></a></div></div>';             
+							if(data[i]['card_image']!="")
+							{
+								imagediv='<img src='+imagePath+' alt="'+data[i]['title']+'" title="'+data[i]['title']+'" class="pull-right img-responsive ml-15">';
+							}
+			                html += '<div class="news-panel-info"><div class="disc"><a href='+href+'>'+imagediv+'<h3>'+pin+' '+data[i]['title']+'</h3> <span class="date">'+news_date+'</span><p> '+body+'</p></a></div></div>';             
 			            } 
 		            	$('.resp').html(html);
 		            }else{

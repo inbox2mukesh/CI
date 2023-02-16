@@ -121,7 +121,7 @@
 														<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Resources</a>
 															<ul class="sub-menu">
 																<li class="back"><a href="#">Back</a></li>
-																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('free-resources');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/article.svg');?>" alt="">Article & Tutorials</a> </li>
+																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('articles');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/article.svg');?>" alt="">Article & Tutorials</a> </li>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('latest-news');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/immigration-news.svg');?>" alt="">Latest Immigration News</a> </li>
 																<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/assessment-tools/english-level-assessment" target="_blank"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/english-level-assesment.svg');?>" alt="">English Level Assessment</a> </li>
 																<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/assessment-tools/visa-assessment" target="_blank"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/study-visa-eligibility.svg');?>" alt="">Study Visa Eligibility</a> </li>

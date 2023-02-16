@@ -24,7 +24,7 @@
 			<div class="column">
 				<h4>Resources</h4>
 				<ul>
-					<li><a href="<?php echo base_url('free-resources');?>">Article & Tutorials</a></li>
+					<li><a href="<?php echo base_url('articles');?>">Article & Tutorials</a></li>
 					<li><a href="<?php echo base_url('latest-news');?>">Latest Immigration News</a></li>
 					<li><a href="https://western-overseas.com/assessment-tools/english-level-assessment" target="_blank">English Level Assessment</a></li>
 					<li><a href="https://western-overseas.com/assessment-tools/visa-assessment" target="_blank">Study Visa Eligibility</a></li>
@@ -47,6 +47,7 @@
 					?>
 					<li><a href="<?php echo base_url();?>become-agent">Join Agent Network</a></li>
 					<?php }?>
+					<li><a href="<?php echo base_url();?>sitemap">Sitemap</a></li>
 				</ul>
 			</div>
 		</div>

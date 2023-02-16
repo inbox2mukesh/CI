@@ -161,13 +161,53 @@ foreach($xml->url as $x)
 <?php }?>  
 </ul>  
 </div>
-<?php */?>
+<?php */
+
+$html = file_get_contents(site_url());
+$doc = new DOMDocument();
+@$doc -> loadHTML($html);
+$xp = new DOMXPath($doc);
+// Only pull back A tags with an href attribute starting with "http".
+$res = $xp -> query('//a[starts-with(@href, "http")]/@href');
+if ($res -> length > 0)
+{  
+    foreach ($res as $node)
+    {    
+      if (strpos($node -> nodeValue, site_url()) !== false) { 
+        if($node -> nodeValue !=site_url()."sitemap"  && $node -> nodeValue !=site_url())
+        {
+          $values[] = $node->nodeValue;   
+        }   
+       
+        }
+    }
+  
+    $ress=array_unique($values);   
+   
+}
+?>
 
 <div class="container">
 <h2>Sitemap</h2>
 <ul>
-<li><a href="https://westernoverseas.ca">www.westernoverseas.ca</a>
-<li><a href="https://westernoverseas.ca/visa-services">Visa & Immigration Services</a></li>
+  <?php 
+  sort($ress);
+  foreach($ress as $p){?>
+<li><a href="<?php echo $p?>">
+<?php //echo $p;
+if($p == base_url())
+{
+  echo "Home";
+}
+else {
+  echo ucfirst(str_replace(base_url(),"",$p));
+}
+
+
+?>
+</a>
+<?php }?>
+<!-- <li><a href="https://westernoverseas.ca/visa-services">Visa & Immigration Services</a></li>
 <li><a href="https://westernoverseas.ca/online-courses">Online-courses</a></li>
 <li><a href="https://westernoverseas.ca/practice-packs">Practice-packs</a></li>
 <li><a href="https://westernoverseas.ca/free-resources">Article & Tutorials</a></li>
@@ -178,7 +218,7 @@ foreach($xml->url as $x)
 <li><a href="https://westernoverseas.ca/contact-us">Contact</a></li>
 <li><a href="https://westernoverseas.ca/faq">FAQ</a></li>
 <li><a href="https://westernoverseas.ca/become-agent">Join Agent Network</a></li>
-<li><a href="https://westernoverseas.ca/term-condition">Terms and Condition</a></li>
+<li><a href="https://westernoverseas.ca/term-condition">Terms and Condition</a></li> -->
 
  
 </ul>  

@@ -129,6 +129,7 @@
             fr.isPinned,
             fr.title,
             fr.description,
+            fr.URLslug,
             CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
             date_format(fr.modified, "%D %b %Y") as `created`,
         ');
@@ -158,6 +159,7 @@
             fr.isPinned,
             fr.title,
             fr.description,
+            fr.URLslug,
             CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
             date_format(fr.modified, "%D %b %Y") as `created`,
         ');
@@ -184,6 +186,7 @@
             fr.isPinned,
             fr.title,
             fr.description,
+            fr.URLslug,
             CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
             date_format(fr.modified, "%D %b %Y") as `created`,
         ');
@@ -220,6 +223,7 @@
             fr.isPinned,
             fr.title,
             fr.description,
+            fr.URLslug,
             CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
             date_format(fr.created, "%D %b %Y") as `created`,
         ');
@@ -275,6 +279,7 @@
             fr.title,
             fr.isPinned,
             fr.description,
+            fr.URLslug,
             CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
             date_format(fr.created, "%D %b %Y") as `created`,
         ');
@@ -452,6 +457,7 @@
             fr.isPinned,
             fr.title,
             fr.description,
+            fr.URLslug,
             CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
             date_format(fr.modified, "%D %b %Y") as `created`,
         ');
