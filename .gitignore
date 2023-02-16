@@ -12,6 +12,7 @@ application/config/database.php
 application/cache/
 cache/
 index.php
+sitemap.xml
 
 # Compiled Java class files
 *.class
@@ -53,5 +54,4 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
-
 
