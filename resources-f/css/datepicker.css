@@ -1,10 +1,10 @@
 .datepicker.dropdown-menu {
-  padding: 5px!important;
+  padding: 5px!important;  
 }
 .datepicker {
   top: 0;
   left: 0;
-/*  padding: 4px;*/
+ /* padding: 4px; */
   margin-top:0px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -191,3 +191,10 @@
     background-color: #eeeeee !important;
     border-color: #204d74 !important;
 }
+
+
+
+/** Safari */
+@media not all and (min-resolution: 0.001dpcm) {
+    body.modal-open{position:fixed!important;}
+    }

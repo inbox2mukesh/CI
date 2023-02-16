@@ -1,7 +1,7 @@
 !(function (a, b, c, d) {
     a.fn.jConveyorTicker = function (b) {
         if (void 0 === this || 0 === this.length) return console.log("jquery.jConveyorTicker() INITIALIZATION ERROR: You need to select one or more elements. See documentation form more information."), !1;
-        var c = { anim_duration: 150, reverse_elm: !1, force_loop: !1, start_paused: !1 },
+        var c = { anim_duration: 150, reverse_elm: !1, force_loop: !1, start_paused: !1 }, 
             d = c.anim_duration,
             e = c.reverse_elm,
             f = c.force_loop,
