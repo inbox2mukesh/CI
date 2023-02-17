@@ -67,6 +67,9 @@ if(DEFAULT_COUNTRY==38){
 
 	define('TESTINGURL', 'https://westernoverseas.ca/canada-production-testing/adminController/dashboard');
 	define('LIVEURL', 'https://westernoverseas.ca/adminController/dashboard');
+	define('FB',  'https://www.facebook.com/westernoverseascanada/');
+	define('INST','https://www.instagram.com/westernoverseascanada/');
+	define('TTK', 'https://www.tiktok.com/@westernoverseasimm');
 
 }else if(DEFAULT_COUNTRY==13){
 	define('TIME_DIFF', 330);
@@ -124,6 +127,9 @@ if(DEFAULT_COUNTRY==38){
 
 	define('TESTINGURL', 'https://westernoverseas.com.au/aus-production-testing/adminController/dashboard');
 	define('LIVEURL', 'https://westernoverseas.com.au/adminController/dashboard');
+	define('FB',  'https://www.facebook.com/westernoverseasaustralia');
+	define('INST','https://www.instagram.com/westernoverseasaustralia');
+	define('TTK', '');
 
 }else if(DEFAULT_COUNTRY==101){
 	define('TIME_DIFF', 0);
@@ -152,18 +158,18 @@ if(DEFAULT_COUNTRY==38){
 		define('SESSION_VAR', '');
 	}
 	define('STAMP', 'resources-f/images/mock_test_reprt_images/India-Online-Stamp.png');
-	define('LOGO', 'resources-f/images/logo-sm.webp');
-	define('MAIL_LOGO', 'resources-f/images/can_logo.png');
+	define('LOGO', 'resources-f/images/logo-sm-online.webp');
+	define('MAIL_LOGO', 'resources-f/images/logo-sm-online.webp');
 	define('CURRENCY', 'INR');
 	define('TIME_ZONE', 'Asia/Kolkata');
 
-	define('LOGO_IELTS', 'resources-f/images/mock_test_reprt_images/logo-sm.png');//ielts,cd-ielts
-	define('LOGO_PTE', 'resources-f/images/mock_test_reprt_images/mock_test_logo.png');
-	define('LOGO_TOEFL', 'resources-f/images/mock_test_reprt_images/can_logo_white.png');
+	define('LOGO_IELTS', 'resources-f/images/mock_test_reprt_images/logo-sm.webp');//ielts,cd-ielts
+	define('LOGO_PTE', 'resources-f/images/mock_test_reprt_images/mock_test_logo.webp');
+	define('LOGO_TOEFL', 'resources-f/images/mock_test_reprt_images/can_logo_white.webp');
 
 	define('CU_PHONE', '+1 (902) 537-1344');
-	define('CU_EMAIL', 'info@westernoverseas.ca');
-	define('CU_EMAIL2', 'ankit@westernoverseas.ca');
+	define('CU_EMAIL', 'info@westernoverseas.online');
+	define('CU_EMAIL2', 'online@westernoverseas.online');
 	define('ADMIN_NAME', 'Mr. Pradeep Balyan');
 	define('Licence_No', '<span class="text-red">Licence No.</span> xxxxxxx');
 
@@ -176,11 +182,11 @@ if(DEFAULT_COUNTRY==38){
 	define('PAN_ACCOUNT_NUMBER', '1010101010');
 	define('GST_NUMBER', '1111122222');
 
-	define('ADMIN_EMAIL','info@westernoverseas.ca');
-	define('ADMISSION_EMAIL', 'info@westernoverseas.ca');
+	define('ADMIN_EMAIL','info@westernoverseas.online');
+	define('ADMISSION_EMAIL', 'info@westernoverseas.online');
 	define('FROM_NAME','Western Overseas Immigration');
 
-	define('TESTINGURL', 'https://www.westernoverseas.online/wosa_online-production-testing/adminController/dashboard');
+	define('TESTINGURL', 'https://www.westernoverseas.online/_online-production-testing/adminController/dashboard');
 	define('LIVEURL', 'https://www.westernoverseas.online/adminController/dashboard');
 }else{
 
@@ -708,14 +714,11 @@ define('ENQ_SUC', 'Thanks! Your query sent successfully to Western Overseas Admi
 define('ENQ_FLD', 'Oops! Your query submission failed! Please try again.');
 
 //social medias
-define('FB',  'https://www.facebook.com/westernoverseas172');
 define('YTD', 'https://www.youtube.com/channel/UCqvHFSJIuOlBQw7LPUTPHaw');
-define('INST','https://www.instagram.com/accounts/login/');
 define('TWT', 'https://twitter.com/westernoverseaa');
 define('LI',  'https://www.linkedin.com/in/westernoverseas/');
 define('PNT', 'https://in.pinterest.com/overseaswestern/');
 define('GP',  'https://plus.google.com/u/0/+WesternOverseas');
-define('TTK', 'https://vm.tiktok.com/ZMLAHMv6E/');
 //Buttons
 define('SAVE_LABEL', 'Submit');
 define('UPDATE_LABEL', 'Update');

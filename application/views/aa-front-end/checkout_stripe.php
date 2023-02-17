@@ -49,21 +49,21 @@ if ($packdetail->error_message->data->amount == $packdetail->error_message->data
       <div class="main-box">
         <form action="<?php echo base_url('handlePayment');?>" method="post" class="form-validation" data-cc-on-file="false" data-stripe-publishable-key="<?php echo $this->config->item('stripe_key') ?>" id="payment-form" >
           <div class="check-details">           
-			<div class='form-row row'>
+			<div class='row'>
 								<div class='col-xs-12 form-group required'>
 									<label class='control-label'>Name on Card<span class="text-red">*</span></label>
 									<input class='fstinput allow_alphabets removeerrmessage' type='text' id="card_holder_name">
                   <p class="validation card_holder_name_err" id="card_holder_name_err"></p>
 								</div>
 							</div>
-							<div class='form-row row'>
+							<div class='row'>
 								<div class='col-xs-12 form-group card required'>
 									<label class='pull-left'>Card Number<span class="text-red">*</span></label>
 									<input autocomplete='off' class='fstinput dob_mask_n card-number  removeerrmessage' data-inputmask="'mask': '9999 9999 9999 9999'" size='20' type='text' name="number" placeholder="xxxx xxxx xxxx xxxx" id="card_number" maxlength="20">
                   <p class="validation card_number_err" id="card_number_err"></p>
 								</div>
 							</div>
-							<div class='form-row row'>
+							<div class='row'>
 								<div class='col-xs-12 col-md-4 form-group cvc required'>
 									<label class='control-label'>CVC<span class="text-red">*</span></label>
 									<input autocomplete='off' class='fstinput card-cvc allow_numeric change_focus removeerrmessage' placeholder='ex. 311'
@@ -157,12 +157,12 @@ if ($packdetail->error_message->data->amount == $packdetail->error_message->data
             <input type="hidden" name="address_field_action" id="address_field_action" value="<?php echo $address_field_action; ?>" />
            
             
-			<div class='form-row row'>
+			<div class='row mt-15'>
 								<div class='col-md-12 error form-group hide'>
 									<div class='alert-danger alert'>Error occured while making the payment.</div>
 								</div>
 							</div>
-            <div class="mt-20">
+            <div class="mt-10">
             <!-- <a href="<?php echo site_url()?>stripePaymentController" type="button" class="btn mp-btn btn-lg btn-block"   >Stripe Checkout</a> -->
             <button type="button" class="btn mp-btn-disable btn-lg btn-block hide" id="pleasewaitpayment" disabled>Please Wait...</button>
               <button type="submit" class="btn mp-btn btn-lg btn-block" id="make_payment"  onclick="return check_validation();">Make Payment</button>

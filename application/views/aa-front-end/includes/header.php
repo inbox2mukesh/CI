@@ -106,7 +106,7 @@
 										<div class="header-container">
 											<div class="menu-header-container">
 												<ul id="cd-primary-nav" class="menu">
-												<?php if(DEFAULT_COUNTRY!=13) { ?>
+												<?php if(DEFAULT_COUNTRY!=13 && DEFAULT_COUNTRY!=101) { ?>
 													<li style="margin-bottom:10px!important;" class="mob-enq-btn no-lg-display" onClick="location.replace('<?php echo base_url('counseling');?>');"><a>Book Counseling</a></li>	
 													<?php }?>
 													<li class="menu-item leave-mouse"> <a href="<?php echo base_url('visa-services');?>">Visa &amp; Immigration Services</a> </li>
@@ -133,7 +133,7 @@
 															<ul class="sub-menu">
 																<li class="back"><a href="#">Back</a></li>
 																<div class="submenu-scroll scroll-v">
-																<?php if(DEFAULT_COUNTRY!=13) { ?>
+																<?php if(DEFAULT_COUNTRY!=13 && DEFAULT_COUNTRY!=101) { ?>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('why-canada');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/why-canada.svg');?>" alt="">Why Canada?</a> </li>
 																<?php }?>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('gallery');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/gallery.svg');?>" alt="">Image Gallery</a> </li>
@@ -163,7 +163,7 @@
 																			<div><a href="<?php echo TWT;?>" target="_blank"><i class="fa fa-twitter s-icn twitter"></i>Twitter</a></div>
 																			<div><a href="<?php echo INST;?>" target="_blank"><i class="fa fa-instagram s-icn instagram"></i>Instagram</a></div>
 																			<div><a href="<?php echo YTD;?>" target="_blank"><i class="fa fa-youtube s-icn y-tb"></i>Youtube</a></div>
-																			<?php if(DEFAULT_COUNTRY!=13) { ?>
+																			<?php if(DEFAULT_COUNTRY!=13 && DEFAULT_COUNTRY!=101) { ?>
 																			<div><a href="<?php echo TTK;?>" target="_blank" style="display: -webkit-box!important;"><img class="s-icn tik" style="padding: 10px;"src="<?php echo base_url(DESIGN_VERSION_F.'/images/tiktok.svg');?>" alt=""><span style="margin-top:7px; display: block;"> Tiktok</span></a></div>
 																			<?php } ?>
 																		</div>
@@ -198,7 +198,7 @@
 											</div>
 										</div>
 										<?php 
-										if(DEFAULT_COUNTRY!=13){
+										if(DEFAULT_COUNTRY!=13 && DEFAULT_COUNTRY!=101){
 										?>
 										<div class="rts-btn mob-display">
 											<ul>

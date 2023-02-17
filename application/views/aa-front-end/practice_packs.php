@@ -523,8 +523,11 @@
         //alert(data)
         $('#programe_id').html(data);
         $('#programe_id').selectpicker('refresh');
-        Getcategory()
-        GetOnlinePack();
+        Getcategory()        
+        GetDuation();
+       // GetOnlinePack();
+       // GetCourseType();
+       GetOnlinePack();
        $('#category_id').prop('disabled', false);
        // $('#course_type').prop('disabled', false);
         $('#duration').prop('disabled', false);

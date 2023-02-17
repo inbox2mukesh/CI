@@ -186,14 +186,14 @@ if ($res -> length > 0)
    
 }
 ?>
-
-<div class="container">
+<section class="bg-lighter">
+<div class="container sitemap-content">
 <h2>Sitemap</h2>
 <ul>
   <?php 
   sort($ress);
   foreach($ress as $p){?>
-<li><a href="<?php echo $p?>">
+<li><i class="fa fa-angle-double-right mr-5"></i> <a href="<?php echo $p?>">
 <?php //echo $p;
 if($p == base_url())
 {
@@ -223,3 +223,4 @@ else {
  
 </ul>  
 </div>
+</section>

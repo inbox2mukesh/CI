@@ -35,7 +35,7 @@
 			<div class="column">
 				<h4>More</h4>
 				<ul>
-				<?php if(DEFAULT_COUNTRY!=13) { ?> 
+				<?php if(DEFAULT_COUNTRY!=13 && DEFAULT_COUNTRY!=101) { ?> 
 					<li><a href="<?php echo base_url('why-canada');?>">Why Canada?</a></li>
 					<?php }?>
 					<li><a href="<?php echo base_url('gallery');?>">Image Gallery</a></li>
@@ -76,7 +76,7 @@
 						<li><a href="<?php echo TWT;?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
 						<li><a href="<?php echo YTD;?>" target="_blank"><i class="fa fa-youtube"></i></a></li>
 						<li><a href="<?php echo INST;?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
-						<?php if(DEFAULT_COUNTRY!=13) { ?>
+						<?php if(DEFAULT_COUNTRY!=13 && DEFAULT_COUNTRY!=103 ) { ?>
 						<li><a href="<?php echo TTK;?>" target="_blank" cursor-class="arrow"><i><img src="<?php echo base_url('resources-f/images/tiktok.svg');?>" alt="" style="display: inline;padding:5px;width: 22px;"></i></a></li>
 						<?php }?>
 					</ul>
@@ -93,12 +93,24 @@
 			</div>
 			<div class="col-md-12 web">
 				<div class="btm-info">
-					<h4>Our Websites</h4> <span><a href="https://western-overseas.com/" target="_blank">www.western-overseas.com</a></span> <span><a href="https://www.westernoverseas.online/" target="_blank">www.westernoverseas.online</a></span> <span><a href="https://www.westernoverseas.events/" target="_blank">www.westernoverseas.events</a></span>
+					<h4>Our Websites</h4> <span><a href="https://western-overseas.com/" target="_blank">www.western-overseas.com</a></span> 
+					
+					<?php if(DEFAULT_COUNTRY!=101) { ?>
+					<span><a href="https://www.westernoverseas.online/" target="_blank">www.westernoverseas.online</a></span>
+					<?php }?>
+					<span><a href="https://www.westernoverseas.events/" target="_blank">www.westernoverseas.events</a></span>
 				
-					<?php if(DEFAULT_COUNTRY==13) { ?> 
+					<?php if(DEFAULT_COUNTRY==13 ) { ?> 
 					<span><a href="https://westernoverseas.ca/" target="_blank">www.westernoverseas.ca</a></span> 
-					<?php } else {?>
+					<?php } else if(DEFAULT_COUNTRY==101)
+					{
+						?>
+						<span><a href="https://westernoverseas.ca/" target="_blank">www.westernoverseas.ca</a></span> 
 						<span><a href="https://westernoverseas.com.au/" target="_blank">www.westernoverseas.com.au</a></span> 
+						<?php 
+					}
+					else {?>
+						<span><a href="https://westernoverseas.com.au/" target="_blank">www.westernoverseas.com.au</a></span> 						
 						<?php }?>
 				</div>
 			</div>
