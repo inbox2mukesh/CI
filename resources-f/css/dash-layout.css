@@ -3562,3 +3562,9 @@ a.text-white:hover {
     height: auto;
     border-radius: 0px;
 }
+
+.sitemap-content ul{padding: 0px; margin:0px 0px 0px 0px}
+.sitemap-content ul li{padding: 0px;margin:7px 0px;list-style: none;font-weight: 500; transition: 0.3s;color: #000;}
+.sitemap-content ul li a{ text-decoration: none;}
+.sitemap-content ul li a:hover{color: #d9070a;}
+.sitemap-content ul li:hover{color: #d9070a;}
