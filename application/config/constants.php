@@ -188,6 +188,13 @@ if(DEFAULT_COUNTRY==38){
 
 	define('TESTINGURL', 'https://www.westernoverseas.online/_online-production-testing/adminController/dashboard');
 	define('LIVEURL', 'https://www.westernoverseas.online/adminController/dashboard');
+	define('TESTINGURL', 'https://westernoverseas.com.au/aus-production-testing/adminController/dashboard');
+	define('LIVEURL', 'https://westernoverseas.com.au/adminController/dashboard');
+	define('TESTINGURL', 'https://westernoverseas.ca/canada-production-testing/adminController/dashboard');
+	define('LIVEURL', 'https://westernoverseas.ca/adminController/dashboard');
+	define('FB',  'https://www.facebook.com/westernoverseascanada/');
+	define('INST','https://www.instagram.com/westernoverseascanada/');
+	define('TTK', 'https://www.tiktok.com/@westernoverseasimm');
 }else{
 
 }
