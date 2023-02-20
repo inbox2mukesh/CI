@@ -52,7 +52,7 @@ class Enquiry_purpose extends MY_Controller{
 		$this->form_validation->set_rules('enquiry_purpose_name','enquiry purpose name','required|trim|is_unique[enquiry_purpose_masters.enquiry_purpose_name]|max_length[50]');
 		
         $this->form_validation->set_rules('division_id[]','Division','required');
-        $this->form_validation->set_rules('URLslug','Url Slug','required|trim|');
+        $this->form_validation->set_rules('URLslug','Url Slug','required|trim');
 		if($this->form_validation->run())     
         {   
             $by_user=$_SESSION['UserId'];
