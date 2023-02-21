@@ -1870,7 +1870,9 @@ class Our_students extends MY_Controller
             /*---------COMMON API CALL-----*/  
             $data['curPack']= $GLOBALS['curPack'];
             $data['countryCode'] = $GLOBALS['countryCode']; 
-            $data['announcements']=$GLOBALS['announcements'];
+            $data['announcements']=$GLOBALS['announcements'];           
+            $data['serviceData']=$GLOBALS['serviceData'];
+            $data['newsData']=$GLOBALS['newsData'];
             $headers = array(
                 'API-KEY:' . WOSA_API_KEY,
                 'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,

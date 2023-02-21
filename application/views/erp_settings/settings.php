@@ -10,7 +10,13 @@
                         <a href="<?php echo site_url('adminController/role/auto_clean_assigned_role'); ?>" class="btn btn-danger btn-sm link-btn-ui-100">Empty Access Role</a>
                         <a href="<?php echo site_url('adminController/student/clear_all_'); ?>" class="btn btn-danger btn-sm">Clear all Students(Testing purpose)</a>
                         <a href="<?php echo site_url('adminController/user/auto_clean_employee'); ?>" class="btn btn-danger btn-sm">Clean all employee</a>
-                    <?php } ?>                
+						 
+                    <?php } ?>
+                    <?php 
+                    if($this->Role_model->_has_access_('sitemap','updateSiteMap')){
+                     ?>
+                     <a href="<?php echo site_url('adminController/sitemap/updateSiteMap'); ?>" class="btn btn-danger btn-sm">Run Sitemap</a>  
+                    <?php }?>              
                 </div>
             </div>           
             <div class="box-body">
