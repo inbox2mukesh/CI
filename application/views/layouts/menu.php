@@ -123,11 +123,11 @@
       <a href="<?php echo site_url('adminController/agent'); ?>"><i class="fa fa-list-ul"></i> Become An Agent (ALL)</a>
     </li><?php } ?>
     <?php
-       /* if($this->Role_model->_has_access_('lead_management','crs_list')){
+        if($this->Role_model->_has_access_('lead_management','crs_list')){
     ?>
     <li>
       <a href="<?php echo site_url('adminController/lead_management/crs_list'); ?>"><i class="fa fa-plus"></i>Leads From CRS</a>
-    </li><?php } */?>
+    </li><?php } ?>
   </ul>
 </li>
 
@@ -287,7 +287,7 @@
     <li> <a href="<?php echo site_url('adminController/gallery/index');?>"><i class="fa fa-list-ul"></i> Gallery</a> </li><?php } ?> 
   </ul>
 </li>
-<!-- 
+
 <li> <a href="#"> <i class="fa fa-desktop text-light"></i> <span> Counseling Sessions </span> </i> </a>
   <ul class="treeview-menu">
   <?php 
@@ -318,10 +318,18 @@
       <a href="<?php echo site_url('adminController/counseling_session/counselling_booking_completed_list/');?>"><i class="fa fa-list-ul"></i>Success booking Lead</a>
       </li>
       <?php }?> 
-   
+    
+    <?php /*
+        if($this->Role_model->_has_access_('counseling_session','index')){
+    ?>
+    <li> <a href="<?php echo site_url('adminController/counseling_session/index');?>"><i class="fa fa-list"></i> Demo/Counseling</a> </li><?php } ?>
+    <?php
+        if($this->Role_model->_has_access_('counseling_session','counselling_booking_list')){
+    ?>
+    <li> <a href="<?php echo site_url('adminController/counseling_session/counselling_booking_list');?>"><i class="fa fa-list"></i> Demo/Counseling booking</a> </li><?php } */?>
   </ul>
 </li>
- -->
+
 <li> <a href="#"> <i class="fa fa-newspaper-o text-light"></i> <span>Mock Test </span> </a>
   <ul class="treeview-menu">
     <?php
@@ -339,6 +347,7 @@
   <ul class="treeview-menu">
 
     <?php
+    /*
       if(WOSA_ONLINE_DOMAIN==1){
     ?>
       <?php
@@ -350,7 +359,7 @@
           if($this->Role_model->_has_access_('package_master','offline_pack')){
       ?>
       <li> <a href="<?php echo site_url('adminController/package_master/offline_pack');?>"><i class="fa fa-list-ul"></i> List (Inhouse)</a> </li><?php } ?>    
-   <?php } ?>
+   <?php } */ ?>
 
     <?php
         if($this->Role_model->_has_access_('package_master','add_online_pack')){

@@ -64,13 +64,29 @@
 						</div>
 					</div>
 				   <?php }elseif(DEFAULT_COUNTRY==101){ ?>
+					<?php foreach ($longBranchesOverseas->error_message->data as $p){  ?>
+		<div class="col-md-4 col-sm-6">
+			<div class="branch-box mb-20 wht-bg">
+				<h4 class="mt-0"><?php echo $p->center_name;?></h4>
+				<div class="content">
+					<p><i class="fa fa-map-marker"></i> <span><?php echo $p->address_line_1;?></span></p>
+					<p><i class="fa fa-phone"></i> <span><a href="tel:<?php echo $p->contact;?>"><?php echo $p->contact;?></a></span> </p>
+					<p><i class="fa fa-envelope-o"></i><span> 
+					<a href="mailto:<?php echo $p->email;?>"><?php echo $p->email;?></a></span> </p>
+				</div>
+				<?php if($p->feedbackLink){ ?>
+					<div class="ft-btm"><a href="<?php echo $p->feedbackLink;?>"  target="_blank" class="btn btn-red btn-md">Give Feedback</a> </div><?php } ?>
+			</div>
+		</div>
+	<?php } ?>
 				   <?php }else{ ?>
 				   <?php } ?>
 			</div>
 		</div>
 	</div>
 	<!--End Map Section-->
-
+	
+	<?php if(DEFAULT_COUNTRY!=101){?>
 	<!--Start Branch Section-->
 	<h3 class="font-weight-400 text-uppercase text-center mt-40">Other <span class="text-red font-weight-600">Partners in our Network</span></h3>
 	<div class="branch-info mt-20">
@@ -94,7 +110,9 @@
 	</div>
 
 	<!--India Branch-->
-	<?php if(count($indianbranch)>0){ ?>
+	<?php
+	$indianbranch=array();
+	if(count($indianbranch)>0 && isset($indianbranch) ){ ?>
 		<div class="branch-wht mt-20">
 			<h3 class="red-text text-uppercase mb-10">India
 				<a href="<?php echo IND_SITE_LINK;?>" target="_blank"><span class="btn btn-red btn-circled btn-sm mb-10 pull-right">Website</span></a>
@@ -116,7 +134,7 @@
 		</div>
 	<?php } ?>
 	</div>
-<?php ?>
+<?php }?>
 <!--End Branch Section-->
 		</div>
 	</div>

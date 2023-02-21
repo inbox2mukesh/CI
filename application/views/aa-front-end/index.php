@@ -73,7 +73,7 @@
 
 		<div class="container">
 			<div class="about-content">
-			<?php if(DEFAULT_COUNTRY!=13) { ?>
+			<?php if(DEFAULT_COUNTRY!=13 && DEFAULT_COUNTRY!=101) { ?>
 					<div class="text-center" style="text-align: -webkit-center;">
 
 							<img src="<?php echo base_url('resources-f/images/iccrc.webp');?>" alt="rcic logo" title="rcic logo" class="image_iccrc" loading="lazy">
@@ -125,7 +125,7 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 <section class="bg-lighter-theme">
 <div class="service-card-container">
 	
-	
+<?php if(DEFAULT_COUNTRY!=101) { ?>
 	<div class="service-card">
 	<a href="<?php echo site_url()?>visa-services"> 
 			<div class="rt-img up">
@@ -153,26 +153,13 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 					 <div class="crd-disc">			
 								<p>At Western Overseas Immigration we believe in transparency and efficiency in dealing with each and every client across a vast variety of Visa and Immigration Services. </p>							
 							 <div class="view-btn">Click Here <i class="fa fa-angle-right"></i></div>
-					</div>	
-				
+					</div>					
 	
 		</a>
 		
-		
-			<!-- <div class="video-popup-widget" style="display: none">
-			<h2>Immigration Services</h2>
-			<div class="close-tag" href="#">&times;</div>
-			<div class="content">
-			<div class="embed-responsive embed-responsive-16by9">
-			<div class="embed-responsive">
-			<video autoplay preload="auto" loop="loop" muted="muted" controls disablepictureinpicture controlslist="nodownload noplaybackrate">
-			<source src="<?php echo site_url()?>resources-f/video/ocean.mp4"> </video>
-			</div>
-			</div>
-			</div>
-		</div> -->
+			
 </div>
-
+<?php } ?>
 	
 	<div class="service-card">
 	<a href="<?php echo site_url()?>online-courses">
@@ -270,7 +257,41 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 		</div> -->
 	
 </div>
+<?php if(DEFAULT_COUNTRY==101) { ?>
+	<div class="service-card">
+	<a href="https://www.ieltsrealitytest.com/" target="_blank"> 
+			<div class="rt-img up">
+							<div class="video-popup">
+								<img src="<?php echo BASE_URL();?>resources-f/images/immigration-services.webp" alt="">
+								<!-- <span class="play-btn"><i class="fa fa-play play-cicle"></i></span>  -->
+						</div>
+						</div>
+		
 	
+					<div class="crd-disc order-info">
+						<div class="lt-info down">							
+								<div class="title-heading">Reality Test</div>	
+								
+								<ul>
+									<li>PTE</li>
+									<li>IELTS</li>
+									<li>CD-IELTS</li>
+								</ul>	
+									
+						</div>
+					
+					</div>	
+                        <div class="sp-line"></div>
+					 <div class="crd-disc">			
+								<p>At Western Overseas Immigration we believe in transparency and efficiency in dealing with each and every client across a vast variety of Visa and Immigration Services. </p>							
+							 <div class="view-btn">Click Here <i class="fa fa-angle-right"></i></div>
+					</div>					
+	
+		</a>
+		
+			
+</div>
+<?php } ?>
 
 	</section>
 
@@ -388,7 +409,7 @@ if(!empty($newsData->error_message->data))
 					?>
 					<!--Start Items-->
 					<div class="card-item-3">
-						<a href="<?php echo base_url('news-article/'.$d->URLslug);?>">
+						<a href="<?php echo base_url('news/post/'.$d->URLslug);?>">
 							<div class="lt-post-img lt-bg">
 								<div class="img-area"> <img src="<?php echo base_url('uploads/news/'.$d->card_image);?>" class="img-responsive" alt=""> </div>
 								<div class="img-text">
@@ -405,7 +426,7 @@ if(!empty($newsData->error_message->data))
 				</div>
 			</div>
 				<!--End Thumb GRID CONTAINER -->
-				<div class="mt-20 text-center"><a class="btn btn-red btn-flat view-btn" href="<?php echo base_url();?>latest-news">View More →</a></div>
+				<div class="mt-20 text-center"><a class="btn btn-red btn-flat view-btn" href="<?php echo base_url();?>news">View More →</a></div>
 			</div>
 		</div>
 	</section>

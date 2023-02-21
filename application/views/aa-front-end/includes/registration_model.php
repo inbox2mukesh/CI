@@ -68,8 +68,8 @@
 							<div class="form-group">                
 	<lable>DOB<span class="text-red">*</span></lable>
                   <div class="has-feedback">
-                 <!--  <input  name="regdob" id="regdob" type="text" class="fstinput datepicker"  value="<?php if(isset($this->session->userdata('student_login_data')->dob)) {   echo $this->session->userdata('student_login_data')->dob; } else { echo "";}?>" placeholder="DOB*" maxlength="10" autocomplete='off' readonly="readonly"  <?php echo $disabled_sel;?>>  -->
-<input type="text" data-inputmask="'alias': 'date'" class="fstinput dob_mask" name="regdob" id="regdob" value="<?php if(isset($this->session->userdata('student_login_data')->dob)) {   echo $this->session->userdata('student_login_data')->dob; } else { echo "";}?>" placeholder="dd/mm/yyyy"  autocomplete="off" onchange="validatedob(this.value,this.id)"  <?php echo $disabled_sel;?>>
+                 <!--  <input  name="regdob" id="regdob" type="text" class="fstinput datepicker"  value="<?php if(isset($this->session->userdata('student_login_data')->dob)) {   echo $this->session->userdata('student_login_data')->dob; } else { echo "";}?>" placeholder="DOB*" maxlength="10" autocomplete='off' readonly="readonly"  <?php //echo $disabled_sel;?>>  -->
+<input type="text" data-inputmask="'alias': 'date'" class="fstinput dob_mask" name="regdob" id="regdob" value="<?php if(isset($this->session->userdata('student_login_data')->dob)) {   echo $this->session->userdata('student_login_data')->dob; } else { echo "";}?>" placeholder="dd/mm/yyyy"  autocomplete="off" onchange="validatedob(this.value,this.id)"  <?php //echo $disabled_sel;?>>
                   <span class="fa fa-calendar form-group-icon"></span> </div>
                   <div class="p-validation regdob_err"><?php echo form_error('dob');?></div>
                 </div>

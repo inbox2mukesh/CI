@@ -2,6 +2,7 @@
 <section class="footer-bg footer">
 	<div class="container">
 		<div class="footer-wrapper4">
+		<?php  if(DEFAULT_COUNTRY!=101){?>
 			<div class="column">
 				<h4>Visa &amp; Immigration Services</h4>
 				<ul>
@@ -14,18 +15,36 @@
 					<?php } ?>
 				</ul>
 			</div>
+			
+			<?php } else {
+				?>
+			<div class="column">
+				<h4>Visa &amp; Immigration Services</h4>
+				<ul>					
+						<li>
+							<a href="https://western-overseas.com/" target="_blank">Visa &amp; Immigration Services</a>
+						</li>					
+				</ul>
+			</div>
+			<?php }?>
 			<div class="column">
 				<h4>Online Coaching</h4>
 				<ul>
 					<li><a href="<?php echo base_url('online-courses');?>">Online Course</a></li>
 					<li><a href="<?php echo base_url('practice-packs');?>">Practice Pack</a></li>
+					<?php  if(DEFAULT_COUNTRY==101){?>
+					<li><a href="https://www.ieltsrealitytest.com/"  target="_blank">Reality Test</a></li>
+					<?php }?>
+
 				</ul>
 			</div>
 			<div class="column">
 				<h4>Resources</h4>
 				<ul>
 					<li><a href="<?php echo base_url('articles');?>">Article & Tutorials</a></li>
-					<li><a href="<?php echo base_url('latest-news');?>">Latest Immigration News</a></li>
+					<?php  if(DEFAULT_COUNTRY!=101){?>
+					<li><a href="<?php echo base_url('news');?>">Latest Immigration News</a></li>
+					<?php }?>
 					<li><a href="https://western-overseas.com/assessment-tools/english-level-assessment" target="_blank">English Level Assessment</a></li>
 					<li><a href="https://western-overseas.com/assessment-tools/visa-assessment" target="_blank">Study Visa Eligibility</a></li>
 					<li><a href="https://western-overseas.com/assessment-tools/crs-calculator" target="_blank">CRS Calculator</a></li>
@@ -43,7 +62,7 @@
 					<li><a href="<?php echo base_url('contact-us');?>">Contact</a></li>
 					<li><a href="<?php echo base_url('faq');?>">FAQ</a></li>
 					<?php
-					if(!$this->session->userdata('student_login_data')){
+					if(!$this->session->userdata('student_login_data') && DEFAULT_COUNTRY!=101){
 					?>
 					<li><a href="<?php echo base_url();?>become-agent">Join Agent Network</a></li>
 					<?php }?>
@@ -76,7 +95,7 @@
 						<li><a href="<?php echo TWT;?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
 						<li><a href="<?php echo YTD;?>" target="_blank"><i class="fa fa-youtube"></i></a></li>
 						<li><a href="<?php echo INST;?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
-						<?php if(DEFAULT_COUNTRY!=13 && DEFAULT_COUNTRY!=103 ) { ?>
+						<?php if(DEFAULT_COUNTRY!=13 && DEFAULT_COUNTRY!=101 ) { ?>
 						<li><a href="<?php echo TTK;?>" target="_blank" cursor-class="arrow"><i><img src="<?php echo base_url('resources-f/images/tiktok.svg');?>" alt="" style="display: inline;padding:5px;width: 22px;"></i></a></li>
 						<?php }?>
 					</ul>

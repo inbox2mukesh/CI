@@ -109,7 +109,13 @@
 												<?php if(DEFAULT_COUNTRY!=13 && DEFAULT_COUNTRY!=101) { ?>
 													<li style="margin-bottom:10px!important;" class="mob-enq-btn no-lg-display" onClick="location.replace('<?php echo base_url('counseling');?>');"><a>Book Counseling</a></li>	
 													<?php }?>
-													<li class="menu-item leave-mouse"> <a href="<?php echo base_url('visa-services');?>">Visa &amp; Immigration Services</a> </li>
+													<?php if(DEFAULT_COUNTRY==101) { ?>
+													<li style="margin-bottom:10px!important;" class="mob-enq-btn no-lg-display"><a href="https://www.ieltsrealitytest.com/" target="_blank">Reality Test</a></li>	
+													<?php }?>
+
+													<?php if(DEFAULT_COUNTRY!=101) { ?>
+														<li class="menu-item leave-mouse"> <a href="<?php echo base_url('visa-services');?>">Visa &amp; Immigration Services</a></li>
+													<?php }?>
 													<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Online coaching</a>
 														<ul class="sub-menu">
 															<li class="back"><a href="#">Back</a></li>
@@ -117,12 +123,17 @@
 															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('practice-packs');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/practice-pack.svg');?>" alt="">Practice Pack</a> </li>
 															<li class="menu-item menu-item-has-children header-sub-menu">
 														</ul>
-														</li>
+														</li>														
+													<?php if(DEFAULT_COUNTRY==101) { ?>
+													<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/" target="_blank">Visa &amp; Immigration Services</a> </li>
+													<?php } ?>
 														<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Resources</a>
 															<ul class="sub-menu">
 																<li class="back"><a href="#">Back</a></li>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('articles');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/article.svg');?>" alt="">Article & Tutorials</a> </li>
-																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('latest-news');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/immigration-news.svg');?>" alt="">Latest Immigration News</a> </li>
+																<?php  if(DEFAULT_COUNTRY!=101){?>
+																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('news');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/immigration-news.svg');?>" alt="">Latest Immigration News</a> </li>
+																<?php }?>
 																<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/assessment-tools/english-level-assessment" target="_blank"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/english-level-assesment.svg');?>" alt="">English Level Assessment</a> </li>
 																<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/assessment-tools/visa-assessment" target="_blank"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/study-visa-eligibility.svg');?>" alt="">Study Visa Eligibility</a> </li>
 																<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/assessment-tools/crs-calculator" target="_blank"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/crs-calculator.svg');?>" alt="">CRS Calculator</a> </li>
@@ -141,18 +152,26 @@
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('contact-us');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/contact.svg');?>" alt="">Contact</a> </li>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('faq');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/faq.svg');?>" alt="">FAQ</a> </li>
 																<?php
-															if(!$this->session->userdata('student_login_data')){
+															if(!$this->session->userdata('student_login_data') && DEFAULT_COUNTRY!=101){
 															?>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url();?>become-agent" class="blink"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/network.svg');?>" alt="">Join Agent Network</a> </li>
 																<?php }?>
-																<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/partners.svg');?>" alt="">Our Partners</a>
+																<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/partners.svg');?>" alt="">
+																<?php if(DEFAULT_COUNTRY==101){ echo "Our Website";} else { echo "Our Partners";} ?></a>
 																	<ul class="sub-menu">
 																		<li class="back"><a href="#">Back</a></li>
 																		<li class="menu-item leave-mouse"> <a class="text-normal" href="https://western-overseas.com/" style="text-transform: lowercase!important;" target="_blank">www.western-overseas.com</a> </li>
+																		<?php if(DEFAULT_COUNTRY!=101) { ?>
 																		<li class="menu-item leave-mouse"> <a class="text-normal" href="https://www.westernoverseas.online/" style="text-transform: lowercase!important;" target="_blank">www.westernoverseas.online</a> </li>
+																		<?php }?>
+																		<?php if(DEFAULT_COUNTRY!=38) { ?>
 																		<li class="menu-item leave-mouse"> <a class="text-normal" href="https://westernoverseas.ca/" style="text-transform: lowercase!important;" target="_blank">www.westernoverseas.ca</a> </li>
+																		<?php } ?>
 																		<li class="menu-item leave-mouse"> <a class="text-normal" href="https://www.ieltsrealitytest.com/" style="text-transform: lowercase!important;" target="_blank">www.ieltsrealitytest.com</a> </li>
 																		<li class="menu-item leave-mouse"> <a class="text-normal" href="https://westernoverseas.events/" style="text-transform: lowercase!important;" target="_blank">www.westernoverseas.events</a> </li>
+																		<?php if(DEFAULT_COUNTRY!=13) { ?>
+																		<li class="menu-item leave-mouse"> <a class="text-normal" href="https://westernoverseas.com.au/" style="text-transform: lowercase!important;" target="_blank">www.westernoverseas.com.au</a> </li>
+																		<?php } ?>
 																	</ul>
 																</li>
 																<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/social-media.svg');?>" alt="">Find us on Social Media</a>
@@ -203,6 +222,16 @@
 										<div class="rts-btn mob-display">
 											<ul>
 												<li class="enq-btn" onClick="location.replace('<?php echo base_url('counseling');?>');"><a>Book Counseling</a></li>
+											</ul>
+										</div>
+										<?php  }?>
+										<?php 
+										if(DEFAULT_COUNTRY==101){
+										?>
+										<div class="rts-btn mob-display">
+											<ul>
+											<li class="enq-btn"> <a href="https://www.ieltsrealitytest.com/" target="_blank">Reality Test</a> </li>
+												<!-- <li class="enq-btn" onClick="location.replace('<?php echo base_url('counseling');?>');"><a>Reality Test</a></li> -->
 											</ul>
 										</div>
 										<?php  }?>

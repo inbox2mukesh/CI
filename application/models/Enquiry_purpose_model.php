@@ -66,6 +66,10 @@
         $this->db->from('enquiry_purpose_masters');  
         $this->db->join('`enquiry_purpose_division`', 'enquiry_purpose_division.enquiry_purpose_id= enquiry_purpose_masters.id', 'left'); 
         $this->db->where( array('enquiry_purpose_masters.active'=>1));  
+        if(DEFAULT_COUNTRY==101)
+        {           
+            $this->db->where('division_id',1);
+        }
         $this->db->order_by('enquiry_purpose_division.division_id', 'ASC');
         return $this->db->get()->result_array();
     }    

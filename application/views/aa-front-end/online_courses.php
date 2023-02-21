@@ -93,6 +93,7 @@
 
     <div class="row onlinePackResultDiv">
       <?php
+      if (!empty($OnlinePack->error_message->data)) {
       foreach ($OnlinePack->error_message->data as $p) {
         $package_id = $p->package_id;
         $test_module_id = $p->test_module_id;
@@ -390,7 +391,10 @@
 
         <!--END GRID ITEM -->
 
-      <?php } ?>
+      <?php } } else {?>
+        <div class="text-center">No package found</div>
+        
+        <?php }?>
       <input type="hidden" id="stepcountp" />
       <input type="hidden" id="hidpackageid" />
       <script type="text/javascript">

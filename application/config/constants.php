@@ -70,6 +70,8 @@ if(DEFAULT_COUNTRY==38){
 	define('FB',  'https://www.facebook.com/westernoverseascanada/');
 	define('INST','https://www.instagram.com/westernoverseascanada/');
 	define('TTK', 'https://www.tiktok.com/@westernoverseasimm');
+	define('YTD', 'https://www.youtube.com/channel/UCqvHFSJIuOlBQw7LPUTPHaw');
+define('TWT', 'https://twitter.com/westernoverseaa');
 
 }else if(DEFAULT_COUNTRY==13){
 	define('TIME_DIFF', 330);
@@ -130,6 +132,8 @@ if(DEFAULT_COUNTRY==38){
 	define('FB',  'https://www.facebook.com/westernoverseasaustralia');
 	define('INST','https://www.instagram.com/westernoverseasaustralia');
 	define('TTK', '');
+	define('YTD', 'https://www.youtube.com/channel/UCqvHFSJIuOlBQw7LPUTPHaw');
+	define('TWT', 'https://twitter.com/westernoverseaa');
 
 }else if(DEFAULT_COUNTRY==101){
 	define('TIME_DIFF', 0);
@@ -188,13 +192,12 @@ if(DEFAULT_COUNTRY==38){
 
 	define('TESTINGURL', 'https://www.westernoverseas.online/_online-production-testing/adminController/dashboard');
 	define('LIVEURL', 'https://www.westernoverseas.online/adminController/dashboard');
-	define('TESTINGURL', 'https://westernoverseas.com.au/aus-production-testing/adminController/dashboard');
-	define('LIVEURL', 'https://westernoverseas.com.au/adminController/dashboard');
-	define('TESTINGURL', 'https://westernoverseas.ca/canada-production-testing/adminController/dashboard');
-	define('LIVEURL', 'https://westernoverseas.ca/adminController/dashboard');
-	define('FB',  'https://www.facebook.com/westernoverseascanada/');
-	define('INST','https://www.instagram.com/westernoverseascanada/');
+	
+	define('FB',  'https://www.facebook.com/westernoverseas172/');
+	define('INST','https://www.instagram.com/westernoverseas/');
 	define('TTK', 'https://www.tiktok.com/@westernoverseasimm');
+	define('YTD', 'https://www.youtube.com/westernoverseas');
+	define('TWT', 'https://twitter.com/westernoverseaa?lang=en');
 }else{
 
 }
@@ -721,8 +724,7 @@ define('ENQ_SUC', 'Thanks! Your query sent successfully to Western Overseas Admi
 define('ENQ_FLD', 'Oops! Your query submission failed! Please try again.');
 
 //social medias
-define('YTD', 'https://www.youtube.com/channel/UCqvHFSJIuOlBQw7LPUTPHaw');
-define('TWT', 'https://twitter.com/westernoverseaa');
+
 define('LI',  'https://www.linkedin.com/in/westernoverseas/');
 define('PNT', 'https://in.pinterest.com/overseaswestern/');
 define('GP',  'https://plus.google.com/u/0/+WesternOverseas');

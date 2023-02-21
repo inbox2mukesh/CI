@@ -20,11 +20,10 @@ class Offline_courses extends MY_Controller{
         $data['title2'] = ' Courses';
         $headers = array(
             'API-KEY:'.WOSA_API_KEY,   
-        ); 
+        );
 
-
-         /*---------COMMON API CALL FOR HEADER-----*/
-          $data['allcountry']= json_decode($this->_curlGetData(base_url(GET_CNT_URL), $headers)); 
+        /*---------COMMON API CALL FOR HEADER-----*/
+        $data['allcountry']= json_decode($this->_curlGetData(base_url(GET_CNT_URL), $headers)); 
         //get complain subject list
         $data['complaintSubject'] = json_decode($this->_curlGetData(base_url(GET_COMPLAINT_SUBJECT), $headers));
         //get offer marquee

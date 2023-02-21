@@ -81,6 +81,7 @@
 
     <div class="row onlinePackResultDiv">
       <?php
+      if (!empty($AllPack_PP->error_message->data)) {
       foreach ($AllPack_PP->error_message->data as $p) {
         $package_id = $p->package_id;
         if (!empty($package_id)) {
@@ -339,7 +340,9 @@
           </script>
           <!--End Modal info-->
       <?php }
-      } ?>
+      } } else {?>
+      <div class="text-center">No package found</div>
+      <?php }?>
       <script type="text/javascript">
         $('.selectpicker').selectpicker('refresh')
         $('.datepicker').datepicker({

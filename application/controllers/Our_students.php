@@ -15,8 +15,8 @@ class Our_students extends MY_Controller
         $this->load->model('News_model');
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
-            'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
-            'CLASSROOM-ID:' . $_SESSION['classroom_id'],               
+            'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
+            'CLASSROOM-ID:' . @$_SESSION['classroom_id'],               
         );           
         $GLOBALS['curPack']=json_decode($this->_curlGetData(base_url(GET_CUR_PACK_URL), $headers)); 
         $GLOBALS['allClassSchedule']=json_decode($this->_curlGetData(base_url(GET_CLASS_SCH_URL_LONG_COUNT), $headers));
@@ -85,7 +85,7 @@ class Our_students extends MY_Controller
             $data['STU_PACK_START_DATE'] = json_decode($this->_curlGetData(base_url(STU_PACK_START_DATE), $headers_a));
             $headers_b = array(
                 'API-KEY:' . WOSA_API_KEY,
-                'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+                'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
                 'CLASSROOM-ID:' . $_SESSION['classroom_id'],
                 'STUDENT-PACK-START-DATE:' . $data['STU_PACK_START_DATE']->error_message->data->subscribed_on_str,
                 'STUDENT-PACK-END-DATE:' . strtotime($data['STU_PACK_START_DATE']->error_message->data->expired_on),
@@ -95,7 +95,7 @@ class Our_students extends MY_Controller
             $data['allClassroomMaterial'] = json_decode($this->_curlGetData(base_url(GET_ALL_CLASSROOM_MATERIAL), $headers_b));
             $headers_count = array(
                 'API-KEY:' . WOSA_API_KEY,
-                'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+                'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
                 'CLASSROOM-ID:' . $_SESSION['classroom_id'],                
             );            
             $data['allSharedDocsCount'] = json_decode($this->_curlGetData(base_url(GET_SHARED_DOCS_COUNT_URL), $headers_count));          
@@ -103,7 +103,7 @@ class Our_students extends MY_Controller
 			
 			 $headers_re_count = array(
                 'API-KEY:' . WOSA_API_KEY,
-                'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+                'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
                 'CLASSROOM-ID:' . $_SESSION['classroom_id'],
                 'STUDENT-PACK-START-DATE:' . $data['STU_PACK_START_DATE']->error_message->data->subscribed_on_str,
                 'STUDENT-PACK-END-DATE:' . strtotime($data['STU_PACK_START_DATE']->error_message->data->expired_on),              
@@ -125,7 +125,7 @@ class Our_students extends MY_Controller
             $data['STU_PACK_START_DATE'] = json_decode($this->_curlGetData(base_url(STU_PACK_START_DATE), $headers_a));
             $headers_b = array(
             'API-KEY:' . WOSA_API_KEY,
-            'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+            'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
             'CLASSROOM-ID:' . $_SESSION['classroom_id'],
             'STUDENT-PACK-START-DATE:' . $data['STU_PACK_START_DATE']->error_message->data->subscribed_on_str,
             'STUDENT-PACK-END-DATE:' . strtotime($data['STU_PACK_START_DATE']->error_message->data->expired_on),
@@ -134,13 +134,13 @@ class Our_students extends MY_Controller
 
             $headers_count = array(
             'API-KEY:' . WOSA_API_KEY,
-            'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+            'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
             'CLASSROOM-ID:' . $_SESSION['classroom_id'],                
             );            
             $data['allSharedDocsCount'] = json_decode($this->_curlGetData(base_url(GET_SHARED_DOCS_COUNT_URL), $headers_count));          
             $headers_re_count = array(
             'API-KEY:' . WOSA_API_KEY,
-            'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+            'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
             'CLASSROOM-ID:' . $_SESSION['classroom_id'],
             'STUDENT-PACK-START-DATE:' . $data['STU_PACK_START_DATE']->error_message->data->subscribed_on_str,
             'STUDENT-PACK-END-DATE:' . strtotime($data['STU_PACK_START_DATE']->error_message->data->expired_on),              
@@ -187,12 +187,12 @@ class Our_students extends MY_Controller
             /*---------ENDS-----*/   
             $headers = array(
                 'API-KEY:' . WOSA_API_KEY,
-                'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+                'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
             );
             $data['segment'] = $this->_getURI3(); //for student profile side menu 
             $headers = array(
                 'API-KEY:' . WOSA_API_KEY,
-                'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+                'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
             );
             $data['STD_WALLET_HISTORY'] = json_decode($this->_curlGetData(base_url(GET_STD_WALLET_HISTORY), $headers));           
             $data['wallet'] = json_decode($this->_curlGetData(base_url(GET_WALLET), $headers));            
@@ -252,7 +252,7 @@ class Our_students extends MY_Controller
                     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data_img);
                     $params = array(
                         'post_text' => $this->input->post('post_text'),
-                        'student_id' => $this->session->userdata('student_login_data')->id,
+                        'student_id' => @$this->session->userdata('student_login_data')->id,
                         'post_image' => $base64,
                         'type' => $type,
                         'active' => 1,
@@ -260,7 +260,7 @@ class Our_students extends MY_Controller
                 } else {
                     $params = array(
                         'post_text' => $this->input->post('post_text'),
-                        'student_id' => $this->session->userdata('student_login_data')->id,
+                        'student_id' => @$this->session->userdata('student_login_data')->id,
                         'type' => '',
                         'post_image' => NULL,
                         'active' => 1,
@@ -269,7 +269,7 @@ class Our_students extends MY_Controller
             } else {
                 $params = array(
                     'post_text' => $this->input->post('post_text'),
-                    'student_id' => $this->session->userdata('student_login_data')->id,
+                    'student_id' => @$this->session->userdata('student_login_data')->id,
                     'type' => '',
                     'post_image' => NULL,
                     'active' => 1,
@@ -303,7 +303,7 @@ class Our_students extends MY_Controller
         if ($this->form_validation->run()) {
             $params = array(
                 'post_id' => $this->input->post('post_id'),
-                'by_student' => $this->session->userdata('student_login_data')->id,
+                'by_student' => @$this->session->userdata('student_login_data')->id,
                 'post_reply_text' => $this->input->post('post_reply_text'),
                 'active' => 1,
             );
@@ -595,7 +595,7 @@ class Our_students extends MY_Controller
         $data['title2'] = ' Profile';
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
-            'STUDENT-ID:' . $this->session->userdata('student_login_data')->id
+            'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id
         );
         /*---------COMMON API CALL-----*/   
         $data['countryCode'] = $GLOBALS['countryCode'];  
@@ -717,7 +717,7 @@ class Our_students extends MY_Controller
         $data['title2'] = ' Password';
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
-            'ID:' . $this->session->userdata('student_login_data')->id
+            'ID:' . @$this->session->userdata('student_login_data')->id
         );       
         $data['segment'] = $this->_getURI();        
         $this->load->library('form_validation');
@@ -772,7 +772,7 @@ class Our_students extends MY_Controller
            // $data['announcements']=$GLOBALS['announcements'];
             $headers = array(
                 'API-KEY:' . WOSA_API_KEY,
-                'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+                'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
                 'CLASSROOM-ID:' . $_SESSION['classroom_id'],   
                 'LIMIT:' .LOAD_MORE_LIMIT_10,
                 'OFFSET:0',            
@@ -780,7 +780,7 @@ class Our_students extends MY_Controller
             $data['announcements'] = json_decode($this->_curlGetData(base_url(GET_ANNOUNCEMENTS_URL), $headers));
             $headers_count = array(
                 'API-KEY:' . WOSA_API_KEY,
-                'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+                'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
                 'CLASSROOM-ID:' . $_SESSION['classroom_id'],                           
             );
             $data['announcements_count'] = json_decode($this->_curlGetData(base_url(GET_ANNOUNCEMENTS_COUNT_URL), $headers_count)); 
@@ -796,7 +796,7 @@ class Our_students extends MY_Controller
         $offset=$this->input->post('offset')+LOAD_MORE_LIMIT_10;
         $headers1 = array(
             'API-KEY:' . WOSA_API_KEY,
-            'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+            'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
             'CLASSROOM-ID:' . $_SESSION['classroom_id'],
             'LIMIT:' .LOAD_MORE_LIMIT_10,
             'OFFSET:'.$offset,
@@ -805,7 +805,7 @@ class Our_students extends MY_Controller
         $next_offset=$offset+LOAD_MORE_LIMIT_10;
         $headers_count = array(
             'API-KEY:' . WOSA_API_KEY,
-            'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+            'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
             'CLASSROOM-ID:' . $_SESSION['classroom_id'],
             'LIMIT:' .LOAD_MORE_LIMIT_10,
             'OFFSET:'.$next_offset,
@@ -823,7 +823,7 @@ class Our_students extends MY_Controller
        
         $headers1 = array(
             'API-KEY:' . WOSA_API_KEY,
-            'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+            'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
             'CLASSROOM-ID:' . $_SESSION['classroom_id'],
             'LIMIT:' .LOAD_MORE_LIMIT_10,
             'OFFSET:0',
@@ -831,7 +831,7 @@ class Our_students extends MY_Controller
         $data['announcements'] = json_decode($this->_curlGetData(base_url(GET_ANNOUNCEMENTS_URL), $headers1));      
         $headers_count = array(
             'API-KEY:' . WOSA_API_KEY,
-            'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+            'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
             'CLASSROOM-ID:' . $_SESSION['classroom_id'],
             
         );
@@ -865,7 +865,7 @@ class Our_students extends MY_Controller
             /*---------ENDS-----*/   
             $headers1 = array(
                 'API-KEY:' . WOSA_API_KEY,
-                'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+                'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
                 'CLASSROOM-ID:' . $_SESSION['classroom_id'],
                 'LIMIT:' .LOAD_MORE_LIMIT,
                 'OFFSET:0',
@@ -874,7 +874,7 @@ class Our_students extends MY_Controller
             $data['allSharedDocs'] = json_decode($this->_curlGetData(base_url(GET_SHARED_DOCS_URL), $headers1));
             $headers = array(
                 'API-KEY:' . WOSA_API_KEY,
-                'STUDENT-ID:' . $this->session->userdata('student_login_data')->id,
+                'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
                 'CLASSROOM-ID:' . $_SESSION['classroom_id'],                
             );            
             $data['allSharedDocsCount'] = json_decode($this->_curlGetData(base_url(GET_SHARED_DOCS_COUNT_URL), $headers));  

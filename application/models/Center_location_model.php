@@ -103,7 +103,14 @@ class Center_location_model extends CI_Model
         $this->db->join('country cnt', 'cnt.country_id = cl.country_id' ,'left');
         $this->db->join('state st', 'st.state_id = cl.state_id' ,'left');
         $this->db->join('city ct', 'ct.city_id = cl.city_id' ,'left');
-        $this->db->where(array('cl.active'=>1,'cl.is_overseas'=>1));
+        if(DEFAULT_COUNTRY==101)
+        {
+            $this->db->where(array('cl.active'=>1,'cl.is_overseas'=>0));
+        }
+        else {
+            $this->db->where(array('cl.active'=>1,'cl.is_overseas'=>1));
+        }
+        
         $this->db->order_by('cl.center_name', 'ASC');
         return $this->db->get('')->result_array();
     }

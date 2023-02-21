@@ -23,6 +23,7 @@ class Sitemap extends MY_Controller{
        $data['faqData'] = json_decode($this->_curlGetData(base_url(GET_ALL_FAQ_URL), $headers));        
        $data['newsData'] = json_decode($this->_curlGetData(base_url(GET_NEWS_DATA_URL), $headers));
       // header('Content-type: text/xml');
+      $data['title'] = 'Sitemap';
        $this->load->view('aa-front-end/includes/header',$data);
     
         $this->load->view("aa-front-end/sitemap");
@@ -44,7 +45,7 @@ class Sitemap extends MY_Controller{
         foreach ($res as $node)
         {    
         if (strpos($node -> nodeValue, site_url()) !== false) {    
-            if($node -> nodeValue !=site_url()."sitemap"  && $node -> nodeValue !=site_url())
+            if($node -> nodeValue !=site_url()."sitemap")
         {
           $values[] = $node->nodeValue;   
         }  
