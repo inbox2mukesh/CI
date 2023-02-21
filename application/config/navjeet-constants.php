@@ -28,7 +28,7 @@ define('USP_COUNT_LENGHT', 6);
 /*----ends---*/
 define('GET_CNT_URL', 'WOSA-API-V1/Get_country');
 define('GET_PP_COURSE', 'WOSA-API-V1/practice_packs/Get_PP_TestModule');
-define('GET_PP_PGM', 'WOSA-API-V1/practice_packs/Get_PP_programe');
+//define('GET_PP_PGM', 'WOSA-API-V1/practice_packs/Get_PP_programe');
 define('GET_PP_DURATION', 'WOSA-API-V1/practice_packs/Get_pp_duration');
 define('GET_PACKPAGE_BATCH', 'WOSA-API-V1/online_courses/Get_package_batch');
 define('GET_CLASSROOM_SCHEDULE', 'WOSA-API-V1/online_courses/Get_package_classroom');
@@ -53,7 +53,7 @@ define('GET_ANNOUNCEMENTS_COUNT_URL', 'WOSA-API-V1/student/Get_announcement_coun
 define('GET_ONN_COURSE_TYPE', 'WOSA-API-V1/online_courses/Get_onlineCourse_type');
 define('DEFINE_NIL', 'NIL');
 define('CHECKOUT_TRACKING_URL_COUNSELLING', 'WOSA-API-V1/Checkout_tracking_counselling');
-
+define('GET_ONL_PGM', 'WOSA-API-V1/Get_programe');
 
 
 
@@ -69,6 +69,7 @@ define('LOAD_MORE_LIMIT', 6);
 define('LOAD_MORE_LIMIT_8', 8);
 define('LOAD_MORE_LIMIT_10', 10);
 define('CLASSROOM_ALL_MATERIAL_REFRESH_TIME', 20000);//1000=millisec
+define('PACKAGE_MAX_DURATION', 180);//6=month
 
 define('MENU_ICON_FILE_PATH', '/resources/img/user2-160x160.jpg');//live
 define('MAX_CLASS_DURATION', 14400);//14400(min)=4h

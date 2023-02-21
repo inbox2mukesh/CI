@@ -1272,9 +1272,9 @@ $(".ppp").change(function () {
 				html = '<option data-subtext="" value="">Select package</option>';
 				for (i = 0; i < data.length; i++) {
 					if (data[i]['discounted_amount'] === data[i]['amount'] || data[i]['discounted_amount'] == null) {
-						html += '<option value=' + data[i]['package_id'] + ' >' + data[i]['package_name'] + ' | ' + data[i]['discounted_amount'] + ' | ' + data[i]['duration'] + ' ' + data[i]['duration_type'] + '</option>';
+						html += '<option value=' + data[i]['package_id'] + ' data-dur='+data[i]['duration']+' '+data[i]['duration_type']+'   >' + data[i]['package_name'] + ' | ' + data[i]['discounted_amount'] + ' | ' + data[i]['duration'] + ' ' + data[i]['duration_type'] + '</option>';
 					} else {
-						html += '<option value=' + data[i]['package_id'] + ' >' + data[i]['package_name'] + ' | ' + data[i]['discounted_amount'] + '/' + data[i]['amount'] + ' | ' + data[i]['duration'] + ' ' + data[i]['duration_type'] + '</option>';
+						html += '<option value=' + data[i]['package_id'] + ' data-dur='+data[i]['duration']+' '+data[i]['duration_type']+'   >' + data[i]['package_name'] + ' | ' + data[i]['discounted_amount'] + '/' + data[i]['amount'] + ' | ' + data[i]['duration'] + ' ' + data[i]['duration_type'] + '</option>';
 					}
 				}
 				html += '</select>';
@@ -7679,6 +7679,19 @@ $('.validatewordcount').keyup(function() {
         return false;
     }
 });
+$(".numeric_without_zero").on("blur", function (evt) {
+	var self = $(this);
+	var data=$(this).val();
+	var id=$(this).attr('id');
+	self.val(self.val().replace(/\D/g, ""));
+	if (data!='' && data<=0) {
+	$(this).val('');
+	$('.'+id+'_err').text('Zero is not allowed!');
+	} 
+	else {
+		$('.'+id+'_err').text('');
+	}
+});
 //restrict input type word count limit
 $('.maxlenghtrestrict').keyup(function(e) {
     var max			= $(this).data('count');
@@ -8421,3 +8434,106 @@ function fire_change_event()
 	$(".ppp").trigger("change");
 
 }
+function noNumbers(e) {
+	var code = ('charCode' in e) ? e.charCode : e.keyCode;
+	//alert(code);
+	if (!(code == 32) && // space
+		!(code > 47 && code < 58) && // numeric (0-9)
+		!(code > 64 && code < 91) && // upper alpha (A-Z)
+		!(code > 96 && code < 123) && // lower alpha (a-z)
+		!(code == 45)) { //  under score(-)
+		e.preventDefault();
+	}
+}
+function checkUrl(type,id) {
+	edit_id = $('#hid_id').val();
+	//eventUrlDisplayTitle = '<?php echo $eventData["eventUrlDisplayTitle"] ?>';
+	$('.'+id+'_err').text('');
+	reg = /(?=.*[a-zA-Z])[0-9a-zA-Z- ]/
+	var url = $("#"+id).val();	
+	if (url != '') {
+
+		if (url.match(reg)) {
+			$.ajax({
+				url: WOSA_ADMIN_URL + 'Url_slug/ajax_check_url_',
+				async: true,
+				type: 'post',
+				data: {
+					'url': url,'type':type,edit_id:edit_id					
+				},				
+				success: function(response) {
+					//alert(response)
+					if (response == 0) {
+						$('.submit_btn').prop('disabled', false);
+						return true;
+					}
+					else {
+						$('.'+id+'_err').text('this url is already taken');
+						$('#'+id).focus();
+						$('.submit_btn').prop('disabled', true);
+						return false;
+					}
+					//return false;
+					
+				}
+			});
+		} else {
+			$('.event_url_display_title_error').text('Url must contain at least one alphabet character.');
+			return false;
+		}
+	} else {
+		return false;
+		/*if(type=='submit'){
+			$("#event_form").submit();
+		}*/
+	}
+}
+$(document).on('blur', '.validate_url', function () {
+	var data=$(this).val();
+	var id=$(this).attr('id');
+	var regex = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+	if (!regex.test(data)) {
+	$("."+id+'_err').text('Invalid Link');
+	$(this).val('');
+	return false;
+	} else {
+	$("."+id+'_err').text('');
+	return true;
+	}
+});
+function validate_package_max_duration(value,maxDuration)
+{
+	var duration_type=$('#duration_type').val();
+	if(duration_type !="" && value!="" && maxDuration !="")
+	{	//alert(duration_type)
+	if(duration_type == 1) /* Day */
+	{
+		var duration =parseInt(value);
+	}
+	else if(duration_type == 2)/* Week */
+	{
+		var duration =parseInt(value*7);
+	}
+	else if(duration_type == 3)/* Month */
+	{
+		var duration =parseInt(value*30);
+
+	}	
+	if(duration>parseInt(maxDuration))
+	{
+		$('.duration_err').text('Package max duration is '+maxDuration+' days');
+		$('#duration').val('');
+		$('#duration').focus();
+	}
+	else {
+		$('.duration_err').text('');
+		//('#duration').val('');
+		//$('#duration').focus();
+	}
+	}	
+}
+$(document).on('change', '.reset_duration_field', function () {
+	$('#duration').val('');
+	$('.duration_err').text('');
+
+});

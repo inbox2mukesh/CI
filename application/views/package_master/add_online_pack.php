@@ -30,7 +30,7 @@
 					<div class="col-md-4">
 						<label for="package_name" class="control-label"><span class="text-danger">*</span>Pack Name</label>
 						<div class="form-group">
-							<input type="text" name="package_name" value="<?php echo $this->input->post('package_name'); ?>" class="form-control input-ui-100 removeerrmessage" id="package_name" maxlength="60"/>
+							<input type="text" name="package_name" value="<?php echo $this->input->post('package_name'); ?>" class="form-control input-ui-100 removeerrmessage" id="package_name" maxlength="45"/>
 							<span class="text-danger package_name_err"><?php echo form_error('package_name');?></span>
 						</div>
 					</div>
@@ -60,7 +60,7 @@
 					<div class="col-md-4">
 						<label for="duration_type" class="control-label"><span class="text-danger">*</span>Duration type</label>
 						<div class="form-group">
-							<select name="duration_type" id="duration_type" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep">
+							<select name="duration_type" id="duration_type" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep reset_duration_field" >
 								<option value="">Select</option>
 								<?php
 								foreach($all_duration_type as $p){
@@ -76,7 +76,7 @@
 					<div class="col-md-4">
 						<label for="duration" class="control-label"><span class="text-danger">*</span>Duration</label>
 						<div class="form-group has-feedback">
-							<input type="text" placeholder="e.g. 30" name="duration" value="<?php echo $this->input->post('duration'); ?>" class="input-ui-100 form-control chknum1 removeerrmessage" id="duration" maxlength="3" autocomplete="off"/>
+							<input type="text" placeholder="e.g. 30" name="duration" value="<?php echo $this->input->post('duration'); ?>" class="input-ui-100 form-control chknum1 removeerrmessage" id="duration" maxlength="3" autocomplete="off" onblur="validate_package_max_duration(this.value,'<?php echo PACKAGE_MAX_DURATION;?>')" />
 							<span class="glyphicon glyphicon-time form-control-feedback"></span>
 							<span class="text-danger duration_err"><?php echo form_error('duration');?></span>
 						</div>
