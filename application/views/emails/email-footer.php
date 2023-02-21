@@ -7,7 +7,7 @@
 		</div>	
 		 </div>
 		<?php 
-		if(DEFAULT_COUNTRY !='13') { //not Australia
+		if(DEFAULT_COUNTRY !='13' && DEFAULT_COUNTRY!=101) { //not Australia
 		?>
 		<div class="bx-2">		 
 		<img src="<?php echo base_url('resources-f/images/cer-logo.png');?>" style="width:270px;">
@@ -20,7 +20,7 @@
 		<a href="<?php echo INST;?>"><img src="<?php echo base_url('resources/img/i-icn.png');?>" width="25" height="25" style="margin-right:0px;"></a>
 		<a href="<?php echo YTD;?>"><img src="<?php echo base_url('resources/img/y-icn.png');?>" width="25" height="25" style="margin-right:0px;"></a>
 		<?php 
-		if(DEFAULT_COUNTRY !='13') { //not Australia
+		if(DEFAULT_COUNTRY !='13' && DEFAULT_COUNTRY!=101) { //not Australia
 		?>
 		<a href="<?php echo TTK;?>"><img src="<?php echo base_url('resources/img/tiktok.png');?>" width="25" height="25" style="margin-right:0px;"></a>
 		<?php }?>

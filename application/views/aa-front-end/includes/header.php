@@ -7,7 +7,31 @@
     <meta name="description" content="Online/Offline english learning" />
     <meta name="keywords" content="VISA, Canada, Study abroad, Immigration" />
     <meta name="author" content="" />
-    <meta name="google-site-verification" content="" />
+	<?php if(DEFAULT_COUNTRY ==38) // canada 
+	{ ?>
+	<meta name="google-site-verification" content="TApYsq7UsonG0PLyqa7zIma_Fy6qgiYmHIw7TjulIE0" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-KDB482Q');</script>
+	<!-- End Google Tag Manager -->
+
+	<?php } else if(DEFAULT_COUNTRY ==13)//Australia
+	 {?> 
+	<meta name="google-site-verification" content="CTkHkLdQ7ZCkrb1WCxDtXwX2cOhIfNmcmP-UQGpnT-g" />
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-NZFNR26');</script>
+	<!-- End Google Tag Manager -->
+	<?php } else if(DEFAULT_COUNTRY ==101) {?>
+	<meta name="google-site-verification" content="" />		
+	<?php }?>
+    
     <title><?php echo $title;?></title>
     <link href="<?php echo base_url(DESIGN_VERSION_F.'/images/favicon.png');?>" rel="shortcut icon" type="image/png">
     <!-- Stylesheet -->
@@ -57,6 +81,23 @@
 </script>
 </head>
 <body>
+	<?php if(DEFAULT_COUNTRY ==38) {?>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDB482Q"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+	<?php } else if(DEFAULT_COUNTRY ==13) {?>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NZFNR26"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+	<?php } else if(DEFAULT_COUNTRY ==101){?>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDB482Q"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+	<?php } else { }?>
 	<?php include_once('login_model.php');?>
 	<?php include_once('registration_model.php');?>
 	<?php include_once('forgot_password_model.php');?>

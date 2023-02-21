@@ -345,7 +345,7 @@
                         </div>
 
                         <?php if ($student['is_email_verified'] == 1 and $student['active'] == 1) { ?>
-                            <?php if ($userPhysicalBranch == 1 and $this->Role_model->_has_access_('student','sell_inhouse_pack_')) { ?>
+                            <?php /*if ($userPhysicalBranch == 1 and $this->Role_model->_has_access_('student','sell_inhouse_pack_')) { ?>
                                 <?php if(WOSA_ONLINE_DOMAIN==1){ ?>
                                     <div class="col-md-2 radiCourse">
                                         <div class="form-group">
@@ -353,7 +353,7 @@
                                             <label for="offline_cb" class="control-label">Inhouse Pack?</label>
                                         </div>
                                     </div><?php } ?>
-                                <?php } ?>
+                                <?php } */?>
 
                             <?php if ($userVirtualBranch == 1 and $this->Role_model->_has_access_('student', 'sell_online_pack_')) { ?>
                                 <div class="col-md-2 radiCourse">
@@ -486,7 +486,7 @@
                             <div class="col-md-4">
                                 <label for="start_date_off" class="control-label"><span class="text-danger">*</span>Start Date <span class="packScheduleInfo_off text-success"></span></label>
                                 <div class="form-group has-feedback">
-                                    <input type="text" name="start_date_off" id="start_date_off" value="<?php echo ($this->input->post('start_date_off') ? $this->input->post('start_date_off') : $tomarrow); ?>" class="noBackDate form-control input-ui-100 change_startdate" autocomplete="off" readonly="readonly" />
+                                    <input type="text" name="start_date_off" id="start_date_off" value="<?php echo ($this->input->post('start_date_off') ? $this->input->post('start_date_off') : $tomarrow); ?>" class="datepicker_timezone form-control input-ui-100 change_startdate" autocomplete="off" readonly="readonly" />
                                     <span class="glyphicon glyphicon-calendar form-control-feedback text-info"></span>
                                     <span class="text-danger start_date_off_err"><?php echo form_error('start_date_off'); ?></span>
                                 </div>
@@ -494,7 +494,7 @@
                             <div class="col-md-4">
                                 <label for="due_commitment_date_off" class="control-label">Due Commitment Date (If any)</label>
                                 <div class="form-group has-feedback">
-                                    <input type="text" name="due_commitment_date_off" value="<?php echo ($this->input->post('due_commitment_date_off') ? $this->input->post('due_commitment_date_off') : ''); ?>" class="noBackDate form-control input-ui-100" id="due_commitment_date_off" autocomplete="off" readonly="readonly"/>
+                                    <input type="text" name="due_commitment_date_off" value="<?php echo ($this->input->post('due_commitment_date_off') ? $this->input->post('due_commitment_date_off') : ''); ?>" class="datepicker_timezone form-control input-ui-100" id="due_commitment_date_off" autocomplete="off" readonly="readonly"/>
                                     <span class="glyphicon glyphicon-calendar form-control-feedback text-info"></span>
                                     <span class="text-danger due_commitment_date_off_err"><?php echo form_error('due_commitment_date_off'); ?></span>
                                 </div>
@@ -610,9 +610,9 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="start_date" class="control-label"><span class="text-danger">*</span>Start Date <span class="packScheduleInfo text-success"></span></label>
+                                <label for="start_date" class="control-label"><span class="text-danger">*</span>Start Date<span class="packScheduleInfo text-success"></span></label>
                                 <div class="form-group has-feedback">
-                                    <input type="text" name="start_date" value="<?php echo ($this->input->post('start_date') ? $this->input->post('start_date') : $tomarrow); ?>" class="noBackDate form-control input-ui-100 removeerrmessage change_startdate" id="start_date" autocomplete="off" readonly="readonly"/>
+                                    <input type="text" name="start_date" value="<?php echo ($this->input->post('start_date') ? $this->input->post('start_date') : $tomarrow); ?>" class="datepicker_timezone form-control input-ui-100 removeerrmessage change_startdate" id="start_date" autocomplete="off" readonly="readonly"/>
                                     <span class="glyphicon glyphicon-calendar form-control-feedback text-info"></span>
                                     <span class="text-danger start_date_err"><?php echo form_error('start_date'); ?></span>
                                 </div>
@@ -620,7 +620,7 @@
                             <div class="col-md-4">
                                 <label for="due_commitment_date" class="control-label">Due Commitment Date (If any)</label>
                                 <div class="form-group has-feedback">
-                                    <input type="text" name="due_commitment_date" value="<?php echo ($this->input->post('due_commitment_date') ? $this->input->post('due_commitment_date') : ''); ?>" class="noBackDate form-control input-ui-100" id="due_commitment_date" autocomplete="off" readonly="readonly"/>
+                                    <input type="text" name="due_commitment_date" value="<?php echo ($this->input->post('due_commitment_date') ? $this->input->post('due_commitment_date') : ''); ?>" class="datepicker_timezone form-control input-ui-100" id="due_commitment_date" autocomplete="off" readonly="readonly"/>
                                     <span class="glyphicon glyphicon-calendar form-control-feedback text-info"></span>
                                     <span class="text-danger due_commitment_date_err"><?php echo form_error('due_commitment_date'); ?></span>
                                 </div>
@@ -730,7 +730,7 @@
                             <div class="col-md-4">
                                 <label for="start_date_pp" class="control-label"><span class="text-danger">*</span>Package Starting Date</label>
                                 <div class="form-group has-feedback">
-                                    <input type="text" name="start_date_pp" id="start_date_pp" value="<?php echo ($this->input->post('start_date_pp') ? $this->input->post('start_date_pp') : $tomarrow); ?>" class="noBackDate form-control input-ui-100 removeerrmessage change_startdate" autocomplete="off" readonly="readonly" />
+                                    <input type="text" name="start_date_pp" id="start_date_pp" value="<?php echo ($this->input->post('start_date_pp') ? $this->input->post('start_date_pp') : $tomarrow); ?>" class="datepicker_timezone form-control input-ui-100 removeerrmessage change_startdate" autocomplete="off" readonly="readonly" />
                                     <span class="glyphicon glyphicon-calendar form-control-feedback text-info"></span>
                                     <span class="text-danger start_date_pp_err"><?php echo form_error('start_date_pp'); ?></span>
                                 </div>
@@ -738,7 +738,7 @@
                             <div class="col-md-4">
                                 <label for="due_commitment_date_pp" class="control-label">Due Commitment Date (If any)</label>
                                 <div class="form-group has-feedback">
-                                    <input type="text" name="due_commitment_date_pp" value="<?php echo ($this->input->post('due_commitment_date_pp') ? $this->input->post('due_commitment_date_pp') : ''); ?>" class="noBackDate form-control input-ui-100" id="due_commitment_date_pp" autocomplete="off" readonly="readonly" />
+                                    <input type="text" name="due_commitment_date_pp" value="<?php echo ($this->input->post('due_commitment_date_pp') ? $this->input->post('due_commitment_date_pp') : ''); ?>" class="datepicker_timezone form-control input-ui-100" id="due_commitment_date_pp" autocomplete="off" readonly="readonly" />
                                     <span class="glyphicon glyphicon-calendar form-control-feedback text-info"></span>
                                     <span class="text-danger due_commitment_date_pp_err"><?php echo form_error('due_commitment_date_pp'); ?></span>
                                 </div>
@@ -1552,6 +1552,7 @@
         </div>
     </div>
 </div>
+<input type="hidden" name="pack_duration" id="pack_duration">
 <!-- modal box for promocode range ends-->
 <div>
 <?php ob_start(); ?>
