@@ -6,7 +6,7 @@
 <tr>
 	<td style="font-size:16px; color:#333333!important; line-height:24px; text-align: justify">
 	<p style="padding:5px 0px;margin:0px;">Dear <?php echo $fname;?>,</p>	
-	<p style="word-break: break-all;"> 
+	<p style="word-break:break-word;"> 
 		<?php echo $email_message.'<br/><br/>'; ?>
 		<b>STUDENT UID:</b> <?php echo $UID.'<br/>'; ?>
 		<b>PASSWORD:</b> <?php echo $password.'<br/><br/>'; ?>				

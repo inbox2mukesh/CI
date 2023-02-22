@@ -317,6 +317,7 @@ updateTimeSlotList();
 		
 	select_session_type=$("#session_title").val();
 	session_date=$("#session_date").val();
+	//alert(session_date)
 	const myArray = session_date.split(" - ");
 	fromDate=myArray[0];
 	toDate=myArray[1];

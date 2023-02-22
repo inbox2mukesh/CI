@@ -197,8 +197,7 @@
 															?>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url();?>become-agent" class="blink"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/network.svg');?>" alt="">Join Agent Network</a> </li>
 																<?php }?>
-																<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/partners.svg');?>" alt="">
-																<?php if(DEFAULT_COUNTRY==101){ echo "Our Website";} else { echo "Our Partners";} ?></a>
+																<li class="menu-item menu-item-has-children header-sub-menu"><a href="#"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/partners.svg');?>" alt=""><?php if(DEFAULT_COUNTRY==101){ echo"Our Website";} else { echo "Our Partners";} ?></a>
 																	<ul class="sub-menu">
 																		<li class="back"><a href="#">Back</a></li>
 																		<li class="menu-item leave-mouse"> <a class="text-normal" href="https://western-overseas.com/" style="text-transform: lowercase!important;" target="_blank">www.western-overseas.com</a> </li>
@@ -271,7 +270,7 @@
 										?>
 										<div class="rts-btn mob-display">
 											<ul>
-											<li class="enq-btn"> <a href="https://www.ieltsrealitytest.com/" target="_blank">Reality Test</a> </li>
+											<a href="https://www.ieltsrealitytest.com/" target="_blank"><li class="enq-btn">Reality Test</li></a> 
 												<!-- <li class="enq-btn" onClick="location.replace('<?php echo base_url('counseling');?>');"><a>Reality Test</a></li> -->
 											</ul>
 										</div>

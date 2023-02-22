@@ -1112,13 +1112,15 @@ class Package_master_model extends CI_Model
             $this->db->where(array('pkg.programe_id'=>$programe_id));
         }else{ }
         if($category_id){
-            $this->db->where(array('pcat.category_id'=>$category_id));
+            $this->db->join('`package_category` pcat_temp','pcat.`package_id`=pkg.`package_id`');
+            $this->db->where(array('pcat_temp.category_id'=>$category_id));
         }else{ }
         if($duration){
             $this->db->where(array('pkg.duration'=>$duration));
         }else{ }
         if($course_type){
-            $this->db->where(array('pk_time.course_timing_id'=>$course_type));
+          $this->db->join('`package_timing` pk_time1','pk_time1.`package_id`=pkg.`package_id`');
+            $this->db->where(array('pk_time1.course_timing_id'=>$course_type));
         }else{ }
         $this->db->where(array('pkg.active'=>1,'pkg.publish'=>1,'is_offline'=>0,'pkg.country_id'=>$country_id));
         $this->db->group_by('pkg.package_id');

@@ -26,13 +26,10 @@ border-radius: 10px;
             </div>
             <?php echo $this->session->flashdata('flsh_msg'); ?>
 			<?php echo form_open('adminController/counseling_session/edit/'.$counseling_session['id']); ?>
-		    <?php				
-			   
+		    <?php		   
 					
-			  $session_type=$counseling_session['session_type'];
-				
-				$counseling_session_id=$counseling_session['id'];
-				
+			$session_type=$counseling_session['session_type'];				
+			$counseling_session_id=$counseling_session['id'];				
 			?>			
 			<div class="box-body">
 				<div class="row clearfix">
@@ -177,6 +174,7 @@ border-radius: 10px;
 	?>
     updateTimeSlotList();
     function updateTimeSlotList(){
+		console.log(dateBranchTimeSlotList);
 		
 		counseling_session_id='<?php echo $counseling_session_id?>';
 		
@@ -200,10 +198,11 @@ border-radius: 10px;
 		select_session_type=$("#session_title").val();
 		//alert(select_session_type)
 		session_date=$("#session_date_new").val();
+		//alert(session_date)
 		dates={};
 		dates[session_date]=session_date;
 		AllRedyAddTimeSlotList={};
-		/*$.each(dateBranchTimeSlotList,function(key,val){
+		$.each(dateBranchTimeSlotList,function(key,val){
 			
 			sdate=val.session_date;
 			stime_slot=val.time_slot;
@@ -212,12 +211,12 @@ border-radius: 10px;
 			
 			added_session_type=val.session_type;
 
-			if(dates.hasOwnProperty(sdate)==false && select_session_type == added_session_type && counseling_session_id != select_counseling_session_id){
+			if(dates.hasOwnProperty(sdate)==true && select_session_type == added_session_type && counseling_session_id != select_counseling_session_id){
 				//alert(dates.hasOwnProperty(sdate))
 				AllRedyAddTimeSlotList[stime_slot]=stime_slot;
 			}
 		})
-		  */
+		
             			
 			var counseling_session_time_slot=$('#counseling_session_time_slot').val();
 			//alert(counseling_session_time_slot)

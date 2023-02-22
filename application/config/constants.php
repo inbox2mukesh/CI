@@ -163,7 +163,7 @@ define('TWT', 'https://twitter.com/westernoverseaa');
 	}
 	define('STAMP', 'resources-f/images/mock_test_reprt_images/India-Online-Stamp.png');
 	define('LOGO', 'resources-f/images/logo-sm-online.webp');
-	define('MAIL_LOGO', 'resources-f/images/logo-sm-online.webp');
+	define('MAIL_LOGO', 'resources-f/images/logo-sm-online.png');
 	define('CURRENCY', 'INR');
 	define('TIME_ZONE', 'Asia/Kolkata');
 

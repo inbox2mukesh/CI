@@ -15,7 +15,7 @@
 
 				<!-- <iframe id="frm<?php echo $p->video_id; ?>" class="thumb-videos" src="<?php echo $d->video_url; ?>" allowfullscreen controls autoplay></iframe> -->
 				<div class="video-border">
-				<video id="frm<?php echo $p->video_id; ?>" class="thumb-videos" controls controlsList="nodownload" controlsList="noplaybackrate" poster="https://westernoverseas.ca/canada-testing/resources-f/images/slider/desktop-slider-1.webp">
+				<video id="frm<?php echo $p->video_id; ?>" class="thumb-videos" controls controlsList="nodownload" controlsList="noplaybackrate" poster="resources-f/images/poster.jpg">
 	  				<source src="<?php echo $d->video_url; ?>" type="video/mp4">  					
 				</video>
 			</div>

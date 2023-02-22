@@ -144,6 +144,8 @@ class Online_courses extends MY_Controller
             'COURSE-ID:' . $course_type,           
             'COUNTRY-ID:' . DEFAULT_COUNTRY,
         );
+       //echo  $this->_curlGetData(base_url(GET_ONN_COURSE_DURATION), $headers);
+//die();
         $data['allOnlineCourseDuration'] = json_decode($this->_curlGetData(base_url(GET_ONN_COURSE_DURATION), $headers));
         $this->load->view('aa-front-end/ajax_online_duation', $data);
 
@@ -256,6 +258,7 @@ class Online_courses extends MY_Controller
             'PROGRAME-ID:' . $programe_id,          
             'CATEGORY-ID:' . $category_id,          
         );
+       
         $catOption = '<option value="">Select Course Type</option>';
         $Getcoursetype= json_decode($this->_curlGetData(base_url(GET_ONN_COURSE_TYPE), $headers));
         foreach ($Getcoursetype->error_message->data as $p) {

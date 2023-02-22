@@ -554,7 +554,7 @@ if ($(window).width() >= 500) {
 
 
 <!-- Body Scroller Remove on modal-->
-<script>
+<!-- <script>
 	var scrollDistance = 0;
 	$(document).on("show.bs.modal", ".modal", function () {
 	scrollDistance = $(window).scrollTop();
@@ -565,7 +565,7 @@ if ($(window).width() >= 500) {
 	$("body").css("top", "");
 	$(window).scrollTop(scrollDistance);
 	});
-</script>
+</script> -->
 
 
 
