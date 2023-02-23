@@ -9,7 +9,7 @@
     <meta name="author" content="" />
 	<?php if(DEFAULT_COUNTRY ==38) // canada 
 	{ ?>
-	<meta name="google-site-verification" content="TApYsq7UsonG0PLyqa7zIma_Fy6qgiYmHIw7TjulIE0" />
+	<meta name="google-site-verification" content="TWahbwzXobBcHLN37jpUOgPFpl67Di8nEZ4YmKxDK0I" />
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -20,7 +20,7 @@
 
 	<?php } else if(DEFAULT_COUNTRY ==13)//Australia
 	 {?> 
-	<meta name="google-site-verification" content="CTkHkLdQ7ZCkrb1WCxDtXwX2cOhIfNmcmP-UQGpnT-g" />
+	<meta name="google-site-verification" content="a9_WHtbaFwjpLNeEwuUYmBxH3Qrnfyf9YSCpG-E6U7M" />
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -29,7 +29,7 @@
 	})(window,document,'script','dataLayer','GTM-T479XDP');</script>
 	<!-- End Google Tag Manager -->
 	<?php } else if(DEFAULT_COUNTRY ==101) {?>
-	<meta name="google-site-verification" content="" />		
+	<meta name="google-site-verification" content="hHbGzYKUYkKZiPzPYliiuH_vn_FizdVJJTkaGHnHZE0" />		
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

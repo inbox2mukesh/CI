@@ -96,7 +96,7 @@ class Package_transaction extends MY_Controller{
         
         //access control ends      
         $data['title'] = 'Success Package Payment';
-        $data['transaction'] = $this->Package_master_model->get_success_package_payment();
+        $data['transaction'] = $this->Package_master_model->get_success_package_payment();      
         $data['_view'] = 'package_transaction/view_success_package_payment';
         $this->load->view('layouts/main', $data);
 
@@ -198,6 +198,21 @@ class Package_transaction extends MY_Controller{
           header('Content-Type: application/vnd.ms-excel');
           header('Content-Disposition: attachment;filename='.$fileVame);
           $object_writer->save('php://output');
+    }
+
+    function success_fourmodule_data()
+    {
+        //access control start
+        $cn = $this->router->fetch_class() . '' . '.php';
+        $mn = $this->router->fetch_method();
+        if (!$this->_has_access($cn, $mn)) {
+            redirect('adminController/error_cl/index');
+        }        
+        //access control ends  
+        $data['title'] = 'Success Fourmodule Data';
+        $data['transaction'] = $this->Package_master_model->get_success_fourmodule_data();
+        $data['_view'] = 'package_transaction/success_fourmodule_data';
+        $this->load->view('layouts/main', $data);
     }
 
     

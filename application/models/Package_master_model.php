@@ -2189,4 +2189,17 @@ class Package_master_model extends CI_Model
         $this->db->where(array('sp.fourmodule_api_called !='=>0,'fourmodule_status='=>0));
         return $this->db->get('')->result_array();
     }
+    function get_success_fourmodule_data()
+    {
+        $this->db->select('std.fname,std.lname,std.email,std.mobile,std.UID,std.country_code,sp.fourmodule_api_called,sp.fourmodule_status,sp.fourmodule_response,sp.package_name,sp.package_duration,sp.subscribed_on,sp.expired_on,sp.student_package_id,tm.`test_module_name`,pgm.`programe_name,batch_master.batch_name,sp.fourmodule_json');
+        $this->db->from('`student_package` sp');  
+        $this->db->join('`students` std', 'std.`id`= sp.`student_id`'); 
+        $this->db->join('`test_module` tm','sp.`test_module_id`=tm.`test_module_id`'); 
+        $this->db->join('`programe_masters` pgm','pgm.`programe_id`=sp.`programe_id`');  
+        $this->db->join('batch_master', 'batch_master.batch_id = sp.batch_id','left');   
+        $this->db->order_by('sp.requested_on','DESC');
+      //  $this->db->where('sp.fourmodule_api_called !=', '0'); 
+        $this->db->where(array('sp.fourmodule_api_called !='=>0,'fourmodule_status='=>1));
+        return $this->db->get('')->result_array();
+    }
 }

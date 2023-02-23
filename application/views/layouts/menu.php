@@ -53,9 +53,14 @@
     ?>
     <li> <a href="<?php echo site_url('adminController/package_transaction/all_package_payment'); ?>"><i class="fa fa-inr"></i> All Package Payment</a> </li><?php } ?>
     <?php
+        if($this->Role_model->_has_access_('package_transaction','success_fourmodule_data')){
+    ?>
+    <li> <a href="<?php echo site_url('adminController/package_transaction/success_fourmodule_data'); ?>"><i class="fa fa-inr"></i> Success Fourmodule Data</a> </li><?php } ?>
+    <?php
         if($this->Role_model->_has_access_('package_transaction','failed_fourmodule_data')){
     ?>
     <li> <a href="<?php echo site_url('adminController/package_transaction/failed_fourmodule_data'); ?>"><i class="fa fa-inr"></i> Failed Fourmodule Data</a> </li><?php } ?>
+    
   </ul>
 </li>
 

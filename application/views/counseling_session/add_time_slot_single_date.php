@@ -28,17 +28,18 @@
 						<label for="session_type" class="control-label">Session Type<span class="text-danger">*</span></label>
 						<div class="form-group">
 						  
-						   	<select name="session_title" id="session_title" class="form-control" onchange="checkSessionType()">
+						   	<!-- <select name="session_title" id="session_title" class="form-control" onchange="checkSessionType()">
 						<?php foreach($sessiontypeList as $key=>$val){?>
 						<option value="<?php echo $key?>" <?php echo $key==$session_type ? 'selected="selected"':''?>>
 						<?php echo $val?></option>
 						<?php 
 						}?>	
-						</select>						
+						</select> -->	
+						<input type="text" readonly class="form-control" value="<?php echo $session_title?>" name="session_title" id="session_title">					
 							<span class="text-danger"><?php echo form_error('session_title');?></span>
 						</div>
 					</div>
-					<input type="hidden" value="<?php echo $session_title?>" name="session_title" id="session_title">
+					
                     <?php 
 					$session_date=$this->input->post('session_date');
 					if(empty($session_date)){
@@ -61,7 +62,16 @@
 							<span class="text-danger"><?php echo form_error('amount');?></span>							
 						</div>
 					</div>
+					<div class="col-md-4" id="duration" >
+						<label for="duration" class="control-label">Duration(In Minutes)<span class="text-danger">*</span></label>
+						<div class="form-group">
+                            <input type="text" name="duration" value="<?php echo $counseling_session_group['duration']?>" class="form-control allow_numeric numeric_without_zero removeerrmessage" id="duration"  maxlength="3"/>
+							<span class="text-danger duration_err"><?php echo form_error('duration');?></span>
+							
+						</div>
+					</div>	
 					<?php 
+					if($session_title !="In-Person"){
 					 $zoom_link=$this->input->post('zoom_link');
 					 if(empty($zoom_link)){
 						 
@@ -76,6 +86,7 @@
 							
 						</div>
 					</div>	
+					<?php }?>
 					 <!-- <div class="col-md-4"  id="paypal_link" >
 						<label for="paypal_link" class="control-label">PayPal Link<span class="text-danger">*</span></label>
 						<div class="form-group">

@@ -312,7 +312,12 @@ class Counseling_session extends MY_Controller{
 		
         $this->form_validation->set_rules('session_date','session date','required|trim');
 		$this->form_validation->set_rules('session_title','session title','required|trim');
-		$this->form_validation->set_rules('zoom_link','zoom link','required|trim');
+		if($this->input->post('session_title') == 'online')	
+        {
+        	//$this->form_validation->set_rules('meeting_link','meeting link','required|trim');	
+			$this->form_validation->set_rules('zoom_link','meeting link','required|trim');
+        }
+		
 		$this->form_validation->set_rules('amount','amount','required|trim');	
 		$this->form_validation->set_rules('counseling_session_time_requerd','select at least one time slot','required|trim');
 		if($this->form_validation->run())     
@@ -326,7 +331,7 @@ class Counseling_session extends MY_Controller{
 			$session_date_to=trim($session_date_array[1]);
 			$Diff = strtotime($session_date_to)-strtotime($session_date_from);
             $dayDiff=$Diff/86400;
-			$session_type=$data['counseling_session_group']['session_title'];			
+			$session_type=$data['counseling_session_group']['session_type'];			
 			$zoom_link=$this->input->post('zoom_link');
 			$paypal_link=$this->input->post('paypal_link');
 		    
@@ -349,7 +354,7 @@ class Counseling_session extends MY_Controller{
 							
 							$params = array(
 							'active' =>$this->input->post('active') ? $this->input->post('active') : 0,
-							'session_title' =>$session_type,
+							'session_type' =>$session_type,
 							'amount' =>$this->input->post('amount'),
 							'by_user' => $by_user,
 							'session_date' => $session_date_new,
@@ -359,7 +364,8 @@ class Counseling_session extends MY_Controller{
 							'session_date_time_str'=>$session_date_time_str,
 							'dayname'=>$nameOfDay,
 							'time_slot'=>$time_slot,
-							'counseling_sessions_group_id'=>$counseling_sessions_group_id
+							'counseling_sessions_group_id'=>$counseling_sessions_group_id,
+							'duration' => $this->input->post('duration'),
 							//'session_date_to'=>$session_date_to
 							);
 							$id = $this->Counseling_session_model->add_c_session($params);
