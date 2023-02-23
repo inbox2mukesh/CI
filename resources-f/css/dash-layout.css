@@ -599,6 +599,7 @@ a:hover.change-btn {
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
+    word-break: break-word;
 }
 
 .card-ht {
@@ -1314,7 +1315,7 @@ a:hover.change-btn {
     overflow-x: hidden;
     padding-right: 0px;
     margin-right: 5px;
-    min-height: 370px;
+    /* min-height: 370px; */
     max-height: 370px;
     scrollbar-visibility: hidden;
     padding-bottom: 5px;
@@ -1846,6 +1847,7 @@ a:hover.change-btn {
     font-size: 13px;
     margin-bottom: 0px!important;
     line-height: 20px!important;
+    margin-right: 20px;
 }
 
 .date-bar .title:after {
@@ -1873,10 +1875,12 @@ a:hover.change-btn {
     background: #f8f8f8;
     display: block;
     font-size: 15px;
-    font-weight: 500;
-    padding: 8px 15px 8px 8px!important;
+    font-weight:600;
+    padding: 8px 25px 8px 8px!important;
     white-space: normal;
     border-radius: 6px!important;
+    line-height: 20px;
+    word-break: break-word;
 }
 
 .announcement .panel-body {
@@ -2436,9 +2440,9 @@ a:hover.change-btn {
     display: inline-flex;
 }
 
-.mb-inline {
+/* .mb-inline {
     margin-left: 20px;
-}
+} */
 
 .top-slider-img {
     position: relative;
