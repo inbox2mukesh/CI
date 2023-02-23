@@ -1112,7 +1112,7 @@ class Package_master_model extends CI_Model
             $this->db->where(array('pkg.programe_id'=>$programe_id));
         }else{ }
         if($category_id){
-            $this->db->join('`package_category` pcat_temp','pcat.`package_id`=pkg.`package_id`');
+            $this->db->join('`package_category` pcat_temp','pcat_temp.`package_id`=pkg.`package_id`');
             $this->db->where(array('pcat_temp.category_id'=>$category_id));
         }else{ }
         if($duration){

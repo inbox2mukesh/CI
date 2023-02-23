@@ -15,7 +15,7 @@
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-KDB482Q');</script>
+	})(window,document,'script','dataLayer','GTM-MX66WH3');</script>
 	<!-- End Google Tag Manager -->
 
 	<?php } else if(DEFAULT_COUNTRY ==13)//Australia
@@ -26,10 +26,17 @@
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-NZFNR26');</script>
+	})(window,document,'script','dataLayer','GTM-T479XDP');</script>
 	<!-- End Google Tag Manager -->
 	<?php } else if(DEFAULT_COUNTRY ==101) {?>
 	<meta name="google-site-verification" content="" />		
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-KWNJTJJ');</script>
+	<!-- End Google Tag Manager -->
 	<?php }?>
     
     <title><?php echo $title;?></title>
@@ -83,20 +90,19 @@
 <body>
 	<?php if(DEFAULT_COUNTRY ==38) {?>
 		<!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDB482Q"
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MX66WH3"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
-
 	<?php } else if(DEFAULT_COUNTRY ==13) {?>
 		<!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NZFNR26"
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T479XDP"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
 	<?php } else if(DEFAULT_COUNTRY ==101){?>
-		<!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDB482Q"
-		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<!-- End Google Tag Manager (noscript) -->
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KWNJTJJ"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 	<?php } else { }?>
 	<?php include_once('login_model.php');?>
 	<?php include_once('registration_model.php');?>

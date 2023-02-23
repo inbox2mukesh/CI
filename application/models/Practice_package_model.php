@@ -308,7 +308,8 @@ class Practice_package_model extends CI_Model
             $this->db->where(array('pkg.duration'=>$duration));
         }else{ }
         if($category_id){
-            $this->db->where(array('pcat.category_id'=>$category_id));
+            $this->db->join('`practice_package_category` pcat_temp','pcat_temp.`package_id`=pkg.`package_id`');
+            $this->db->where(array('pcat_temp.category_id'=>$category_id));
         }else{ }
         $this->db->where(array('pkg.active'=>1,'pkg.publish'=>1,'pkg.country_id'=>$country_id));
         $this->db->group_by('pkg.package_id');
