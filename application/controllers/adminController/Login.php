@@ -85,11 +85,11 @@ class Login extends MY_Controller{
         //activity update start              
             $activity_name= SIGNOUT;
             $description= urldecode($response);
-            $res=$this->addUserActivity($activity_name,$description,$student_package_id=0,$_SESSION['UserId']);
+            $res=$this->addUserActivity($activity_name,$description,$student_package_id=0,$by_user);
         //activity update end
-        $this->session->set_userdata(SESSION_VAR, '');
-        $this->session->unset_userdata(SESSION_VAR);
-        if(isset($_SESSION['UserId'])){
+        //$this->session->set_userdata(SESSION_VAR, '');
+       // $this->session->unset_userdata(SESSION_VAR);
+       /*  if(isset($_SESSION['UserId'])){
             session_unset($_SESSION['UserId']);
         }
         if(isset($_SESSION['roleId'])){
@@ -119,8 +119,8 @@ class Login extends MY_Controller{
         session_unset($_SESSION['userActivitySearch']['from_date']);
         session_unset($_SESSION['userActivitySearch']['to_date']);
         session_unset($_SESSION['userActivitySearch']['active']);
-        session_unset($_SESSION['userActivitySearch']['status']);
-       // $this->session->sess_destroy();        
+        session_unset($_SESSION['userActivitySearch']['status']); */
+       $this->session->sess_destroy();        
         redirect('adminController/login');
     }
 
