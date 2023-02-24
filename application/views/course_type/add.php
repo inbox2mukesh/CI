@@ -18,7 +18,7 @@
 					<div class="col-md-6">
 						<label for="course_timing" class="control-label"><span class="text-danger">*</span>Course Type</label>
 						<div class="form-group">
-							<input type="text" name="course_timing" value="<?php echo $this->input->post('course_timing'); ?>" class="form-control input-ui-100" id="course_timing" maxlength="20" onblur="check_course_type_duplicacy(this.value);"/>
+							<input type="text" name="course_timing" value="<?php echo $this->input->post('course_timing'); ?>" class="form-control input-ui-100" id="course_timing" maxlength="40" onblur="check_course_type_duplicacy(this.value);"/>
 							<span class="text-danger course_name_err"><?php echo form_error('course_timing');?></span>
 						</div>
 					</div>						

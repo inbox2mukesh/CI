@@ -12,7 +12,7 @@
 					<div class="col-md-6">
 						<label for="batch_name" class="control-label"><span class="text-danger">*</span>Batch Name</label>
 						<div class="form-group">
-							<input type="text" name="batch_name" value="<?php echo ($this->input->post('batch_name') ? $this->input->post('batch_name') : $batch_master['batch_name']); ?>" class="form-control input-ui-100" id="batch_name" maxlength="20" onblur="check_batch_duplicacy(this.value);"/>
+							<input type="text" name="batch_name" value="<?php echo ($this->input->post('batch_name') ? $this->input->post('batch_name') : $batch_master['batch_name']); ?>" class="form-control input-ui-100" id="batch_name" maxlength="40" onblur="check_batch_duplicacy(this.value);"/>
 							<span class="text-danger batch_name_err"><?php echo form_error('batch_name');?></span>
 						</div>
 					</div>					
