@@ -89,7 +89,7 @@ class MY_Controller extends CI_Controller
     }
 
     function _is_logged_in(){
-
+        if (isset($_SESSION['employeeCode'])) {
         $this->load->model('User_model');
         $verifyAccess = $this->User_model->verifyAccess($_SESSION['employeeCode']);
         $portal_access = $verifyAccess['portal_access'];
@@ -105,6 +105,7 @@ class MY_Controller extends CI_Controller
         if(!empty($user) and $ut and $portal_access == 1){
             return TRUE;
         }
+    }
         return FALSE;
     }
 
@@ -284,6 +285,17 @@ class MY_Controller extends CI_Controller
             $new_uid = $letters . $nn;
         } else {
             $new_uid = '';
+        }
+        if(DEFAULT_COUNTRY==38)
+        {
+            $new_uid='CA-'.$new_uid;
+        }
+        else if(DEFAULT_COUNTRY==13)
+        {
+            $new_uid='AU-'.$new_uid;
+        }
+        else {
+            $new_uid=$new_uid;
         }
         return $new_uid;
     }
