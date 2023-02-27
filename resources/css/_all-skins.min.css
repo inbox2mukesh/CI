@@ -289,6 +289,7 @@ aside.control-sidebar.control-sidebar-dark {    display: none!important;}
 
 .input-ui-relative .checkfile.input-file-ui-100 {
     border-radius: 100px;
+
 }
 
 span.input-ui-relative{
@@ -3557,3 +3558,11 @@ margin-bottom:0px;}
 .modal+.modal{background: rgba(255,255,255,0.1)!important;padding-left: 0px!important;}
 
 #modal-refund-history1 .modal-content{border-radius:8px;}
+
+.form-checkbox label{display: initial; cursor: inherit;}
+
+.form-checkbox input[type=checkbox][disabled]{cursor: not-allowed!important;}
+
+.mediaFile .checkfile.form-control{ width:auto!important}	
+.mediaFile .input-ui-relative .checkfile.input-file-ui-100 {position: relative;}
+.mediaFile span.input-ui-relative{position: inherit!important;}
