@@ -72,6 +72,12 @@
     .announcement-box marquee ul li a{font-size: 12px!important;}
 
 
+    .vd-border .owl-controls .owl-nav > div{padding: 0px 5px;}
+    .vd-border .owl-controls .owl-prev i{font-size: 24px;line-height: 26px;}
+    .vd-border .owl-controls .owl-next i{font-size: 24px;line-height: 26px;}
+
+
+
 
 
 
