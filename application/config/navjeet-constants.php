@@ -79,6 +79,19 @@ define('GET_PROVINCES', 'WOSA-API-V1/provinces/Get_provinces');
 define('GET_PROVINCES_IMAGES', 'WOSA-API-V1/provinces/Get_provinces_image');
 define('GET_PROVINCES_SHORT', 'WOSA-API-V1/provinces/Get_provinces_short');
 define('SUBMIT_ENQUIRY_AGENT', 'WOSA-API-V1/become_agent/Submit_enquiry_agent');
+define('GET_ACADEMY_SERVICE_URL', 'WOSA-API-V1/Get_service_data_academy');
+/* file size validation */
+define('COMMON_IMAGE_PATH', './uploads/common/image/');
+define('COMMON_VIDEO_PATH', './uploads/common/video/');
+define('COMMON_AUDIO_PATH', './uploads/common/audio/');
+define('COMMON_IMAGE_TYPE','webp|gif');
+define('COMMON_VIDEO_TYPE','mp4|mp3|wav|ogg|mpeg');
+define('COMMON_AUDIO_TYPE','mp3|wav|ogg|mpeg');
+define('PACK_IMAGE_TYPE_ALLOW','image/webp');
+define('PACK_IMAGE_WIDTH','355');
+define('PACK_IMAGE_HEIGHT','270');
+define('PACK_IMAGE_SIZE_LABEL','Accept img Size '.PACK_IMAGE_WIDTH.'x'.PACK_IMAGE_HEIGHT);
+/* ends file size validation */
 /*---- Third party used constant ----*/
 define('FOURMODULE_DOMAIN_ID', '255');
 define('FOURMODULE_ONL_BRANCH_ID', '4765');
@@ -107,5 +120,4 @@ define('FOURMODULE_KEY', 'api_key dWp9c2d4ZX1pYmY/dik6JTgqYCgkNSA5I3AyITQ9 api_s
 define('FOURMODULE_URL', 'https://api.fourmodules.com/centreapi/api.php');
 define('IDENTIFY_FOURMODULE_API', 'WOSA-API-V1/fourmodule/identify_api');
 /* ---ends----- */
-
 ?>

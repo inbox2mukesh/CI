@@ -32,6 +32,7 @@
 				<ul>
 					<li><a href="<?php echo base_url('online-courses');?>">Online Course</a></li>
 					<li><a href="<?php echo base_url('practice-packs');?>">Practice Pack</a></li>
+					<li><a href="<?php echo base_url('about-online-pack');?>">About Online Pack</a></li>
 					<?php  if(DEFAULT_COUNTRY==101){?>
 					<li><a href="https://www.ieltsrealitytest.com/"  target="_blank">Reality Test</a></li>
 					<?php }?>
@@ -41,7 +42,7 @@
 			<div class="column">
 				<h4>Resources</h4>
 				<ul>
-					<li><a href="<?php echo base_url('articles');?>">Article & Tutorials</a></li>
+					<li><a href="<?php echo base_url('articles');?>">Article</a></li>
 					<?php  if(DEFAULT_COUNTRY!=101){?>
 					<li><a href="<?php echo base_url('news');?>">Latest Immigration News</a></li>
 					<?php }?>

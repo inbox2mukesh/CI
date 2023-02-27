@@ -1,11 +1,6 @@
-
-			
-
-
 <!--Start Services Section-->
 <section>
 	<div class="container">
-
 
 	<div class="vd-border">
 			<div class="owl-carousel-slider image-border">
@@ -15,8 +10,8 @@
 		</div>
 
 		<div class="services-content mt-40">
-		<h2 class="font-weight-300 text-uppercase text-center">Our 
-			<span class="text-red font-weight-600">SERVICES<a name="visa-services"></a></span>
+		<h2 class="font-weight-300 text-uppercase text-center">About 
+			<span class="text-red font-weight-600">online Pack<a name="visa-services"></a></span>
 		</h2>
 	<!--START GRID CONTAINER -->
 				<div class="grid-container">
@@ -26,7 +21,7 @@
 						foreach ($serviceData->error_message->data as $d) { ?>
 						<div class="grid-card-container">
 							<div class="grid-card">
-								<a href="<?php echo base_url('visa-service-details/'.$d->URLslug);?>">
+								<a href="<?php echo base_url('about-online-pack/view/'.$d->URLslug);?>">
 									<div class="services">
 										<div class="img-area"> <img src="<?php echo base_url('uploads/service_image/'.$d->image);?>" class="img-responsive" alt="" title=""> </div>
 										<div class="img-text">

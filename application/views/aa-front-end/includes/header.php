@@ -168,6 +168,7 @@
 															<li class="back"><a href="#">Back</a></li>
 															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('online-courses');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/online-course.svg');?>" alt="">Online Course</a> </li>
 															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('practice-packs');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/practice-pack.svg');?>" alt="">Practice Pack</a> </li>
+															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('about-online-pack');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/about-online-pack.svg');?>" alt="">About Online Pack</a> </li>
 															<li class="menu-item menu-item-has-children header-sub-menu">
 														</ul>
 														</li>														
@@ -177,7 +178,7 @@
 														<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Resources</a>
 															<ul class="sub-menu">
 																<li class="back"><a href="#">Back</a></li>
-																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('articles');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/article.svg');?>" alt="">Article & Tutorials</a> </li>
+																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('articles');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/article.svg');?>" alt="">Article</a> </li>
 																<?php  if(DEFAULT_COUNTRY!=101){?>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('news');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/immigration-news.svg');?>" alt="">Latest Immigration News</a> </li>
 																<?php }?>

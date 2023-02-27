@@ -23,3 +23,4 @@ $route['why-canada'] = "why_canada";
 $route['contact-us'] = "contact_us";
 $route['become-agent'] = "become_agent";
 $route['term-condition'] = "term_condition";
+$route['about-online-pack'] = "About_online_pack";

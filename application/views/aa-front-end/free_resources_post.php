@@ -12,6 +12,9 @@ foreach($content as $content_data)
 ?>
 <section>
 		<div class="container free-resources">
+    <!-- <div class="head-title font-weight-400 text-uppercase mb-20">Articles <span class="text-red font-weight-600">Post</span></div> -->
+    <div class="row">
+    <div class="col-md-8">	
 			<div class="post-info"> 
         <!-- <img src="<?php echo $content_image;?>" class="img-fullwidth"> -->
 
@@ -297,7 +300,31 @@ if($sec_d->type == 'audio')
 
 					?>			
 			<?php } }?>
-            <br><br>
-</div></div></section>
+            <br>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="rt-sidebar mob-display">
+<div class="news-articles">
+	<h3><i class="fa fa-thumb-tack"></i> Pinned Articles</h3>
+		<ul>
+						<li><a href="#">New Marquee Test<p>Feb 16, 2023</p></a></li>
+					<li><a href="#">Shivam New Test<p>Feb 16, 2023</p></a></li>
+				</ul>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+</section>
 
 	<!-- End Latest Post Section Section -->
