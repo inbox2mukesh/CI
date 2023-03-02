@@ -165,7 +165,7 @@ class Practice_packages extends MY_Controller{
             if(!file_exists(PACKAGE_FILE_PATH)){
                 mkdir(PACKAGE_FILE_PATH, 0777, true);
             }
-            $config['upload_path']      = PACKAGE_FILE_PATH;
+            /* $config['upload_path']      = PACKAGE_FILE_PATH;
             $config['allowed_types']    = WEBP_FILE_TYPES;
             $config['encrypt_name']     = FALSE;         
             $this->load->library('upload',$config);
@@ -175,7 +175,13 @@ class Practice_packages extends MY_Controller{
                 $image= $data1['upload_data']['file_name'];                     
             }else{                          
                 $image=NULL; 
-            }
+            } */
+
+
+            $sorcePath= COMMON_IMAGE_PATH;
+			$destinationPath  = PACKAGE_FILE_PATH;
+			
+			$this->auto_move_file_common_to_main($sorcePath. $this->input->post('upload_image_hidden'), $destinationPath);
            
 
             if($this->input->post("country_type") == COUNTRY_TYPE[0]) {
@@ -207,7 +213,7 @@ class Practice_packages extends MY_Controller{
                         'center_id'             => ONLINE_BRANCH_ID,
                         'duration_type'         => $this->input->post('duration_type'),
                         'duration'              => $this->input->post('duration'),
-                        'image'                 => $image,
+                        'image'                 => $this->input->post('upload_image_hidden'),
                         'mock_test_count'       => $this->input->post('mock_test_count'),
                         'reading_test_count'    => $this->input->post('reading_test_count'),
                         'listening_test_count'  => $this->input->post('listening_test_count'),
@@ -309,18 +315,30 @@ class Practice_packages extends MY_Controller{
                 if(!file_exists(PACKAGE_FILE_PATH)){
                 mkdir(PACKAGE_FILE_PATH, 0777, true);
                 }
-                $config['upload_path']      = PACKAGE_FILE_PATH;
+                /* $config['upload_path']      = PACKAGE_FILE_PATH;
                 $config['allowed_types']    = WEBP_FILE_TYPES;
                 $config['encrypt_name']     = FALSE;         
-                $this->load->library('upload',$config);
+                $this->load->library('upload',$config); */
 
-                if($this->upload->do_upload("image")){
+                /* if($this->upload->do_upload("image")){
                     $data1 = array('upload_data' => $this->upload->data());
                     $image= $data1['upload_data']['file_name'];
                     unlink(PACKAGE_FILE_PATH.$data['practice_packages']['image']);
                 }else{                          
                     $image=$data['practice_packages']['image']; 
+                } */
+                if($this->input->post('upload_image_hidden'))
+                {
+                    $sorcePath= COMMON_IMAGE_PATH;
+                    $destinationPath  = PACKAGE_FILE_PATH;                    
+                    $this->auto_move_file_common_to_main($sorcePath. $this->input->post('upload_image_hidden'), $destinationPath);
+                    $image= $this->input->post('upload_image_hidden');                   
+                    unlink(PACKAGE_FILE_PATH.$data['practice_packages']['image']);    
                 }
+               else {
+                $image=$data['practice_packages']['image']; 
+               }
+               
                 $params = array(
                     'test_module_id' => $this->input->post('test_module_id'),
                     'programe_id' => $this->input->post('programe_id'),             

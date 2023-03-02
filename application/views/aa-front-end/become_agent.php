@@ -202,7 +202,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Message<span class="red-text">*</span></label>
-							<textarea name="address" id="address_ba" placeholder="" rows="5" class="t-area form-control removeerrmessage"  style="height:inherit!important;max-height:inherit!important"></textarea>
+							<textarea name="address" id="address_ba" placeholder="" rows="5" class="t-area form-control removeerrmessage validatewordcount"  style="height:inherit!important;max-height:inherit!important"></textarea>
 							<div class="valid-validation address_ba_err"></div>
 						</div>
 					</div>
@@ -249,9 +249,41 @@
 </section>
 <!--End FAQ Section-->
 <script>
-	var wordLen = 2000,
+	var minCount = 50,
 len; // Maximum word length
-$('#address_ba').keyup(function(event) {	
+
+$('.validatewordcount').keyup(function (event) {
+	var id = $(this).attr('id');
+	var id_err = id + '_err'; //create class for message display
+	// var maxCount = $(this).data('count');	
+	//var minCount = $(this).data('min-count');
+	var minCount = 50;
+	var entervword = $(this).val();
+	var words = entervword.split(" ");
+	charlenght = entervword.length;
+	// word length
+	words = words.filter(function (words) {
+		return words.length > 0
+	}).length;
+	// $("#msg_despChar").text('')
+	$("." + id_err).text('Entered Characters : ' + charlenght+':'+words+'---'+ minCount);
+	//return false; //
+	if (words > minCount) {
+		$("." + id_err).text(words+' if Minimum length should ' + minCount + ' characters ' + '     Entered Characters : ' + charlenght + '  Entered Words : ' + words);
+		//event.preventDefault();
+		// $("#msg_despChar").text('')
+		return false;
+	} else {
+		$("." + id_err).text('else Entered Characters : ' + charlenght + '  Entered Words : ' + words)
+		// $("#msg_despChar").text('Entered Characters : ' + charlenght + '  Entered Words : ' + words);
+		return false;
+	}	
+});
+
+
+
+
+$('#address_ba_old').keyup(function(event) {	
 	len = $('#address_ba').val().split(/[\s]+/);
 	if (len.length > wordLen) { 
 		if ( event.keyCode == 46 || event.keyCode == 8 ) {// Allow backspace and delete buttons
@@ -265,7 +297,7 @@ $('#address_ba').keyup(function(event) {
 	//$('.message_err').html(wordsLeft+ ' words left');
 	});
 
-	$('#address_ba').blur(function(event) {	
+	$('#address_ba_old').blur(function(event) {	
 	len = $('#address_ba').val().split(/[\s]+/);
 	if (len.length > wordLen) { 
 		if ( event.keyCode == 46 || event.keyCode == 8 ) {// Allow backspace and delete buttons

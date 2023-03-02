@@ -1,3 +1,5 @@
+
+
 <div class="row package_master-add_online_pack">
     <div class="col-md-12">
       	<div class="box box-info">
@@ -180,12 +182,18 @@
 					<div class="col-md-4 media-file-widget">
 						<label for="image" class="control-label"><span class="text-danger">*</span>Media File</label>
 						<?php echo WEBP_ALLOWED_TYPES_LABEL;?>
-						<div class="form-group">
-							<input type="file" name="image" class="form-control input-file-ui-100 input-file-ui" id="image" value="<?php echo $this->input->post('image'); ?>" onchange="validate_file_type_Webp(this.id)" />
-							<span class="text-danger image_err"><?php echo form_error('image');?></span>
-						
+						<div class="form-group mediaFile">
+						<!-- file size check html -->						
+						<input  accept="<?php echo PACK_IMAGE_TYPE_ALLOW;?>" onchange="uploadFile('upload_image', 'image',<?php echo PACK_IMAGE_WIDTH;?>, <?php echo PACK_IMAGE_HEIGHT;?>)" type="file" name="image" value="<?php echo $this->input->post('upload_file'); ?>" class="form-control input-file-ui-100 input-file-ui"  id="upload_image"/>
+						<input type="hidden" name="upload_image_hidden"  id="upload_image_hidden">
+						<div class="correct-accept text-blue" style="position:absolute;margin-top: 10px;"><?php echo PACK_IMAGE_SIZE_LABEL;?></div>
+						<span class="text-danger validation-error" id="msg_image" style="margin-top:0px"><?php echo form_error('image');?></span>
+						<progress id="upload_image_progressBar" value="0" max="100" style="width:100%;display:none; "></progress>
+						<span class="text-danger upload_image_err"></span>
+						<h3 id="upload_image_status"></h3>
+						<p id="upload_image_loaded_n_total"></p>						
+						<!--END file size check html -->
 						</div>
-						
 					</div>
 
 					<div class="col-md-3 mt-30">
@@ -241,7 +249,7 @@
 		var test_module_id=$('#test_module_id').val();
 		var programe_id=$('#programe_id').val();
 		var category_id=$('#category_id').val();
-		var image=$('#image').val();
+		var image=$('#upload_image').val();
 		var package_desc=CKEDITOR.instances.package_desc.getData();
 		
 		if(package_name == "")
@@ -300,9 +308,9 @@
 		
 		if(image == "")
 		{			
-			$(".image_err").html('The Media File field is required.');
+			$(".upload_image_err").html('The Media File field is required.');
 			flag=0;
-		} else { $(".image_err").html(''); }
+		} else { $(".upload_image_err").html(''); }
 		
 		if(package_desc == "")
 		{			

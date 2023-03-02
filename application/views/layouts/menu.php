@@ -180,6 +180,14 @@
     ?>
     <li> <a href="<?php echo site_url('adminController/free_resources/index');?>"><i class="fa fa-list"></i> Free Resource</a> </li><?php } ?>
     <?php
+        if($this->Role_model->_has_access_('test_preparation_material','index')){
+    ?>
+    <li> <a href="<?php echo site_url('adminController/test_preparation_material/index');?>"><i class="fa fa-list"></i> Test Preparation material</a> </li><?php } ?>
+    <?php
+        if($this->Role_model->_has_access_('test_preparation_material_topic','index')){
+    ?>
+    <li> <a href="<?php echo site_url('adminController/test_preparation_material_topic/index');?>"><i class="fa fa-list"></i> Test Preparation material Topic</a> </li><?php } ?>
+    <?php
         if($this->Role_model->_has_access_('other_contents','index')){
     ?>
     <li> <a href="<?php echo site_url('adminController/other_contents/index');?>"><i class="fa fa-list"></i> Other Content</a> </li><?php } ?>

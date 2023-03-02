@@ -3,6 +3,7 @@
 								<div class="profile-info">
 									<div class="pro-pics">
 										<?php 
+									
 		                          if(!empty($this->session->userdata('student_login_data')->profile_pic ))
 		{
 $p_pic=base_url($this->session->userdata('student_login_data')->profile_pic);
@@ -25,7 +26,17 @@ $p_pic=base_url($this->session->userdata('student_login_data')->profile_pic);
 										<p><?php echo $this->session->userdata('student_login_data')->fname.' '.$this->session->userdata('student_login_data')->lname?></p>
 										<p><?php echo $this->session->userdata('student_login_data')->country_code.'-'.$this->session->userdata('student_login_data')->mobile;?></p>
 										<p><?php echo $this->session->userdata('student_login_data')->email;?></p>
-										<p class="font-12 mt-15"><a class="text-blue" href="<?php echo base_url('our_students/update_profile');?>"><i class="fa fa-pencil mr-5"></i>EDIT PROFILE</a></p>
+										<p class="font-12 mt-15"><a class="text-blue" href="<?php echo base_url('our_students/update_profile');?>">
+										<?php 
+										if($this->session->userdata('student_login_data')->profileUpdate ==1)
+										{
+											echo '<i class="fa fa-asterisk" aria-hidden="true"></i> VIEW PROFILE';
+										}
+										else {
+											echo '<i class="fa fa-pencil mr-5"></i>EDIT PROFILE';
+										}
+										?>
+										</a></p>
 										<p class="font-12 mt-15"><a  href="javascript:void" class="launch-modal text-red" data-toggle="modal" data-target="#modal-md"><i class="fa fa-key mr-5"></i>CHANGE PASSWORD</a></p>
 										<div class="mt-10" style="display: inline-block;"><span class="id-info">UNIQUE ID: <?php echo $this->session->userdata('student_login_data')->UID;?></span></div>
 										<!-- <div class="wallet-info">

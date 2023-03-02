@@ -19,13 +19,13 @@
 			<span class="text-red font-weight-600">SERVICES<a name="visa-services"></a></span>
 		</h2>
 	<!--START GRID CONTAINER -->
-				<div class="grid-container">
-					<div class="grid-flex-cont4">						
+				<div class="row">
+								
 						<!--Start Grid Items-->
 						<?php
 						foreach ($serviceData->error_message->data as $d) { ?>
-						<div class="grid-card-container">
-							<div class="grid-card">
+						<div class="col-md-3 col-sm-6">
+						
 								<a href="<?php echo base_url('visa-service-details/'.$d->URLslug);?>">
 									<div class="services">
 										<div class="img-area"> <img src="<?php echo base_url('uploads/service_image/'.$d->image);?>" class="img-responsive" alt="" title=""> </div>
@@ -38,11 +38,11 @@
 									</div>
 								</a>
 							</div>
-						</div>
+				
 						<?php } ?>
 						<!--End Grid Items-->	
 					</div>
-				</div>
+			
 				<!--END GRID CONTAINER -->
 			</div>
 		</div>

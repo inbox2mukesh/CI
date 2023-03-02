@@ -83,10 +83,30 @@ if(isset($this->session->userdata('student_login_data')->id)){
     <div class="form-group col-md-12">
       <label>Services<span class="text-red">*</span></label>
       <select class="form-control selectpicker" name="enquiry_purpose_id" id="enquiry_purpose_id">
-        <option value="">Select Services</option>
-        <?php foreach ($serviceDataAll->error_message->data  as $d) { ?>
-          <option value="<?php echo $d->id; ?>"><?php echo $d->enquiry_purpose_name; ?></option>
-        <?php } ?>
+        
+        <?php $i=1; foreach ($serviceDataAll->error_message->data  as $d) { 
+          if(isset($service_id))
+          {
+            $opsel="selected";
+            $alcount=1;
+            if($service_id != $d->id)
+            {
+            continue;
+           
+            }
+          }
+          else {
+            $alcount=0;
+            $opsel="";
+          }
+          
+          
+          ?>
+          <?php if($i == 1 && $alcount ==0){?>
+          <option value="">Select Services</option>
+          <?php }?>
+          <option value="<?php echo $d->id; ?>" <?php echo $opsel;?>><?php echo $d->enquiry_purpose_name; ?></option>
+        <?php $i++; } ?>
       </select>
       <span class="valid-validation purpose_err"></span>
     </div>

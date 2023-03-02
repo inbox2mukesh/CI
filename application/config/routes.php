@@ -24,3 +24,5 @@ $route['contact-us'] = "contact_us";
 $route['become-agent'] = "become_agent";
 $route['term-condition'] = "term_condition";
 $route['about-online-pack'] = "About_online_pack";
+$route['test-preparation-material'] = "test_preparation_material";
+$route['test-preparation-material/post/(:any)'] = "test_preparation_material/post/$1";// dynamic rewritting

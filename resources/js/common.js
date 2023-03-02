@@ -8537,3 +8537,197 @@ $(document).on('change', '.reset_duration_field', function () {
 	$('.duration_err').text('');
 
 });
+
+// -------------------------------- File Upload progress bar-------------------------//
+function _(el) {
+	return document.getElementById(el);
+}
+function commonReadImageFile(idofUpload, file, filewidth, fileheight, fileType) {
+	var reader = new FileReader();
+	var flag = false;
+	console.log("idofUpload", idofUpload);
+	return new Promise((resolve, reject) => {
+		reader.onload = function (e) {
+			if(fileType =='video'){
+				$("#previewVideo_"+idofUpload).attr("src", reader.result);
+				resolve(true) 
+			}else if(fileType == 'audio'){
+				console.log("reader.result", reader.result)
+				$("#previewAudio_"+idofUpload).attr("src", reader.result);
+				resolve(true) 
+			}
+
+			var img = new Image();
+			img.src = e.target.result;
+		
+			img.onload = function () {
+				
+				var w = this.width;
+				var h = this.height;
+				console.log("reader.result", w,filewidth, h, fileheight, reader.result );
+				if ((w == filewidth && h == fileheight) || (filewidth == 0 && fileheight == 0 )) {
+					console.log("case1");
+					$(idofUpload).removeClass('file-empty');
+					$('.correct-accept').addClass('active');
+					$(".correct-accept").addClass("text-green");
+					$(".correct-accept").removeClass("text-red");
+					$("#previewImg_"+idofUpload).attr("src", reader.result);
+				flag = true;
+				} else {
+					console.log("case2");
+					// $(idofUpload).val('');
+					// $(idofUpload).next().removeClass('active');
+					// $(idofUpload).next().html('Choose a file ...');
+					// $(idofUpload).addClass('file-empty');
+					$("#"+idofUpload).val('');
+					$("#"+idofUpload).next().removeClass('active');
+					$("#"+idofUpload).next().html('Choose a file ...');
+					$("#"+idofUpload).addClass('file-empty');
+					$(".correct-accept").removeClass("text-blue");
+					$(".correct-accept").removeClass("text-green")
+					$(".correct-accept").addClass("text-red");
+					$('#posts_section'+idofUpload).val('');
+					$("#previewImg_"+idofUpload).attr("src",'');
+					console.log("case3");
+				flag = false;
+				}
+				resolve(flag) 
+			}	
+		};
+		reader.readAsDataURL(file);
+	})
+}
+ async function fileSizeCheck(idofUpload,files, type, fileWidth, fileHeight) {
+	var maxfilesize = ''
+	var maxfilesize_title = '' 
+	console.log("idofUpload",idofUpload);
+	if (type == 'image') //1=image
+	{
+		 maxfilesize = MEDIUM_CATEGORY_IMAGE_SIZE.replace('MB', '');
+		 maxfilesize_title = MEDIUM_CATEGORY_IMAGE_SIZE;
+	}
+	else if (type == 'video')//2=video
+	{
+		 maxfilesize = MEDIUM_CATEGORY_VIDEO_SIZE.replace('MB', '');
+		 maxfilesize_title = MEDIUM_CATEGORY_VIDEO_SIZE;
+	}
+	else { //3=audio
+		 maxfilesize = MEDIUM_CATEGORY_AUDIO_SIZE.replace('MB', '');
+		 maxfilesize_title = MEDIUM_CATEGORY_AUDIO_SIZE;
+	}
+	medium_file_size = maxfilesize * 1024 * 1024; // ....convert in bytes
+	console.log("medium_file_size", medium_file_size, files.size);
+	var errorClass = idofUpload+'_err';
+	if (files.size > medium_file_size) {
+		console.log("case1");
+		$('.' + errorClass).text("File size is not greater than " + maxfilesize_title);
+		$('#' + idofUpload).focus();
+		$('#' + idofUpload).val();
+	    return false
+	} else {
+		$('.' + errorClass).text('')
+			return await commonReadImageFile(idofUpload, files, fileWidth, fileHeight, type) 
+		
+		
+	}
+}
+
+ async function uploadFile(idofUpload, fileType,  fileWidth, fileHeight) {
+	var file = _(idofUpload).files[0];
+	$('#'+idofUpload+"_status").text('')
+	$('#'+idofUpload+"_progressBar").val('')
+	$('#'+idofUpload+"_loaded_n_total").text('')
+	$('#'+idofUpload+"_hidden").val('')
+	var fileValidation = await fileSizeCheck(idofUpload, file, fileType, fileWidth, fileHeight)
+	if(!fileValidation){
+		return false;
+	} else {
+	$('#'+idofUpload+"_progressBar").show('')
+	var formdata = new FormData();
+	formdata.append("upload_file", file);
+	// formdata.append("controllerName", controllerName);
+	formdata.append("fileType", fileType);
+
+	var ajax = new XMLHttpRequest();
+	ajax.upload.uploadedId=idofUpload;
+	ajax.upload.addEventListener("progress", progressHandler, false);
+
+	ajax.addEventListener("load", completeHandler, false);
+	ajax.addEventListener("error", errorHandler, false);
+	ajax.addEventListener("abort", abortHandler, false);
+
+	ajax.open("POST", WOSA_ADMIN_URL +'common/auto_common_file_upload')
+	ajax.send(formdata);
+	
+	}
+  }
+  
+  function progressHandler(event) {
+	var uploadedId =event.target.uploadedId
+	_(uploadedId+"_loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
+	var percent = (event.loaded / event.total) * 100;
+	_(uploadedId+"_progressBar").value = Math.round(percent);
+	_(uploadedId+"_status").innerHTML = Math.round(percent) + "% uploaded... please wait";
+  }
+  
+  function completeHandler(event) {
+	var uploadedId = event.target.upload.uploadedId
+	var msg = event.target.responseText == ''? 'somthing went worng' : 'file uploaded successfully';
+	// Swal.fire({
+	// 	position: 'top-end',
+	// 	icon: event.target.responseText != ''?'success': 'error',
+	// 	title: msg,
+	// 	showConfirmButton: false,
+	// 	timer: 2500
+	//   })
+	_(uploadedId+"_status").innerHTML = '';
+	_(uploadedId+"_hidden").value= event.target.responseText
+	// _(uploadedId+"_progressBar").style.display="none" //wil clear progress bar after successful upload
+	_(uploadedId+"_loaded_n_total").innerHTML= ''
+  }
+  
+  function errorHandler(event) {
+	var uploadedId = event.target.upload.uploadedId
+	_(uploadedId+"_progressBar").style.display="none"
+	_(uploadedId+"_loaded_n_total").innerHTML= ''
+	// _(uploadedId+"_status").innerHTML = "Upload Failed";
+  }
+  
+  function abortHandler(event) {
+	var uploadedId = event.target.upload.uploadedId
+	_(uploadedId+"_progressBar").style.display="none"
+	_(uploadedId+"_loaded_n_total").innerHTML= ''
+	// _(uploadedId+"_status").innerHTML = "Upload Aborted";
+  }
+
+  function check_test_preparation_duplicacy(topic) {
+	var topic_id = $('#topic_id_hidden').val();
+	if (topic == '') {
+		$('.topic_err').text('Please type topic');
+		$('#topic').focus();
+		$('.sbm').prop('disabled', true);
+		return false;
+	} else {
+		$('.topic_err').text('');
+		$('.sbm').prop('disabled', false);
+	}
+	$.ajax({
+		url: WOSA_ADMIN_URL + 'test_preparation_material_topic/ajax_check_freeresourcetopic_duplicacy',
+		async: false,
+		type: 'post',
+		data: { topic: topic, topic_id: topic_id },
+		dataType: 'json',
+		success: function (response) {
+			if (response > 0) {
+				$('.topic_err').text('Please type unique name.' + topic + ' already exist');
+				$('#topic_name').val('');
+				$('#topic_name').focus();
+				$('.sbm').prop('disabled', true);
+				return false;
+			} else {
+				$('.topic_err').text('');
+				$('.sbm').prop('disabled', false);
+			}
+		}
+	});
+}

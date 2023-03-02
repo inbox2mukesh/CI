@@ -53,7 +53,7 @@
     <link href="<?php echo base_url(DESIGN_VERSION_F.'/css/dash-layout.css?v='.JS_CSS_VERSION_F);?>" rel="stylesheet" type="text/css" media="all">
     <link href="<?php echo base_url(DESIGN_VERSION_F.'/css/wosa-header.css?v='.JS_CSS_VERSION_F);?>" rel="stylesheet" type="text/css" media="all">  
 	<link href="<?php echo base_url(DESIGN_VERSION_F.'/css/marquee-ticker.css?v='.JS_CSS_VERSION_F);?>" rel="stylesheet" type="text/css" media="all">  
-    <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/jquery-min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
+	<script src="<?php echo base_url(DESIGN_VERSION_F.'/js/jquery-min.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200&display=swap" rel="stylesheet">
 	<!--Added by Vikram 6 dec 2022 -->
@@ -61,31 +61,9 @@
     <style>
 	    body {opacity: 0}
 	    body.active {opacity: 1}
-
-		/* .news-headline {overflow: hidden;font-size: 12px;display: list-item;height: 26px;line-height: 26px;}
-	    .news-headline span {margin: 5px 0px;line-height: 23px;}
-	    .news-headline span a {color: #fff;}
-	    .news-headline span a span.date {font-style: italic;font-weight: bold;font-size: .70rem;margin-left: 10px;}
-	    .news-headline span.spacer {color: rgb(255, 255, 255, 0.3); margin: 0px 10px;} */
-		/* .lt-news ul{  margin:0px 0px 0px 0px;padding: 0;height:20px;overflow: hidden;white-space: nowrap;display: inline-block;width:100%;}
-		.lt-news li{  list-style: none;margin:0px;padding:0;display: inline-block;line-height:20px;vertical-align: middle;color:#fff;font-size:13px!important;}
-		.lt-news li a{color:#fff;font-size:13px!important;}
-		.lt-news li .date{color:#fff;margin-bottom:0px!important}
-		.lt-news span{display: inline-block;} */
     </style>
-    <script>
-	    $(document).ready(function() {
-	        $("#myModal").modal('show');
-	    });
-	    window.onload = function() {
-	        setTimeout(function() {
-	            $("body").addClass("active")
-	        }, 1);
-	    };
-    </script>
-<script type="text/javascript"> 
-(function() { var css = document.createElement('link'); css.href = '<?php echo base_url(DESIGN_VERSION_F.'/css/font-awesome.min.css?v='.JS_CSS_VERSION_F);?>'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); 
-</script>
+   
+
 </head>
 <body>
 	<?php if(DEFAULT_COUNTRY ==38) {?>
@@ -166,9 +144,10 @@
 													<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Online coaching</a>
 														<ul class="sub-menu">
 															<li class="back"><a href="#">Back</a></li>
-															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('online-courses');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/online-course.svg');?>" alt="">Online Course</a> </li>
-															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('practice-packs');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/practice-pack.svg');?>" alt="">Practice Pack</a> </li>
 															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('about-online-pack');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/about-online-pack.svg');?>" alt="">About Online Pack</a> </li>
+															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('online-courses');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/online-course.svg');?>" alt="">Online Courses</a> </li>
+															<li class="menu-item leave-mouse"> <a href="<?php echo base_url('practice-packs');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/practice-pack.svg');?>" alt="">Practice Packs</a> </li>
+															
 															<li class="menu-item menu-item-has-children header-sub-menu">
 														</ul>
 														</li>														
@@ -178,10 +157,11 @@
 														<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Resources</a>
 															<ul class="sub-menu">
 																<li class="back"><a href="#">Back</a></li>
-																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('articles');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/article.svg');?>" alt="">Article</a> </li>
+																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('articles');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/article.svg');?>" alt="">Articles</a> </li>
 																<?php  if(DEFAULT_COUNTRY!=101){?>
 																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('news');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/immigration-news.svg');?>" alt="">Latest Immigration News</a> </li>
 																<?php }?>
+																<li class="menu-item leave-mouse"> <a href="<?php echo base_url('test-preparation-material');?>"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/immigration-news.svg');?>" alt="">Test Preparation Material</a> </li>
 																<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/assessment-tools/english-level-assessment" target="_blank"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/english-level-assesment.svg');?>" alt="">English Level Assessment</a> </li>
 																<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/assessment-tools/visa-assessment" target="_blank"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/study-visa-eligibility.svg');?>" alt="">Study Visa Eligibility</a> </li>
 																<li class="menu-item leave-mouse"> <a href="https://western-overseas.com/assessment-tools/crs-calculator" target="_blank"><img src="<?php echo base_url(DESIGN_VERSION_F.'/images/crs-calculator.svg');?>" alt="">CRS Calculator</a> </li>

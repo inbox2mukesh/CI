@@ -321,6 +321,16 @@ define('GET_FREE_RESOURCE_CONTENT_TYPE', 'WOSA-API-V1/free_resource/Get_free_res
 define('FREE_RESOURCE_CONTENT_FILTER', 'WOSA-API-V1/free_resource/Free_resource_contents_filter');
 define('FREE_RESOURCE_CONTENT_SHORT', 'WOSA-API-V1/free_resource/Free_resource_contents_short');
 define('CHECK_FREE_RESOURCE', 'WOSA-API-V1/free_resource/Free_resource_check');
+define('FREE_RESOURCE_SECTION_LIMITED', 'WOSA-API-V1/free_resource/Free_resource_section_limited');
+
+// test preparation material
+define('TEST_PREPARATION_MATERIAL_CONTENT', 'WOSA-API-V1/test_preparation_material/Test_preparation_material_contents');
+define('GET_TEST_PREPARATION_MATERIAL_COURSE', 'WOSA-API-V1/test_preparation_material/Get_test_preparation_material_course');
+define('GET_TEST_PREPARATION_MATERIAL_CONTENT_TYPE', 'WOSA-API-V1/test_preparation_material/Get_test_preparation_material_content_type');
+define('CHECK_TEST_PREPARATION_MATERIAL', 'WOSA-API-V1/test_preparation_material/Test_preparation_material_check');
+define('TEST_PREPARATION_MATERIAL_SECTION', 'WOSA-API-V1/test_preparation_material/Test_preparation_material_section');
+define('TEST_PREPARATION_MATERIAL_CONTENT_FILTER', 'WOSA-API-V1/test_preparation_material/Test_preparation_material_contents_filter');
+define('TEST_PREPARATION_MATERIAL_SECTION_LIMITED', 'WOSA-API-V1/test_preparation_material/Test_preparation_material_section_limited');
 
 //enquiry
 define('SUBMIT_ENQUIRY_URL', 'WOSA-API-V1/enquiry/Submit_enquiry');
@@ -515,6 +525,11 @@ define('CLASSROOM_DOCUMENTS_IMAGE_PATH', './uploads/classroom_documents/image/')
 define('CLASSROOM_DOCUMENTS_VIDEO_PATH', './uploads/classroom_documents/video/');
 define('CLASSROOM_DOCUMENTS_AUDIO_PATH', './uploads/classroom_documents/audio/');
 define('PACKAGE_FILE_PATH', './uploads/package_file/');
+
+define('TEST_PREPARATION_IMAGE_PATH', './uploads/test_preparation/image/');
+define('TEST_PREPARATION_VIDEO_PATH', './uploads/test_preparation/video/');
+define('TEST_PREPARATION_AUDIO_PATH', './uploads/test_preparation/audio/');
+
 
 //allowed file types
 define('STUDENT_POST_ALLOWED_TYPES', 'jpg|png|jpeg|pdf');
@@ -1151,6 +1166,8 @@ define('RL', 'Logged out - Regular');
 define('SOURCE_ADD', 'New source added');
 define('SOURCE_MASTER_UPDATE', 'Source name updated');
 define('SOURCE_MASTER_DELETE', 'Source deleted');
+define('TEST_PREPARATION_TOPIC_ADD', 'Test preparation material topic added');
+define('TEST_PREPARATION_TOPIC_UPDATE', 'Test preparation material topic added');
 
 /*****************Code Add By Neelu*******/
  include_once(FCPATH.'application/config/neelu-constants.php');

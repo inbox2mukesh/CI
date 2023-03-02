@@ -21,7 +21,41 @@
 
   
   </div>
-  <?php } else {?>
+  <?php }
+  else if(DEFAULT_COUNTRY==101) { 
+	?>
+
+<div class="owl-carousel-slider">
+    <div class="carousel-item active">
+      <img class="d-block w-100 desktop-slider lazyload" src="<?php echo base_url('resources-f/images/slider/online-desktop-slider-1.webp');?>" alt="" loading="lazy">
+	  <img class="d-block w-100 mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/online-mobile-slider-1.webp');?>" alt="" loading="lazy">
+    </div>
+
+	<div class="carousel-item">
+      <img class="d-block w-100 desktop-slider " src="<?php echo base_url('resources-f/images/slider/online-desktop-slider-2.webp');?>" alt="" loading="lazy">	 
+	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/online-mobile-slider-2.webp');?>" alt="" loading="lazy">	 
+    </div>
+
+	<div class="carousel-item">
+      <img class="d-block w-100 desktop-slider" src="<?php echo base_url('resources-f/images/slider/online-desktop-slider-3.webp');?>" alt="" loading="lazy">	
+	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/online-mobile-slider-3.webp');?>" alt="" loading="lazy">
+    </div>
+
+	<div class="carousel-item">
+      <img class="d-block w-100 desktop-slider" src="<?php echo base_url('resources-f/images/slider/online-desktop-slider-4.webp');?>" alt="" loading="lazy">	
+	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/online-mobile-slider-4.webp');?>" alt="" loading="lazy">
+    </div>
+
+
+  
+  </div>
+
+
+
+	<?php
+  }
+ 
+ else {?>
 	<div class="owl-carousel-slider">
     <div class="carousel-item active">
       <img class="d-block w-100 desktop-slider lazyload" src="<?php echo base_url('resources-f/images/slider/desktop-slider-1.webp');?>" alt="" loading="lazy">

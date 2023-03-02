@@ -46,7 +46,7 @@ class Update_profile extends REST_Controller {
                 'qualification_id' => $std_data->qualification_id,
                 'int_country_id' => $std_data->int_country_id,
                 'source_id' => $std_data->source_id, 
-                'gar_country_code' => $std_data->gar_country_code, 
+                'gar_country_code' => @$std_data->gar_country_code, 
                 'country_id' => $std_data->country_id, 
                 'state_id' => $std_data->state_id, 
                 'city_id' => $std_data->city_id, 

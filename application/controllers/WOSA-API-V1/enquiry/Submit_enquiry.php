@@ -44,8 +44,8 @@ public function index_post()
             $enqData = $this->Student_enquiry_model->get_enquiry_data($enquiry_id);
            
            if($sendemail_flag == 1){
-            $subject = 'Hi! your enquiry sent successfully';
-            $email_message = "Hi! your enquiry sent successfully at our Enquiry team.<br> Your Enquiry Id:$enquiry_no.<br> We will get back to soon.";
+            $subject = 'Hi, Your enquiry sent successfully';
+            $email_message = "Hi, Your enquiry sent successfully at our Enquiry team.<br><b>Enquiry ID</b>: $enquiry_no.<br> We will get back to you soon.";
             $mailData['fname']          = $enqData['fname'];                
             $mailData['email']          = $enqData['email'];           
             $mailData['email_message']  = $email_message;           

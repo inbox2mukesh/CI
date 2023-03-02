@@ -30,9 +30,10 @@
 			<div class="column">
 				<h4>Online Coaching</h4>
 				<ul>
-					<li><a href="<?php echo base_url('online-courses');?>">Online Course</a></li>
-					<li><a href="<?php echo base_url('practice-packs');?>">Practice Pack</a></li>
-					<li><a href="<?php echo base_url('about-online-pack');?>">About Online Pack</a></li>
+				<li><a href="<?php echo base_url('about-online-pack');?>">About Online Pack</a></li>
+					<li><a href="<?php echo base_url('online-courses');?>">Online Courses</a></li>
+					<li><a href="<?php echo base_url('practice-packs');?>">Practice Packs</a></li>
+					
 					<?php  if(DEFAULT_COUNTRY==101){?>
 					<li><a href="https://www.ieltsrealitytest.com/"  target="_blank">Reality Test</a></li>
 					<?php }?>
@@ -42,10 +43,11 @@
 			<div class="column">
 				<h4>Resources</h4>
 				<ul>
-					<li><a href="<?php echo base_url('articles');?>">Article</a></li>
+					<li><a href="<?php echo base_url('articles');?>">Articles</a></li>
 					<?php  if(DEFAULT_COUNTRY!=101){?>
 					<li><a href="<?php echo base_url('news');?>">Latest Immigration News</a></li>
 					<?php }?>
+					<li><a href="<?php echo base_url('test-preparation-material');?>" target="_blank">Test Preparation Material</a></li>
 					<li><a href="https://western-overseas.com/assessment-tools/english-level-assessment" target="_blank">English Level Assessment</a></li>
 					<li><a href="https://western-overseas.com/assessment-tools/visa-assessment" target="_blank">Study Visa Eligibility</a></li>
 					<li><a href="https://western-overseas.com/assessment-tools/crs-calculator" target="_blank">CRS Calculator</a></li>
@@ -155,11 +157,24 @@
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/sidebar.menu.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/wosa-header.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
 <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/jquery-plugin-collection.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
-<script src="<?php echo base_url(DESIGN_VERSION_F.'/js/polyfills.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
-<script src="<?php echo base_url(DESIGN_VERSION_F.'/js/webp-hero.bundle.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
+<!-- <script src="<?php echo base_url(DESIGN_VERSION_F.'/js/polyfills.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script>
+<script src="<?php echo base_url(DESIGN_VERSION_F.'/js/webp-hero.bundle.js?v='.JS_CSS_VERSION_F);?>" type="text/javascript"></script> -->
+
 <!--Added by Vikram 6 dec 2022 -->
 <script src="<?php echo site_url(DESIGN_VERSION . '/js/sweetalert2.all.min.js?v='.JS_CSS_VERSION_F); ?>"></script>
-
+<script type="text/javascript"> 
+(function() { var css = document.createElement('link'); css.href = '<?php echo base_url(DESIGN_VERSION_F.'/css/font-awesome.min.css?v='.JS_CSS_VERSION_F);?>'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); 
+</script>
+<script>
+	    $(document).ready(function() {
+	        $("#myModal").modal('show');
+	    });
+	    window.onload = function() {
+	        setTimeout(function() {
+	            $("body").addClass("active")
+	        }, 1);
+	    };
+</script>
 <script type="text/javascript">
 	$(function() {
 		$('.marquee-news-ticker').jConveyorTicker({
@@ -548,10 +563,10 @@ if ($(window).width() >= 500) {
 
 </script>
 
-<script>
+<!-- <script>
 	var webpMachine = new webpHero.WebpMachine()
 	webpMachine.polyfillDocument()
-</script>
+</script> -->
 
 
 <!-- Body Scroller Remove on modal-->

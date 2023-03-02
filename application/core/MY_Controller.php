@@ -8,9 +8,12 @@
  **/
 defined('BASEPATH') or exit('No direct script access allowed');
 require_once APPPATH . 'libraries/traits/timezoneTrait.php';
+require_once APPPATH . 'libraries/traits/moveFileTrait.php';
+
 class MY_Controller extends CI_Controller
 {
     use timezoneTrait;
+    use moveFileTrait;
     function __construct(){
         date_default_timezone_set(TIME_ZONE);
         parent::__construct();
@@ -514,4 +517,5 @@ class MY_Controller extends CI_Controller
             return $response;
         }
     }
+    
 }

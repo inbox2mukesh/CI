@@ -446,7 +446,7 @@ class Role extends MY_Controller{
 
         foreach($controllers as $controller){            
             $excludedController=array(
-                'Dashboard.php','Ckeditor.php','Login.php','Error_cl.php','Cron_tab.php','Forgot_password.php','Gender.php','Leads.php','Time_slot_master.php','Student_post.php','Discount.php','Classroom_post.php',
+                'Dashboard.php','Ckeditor.php','Login.php','Error_cl.php','Cron_tab.php','Forgot_password.php','Gender.php','Leads.php','Time_slot_master.php','Student_post.php','Discount.php','Classroom_post.php','Common.php','Url_slug.php','Sitemap.php',
             );
             if(in_array($controller, $excludedController)){
 

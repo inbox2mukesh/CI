@@ -469,4 +469,23 @@
         $this->db->limit(3);
         return $this->db->get()->result_array();
     }
+    function getFreeResourceContentSpecificLimited($id){
+
+        $this->db->select('
+            ctm.content_type_name,
+            fr.id,
+            fr.title,
+            fr.isPinned,
+            fr.description,
+            fr.URLslug,
+            CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
+            date_format(fr.created, "%D %b %Y") as `created`,
+        ');
+        $this->db->from('free_resources fr');
+        $this->db->join('content_type_masters ctm', 'ctm.id= fr.content_type_id');
+        $this->db->where('fr.URLslug!=', $id);
+        $this->db->limit(5);
+        return $this->db->get()->result_array();
+
+    }
 }

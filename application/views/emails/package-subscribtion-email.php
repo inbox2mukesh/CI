@@ -60,7 +60,7 @@
   </tr>
   
   <tr>
-    <td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;">Cost (Org.)</td>
+    <td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;">Cost (Org.)</td>
     <td valign="top" style="padding:4px;"><?php echo $currency.' '.$amount;?></td>
   </tr>
   
@@ -82,7 +82,7 @@
   </tr>
 
   <tr>
-    <td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;">Expiry</td>
+    <td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;">Expiry Date</td>
     <td valign="top" style="padding:4px;"><?php echo $expired_on;?> </td>
   </tr>
   

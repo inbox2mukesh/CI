@@ -68,18 +68,22 @@ class Package_master extends MY_Controller{
             if(!file_exists(PACKAGE_FILE_PATH)){
                 mkdir(PACKAGE_FILE_PATH, 0777, true);
             }
-            $config['upload_path']      = PACKAGE_FILE_PATH;
-            $config['allowed_types']    = WEBP_FILE_TYPES;
-            $config['encrypt_name']     = FALSE;         
-            $this->load->library('upload',$config);
-            if($this->upload->do_upload("image"))
-            {
-                $data1 = array('upload_data' => $this->upload->data());
-                $image= $data1['upload_data']['file_name'];                     
-            }else{                          
-                $image=NULL; 
-            }
+            // $config['upload_path']      = PACKAGE_FILE_PATH;
+            // $config['allowed_types']    = WEBP_FILE_TYPES;
+            // $config['encrypt_name']     = FALSE;         
+            // $this->load->library('upload',$config);
+            // if($this->upload->do_upload("image"))
+            // {
+            //     $data1 = array('upload_data' => $this->upload->data());
+            //     $image= $data1['upload_data']['file_name'];                     
+            // }else{                          
+            //     $image=NULL; 
+            // }
            
+            $sorcePath= COMMON_IMAGE_PATH;
+			$destinationPath  = PACKAGE_FILE_PATH;
+			
+			$this->auto_move_file_common_to_main($sorcePath. $this->input->post('upload_image_hidden'), $destinationPath);
 
             if($this->input->post("country_type") == COUNTRY_TYPE[0]) {
                 $countryId = $this->input->post("country_id_single");
@@ -116,7 +120,7 @@ class Package_master extends MY_Controller{
                         'test_module_id'    => $this->input->post('test_module_id'),
                         'programe_id'       => $this->input->post('programe_id'),
                         'package_desc'      => $this->input->post('package_desc',false),
-                        'image'             => $image,
+                        'image'             => $this->input->post('upload_image_hidden'),
                         'by_user'           => $by_user, 
                     ); 
                     $duplicacy=$this->Package_master_model->check_package_duplicacy($params,$package_id=0); 
@@ -245,7 +249,7 @@ class Package_master extends MY_Controller{
                 if(!file_exists(PACKAGE_FILE_PATH)){
                     mkdir(PACKAGE_FILE_PATH, 0777, true);
                 }
-                $config['upload_path']      = PACKAGE_FILE_PATH;
+                /* $config['upload_path']      = PACKAGE_FILE_PATH;
                 $config['allowed_types']    = WEBP_FILE_TYPES;
                 $config['encrypt_name']     = FALSE;         
                 $this->load->library('upload',$config);
@@ -256,7 +260,21 @@ class Package_master extends MY_Controller{
                     unlink(PACKAGE_FILE_PATH.$data['package_master']['image']);                  
                 }else{                          
                     $image=$data['package_master']['image']; 
+                } */
+                if($this->input->post('upload_image_hidden'))
+                {
+                    $sorcePath= COMMON_IMAGE_PATH;
+                    $destinationPath  = PACKAGE_FILE_PATH;                    
+                    $this->auto_move_file_common_to_main($sorcePath. $this->input->post('upload_image_hidden'), $destinationPath);
+                    $image= $this->input->post('upload_image_hidden');
+                    unlink(PACKAGE_FILE_PATH.$data['package_master']['image']);    
                 }
+               else {
+                $image=$data['package_master']['image']; 
+               }
+
+
+
                 $params = array(
 					'active' => $this->input->post('active') ? $this->input->post('active') : 0,
                     'publish'           => $this->input->post('publish') ? $this->input->post('publish') : 0,

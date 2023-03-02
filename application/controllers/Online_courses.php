@@ -29,9 +29,9 @@ class Online_courses extends MY_Controller
         $data['countryCode'] = json_decode($this->_curlGetData(base_url(GET_ALL_CNT_CODE_URL), $headers));
         /*-------END-COMMON API CALL FOR HEADER------*/
         $data['allOnlineCourseTestModule'] = json_decode($this->_curlGetData(base_url(GET_ONN_COURSE), $headers));
-        $data['allOnlineCoursePgm'] = json_decode($this->_curlGetData(base_url(GET_ONN_PGM), $headers));
-        $data['allOnlineCourseDuration'] = json_decode($this->_curlGetData(base_url(GET_ONN_COURSE_DURATION), $headers));
-        $data['allOnlineCourseCategory'] = json_decode($this->_curlGetData(base_url(GET_ONN_COURSE_MODULE), $headers));       
+       // $data['allOnlineCoursePgm'] = json_decode($this->_curlGetData(base_url(GET_ONN_PGM), $headers));
+       // $data['allOnlineCourseDuration'] = json_decode($this->_curlGetData(base_url(GET_ONN_COURSE_DURATION), $headers));
+       // $data['allOnlineCourseCategory'] = json_decode($this->_curlGetData(base_url(GET_ONN_COURSE_MODULE), $headers));       
         $data['serviceData'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers));        
         $data['OnlinePack'] = json_decode($this->_curlGetData(base_url(GET_ONLINE_PACK), $headers));
        

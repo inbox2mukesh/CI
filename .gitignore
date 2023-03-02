@@ -11,7 +11,7 @@ application/config/config.php
 application/config/database.php
 application/cache/
 cache/
-index.php
+index.php/
 sitemap.xml
 
 # Compiled Java class files

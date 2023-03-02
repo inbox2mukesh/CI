@@ -56,6 +56,7 @@ class Free_resources extends MY_Controller
         );
         
         $data['FREE_RESOURCE_SECTION'] = json_decode($this->_curlGetData(base_url(FREE_RESOURCE_SECTION), $headers));
+        $data['FREE_RESOURCE_SECTION_LIMITED'] = json_decode($this->_curlGetData(base_url(FREE_RESOURCE_SECTION_LIMITED), $headers));       
         $this->load->view('aa-front-end/includes/header', $data);
         $this->load->view('aa-front-end/free_resources_post');
         $this->load->view('aa-front-end/includes/footer');
