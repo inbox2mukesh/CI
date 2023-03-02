@@ -77,7 +77,7 @@
             fr.title,
             fr.description,
             fr.URLslug,
-            CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
+            CONCAT("'.base_url('./uploads/test_preparation/image/').'", fr.image) as image,
             date_format(fr.modified, "%D %b %Y") as `created`,
         ');
         $this->db->from('test_preparation_material fr');
@@ -131,7 +131,7 @@
             fr.title,
             fr.description,
             fr.URLslug,
-            CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
+            CONCAT("'.base_url('./uploads/test_preparation/image/').'", fr.image) as image,
             date_format(fr.modified, "%D %b %Y") as `created`,
         ');
         $this->db->from('test_preparation_material_topic_data frt');
@@ -161,7 +161,7 @@
             fr.title,
             fr.description,
             fr.URLslug,
-            CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
+            CONCAT("'.base_url('./uploads/test_preparation/image/').'", fr.image) as image,
             date_format(fr.modified, "%D %b %Y") as `created`,
         ');
         $this->db->from('test_preparation_material_topic_data frt');
@@ -188,7 +188,7 @@
             fr.title,
             fr.description,
             fr.URLslug,
-            CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
+            CONCAT("'.base_url('./uploads/test_preparation/image/').'", fr.image) as image,
             date_format(fr.modified, "%D %b %Y") as `created`,
         ');
         $this->db->from('test_preparation_material fr');
@@ -225,7 +225,7 @@
             fr.title,
             fr.description,
             fr.URLslug,
-            CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
+            CONCAT("'.base_url('./uploads/test_preparation/image/').'", fr.image) as image,
             date_format(fr.created, "%D %b %Y") as `created`,
         ');
         $this->db->from('test_preparation_material fr');
@@ -300,7 +300,7 @@
             fr.isPinned,
             fr.description,
             fr.URLslug,
-            CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
+            CONCAT("'.base_url('./uploads/test_preparation/image/').'", fr.image) as image,
             date_format(fr.created, "%D %b %Y") as `created`,
         ');
         $this->db->from('test_preparation_material fr');
@@ -478,7 +478,7 @@
             fr.title,
             fr.description,
             fr.URLslug,
-            CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
+            CONCAT("'.base_url('./uploads/test_preparation/image/').'", fr.image) as image,
             date_format(fr.modified, "%D %b %Y") as `created`,
         ');
         $this->db->from('test_preparation_material fr');
