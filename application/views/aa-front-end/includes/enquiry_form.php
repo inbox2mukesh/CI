@@ -80,36 +80,28 @@ if(isset($this->session->userdata('student_login_data')->id)){
       </div>
       <span class="valid-validation dob_qnform_err"></span>
     </div>
-    <div class="form-group col-md-12">
+        <?php 
+         if(isset($service_id))
+         {
+        ?>
+        <div class="form-group col-md-12">
+      <label>Services<span class="text-red">*</span></label>
+      <input type="text" class="fstinput form-control" name="enquiry_purpose_id" id="enquiry_purpose_id"  value="<?php echo $enquiry_purpose_name;?>" autocomplete="off"  readonly>
+    </div>
+    
+    <?php } else {?>
+      <div class="form-group col-md-12">
       <label>Services<span class="text-red">*</span></label>
       <select class="form-control selectpicker" name="enquiry_purpose_id" id="enquiry_purpose_id">
-        
-        <?php $i=1; foreach ($serviceDataAll->error_message->data  as $d) { 
-          if(isset($service_id))
-          {
-            $opsel="selected";
-            $alcount=1;
-            if($service_id != $d->id)
-            {
-            continue;
-           
-            }
-          }
-          else {
-            $alcount=0;
-            $opsel="";
-          }
-          
-          
-          ?>
-          <?php if($i == 1 && $alcount ==0){?>
-          <option value="">Select Services</option>
-          <?php }?>
-          <option value="<?php echo $d->id; ?>" <?php echo $opsel;?>><?php echo $d->enquiry_purpose_name; ?></option>
-        <?php $i++; } ?>
+      <option value="">Select Services</option>
+        <?php  foreach ($serviceDataAll->error_message->data  as $d) { ?>          
+          <option value="<?php echo $d->id; ?>"><?php echo $d->enquiry_purpose_name; ?></option>
+        <?php } ?>
       </select>
       <span class="valid-validation purpose_err"></span>
     </div>
+      <?php }?>
+
     <div class="form-group col-md-12">
       <label>Message<span class="text-red">*</span></label>
       <textarea name="message" id="message_qnform" placeholder="Enter Message* (Max. 150 words)" rows="2" class="t-area form-control" onblur="getWordCount(this.value);"></textarea>
@@ -172,7 +164,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
                   <span id="enq_reg_opt_success_message"> </span>
 									</div>
 										<div class="hide font-12 col-md-12 alert alert-danger alert-dismissible reg_otp_err " id="enq_reg_opt_danger" role="alert">
-									<strong>WRONG:</strong>Ohh.Wrong Verification Code entered!. Please try again!
+									<strong>WRONG: </strong>Ohh..Wrong Verification Code entered!. <br>Please try again!
 									</div>
 									
 							</div>

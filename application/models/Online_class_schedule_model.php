@@ -258,13 +258,13 @@ class  Online_class_schedule_model extends CI_Model
             // $sql="SELECT id FROM `online_class_schedules` WHERE classroom_id='$class_id' AND DATE_FORMAT(FROM_UNIXTIME(`strdate`), '%d-%m-%Y') = '$curr_date' AND (('$end_date' <=strdate) || ('$st_date' >=strdate_end))";    
             // $query = $this->db->query($sql);
 
-            $sql="SELECT id FROM `online_class_schedules` WHERE classroom_id='$class_id' AND DATE_FORMAT(FROM_UNIXTIME(`strdate`), '%d-%m-%Y') = '$curr_date' $con ";    
+            $sql="SELECT id FROM `online_class_schedules` WHERE classroom_id='$class_id' AND active=1 AND DATE_FORMAT(FROM_UNIXTIME(`strdate`), '%d-%m-%Y') = '$curr_date' $con ";    
             $query = $this->db->query($sql);
             $flag=0;
             foreach($query->result_array() as $val)
             {
               
-                $sql="SELECT id FROM `online_class_schedules` WHERE id='$val[id]' AND DATE_FORMAT(FROM_UNIXTIME(`strdate`), '%d-%m-%Y') = '$curr_date' AND (('$end_date' <=strdate) || ('$st_date' >=strdate_end))";    
+                $sql="SELECT id FROM `online_class_schedules` WHERE active=1 AND id='$val[id]' AND DATE_FORMAT(FROM_UNIXTIME(`strdate`), '%d-%m-%Y') = '$curr_date' AND (('$end_date' <=strdate) || ('$st_date' >=strdate_end))";    
                 $query = $this->db->query($sql);
                 $count_num= $query->num_rows();
                 if($count_num == 0)

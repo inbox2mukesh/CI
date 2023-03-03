@@ -15,7 +15,7 @@
 	<!--Start Why Canada Section-->
 	<section>
 		<div class="container">
-		<div class="head-title font-weight-400 text-uppercase mb-20">OUR <span class="text-red font-weight-600">SERVICES</span></div>
+			 <div class="head-title font-weight-400 text-uppercase mb-20">About Online <span class="text-red font-weight-600">Pack</span></div>
 			<div class="row" id="order-flex">
 				<div class="col-md-8" id="down">
 					<div class="main-services">
@@ -45,7 +45,6 @@
 			<div class="topFormpanel text-left mt-30 mob-display clearfix">
 					<?php 
 					$service_id=$serviceDetails->error_message->data->id;
-					$enquiry_purpose_name=$serviceDetails->error_message->data->enquiry_purpose_name;
 					include('includes/enquiry_form.php');?>
 				</div>
 			</div>

@@ -11,7 +11,7 @@ foreach ($content as $content_data) {
 ?>
 <section>
   <div class="container free-resources">
-    <!-- <div class="head-title font-weight-400 text-uppercase mb-20">Articles <span class="text-red font-weight-600">Post</span></div> -->
+  <div class="head-title font-weight-400 text-uppercase mb-20"><span class="text-red font-weight-600">Articles</span></div>
     <div class="row">
       <div class="col-md-8">
         <div class="post-info">

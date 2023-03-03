@@ -17,10 +17,10 @@
 	<section>
 
 		<div class="container">
-
+	<h2 class="mb-30 text-uppercase font-weight-300 font-28 mt-0 text-center">Test Preparation <span class="text-red font-weight-600">Material</span></h2>
 			<!--Filter Box--->
 
-			<div class="filter-gry-box">
+			<div class="filter-wht-box">
 
 				<div class="filter-events">
 
@@ -112,7 +112,7 @@
 
 				</div>
 
-				<div class="clearfix" > <span class="text-left font-weight-600 pull-left hide" id="flter-btm-info"> <i class="fa fa-spinner fa-spin mr-10"></i> Loading...Please Wait </span> <span class="pull-right font-weight-600" id="down"><a href="" class="text-white">Clear All </a></span> </div>
+				<div class="clearfix" > <span class="text-left font-weight-600 pull-left hide" id="flter-btm-info"> <i class="fa fa-spinner fa-spin mr-10"></i> Loading...Please Wait </span> <span class="pull-right font-weight-600" id="down"><a href="" class="text-black">Clear All </a></span> </div>
 
 			</div>
 

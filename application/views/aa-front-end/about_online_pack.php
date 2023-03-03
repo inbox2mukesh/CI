@@ -10,8 +10,8 @@
 		</div>
 
 		<div class="services-content mt-40">
-		<h2 class="font-weight-300 text-uppercase text-center">About 
-			<span class="text-red font-weight-600">online Pack<a name="visa-services"></a></span>
+		<h2 class="font-weight-300 text-uppercase text-center">About Online
+			<span class="text-red font-weight-600"> Pack<a name="visa-services"></a></span>
 		</h2>
 	<!--START GRID CONTAINER -->
 				<div class="row">

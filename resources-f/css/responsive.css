@@ -40,8 +40,6 @@
     .maximage-slider .maximage .mc-image{background-repeat: no-repeat;background-size:cover!important;}
     .maximage-slider .maximage{ height:55vh!important;min-height: auto;}
     .sl-form{z-index:inherit!important;}
-    .desktop-slider{display:none;}
-    .mobile-slider{display:block;}
     .w-subInfo ul li{display: block;}
     .classroom-info-box{min-height: inherit!important; max-height: inherit!important;}
     .announcement-bar ul li{font-size: 14px!important;line-height: 20px!important;}
@@ -72,12 +70,18 @@
     .vd-border .owl-controls .owl-next i{font-size: 24px;line-height: 26px;}
     .rt-services .img-area img {width: 100%; min-height: inherit; max-height:300px;}
 }
-
-@media screen and (min-width:220px) and (max-width:400px){
+/* new code added by surinder */
+.small-mobile-slider{display:none}
+@media screen and (min-width:220px) and (max-width:415px){
     /* .step-footer{min-height: 75px;} */
     .event-booking .timeslot-card-row .card{min-width: 140px!important; max-width:140px!important;}
 
-}
+    /* new code added by surinder */
+    .desktop-slider{display:none;}
+    .mobile-slider{display:none;}
+    .small-mobile-slider{display:block; width: 100%;}
+
+} 
 
 
 @media screen and (min-width:220px) and (max-width:480px){

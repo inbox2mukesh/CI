@@ -4,7 +4,7 @@
     <div class="section-title">
       <div class="row">
         <div class="text-center">
-          <h2 class="mb-20 text-uppercase font-weight-300 font-28 mt-0">Practice <span class="text-theme-color-2 font-weight-500"> Pack</span></h2>
+          <h2 class="mb-20 text-uppercase font-weight-300 font-28 mt-0">Practice <span class="text-theme-color-2 font-weight-500"> Packs</span></h2>
         </div>
       </div>
     </div>

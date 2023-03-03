@@ -91,6 +91,7 @@ define('PACK_IMAGE_TYPE_ALLOW','image/webp');
 define('PACK_IMAGE_WIDTH','355');
 define('PACK_IMAGE_HEIGHT','270');
 define('PACK_IMAGE_SIZE_LABEL','Accept img Size '.PACK_IMAGE_WIDTH.'x'.PACK_IMAGE_HEIGHT);
+define('NO_IMAGE_PATH', 'default_image/no-image.png');
 /* ends file size validation */
 /*---- Third party used constant ----*/
 define('FOURMODULE_DOMAIN_ID', '255');

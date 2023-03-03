@@ -428,12 +428,7 @@ class Test_preparation_material extends MY_Controller{
 		
 	}
    
-    function ajax_delete_free_resources_test(){
-        //access control start
-        $cn = $this->router->fetch_class().''.'.php';
-        $mn = $this->router->fetch_method();        
-        if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
-        //access control ends
+    function ajax_delete_free_resources_test(){       
         $free_resources_id = $this->input->post('free_resources_id', true);
         $test_module_id = $this->input->post('test_module_id', true);
         if($test_module_id!=''){

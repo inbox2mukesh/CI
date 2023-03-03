@@ -45,7 +45,7 @@ class About_online_pack extends MY_Controller{
         $this->load->model('Country_model');     
         $data['newsData'] = json_decode($this->_curlGetData(base_url(GET_NEWS_DATA_URL), $headers));
         $this->load->view('aa-front-end/includes/header',$data);
-        $this->load->view('aa-front-end/visa-service-details',$data);
+        $this->load->view('aa-front-end/about_online_pack_detail',$data);
         $this->load->view('aa-front-end/includes/footer');
     }  
 }
