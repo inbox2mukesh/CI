@@ -54,7 +54,7 @@ h2{font-size: 22px;}
 						<label for="department_name" class="control-label bold">Image:<?php if($free_resources['image']){ ?><br>
                                 <img src="<?php echo site_url(TEST_PREPARATION_IMAGE_PATH.$free_resources['image']);?>"  height="200" width="200" id="thumbnailPreview" class="thumbnailPreview">
                             <?php }else{ ?>
-                                <img src="<?php echo site_url(TEST_PREPARATION_IMAGE_PATH.'no-image.png');?>"  height="200" width="200" id="thumbnailPreview" class="thumbnailPreview">
+                                <img src="<?php echo site_url(NO_IMAGE_PATH);?>"  height="200" width="200" id="thumbnailPreview" class="thumbnailPreview">
                             <?php } ?>
 						</label>
 						<div class="form-group">
@@ -109,7 +109,7 @@ h2{font-size: 22px;}
 								  <img src="<?php echo site_url(TEST_PREPARATION_IMAGE_PATH.$section);?>" height="150" width="150" id="previewImg<?php echo $i?>" class="previewImg">
 							       <?php 
 									 }else{?>
-									  <img src="<?php echo site_url(TEST_PREPARATION_IMAGE_PATH.'no-image.png');?>" height="150" width="150" id="previewImg<?php echo $i?>" class="previewImg">
+									  <img src="<?php echo site_url(NO_IMAGE_PATH);?>" height="150" width="150" id="previewImg<?php echo $i?>" class="previewImg">
 									 <?php }?>
                             <?php 							
 							}else if($section_type=='video'){

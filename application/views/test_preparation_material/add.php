@@ -409,7 +409,7 @@ $('#freeresourse_add_form').on('submit', function(e){
 
 <script>
 	
-    var DEMO_IMAGE_URL='<?php echo site_url(TEST_PREPARATION_IMAGE_PATH."no-image.png");?>';
+    var DEMO_IMAGE_URL='<?php echo site_url(NO_IMAGE_PATH);?>';
 	function AddRow(type){
 		
 		var employeeTierIdDataHtml=$("#EmployeeTierIdData").html();

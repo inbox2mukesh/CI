@@ -51,7 +51,7 @@
 						<div class="form-group">
 							<div class="row">
 						    <div class="col-md-3">
-						    <img src="<?php echo site_url(FREE_RESOURCES_IMAGE_PATH.'no-image.png');?>" height="85" width="85" id="thumbnailPreview" class="thumbnailPreview photo-border" style="position:absolute;">
+						    <img src="<?php echo site_url(NO_IMAGE_PATH);?>" height="85" width="85" id="thumbnailPreview" class="thumbnailPreview photo-border" style="position:absolute;">
 							</div>
 							<div class="col-md-9">
 							<label for="image" class="control-label">Upload Thumbnail <?php echo WEBP_ALLOWED_TYPES_LABEL;?><span class="text-danger">*</span></label>
@@ -186,7 +186,7 @@
 										?>
 					               <div style="margin-bottom: 10px;">
 								   <div class="col-md-4">
-								   <img src="<?php echo site_url(FREE_RESOURCES_IMAGE_PATH.'no-image.png');?>" height="150" width="150" id="previewImg<?php echo $i?>" class="previewImg"></div>
+								   <img src="<?php echo site_url(NO_IMAGE_PATH);?>" height="150" width="150" id="previewImg<?php echo $i?>" class="previewImg"></div>
 								  <div class="col-md-8">
 					              <input type="file"  class="form-control free_resources_section" id="free_resources_section<?php echo $i?>" name="free_resources_section<?php echo $i?>"  onchange="isImage('<?php echo $i?>')"/><?php echo WEBP_ALLOWED_TYPES_LABEL;?>
 								   </div>
@@ -409,7 +409,7 @@ $('#freeresourse_add_form').on('submit', function(e){
 
 <script>
 	
-    var DEMO_IMAGE_URL='<?php echo site_url(FREE_RESOURCES_IMAGE_PATH."no-image.png");?>';
+    var DEMO_IMAGE_URL='<?php echo site_url(NO_IMAGE_PATH);?>';
 	function AddRow(type){
 		
 		var employeeTierIdDataHtml=$("#EmployeeTierIdData").html();

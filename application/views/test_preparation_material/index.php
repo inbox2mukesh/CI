@@ -52,7 +52,7 @@
 						<td><?php if($p['image']){ ?>
                                 <img src="<?php echo site_url(TEST_PREPARATION_IMAGE_PATH.$p['image']);?>" style="width:50px; height:50px">
                             <?php }else{ ?>
-                                <img src="<?php echo site_url(TEST_PREPARATION_IMAGE_PATH.'no-image.png');?>" style="width:50px; height:50px">
+                                <img src="<?php echo site_url(NO_IMAGE_PATH);?>" style="width:50px; height:50px">
                             <?php } ?></td>
 						<td><?php echo ucfirst($p['content_type_name']); ?></td>
                         <td><?php

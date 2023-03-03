@@ -108,7 +108,7 @@ border-radius: 10px;
 						<label for="free_resources_test" class="control-label">Test Type<span class="text-danger">*</span></label>
 						<?php
 							foreach ($free_resources_test_list as $c) {
-							echo '<button type="button" class="btn btn-md btn-info del" onclick=deletefreeResourcesTestType('.$c["free_resources_id"].','.$c["topic_id"].')>
+							echo '<button type="button" class="btn btn-md btn-info del" onclick=deletefreeResourcesTestType('.$c["test_preparation_material_id"].','.$c["topic_id"].')>
                				'.$c['topic'].'<i class="fa fa-close cross-icn"></i></button>';
 						 } 
 						?>
@@ -480,7 +480,7 @@ $('#freeresourse_edit_form').on('submit', function(e){
             }
         });
     }
-	var DEMO_IMAGE_URL='<?php echo site_url(TEST_PREPARATION_IMAGE_PATH."no-image.png");?>';
+	var DEMO_IMAGE_URL='<?php echo site_url(NO_IMAGE_PATH);?>';
 	function AddRow(type){
 		
 		var employeeTierIdDataHtml=$("#EmployeeTierIdData").html();

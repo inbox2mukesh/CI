@@ -78,7 +78,7 @@ border-radius: 10px;
 							<?php if($free_resources['image']){ ?>
                                 <img src="<?php echo site_url(FREE_RESOURCES_IMAGE_PATH.$free_resources['image']);?>"  height="85" width="85" id="thumbnailPreview" class="thumbnailPreview photo-border" style="position:absolute;">
                             <?php }else{ ?>
-                                <img src="<?php echo site_url(FREE_RESOURCES_IMAGE_PATH.'no-image.png');?>"  height="85" width="85" id="thumbnailPreview" class="thumbnailPreview photo-border">
+                                <img src="<?php echo site_url(NO_IMAGE_PATH);?>"  height="85" width="85" id="thumbnailPreview" class="thumbnailPreview photo-border">
                             <?php } ?>
 							<input type="hidden" name="old_image" id="old_image" value="<?php echo $free_resources['image']?>">
 							</div>
@@ -242,7 +242,7 @@ border-radius: 10px;
 								     <img src="<?php echo site_url(FREE_RESOURCES_IMAGE_PATH.$old_section);?>" height="150" width="150" id="previewImg<?php echo $i?>" class="previewImg">
 									 <?php 
 									 }else{?>
-									  <img src="<?php echo site_url(FREE_RESOURCES_IMAGE_PATH.'no-image.png');?>" height="150" width="150" id="previewImg<?php echo $i?>" class="previewImg">
+									  <img src="<?php echo site_url(NO_IMAGE_PATH);?>" height="150" width="150" id="previewImg<?php echo $i?>" class="previewImg">
 									  
 									 <?php }?>
 								   </div>
@@ -480,7 +480,7 @@ $('#freeresourse_edit_form').on('submit', function(e){
             }
         });
     }
-	var DEMO_IMAGE_URL='<?php echo site_url(FREE_RESOURCES_IMAGE_PATH."no-image.png");?>';
+	var DEMO_IMAGE_URL='<?php echo site_url(NO_IMAGE_PATH);?>';
 	function AddRow(type){
 		
 		var employeeTierIdDataHtml=$("#EmployeeTierIdData").html();
