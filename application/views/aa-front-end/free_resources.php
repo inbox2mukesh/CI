@@ -198,7 +198,7 @@ $type="";
 
 		<div class="container">
 
-				<h3 class="text-red text-center">No free resources found!</h3>
+				<h3 class="text-red text-center">No articles found!</h3>
 
 	</div>
 

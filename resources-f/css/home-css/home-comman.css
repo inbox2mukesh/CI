@@ -1,0 +1,61 @@
+html {font-size: 100%;} 
+body {line-height: 1.7;color: #16161d;font-size: 14px;font-family: "Montserrat", sans-serif;background-color: #fff;font-weight: 400 !important;min-height: 100%;padding: 0px !important; margin: 0px !important;}  
+a {color: #16161d;text-decoration: none;}
+a img {border: none;}
+img {max-width: 100%;}
+h2,.h2 {font-size: 2rem;}
+h4,.h4 {font-size: 18px;}
+h1,h2,.h1,.h2 {font-family: "Montserrat", sans-serif; font-weight: 500;line-height: 1.42857143;color: #16161d;}
+ul, ol {margin: 10px 0px 0px 0px;padding: 0;}
+ul ul,ol ul {margin-left: 15px;}
+section {position: relative;}
+.scrollToTop {position: fixed;bottom: 15px;right: 5px;width: 30px; height: 40px;border-radius: 10px;background-color: #d9070a; display: none;cursor: pointer; text-align: center;line-height: 40px;}
+.btn-default {color: #333;background-color: #fff;border-color: #ccc;}
+.btn {font-size: 13px;padding: 8px 22px;}
+.image_iccrc {max-width: 60%;margin: auto;}
+.scrollToTop i {color: #fff;font-size: 26px;font-weight: 600;}
+.sld-form {position: relative;}
+label {font-weight: 500;margin-bottom: 3px;display: block;max-width: 100%;}
+.qury-form-row label {margin-bottom: 3px!important;font-size: 13px;}
+
+.bg-lighter {background-color: #fff!important;}
+.bg-lighter-theme {background-color: #FEFAEE;}
+.sp-line {height: 1px;background-color: #e7e7e7;}
+section > .container, section > .container-fluid {padding-top: 70px;padding-bottom: 70px;}
+.text-red {color: #d72a22!important;}
+.font-weight-600 {font-weight: 600!important;}
+.ft-line {height: 1px;background-color: #ccc;margin: 50px 100px;}
+
+.owl-controls {margin: 0;}
+.owl-controls .owl-nav > div {border-radius: 0;display: block;margin: 0;padding: 4px;position: absolute;top: 38%;-webkit-transition: all 0.4s ease 0s;-moz-transition: all 0.4s ease 0s;-ms-transition: all 0.4s ease 0s;-o-transition: all 0.4s ease 0s;transition: all 0.4s ease 0s;}
+.owl-controls .owl-next {right: 0px;}
+.owl-controls .owl-prev {left: 0px;}
+.owl-controls .owl-next i {color: rgba(75, 75, 75, 0.5);font-size: 42px;}
+.owl-controls .owl-prev i {color: rgba(75, 75, 75, 0.5); font-size: 42px;}
+.owl-theme .owl-dots {text-align: center;margin-top: 10px;margin-bottom: 5px;}
+.owl-carousel {display: block;width: 100%;-webkit-tap-highlight-color: transparent;position: relative;}
+.owl-carousel .owl-stage-outer {position: relative;overflow: hidden;-webkit-transform: translate3d(0px, 0px, 0px);}
+.owl-carousel .owl-stage {position: relative;-ms-touch-action: pan-Y;}
+.owl-carousel .owl-item { position: relative;min-height: 1px;float: left;-webkit-backface-visibility: hidden;-webkit-tap-highlight-color: transparent;-webkit-touch-callout: none; -webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+.carousel-item {transition: transform 2.6s ease-in-out;}
+.owl-carousel .owl-controls .owl-nav .owl-prev, .owl-carousel .owl-controls .owl-nav .owl-next, .owl-carousel .owl-controls .owl-dot {cursor: pointer;}
+
+/* footer-css */
+.footer {padding:0;margin:0;}
+.footer-wrapper4 {flex-wrap: wrap;display: flex;}
+.footer-wrapper4 .column:first-child {width: 31%;}
+.footer-wrapper4 .column {width: 20.5%;text-transform: uppercase;margin-right: 2.5%;}
+.footer h4 {font-size: 1.1rem;font-weight: 600;text-transform: uppercase;padding: 0;margin: 0 0 10px;}
+.footer ul {padding: 0;margin: 0;}
+.footer ul li {padding: 0;margin: 0 0 10px;list-style: none;word-break: break-all;}
+.footer ul li a { color: #16161d;transition: .5s;text-decoration: none;font-weight: 400;text-transform: capitalize; font-size: 14px;}
+.footer ul li a:hover {color: #d9070a;}
+.social-media ul {padding: 0;margin-top: 22px!important;}
+.social-media ul li {list-style: none;border-bottom: none;margin: 0;padding: 7px 5px!important;display: inline; text-align: center;transition: .5s; border-radius: 6px;margin-right: 6px;background-color: #d72a22;}
+.social-media ul li i {font-size: 14px;height: 22px;line-height: 22px;width: 22px;color: #fff;}
+.footer .btm-info {padding: 0;margin: 30px 0 0;}
+.footer h4 {font-size: 1.1rem;font-weight: 600;text-transform: uppercase;padding: 0;margin: 0 0 10px;}
+.web span {margin-right: 15px;margin-bottom: 10px;font-weight: 400;}
+.top-info {text-align: right;}
+.top-info ul li a {text-transform: lowercase!important;}
+.footer .top-info ul li i {margin-right: 5px;}

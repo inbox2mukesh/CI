@@ -77,8 +77,24 @@
 	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/bootstrap.min.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
 	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/css-plugin-collections.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" media="all">
 	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/style-main.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
-	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/global.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
-	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/responsive.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
+	
+	<?php
+		$REQUEST_URI_ARRAY=explode('/',$_SERVER['REQUEST_URI']);
+		#pr($REQUEST_URI_ARRAY,1);
+		if($controller_name=$REQUEST_URI_ARRAY[2] =="")
+		{
+			?>
+			<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/home-css/home.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
+			<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/home-css/home-comman.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
+			<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/home-css/home-responsive.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
+			<?php 
+		} else {?>
+			<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/global.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
+			<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/responsive.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
+		<?php }
+	?>
+
+	
 	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/bootstrap-select.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
 	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/datepicker.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
 	<?php if ($this->session->userdata('student_login_data')) { ?>
@@ -86,8 +102,10 @@
 	<?php } ?>
 	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/wosa-header.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
 	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/marquee-ticker.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
-	<script src="<?php echo base_url(DESIGN_VERSION_F . '/js/jquery-min.js?v=' . JS_CSS_VERSION_F); ?>" type="text/javascript"></script>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all">
+	<!-- <link href="https://fonts.cdnfonts.com/css/montserrat?styles=17402,17405,17398,17400,17403,17391" rel="stylesheet"> -->
+	<script  src="<?php echo base_url(DESIGN_VERSION_F . '/js/jquery-min.js?v=' . JS_CSS_VERSION_F); ?>" type="text/javascript"></script>
+	<!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200&display=swap" rel="stylesheet"> -->
 	<!--Added by Vikram 6 dec 2022 -->
 	<?php echo callCommonJSFileVariables(); ?>
 	<style>

@@ -14,7 +14,7 @@ class Test_preparation_material extends MY_Controller
     function index()
     {
         $data['segment'] = $this->_getURI();
-        $data['title'] = "Test-preparation-material";
+        $data['title'] = "Test Preparation Material";
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
         );
@@ -44,7 +44,7 @@ class Test_preparation_material extends MY_Controller
         }
 
         //$data['segment'] = $this->_getURI();
-        $data['title'] = "Test preparation material Post";
+        $data['title'] = "Test Preparation Material";
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
         );

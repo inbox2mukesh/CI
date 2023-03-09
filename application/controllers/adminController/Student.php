@@ -613,7 +613,6 @@ class Student extends MY_Controller{
     }
     
     function edit($id){
-
         $id = base64_decode($id);
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -2745,6 +2744,7 @@ class Student extends MY_Controller{
                 'active'        => 1,
                 'packCloseReason'=> NULL,
                 'expired_on'    => $newDate,
+                 'expired_on_str' => strtotime($newDate),
             );
             $params2 = array(                    
                 'student_package_id'=> $student_package_id,
@@ -2785,6 +2785,7 @@ class Student extends MY_Controller{
                 'active'        => 1,
                 'packCloseReason'=> NULL,
                 'expired_on'    => $newDate,
+                'expired_on_str' => strtotime($newDate),
             );
             $params2 = array(                    
                 'student_package_id'=> $student_package_id,
@@ -3110,11 +3111,18 @@ class Student extends MY_Controller{
         $holdDateTo_str = strtotime($holdDateTo);
         $diffStr = $holdDateTo_str-$holdDateFrom_str;
         $diff = ($diffStr/86400) + 1;
-
+        $p=explode(".",$diff);       
+        if($p[1] !="")
+        {
+            $diff=round($diff);
+        }
+       
         $getPackExpiry = $this->Student_package_model->getPackExpiry($student_package_id);
-        $currentExpiryDate = $getPackExpiry['expired_on'];
+         $currentExpiryDate = $getPackExpiry['expired_on'];
 
-        $newExpiryDate = date('d-m-Y', strtotime($currentExpiryDate . ' +'.$diff.' day'));
+       $newExpiryDate = date('d-m-Y', strtotime($currentExpiryDate . ' +'.$diff.' days'));
+
+
         $closingFromToday = $todayStr-$holdDateFrom_str;      
                   
 
@@ -3133,6 +3141,7 @@ class Student extends MY_Controller{
                 'holdDateTo'=> $holdDateTo,
                 'application_file'=>$application_file,
                 'expired_on'=> $newExpiryDate,
+                'expired_on_str' => strtotime($newExpiryDate),
                 'onHold'=>$onHold,      
                 'by_user'=> $by_user,
                 'packCloseReason'=>$packCloseReason,
@@ -3195,7 +3204,7 @@ class Student extends MY_Controller{
         $diffStr = $holdDateTo_str-$holdDateFrom_str;
         $diff = ($diffStr/86400) + 1;
 
-        $newExpiryDate = date('d-m-Y', strtotime($currentExpiryDate . ' -'.$diff.' day'));
+        $newExpiryDate = date('d-m-Y', strtotime($currentExpiryDate . ' -'.$diff.' days'));
         $today = date('d-m-Y');
         $params1 = array( 
             'onHold' => 0,      

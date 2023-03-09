@@ -1161,7 +1161,7 @@ define('MDL', 'Logged out - Multiple device/browser login');
 define('PAR', 'Logged out - Portal access revoked');
 define('STO', 'Logged out - Session time out');
 define('RC', 'Logged out - Role changed');
-define('RL', 'Logged out - Regular');
+define('RL', 'Logged-out-Regular');
 
 define('SOURCE_ADD', 'New source added');
 define('SOURCE_MASTER_UPDATE', 'Source name updated');

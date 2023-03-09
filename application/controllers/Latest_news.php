@@ -49,7 +49,7 @@ class Latest_news extends MY_Controller{
         $data['countnewsData']=json_decode($this->_curlGetData(base_url(GET_All_NEWS_DATA_URL), $headers1_count));
         $config['total_rows'] = count($data['countnewsData']->error_message->data);
         $this->pagination->initialize($config);
-        $data['title'] = 'Latest news';
+        $data['title'] = 'News';
         $data['serviceData']=json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers));
         $data['pinnedNewsData']=json_decode($this->_curlGetData(base_url(GET_PINNED_NEWS_DATA_URL), $headers1));
         $data['uri'] = $uri;
@@ -67,7 +67,7 @@ class Latest_news extends MY_Controller{
         );
         //$data['callfromview'] = $this;
         $data['countryCode']=json_decode($this->_curlGetData(base_url(GET_ALL_CNT_CODE_URL), $headers));      
-        $data['title'] = 'News Article';
+        $data['title'] = 'News';
         $data['serviceData']=json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers));      
         $data['serviceDataAll']=json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_All_URL), $headers));
         $data['newsArticleData']=json_decode($this->_curlGetData(base_url(GET_NEWS_DATA_BY_ID_URL), $headers));

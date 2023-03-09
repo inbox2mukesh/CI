@@ -22,7 +22,7 @@
 						<!--Start About Content-->
 						<div class="wraper-content">
 							<div class="sub-service-info">
-								<h4 class="title-head-bar">About <?php echo strtolower($serviceDetails->error_message->data->enquiry_purpose_name);?></h4>
+								<h4 class="title-head-bar text-uppercase">About <?php echo strtolower($serviceDetails->error_message->data->enquiry_purpose_name);?></h4>
 								<div class="about-sub-info">
 									<p> <?php echo $serviceDetails->error_message->data->about_service?></p>
 								</div>
@@ -45,6 +45,7 @@
 			<div class="topFormpanel text-left mt-30 mob-display clearfix">
 					<?php 
 					$service_id=$serviceDetails->error_message->data->id;
+					$enquiry_purpose_name=$serviceDetails->error_message->data->enquiry_purpose_name;
 					include('includes/enquiry_form.php');?>
 				</div>
 			</div>

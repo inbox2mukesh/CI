@@ -317,10 +317,10 @@ class Student_package_model extends CI_Model
         $add_payment = $params['add_payment'];
         $expired_on = $params['expired_on'];
         $active = $params['active'];
-
         return $this->db->query("update `student_package` SET
             `ext_amount` = `ext_amount` + '".$add_payment."',
             `expired_on` = '".$expired_on."',
+            `expired_on_str` = '".strtotime($expired_on)."',
             `packCloseReason` = NULL,
             `active` = '".$active."' 
             where student_package_id = '".$student_package_id."' 

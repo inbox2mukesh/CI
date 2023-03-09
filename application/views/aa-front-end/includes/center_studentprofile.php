@@ -30,7 +30,7 @@ $p_pic=base_url($this->session->userdata('student_login_data')->profile_pic);
 										<?php 
 										if($this->session->userdata('student_login_data')->profileUpdate ==1)
 										{
-											echo '<i class="fa fa-asterisk" aria-hidden="true"></i> VIEW PROFILE';
+											echo '<i class="fa fa-user" aria-hidden="true"></i> VIEW PROFILE';
 										}
 										else {
 											echo '<i class="fa fa-pencil mr-5"></i>EDIT PROFILE';

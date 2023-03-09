@@ -152,7 +152,7 @@
 <script src="<?php echo base_url(DESIGN_VERSION_F . '/js/webp-hero.bundle.js?v=' . JS_CSS_VERSION_F); ?>" type="text/javascript"></script> -->
 <!--Added by Vikram 6 dec 2022 -->
 <script src="<?php echo site_url(DESIGN_VERSION . '/js/sweetalert2.all.min.js?v=' . JS_CSS_VERSION_F); ?>"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	(function() {
 		var css = document.createElement('link');
 		css.href = '<?php echo base_url(DESIGN_VERSION_F . '/css/font-awesome.min.css?v=' . JS_CSS_VERSION_F); ?>';
@@ -160,6 +160,15 @@
 		css.type = 'text/css';
 		document.getElementsByTagName('head')[0].appendChild(css);
 	})();
+</script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+<script>
+  WebFont.load({
+    google: {
+      families: ['Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200&display=swap']
+    }
+  });
 </script>
 <script>
 	$(document).ready(function() {

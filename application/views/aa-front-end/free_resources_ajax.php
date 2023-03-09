@@ -28,7 +28,7 @@ $type="";
 
 <div class="grid-card-container">
             <div class="grid-card">
-                    <h2 class="text-red">No Free Resource Found</h2>
+                    <h2 class="text-red">No articles Found</h2>
                     
                   
                   

@@ -22,7 +22,7 @@
 						<!--Start About Content-->
 						<div class="wraper-content">
 							<div class="sub-service-info">
-								<h4 class="title-head-bar">About <?php echo strtolower($serviceDetails->error_message->data->enquiry_purpose_name);?></h4>
+								<h4 class="title-head-bar text-uppercase ">About <?php echo strtolower($serviceDetails->error_message->data->enquiry_purpose_name);?></h4>
 								<div class="about-sub-info">
 									<p> <?php echo $serviceDetails->error_message->data->about_service?></p>
 								</div>

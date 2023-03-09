@@ -139,6 +139,7 @@
         $this->db->join('content_type_masters ctm', 'ctm.id= fr.content_type_id');
         $this->db->where('frt.topic_id', $test_type);
         $this->db->where('fr.active', 1);
+        $this->db->where('URLslug IS NOT NULL');
         if($search_text){
         $this->db->like('fr.title', $search_text);
         }
@@ -169,6 +170,7 @@
         $this->db->join('content_type_masters ctm', 'ctm.id= fr.content_type_id');
         $this->db->where('frt.topic_id', $test_type);
         $this->db->where('fr.active', 1);
+        $this->db->where('URLslug IS NOT NULL');
          if($search_text){
         $this->db->like('fr.title', $search_text);
         }
@@ -206,6 +208,7 @@
             $this->db->where('DATE(fr.modified) >=', $firstday);
             $this->db->where('DATE(fr.modified) <=', $enddate);
         }
+        $this->db->where('URLslug IS NOT NULL');
         $this->db->where('fr.active', 1);
         $this->db->order_by('fr.id', 'DESC');
         $this->db->limit(9);

@@ -148,7 +148,7 @@
 
             <div class="form-group col-md-12">
               <label>Permanent Address<span class="red-text">*</span> </label>
-              <textarea class="form-control" rows="3" name="residential_address" id="residential_address" style="height: inherit!important;"><?php echo ($stdInfo->error_message->data->residential_address != '') ? $stdInfo->error_message->data->residential_address : $this->input->post('residential_address'); ?></textarea>
+              <textarea class="form-control" rows="3" name="residential_address" id="residential_address" style="height: inherit!important;" <?php echo $disabledFields;?>><?php echo ($stdInfo->error_message->data->residential_address != '') ? $stdInfo->error_message->data->residential_address : $this->input->post('residential_address'); ?></textarea>
             </div>
             <div class="form-group col-md-12 font-12"> <span class="red-text">Note:</span> You can only change this information one time, If you would like any changes, please contact admission team. </div>
             <?php

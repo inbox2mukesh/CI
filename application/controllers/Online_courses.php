@@ -14,7 +14,7 @@ class Online_courses extends MY_Controller
     function index()
     {
         //$data['segment'] = $this->_getURI();
-        $data['title'] = 'Online Class Courses';
+        $data['title'] = 'Join IELTS online courses &amp; get ready for studying in Canada';
         $data['title1'] = 'Online Class';
         $data['title2'] = ' Courses';
         $headers = array(
