@@ -80,8 +80,16 @@
 	
 	<?php
 		$REQUEST_URI_ARRAY=explode('/',$_SERVER['REQUEST_URI']);
-		#pr($REQUEST_URI_ARRAY,1);
-		if($controller_name=$REQUEST_URI_ARRAY[2] =="")
+		
+		//pr($REQUEST_URI_ARRAY,1);
+		if(ENVIRONMENT != "production" ) {
+			$requestURIIndex = $REQUEST_URI_ARRAY[2];
+		}
+		else {
+			$requestURIIndex = $REQUEST_URI_ARRAY[1];
+		}
+
+		if($requestURIIndex =="")
 		{
 			?>
 			<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/home-css/home.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
