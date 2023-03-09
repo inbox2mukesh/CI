@@ -13,7 +13,6 @@
  .login-modal .info {padding: 10px;margin: 0px;}
  .bg-white {background-color: #fff;}
  .alert-danger {text-align: center!important;margin-bottom: 6px!important;font-weight: 500;}
- .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-    background-color: #fff !important;
-    opacity: 1 !important;
-}
+ .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {background-color: #fff !important;opacity: 1 !important;}
+ .about-sub-info table { width: 100% !important;margin: 10px 0;}
+ .about-sub-info table td {padding: 8px;border: 1px solid #ccc;font-size: 15px;}

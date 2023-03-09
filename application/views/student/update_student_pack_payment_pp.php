@@ -482,7 +482,7 @@
 								<div class="col-md-6">
 									<div class="form-group has-feedback">
 										<label for="expired_on" class="control-label text-success"><span class="text-danger">*</span>Pack Extension till Date (Current expiry date is: <?php echo date("d-m-Y", strtotime($sp['expired_on2'])); ?>)</label>
-										<input type="text" name="expired_on" class="pe_date form-control input-ui-100" id="expired_on" maxlength="10" autocomplete="off" readonly="readonly" data-date-format="dd/mm/yyyy" />
+										<input type="text" name="expired_on" class="pe_date form-control input-ui-100" id="expired_on" maxlength="10" autocomplete="off" readonly="readonly" />
 										<span class="glyphicon form-control-feedback">
 											<i class="fa fa-calendar"></i></span>
 										<span class="expired_on_err text-danger"></span>
