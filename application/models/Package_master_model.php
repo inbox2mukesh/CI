@@ -2063,14 +2063,7 @@ class Package_master_model extends CI_Model
     }
 
     function startPackByStartDate($today){
-
-        $params = array(
-            'active' => 1,
-            'packCloseReason'=>NULL
-        );
-        $this->db->where(array('subscribed_on_str'=>$today,'is_terminated'=>0,'onHold'=>0));
-        return $this->db->update('student_package',$params);
-        //print_r($this->db->last_query());exit;
+        return $this->db->query('UPDATE `student_package` SET `active` = 1, `packCloseReason` = NULL WHERE `subscribed_on_str` = '.$today.' AND `is_terminated` =0 AND `onHold` =0 AND `packCloseReason`!="Course switched"');
     }
 
     function getAllOrderDate($id)

@@ -1097,7 +1097,7 @@ class Student extends MY_Controller{
                 }elseif($payment_type=='Adjustment-PE'){
                     
                     $use_wallet = $this->input->post('use_wallet_pe', TRUE);
-                    $add_payment = $this->input->post('add_payment_pe', TRUE);
+                    $add_payment = $this->input->post('add_payment_pe', TRUE)*100;
                     $newDate = date("d-m-Y", strtotime($this->input->post('expired_on', TRUE)));
                     $response = $this->pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id);                     
 
