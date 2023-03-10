@@ -32,6 +32,8 @@
 								}else{
 									$holdDateFrom_isFuture=2;
 								}
+								$_SESSION['current_start_date']=$sp['subscribed_on2'];
+								
 								//echo $holdDateFrom_isFuture;
 						?>
 							<?php echo form_open_multipart('adminController/student/adjust_practice_pack_/' . $sp['student_package_id'], array('onsubmit' => 'return validate_adjustment_forms();')); ?>
@@ -235,7 +237,7 @@
 							</div>
 
 							<div class="col-md-3">
-									<label for="application_file" class="control-label">Pack Hold Application file</label>
+									<label for="" class="control-label">Pack Hold Application file</label>
 									<div class="form-group">
 
 										<?php
@@ -304,7 +306,7 @@
 												<option value="Change DCD">Change Due Commitment date</option>
 											<?php } ?>
 											<!-- <option value="Waiver">Waiver Reimbursement</option> -->
-											<option value="Terminate-Pack">Terminate Pack</option>
+											<!-- <option value="Terminate-Pack">Terminate Pack</option> -->
 											<option value="Unhold-Pack">Unhold pack</option>
 										</select>
 										<span class="text-danger"><?php echo form_error('payment_type'); ?></span>
@@ -339,7 +341,7 @@
 											<?php if ($sp['package_status'] == 1) { ?>
 												<option value="Pack on Hold">Pack on Hold</option>
 											<?php } ?>
-											<option value="Terminate-Pack">Terminate Pack</option>
+											<!-- <option value="Terminate-Pack">Terminate Pack</option> -->
 										</select>
 										<span class="text-danger"><?php echo form_error('payment_type'); ?></span>
 									</div>
@@ -405,11 +407,21 @@
 													<option value="Pack on Hold">Pack on Hold</option>
 												<?php } ?>
 											<?php } ?>
+											<!-- manage start date -->
+										<?php if ($sp['packCloseReason'] == 'Have to be start') { ?>
 											<?php
-											if ($this->Role_model->_has_access_('student', 'terminate_pack_')) {
+											if ($this->Role_model->_has_access_('student', 'manage_pack_start_date')) {
+											?>
+												<option value="Manage start date">Manage start date</option>
+											<?php } ?>
+											
+										<?php } ?>
+										<!-- manage start date -->
+											<?php
+											/* if ($this->Role_model->_has_access_('student', 'terminate_pack_')) {
 											?>
 												<option value="Terminate-Pack">Terminate Pack</option>
-											<?php } ?>
+											<?php } */ ?>
 										</select>
 										<span class="text-danger"><?php echo form_error('payment_type'); ?></span>
 									</div>
@@ -560,7 +572,30 @@
 							</div>
 						</div>
 						<!-- Course switch form closed-->
+						<!-- manage start date form -->
+						<div class="col-md-12 manage_start_date_form" style="display:none;" >
 
+												
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group has-feedback">
+									<label for="add_payment_pe" class="control-label text-success">Current Start Date</label>
+									<input type="text" value="<?php echo $_SESSION['current_start_date'];?>" name="current_start_date" class="form-control input-ui-100" id="current_start_date" readonly />									
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-group has-feedback">
+									<label for="new_start_date" class="control-label text-success"><span class="text-danger">*</span>New Start Date</label>
+									<input type="text" name="new_start_date" class="noBackDate form-control input-ui-100" id="new_start_date" maxlength="10" autocomplete="off" readonly="readonly" />
+									<span class="glyphicon form-control-feedback">
+										<i class="fa fa-calendar"></i></span>
+									<span class="new_start_date_err text-danger"></span>
+								</div>
+							</div>
+						</div>
+						</div>
+						<!-- manage start date form closed-->
 					</div>
 
 					<!--waiver-->

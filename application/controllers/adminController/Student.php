@@ -923,6 +923,9 @@ class Student extends MY_Controller{
             }elseif($payment_type=='Reactivate-Pack-Against-PR'){
                 
             }
+            elseif($payment_type=='Manage start date'){                    
+                $this->form_validation->set_rules('new_start_date','New Start Date','required|trim');
+            }
             else{  }
 
             if($this->form_validation->run()){                
@@ -989,7 +992,15 @@ class Student extends MY_Controller{
                 }elseif($payment_type=='Reactivate-Pack-Against-PR'){
                     
                     $response = $this->reactivate_pack_against_partial_refund_($student_package_id,$student_id);
-                }else{ /*... do nothing ...*/ }
+                }
+                elseif($payment_type=='Manage start date'){
+                    
+                    $new_start_date = $this->input->post('new_start_date', TRUE);    
+                    
+                    $response = $this->manage_pack_start_date($new_start_date,$student_package_id,$student_id);                    
+
+                }
+            else{ /*... do nothing ...*/ }
 
                 $this->db->trans_complete();
                 if($this->db->trans_status() === FALSE){
@@ -1023,8 +1034,9 @@ class Student extends MY_Controller{
             show_error(ITEM_NOT_EXIST);
         ////////////////////////////////////////////////////////////
         
-    }    
-
+    }   
+    
+   
     //non-real function
     function adjust_practice_pack_($student_package_id){               
 
@@ -1061,7 +1073,11 @@ class Student extends MY_Controller{
                     $this->form_validation->set_rules('termination_reason','Termination reason','required');
                 }elseif($payment_type=='Change DCD'){                    
                     $this->form_validation->set_rules('new_due_committment_date','Due committment date','required');
-                }else{ /*... do nothing ...*/ }       
+                }
+                elseif($payment_type=='Manage start date'){                    
+                    $this->form_validation->set_rules('new_start_date','New Start Date','required|trim');
+                }
+            else{ /*... do nothing ...*/ }       
         
             if($this->form_validation->run()){                
                 //tran start
@@ -1121,6 +1137,13 @@ class Student extends MY_Controller{
                 }
                 elseif($payment_type=='Reactivate-Pack-Against-PR'){                    
                     $response = $this->reactivate_pack_against_partial_refund_($student_package_id,$student_id);
+                }
+                elseif($payment_type=='Manage start date'){
+                    
+                    $new_start_date = $this->input->post('new_start_date', TRUE);    
+                    
+                    $response = $this->manage_pack_start_date($new_start_date,$student_package_id,$student_id);                    
+
                 }
             else{ /*... do nothing ...*/ }              
                 $this->db->trans_complete();
@@ -3078,6 +3101,96 @@ class Student extends MY_Controller{
             return 0;
         }
     }
+    function manage_pack_start_date($new_start_date,$student_package_id,$student_id){          
+        
+        //access control start
+        $cn = $this->router->fetch_class().''.'.php';
+        $mn='manage_pack_start_date';        
+        if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
+        //access control ends
+        $by_user=$_SESSION['UserId'];
+        $packdata= $this->Package_master_model->get_pack_id($student_package_id);
+        $package_id=$packdata['package_id'];
+        $currtent_start_date=$packdata['subscribed_on'];
+        $pack_type=$packdata['pack_type'];
+        if($pack_type=="online")
+        {
+            $package_data= $this->Package_master_model->get_package_master($package_id);
+        }
+        else {
+            $package_data= $this->Package_master_model->get_package_master_pp($package_id);
+        }
+        
+        $duration_type = $package_data['duration_type_name'];
+        $duration      = $package_data['duration'];         
+        $dt = $duration.' '.$duration_type;
+        if($duration_type=='Day'){
+            $duration = $duration;
+        }elseif($duration_type=='Week'){
+           $duration = $duration*7;                
+        }elseif($duration_type=='Month'){
+           $duration = $duration*30;                
+        }else{
+           $duration = 0;
+        }
+        if($duration >0){
+           $duration=$duration-1;
+          //  $duration=$duration;
+        }      
+        $duration = $duration.' days';         
+    
+        $subscribed_on = date("d-m-Y", strtotime($new_start_date));
+        $datee=date_create($subscribed_on);
+        date_add($datee,date_interval_create_from_date_string($duration));
+        $expired_on = date_format($datee,"d-m-Y");
+        $params1 = array(                    
+            'subscribed_on'=> $new_start_date,
+            'subscribed_on_str'=> strtotime($new_start_date),          
+            'expired_on'=> $expired_on,
+            'expired_on_str' => strtotime($expired_on),              
+            'by_user'=> $by_user,            
+        ); 
+        $idd1=$this->Student_package_model->update_student_pack($student_package_id,$params1);
+        $params2 = array(                    
+            'student_package_id'=> $student_package_id,
+            'amount'            => 0,
+            'remarks'           => 'Start Date updated from '.$currtent_start_date. ' To '.$new_start_date,
+            'student_id'        => $student_id,
+            'type'              => 'N/A',
+            'by_user'           => $by_user,
+            'created'           => date("d-m-Y h:i:s A"),
+            'modified'          => date("d-m-Y h:i:s A"),
+        ); 
+        $idd2 = $this->Student_package_model->update_transaction($params2);
+        if($idd1 and $idd2 ){
+            $get_UID = $this->Student_model->get_UID($datas['student_id']);
+            $UID = $get_UID['UID'];
+            //activity update start 
+                $activity_name= MANAGE_START_DATE;
+                $description= 'Start Date updated from '.$currtent_start_date. ' to '.$new_start_date.' for student '.$UID.'';
+                $res=$this->addUserActivity($activity_name,$description,$student_package_id,$by_user);
+            //activity update end
+            unset($_SESSION['current_start_date']);
+
+            $subject = 'Dear User, your package subscription date updated';
+           $email_message='Your package subscription date updated from '.$currtent_start_date. ' to '.$new_start_date.'';
+            $mailData                   = $this->Student_model->getMailData($student_package_id);
+            $mailData['email_message']  = $email_message;
+            
+            $mailData['thanks']         = THANKS;
+            $mailData['team']           = WOSA;
+            if(base_url()!=BASEURL){
+                $this->sendEmailTostd_manage_start_date($subject,$mailData);
+                //$this->_call_smaGateway($this->input->post('mobile'),PACK_SUBSCRIPTION_SMS);
+            }
+            return 1;
+          
+        }else{
+            unset($_SESSION['current_start_date']);
+            return 0;
+        }      
+       
+    }
 
     function do_pack_on_hold_($holdDateFrom,$holdDateTo,$application_file,$student_package_id,$student_id){          
         
@@ -3109,22 +3222,14 @@ class Student extends MY_Controller{
 
         $holdDateFrom_str = strtotime($holdDateFrom);
         $holdDateTo_str = strtotime($holdDateTo);
-        $diffStr = $holdDateTo_str-$holdDateFrom_str;
+        $diffStr = abs($holdDateTo_str-$holdDateFrom_str);
         $diff = ($diffStr/86400) + 1;
-        $p=explode(".",$diff);       
-        if($p[1] !="")
-        {
-            $diff=round($diff);
-        }
+        $diff = round($diff);        
        
         $getPackExpiry = $this->Student_package_model->getPackExpiry($student_package_id);
-         $currentExpiryDate = $getPackExpiry['expired_on'];
-
-       $newExpiryDate = date('d-m-Y', strtotime($currentExpiryDate . ' +'.$diff.' days'));
-
-
-        $closingFromToday = $todayStr-$holdDateFrom_str;      
-                  
+        $currentExpiryDate = $getPackExpiry['expired_on'];
+        $newExpiryDate = date('d-m-Y', strtotime($currentExpiryDate . ' +'.$diff.' days'));
+        $closingFromToday = abs($todayStr-$holdDateFrom_str); 
 
         if($closingFromToday==0){
             $active=0;
@@ -3201,9 +3306,9 @@ class Student extends MY_Controller{
 
         $holdDateFrom_str = strtotime($holdDateFrom);
         $holdDateTo_str = strtotime($holdDateTo);
-        $diffStr = $holdDateTo_str-$holdDateFrom_str;
+        $diffStr = abs($holdDateTo_str-$holdDateFrom_str);
         $diff = ($diffStr/86400) + 1;
-
+        $diff = round($diff);
         $newExpiryDate = date('d-m-Y', strtotime($currentExpiryDate . ' -'.$diff.' days'));
         $today = date('d-m-Y');
         $params1 = array( 

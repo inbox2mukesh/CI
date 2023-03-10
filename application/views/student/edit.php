@@ -889,7 +889,7 @@
                                     <a href="<?php echo base_url(PAYMENT_SCREENSHOT_FILE_PATH_ONLINE . $sp['payment_file']); ?>" target="_blank" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Transaction file"><span class="fa fa-download"></span> </a>
                                 <?php } ?>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <?php
                                     if($sp['packCloseReason'] == NULL) {
                                         echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
@@ -902,7 +902,9 @@
                                     }else{
                                         echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="Deactive/Expired pack"  >' . DEACTIVE . '</a></span>';
                                     }
+                                   
                                     ?>
+                                     <div><?php echo $sp['packCloseReason'];?></div>
                                     </td>
                                     <td><?php echo $sp['package_name']; ?></td>
                                     <td><?php echo $sp['test_module_name'].'/'.$sp['programe_name']; ?></td>
@@ -990,9 +992,9 @@
                                                                     <a href="<?php echo base_url(PAYMENT_SCREENSHOT_FILE_PATH_PP . $sp['payment_file']); ?>" target="_blank" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Transaction file"><span class="fa fa-download"></span></a>
                                                                 <?php } ?>
                                                             </td>
-                                                            <td>
+                                                            <td style="text-align: center;">
                                                                 <?php
-                                                                if ($sp['packCloseReason'] == NULL) {
+                                                                  if ($sp['packCloseReason'] == NULL) {
                                                                     echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
                                                                 } else if (($sp['packCloseReason'] == 'Partial Refund' AND $sp['package_status'] == 0) or $sp['packCloseReason'] == 'Full Refund' or $sp['packCloseReason'] == 'Pack Terminated' or $sp['packCloseReason'] == 'Course switched' or $sp['packCloseReason'] == 'Branch switched' or $sp['packCloseReason'] == 'Pack on hold' or $sp['packCloseReason'] == 'Due') {
                                                                     echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="' . $sp['packCloseReason'] . ' "  >' . DEACTIVE . '</a></span>';
@@ -1005,6 +1007,8 @@
                                                                     echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="Deactive/Expired pack"  >' . DEACTIVE . '</a></span>';
                                                                 }
                                                                 ?>
+                                                                
+                                                                <div><?php echo $sp['packCloseReason']?></div>
                                                             </td>
                                                             <td><?php echo $sp['package_name']; ?></td>
                                                             <td><?php echo $sp['test_module_name'] . '/' . $sp['programe_name']; ?></td>

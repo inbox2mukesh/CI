@@ -491,6 +491,20 @@ class MY_Controller extends CI_Controller
         $this->email->message($body);
         $this->email->send();
     }
+    function sendEmailTostd_manage_start_date($subject, $data){
+
+        $this->load->library('email');
+        $this->email->set_mailtype("html");
+        $this->email->set_newline("\r\n");
+        $this->email->from(ADMISSION_EMAIL, FROM_NAME);
+        $this->email->to($data['email']);
+        $this->email->subject($subject);
+        $body = $this->load->view('emails/manage_start_date_email.php', $data, TRUE);
+        $this->email->message($body);
+        $this->email->send();
+    }
+
+    
 
     public function _curPostData_fourmodules($url, $headers, $params)
     {

@@ -3272,7 +3272,8 @@ function deleteUserCategory(category_id, user_id, btnId) {
 function display_form(val) {
 	$('.uspp').show();
 	if (val == 'Add payment') {
-		$('.rp').hide();
+		$(".manage_start_date_form").hide();
+		$('.rp').hide();		
 		$('.ap').show();
 		$('.pf').show();
 		$(".wv_table").hide();
@@ -3292,6 +3293,7 @@ function display_form(val) {
 		$('#add_payment').prop('readonly', false);
 		$('.uspp').show();
 	} else if (val == 'Partial Refund' || val == 'Full Refund') {
+		$(".manage_start_date_form").hide();
 		$('.rp').hide();
 		$('.ap').hide();
 		$('.pf').hide();
@@ -3342,7 +3344,7 @@ function display_form(val) {
 			}
 		});
 	} else if (val == 'Waiver') {
-		//alert(val)
+		$(".manage_start_date_form").hide();
 		$('.rp').hide();
 		$('.ap').hide();
 		$('.pf').hide();
@@ -3383,6 +3385,7 @@ function display_form(val) {
 			}
 		});
 	} else if (val == 'Adjustment-PE') {
+		$(".manage_start_date_form").hide();
 		$('.ap').hide();
 		$('.rp').hide();
 		$('.pf').hide();
@@ -3400,6 +3403,7 @@ function display_form(val) {
 		$(".reactivate_pack_form").hide();
 		$(".due_commitment_form").hide();
 	} else if (val == 'Adjustment-BS') {
+		$(".manage_start_date_form").hide();
 		$(".branch_switch_form").show();
 		$('.ap').hide();
 		$('.rp').hide();
@@ -3417,6 +3421,7 @@ function display_form(val) {
 		$(".reactivate_pack_form").hide();
 		$(".due_commitment_form").hide();
 	} else if (val == 'Adjustment-CS') {
+		$(".manage_start_date_form").hide();
 		$(".course_switch_form").show();
 		$(".branch_switch_form").hide();
 		$('.ap').hide();
@@ -3434,6 +3439,7 @@ function display_form(val) {
 		$(".reactivate_pack_form").hide();
 		$(".due_commitment_form").hide();
 	} else if (val == 'Pack on Hold') {
+		$(".manage_start_date_form").hide();
 		$(".pack_onhold_form").show()
 		$(".course_switch_form").hide();
 		$(".branch_switch_form").hide();
@@ -3451,6 +3457,7 @@ function display_form(val) {
 		$(".reactivate_pack_form").hide();
 		$(".due_commitment_form").hide();
 	} else if (val == 'Batch Update') {
+		$(".manage_start_date_form").hide();
 		$(".batch_update_form").show();
 		$(".pack_onhold_form").hide()
 		$(".course_switch_form").hide();
@@ -3468,6 +3475,7 @@ function display_form(val) {
 		$(".reactivate_pack_form").hide();
 		$(".due_commitment_form").hide();
 	} else if (val == 'Terminate-Pack') {
+		$(".manage_start_date_form").hide();
 		$(".terminate_pack_form").show();
 		$(".batch_update_form").hide();
 		$(".pack_onhold_form").hide()
@@ -3485,6 +3493,7 @@ function display_form(val) {
 		$(".reactivate_pack_form").hide();
 		$(".due_commitment_form").hide();
 	} else if (val == 'Unhold-Pack') {
+		$(".manage_start_date_form").hide();
 		$(".terminate_pack_form").hide();
 		$(".batch_update_form").hide();
 		$(".pack_onhold_form").hide()
@@ -3503,6 +3512,7 @@ function display_form(val) {
 		$(".due_commitment_form").hide();
 		$('.uspp').prop('disabled', false);
 	} else if (val == 'Reactivate-Pack') {
+		$(".manage_start_date_form").hide();
 		$(".terminate_pack_form").hide();
 		$(".batch_update_form").hide();
 		$(".pack_onhold_form").hide()
@@ -3521,6 +3531,7 @@ function display_form(val) {
 		$(".due_commitment_form").hide();
 		$('.uspp').prop('disabled', false);
 	} else if (val == 'Change DCD') {
+		$(".manage_start_date_form").hide();
 		$(".due_commitment_form").show();
 		$('.ap').hide();
 		$('.rp').hide();
@@ -3538,9 +3549,32 @@ function display_form(val) {
 		$(".unhold_pack_form").hide();
 		$(".reactivate_pack_form").hide();
 		$('.uspp').prop('disabled', false);
-	} else if (val == 'Reactivate-Pack-Against-PR') {		
+	} else if (val == 'Reactivate-Pack-Against-PR') {
+		$(".manage_start_date_form").hide();		
 		$('.uspp').prop('disabled', false);
-	}else {
+	}
+	else if (val == 'Manage start date') {	
+		$(".manage_start_date_form").show();
+		$(".due_commitment_form").hide();
+		$('.ap').hide();
+		$('.rp').hide();
+		$('.pf').hide();
+		$(".wv_table").hide();
+		$(".rf_table").hide();
+		$(".refund_msg_failed").hide();
+		$(".waiver_msg_failed").hide();
+		$(".pack_extension_form").hide();
+		$(".branch_switch_form").hide();
+		$(".course_switch_form").hide();
+		$(".pack_onhold_form").hide();
+		$(".batch_update_form").hide();
+		$(".terminate_pack_form").hide();
+		$(".unhold_pack_form").hide();
+		$(".reactivate_pack_form").hide();
+		$('.uspp').prop('disabled', false);
+	}
+	
+	else {
 		$('.ap').hide();
 		$('.rp').hide();
 		$('.pf').hide();
@@ -8296,7 +8330,17 @@ function validate_adjustment_forms(){
 		}else{
 			$('.new_due_committment_date_err').text('');
 		}
-	}else{
+	}
+	else if(adjustment_form=='Manage start date'){
+		var new_start_date = $('#new_start_date').val();
+		if(new_start_date==''){
+			$('.new_start_date_err').text('Please enter new date');
+			return false;
+		}else{
+			$('.new_start_date_err').text('');
+		}
+	}
+	else{
 	}
 	//return false;
 }

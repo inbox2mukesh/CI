@@ -922,7 +922,7 @@ define('TR_OFFLINE', '<th>Action</th>
 
 if(WOSA_ONLINE_DOMAIN==1){
 	define('TR_ONLINE_OFFLINE', '<th>Action</th>
-	<th>Status</th>
+	<th style="text-align: center;">Status</th>
 	<th>Pack</th>
 	<th>Course/Program</th>
 	<th>Price/Duration</th>
@@ -943,7 +943,7 @@ if(WOSA_ONLINE_DOMAIN==1){
 	');
 }else{
 	define('TR_ONLINE_OFFLINE', '<th>Action</th>
-	<th>Status</th>
+	<th style="text-align: center;">Status</th>
 	<th>Pack</th>
 	<th>Course/Program</th>
 	<th>Price/Duration</th>
@@ -964,7 +964,7 @@ if(WOSA_ONLINE_DOMAIN==1){
 
 if(WOSA_ONLINE_DOMAIN==1){
 	define('TR_PRACTICE_PACK', '<th>Action</th>
-	<th>Status</th>
+	<th style="text-align: center;">Status</th>
 	<th>Pack</th>
 	<th>Course/Program</th>
 	<th>Price/Duration</th>
@@ -984,7 +984,7 @@ if(WOSA_ONLINE_DOMAIN==1){
 	');
 }else{
 	define('TR_PRACTICE_PACK', '<th>Action</th>
-	<th>Status</th>
+	<th style="text-align: center;">Status</th>
 	<th>Pack</th>
 	<th>Course/Program</th>
 	<th>Price/Duration</th>
@@ -1038,6 +1038,7 @@ define('PACK_UNHOLD', 'Pack unhold');
 define('PACK_TERMINATION', 'Pack Termination');
 define('PACK_REACTIVATION', 'Pack Reactivation');
 define('WAIVER_REMBURSE', 'Waiver Remburse');
+define('MANAGE_START_DATE', 'Start Date Updated');
 
 define('DOC_ADDED', 'Document file uploaded');
 define('WALLET_WITHDRAWL', 'Withdrawl from wallet');  
@@ -1157,10 +1158,10 @@ define('TIME_SLOT_UPDATE', 'Time slot update');
 define('DEFAULT_PARENT_MENU_ICON', '<i class="fa fa-list"></i>');
 define('DEFAULT_CHILD_MENU_ICON', '<i class="fa fa-arrow-right"></i>');
 
-define('MDL', 'Logged out - Multiple device/browser login');
-define('PAR', 'Logged out - Portal access revoked');
-define('STO', 'Logged out - Session time out');
-define('RC', 'Logged out - Role changed');
+define('MDL', 'Logged-out-Multiple-device/browser-login');
+define('PAR', 'Logged-out-Portal-access-revoked');
+define('STO', 'Logged-out-Session-time-out');
+define('RC', 'Logged-out-Role-changed');
 define('RL', 'Logged-out-Regular');
 
 define('SOURCE_ADD', 'New source added');

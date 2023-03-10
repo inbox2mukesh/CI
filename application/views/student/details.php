@@ -184,7 +184,7 @@
                                     <a href="<?php echo base_url(PAYMENT_SCREENSHOT_FILE_PATH_PP . $sp['payment_file']); ?>" target="_blank" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Transaction file"><span class="fa fa-download"></span></a>
                                 <?php } ?>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <?php
                                     if ($sp['packCloseReason'] == NULL){
                                         echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
@@ -196,6 +196,7 @@
                                         echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="Deactive/Expired pack"  >' . DEACTIVE . '</a></span>';
                                     }
                                 ?>
+                                <div><?php echo $sp['packCloseReason']?></div>
                             </td>
                             <td><?php echo $sp['package_name']; ?></td>
                             <td><?php echo $sp['test_module_name'] . '/' . $sp['programe_name']; ?></td>
@@ -283,7 +284,7 @@
                                     <a href="<?php echo base_url(PAYMENT_SCREENSHOT_FILE_PATH_INHOUSE . $sp['payment_file']); ?>" target="_blank" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Transaction file"><span class="fa fa-download"></span></a>
                                 <?php } ?>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                                                 <?php
                                                                 if ($sp['packCloseReason'] == NULL) {
                                                                     echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
@@ -294,6 +295,7 @@
                                                                     echo '<span class="text-danger"><a href="javascript:void(0);" data-toggle="tooltip" title="Deactive/Expired pack"  >' . DEACTIVE . '</a></span>';
                                                                 }
                                                                 ?>
+                                                                <div><?php echo $sp['packCloseReason']?></div>
                                                             </td>
                                                             <td><?php echo $sp['package_name']; ?></td>
                                                             <td><?php echo $sp['package_cost'] . '/' . $sp['package_duration']; ?></td>
@@ -389,7 +391,7 @@
                                     <a href="<?php echo base_url(PAYMENT_SCREENSHOT_FILE_PATH_ONLINE . $sp['payment_file']); ?>" target="_blank" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Transaction file"><span class="fa fa-download"></span> </a>
                                 <?php } ?>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <?php
                                     if ($sp['packCloseReason'] == NULL) {
                                         echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
@@ -403,6 +405,7 @@
                                         echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="Deactive/Expired pack"  >' . DEACTIVE . '</a></span>';
                                     }
                                     ?>
+                                    <div><?php echo $sp['packCloseReason']?></div>
                                 </td>
                                 <td><?php echo $sp['package_name']; ?></td>
                                 <td><?php echo $sp['test_module_name'].'/'.$sp['programe_name']; ?></td>

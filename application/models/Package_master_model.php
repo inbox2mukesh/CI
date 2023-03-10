@@ -189,6 +189,22 @@ class Package_master_model extends CI_Model
         $this->db->where(array('pkg.package_id'=>$package_id));
         return $this->db->get('')->row_array();
         //print_r($this->db->last_query());exit;
+    } 
+    function get_package_master_pp($package_id)
+    {
+        //return $this->db->get_where('package_masters',array('package_id'=>$package_id))->row_array();
+        $this->db->select('
+            pkg.*,
+            dt.duration_type as duration_type_name,
+            ct.name as country_name,
+            ct.country_id
+        ');
+        $this->db->from('`practice_package_masters` pkg');
+        $this->db->join('`duration_type` dt', 'dt.`id`= pkg.`duration_type`');
+        $this->db->join('`country` ct', 'ct.`country_id`= pkg.`country_id`');
+        $this->db->where(array('pkg.package_id'=>$package_id));
+        return $this->db->get('')->row_array();
+        //print_r($this->db->last_query());exit;
     }  
 
     function getPackageProfile($package_id){
@@ -1927,15 +1943,15 @@ class Package_master_model extends CI_Model
 
     }
 
-    function activatePackWhichIsOnHold_finished($today){
-
+    function activatePackWhichIsOnHold_finished($today){        
         $params = array(
             'active' => 1,
             'onHold'=>0,
             'packCloseReason'=>NULL
         );
-        $this->db->where(array('holdDateTo'=>$today,'onHold'=>1));
+        $this->db->where(array('holdDateTo_str'=>$today,'onHold'=>1));
         return $this->db->update('student_package',$params);
+      // print_r($this->db->last_query());exit;
     }
 
     function DeactivateExpiredPack($today)
@@ -2052,8 +2068,9 @@ class Package_master_model extends CI_Model
             'active' => 1,
             'packCloseReason'=>NULL
         );
-        $this->db->where(array('subscribed_on_str'=>$today));
+        $this->db->where(array('subscribed_on_str'=>$today,'is_terminated'=>0,'onHold'=>0));
         return $this->db->update('student_package',$params);
+        //print_r($this->db->last_query());exit;
     }
 
     function getAllOrderDate($id)
@@ -2201,5 +2218,13 @@ class Package_master_model extends CI_Model
       //  $this->db->where('sp.fourmodule_api_called !=', '0'); 
         $this->db->where(array('sp.fourmodule_api_called !='=>0,'fourmodule_status='=>1));
         return $this->db->get('')->result_array();
+    }
+
+    function get_pack_id($student_package_id)
+    {
+        $this->db->select('package_id,subscribed_on,pack_type');
+        $this->db->from('`student_package`'); 
+        $this->db->where(array('student_package_id'=>$student_package_id));
+        return $this->db->get('')->row_array();  
     }
 }
