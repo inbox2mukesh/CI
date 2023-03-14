@@ -269,12 +269,9 @@ $(document).bind("contextmenu",function(e){
 document.onkeydown = function(e){
   if(e.ctrlKey && 
       (
-      e.keyCode === 67 ||
-      e.keyCode === 86 || 
       e.keyCode === 85 ||
       e.keyCode === 117 ||
-      e.keyCode === 73 || 
-      e.keyCode === 88 || 
+      e.keyCode === 73 ||      
       e.keyCode === 80 ||
       e.keyCode === 83)){
         return false;
@@ -335,7 +332,7 @@ const date = new Date();
 	<?php }?>
 
 $('.datepicker_timezone').datepicker({
-startDate: new Date(),
+startDate: caDate,
 autoclose:true,
 });
 

@@ -301,6 +301,7 @@
         $this->db->from('students');
         $this->db->where(array('country_code'=>$country_code, 'mobile'=> $mobile));
         return $this->db->get('')->row_array();
+        //print_r($this->db->last_query());exit;
     }
 
     function get_studentfull_profile($id){
@@ -808,7 +809,8 @@
             spkg.`method`,
             spkg.subscribed_on as `subscribed_on`,
             spkg.expired_on as `expired_on`,
-            spkg.requested_on as `requested_on`
+            spkg.requested_on as `requested_on`,
+            spkg.`pack_type`,
         ');
         $this->db->from('`students` s');       
         $this->db->join('`student_package` spkg', 'spkg.`student_id`= s.`id`', 'left');
@@ -844,6 +846,7 @@
             tm.test_module_name,
             cl.center_name,
             spkg.`currency`,
+            spkg.`pack_type`,
         ');
         $this->db->from('`students` s');       
         $this->db->join('`student_package` spkg', 'spkg.`student_id`= s.`id`', 'left');
@@ -1340,6 +1343,24 @@
 
         $this->db->where('student_package_id',$student_id);
         return $this->db->update('student_package',$params);
+    }
+    function verfiy_StudentOTP($email,$opt)
+    {
+        $this->db->select('id');
+        $this->db->from('students');     
+        $this->db->where(array('email'=>$email,'OTP'=>$opt));     
+        return $this->db->get('')->row_array();
+         //print_r($this->db->last_query());exit;
+
+    }
+    function verfiy_StudentOTP_by_mobile($country_code,$mobile,$opt)
+    {
+        $this->db->select('id');
+        $this->db->from('students');     
+        $this->db->where(array('country_code'=>$country_code,'mobile'=>$mobile,'OTP'=>$opt));     
+        return $this->db->get('')->row_array();
+        // print_r($this->db->last_query());exit;
+
     }
 
 }

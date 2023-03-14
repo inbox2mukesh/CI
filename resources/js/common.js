@@ -2831,13 +2831,15 @@ function get_otp() {
 }
 function send_mobile_otp() {
 	var mobile = $("#mobile").val();
+	var country_code = $("#country_code").val();
 	$.ajax({
 		url: WOSA_ADMIN_URL + 'student/ajax_send_mobile_otp',
 		type: 'post',
-		data: { mobile: mobile },
+		data: { mobile: mobile,country_code:country_code },
 		success: function (response) {
+			
 			if (response.status == 'true') {
-				$('#mobileOTP').val(response.otp);
+				//$('#mobileOTP').val(response.otp);
 				$('.mobile_otp_err').text(response.msg);
 			} else {
 				$('#mobileOTP').val('');
@@ -2853,16 +2855,18 @@ function send_email_otp() {
 		type: 'post',
 		data: { email: email },
 		success: function (response) {
+			
 			if (response.status == 'true') {
-				$('#emailOTP').val(response.otp);
+				//$('#emailOTP').val(response.otp);
 				$('.email_otp_err').text(response.msg);
 			} else {
-				$('#emailOTP').val('');
+				//$('#emailOTP').val('');
 				$('.email_otp_err').text(response.msg);
 			}
 		}
 	});
 }
+
 function get_otp_walkin() {
 	var mobile = $("#mobile").val();
 	$.ajax({

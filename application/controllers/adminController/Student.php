@@ -63,12 +63,62 @@ class Student extends MY_Controller{
         //access control ends
         
         $data['title'] = 'Verify Mobile/Email';
-        $this->load->library('form_validation');        
-        $this->form_validation->set_rules('mobile','Mobile','required|max_length[10]|trim');
-            
-        $data['all_country_code'] = $this->Country_model->getAllCountryCode();
-        $data['_view']='student/student_verification';
-        $this->load->view('layouts/main',$data);
+        $this->load->library('form_validation');    
+        if(DEFAULT_COUNTRY == 101)
+        {
+            $this->form_validation->set_rules('country_code','Country code','required|trim');
+            $this->form_validation->set_rules('mobile','Mobile No.','required|trim');
+            $this->form_validation->set_rules('mobileOTP','OTP','required|trim'); 
+        }
+        else {
+            $this->form_validation->set_rules('email','Email','required|trim');
+            $this->form_validation->set_rules('emailOTP','OTP','required|trim');  
+        }        
+                 
+        if($this->form_validation->run())
+         {          
+                  
+            if(DEFAULT_COUNTRY == 101)
+            {
+               $country_code=$this->input->post('country_code');
+                $mobile=$this->input->post('mobile');
+                $opt=$this->input->post('mobileOTP');
+                $studentid = $this->Student_model->verfiy_StudentOTP_by_mobile($country_code,$mobile,$opt);
+                if($studentid['id'])
+                { 
+                    $params = array('is_otp_verified'=>1,'active'=>1);                               
+                    $idd = $this->Student_model->update_student($studentid['id'],$params);  
+                    $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
+                    redirect('adminController/student/student_verification'); 
+                }
+                else {
+                    $this->session->set_flashdata('flsh_msg', FAILED_MSG);
+                    redirect('adminController/student/student_verification');
+                }
+            }
+            else {
+                $email=$this->input->post('email');
+                $opt=$this->input->post('emailOTP');  
+                $studentid = $this->Student_model->verfiy_StudentOTP($email,$opt);
+                if($studentid['id'])
+                { 
+                    $params = array('is_email_verified'=>1,'active'=>1);                               
+                    $idd = $this->Student_model->update_student($studentid['id'],$params);  
+                    $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
+                    redirect('adminController/student/student_verification'); 
+                }
+                else {
+                    $this->session->set_flashdata('flsh_msg', FAILED_MSG);
+                    redirect('adminController/student/student_verification');
+                }
+            }    
+         }
+         else {
+            $data['all_country_code'] = $this->Country_model->getAllCountryCode();
+            $data['_view']='student/student_verification';
+            $this->load->view('layouts/main',$data);
+         }           
+       
     }
 
     function ajax_checkDuplicateInhousePackBooking(){
@@ -3552,6 +3602,7 @@ class Student extends MY_Controller{
     function ajax_send_mobile_otp(){
 
         $mobile = $this->input->post('mobile', TRUE);
+        $country_code = $this->input->post('country_code', TRUE);
                     
             if(strlen($mobile)!=10){
                 header('Content-Type: application/json');
@@ -3562,38 +3613,67 @@ class Student extends MY_Controller{
                 $response = ['msg'=>'Please enter valid Number. Alphabets not allowed', 'status'=>'false', 'otp'=>''];
                 echo json_encode($response);
             }else{
-                if(base_url()!=BASEURL){ 
-                    $otp = rand(1000,10000);
-                    $message = 'Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
-                   //$this->_call_smaGateway($mobile,$message);
-                }else{
-                    $otp = 1234;
-                    $message = 'Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
+                
+                $data_user = $this->Student_model->get_studentId_byMobile($country_code,$mobile); 
+				                            
+                if(!empty($data_user))
+                {
+                     $id=$data_user['id'];   
+                    if(base_url()!=BASEURL){ 
+                        $otp = rand(1000,10000);
+                        $message = 'Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
+                       $this->_call_smaGateway($mobile,$message);
+                    }else{
+                        $otp = 1234;
+                        $message = 'Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
+                    }
+					 $params2 = array('OTP'=>$otp);                               
+                    $idd = $this->Student_model->update_student($id,$params2);
+                    header('Content-Type: application/json');
+                     $response = ['msg'=>'OTP sent on this mobile number, Please check', 'status'=>'true', 'otp'=>$otp];
+                     echo json_encode($response);   
+                }  
+                else {
+                    header('Content-Type: application/json');
+                $response = ['msg'=>'Fail to send OTP. Try again', 'status'=>'false'];
+                echo json_encode($response);   
                 }
-                header('Content-Type: application/json');
-                $response = ['msg'=>'OTP sent.Please check device', 'status'=>'true', 'otp'=>$otp];
-                echo json_encode($response);                
+                             
             } 
     } 
 
     function ajax_send_email_otp(){
 
-        $email = $this->input->post('email', TRUE);
-        $otp = rand(1000,10000);            
-        $subject='Email OTP verification';                   
-        $email_message='Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
-        $mailData                 = [];
-        $mailData['fname']        = 'User';
-        $mailData['email']        = $email;
-        $mailData['email_message']= $email_message;
-        $mailData['thanks']       = THANKS;
-        $mailData['team']         = WOSA;
-        if(base_url()!=BASEURL){               
-            $this->sendEmailTostd_walkinOTP_($subject,$mailData);
-        }        
-        header('Content-Type: application/json');
-        $response = ['msg'=>'OTP sent on this email.Please check mail to confirm', 'status'=>'true', 'otp'=>$otp];
-        echo json_encode($response);     
+        $email = $this->input->post('email', TRUE);       
+        $data_user = $this->Student_model->get_studentId_byEmail($email); 
+        $id=$data_user['id'];       
+        if($id)
+        {
+            $otp = rand(1000,10000);            
+            $subject='Email OTP verification';                   
+            $email_message='Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
+            $mailData                 = [];
+            $mailData['fname']        = 'User';
+            $mailData['email']        = $email;
+            $mailData['email_message']= $email_message;
+            $mailData['thanks']       = THANKS;
+            $mailData['team']         = WOSA;
+            if(base_url()!=BASEURL){               
+                $this->sendEmailTostd_walkinOTP_($subject,$mailData);
+            } 
+            $params2 = array('OTP'=>$otp);                               
+            $idd = $this->Student_model->update_student($id,$params2); 
+            header('Content-Type: application/json');
+            $response = ['msg'=>'OTP sent on this email, Please check', 'status'=>'true', 'otp'=>$otp];
+            echo json_encode($response);   
+        }  
+        else {
+            header('Content-Type: application/json');
+            $response = ['msg'=>'Fail to send OTP. Try again', 'status'=>'false'];
+            echo json_encode($response);   
+        }     
+                
+         
     }
 
     //non-real function
