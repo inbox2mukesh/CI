@@ -106,8 +106,8 @@ define('TWT', 'https://twitter.com/westernoverseaa');
 	define('TIME_ZONE', 'Australia/Adelaide');	
 
 	define('LOGO_IELTS', 'resources-f/images/mock_test_reprt_images/logo-sm-aus.png');//ielts,cd-ielts
-	define('LOGO_PTE', 'resources-f/images/mock_test_reprt_images/logo-sm-aus.png');
-	define('LOGO_TOEFL', 'resources-f/images/mock_test_reprt_images/logo-sm-aus.png');
+	define('LOGO_PTE', 'resources-f/images/mock_test_reprt_images/aus_logo_white.png');
+	define('LOGO_TOEFL', 'resources-f/images/mock_test_reprt_images/aus_logo_white.png');
 
 	define('CU_PHONE', '+61-430-439-035');
 	define('CU_EMAIL', 'info@westernoverseas.com.au');
