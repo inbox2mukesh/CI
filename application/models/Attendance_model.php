@@ -15,14 +15,14 @@ class  Attendance_model extends CI_Model{
     
     function add_attendance($params){
 
-        $this->db->insert('student_attendance',$params);
+        $this->db->insert('student_attendance_main',$params);
         return $this->db->insert_id();
     }
 
     function get_attendance($student_id,$classroom_id,$sch_id,$date){ 
 
         $this->db->where(array('student_id'=>$student_id,'classroom_id'=>$classroom_id,'sch_id'=>$sch_id,'date'=>$date));
-        $query = $this->db->get('student_attendance');
+        $query = $this->db->get('student_attendance_main');
         return $query->num_rows();
     }
     
