@@ -167,9 +167,9 @@ define('TWT', 'https://twitter.com/westernoverseaa');
 	define('CURRENCY', 'INR');
 	define('TIME_ZONE', 'Asia/Kolkata');
 
-	define('LOGO_IELTS', 'resources-f/images/mock_test_reprt_images/logo-sm.webp');//ielts,cd-ielts
-	define('LOGO_PTE', 'resources-f/images/mock_test_reprt_images/mock_test_logo.webp');
-	define('LOGO_TOEFL', 'resources-f/images/mock_test_reprt_images/can_logo_white.webp');
+	define('LOGO_IELTS', 'resources-f/images/mock_test_reprt_images/logo-sm.png');//ielts,cd-ielts
+	define('LOGO_PTE', 'resources-f/images/mock_test_reprt_images/can_logo_white.png');
+	define('LOGO_TOEFL', 'resources-f/images/mock_test_reprt_images/can_logo_white.png');
 
 	define('CU_PHONE', '+1 (902) 537-1344');
 	define('CU_EMAIL', 'info@westernoverseas.online');
