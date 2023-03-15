@@ -15,7 +15,7 @@
 	<!--Start Why Canada Section-->
 	<section>
 		<div class="container">
-			 <div class="head-title font-weight-400 text-uppercase mb-20">About Online <span class="text-red font-weight-600">Pack</span></div>
+			 <div class="head-title font-weight-400 text-uppercase mb-20">About Online <span class="text-red font-weight-600">Coaching</span></div>
 			<div class="row" id="order-flex">
 				<div class="col-md-8" id="down">
 					<div class="main-services">

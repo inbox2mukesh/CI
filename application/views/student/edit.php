@@ -344,7 +344,15 @@
                             </div>
                         </div>
 
-                        <?php if ($student['is_email_verified'] == 1 and $student['active'] == 1) { ?>
+                        <?php 
+                        if (DEFAULT_COUNTRY == 101) {
+                            $verfiled_field=$student['is_otp_verified'];
+                        }
+                        else {
+                            $verfiled_field=$student['is_email_verified'];
+                        }
+                        
+                        if ($verfiled_field == 1 and $student['active'] == 1) { ?>
                             <?php /*if ($userPhysicalBranch == 1 and $this->Role_model->_has_access_('student','sell_inhouse_pack_')) { ?>
                                 <?php if(WOSA_ONLINE_DOMAIN==1){ ?>
                                     <div class="col-md-2 radiCourse">
@@ -571,8 +579,10 @@
                                 <div class="form-group">
                                     <select name="discount_type" id="discount_type" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep"  data-show-subtext="true" data-live-search="true" onchange="showDiscountTypeFields_online(this.value)">
                                         <!-- <option value="">Select type</option> -->
-                                        <!-- <option value="Waiver">Waiver</option>
-                                        <option value="Discount">Promocode</option> -->
+                                         <!-- <option value="Discount">Promocode</option>  -->
+                                        <?php if(WOSA_ONLINE_DOMAIN == 1){?> 
+                                        <option value="Waiver">Waiver</option>                                       
+                                        <?php } ?>
                                         <option value="None" selected>None</option>
                                     </select>
                                     <span class="text-danger discount_type_err"><?php echo form_error('discount_type'); ?></span>
@@ -689,9 +699,9 @@
                                 <label for="discount_type_pp" class="control-label text-success"><span class="text-danger">*</span>Discount type</label>
                                 <div class="form-group">
                                     <select name="discount_type_pp" id="discount_type_pp" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep" data-show-subtext="true" data-live-search="true" onchange="showDiscountTypeFields_pp(this.value)">
-                                        <!-- <option value="">Select type</option> -->
-                                        <!-- <option value="Waiver">Waiver</option>
-                                        <option value="Discount">Promocode</option> -->
+                                    <?php if(WOSA_ONLINE_DOMAIN == 1){?> 
+                                        <option value="Waiver">Waiver</option>                                       
+                                        <?php } ?>
                                         <option value="None">None</option>
                                     </select>
                                     <span class="text-danger discount_type_pp_err"><?php echo form_error('discount_type_pp'); ?></span>

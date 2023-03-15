@@ -58,21 +58,21 @@
  else {?>
 	<div class="owl-carousel-slider">
     <div class="carousel-item active">
-      <img class="d-block w-100 desktop-slider lazyload" src="<?php echo base_url('resources-f/images/slider/desktop-slider-1.webp');?>" alt="" loading="lazy">
-	  <img class="d-block w-100 mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/mobile-slider-1.webp');?>" alt="" loading="lazy">
-	  <img class="d-block w-100 small-mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/small-mobile-slider-1.webp');?>" alt="" loading="lazy">
+      <img class="d-block w-100 desktop-slider lazyload" src="<?php echo base_url('resources-f/images/slider/desktop-slider-1.webp');?>" alt="" width="1920px" height="800px">
+	  <img class="d-block w-100 mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/mobile-slider-1.webp');?>" alt="" width="1000px" height="665px">
+	  <img class="d-block w-100 small-mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/small-mobile-slider-1.webp');?>" alt="" width="375px" height="249px">
     </div>
 
 	<div class="carousel-item">
-      <img class="d-block w-100 desktop-slider " src="<?php echo base_url('resources-f/images/slider/desktop-slider-2.webp');?>" alt="" loading="lazy">	 
-	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/mobile-slider-2.webp');?>" alt="" loading="lazy">
-	  <img class="d-block w-100 small-mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/small-mobile-slider-2.webp');?>" alt="" loading="lazy">	 
+      <img class="d-block w-100 desktop-slider " src="<?php echo base_url('resources-f/images/slider/desktop-slider-2.webp');?>" alt="" width="1920px" height="800px">	 
+	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/mobile-slider-2.webp');?>" alt="" width="1000px" height="665px">
+	  <img class="d-block w-100 small-mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/small-mobile-slider-2.webp');?>" alt="" width="375px" height="249px">	 
     </div>
 
 	<div class="carousel-item">
-      <img class="d-block w-100 desktop-slider" src="<?php echo base_url('resources-f/images/slider/desktop-slider-3.webp');?>" alt="" loading="lazy">	
-	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/mobile-slider-3.webp');?>" alt="" loading="lazy">
-	  <img class="d-block w-100 small-mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/small-mobile-slider-3.webp');?>" alt="" loading="lazy">
+      <img class="d-block w-100 desktop-slider" src="<?php echo base_url('resources-f/images/slider/desktop-slider-3.webp');?>" alt="" width="1920px" height="800px">	
+	  <img class="d-block w-100 mobile-slider" src="<?php echo base_url('resources-f/images/slider/mobile-slider-3.webp');?>" alt="" width="1000px" height="665px">
+	  <img class="d-block w-100 small-mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/small-mobile-slider-3.webp');?>" alt="" width="375px" height="249px">
     </div>
   
   </div>
@@ -113,7 +113,7 @@
 			<?php if(DEFAULT_COUNTRY!=13 && DEFAULT_COUNTRY!=101) { ?>
 					<div class="text-center" style="text-align: -webkit-center;">
 
-							<img src="<?php echo base_url('resources-f/images/iccrc.webp');?>" alt="rcic logo" title="rcic logo" class="image_iccrc" loading="lazy">
+							<img src="<?php echo base_url('resources-f/images/iccrc.webp');?>" alt="rcic logo" title="rcic logo" class="image_iccrc" width="685px" height="204px">
 
 						</div>
 
@@ -167,7 +167,7 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 	<a href="<?php echo site_url()?>visa-services"> 
 			<div class="rt-img up">
 							<div class="video-popup">
-								<img src="<?php echo BASE_URL();?>resources-f/images/immigration-services.webp" alt="">
+								<img src="<?php echo BASE_URL();?>resources-f/images/immigration-services.webp" alt="" width="420px" height="280px">
 								<!-- <span class="play-btn"><i class="fa fa-play play-cicle"></i></span>  -->
 						</div>
 						</div>
@@ -202,7 +202,7 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 	<a href="<?php echo site_url()?>online-courses">
 		<div class="rt-img up">
 							<div class="video-popup">
-								<img src="<?php echo BASE_URL();?>resources-f/images/online-coachings.webp" alt="">
+								<img src="<?php echo BASE_URL();?>resources-f/images/online-coachings.webp" alt="" width="420px" height="280px">
 								<!-- <span class="play-btn"><i class="fa fa-play play-cicle"></i></span>  -->
 						      </div>
 						</div>
@@ -251,7 +251,7 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 <a href="<?php echo site_url()?>practice-packs">
 		<div class="rt-img up">
 			<div class="video-popup">
-			<img src="<?php echo BASE_URL();?>resources-f/images/test-prap.webp" alt="">
+			<img src="<?php echo BASE_URL();?>resources-f/images/test-prap.webp" alt="" width="420px" height="280px">
 			<!-- <span class="play-btn"><i class="fa fa-play play-cicle"></i></span> -->
 			</div>
 		</div>
@@ -352,7 +352,7 @@ foreach($FREE_RESOURCE_CONTENT->error_message->data as $p){
 					<div class="card-item-3">
 						<a href="<?php echo base_url()?>articles/post/<?php echo $p->URLslug; ?>">
 							<div class="lt-post-img">
-								<div class="img-area"> <img src="<?php echo $p->image;?>" class="img-responsive" alt=""> </div>
+								<div class="img-area"> <img src="<?php echo $p->image;?>" class="img-responsive" alt="" width="237px" height="250px"> </div>
 								<div class="img-text">
 									<h4><!-- <i class="fa fa-thumb-tack text-red mr-5"></i> --><?php echo ucwords($p->title);?></h4>
 									<div class="date"><?php echo $p->created;?></div>
@@ -388,7 +388,7 @@ $type="";
 			    <div class="col-md-3 col-sm-6 text-center">					
 					<div class="img-tools">
 					<a href="https://western-overseas.com/assessment-tools/crs-calculator" target="_blank">						
-					<div class="imgi-icn"><img src="<?php echo BASE_URL();?>resources-f/images/crs-icn.svg" alt="" title=""></div>
+					<div class="imgi-icn"><img src="<?php echo BASE_URL();?>resources-f/images/crs-icn.svg" alt="" title="" width="70px" height="70px"></div>
 						<div class="imgi-title">CRS CALCULATOR</div>
 					</a>
 					</div>
@@ -397,7 +397,7 @@ $type="";
 				 <div class="col-md-3 col-sm-6 text-center">					
 					<div class="img-tools">	
 					<a href="https://western-overseas.com/assessment-tools/visa-assessment" target="_blank">					
-					<div class="imgi-icn"><img src="<?php echo BASE_URL();?>resources-f/images/study-visa.svg" alt="" title=""></div>
+					<div class="imgi-icn"><img src="<?php echo BASE_URL();?>resources-f/images/study-visa.svg" alt="" title="" width="70px" height="70px"></div>
 						<div class="imgi-title">Study Visa Eligibility</div>
 					</a>
 					</div>
@@ -406,7 +406,7 @@ $type="";
 			 <div class="col-md-3 col-sm-6 text-center">					
 					<div class="img-tools">				
 					<a href="https://western-overseas.com/assessment-tools/english-level-assessment" target="_blank">	
-					<div class="imgi-icn"><img src="<?php echo BASE_URL();?>resources-f/images/eng-level.svg" alt="" title=""></div>
+					<div class="imgi-icn"><img src="<?php echo BASE_URL();?>resources-f/images/eng-level.svg" alt="" title="" width="70px" height="70px"></div>
 						<div class="imgi-title">English Level Assessment</div>
 					</a>
 					</div>
@@ -414,7 +414,7 @@ $type="";
 			 <div class="col-md-3 col-sm-6 text-center">					
 					<div class="img-tools">	
 <a href="https://western-overseas.com/assessment-tools/score-converter" target="_blank">
-					    <div class="imgi-icn"><img src="<?php echo BASE_URL();?>resources-f/images/score-convert.svg" alt="" title=""></div>
+					    <div class="imgi-icn"><img src="<?php echo BASE_URL();?>resources-f/images/score-convert.svg" alt="" title="" width="70px" height="70px"></div>
 						<div class="imgi-title">Score Convertor</div>
 					</a>
 
@@ -448,7 +448,7 @@ if(!empty($newsData->error_message->data))
 					<div class="card-item-3">
 						<a href="<?php echo base_url('news/post/'.$d->URLslug);?>">
 							<div class="lt-post-img lt-bg">
-								<div class="img-area"> <img src="<?php echo base_url('uploads/news/'.$d->card_image);?>" class="img-responsive" alt=""> </div>
+								<div class="img-area"> <img src="<?php echo base_url('uploads/news/'.$d->card_image);?>" class="img-responsive" alt="" width="237px" height="250px" > </div>
 								<div class="img-text">
 									<h4><?php echo substr($d->title,0,60);?></h4>
 									<div class="date"><?php echo $news_date;?></div>

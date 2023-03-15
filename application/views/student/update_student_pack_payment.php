@@ -342,7 +342,10 @@
 												<option value="Change DCD">Change Due Commitment date</option>
 											<?php } ?>
 										<?php } ?>
-										<!-- <option value="Waiver">Waiver Reimbursement</option>	 -->
+										<?php
+												if ($this->Role_model->_has_access_('student', 'Remburse_waiver_') and WOSA_ONLINE_DOMAIN==1) {
+												?>
+											 <option value="Waiver">Waiver Reimbursement</option> <?php } ?>
 										<?php if ($sp['package_status'] == 1) { ?>
 											<?php
 											if ($this->Role_model->_has_access_('student', 'updateBatch_')) {
@@ -407,7 +410,11 @@
 												if ($this->Role_model->_has_access_('student', 'branch_switch_adjustment_') and WOSA_ONLINE_DOMAIN==1) {
 												?>
 											<option value="Adjustment-BS">Adjustment-Branch Switch</option><?php } ?>
-										 	<!-- <option value="Waiver">Waiver Reimbursement</option> -->
+											<?php
+												if ($this->Role_model->_has_access_('student', 'Remburse_waiver_') and WOSA_ONLINE_DOMAIN==1) {
+												?>
+											 <option value="Waiver">Waiver Reimbursement</option> <?php } ?>
+										
 										<?php if ($sp['package_status'] == 1) { ?>
 											<?php
 											if ($this->Role_model->_has_access_('student', 'do_pack_on_hold_')) {
@@ -489,7 +496,11 @@
 												if ($this->Role_model->_has_access_('student', 'branch_switch_adjustment_') and WOSA_ONLINE_DOMAIN==1) {
 												?>
 												<option value="Adjustment-BS">Adjustment-Branch Switch</option><?php } ?>
-										<!-- <option value="Waiver">Waiver Reimbursement</option> -->	 
+												<?php
+												if ($this->Role_model->_has_access_('student', 'Remburse_waiver_') and WOSA_ONLINE_DOMAIN==1) {
+												?>
+											 <option value="Waiver">Waiver Reimbursement</option> <?php } ?>
+										 
 										<?php if ($sp['package_status'] == 1) { ?>
 											<?php
 											if ($this->Role_model->_has_access_('student', 'do_pack_on_hold_')) {

@@ -305,7 +305,10 @@
 												<option value="Add payment">Add Payment</option>
 												<option value="Change DCD">Change Due Commitment date</option>
 											<?php } ?>
-											<!-- <option value="Waiver">Waiver Reimbursement</option> -->
+											<?php
+												if ($this->Role_model->_has_access_('student', 'Remburse_waiver_') and WOSA_ONLINE_DOMAIN==1) {
+												?>
+											 <option value="Waiver">Waiver Reimbursement</option> <?php } ?>
 											<!-- <option value="Terminate-Pack">Terminate Pack</option> -->
 											<option value="Unhold-Pack">Unhold pack</option>
 										</select>
@@ -337,7 +340,10 @@
 											<?php } ?>
 											<option value="Adjustment-PE">Adjustment-Pack Extension</option>
 											<option value="Adjustment-CS">Adjustment-Course Switch</option>
-											<!-- <option value="Waiver">Waiver Reimbursement</option> -->
+											<?php
+												if ($this->Role_model->_has_access_('student', 'Remburse_waiver_') and WOSA_ONLINE_DOMAIN==1) {
+												?>
+											 <option value="Waiver">Waiver Reimbursement</option> <?php } ?>
 											<?php if ($sp['package_status'] == 1) { ?>
 												<option value="Pack on Hold">Pack on Hold</option>
 											<?php } ?>
@@ -399,7 +405,10 @@
 											if ($this->Role_model->_has_access_('student', 'course_switch_adjustment_')) {
 											?>
 												<option value="Adjustment-CS">Adjustment-Course Switch</option><?php } ?>
-											<!-- <option value="Waiver">Waiver Reimbursement</option> -->
+												<?php
+												if ($this->Role_model->_has_access_('student', 'Remburse_waiver_') and WOSA_ONLINE_DOMAIN==1) {
+												?>
+											 <option value="Waiver">Waiver Reimbursement</option> <?php } ?>
 											<?php if ($sp['package_status'] == 1) { ?>
 												<?php
 												if ($this->Role_model->_has_access_('student', 'do_pack_on_hold_')) {

@@ -11,7 +11,7 @@
 
 		<div class="services-content mt-40">
 		<h2 class="font-weight-300 text-uppercase text-center">About Online
-			<span class="text-red font-weight-600"> Pack<a name="visa-services"></a></span>
+			<span class="text-red font-weight-600"> Coaching<a name="visa-services"></a></span>
 		</h2>
 	<!--START GRID CONTAINER -->
 				<div class="row">
@@ -21,7 +21,7 @@
 						foreach ($serviceData_p->error_message->data as $d) { ?>
 						
 						<div class="col-md-3 col-sm-6">
-								<a href="<?php echo base_url('about-online-pack/view/'.$d->URLslug);?>">
+								<a href="<?php echo base_url('about-online-coaching/view/'.$d->URLslug);?>">
 									<div class="services">
 										<div class="img-area"> <img src="<?php echo base_url('uploads/service_image/'.$d->image);?>" class="img-responsive" alt="" title=""> </div>
 										<div class="img-text">

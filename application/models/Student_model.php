@@ -1362,5 +1362,14 @@
         // print_r($this->db->last_query());exit;
 
     }
+    function checkStudentExistenceBoth($mobile,$email){
+
+        $this->db->select('id,fresh,active,is_otp_verified,is_email_verified');
+        $this->db->from('`students`');
+       // $this->db->where(array('mobile'=> $mobile,'email'=>$email));       
+       $this->db->where(array('mobile'=>$mobile)); 
+       $this->db->or_where(array('email'=>$email));    
+        return $this->db->get('')->row_array();
+    }
 
 }

@@ -2,7 +2,7 @@
 .topFormpanel {background: #fff;padding: 8px 15px 15px 15px; margin-bottom: 0;height: fit-content;border-radius: 10px;-moz-box-shadow: 0px 0px 5px #a9a9a9;-webkit-box-shadow: 0px 0px 5px #a9a9a9;box-shadow: 0px 0px 5px #a9a9a9;position: relative;z-index: inherit;opacity: 1;}
 .topFormpanel .fstinput {padding: 0 12px;vertical-align: middle;border: none;border-radius: 4px;background-color: #fff!important;overflow: hidden;width: inherit;-moz-box-shadow: 0px 0px 3px #a9a9a9;-webkit-box-shadow: 0px 0px 3px #a9a9a9;box-shadow: 0px 0px 3px #a9a9a9;border: solid 1px #ddd;width: 100%;font-weight: 500;color: #757575;height: 38px;}
 .qury-form-row .valid-validation {display: block;z-index: 5;font-size: 10px!important;line-height: 10px!important; color: #ff1f14;position: absolute!important;margin-top: 3px;word-break: break-all; font-weight: 500;}
-.qury-form-row {margin-right: -5px;margin-left: -5px;width: -webkit-fill-available;display: flow-root!important;}
+/* .qury-form-row {margin-right: -5px;margin-left: -5px;width: -webkit-fill-available;display: flow-root!important;} */
 .qury-form-row .btn {padding:7px 12px!important;}
 .btn-red { color: #fff!important; background-color: #DA251D;transition: .5s;}
 .font-20 {font-size: 20px!important;}
@@ -84,6 +84,11 @@
 .social-media ul li:hover { opacity: .8;}
 .social-media ul li i {font-size: 14px;height: 22px;line-height: 22px;width: 22px;color: #fff;}
 
+/* new css 3/14/2023 */
+.owl-carousel-slider .carousel-item img {width: 100%;height: auto;}
+.qury-form-row{display: flex;flex-wrap: wrap;width: 100%;}
+.qury-form-row .text-uppercase {width: 100%;}
+
 /* modal css */
 .modal-md {max-width: 600px;}
 .modal-title {font-weight: 600;font-size: 18px;line-height: 24px;}.login .modal-header {padding: 10px 15px 10px 25px;border-bottom: solid 1px #ebebeb;}
@@ -102,6 +107,16 @@
  .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {background-color: #fff !important;opacity: 1 !important;}
  .form-group-icon {position: absolute;top: 6px;right: 3px;display: block;width: 34px;height: 34px;line-height: 34px !important;text-align: center;pointer-events: none;}
  .modal-backdrop.in{z-index: 99;}
+ .reg-otp-info h3 {font-size: 20px;font-weight: 600;margin: 10px 0;}
+ .reg-otp-info {padding: 15px;}
+ .reg-otp-info .subs-group #reg_otp,  .reg-otp-info .subs-group #otp {padding: 10px 15px;height: auto;margin-bottom: 17px;-moz-box-shadow: 0px 0px 3px #a9a9a9;-webkit-box-shadow: 0px 0px 3px #a9a9a9;box-shadow: 0px 0px 3px #a9a9a9;}
+ .reg-otp-info #reg_otp:focus {background: #fff !important;text-shadow: none !important;}
+ .reg-otp-info p {color: #000;font-size: 14px !important;}
+ .reg-otp-info .subs-group {display: block;margin-bottom: 0;}
+ .reg-otp-info #reg_otp::placeholder {color: #c1c1c1 !important;}
+ .reg-otp .cross-btn {color: #000;}
+ .modal-open .modal-backdrop.in{overflow-y: scroll;}
+ .reg-otp-info .btn-subs {padding: 8px 22px !important;border-radius: 5px;}
 
 
  @media screen and (min-width: 220px) and (max-width: 990px)

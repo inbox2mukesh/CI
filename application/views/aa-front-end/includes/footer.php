@@ -29,7 +29,7 @@
 			<div class="column">
 				<h4>Online Coaching</h4>
 				<ul>
-					<li><a href="<?php echo base_url('about-online-pack'); ?>">About Online Pack</a></li>
+					<li><a href="<?php echo base_url('about-online-coaching'); ?>">About Online Coaching</a></li>
 					<li><a href="<?php echo base_url('online-courses'); ?>">Online Courses</a></li>
 					<li><a href="<?php echo base_url('practice-packs'); ?>">Practice Packs</a></li>
 					<?php if (DEFAULT_COUNTRY == 101) { ?>
@@ -96,7 +96,7 @@
 						<li><a href="<?php echo YTD; ?>" target="_blank"><i class="fa fa-youtube"></i></a></li>
 						<li><a href="<?php echo INST; ?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
 						<?php if (DEFAULT_COUNTRY != 13 && DEFAULT_COUNTRY != 101) { ?>
-							<li><a href="<?php echo TTK; ?>" target="_blank" cursor-class="arrow"><i><img src="<?php echo base_url('resources-f/images/tiktok.svg'); ?>" alt="" style="display: inline;padding:5px;width: 22px;"></i></a></li>
+							<li><a href="<?php echo TTK; ?>" target="_blank" cursor-class="arrow"><img src="<?php echo base_url('resources-f/images/tiktok.svg'); ?>" alt="" style="display: inline;padding:5px;" width="22px" height="22px"></a></li>
 						<?php } ?>
 					</ul>
 				</div>

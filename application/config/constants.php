@@ -190,7 +190,7 @@ define('TWT', 'https://twitter.com/westernoverseaa');
 	define('ADMISSION_EMAIL', 'info@westernoverseas.online');
 	define('FROM_NAME','Western Overseas Immigration');
 
-	define('TESTINGURL', 'https://www.westernoverseas.online/_online-production-testing/adminController/dashboard');
+	define('TESTINGURL', 'https://www.westernoverseas.online/wosa-online-production-testing/adminController/dashboard');
 	define('LIVEURL', 'https://www.westernoverseas.online/adminController/dashboard');
 	
 	define('FB',  'https://www.facebook.com/westernoverseas172/');

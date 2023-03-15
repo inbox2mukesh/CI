@@ -279,6 +279,7 @@
     }
     .qury-form-row .form-group {
       margin-bottom: 15px !important;
+      width: 100%;
     }
     .mdl-bg {
       background-color: #fff !important;
@@ -891,6 +892,10 @@
     .modal-change-password .modal {
       top: 1% !important;
     }
+    .qury-form-row .col-md-12 {
+      width: 100%;
+    }
+    img {height: auto;}
   }
   @media screen and (min-width: 220px) and (max-width: 480px) {
     .fltr-row-4clmn > .col,

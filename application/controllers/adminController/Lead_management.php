@@ -17,6 +17,8 @@ class Lead_management extends MY_Controller{
         $this->load->model('Country_model');
         $this->load->model('Enquiry_purpose_model');
         $this->load->model('Immigration_tools_model');             
+        $this->load->model('Division_master_model');             
+        $this->load->model('Student_model');             
     }
 
     function crs_list(){
@@ -466,6 +468,98 @@ class Lead_management extends MY_Controller{
         $this->form_validation->set_rules('fname','First name','required');
         if($this->form_validation->run())
         {   
+
+           if($this->input->post('division_id')== 1)// academic division
+           {            
+            $count=$this->Student_model->checkStudentExistenceBoth($this->input->post('mobile'),$this->input->post('email'));                     
+            if(count($count) > 0)
+            {   
+                $DUP_LEAD_MSG= '<div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Failed:</strong> Student Already Found.<a href="#" class="alert-link"></a>.
+                 </div>';       
+                $this->session->set_flashdata('flsh_msg', $DUP_LEAD_MSG);
+                redirect('adminController/lead_management/add_new_lead');
+            }
+            else {
+                $maxid = $this->Student_model->getMax_UID();
+			    $UID = $this->_calculateUID($maxid);
+                $service_id =10;// for enquriy
+                if(isset($test_module_id)and isset($programe_id) and isset($center_id)){
+                    $response = $this->_calculateStatus($service_id,$center_id,$test_module_id,$programe_id,@$pack_cb);
+                    $student_identity = $response['student_identity'];
+                    $details = $response['details'];
+                }else{
+                     $student_identity = 'WA13-'.ONLINE_BRANCH_ID.'-0';
+                }
+                if(ENVIRONMENT!='production'){
+                    $plain_pwd = PLAIN_PWD;  
+                }else{
+                    $plain_pwd = $this->_getorderTokens(PWD_LEN);
+                } 
+               $p=explode("|",$this->input->post('country_code'));
+               $countryData =$this->Country_model->get_country_id($p[0]);
+               $country_id = $countryData['country_id'];
+                $std_params = array( 
+                    'UID'   => $UID,
+                    'student_identity' => $student_identity, 
+                    'fresh'=>1,
+                    'service_id' => $service_id,                             
+                    'fname' => ucfirst($this->input->post('fname')), 
+                    'lname' => ucfirst($this->input->post('lname')),                                 
+                    'country_code' =>$p[0],
+                    'country_iso3_code' => $p[1],
+                    'mobile'=>$this->input->post('mobile'),                    
+                    'email' =>$this->input->post('email'),
+                    'username' => $this->input->post('email'), 
+                    'country_id' => $country_id,             
+                    'active' => 0,                
+                    'is_otp_verified'=>0,
+                    'is_email_verified'=>0,
+                    'today' =>date('d-m-Y'), 
+                    'loggedIn'=>1,
+                    'password' => md5($plain_pwd),
+                );
+                
+                $last_id = $this->Student_model->add_student($std_params);
+                if($last_id)
+                {
+                    $enquiry_no=$this->_getorderTokens(12);    
+                    $params=array(                         
+                    'enquiry_purpose_id' =>$this->input->post('enquiry_purpose_id'),            
+                    'student_id' => $last_id,            
+                    'message' =>$this->input->post('message'),            
+                    'todayDate' =>date('d-m-Y'),            
+                    'enquiry_no' =>$enquiry_no,            
+                    ); 
+                    $enquiry_id = $this->Student_enquiry_model->add_enquiry($params); 
+                    if($enquiry_id)
+                    {
+                        $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
+                        redirect('adminController/lead_management/add_new_lead');
+                    }
+                    else {
+                    $DUP_LEAD_MSG= '<div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Failed:</strong>Error. Try Again.<a href="#" class="alert-link"></a>.
+                    </div>';       
+                    $this->session->set_flashdata('flsh_msg', $DUP_LEAD_MSG);
+                    redirect('adminController/lead_management/add_new_lead');
+                    }
+                }
+                else {
+                    $DUP_LEAD_MSG= '<div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Failed:</strong>Error. Try Again.<a href="#" class="alert-link"></a>.
+                    </div>';       
+                    $this->session->set_flashdata('flsh_msg', $DUP_LEAD_MSG);
+                    redirect('adminController/lead_management/add_new_lead');
+                }
+                //$this->session->set_flashdata('flsh_msg', DUP_LEAD_MSG);
+               // redirect('adminController/lead_management/add_new_enquiry');
+            }
+           }
+           else {
             $by_user=$_SESSION['UserId'];
             $today = date('d-m-Y');
             $params=array(
@@ -528,11 +622,11 @@ class Lead_management extends MY_Controller{
              $this->session->set_flashdata('flsh_msg', DUP_LEAD_MSG);
              redirect('adminController/lead_management/add_new_enquiry');
         }
-       
-  
+           }
     }
     else
-    {         
+    {   
+        $data['all_division'] = $this->Division_master_model->get_all_division_active();       
         $data['all_country_code'] = $this->Country_model->get_all_country_active();        
         $data['all_purpose'] = $this->Enquiry_purpose_model->get_all_enquiry_purpose_active();
         $data['_view'] = 'followup_master/add_new_enquiry';
@@ -645,6 +739,20 @@ class Lead_management extends MY_Controller{
 
    } 
 
-   /*---ends----*/       
+   /*---ends----*/
+   
+   function ajax_get_enqpurpose()
+   {
+
+    $division_id=$this->input->post('division_id');
+    $data= $this->Enquiry_purpose_model->get_all_enquiry_purpose_by_division($division_id);
+    
+    $catOption = '<option value="">Select Purpose</option>';
+   foreach ($data as $p) {
+
+        $catOption .= '<option value=' . $p['id'] . '>' . $p['enquiry_purpose_name'].'</option>';
+    } 
+    echo $catOption;
+   }
 
 }
