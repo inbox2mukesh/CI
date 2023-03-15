@@ -620,7 +620,7 @@ class Lead_management extends MY_Controller{
         else
         {
              $this->session->set_flashdata('flsh_msg', DUP_LEAD_MSG);
-             redirect('adminController/lead_management/add_new_enquiry');
+             redirect('adminController/lead_management/add_new_lead');
         }
            }
     }
@@ -719,7 +719,7 @@ class Lead_management extends MY_Controller{
             else
             {
             $this->session->set_flashdata('flsh_msg', DUP_LEAD_MSG);
-            redirect('adminController/lead_management/edit_new_enquiry/'.$id);
+            redirect('adminController/lead_management/edit_lead_/'.$id);
             }
 
         }        
