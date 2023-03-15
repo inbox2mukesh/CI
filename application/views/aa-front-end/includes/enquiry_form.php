@@ -14,7 +14,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
 
   <div class="qury-form-row">
   <div class="font-20 text-center mt-0 text-uppercase">
-      Quick <span class="text-theme-color-2 font-weight-600">Enquiry</span>
+      Quick <span class="text-theme-color-2 font-weight-600 text-red">Enquiry</span>
     </div>
    
     <div class="form-group col-md-6 col-sm-6">

@@ -519,6 +519,8 @@ class Lead_management extends MY_Controller{
                     'today' =>date('d-m-Y'), 
                     'loggedIn'=>1,
                     'password' => md5($plain_pwd),
+                    'center_id'=>ONLINE_BRANCH_ID,
+                    'all_center_id'=>ONLINE_BRANCH_ID,
                 );
                 
                 $last_id = $this->Student_model->add_student($std_params);

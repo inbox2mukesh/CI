@@ -25,7 +25,8 @@ class Get_pp_duration extends REST_Controller {
           $country_id = $this->input->get_request_header('COUNTRY-ID');
           $test_module_id = $this->input->get_request_header('TEST-MODULE-ID');
           $programe_id = $this->input->get_request_header('PROGRAME-ID');
-          $bData = $this->Practice_package_model->Get_pp_duration($country_id,$test_module_id, $programe_id);
+          $category_id = $this->input->get_request_header('CATEGORY-ID');
+          $bData = $this->Practice_package_model->Get_pp_duration($country_id,$test_module_id, $programe_id,$category_id);
           if(!empty($bData)){
             $data['error_message'] = [ "success" => 1, "message" => "success", "data"=> $bData];    
           }else{

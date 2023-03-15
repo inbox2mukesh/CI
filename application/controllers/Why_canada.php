@@ -16,7 +16,7 @@ class Why_canada extends MY_Controller{
             'API-KEY:'.WOSA_API_KEY,   
         );
         $data['countryCode']= json_decode($this->_curlGetData(base_url(GET_ALL_CNT_CODE_URL), $headers));
-        $data['title'] = 'Why Australia?';
+        $data['title'] = 'Why canada?';
         $data['newsData'] = json_decode($this->_curlGetData(base_url(GET_NEWS_DATA_URL), $headers));
         $data['serviceData'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers));      
         $data['provinceData'] = json_decode($this->_curlGetData(base_url(GET_PROVINCES_SHORT), $headers));      
