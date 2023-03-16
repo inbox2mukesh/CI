@@ -12,16 +12,17 @@ class Visa_service_details extends MY_Controller{
         parent::__construct();       
     }
     
-    function index($id)
+    function index($id=null)
     {   
+        if (!$id) {
+            redirect('/');
+            exit;
+        }
         $headers = array(
             'API-KEY:'.WOSA_API_KEY,   
             'SERVICE_ID:'.$id,   
         );
-        $data['countryCode']= json_decode($this->_curlGetData(base_url(GET_ALL_CNT_CODE_URL), $headers));
-         //SERVICE_DATA/enquiry_purpose is same 
-       //  print_r($this->_curlGetData(base_url(GET_SERVICE_DATA_BY_ID_URL), $headers));
-        // die();
+        $data['countryCode']= json_decode($this->_curlGetData(base_url(GET_ALL_CNT_CODE_URL), $headers));       
         $data['serviceData'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers));
         $data['serviceDetails'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_BY_ID_URL), $headers));
         $data['serviceDataAll'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_All_URL), $headers));

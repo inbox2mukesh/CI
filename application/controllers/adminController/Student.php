@@ -40,7 +40,7 @@ class Student extends MY_Controller{
         $this->Student_package_model->updateDueCommittmentDate();
         $this->Student_attendance_model->backupAttendance($today);
         $this->Waiver_model->deactivateApprovedWaiverNotUsedAfterTwoDays($today);
-        $this->Refund_model->deactivateApprovedRefundNotUsedAfterTwoDays($today);
+        $this->Refund_model->deactivateApprovedRefundNotUsedAfterTwoDays($today); 
     }
 
     function clear_all_(){
@@ -2354,12 +2354,27 @@ class Student extends MY_Controller{
         }else{
             $ncd = 'N/A';
         }
+//echo $new_due_committment_date;
 
+            $today=date("d-m-Y");
+            $today=strtotime($today);
+            if($new_due_committment_date>=$today){               
+                $params = array(  
+                    'due_commitment_date' => $new_due_committment_date,                  
+                    'by_user'             => $by_user,
+                    'active'             => 1,
+                    'packCloseReason'             => NULL,
+        
+                );
+            }
+            else {
+                $params = array(  
+                    'due_commitment_date' => $new_due_committment_date,                  
+                    'by_user'             => $by_user,                   
+        
+                );
+            }
 
-        $params = array(  
-            'due_commitment_date' => $new_due_committment_date,                  
-            'by_user'             => $by_user,
-        ); 
         $params2 = array(                    
             'student_package_id'=> $student_package_id,
             'amount'            => 0,

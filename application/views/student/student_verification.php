@@ -34,7 +34,7 @@
 							<div class="form-group">
 								<div style="display:flex">								
 									<span class="has-feedback" style="flex-grow: 1;">
-									<input type="text" name="mobile" value="<?php echo $this->input->post('mobile'); ?>" class="form-control  input-ui-100" id="mobile" maxlength="10" minlength="10" onblur="validate_phone(this.value);"/>
+									<input type="text" name="mobile" value="<?php echo $this->input->post('mobile'); ?>" class="form-control  input-ui-100" id="mobile" maxlength="10" minlength="10"  onkeypress="validate_phone(this.value);" onkeyup="validate_phone(this.value);"/>
 									<span class="glyphicon glyphicon-phone form-control-feedback"></span>
 									</span>
 									<button type="button" class="btn btn-danger send_mobile_otp rd-20 ml-5" style="height: 33px !important;" onclick="send_mobile_otp();" disabled="disabled">Send Mobile OTP <i class="fa fa-send text-light"></i></button>
@@ -56,7 +56,7 @@
 							<div class="form-group">
 							<div style="display:flex">
 							<span class="has-feedback" style="flex-grow: 1;">
-								<input type="text" name="email" value="<?php echo $this->input->post('email'); ?>" class="form-control input-ui-100" id="email" maxlength="60" onblur="validate_emailn_(this.value);"/>
+								<input type="text" name="email" value="<?php echo $this->input->post('email'); ?>" class="form-control input-ui-100" id="email" maxlength="60"  onkeypress="validate_emailn_(this.value);" onkeyup="validate_emailn_(this.value);"/>
 								<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 								</span>
 								<button type="button" class="btn btn-danger send_email_otp rd-20 ml-5" style="height: 33px !important;" onclick="send_email_otp();" disabled="disabled"> Send Email OTP <i class="fa fa-send text-light"></i></button>

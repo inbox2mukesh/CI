@@ -90,10 +90,14 @@ class Student_package_model extends CI_Model
 
     function updateNewDueCommittmentDate($student_package_id,$params){
 
-       return $this->db->query("update `student_package` SET 
+       /* return $this->db->query("update `student_package` SET 
             `due_commitment_date` = '".$params['due_commitment_date']."' 
             where student_package_id = '".$student_package_id."' 
-        ");
+        "); */
+
+
+        $this->db->where('student_package_id',$student_package_id);
+        return $this->db->update('student_package',$params);
     }
 
     function suspendPackAfterDueCommittmentDate($yesterdayStr){
