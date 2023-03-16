@@ -727,7 +727,10 @@ define('FILE_SUCCESS_MSG', '<h5 class="text-success"><strong><i>File uploaded su
 define('FILE_FAILED_MSG', '<h5 class="text-warning"><strong><i>File upload failed! please try again</strong></i></h5>');
 
 
-
+define('DUP_LEAD_MSG','<div class="alert alert-warning alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>DUPLICATE:</strong> Already exist, please try different!<a href="#" class="alert-link"></a>.
+                </div>');
 //SMS
 define('API_ID', 'APIYhEf5Fey45904');
 define('API_PASSWORD', 'nkqBGXLM');
