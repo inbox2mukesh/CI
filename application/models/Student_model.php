@@ -593,7 +593,7 @@
         $this->db->join('`center_location` cl','cl.`center_id`= s.`center_id`', 'left');
         $this->db->join('`student_package` spkg','spkg.`student_id`= s.`id`', 'left');
         if($roleName==ADMIN){
-            $this->db->where(array('s.fresh'=>2));
+            $this->db->where(array('s.fresh>'=>0,'s.active'=>1));
         }else{
             
             $brCount = count($userBranch);
@@ -608,7 +608,7 @@
                     }                    
                     $i++;
                 }                                
-                $this->db->where(array('s.fresh'=>2));
+                $this->db->where(array('s.fresh>'=>0,'s.active'=>1));
                 $this->db->where($where);
             }else{
                 $userBranch=0;
@@ -621,7 +621,7 @@
                     }                    
                     $i++;
                 }                                
-                $this->db->where(array('s.fresh'=>2));
+                $this->db->where(array('s.fresh>'=>0,'s.active'=>1));
                 //$this->db->where($where);
             }           
         }        

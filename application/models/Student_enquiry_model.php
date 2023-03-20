@@ -137,6 +137,7 @@ class Student_enquiry_model extends CI_Model
             s.`dob`,
             s.`email`,
             s.`is_email_verified`,
+            s.`is_otp_verified`,
             s.`country_code`,
             s.`mobile`,
             se.`free_demo`,
@@ -181,6 +182,7 @@ class Student_enquiry_model extends CI_Model
             s.`dob`,
             s.`email`,
             s.`is_email_verified`,
+            s.`is_otp_verified`,
             s.`country_code`,
             s.`mobile`,
             s.id as student_id,
@@ -385,8 +387,14 @@ class Student_enquiry_model extends CI_Model
         $this->db->where('students_enquiry.enquiry_id',$enquiry_id);
       //  $this->db->join('`students_enquiry`', 'students_enquiry.`student_id`= students.`id`', 'inner');
         return $this->db->update("UPDATE `students` INNER JOIN students_enquiry ON `students_enquiry`.`student_id`=students.id SET students.`active` = 1, `is_otp_verified` = 1 WHERE `students_enquiry`.`enquiry_id` = '2';");  */
-
-        return  $query = $this->db->query("UPDATE `students` INNER JOIN students_enquiry ON `students_enquiry`.`student_id`=students.id SET students.`active` = 1, `is_email_verified` = 1 WHERE `students_enquiry`.`enquiry_id` = '$enquiry_id'");
+        if (DEFAULT_COUNTRY == 101) //india
+        {
+            return  $query = $this->db->query("UPDATE `students` INNER JOIN students_enquiry ON `students_enquiry`.`student_id`=students.id SET students.`active` = 1, `is_otp_verified` = 1 WHERE `students_enquiry`.`enquiry_id` = '$enquiry_id'");
+        }
+        else {
+            return  $query = $this->db->query("UPDATE `students` INNER JOIN students_enquiry ON `students_enquiry`.`student_id`=students.id SET students.`active` = 1, `is_email_verified` = 1 WHERE `students_enquiry`.`enquiry_id` = '$enquiry_id'");
+        }
+       
 
     }
 

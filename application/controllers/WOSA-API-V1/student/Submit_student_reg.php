@@ -36,23 +36,30 @@ public function index_post()
         $tc = $mobile_count+$email_count;
         //student add
         if($tc==0){
-            $otp = rand(1000,10000);
-            $message = 'Hi, please confirm your details by entering the Verification code '.$otp.' Valid for 10 minutes only Regards '.COMPANY;   
-            
+            $otp = rand(1000,10000);      
             $ccode=ltrim($std_data->country_code,"+");
             $opt_mobileno=$ccode.''.$std_data->mobile;
-           // $this->_call_smaGateway($opt_mobileno,$message);          
-            if(base_url()!=BASEURL){
-                $subject = "Verification code- WOSA";
-                $email_message='Hi, please confirm your details by entering the <b>Verification code '.$otp.'</b> Valid for 10 minutes only Regards '.COMPANY;
-                $mailData=[]; 
-                $mailData['fname']         = $std_data->fname;
-                $mailData['email']         = $std_data->email;               
-                $mailData['email_message'] = $email_message;
-                $mailData['thanks']        = THANKS;
-                $mailData['team']          = WOSA;               
-                $this->sendEmailTostd_walkinOTP_($subject,$mailData);
+            if (DEFAULT_COUNTRY == 101) //india
+            { 
+                if(base_url()!=BASEURL){           
+                $message = 'Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
+                $this->_call_smaGateway($opt_mobileno,$message);  
+                }             
             }
+            else { // other country
+                if(base_url()!=BASEURL){
+                    $subject = "Verification code- WOSA";
+                    $email_message='Hi, please confirm your details by entering the <b>Verification code '.$otp.'</b> Valid for 10 minutes only Regards '.COMPANY;
+                    $mailData=[]; 
+                    $mailData['fname']         = $std_data->fname;
+                    $mailData['email']         = $std_data->email;               
+                    $mailData['email_message'] = $email_message;
+                    $mailData['thanks']        = THANKS;
+                    $mailData['team']          = WOSA;               
+                    $this->sendEmailTostd_walkinOTP_($subject,$mailData);
+                }
+            }            
+           
             $countryData =$this->Country_model->get_country_id($std_data->country_code);
             $country_id = $countryData['country_id'];
             $maxid = $this->Student_model->getMax_UID();

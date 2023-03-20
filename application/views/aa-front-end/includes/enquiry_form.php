@@ -148,7 +148,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
 						<div class="reg-modal clearfix"> <span class="cross-btn pull-right text-white hide-btn" data-dismiss="modal"><i class="fa fa-close font-20"></i></span>
 							<div class="reg-otp-info text-center text-white ">
 								<h3>ENTER VERIFICATION CODE</h3>
-								<p class="mb-10 font-12">Verification Code has been sent on your email.</p>
+								<p class="mb-10 font-12">Verification Code has been sent on your <?php if (DEFAULT_COUNTRY == 101){ echo "mobile";} else { echo "email";} ?>.</p>
 									<div class="form-group" id="formsection">
 									
 									<div class="subs-group" id="main_sec">
@@ -243,7 +243,7 @@ $(".hide-btn").click(function()
         {          
           $('#formsection').addClass('hide');
           $('#enq_reg_opt_success').removeClass('hide');
-          $('#enq_reg_opt_success_message').text('Verification Code sent on your email. Please Enter Verification Code');
+          $('#enq_reg_opt_success_message').text('Hi! your enquiry sent successfully at our Enquiry team. We will get back to soon.');
           $('#enq_reg_opt_danger').addClass('hide');
           $('.enqBtn').prop('disabled', true);
          <?php

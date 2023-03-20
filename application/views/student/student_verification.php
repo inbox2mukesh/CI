@@ -45,7 +45,7 @@
 						<div class="col-md-4">
 							<label for="mobileOTP" class="control-label">Mobile OTP Recieved</label>
 							<div class="form-group">
-								<input type="text" name="mobileOTP" id="mobileOTP" class="form-control input-ui-100"  maxlength="4" maxlength="4" minlength="4" onblur="validate_optp(this.value);"/>
+								<input type="text" name="mobileOTP" id="mobileOTP" class="form-control input-ui-100"  maxlength="4" maxlength="4" minlength="4" onkeypress="validate_optp(this.value);" onkeyup="validate_optp(this.value);"/>
 								<span class="text-success mobile_otp_err emailOTP_err" id="mobileOTP_err"></span>
 							</div>
 						</div>
@@ -72,7 +72,7 @@
 						<div class="col-md-4">
 							<label for="emailOTP" class="control-label">Email OTP Recieved</label>
 							<div class="form-group">
-								<input type="text" name="emailOTP" id="emailOTP" class="form-control input-ui-100 allow_numeric"  maxlength="4" minlength="4" onblur="validate_optp(this.value);"/>
+								<input type="text" name="emailOTP" id="emailOTP" class="form-control input-ui-100 allow_numeric"  maxlength="4" minlength="4" onkeypress="validate_optp(this.value);" onkeyup="validate_optp(this.value);" />
 								<span class="text-success email_otp_err emailOTP_err" id="emailOTP_err"></span>
 							</div>
 						</div>

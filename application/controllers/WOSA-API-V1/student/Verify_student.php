@@ -36,13 +36,26 @@ class Verify_student extends REST_Controller {
                     $plain_pwd = PLAIN_PWD;  
                 }else{
                     $plain_pwd = $this->_getorderTokens(PWD_LEN);
-                }                           
-                $params = array(                                
-                    'active' => 1,
-                    'is_email_verified'=>1,
-                    'loggedIn'=>1,
-                    'password' => md5($plain_pwd),
-                );
+                }  
+                if (DEFAULT_COUNTRY == 101) //india
+                {
+                    $params = array(                                
+                        'active' => 1,
+                        'is_otp_verified'=>1,
+                        'loggedIn'=>1,
+                        'password' => md5($plain_pwd),
+                    );   
+                }
+                else {// other countries
+                    $params = array(                                
+                        'active' => 1,
+                        'is_email_verified'=>1,
+                        'loggedIn'=>1,
+                        'password' => md5($plain_pwd),
+                    );
+                }
+                
+               
                 $idd = $this->Student_model->update_student($lastId,$params);                  
                 if($idd==1){
                     
@@ -62,7 +75,15 @@ class Verify_student extends REST_Controller {
                         $mailData['team']           = WOSA;
                         $this->sendEmailTostd_creds_($subject,$mailData);
                     }
-                    $data['error_message'] = [ "success" => 1, "message" => "Dear User, Your Email verified and you are registered successfully. Please check your email for more information." , 'data'=> $studentInfo];
+
+                    if (DEFAULT_COUNTRY == 101) //india
+                    {
+
+                    $data['error_message'] = [ "success" => 1, "message" => "Dear User, Your Mobile verified and you are registered successfully. Please check your email/mobile for more information." , 'data'=> $studentInfo];
+                    }
+                    else {
+                        $data['error_message'] = [ "success" => 1, "message" => "Dear User, Your Email verified and you are registered successfully. Please check your email for more information." , 'data'=> $studentInfo];
+                    }
                         
                 }else{
                     $data['error_message'] = [ "success" => 3, "message" => "Oops..failed to register. Please try again!" , 'data'=>[] ];

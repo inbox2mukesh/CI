@@ -100,7 +100,7 @@
 						<div class="reg-modal clearfix"> <span class="cross-btn pull-right text-white hide-btn" data-dismiss="modal"><i class="fa fa-close font-20"></i></span>
 							<div class="reg-otp-info text-center text-white ">
 								<h3>ENTER VERIFICATION CODE</h3>
-								<p class="mb-10 font-12">Verification Code has been sent on your email.</p>
+								<p class="mb-10 font-12">Verification Code has been sent on your<?php if (DEFAULT_COUNTRY == 101){ echo " mobile";} else { echo " email";} ?> .</p>
 									<div class="form-group">
 									
 									<div class="subs-group" id="main_sec">
@@ -181,6 +181,7 @@ function Verify_Complaints()
         data: {otp: reg_otp},                              
         success: function(response)
         {  
+			
 			if(response.status=='true')
 			{
 				$('#main_sec').addClass('hide');
@@ -383,7 +384,8 @@ return false;
         url: "<?php echo site_url('our_students/registration');?>",
         type: 'post',
         data: {fname: fname, lname: lname, mobile: mobile, email:email,country_code:country_code,dob:dob},                
-        success: function(response){		
+        success: function(response){	
+			
           if(response.status==1)
 		  {
 			   $('#modal-register').modal('hide');

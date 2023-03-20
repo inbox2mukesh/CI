@@ -29,7 +29,8 @@ class Student extends MY_Controller{
         $this->load->model('Student_attendance_model');  
         //echo date('d-m-Y');
         $today=strtotime(date('d-m-Y'));
-        $yesterday = date('d-m-Y', strtotime($today. ' - 1 days'));
+        //echo date('d-m-Y');
+        $yesterday = date('d-m-Y', strtotime(date('d-m-Y'). ' - 1 days'));
         $yesterdayStr = strtotime($yesterday);
         $this->Package_master_model->DeactivateExpiredPack($today);
         $this->Student_package_model->calculateIrrDuesForExpiredPack($today);
@@ -76,7 +77,12 @@ class Student extends MY_Controller{
         }        
                  
         if($this->form_validation->run())
-         {          
+         { 
+            if(ENVIRONMENT!='production'){
+                $plain_pwd = PLAIN_PWD;  
+            }else{
+                $plain_pwd = $this->_getorderTokens(PWD_LEN);
+            }           
                   
             if(DEFAULT_COUNTRY == 101)
             {
@@ -86,9 +92,23 @@ class Student extends MY_Controller{
                 $studentid = $this->Student_model->verfiy_StudentOTP_by_mobile($country_code,$mobile,$opt);
                 if($studentid['id'])
                 { 
-                    $params = array('is_otp_verified'=>1,'active'=>1);                               
-                    $idd = $this->Student_model->update_student($studentid['id'],$params);  
+                    
+                    $params = array('is_otp_verified'=>1,'active'=>1,'password' => md5($plain_pwd));                               
+                    $idd = $this->Student_model->update_student($studentid['id'],$params);
+                    if(base_url()!=BASEURL){               
+                        $studentInfo = $this->Student_model->get_student($studentid['id']);
+                        $subject = 'Dear '.$studentInfo['fname'].', you are registered successfully at '.COMPANY.'';
+                        $email_message = 'You are registered successfully at '.COMPANY.' Your details are as below:';
+                        $mailData  = $this->Student_model->getMailData_forReg($studentid['id']);
+                        $mailData['UID']            = $mailData['UID'];
+                        $mailData['password']       = $plain_pwd;
+                        $mailData['email_message']  = $email_message;
+                        $mailData['thanks']         = THANKS;
+                        $mailData['team']           = WOSA;
+                        $this->sendEmailTostd_creds_($subject,$mailData);
+                    } 
                     $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
+
                     redirect('adminController/student/student_verification'); 
                 }
                 else {
@@ -102,8 +122,21 @@ class Student extends MY_Controller{
                 $studentid = $this->Student_model->verfiy_StudentOTP($email,$opt);
                 if($studentid['id'])
                 { 
-                    $params = array('is_email_verified'=>1,'active'=>1);                               
+                    $params = array('is_email_verified'=>1,'active'=>1,'password' => md5($plain_pwd));                               
                     $idd = $this->Student_model->update_student($studentid['id'],$params);  
+
+                    if(base_url()!=BASEURL){                
+                        $studentInfo = $this->Student_model->get_student($studentid['id']);
+                        $subject = 'Dear '.$studentInfo['fname'].', you are registered successfully at '.COMPANY.'';
+                        $email_message = 'You are registered successfully at '.COMPANY.' Your details are as below:';
+                        $mailData  = $this->Student_model->getMailData_forReg($studentid['id']);
+                        $mailData['UID']            = $mailData['UID'];
+                        $mailData['password']       = $plain_pwd;
+                        $mailData['email_message']  = $email_message;
+                        $mailData['thanks']         = THANKS;
+                        $mailData['team']           = WOSA;
+                        $this->sendEmailTostd_creds_($subject,$mailData);
+                    }
                     $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
                     redirect('adminController/student/student_verification'); 
                 }
@@ -111,7 +144,11 @@ class Student extends MY_Controller{
                     $this->session->set_flashdata('flsh_msg', FAILED_MSG);
                     redirect('adminController/student/student_verification');
                 }
-            }    
+            } 
+            // send email to student 
+            
+          
+
          }
          else {
             $data['all_country_code'] = $this->Country_model->getAllCountryCode();
@@ -778,7 +815,7 @@ class Student extends MY_Controller{
                     $this->form_validation->set_rules('method_pp','Payment mode','required');
                     $this->form_validation->set_rules('amount_paid_pp','Amount','required|trim');
                     $this->form_validation->set_rules('start_date_pp','Pack starting date','required');
-                }else{ $fresh=2; }
+                }else{ $fresh=1; }
 
                 if($this->form_validation->run()){ 
                     
@@ -901,6 +938,7 @@ class Student extends MY_Controller{
                     //update all centers
                     $params_all_center=array('all_center_id'=>$branchCollection['all_center_id']);
                     $this->Student_model->update_student($id,$params_all_center);
+                    
                     $this->db->trans_complete();                
                     if($this->db->trans_status() === FALSE){
                         $this->session->set_flashdata('flsh_msg', TRAN_FAILED_MSG);
@@ -3992,7 +4030,7 @@ class Student extends MY_Controller{
         $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
         $config = $this->config->item('pagination');
         $config['base_url'] = site_url('adminController/student/online_registration_leads?');
-        $config['total_rows'] = $this->Student_model->get_all_students_count_ol();
+        $config['total_rows'] = $this->Student_model->getget_all_students_all_students_count_ol();
         $this->pagination->initialize($config);        
         $data['students'] = $this->Student_model->get_all_students_ol($params);
         $data['_view'] = 'student/online_registration_leads';
