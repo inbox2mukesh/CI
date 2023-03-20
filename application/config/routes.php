@@ -6,7 +6,7 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
 
-$route['make-stripe-payment'] = "booking";
+$route['make-stripe-payment'] = "booking"; 
 $route['handlePayment']['post'] = "booking/handlePayment";
 //$route['Second-event/(:any)'] = "Second-event/$1";// dynamic rewritting
 $route['news-article/(:any)'] = "news_article/index/$1";// dynamic rewritting
