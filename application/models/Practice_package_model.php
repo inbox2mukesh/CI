@@ -717,7 +717,7 @@ class Practice_package_model extends CI_Model
         $this->db->select(' 
             pkg.package_id,
             pkg.package_name,
-            CONCAT("'.CURRENCY.' ", pkg.amount) AS package_cost,
+            CONCAT("'.CURRENCY.' ", FORMAT(spkg.`amount`/100,2)) AS package_cost,  
             CONCAT("'.CURRENCY.' ", pkg.discounted_amount) AS discounted_amount,
             CONCAT(pkg.duration, " Days") as package_duration,
             spkg.`student_id`,
