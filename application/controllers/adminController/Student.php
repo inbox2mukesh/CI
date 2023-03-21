@@ -4030,7 +4030,7 @@ class Student extends MY_Controller{
         $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
         $config = $this->config->item('pagination');
         $config['base_url'] = site_url('adminController/student/online_registration_leads?');
-        $config['total_rows'] = $this->Student_model->getget_all_students_all_students_count_ol();
+        $config['total_rows'] = $this->Student_model->get_all_students_count_ol();
         $this->pagination->initialize($config);        
         $data['students'] = $this->Student_model->get_all_students_ol($params);
         $data['_view'] = 'student/online_registration_leads';
