@@ -1150,7 +1150,7 @@ function validate_email(email) {
 }
 function validate_phone(myval) {
 	var filter = /^[0-9-+]+$/;
-	if (!filter.test(myval)) {
+	/*if (!filter.test(myval)) {
 		$('.mobile_err').text('Please enter valid Number!');
 		$('#mobile').focus();
 		$('.send_mobile_otp').prop('disabled', true);
@@ -1158,7 +1158,7 @@ function validate_phone(myval) {
 	} else {
 		$('.mobile_err').text('');
 		$('.send_mobile_otp').prop('disabled', false);
-	}
+	}*/
 	if (myval.length > 10 || myval.length < 10) {
 		$(".mobile_err").text('Please enter valid Number of 10 digit');
 		$('.send_mobile_otp').prop('disabled', true);
