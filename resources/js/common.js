@@ -1206,6 +1206,7 @@ $(".rsTypeClass").change(function () {
 //radio button ppp change
 $(".ppp").change(function () {
 	var html = '';
+	$("#packPrice").val('');
 	var val = $(".ppp:checked").val();
 	if (val == 'offline') {
 		$('#packbox_offline').show(); $('#packbox_online').hide(); $('#packbox_pp').hide();
@@ -1839,20 +1840,29 @@ function validate_amount_paid_pp(myval) {
 	var packPrice = '';
 	myval = parseFloat(myval);
 	packPrice = $("#packPrice").val();
+	walletBalance = $("#walletBalance").val();		
 	if (myval < 0) {
 		$('.add_std_pack').prop('disabled', true);
 		$('.amount_paid_err').text('Negative Amount not allowed!');
 		$('#amount_paid').focus();
 		return false;
 	} 
-	else if($("#use_wallet_pp").is(':checked') && myval ==0)
+	/* else if($("#use_wallet_pp").is(':checked') && zeroaccepted ==0)
 	{
 		$('#amount_paid_pp').val('');
 		$('.add_std_pack').prop('disabled', true);
 		$('.amount_paid_err').text("Amount must be greater than 0");
 		$('#amount_paid_pp').focus();
 		return false;
-	}
+	} */
+	/* else if($("#use_wallet_pp").prop('checked') == false)
+	{
+		$('#amount_paid_pp').val('');
+		$('.add_std_pack').prop('disabled', true);
+		$('.amount_paid_err').text("Amount must be greater than 0");
+		$('#amount_paid_pp').focus();
+		return false;
+	} */
 	else {
 		if (myval >= 0 && myval <= packPrice && val != 'pp') {
 			$("#service_id option[value='3']").attr("selected", "selected");
@@ -1896,14 +1906,14 @@ function validate_amount_paid(myval) {
 		$('#amount_paid').focus();
 		return false;
 	} 
-	else if($("#use_wallet_on").is(':checked') && myval ==0)
+	/* else if($("#use_wallet_on").is(':checked') && myval ==0)
 	{
 		$('#amount_paid').val('');
 		$('.add_std_pack').prop('disabled', true);
 		$('.amount_paid_err').text("Amount must be greater than 0");
 		$('#amount_paid').focus();
 		return false;
-	}	
+	}	 */
 	else {
 		if (myval >= 0 && myval <= packPrice && val != 'pp') {
 			$("#service_id option[value='3']").attr("selected", "selected");
@@ -3988,6 +3998,7 @@ function getPackBatch(package_id, pack_type) {
 }
 function getPackPrice(package_id) {
 	var type = $('input[name=pack_cb]:checked').val();
+	$('#packPrice').val('');
 	if (type == 'offline' || type == 'online') {
 		$.ajax({
 			url: WOSA_ADMIN_URL + 'package_master/ajax_getPackPrice',
