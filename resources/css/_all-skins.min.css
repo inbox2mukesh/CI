@@ -3566,3 +3566,10 @@ margin-bottom:0px;}
 .mediaFile .checkfile.form-control{ width:auto!important}	
 .mediaFile .input-ui-relative .checkfile.input-file-ui-100 {position: relative;}
 .mediaFile span.input-ui-relative{position: inherit!important;}
+/* new css added by surinder */
+.mediaFile input#upload_image {width: 94%;}
+.mediaFile .input-ui-relative .checkfile:after{height: 15px;}
+@media screen and (max-width:1440px)
+{
+	.mediaFile input#upload_image {width: 90%;}	
+}

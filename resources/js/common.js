@@ -6871,6 +6871,7 @@ function validate_file_type_stdDoc(id) {
 	}
 }
 function validate_file_type_gallary(id) {
+	//alert('k')
 	var ext = $('#' + id).val().split('.').pop().toLowerCase();
 	var id_err = id + '_err';
 	if ($.inArray(ext, ['gif','png', 'jpg', 'jpeg', 'webp','svg','ico','mp4','mp3']) == -1) {
@@ -6879,7 +6880,9 @@ function validate_file_type_gallary(id) {
 		$('#' + id).focus();
 		return false;
 	} else {
+		rungallerycode();
 		$('.' + id_err).text('');
+		
 	}
 }
 function validate_file_type_paymentSlip(id) {
@@ -8790,3 +8793,9 @@ function commonReadImageFile(idofUpload, file, filewidth, fileheight, fileType) 
 		}
 	});
 }
+
+$(document).on('click', '#hcancel_upload', function () {
+	$('#submit_btn').prop('disabled', false);
+	document.getElementById('filelist').innerHTML = '';
+
+});
