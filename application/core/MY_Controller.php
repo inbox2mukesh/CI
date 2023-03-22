@@ -289,7 +289,7 @@ class MY_Controller extends CI_Controller
         } else {
             $new_uid = '';
         }
-        if(DEFAULT_COUNTRY==38)
+       /*  if(DEFAULT_COUNTRY==38)
         {
             $new_uid='CA-'.$new_uid;
         }
@@ -299,7 +299,7 @@ class MY_Controller extends CI_Controller
         }
         else {
             $new_uid=$new_uid;
-        }
+        } */
         return $new_uid;
     }
 
