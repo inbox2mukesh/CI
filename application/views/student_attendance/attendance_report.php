@@ -32,7 +32,7 @@
 					<div class="col-md-6">
 						<label for="byMonth2" class="control-label"> By month</label>
 						<div class="form-group">
-							<input type="text" name="byMonth2" id="byMonth2" class="form-control b1 input-ui-100" onblur="attendanceFilterformEligibility(this.id);" autocomplete='off' disabled="disabled" />
+							<input type="text" name="byMonth2" value="<?php echo ($this->input->post('byMonth2') ? $this->input->post('byMonth2') : ''); ?>" id="byMonth2" class="form-control b1 input-ui-100" onblur="attendanceFilterformEligibility(this.id);" autocomplete='off' disabled="disabled" />
 						</div>						
 					</div>															
 
@@ -90,7 +90,7 @@
 					</div>
 
 					<div class="col-md-6">
-						<label for="allPresent1" class="control-label"> All present</label>
+						<label for="allPresent1" class="control-label"> All present <?php echo $this->input->post('allPresent1');?></label>
 
 						<div class="form-group">
 							<select name="allPresent1" id="allPresent1" class="form-control selectpicker b2 selectpicker-ui-100" data-show-subtext="true" data-live-search="true" onchange="attendanceFilterformEligibility(this.id);">

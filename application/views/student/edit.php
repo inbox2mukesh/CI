@@ -1022,7 +1022,7 @@
                                                             </td>
                                                             <td><?php echo $sp['package_name']; ?></td>
                                                             <td><?php echo $sp['test_module_name'] . '/' . $sp['programe_name']; ?></td>
-                                                            <td><?php echo $sp['discounted_amount'] . '/' . $sp['package_cost'] . '/' . $sp['package_duration'] ?></td>
+                                                            <td><?php echo $sp['package_cost'] . '/' . $sp['package_duration'] ?></td>
                                                             <td><?php echo $sp['amount_paid']; ?></td>
                                                             <td><?php echo $sp['amount_paid_by_wallet']; ?></td>
                                                             <td><?php echo $sp['ext_amount']; ?></td>

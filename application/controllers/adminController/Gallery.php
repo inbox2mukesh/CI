@@ -43,10 +43,10 @@ class Gallery extends MY_Controller{
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         $data['si'] = 0;
         //access control ends
-        ini_set('upload_max_filesize', '750M');
+       /*  ini_set('upload_max_filesize', '750M');
         ini_set('post_max_size', '750M');                               
         ini_set('max_input_time', 3600);                                
-        ini_set('max_execution_time', 3600);
+        ini_set('max_execution_time', 3600); */
         $this->load->library('form_validation');
         $this->form_validation->set_rules('title','Title','required|trim');
         $data['title'] = 'Add gallery';
@@ -63,7 +63,30 @@ class Gallery extends MY_Controller{
             if(!file_exists(GALLERY_IMAGE_PATH)){
                 mkdir(GALLERY_IMAGE_PATH, 0777, true);
             }
-            $config['upload_path']   = GALLERY_IMAGE_PATH;
+            $params = array(
+                'active' => $this->input->post('active') ? $this->input->post('active') : 0,
+                'image' =>  $this->input->post('file_hidden'),
+                'media_type' => $this->input->post('media_type'),
+                'title' => $this->input->post('title'),
+                'by_user' => $by_user,
+            );
+
+            $id = $this->Gallery_model->add_gallery($params);
+            if($id){
+                //activity update start              
+                    $activity_name= GALLAEY_ADD;
+                    $description= 'New gallery '.$params['title'].' with file '.$image.' having type '.$params['media_type'].' added';
+                    $res=$this->addUserActivity($activity_name,$description,$student_package_id=0,$by_user);
+                //activity update end
+                $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
+                redirect('adminController/gallery/index');
+            }else{
+                $this->session->set_flashdata('flsh_msg', FAILED_MSG);
+                redirect('adminController/gallery/add');
+            }  
+
+
+            /* $config['upload_path']   = GALLERY_IMAGE_PATH;
             $config['allowed_types'] = GALLERY_ALLOWED_TYPES;
             $config['encrypt_name']  = FALSE;         
             $this->load->library('upload',$config);
@@ -101,7 +124,7 @@ class Gallery extends MY_Controller{
                     );
                     $this->session->set_flashdata('flsh_msg', FAILED_MSG);
                     redirect('adminController/gallery/add');
-                } 
+                }  */
         }
         else
         {            
@@ -131,16 +154,17 @@ class Gallery extends MY_Controller{
             if($this->form_validation->run())     
             {   
                 $by_user=$_SESSION['UserId'];
-                $params = array(
-                    'active' => $this->input->post('active') ? $this->input->post('active') : 0,
-                    'title' => $this->input->post('title'),                    
-                    'media_type' => $this->input->post('media_type'),
-                    'by_user' => $by_user,
-                );
+               $params = array(
+                        'active' => $this->input->post('active') ? $this->input->post('active') : 0,
+                        'image' => $this->input->post('file_hidden'),
+                        'media_type' => $this->input->post('media_type'),
+                        'title' => $this->input->post('title'),
+                        'by_user' => $by_user,
+                    );  
                 if(!file_exists(GALLERY_IMAGE_PATH)){
                     mkdir(GALLERY_IMAGE_PATH, 0777, true);
                 }
-                $config['upload_path']   = GALLERY_IMAGE_PATH;
+                /* $config['upload_path']   = GALLERY_IMAGE_PATH;
                 $config['allowed_types'] = GALLERY_ALLOWED_TYPES;
                 $config['encrypt_name']  = FALSE;         
                 $this->load->library('upload',$config);
@@ -156,13 +180,14 @@ class Gallery extends MY_Controller{
                         'by_user' => $by_user,
                     );                    
                 }else{
-                    /*$params = array(
-                        'active' => $this->input->post('active'),
-                        'media_type' => $this->input->post('media_type'),
-                        'title' => $this->input->post('title'),
-                        'by_user' => $by_user,
-                    );*/
-                }
+                   // $params = array(
+                     //   'active' => $this->input->post('active'),
+                    //    'media_type' => $this->input->post('media_type'),
+                     //   'title' => $this->input->post('title'),
+                     //   'by_user' => $by_user,
+                   // );
+                } */
+                
                 $idd = $this->Gallery_model->update_gallery($id,$params);
                 if($idd){
                     $oldData = 'Gallery '.$data['gallery']['title'].'/'.$data['gallery']['media_type'].'/'.$data['gallery']['image'].' updated to ';

@@ -31,25 +31,12 @@
           <div class="col-md-4">
             <label for="image" class="control-label"><span class="text-danger">*</span>File</label><?php echo GALLERY_ALLOWED_TYPES_LABEL;?>
             <div class="form-group">
-              <input type="file" name="image" class="form-control input-ui-100" id="image" /> 
-              <span class="text-danger image_err" id="image_err"><?php echo form_error('image');?></span>
-              <div id="filelist"></div>
+              <input type="file" name="image" class="form-control input-ui-100" id="image" onchange="validate_file_type_gallary(this.id)" /> 
+              <span class="text-danger image_err"><?php echo form_error('image');?></span>
             </div>
           </div>
-           <div class="col-md-3">         
-              <div id="body">
-              <label for="image" class="control-label">&nbsp;</label>
-              <div id="container">
-              <div class="form-group">
-              <a id="upload" href="javascript:;" class="btn btn-danger">Upload files</a>
-              </div>
-              </div>
-              <input type="hidden" id="file_ext" name="file_ext" value="<?=substr( md5( rand(10,100) ) , 0 ,10 )?>">
-              <div id="console"></div>
-              </div>
-          </div> 
 
-          <div class="col-md-12">
+          <div class="col-md-4">
             <label for="title" class="control-label"><span class="text-danger">*</span>Title</label>
             <div class="form-group">
               <input type="text" name="title" value="<?php echo $this->input->post('title'); ?>" class="form-control input-ui-100" id="title" maxlength="50"/>
@@ -68,7 +55,7 @@
       </div>
             <div class="box-footer">
             <div class="col-md-12">
-              <button type="submit" class="btn btn-danger rd-20" id="submit_btn" disabled>
+              <button type="submit" class="btn btn-danger rd-20">
                 <i class="fa fa-check"></i> <?php echo SAVE_LABEL;?>
               </button>
             </div>
@@ -77,14 +64,3 @@
         </div>
     </div>
 </div>
-
-
-<script type="text/javascript">	
-  var WOSA_ADMIN_URL= '<?php echo WOSA_ADMIN_URL; ?>';
-</script>
- 
-
-
-<script src="<?=base_url();?>gallery_plugin/js/plupload/plupload.full.min.js"></script>
- <script type="text/javascript" src="<?=base_url();?>gallery_plugin/js/application.js"></script>
- 

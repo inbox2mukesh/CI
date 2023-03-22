@@ -10,7 +10,7 @@ define('JS_CSS_VERSION', '0.0.2');
 define('ADMIN', 'Super Admin');
 ///////////////////////////////////settings start///////////////////////////////////////
 include_once(FCPATH.'application/config/setting-constants.php');
-if(DEFAULT_COUNTRY==38){ 
+if(DEFAULT_COUNTRY==38){
 	define('TIME_DIFF', 630);
 	define('TIME_DIFF_NATURE', '-');
 	if(ENVIRONMENT=='development'){
@@ -276,7 +276,7 @@ define('GT','General Training');
 define('ACD_GT', 'Academic and General Training');
 
 //Paginations
-define('RECORDS_PER_PAGE', 10);
+define('RECORDS_PER_PAGE', 1000);
 define('COOKIE_EXPIRY', 86400);
 define('PWD_LEN', 6);
 

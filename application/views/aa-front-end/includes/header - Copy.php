@@ -6,19 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<?php
-	/* $directoryURI = $_SERVER['REQUEST_URI'];
+	$directoryURI = $_SERVER['REQUEST_URI'];
 	$path = parse_url($directoryURI, PHP_URL_PATH);
 	$components = explode('/', $path);
 	$page= $components[2];
 	$page3= $components[3];// view pages
 	$this->load->helper('static_meta_helper');
-	echo get_meta_tag($page); */
-	
+	echo get_meta_tag($page);
 	?>	
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
-	<title><?php echo $title; ?></title>
 	<?php if (DEFAULT_COUNTRY == 38) // canada 
 	{ ?>
 		<meta name="google-site-verification" content="TWahbwzXobBcHLN37jpUOgPFpl67Di8nEZ4YmKxDK0I" />

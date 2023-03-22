@@ -43,6 +43,7 @@
                         <td><?php echo $r['title']; ?></td>								 
 						<td>
                             <?php
+                          
                                 $ext = pathinfo($r['image'], PATHINFO_EXTENSION);
                                 if( isset( $r['image']) and ( $ext=='JPG' or $ext=='jpg' or $ext=='jpeg' or $ext=='gif' or $ext=='png' or $ext=='svg' or  $ext=='webp') ){
                             ?>
