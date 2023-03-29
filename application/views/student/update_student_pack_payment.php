@@ -354,10 +354,10 @@
 											<?php } ?>
 										<?php } ?>
 										<?php
-										/* if ($this->Role_model->_has_access_('student', 'terminate_pack')) {
+										if ($this->Role_model->_has_access_('student', 'terminate_pack')) {
 										?>
 											<option value="Terminate-Pack">Terminate Pack</option>
-										<?php } */ ?>
+										<?php }?>
 										<?php
 										if ($this->Role_model->_has_access_('student', 'unhold_pack_')) {
 										?>
@@ -430,10 +430,10 @@
 
 										<?php } ?>
 										<?php
-										/* if ($this->Role_model->_has_access_('student', 'terminate_pack')) {
+										if ($this->Role_model->_has_access_('student', 'terminate_pack')) {
 										?>
 											<option value="Terminate-Pack">Terminate Pack</option>
-										<?php }  */?>
+										<?php }?>
 									</select>
 									<span class="text-danger"><?php echo form_error('payment_type'); ?></span>
 								</div>
@@ -526,10 +526,10 @@
 
 
 										<?php
-										/* if ($this->Role_model->_has_access_('student', 'terminate_pack_')) {
+										if ($this->Role_model->_has_access_('student', 'terminate_pack_')) {
 										?>
 											<option value="Terminate-Pack">Terminate Pack</option>
-										<?php }  */?>
+										<?php } ?>
 									</select>
 									<span class="text-danger"><?php echo form_error('payment_type'); ?></span>
 								</div>

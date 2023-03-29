@@ -1126,8 +1126,9 @@ class Student extends MY_Controller{
     
    
     //non-real function
-    function adjust_practice_pack_($student_package_id){               
-
+    function adjust_practice_pack_($student_package_id)
+    {               
+        $userBranch =null;
         $data['title'] = 'Adjustment- Practice Pack';
         $by_user=$_SESSION['UserId'];
         $get_sid = $this->Student_package_model->get_sid($student_package_id);
@@ -1608,6 +1609,9 @@ class Student extends MY_Controller{
     //non-real function
     function sell_practice_pack_($wid,$package_id,$sid,$mail_sent,$offlineCount,$onlineCount,$ppCount,$enrolledBy_homeBranch){
 
+        $discount_code = null;
+        $centerCode = null;
+        $batch_id= null;$pack_center_id=null;
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
         $mn='sell_practice_pack_';        
@@ -1875,7 +1879,7 @@ class Student extends MY_Controller{
         $service_id=ACADEMY_SERVICE_REGISTRATION_ID;        
         $pack_cb='practice';
         $center_id= $params2['center_id'];
-        $center_name = $centerCode['center_name'];
+        $center_name = (isset($centerCode['center_name']) && $centerCode['center_name']!='') ? $centerCode['center_name']:'';
         $test_module_id = $params2['test_module_id'];
         $programe_id = $params2['programe_id'];
         $studentStatus = $this->_calculateStatus($service_id,$center_id,$test_module_id,$programe_id,$pack_cb);
@@ -1896,7 +1900,8 @@ class Student extends MY_Controller{
             $params4 = array('student_id'=>$sid, 'student_identity'=> $student_identity,'details'=> $details,'by_user'=>$by_user);
             $std_journey=$this->Student_journey_model->update_studentJourney($params4);
         }
-        $get_UID = $this->Student_model->get_UID($datas['student_id']);
+        $get_UID = $this->Student_model->get_UID($sid);
+        // $get_UID = $this->Student_model->get_UID($datas['student_id']);
         $UID = $get_UID['UID'];
         $PLAIN_PWD = $get_UID['plain_pwd'];
         //activity update start

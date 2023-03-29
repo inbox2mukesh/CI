@@ -121,6 +121,7 @@
 								</div>
 							</div>
 							<?php 
+							$nextdat =null;$data_dcd=null;$next_dcd_str=null;
 							if ($sp['due_commitment_date'] != '') {
 								$dcd = date('d-m-Y', $sp['due_commitment_date']);
 								$data_dcd = date('d-m-Y', $sp['due_commitment_date']);	
@@ -185,11 +186,10 @@
 									<input type="text" name="tran_id" value="<?php echo $sp['tran_id']; ?>" class="form-control input-ui-100" id="tran_id" disabled />
 								</div>
 							</div>
-
 							<div class="col-md-3">
 								<label for="subscribed_on" class="control-label">Pack Starting date</label>
 								<div class="form-group has-feedback">
-									<input type="text" name="subscribed_on" value="<?php echo $sp['subscribed_on2']; ?>" class="form-control input-ui-100" id="subscribed_on" disabled data-date="<?php $date = date_create($sp['subscribed_on']); echo date_format($date, "d-m-Y"); ?>" data-strdate="<?php $date = date_create($sp['subscribed_on']); echo strtotime(date_format($date, "d-m-Y")); ?>"/>
+									<input type="text" name="subscribed_on" value="<?php echo $sp['subscribed_on2']; ?>" class="form-control input-ui-100" id="subscribed_on" disabled data-date="<?php $date = date_create($sp['subscribed_on']); echo ($date != '' )? date_format($date, "d-m-Y"):''; ?>" data-strdate="<?php $date = date_create($sp['subscribed_on']); echo ($date != '' ) ? strtotime(date_format($date, "d-m-Y")):''; ?>"/>
 									<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
 								</div>
 							</div>
@@ -309,7 +309,7 @@
 												if ($this->Role_model->_has_access_('student', 'Remburse_waiver_') and WOSA_ONLINE_DOMAIN==1) {
 												?>
 											 <option value="Waiver">Waiver Reimbursement</option> <?php } ?>
-											<!-- <option value="Terminate-Pack">Terminate Pack</option> -->
+											<option value="Terminate-Pack">Terminate Pack</option>
 											<option value="Unhold-Pack">Unhold pack</option>
 										</select>
 										<span class="text-danger"><?php echo form_error('payment_type'); ?></span>
@@ -347,7 +347,7 @@
 											<?php if ($sp['package_status'] == 1) { ?>
 												<option value="Pack on Hold">Pack on Hold</option>
 											<?php } ?>
-											<!-- <option value="Terminate-Pack">Terminate Pack</option> -->
+											<option value="Terminate-Pack">Terminate Pack</option>
 										</select>
 										<span class="text-danger"><?php echo form_error('payment_type'); ?></span>
 									</div>
@@ -427,10 +427,10 @@
 										<?php } ?>
 										<!-- manage start date -->
 											<?php
-											/* if ($this->Role_model->_has_access_('student', 'terminate_pack_')) {
+											if ($this->Role_model->_has_access_('student', 'terminate_pack_')) {
 											?>
 												<option value="Terminate-Pack">Terminate Pack</option>
-											<?php } */ ?>
+											<?php } ?>
 										</select>
 										<span class="text-danger"><?php echo form_error('payment_type'); ?></span>
 									</div>

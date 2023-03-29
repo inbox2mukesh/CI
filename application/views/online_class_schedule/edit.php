@@ -61,6 +61,11 @@ if(isset($dup))
 			<?php }?>
 		
 			<?php
+			if($classroom_id>0){
+				$displayFilterBox='none';
+			}else{
+				$displayFilterBox='block';
+			}
 			$attributes = ['name' => 'schform', 'id' => 'schform_edit_form'];
 			
 			echo form_open('adminController/online_class_schedule/edit/'.$online_class_schedule['id'],$attributes); ?>
@@ -148,7 +153,7 @@ if(isset($dup))
 								foreach($all_classroom as $p){
 									if($p['active'] !=0)
 										{	
-									$clssroomProperty = $p['test_module_name'].'-'.$p['programe_name'].'-'.$p['Category']['category_name'].'-'.$p['batch_name'].'-'.$p['center_name'];
+									$clssroomProperty = $p['test_module_name'].'-'.$p['programe_name'].'-'.$p['category_name'].'-'.$p['batch_name'].'-'.$p['center_name'];
 									$selected='';
 									$selected = ($p['id'] == $online_class_schedule['classroom_id']) ? ' selected="selected"' : "disabled='disabled'";
 									
