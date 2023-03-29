@@ -445,7 +445,7 @@ class Our_students extends MY_Controller
             header('Content-Type: application/json');
             $msg = '<div class="alert alert-warning alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>FAILED:</strong> Your Email or Mobile no already registered with us! Please try with diffrent ids or login <a href="#" class="alert-link"></a>.
+            <strong>FAILED:</strong> Your Email or Mobile no already registered with us! Please try with different id or login <a href="#" class="alert-link"></a>.
             </div>';
             $response = ['msg' => $msg, 'status' => '2'];
             echo json_encode($response); 
