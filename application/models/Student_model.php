@@ -127,7 +127,7 @@
 
     function get_UID($id){
 
-        $this->db->select('UID');
+        $this->db->select('UID,plain_pwd');
         $this->db->from('`students`');       
         $this->db->where(array('id'=>$id));
         return $this->db->get('')->row_array();
@@ -335,6 +335,7 @@
             s.country_id,
             s.state_id,
             s.city_id,
+            s.plain_pwd
         ');
         $this->db->from('`students` s');
         $this->db->join('`gender` g', 'g.`id`= s.`gender`', 'left');

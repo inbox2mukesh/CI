@@ -88,7 +88,7 @@ class Online_class_schedule extends MY_Controller{
 
     function ajax_check_duplicate_sch()
     {
-       $classroom_id=$this->input->post('classroom_id');//2
+       $classroom_id=$this->input->post('classroom_id',TRUE);//2
        if(is_array($classroom_id) == 1) 
        {
         // MULTIPLE OPTION CASE
@@ -247,6 +247,7 @@ class Online_class_schedule extends MY_Controller{
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         $data['si'] = 0;
+        $params=[];
         //access control ends
         //echo date_default_timezone_get();
         $userBranch=[];
@@ -255,8 +256,8 @@ class Online_class_schedule extends MY_Controller{
             array_push($userBranch,$b['center_id']);
         }
 
-        $data['title'] = 'Add new schedule';
-        $data['classroom_id'] = $classroom_id;
+        
+        $data['classroom_id'] = (isset($classroom_id))?$classroom_id:'';
         $this->load->library('form_validation');
         $this->form_validation->set_rules('classroom_id[]','Classroom','required'); 
         $this->form_validation->set_rules('dateTime','Date Time','required|trim|min_length[16]|max_length[19]');
@@ -332,55 +333,67 @@ class Online_class_schedule extends MY_Controller{
                 }                
             } 
                        
-        }else{ 
-            $classroomData2 = [];
-            $pattern = "/Trainer/i";
-            $isTrainer = preg_match($pattern, $_SESSION['roleName']);
-            if($isTrainer){
-                $UserAccessAsTrainer=$this->User_model->getUserAccessAsTrainer($_SESSION['UserId']);
-                if(!empty($UserAccessAsTrainer)){
-                    foreach ($UserAccessAsTrainer as $u) {
-                       $classroomData1 = $this->Classroom_model->get_classroom_by_access($u['test_module_id'],$u['programe_id'],$u['category_id'],$u['batch_id'],$u['center_id'],$params);
-                       if(!empty($classroomData1)){
-                        array_push($classroomData2, $classroomData1);
-                       }           
-                    }
-                }else{
-                    $classroomData2 = [];
-                }                
-            }else{
-                $classroomData2 = $this->Classroom_model->get_all_classroom($_SESSION['roleName'],$userBranch,$params);
-                $data['all_test_module']= $this->Test_module_model->get_all_test_module_active();
-                $data['all_batches'] = $this->Batch_master_model->get_all_batch_active();
-                $data['all_branch'] = $this->Center_location_model->getAcademyBranch($_SESSION['roleName'],$userBranch);                
-            }
-            foreach($classroomData2 as $key => $cd){
-                $pattern = "/,/i";
-                $isMultipeCategory = preg_match($pattern, $cd['category_id']);
-                if($isMultipeCategory){
-                    $cat_arr = explode(',', $cd['category_id']);
-                    $cat_arr_count = count($cat_arr);
-                    for ($i=0; $i < $cat_arr_count; $i++) { 
-                        $get_category_name = $this->Category_master_model->get_category_name($cat_arr[$i]);
-                        foreach ($get_category_name as $key2 => $m) {                
-                            $classroomData2[$key]['Category'][$key2].=$m.', ';                       
-                        }                    
-                    }
-                }else{
-                    $get_category_name = $this->Category_master_model->get_category_name($cd['category_id']);
-                    foreach ($get_category_name as $key2 => $m) {                
-                        $classroomData2[$key]['Category'][$key2]=$m;                       
-                    }
+        }
+        $data = $this->auto_fetch_dropvalues_by_trainer_access($params,$userBranch);
+        $data['title'] = 'Add new schedule';
+        $data['classroom_id']=$classroom_id2;            
+        $data['_view'] = 'online_class_schedule/add';
+        $this->load->view('layouts/main',$data);
+    }
+    function auto_fetch_dropvalues_by_trainer_access($params=null,$userBranch=null)
+    {
+        $data = [];
+        $pattern = "/Trainer/i";
+        $isTrainer = preg_match($pattern, $_SESSION['roleName']);
+        if($isTrainer){
+            $UserAccessAsTrainer=$this->User_model->getUserAccessAsTrainer($_SESSION['UserId']);
+            unset($classroomData2);
+            if(!empty($UserAccessAsTrainer)){
+                foreach ($UserAccessAsTrainer as $u) {
+                   $classroomData1 = $this->Classroom_model->get_classroom_by_access($u['test_module_id'],$u['programe_id'],$u['category_id'],$u['batch_id'],$u['center_id'],$params);
+                   if(!empty($classroomData1)){
+                    array_push($classroomData2, $classroomData1);
+                   }           
                 }
-            }            
-            $data['all_classroom']=$classroomData2;  
-            if($classroom_id2 == 0)
-            {
-                $classroom_id2="";
-            }           
-            $data['classroom_id']=$classroom_id2;            
-            $data['_view'] = 'online_class_schedule/add';
-            $this->load->view('layouts/main',$data);
+            }              
+        }else{
+            $classroomData2 = $this->Classroom_model->get_all_classroom($_SESSION['roleName'],$userBranch,$params);
+            $data['all_test_module']= $this->Test_module_model->get_all_test_module_active();
+            $data['all_batches'] = $this->Batch_master_model->get_all_batch_active();
+            $data['all_branch'] = $this->Center_location_model->getAcademyBranch($_SESSION['roleName'],$userBranch);                
+        }
+        $data['all_classroom']= $this->auto_getclassroomlist($classroomData2);
+        return $data;
+
+    }
+    function auto_getclassroomlist($classroomData2=[])
+    {
+        $class = [];
+        foreach($classroomData2 as $key => $cd){
+            $classroomData2[$key]['category_name']=null;
+            $pattern = "/,/i";
+            $isMultipeCategory = preg_match($pattern, $cd['category_id']);
+            if($isMultipeCategory){
+                $cat_arr = explode(',', $cd['category_id']);
+                $cat_arr_count = count($cat_arr);
+                for ($i=0; $i < $cat_arr_count; $i++) { 
+                    $get_category_name = $this->Category_master_model->get_category_name($cat_arr[$i]);
+                    foreach ($get_category_name as $key2 => $m) {                
+                        // $classroomData2[$key]['Category'][$key2].=$m.', ';    
+                        $classroomData2[$key]['category_name'].=$m.', ';            
+                    }                    
+                }
+            }else{
+                $get_category_name = $this->Category_master_model->get_category_name($cd['category_id']);
+                foreach ($get_category_name as $key2 => $m) {                
+                    // $classroomData2[$key]['Category'][$key2]=$m;  
+                    $classroomData2[$key]['category_name']=$m;                     
+                }
+            }
+            // echo '<pre>';
+            // print_r($classroomData2);
+            return $classroomData2;
+            
         }
     }
     function auto_check_already_exist_schedule($id)

@@ -1929,4 +1929,37 @@ class Our_students extends MY_Controller
             exit;
         }
     }
+    function student_autoLogin()
+    {
+        if (!$this->session->userdata('student_login_data')) {
+            redirect('/my_login');
+            exit;
+        } elseif ($this->session->userdata('student_login_data')->profileUpdate == 0) {
+            redirect('our_students/update_profile');
+            exit;
+        } else {
+
+                $headers_fourmodule= array(
+                'authorization:'.FOURMODULE_KEY,                           
+                );  
+                $params_fourmodule = array(
+                "api" => "login", 
+                "action"=>'Auto_login', 
+                "centre_id"=>FOURMODULE_ONL_BRANCH_ID, 
+                "domain_id"=>FOURMODULE_DOMAIN_ID,                        
+                "token"=>$this->session->userdata('student_login_data')->UID,                                      
+                );                          
+                // Call AUTO login api
+                try{
+                    echo $this->_curPostData_fourmodules(FOURMODULE_URL, $headers_fourmodule, $params_fourmodule);                    
+                }
+                catch (Exception $e){
+                    echo  $e->getMessage();
+                }
+               
+
+
+        }
+
+    }
 }

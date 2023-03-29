@@ -13,9 +13,9 @@ class Faq_master_model extends CI_Model
     }
 
     function get_all_faq_filter($search_text){
-        $this->db->select('fq.`id`,fq.`question`,fq.`answer`,tm.`test_module_name`');
+        $this->db->select('fq.`id`,fq.`question`,fq.`answer`');
         $this->db->from('faq_master fq');        
-        $this->db->join('`test_module` tm', 'tm.`test_module_id`=fq.`test_module_id`');
+        // $this->db->join('`test_module` tm', 'tm.`test_module_id`=fq.`test_module_id`');
         $this->db->where(array('fq.active'=>1));
         if($search_text)
         {
@@ -75,9 +75,9 @@ class Faq_master_model extends CI_Model
     }
 
     function get_all_faq(){
-        $this->db->select('fq.`id`,fq.`question`,fq.`answer`,tm.`test_module_name`');
+        $this->db->select('fq.`id`,fq.`question`,fq.`answer`');
         $this->db->from('faq_master fq');        
-        $this->db->join('`test_module` tm', 'tm.`test_module_id`=fq.`test_module_id`');
+        // $this->db->join('`test_module` tm', 'tm.`test_module_id`=fq.`test_module_id`');
         $this->db->where(array('fq.active'=>1));
         $this->db->order_by('fq.id', 'DESC');        
         return $this->db->get()->result_array();

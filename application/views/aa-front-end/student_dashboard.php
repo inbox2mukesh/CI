@@ -1,3 +1,28 @@
+<style>
+        *{margin:0px;padding:0px;}
+        .loader-cont {position: fixed;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;background: rgba(0,0,0, 0.8);z-index: 99999999;top: 0;}        
+        .loader4 {width:45px;height:45px;display:inline-block;padding:0px;border-radius:100%;border:5px solid;border-top-color:#d72a22;border-bottom-color:rgba(255,255,255, 0.3);border-left-color:#d72a22;border-right-color:rgba(255,255,255, 0.3);-webkit-animation: loader4 1s ease-in-out infinite;animation: loader4 1s ease-in-out infinite;}
+        @keyframes loader4 {
+            from {transform: rotate(0deg);}
+            to {transform: rotate(360deg);}
+        }
+        @-webkit-keyframes loader4 {
+            from {-webkit-transform: rotate(0deg);}
+            to {-webkit-transform: rotate(360deg);}
+        }
+		.sidebarnav .list li button { background: none;border: none;color: #000;}
+		.sidebarnav .list li button:hover { color: #d72a22;}
+
+		.studentresponse-modal .modal-header {align-items: center;border-bottom: solid 1px #ebebeb;}
+		.studentresponse-modal .modal-header h5 { display: inline-block; margin-top: 8px;}
+		.studentresponse-modal .modal-header button.close { font-size: 34px;display: inline-block;}
+		.studentresponse-modal div#msg-content { text-align: center;font-weight: bold;font-size: 15px;}
+		.studentresponse-modal .modal-sm {display: flex; width: 100%;height: 100%;align-items: center;justify-content: center;margin: 0 !important;}
+		.studentresponse-modal .modal-sm .modal-content {max-width: 450px;width: 100%;}
+    </style>
+	<div class="loader-cont" style="display:none;">
+    <div class="loader4"></div>   
+</div>
 <?php
 $packActive=0;
 $packActive=count($curPack->error_message->data);
@@ -15,6 +40,7 @@ if($packActive>0){
 }
 //echo $_SESSION['packActive'];
 ?>
+
 <section class="lt-bg-lighter">
 		<div class="container">
 			<div class="content-wrapper">
@@ -176,8 +202,61 @@ if($packActive>0){
 		</div>
 	</div>
 	<!--End Modal Classroom-->
+	<!--response modal-->
+	<div class="modal fade studentresponse-modal" id="responsemsgmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="responsemsgmodalLabel">Message</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="msg-content">
+				...
+			</div>			
+			</div>
+		</div>
+	</div>
 	<?php 
 	include('change_password.php');
 	include('update_profilepic.php');
 	 ?>
-	
+	 
+	<script>
+		let baseurl= "<?php echo base_url(); ?>";
+		//function formodule login
+		function studentautologin()
+		{
+			$('.loader-cont').show();
+			$.ajax({
+				url: baseurl+'our_students/student_autoLogin',
+				method:'POST',
+				dataType:'json',
+				success: function(resp)
+				{
+					if(resp.success == 1)
+					{
+						var url = 'http://'+resp.link;
+						window.open(url, '_blank');
+					}
+					else if(resp.success == 0){
+						$('#msg-content').html(resp.msg);
+						$('#responsemsgmodal').modal('show');
+						setTimeout(function(){
+							$('#responsemsgmodal').modal('hide');
+						},1500);
+					}
+					else{
+						$('#msg-content').html('Something went wrong. Please try again later');
+						$('#responsemsgmodal').modal('show');
+						setTimeout(function(){
+							$('#responsemsgmodal').modal('hide');
+						},1500);
+					}
+					$('.loader-cont').hide();
+				}
+
+			});
+		}
+	</script>

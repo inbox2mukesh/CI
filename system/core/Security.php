@@ -354,9 +354,15 @@ class CI_Security {
 		// Is the string an array?
 		if (is_array($str))
 		{
-			while (list($key) = each($str))
+			// while (list($key) = each($str)) // The each() function is deprecated with PHP 7.2
+
+			// while (list($key) = each($str))
+			// {
+			// 	$str[$key] = $this->xss_clean($str[$key]);
+			// }
+			foreach ($str as $key => &$value)
 			{
-				$str[$key] = $this->xss_clean($str[$key]);
+				$str[$key] = $this->xss_clean($value);
 			}
 
 			return $str;

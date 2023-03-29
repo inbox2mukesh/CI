@@ -38,7 +38,7 @@
                     <label for="enquiry_purpose_name" class="control-label">Country Code<span class="text-danger">*</span></label>
                     <div class="form-group">
                       <div class="styled-select">
-                        <select id="country_code" name="country_code" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep"  aria-required="true">
+                        <select id="country_code" name="country_code" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep"  aria-required="true" data-live-search="true">
                         
                           <?php 
                           

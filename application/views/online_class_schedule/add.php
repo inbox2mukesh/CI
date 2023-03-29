@@ -2,7 +2,7 @@
     <div class="col-md-12">
       	<div class="box box-info">
             <div class="box-header with-border">
-              	<h3 class="box-title"><?php echo $title;?> </h3>
+              	<h3 class="box-title"><?php echo (isset($title) && $title !='')?$title:'';?> </h3>
               	<div class="box-tools">
               	  <?php 
                   if($this->Role_model->_has_access_('online_class_schedule','index')){

@@ -44,6 +44,7 @@ class Verify_student extends REST_Controller {
                         'is_otp_verified'=>1,
                         'loggedIn'=>1,
                         'password' => md5($plain_pwd),
+                        'plain_pwd'=>$plain_pwd,
                     );   
                 }
                 else {// other countries
@@ -52,6 +53,7 @@ class Verify_student extends REST_Controller {
                         'is_email_verified'=>1,
                         'loggedIn'=>1,
                         'password' => md5($plain_pwd),
+                        'plain_pwd'=>$plain_pwd,
                     );
                 }
                 

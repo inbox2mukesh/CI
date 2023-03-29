@@ -1898,6 +1898,7 @@ class Student extends MY_Controller{
         }
         $get_UID = $this->Student_model->get_UID($datas['student_id']);
         $UID = $get_UID['UID'];
+        $PLAIN_PWD = $get_UID['plain_pwd'];
         //activity update start
             $activity_name = SOLD_PRACTICE_PACK;
             $description = 'Practice pack sold to student '.$UID.' ';
@@ -1960,7 +1961,9 @@ class Student extends MY_Controller{
             "name"=>$mailData['fname'].' '. $mailData['lname'],                                        
             "token"=>$mailData['UID'],                                        
             "start_date"=>$mailData['subscribed_on'],                                        
-            "end_date"=>$mailData['expired_on'],                                         
+            "end_date"=>$mailData['expired_on'], 
+            "username"=>$UID,
+            "password"=>$PLAIN_PWD,                                        
             );                          
             // Call Enrollment apie
            $response_fourmodule= $this->_curPostData_fourmodules(FOURMODULE_URL, $headers_fourmodule, $params_fourmodule);
@@ -1983,7 +1986,7 @@ class Student extends MY_Controller{
             ); 
             $response_fourmodule=$this->_curPostData_fourmodules(FOURMODULE_URL, $headers_fourmodule, $params_fourmodule);
         }
-       else {
+       else {//add program
         $headers_fourmodule = array(
             'Authorization:'.FOURMODULE_KEY,                                      
             );

@@ -359,7 +359,7 @@ foreach($FREE_RESOURCE_CONTENT->error_message->data as $p){
 									<div class="font-weight-600 font-12 text-italic">
 										<?php echo strtoupper($p->content_type_name);?> <span class="text-theme-colored">(
 										<?php 
-$type="";
+										$type="";
 										foreach($p->Course as $pp){
 											$type.=$pp->topic.', ';
 										}

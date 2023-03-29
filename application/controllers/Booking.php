@@ -717,7 +717,9 @@ class Booking extends MY_Controller{
                 "name"=>$this->session->userdata('student_login_data')->fname.' '. $this->session->userdata('student_login_data')->lname,                                        
                 "token"=>$this->session->userdata('student_login_data')->UID,                                        
                 "start_date"=>$packdetail->error_message->data->subscribed_on,                                        
-                "end_date"=>$packdetail->error_message->data->expired_on,                                        
+                "end_date"=>$packdetail->error_message->data->expired_on, 
+                "username"=>$this->session->userdata('student_login_data')->UID,
+                "password"=>$this->session->userdata('student_login_data')->plain_pwd,                                       
                 );                          
                 // Call Enrollment apie
                $response_fourmodule= $this->_curPostData_fourmodules(FOURMODULE_URL, $headers_fourmodule, $params_fourmodule);
