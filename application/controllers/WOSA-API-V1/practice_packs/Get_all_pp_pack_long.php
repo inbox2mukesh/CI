@@ -23,10 +23,10 @@ class Get_all_pp_pack_long extends REST_Controller {
     */
     public function index_get()
     { 
-        if(!$this->Authenticate($this->input->get_request_header('API-KEY'))) {            
+        if(!$this->Authenticate($this->input->get_request_header('API-KEY'))) {           
             $data['error_message'] = [ "success" => 2, "message" => UNAUTHORIZED, "data"=>''];
         }else{ 
-            $country_id = $this->input->get_request_header('COUNTRY-ID');
+            $country_id = DEFAULT_COUNTRY;
             $test_module_id = $this->input->get_request_header('TEST-MODULE-ID');
             $programe_id = $this->input->get_request_header('PROGRAME-ID');           
             $duration = $this->input->get_request_header('DURATION');
@@ -41,7 +41,7 @@ class Get_all_pp_pack_long extends REST_Controller {
           }else{
             $data['error_message'] = [ "success" => 0, "message" => "No Pack found!", "data"=> $bData];     
           } 
-         }      
+         }     
         $this->set_response($data, REST_Controller::HTTP_CREATED);
         
     }

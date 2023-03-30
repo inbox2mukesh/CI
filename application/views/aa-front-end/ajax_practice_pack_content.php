@@ -263,7 +263,7 @@ if (!empty($OnlinePack->error_message->data)) {
     <!--End Modal info-->
   <?php }
 } else { ?>
-<div class="text-center"><?php echo $OnlinePack->error_message->message; ?></div>
+<div class="text-center"><?php echo (isset($OnlinePack) && !empty($OnlinePack)) ? $OnlinePack->error_message->message:''; ?></div>
 <?php } ?>
 <input type="hidden" id="stepcountp" />
         <input type="hidden" id="hidpackageid" />

@@ -14,7 +14,7 @@
 <?php }?>
   <?php
   // classroom schedule section
-  if (count($allClassroomMaterial->error_message->data->classroom_schedule) > 0)
+  if (isset($allClassroomMaterial) && count($allClassroomMaterial->error_message->data->classroom_schedule) > 0)
   { ?>
   <div class="classroom-schedule-row row">
   <?php
@@ -93,7 +93,7 @@ else {
   <?php } ?>
   <!--ENDS--->
   <!--SECTION: SHARED DOC--->
-  <?php if ($_SESSION['classroom_id'] and count($allClassroomMaterial->error_message->data->classroom_doc) > 0) { 
+  <?php if (isset($allClassroomMaterial) &&  isset($_SESSION['classroom_id']) && count($allClassroomMaterial->error_message->data->classroom_doc) > 0) { 
    
     ?>
   <div class="clearfix"> 
@@ -122,7 +122,7 @@ else {
   <!--ENDS--->
   <!--SECTION: RECORDED LECTURE--->
   <?php
-  if (count($allClassroomMaterial->error_message->data->classroom_lecture) > 0) 
+  if (isset($allClassroomMaterial) && count($allClassroomMaterial->error_message->data->classroom_lecture) > 0) 
   {
   ?>
   <div class="clearfix"> 
@@ -146,7 +146,7 @@ else {
   <?php }?>
    <!--ENDS--->
    <?php
- if (count($allClassroomMaterial->error_message->data->classroom_schedule) == 0 AND count($allClassroomMaterial->error_message->data->classroom_doc) == 0 AND count($allClassroomMaterial->error_message->data->classroom_lecture) == 0)
+ if (isset($allClassroomMaterial) && count($allClassroomMaterial->error_message->data->classroom_schedule) == 0 AND count($allClassroomMaterial->error_message->data->classroom_doc) == 0 AND count($allClassroomMaterial->error_message->data->classroom_lecture) == 0)
  {
  ?>
  <div class="col-md-12">
@@ -158,7 +158,7 @@ else {
 ?>
 </div>
 <?php
-$idd = '#' . $_SESSION["firstId"];
+$idd = (isset($_SESSION["firstId"]) && !empty($_SESSION["firstId"]))?'#' . $_SESSION["firstId"]:'';
 ?>
 
 <script src="<?php echo site_url('resources-f/js/jquery.min.js'); ?>" ></script>

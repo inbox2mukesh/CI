@@ -162,6 +162,7 @@
 					<div class="marquee-news-ticker">
 						<ul>
 							<?php
+							if(isset($newsData) && !empty($newsData)){
 							foreach ($newsData->error_message->data as $d) {
 								$date = date_create($d->news_date);
 								$news_date = date_format($date, "M d, Y");
@@ -169,7 +170,9 @@
 							?>
 								<li><span><a href="<?php echo base_url('news-article/' . $d->URLslug); ?>"> <?php echo $d->title; ?> <span class="date"><?php echo $news_date; ?></span></a><span class="bn-seperator">|</span>
 									</span></li>
-							<?php } ?>
+							<?php } 
+							}//end if
+							?>
 						</ul>
 					</div>
 				</div>

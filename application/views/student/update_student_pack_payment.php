@@ -145,7 +145,7 @@
 						<div class="col-md-3">
 							<label for="due_commitment_date" class="control-label text-danger">Due Commitment Date</label>
 							<div class="form-group">
-								<input type="text" name="due_commitment_date" value="<?php echo $dcd; ?>" class="form-control input-ui-100" id="due_commitment_date" disabled data-edate="<?php echo $nextdat; ?>" data-sdate="<?php echo $data_dcd; ?>" data-nextdcdstr="<?php echo $next_dcd_str;?>" />
+								<input type="text" name="due_commitment_date" value="<?php echo $dcd; ?>" class="form-control input-ui-100" id="due_commitment_date" disabled data-edate="<?php echo (isset($nextdat) && $nextdat!='')?$nextdat:''; ?>" data-sdate="<?php echo (isset($data_dcd) && $data_dcd!='')?$data_dcd:'';?>" data-nextdcdstr="<?php echo (isset($next_dcd_str) && $next_dcd_str!='')?$next_dcd_str:'';?>" />
 							</div>
 						</div>
 

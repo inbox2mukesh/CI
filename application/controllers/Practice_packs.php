@@ -17,8 +17,7 @@ class Practice_packs extends MY_Controller{
         $data['title1'] = 'Practice';
         $data['title2'] = ' Packs';
         $headers = array(
-            'API-KEY:'.WOSA_API_KEY,  
-            'COUNTRY-ID:'.DEFAULT_COUNTRY, 
+            'API-KEY:' .WOSA_API_KEY, 
             'LIMIT:' .LOAD_MORE_LIMIT_8,
             'OFFSET:0',
         );           

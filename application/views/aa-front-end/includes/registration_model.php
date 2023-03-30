@@ -9,7 +9,7 @@
 					<div class="modal-body">
 						<div class="register-modal">
 							<div class="info">
-								<div class="hide" role="alert" id="regmain_msg_danger" >
+								<div class="hide" role="alert" id="regmain_msg_danger" style="margin-bottom: 25px;">
 									</div>
 									 <div class="row">
 										<div class="col-sm-6 ">

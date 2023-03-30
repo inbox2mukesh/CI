@@ -31,7 +31,7 @@
     </div>
   </section>
   <?php
-  $idd = '#'.$_SESSION["firstId"];
+  $idd = (isset($_SESSION["firstId"]))?'#'.$_SESSION["firstId"]:'';
 ?>
 
 

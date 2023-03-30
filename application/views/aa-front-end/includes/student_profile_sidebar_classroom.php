@@ -64,7 +64,7 @@ echo "noactive";
 echo "active-text";
 } else {
 echo "noactive";
-} ?>" href="<?php echo base_url('our_students/recorded_lectures'); ?>">Recorded lecutres</a></li>
+} ?>" href="<?php echo base_url('our_students/recorded_lectures'); ?>">Recorded Lecture</a></li>
 <li><a class="text-uppercase <?php if ($segment == "announcements") {
 echo "active-text";
 } else {
