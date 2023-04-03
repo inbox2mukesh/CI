@@ -9,7 +9,7 @@
     <?php echo $this->session->flashdata('flsh_msg');?>
     <form action="" name="fp" id="fp" method="post">      
       <div class="form-group has-feedback">
-        <input type="email" name="email" class="form-control input-ui-100" placeholder="Enter USERNAME">
+        <input type="email" name="email" class="form-control input-ui-100" placeholder="Enter E-mail">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>      
 

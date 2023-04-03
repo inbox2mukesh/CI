@@ -187,7 +187,7 @@ class Enquiry extends MY_Controller{
        $country_code= $this->input->post('country_code', true);
        $iso3_code=explode('|',$country_code);     
         $today = date('d-m-Y');
-        $message = 'Hi, please confirm your details by entering the Verification code '.$otp.' Valid for 10 minutes only Regards '.COMPANY;        
+        $message = 'Hi, please confirm your details by entering the Verification code '.$otp.'Verification code is Valid for 10 minutes only Regards</br>'.COMPANY;        
         $params=array(
             'todayDate'=> $today,
             'fname' => $this->input->post('fname', true),
@@ -221,7 +221,7 @@ class Enquiry extends MY_Controller{
             
             //MAIL
             $subject = "Verification code verification- WOSA";
-            $email_message='Hi, please confirm your details by entering the Verification code '.$otp.' Valid for 10 minutes only Regards '.COMPANY;
+            $email_message='Hi, please confirm your details by entering the Verification code '.$otp.'Verification code is Valid for 10 minutes only Regards</br>'.COMPANY;
             $mailData=[]; 
             $mailData['fname']         = $params['fname'];
             $mailData['email']         = $params['email'];               

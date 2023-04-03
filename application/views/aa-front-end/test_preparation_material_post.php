@@ -42,11 +42,11 @@ foreach ($content as $content_data) {
                 <?php echo ucfirst($sec_d->section) ?>
               <?php }
               if ($sec_d->type == 'image') { ?>
-                <img src="<?php echo base_url(); ?>uploads/free_resources/image/<?php echo $sec_d->section ?>" class="img-fullwidth mt-20">
+                <img src="<?php echo base_url().''.TEST_PREPARATION_IMAGE_PATH.''.$sec_d->section ?>" class="img-fullwidth mt-20">
               <?php }
               if ($sec_d->type == 'video') {  ?>
                 <div class="embed-responsive embed-responsive-16by9 mt-30 mb-15">
-                  <video src="<?php echo base_url(); ?>uploads/free_resources/video/<?php echo $sec_d->section ?>" controls controlsList="nodownload" controlsList="noplaybackrate" disablepictureinpicture></video>
+                  <video src="<?php echo base_url().''.TEST_PREPARATION_VIDEO_PATH.''.$sec_d->section ?>" controls controlsList="nodownload" controlsList="noplaybackrate" disablepictureinpicture></video>
                 </div>
               <?php }
               if ($sec_d->type == 'audio') {
@@ -287,7 +287,7 @@ foreach ($content as $content_data) {
                       <h5>Audio</h5>
                       <div>Click on play and adjust your volumn.</div>
                     </div>
-                    <audio src="<?php echo base_url(); ?>uploads/free_resources/audio/<?php echo $sec_d->section ?>" preload="metadata" loop=""></audio>
+                    <audio src="<?php echo base_url().''.TEST_PREPARATION_AUDIO_PATH.''.$sec_d->section ?>" preload="metadata" loop=""></audio>
                     <div class="vl-area">
                       <output id="volume-output" style="display:none">100</output>
                       <button id="mute-icon"></button>
@@ -302,7 +302,7 @@ foreach ($content as $content_data) {
                     </div>
                   </div>
                 </template>
-                <audio-player data-src2="<?php echo base_url(); ?>uploads/free_resources/audio/<?php echo $sec_d->section ?>"></audio-player>
+                <audio-player data-src2="<?php echo base_url().TEST_PREPARATION_AUDIO_PATH.''. $sec_d->section ?>"></audio-player>
                 <script type="module">
                   import lottieWeb from 'https://cdn.skypack.dev/lottie-web';
                   class AudioPlayer extends HTMLElement {

@@ -31,14 +31,14 @@ class Center_location extends MY_Controller{
         $x = '<select name="center_id[]" id="center_id" class="form-control selectpicker" data-show-subtext="true" data-live-search="true" data-actions-box="true" multiple="multiple">
             <option value="" disabled="disabled">Select Functional Branch</option>';
             foreach ($response as $b){
-                $y .= '<option value="'.$b['center_id'].'">'.$b['center_name'].'</option>';  
+                $x .= '<option value="'.$b['center_id'].'">'.$b['center_name'].'</option>';  
             }
-        $z= '</select>
+            $x.= '</select>
             <span class="text-danger"><?php echo form_error("center_id[]");?></span>';
 
-        $result = $x.$y.$z;
+        //$result = $x.$y.$z;
         header('Content-Type: application/json');
-        echo json_encode($result);
+        echo json_encode($x);
     }
 
     function ajax_GetBranchAddress(){

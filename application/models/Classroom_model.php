@@ -229,7 +229,7 @@ class  Classroom_model extends CI_Model{
         //print_r($this->db->last_query());exit;
     }
     
-    function get_all_classroom($roleName,$userBranch,$params = array()){
+    function get_all_classroom($roleName=null,$userBranch=[],$params = array()){
 
         if(isset($params) && !empty($params))
         {

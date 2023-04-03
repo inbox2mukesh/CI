@@ -162,7 +162,7 @@ if(isset($dup)){
 									{
 										if($p['active'] !=0)
 										{										
-										$clssroomProperty = $p['test_module_name'].'-'.$p['programe_name'].'-'.$p['category_name'].'-'.$p['batch_name'].'-'.$p['center_name'];									
+										$clssroomProperty = $p['test_module_name'].'-'.$p['programe_name'].'-'.$p['category_name'].'-'.$p['batch_name'].'-'.$p['center_name'];										
 										echo '<option value="'.$p['id'].'" data-name="'.$p['classroom_name'].'">'.$p['classroom_name'].' / '.$clssroomProperty.'</option>';
 										}
 									}

@@ -67,7 +67,7 @@ class Waiver extends MY_Controller{
                             
 
 
-        $y .='<tr>
+        $x .='<tr>
                         <td>'.$sr.'</td>
                         <td>'.$c["waiver_type"].'</td>
                         <td>'.$c["UID"].' | '.$c["sfname"].' '.$c["slname"].'</td>  
@@ -83,15 +83,15 @@ class Waiver extends MY_Controller{
                 }
                     
         $z = '</table>';
-        $a = $x.$y.$z;     
+        //$a = $x.$y.$z;     
         if(!empty($waiver)){ 
             header('Content-Type: application/json');
-            $response = ['msg'=>SUCCESS_MSG, 'status'=>'true','data'=>$a];
+            $response = ['msg'=>SUCCESS_MSG, 'status'=>'true','data'=>$x];
             echo json_encode($response);
         }else{
             $a='';
             header('Content-Type: application/json');
-            $response = ['msg'=>FAILED_MSG, 'status'=>'false','data'=>$a];
+            $response = ['msg'=>FAILED_MSG, 'status'=>'false','data'=>$x];
             echo json_encode($response);
         }
     }

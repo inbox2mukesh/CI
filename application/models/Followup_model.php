@@ -90,7 +90,8 @@ class Followup_model extends CI_Model
     }
     function get_last_leadNo()
     {
-        $query = $this->db->query("SELECT `lead_uid` FROM `leads`  order by lead_id desc limit 1");
+        //`lead_uid` FROM `leads`  order by lead_id desc limit 1
+        $query = $this->db->query("SELECT `lead_uid` FROM `leads` order by lead_id desc limit 1");
         $row = $query->row();
         return $row->lead_uid;
     }
@@ -104,7 +105,8 @@ class Followup_model extends CI_Model
 function get_all_leads($enquiry_purpose_id,$params = array())
 {
 //print_r($params);
-
+$con_leadCreateddate = '';$con_active="";$con_pup='';$con_by_user='';
+    $lim='';$con_search_text='';$con_lead_via='';
 $sear_con="LEFT JOIN lead_followup ON (lead_followup.lead_id=leads.lead_id AND `flag`=1)";
 
 if(!empty($params['search_text']))
@@ -182,6 +184,8 @@ if(isset($params) && !empty($params))
 
 function get_all_leads_count($enquiry_purpose_id,$params = array())
 {
+    $con_lead_via ='';$con_leadCreateddate='';$con_active='';$con_pup='';$con_by_user='';
+    $lim='';
 if(isset($params) && !empty($params))
         {
             //$this->db->limit($params['limit'], $params['offset']);
@@ -252,7 +256,25 @@ if(!empty($params['option_followup_status']))
 }
        // $sear_con="LEFT JOIN lead_followup ON (lead_followup.lead_id=leads.lead_id AND `flag`=1)";
 
-         $query = $this->db->query("SELECT leads.`lead_id`, leads.`lead_uid`, leads.`fname`, leads.`lname`, leads.`email`, leads.`country_code`, leads.`mobile`, leads.`dob`, leads.`todayDate`, leads.`lead_via`, leads.`message`, leads.`created`, leads.`active`, enquiry_purpose_masters.`enquiry_purpose_name`,lead_followup.last_followupdatetime,lead_followup.next_followupdatetime,lead_followup.followup_status FROM `leads` LEFT JOIN enquiry_purpose_masters ON enquiry_purpose_masters.id = leads.enquiry_purpose_id  $sear_con  WHERE 1 $con_search_text $con_lead_via $con_active $con_leadCreateddate $con_pup $con_by_user group by leads.lead_id $lim");      
+         $query_st = "SELECT leads.`lead_id`, leads.`lead_uid`, leads.`fname`, leads.`lname`, leads.`email`, leads.`country_code`, leads.`mobile`, leads.`dob`, leads.`todayDate`, leads.`lead_via`, leads.`message`, leads.`created`, leads.`active`, enquiry_purpose_masters.`enquiry_purpose_name`,lead_followup.last_followupdatetime,lead_followup.next_followupdatetime,lead_followup.followup_status FROM `leads` LEFT JOIN enquiry_purpose_masters ON enquiry_purpose_masters.id = leads.enquiry_purpose_id  $sear_con  WHERE 1 $con_leadCreateddate "; 
+         if($con_active != "")
+         {
+            $query_st .= $con_active;
+         }
+         if($con_lead_via != "")
+         {
+            $query_st .= $con_search_text;
+         }
+         if($con_lead_via != "")
+         {
+            $query_st .= $con_lead_via;
+         }
+         if($con_leadCreateddate != "")
+         {
+            $query_st .= $con_leadCreateddate;
+         }
+         $query_st .= "$con_pup $con_by_user group by leads.lead_id $lim";
+         $query =  $this->db->query($query_st);    
           return $query->num_rows();
              //return $query->result_array();
             //return $query->count_all_results();  

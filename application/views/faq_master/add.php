@@ -10,10 +10,10 @@
               	<a href="<?php echo site_url('adminController/faq_master/index'); ?>" class="btn btn-success btn-sm">ALL FAQ's</a>
               <?php }?>
               	<?php 
-              	 if($this->Role_model->_has_access_('faq_master','index')){
-              	foreach ($all_testModule as $t) { $test_module_id=  $t['test_module_id'];?>
-                  <a href="<?php echo site_url('adminController/faq_master/index/'. $test_module_id); ?>" class="btn btn-info btn-sm"><?php echo $t['test_module_name'];?></a>
-              	<?php }} ?>
+              	 //if($this->Role_model->_has_access_('faq_master','index')){
+              	//foreach ($all_testModule as $t) { $test_module_id=  $t['test_module_id'];?>
+                  <!-- <a href="<?php //pecho site_url('adminController/faq_master/index/'. $test_module_id); ?>" class="btn btn-info btn-sm"><?php echo $t['test_module_name'];?></a> -->
+              	<?php //}} ?>
                </div>
             </div>
             <?php echo $this->session->flashdata('flsh_msg'); ?>

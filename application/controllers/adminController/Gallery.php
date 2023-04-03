@@ -75,7 +75,7 @@ class Gallery extends MY_Controller{
             if($id){
                 //activity update start              
                     $activity_name= GALLAEY_ADD;
-                    $description= 'New gallery '.$params['title'].' with file '.$image.' having type '.$params['media_type'].' added';
+                    $description= 'New gallery '.$params['title'].' with file '.$params['image'].' having type '.$params['media_type'].' added';
                     $res=$this->addUserActivity($activity_name,$description,$student_package_id=0,$by_user);
                 //activity update end
                 $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);

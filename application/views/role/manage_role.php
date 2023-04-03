@@ -57,6 +57,7 @@
                                     <input type="checkbox" name="cb_method[]" value="<?php echo $c['id'].'~'.$m['id'];?>" <?php echo $ch;?> class="checkbox_allmethod groupCont<?php echo $c['id'];?>">
                                     <a id="<?php echo $ch;?>" href="javascript:void(0)" title="<?php echo $m['method_desc'];?>"><?php echo $m['method_alias'];?>&nbsp;</a>
                                 </label>
+                                
                                 </span>
                             <?php } ?>
                         </td>

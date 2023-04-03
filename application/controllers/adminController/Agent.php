@@ -79,7 +79,7 @@ class Agent extends MY_Controller{
         $this->load->library("excel");
         $object = new PHPExcel();
         $object->setActiveSheetIndex(0);
-
+        $params =[];
         $table_columns = array("Name","Email-ID", "Mobile-No", "City", "Country", "Organization Name",'Message','Date');
         $column = 0;
           foreach($table_columns as $field)
@@ -95,7 +95,7 @@ class Agent extends MY_Controller{
 
           foreach($data['get_lead_CSV'] as $row)
           {      
-			$date=date_create($s['created']);
+			$date=date_create($row['created']);
 			$created = date_format($date,"M d, Y");			
            $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $row['fname'].' '.$row['lname']);           
            $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $row['email']);        
@@ -175,7 +175,10 @@ class Agent extends MY_Controller{
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         $data['si'] = 0;
         //access control ends
-
+        $otp = rand(1000,10000); 
+        if(base_url()!=BASEURL){ 
+            $otp = 1234;
+        }
         $data['title'] = 'Add new enquiry';
         $this->load->library('form_validation');        
         $this->form_validation->set_rules('fname','First name','required');
@@ -363,7 +366,7 @@ class Agent extends MY_Controller{
                     $mailData['thanks']         = THANKS;
                     $mailData['team']           = WOSA;
                     if(base_url()!=BASEURL){               
-                        $this->sendEmailTostd_enqReply($subject,$mailData);
+                        $this->sendEmailTostd_enqReply_($subject,$mailData);
                     }
                 $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
                 redirect('adminController/student_enquiry/enquiry');

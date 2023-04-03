@@ -86,14 +86,14 @@ class Live_lecture extends MY_Controller{
         }
 
         $data['title'] = 'Add classroom lecture';
-        $data['classroom_id'] = $classroom_id;
+        $data['classroom_id'] = $classroom_id2;
         $this->load->library('form_validation');
         $this->form_validation->set_rules('classroom_id[]','Classroom','required');
         $this->form_validation->set_rules('content_type_id','Content type','required');
 		$this->form_validation->set_rules('live_lecture_title','Live lecture title','required|trim');
 		$this->form_validation->set_rules('video_url','Video URL','required|trim|callback_auto_mp4allowonly[video_url]');
         $this->form_validation->set_rules('lecture_date','Lecture Date','required|trim');
-
+        $params = [];
     
 
        /* if (empty($_FILES['screenshot']['name']))
@@ -240,6 +240,7 @@ class Live_lecture extends MY_Controller{
         $data['si'] = 0;
         //access control ends
         $userBranch=[];
+        $params = [];
         $UserFunctionalBranch= $this->User_model->getUserFunctionalBranch($_SESSION['UserId']);
         foreach ($UserFunctionalBranch as $b){
             array_push($userBranch,$b['center_id']);

@@ -119,7 +119,7 @@
         }
     }
     
-    function edit($state_id)
+    function edit($state_id=null)
     {   
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -161,7 +161,7 @@
                     redirect('adminController/state/index');
                 }else{
                     $this->session->set_flashdata('flsh_msg', UPDATE_FAILED_MSG);           
-                    redirect('adminController/state/edit/'.$category_id);
+                    redirect('adminController/state/edit/'.$state_id);
                 }                
             }
             else

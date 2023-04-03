@@ -18,7 +18,7 @@
                         <tr>
                             <th><?php echo SR; ?></th>
                             <th>Source</th>
-							<th><?php echo Is_Static; ?></th>
+							<th><?php echo 'Is_Static'; ?></th>
                             <th><?php echo STATUS; ?></th>
                             <th><?php echo ACTION; ?></th>
                         </tr>
@@ -59,10 +59,10 @@
                                     ?>
                                     <a href="<?php echo site_url('adminController/source_master/edit/' . $p['id']); ?>" class="btn btn-info btn-xs" data-toggle="tooltip" title="Edit"><span class="fa fa-pencil"></span> </a> <?php } ?>
 									 <?php 
-                                     if($this->Role_model->_has_access_('source_master','view_')){
+                                     //if($this->Role_model->_has_access_('source_master','view_')){
                                     ?>
-                                    <a href="<?php echo site_url('adminController/source_master/view_/' . $p['id']); ?>" class="btn btn-info btn-xs" data-toggle="tooltip" title="View"><span class="fa fa-eye"></span> </a> <?php 
-									} ?>
+                                    <!-- <a href="<?php echo site_url('adminController/source_master/view_/' . $p['id']); ?>" class="btn btn-info btn-xs" data-toggle="tooltip" title="View"><span class="fa fa-eye"></span> </a>--> <?php  
+									//} ?>
                                     <!-- <a href="<?php echo site_url('adminController/source_master/remove/' . $p['id']); ?>" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a> -->
                                 </td>
                             </tr>

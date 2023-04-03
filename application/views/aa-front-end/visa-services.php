@@ -9,8 +9,10 @@
 
 	<div class="vd-border">
 			<div class="owl-carousel-slider image-border">
-				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/abt-slider-1.jpg');?>" class="img-fullwidth"></div>
-				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/abt-slider-2.jpg');?>" class="img-fullwidth"></div>
+				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/visa-services01.webp');?>" class="img-fullwidth"></div>
+				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/visa-services02.webp');?>" class="img-fullwidth"></div>
+				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/visa-services03.webp');?>" class="img-fullwidth"></div>
+				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/visa-services04.webp');?>" class="img-fullwidth"></div>
 			</div>
 		</div>
 

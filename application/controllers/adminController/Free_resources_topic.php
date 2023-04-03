@@ -63,7 +63,7 @@ class Free_resources_topic extends MY_Controller{
             $idd = $this->Free_resources_topic_model->add_topic($params);
             if($idd==1){
                 //activity update start              
-                    $activity_name= FREE_RESOURCES_TOPIC_ADD;
+                    $activity_name= 'FREE_RESOURCES_TOPIC_ADD';
                     $description= ''.json_encode($params).'';
                     $res=$this->addUserActivity($activity_name,$description,$student_package_id=0,$by_user);
                 //activity update end
@@ -108,7 +108,7 @@ class Free_resources_topic extends MY_Controller{
                 $idd = $this->Free_resources_topic_model->update_topic($topic_id,$params,$data['topic_master']['topic']);                
                 if($idd==1){
                     //activity update start             
-                        $activity_name= FREE_RESOURCES_TOPIC_UPDATE;
+                        $activity_name= 'FREE_RESOURCES_TOPIC_UPDATE';
                         unset($data['topic_master']['topic_id'],$data['topic_master']['created'],$data['topic_master']['modified']);//unset extras from array
                         $uaID = 'topic_master'.$idd;
                         $diff1 =  json_encode(array_diff($data['topic_master'], $params));//old

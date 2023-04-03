@@ -23,7 +23,7 @@ class Test_preparation_material extends MY_Controller
         $data['serviceData'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers)); 
         $data['FREE_RESOURCE_CONTENT'] = json_decode($this->_curlGetData(base_url(TEST_PREPARATION_MATERIAL_CONTENT), $headers));
         $data['FREE_RESOURCE_COURSE_LIST'] = json_decode($this->_curlGetData(base_url(GET_TEST_PREPARATION_MATERIAL_COURSE), $headers));
-        $data['FREE_RESOURCE_CONTENT_TYPE'] = json_decode($this->_curlGetData(base_url(GET_TEST_PREPARATION_MATERIAL_CONTENT_TYPE), $headers));
+        $data['FREE_RESOURCE_CONTENT_TYPE'] = json_decode($this->_curlGetData(base_url(GET_TEST_PREPARATION_MATERIAL_CONTENT_TYPE), $headers));//content type DD
         $this->load->view('aa-front-end/includes/header', $data);
         $this->load->view('aa-front-end/test_preparation_material');
         $this->load->view('aa-front-end/includes/footer');

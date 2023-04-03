@@ -84,9 +84,9 @@ class Classroom_announcement extends MY_Controller{
         foreach ($UserFunctionalBranch as $b){
             array_push($userBranch,$b['center_id']);
         }
-
+        $params = [];
         $data['title'] = 'Add Classroom Announcement';
-        $data['classroom_id'] = $classroom_id;
+        $data['classroom_id'] = $classroom_id2;
         $this->load->library('form_validation');
         $this->form_validation->set_rules('classroom_id[]','Classroom','required'); 
 		$this->form_validation->set_rules('subject','Announcement Subject','required|trim');
@@ -110,7 +110,7 @@ class Classroom_announcement extends MY_Controller{
                     $image=NULL; 
                 }
                 $classroom_id=$this->input->post('classroom_id');
-
+                $classroom_name = null;
                     foreach ($classroom_id as $c){
                         $params = array(                
                             'classroom_id'=>$c, 
@@ -189,7 +189,7 @@ class Classroom_announcement extends MY_Controller{
         }
     }
 
-    function edit($id){
+    function edit($id=0){
 
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -207,7 +207,7 @@ class Classroom_announcement extends MY_Controller{
         $data['title'] = 'Edit Classroom Announcement';
         $data['announcements'] = $this->Announcements_model->get_announcements($id);
         $classroom_id = $data['online_class_schedule']['classroom_id'];
-
+        $params=[];
         if(isset($data['announcements']['id'])){
 
             $this->load->library('form_validation');
@@ -323,7 +323,7 @@ class Classroom_announcement extends MY_Controller{
                     }
                 }            
             $data['all_classroom']=$classroomData2;            
-            $data['classroom_id']=$classroom_id2; 
+            $data['classroom_id']=$id; 
             $data['_view'] = 'classroom_announcements/edit';
             $this->load->view('layouts/main',$data);
             }

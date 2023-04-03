@@ -250,7 +250,7 @@ function update_status(id)
     data: {id: id,jsondata:jsondata},
     success: function(response)
     {
-       alert(response)
+        location.reload()
        // $('#content_viewfollowup').html(response);
     }
     });

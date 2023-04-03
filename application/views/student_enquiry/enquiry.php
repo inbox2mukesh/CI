@@ -52,8 +52,9 @@
 						<th>Name</th>
                         <th>DOB</th>
 						<th>Email Id</th>
-                        <th>Email Verified?</th>						
-						<th>Contact No.</th>
+                        <th>Contact No.</th>
+                        <th>Verified?</th>					
+						
                         <th>Purpose</th>
 						<th>Message</th>             
                         <th>Created</th>
@@ -97,16 +98,26 @@
 						<td>
                             <a href="mailto:<?php echo $s['email'];?>"><?php echo $s['email']; ?></a>
                         </td>
+                        <td><?php echo $s['country_code'].'-'.$s['mobile']; ?></td>
                        <td>
                             <?php 
-                            if($s['is_email_verified']==1){
-                                echo '<span class="text-success"><a href="javascript:void(0);" id='.$s['enquiry_id'].' data-toggle="tooltip">'.ACTIVE.'</a></span>';
-                            }else{
-                                echo '<span class="text-danger"><a href="javascript:void(0);" id='.$s['enquiry_id'].' data-toggle="tooltip">'.DEACTIVE.'</a></span>';
-                            }
+
+
+if($s['is_otp_verified']==1){
+    echo '<a href="" class="btn btn-info btn-xs" data-toggle="tooltip" title="Verified contact"><span class="fa fa-phone text-success"></span> </a>';
+}else{
+    echo '<a href="" class="btn btn-info btn-xs" data-toggle="tooltip" title="Un-Verified contact"><span class="fa fa-phone text-danger"></span> </a>';
+}
+
+if($s['is_email_verified']==1){
+    echo '<a href="" class="btn btn-info btn-xs" data-toggle="tooltip" title="Verified email"><span class="fa fa-envelope text-success"></span> </a>';
+}else{
+    echo '<a href="" class="btn btn-info btn-xs" data-toggle="tooltip" title="Un-Verified email"><span class="fa fa-envelope text-danger"></span> </a>';
+}
+
                             ?>                                
                         </td>  
-                        <td><?php echo $s['country_code'].'-'.$s['mobile']; ?></td>
+                        
                         <td><?php echo $s['enquiry_purpose_name']; ?></td>
 						<td><?php echo $s['message']; ?></td>
 						<td>

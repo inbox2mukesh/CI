@@ -182,7 +182,7 @@ class Refund extends MY_Controller{
                                 $status2 = '<span class="text-warning">Pending for approval- Can not use</span>';
                             }
 
-        $y .='<tr>
+        $x .='<tr>
                         <td>'.$sr.'</td>
                         <td>'.$c["UID"].' | '.$c["sfname"].' '.$c["slname"].'</td>
                         <td>'.$c["to_fname"].' '.$c["to_lname"].'-'.$c["to_mobile"].'</td>
@@ -196,8 +196,8 @@ class Refund extends MY_Controller{
                     </tr>';
                 }
 
-        $z = '</table></div></div>';
-        $a = $x.$y.$z;
+        $x .= '</table></div></div>';
+        $a = $x;
         if(!empty($refund)){
             header('Content-Type: application/json');
             $response = ['msg'=>SUCCESS_MSG, 'status'=>'true','data'=>$a];

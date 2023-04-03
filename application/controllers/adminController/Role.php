@@ -19,7 +19,7 @@ class Role extends MY_Controller{
             $this->Role_model->clean_assigned_role();
             $by_user=$_SESSION['UserId'];
             //activity update start           
-                $activity_name= EMPTY_ROLE_ACCESS;
+                $activity_name= 'EMPTY_ROLE_ACCESS';
                 $description='Role access cleaned';
                 $res=$this->addUserActivity($activity_name,$description,$student_package_id=0,$by_user);
             //activity update end
@@ -33,6 +33,8 @@ class Role extends MY_Controller{
     function ajax_get_module_desc(){
 
         $controller_id = $this->input->post('controller_id', TRUE);
+        $controller_desc =null;
+        $controller_alias =null;
         if($controller_id!=''){
             $get_module_desc = $this->Role_model->get_module_desc($controller_id);
             $controller_desc = $get_module_desc['controller_desc'];
@@ -52,6 +54,8 @@ class Role extends MY_Controller{
     function ajax_get_method_desc(){
 
         $method_id = $this->input->post('method_id', TRUE);
+        $method_desc = null;
+        $method_alias=null;
         if($method_id!=''){
             $get_method_desc = $this->Role_model->get_method_desc($method_id);
             $method_desc = $get_method_desc['method_desc'];
@@ -301,10 +305,11 @@ class Role extends MY_Controller{
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}        
         //access control ends
-
+        $cb_method=[];
         $data['title'] = 'Manage Role';
         $data['role'] = $this->Role_model->get_role($id);
         $data['roledata'] = $this->Role_model->get_role_data($id);
+        $idd = 0;
         if(isset($data['role']['id']))
         {            
             $this->load->library('form_validation');
@@ -313,30 +318,37 @@ class Role extends MY_Controller{
             {  
                 $this->Role_model->delete_role_access($id); 
                 $by_user=$_SESSION['UserId'];
-
                 $cb_method[] = $this->input->post('cb_method');
-                
-                foreach ($cb_method[0] as $c) {
+                if(!empty($cb_method[0]))
+                {
+                    foreach ($cb_method[0] as $c) {
 
-                    $arr = explode("~", $c, 2);
-                    $controller_id = $arr[0];
-                    $method_id = $arr[1];
-                    $params = array(
-                        'role_id' => $id,
-                        'controller_id'=>$controller_id,
-                        'method_id' => $method_id,
-                        'by_user' => $by_user,
-                    );
-                    $idd = $this->Role_model->add_access($params);
+                        $arr = explode("~", $c, 2);
+                        $controller_id = $arr[0];
+                        $method_id = $arr[1];
+                        $params = array(
+                            'role_id' => $id,
+                            'controller_id'=>$controller_id,
+                            'method_id' => $method_id,
+                            'by_user' => $by_user,
+                        );
+                        $idd = $this->Role_model->add_access($params);
+                    }
+                    if($idd){
+                        $this->session->set_flashdata('flsh_msg', UPDATE_MSG);           
+                        redirect('adminController/role/manage_role_/'.$id);
+                    }else{
+                        $this->session->set_flashdata('flsh_msg', UPDATE_FAILED_MSG);
+                        redirect('adminController/role/manage_role_/'.$id);
+                    }
                 }
-
-                if($idd){
-                    $this->session->set_flashdata('flsh_msg', UPDATE_MSG);           
-                    redirect('adminController/role/manage_role_/'.$id);
-                }else{
+                else
+                {
                     $this->session->set_flashdata('flsh_msg', UPDATE_FAILED_MSG);
                     redirect('adminController/role/manage_role_/'.$id);
                 }
+                
+                
 
             }else{
                 $cData = $this->Role_model->get_all_controller();

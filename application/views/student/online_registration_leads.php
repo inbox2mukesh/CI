@@ -41,7 +41,7 @@
                             ?>
                         </td>
 
-						<td class="<?php echo $class;?>"><?php echo $s['fname'].' '.$s['lname']; ?></td>
+						<td class="<?php echo (isset($class) && $class !='') ?$class:'' ;?>"><?php echo $s['fname'].' '.$s['lname']; ?></td>
 						<td><a href="mailto:<?php echo $s['email'];?>"><?php echo $s['email']; ?></a></td>
 						<td><?php echo $s['country_code'].'- '.$s['mobile']; ?></td>
 

@@ -177,9 +177,8 @@
                     <?php 
                     if(!empty($allleads))
                     {
-
                     $sr=0;foreach($allleads as $s){$zero=0;$one=1;$pk='lead_id'; $table='leads';$sr++; 
-                        $student_id = $s['student_id'];
+                        //$student_id = $s['student_id'];
                     ?>
                     <tr>
 						<td><?php echo $sr; ?></td>   

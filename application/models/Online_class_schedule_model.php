@@ -250,6 +250,8 @@ class  Online_class_schedule_model extends CI_Model
             $con="AND id!='$params[online_class_schedule]'";
             $this->db->where("id !=", $params['online_class_schedule']);
 
+        }else{
+           $con=''; 
         }
         $count= $this->db->get('')->num_rows();
         //print_r($this->db->last_query());exit;

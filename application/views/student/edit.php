@@ -1011,7 +1011,7 @@
                                                                 } 
                                                                 else if (($sp['packCloseReason'] == 'Partial Refund' AND $sp['package_status'] == 1)) {
                                                                     echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
-                                                                }else if ($sp['packCloseReason'] == 'Have to be start' AND $sp['active']==0) {
+                                                                }else if ($sp['packCloseReason'] == 'Have to be start' AND $sp['package_status']==0) {
                                                                     echo '<span class="text-res"><a href="javascript:void(0);"data-toggle="tooltip" title="Have to be start"  >' . DEACTIVE . '</a></span>';
                                                                 }else {
                                                                     echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="Deactive/Expired pack"  >' . DEACTIVE . '</a></span>';
@@ -1151,9 +1151,9 @@
                         <!-- counselling booked data end-->
                         <!-----Start Add Code By Neelu --->
                         <!-----Event Booked History --->
-                        <?php if (count($student_event_booking) > 0) {
-                            $this->load->view('event/student_event_booking_history.php');
-                        } ?>
+                        <?php //if (count($student_event_booking) > 0) {
+                            //$this->load->view('event/student_event_booking_history.php');
+                        //} ?>
                         <!-----Event Booked History End--->
                         <!-----End Add Code By Neelu --->
                     </div>

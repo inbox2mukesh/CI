@@ -70,7 +70,7 @@
 					<div class="col-md-6 margin-bottom-20">
 						<label for="event_title" class="control-label"><span class="text-danger">*</span>Url Slug</label>
 						<div class="form-group">
-						<input type="text" name="URLslug" value="<?php echo $URLslug; ?>" class="form-control input-ui-100 removeerrmessage allow_url_slug" id="URLslug" placeholder="URL" onKeyPress="return noNumbers(event)" maxlength="140" autocomplete="off" onchange="checkUrl('freeresourse',this.id)" onpaste="return false" />
+						<input type="text" name="URLslug" value="<?php echo (isset($URLslug) && !empty($URLslug))?$URLslug:''; ?>" class="form-control input-ui-100 removeerrmessage allow_url_slug" id="URLslug" placeholder="URL" onKeyPress="return noNumbers(event)" maxlength="140" autocomplete="off" onchange="checkUrl('freeresourse',this.id)" onpaste="return false" />
 						<span class="text-danger URLslug_err"><?php echo form_error('URLslug'); ?></span>
 						</div>
 					</div>	

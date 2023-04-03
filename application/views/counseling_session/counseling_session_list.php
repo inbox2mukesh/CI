@@ -49,9 +49,9 @@ $session_type=$counseling_session_group['session_type'];
                         <td>
                             <?php 
                             if($p['active']==1){
-                                echo '<span class="text-success"><a href="javascript:void(0);" id='.$p['id'].' data-toggle="tooltip" title="Click to De-activate" onclick=counseling_session_activate_deactivete('.$p['id'].','.$zero.',"'.$table.'","'.$p['counseling_sessions_group_id'].'") >'.ACTIVE.'</a></span>';
+                                echo '<span class="text-success"><a href="javascript:void(0);" id='.$p['id'].'>'.ACTIVE.'</a></span>';
                             }else{
-                                echo '<span class="text-danger"><a href="javascript:void(0);" id='.$p['id'].' data-toggle="tooltip" title="Click to Activate" onclick=counseling_session_activate_deactivete('.$p['id'].','.$one.',"'.$table.'","'.$p['counseling_sessions_group_id'].'") >'.DEACTIVE.'</a></span>';
+                                echo '<span class="text-danger"><a href="javascript:void(0);" id='.$p['id'].'  >'.DEACTIVE.'</a></span>';
                             }
                             ?>                                
                         </td>

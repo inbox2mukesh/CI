@@ -6,7 +6,7 @@
  *
  **/
 global $customJS;
-define('JS_CSS_VERSION', '0.0.2');
+define('JS_CSS_VERSION', '0.0.3');
 define('ADMIN', 'Super Admin');
 ///////////////////////////////////settings start///////////////////////////////////////
 include_once(FCPATH.'application/config/setting-constants.php');
@@ -222,7 +222,7 @@ define('FRENCH_ID', 5);
 define('GERMAN_ID', 6);
 define('CAEL_ID', 7);
 define('UKVI_CD_IELTS', 0);
-
+define('UKVI_IELTS_ID',9);
 define('ACADEMY_DIVISION_PKID', 1);
 define('VISA_DIVISION_PKID', 2);
 
@@ -440,6 +440,9 @@ define('GET_SESSION_TIMESLOT_URL', 'WOSA-API-V1/counseling_session/Get_session_t
 define('GET_FINAL_SESSION_URL', 'WOSA-API-V1/counseling_session/Get_final_session');
 define('GET_STUDENT_SESSION_URL', 'WOSA-API-V1/counseling_session/Get_session_booking');
 
+//autologin api
+define('STUDENT_AUTO_LOGIN', 'WOSA-API-V1/faqs/Get_all_faq');
+
 define('GET_REC_LEC_URL_FILTER', 'WOSA-API-V1/recorded_lectures/Get_recorded_lectures_filter');
 
 define('GET_STUDENT_EXISTENCE_URL', 'WOSA-API-V1/Check_student_existence');
@@ -508,7 +511,7 @@ define('POST_REPLY_IMAGE_PATH', './uploads/student_post_reply/');
 define('STUDENT_POST_PIC_FILE_PATH', './uploads/student_post/');
 define('EMP_IMAGE_PATH', './uploads/employees/');
 define('LIVE_LECTURE_IMAGE_PATH', './uploads/live_lecture/');
-define('GALLERY_IMAGE_PATH', './uploads/gallery/');
+define('GALLERY_IMAGE_PATH', '/uploads/gallery/');
 define('PROFILE_PIC_FILE_PATH', './uploads/profile_pic/');
 define('ANNOUNCEMENT_FILE_PATH', './uploads/classroom_announcements/');
 define('CLASSPOST_FILE_PATH', './uploads/classroom_post/');

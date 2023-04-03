@@ -916,188 +916,188 @@ class Package_master extends MY_Controller{
         $this->load->view('layouts/main',$data);
     } 
 
-    function offline_pack($test_module_id=0){
+    // function offline_pack($test_module_id=0){
 
-        //access control start
-        $cn = $this->router->fetch_class().''.'.php';
-        $mn = $this->router->fetch_method();        
-        if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
-        $data['si'] = 0;
-        //access control ends
-        $data['all_testModule'] = $this->Package_master_model->get_all_testModule_offline();       
+    //     //access control start
+    //     $cn = $this->router->fetch_class().''.'.php';
+    //     $mn = $this->router->fetch_method();        
+    //     if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
+    //     $data['si'] = 0;
+    //     //access control ends
+    //     $data['all_testModule'] = $this->Package_master_model->get_all_testModule_offline();       
 
-        $this->load->library('pagination');
-        $params['limit'] = RECORDS_PER_PAGE; 
-        $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
-        $config = $this->config->item('pagination');
-        $config['base_url'] = site_url('adminController/package_master/offline_pack/'.$test_module_id.'?');
-        $config['total_rows'] = $this->Package_master_model->get_offline_package_masters($test_module_id, $params,true);
-        //$this->pagination->initialize($config);
-        $data['title'] = 'Inhouse Class Packages';
+    //     $this->load->library('pagination');
+    //     $params['limit'] = RECORDS_PER_PAGE; 
+    //     $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
+    //     $config = $this->config->item('pagination');
+    //     $config['base_url'] = site_url('adminController/package_master/offline_pack/'.$test_module_id.'?');
+    //     $config['total_rows'] = $this->Package_master_model->get_offline_package_masters($test_module_id, $params,true);
+    //     //$this->pagination->initialize($config);
+    //     $data['title'] = 'Inhouse Class Packages';
 
-        if($this->input->get("submit") == "search") {
-            if(strstr(trim($this->input->get("search")),PREFIX_INHOUSE_PACK_ID)) {
-                $params['prefix_id']      = str_replace(PREFIX_INHOUSE_PACK_ID,"",$this->input->get("search"));
-            }
-            $params["search"]           = strtolower(trim($this->input->get("search")));
-            $params["country_id"]       = $this->input->get("country_id");
-            $params["programe_id"]      = $this->input->get("programe_id");
-            $params["category_id"]      = $this->input->get("category_id");
-            $params["center_id"]        = $this->input->get("center_id");
-            $params["batch_id"]         = $this->input->get("batch_id");
-            $params["duration"]         = $this->input->get("duration");
-            $params["duration_type"]    = $this->input->get("duration_type");
-            $params["course_timing"]    = $this->input->get("course_timing");
-            $params["status"]           = $this->input->get("status");
+    //     if($this->input->get("submit") == "search") {
+    //         if(strstr(trim($this->input->get("search")),PREFIX_INHOUSE_PACK_ID)) {
+    //             $params['prefix_id']      = str_replace(PREFIX_INHOUSE_PACK_ID,"",$this->input->get("search"));
+    //         }
+    //         $params["search"]           = strtolower(trim($this->input->get("search")));
+    //         $params["country_id"]       = $this->input->get("country_id");
+    //         $params["programe_id"]      = $this->input->get("programe_id");
+    //         $params["category_id"]      = $this->input->get("category_id");
+    //         $params["center_id"]        = $this->input->get("center_id");
+    //         $params["batch_id"]         = $this->input->get("batch_id");
+    //         $params["duration"]         = $this->input->get("duration");
+    //         $params["duration_type"]    = $this->input->get("duration_type");
+    //         $params["course_timing"]    = $this->input->get("course_timing");
+    //         $params["status"]           = $this->input->get("status");
 
-            $centerIdSearchQueryString       = "";
+    //         $centerIdSearchQueryString       = "";
 
-            if($params["center_id"]) {
-                $centerIdCount              = 1;
-                $countTotalCenterIds        = count($params["center_id"]); 
-                $centerIdSearchQueryString   = "&";
+    //         if($params["center_id"]) {
+    //             $centerIdCount              = 1;
+    //             $countTotalCenterIds        = count($params["center_id"]); 
+    //             $centerIdSearchQueryString   = "&";
 
-                foreach($params["center_id"] as $centerId) {
-                    if($countTotalBatchIds == $centerIdCount) {
-                        $centerIdSearchQueryString .= "center_id[]=".$centerId;
-                    }
-                    else {
-                        $centerIdSearchQueryString .= "center_id[]=".$centerId."&";
-                    }
-                    $centerIdCount++;
-                }
-            }
+    //             foreach($params["center_id"] as $centerId) {
+    //                 if($countTotalBatchIds == $centerIdCount) {
+    //                     $centerIdSearchQueryString .= "center_id[]=".$centerId;
+    //                 }
+    //                 else {
+    //                     $centerIdSearchQueryString .= "center_id[]=".$centerId."&";
+    //                 }
+    //                 $centerIdCount++;
+    //             }
+    //         }
 
-            $batchIdSearchQueryString       = "";
+    //         $batchIdSearchQueryString       = "";
 
-            if($params["batch_id"]) {
-                $batchIdCount               = 1;
-                $countTotalBatchIds         = count($params["batch_id"]); 
-                $batchIdSearchQueryString   = "&";
+    //         if($params["batch_id"]) {
+    //             $batchIdCount               = 1;
+    //             $countTotalBatchIds         = count($params["batch_id"]); 
+    //             $batchIdSearchQueryString   = "&";
 
-                foreach($params["batch_id"] as $batchId) {
-                    if($countTotalBatchIds == $batchIdCount) {
-                        $batchIdSearchQueryString .= "batch_id[]=".$batchId;
-                    }
-                    else {
-                        $batchIdSearchQueryString .= "batch_id[]=".$batchId."&";
-                    }
-                    $batchIdCount++;
-                }
-            }
+    //             foreach($params["batch_id"] as $batchId) {
+    //                 if($countTotalBatchIds == $batchIdCount) {
+    //                     $batchIdSearchQueryString .= "batch_id[]=".$batchId;
+    //                 }
+    //                 else {
+    //                     $batchIdSearchQueryString .= "batch_id[]=".$batchId."&";
+    //                 }
+    //                 $batchIdCount++;
+    //             }
+    //         }
 
-            $categoryIdSearchQueryString    = "";
+    //         $categoryIdSearchQueryString    = "";
 
-            if($params["category_id"]) {
-                $catgegoryIdCount              = 1;
-                $countTotalCategoryIds         = count($params["category_id"]); 
-                $categoryIdSearchQueryString   = "&";
+    //         if($params["category_id"]) {
+    //             $catgegoryIdCount              = 1;
+    //             $countTotalCategoryIds         = count($params["category_id"]); 
+    //             $categoryIdSearchQueryString   = "&";
 
-                foreach($params["category_id"] as $categoryId) {
-                    if($countTotalCategoryIds == $catgegoryIdCount) {
-                        $categoryIdSearchQueryString .= "category_id[]=".$categoryId;
-                    }
-                    else {
-                        $categoryIdSearchQueryString .= "category_id[]=".$categoryId."&";
-                    }
-                    $catgegoryIdCount++;
-                }
-            }
+    //             foreach($params["category_id"] as $categoryId) {
+    //                 if($countTotalCategoryIds == $catgegoryIdCount) {
+    //                     $categoryIdSearchQueryString .= "category_id[]=".$categoryId;
+    //                 }
+    //                 else {
+    //                     $categoryIdSearchQueryString .= "category_id[]=".$categoryId."&";
+    //                 }
+    //                 $catgegoryIdCount++;
+    //             }
+    //         }
 
-            $courseTimingIdSearchQueryString    = "";
+    //         $courseTimingIdSearchQueryString    = "";
 
-            if($params["course_timing"]) {
-                $courseTimingIdCount               = 1;
-                $countTotalCourseTimingIds         = count($params["course_timing"]); 
-                $courseTimingIdSearchQueryString   = "&";
+    //         if($params["course_timing"]) {
+    //             $courseTimingIdCount               = 1;
+    //             $countTotalCourseTimingIds         = count($params["course_timing"]); 
+    //             $courseTimingIdSearchQueryString   = "&";
 
-                foreach($params["course_timing"] as $courseTimingId) {
-                    if($countTotalCourseTimingIds == $courseTimingIdCount) {
-                        $courseTimingIdSearchQueryString .= "course_timing[]=".$courseTimingId;
-                    }
-                    else {
-                        $courseTimingIdSearchQueryString .= "course_timing[]=".$courseTimingId."&";
-                    }
-                    $courseTimingIdCount++;
-                }
-            }
+    //             foreach($params["course_timing"] as $courseTimingId) {
+    //                 if($countTotalCourseTimingIds == $courseTimingIdCount) {
+    //                     $courseTimingIdSearchQueryString .= "course_timing[]=".$courseTimingId;
+    //                 }
+    //                 else {
+    //                     $courseTimingIdSearchQueryString .= "course_timing[]=".$courseTimingId."&";
+    //                 }
+    //                 $courseTimingIdCount++;
+    //             }
+    //         }
 
-            $countryIdSearchQueryString    = "";
+    //         $countryIdSearchQueryString    = "";
 
-            if($params["country_id"]) {
-                $countryIdCount                     = 1;
-                $countTotalCountryIds               = count($params["country_id"]); 
-                $countryIdSearchQueryString         = "&";
+    //         if($params["country_id"]) {
+    //             $countryIdCount                     = 1;
+    //             $countTotalCountryIds               = count($params["country_id"]); 
+    //             $countryIdSearchQueryString         = "&";
 
-                foreach($params["country_id"] as $countryId) {
-                    if($countTotalCountryIds == $countryIdCount) {
-                        $countryIdSearchQueryString .= "country_id[]=".$countryId;
-                    }
-                    else {
-                        $countryIdSearchQueryString .= "country_id[]=".$countryId."&";
-                    }
-                    $countryIdCount++;
-                }
-            }
+    //             foreach($params["country_id"] as $countryId) {
+    //                 if($countTotalCountryIds == $countryIdCount) {
+    //                     $countryIdSearchQueryString .= "country_id[]=".$countryId;
+    //                 }
+    //                 else {
+    //                     $countryIdSearchQueryString .= "country_id[]=".$countryId."&";
+    //                 }
+    //                 $countryIdCount++;
+    //             }
+    //         }
 
-            $test_module_id = $this->input->get("test_module_id") ? $this->input->get("test_module_id") :  $test_module_id;
+    //         $test_module_id = $this->input->get("test_module_id") ? $this->input->get("test_module_id") :  $test_module_id;
 
-            $config['base_url'] = site_url('adminController/package_master/offline_pack/?search='.$params["search"].'&test_module_id='.$test_module_id.'&programe_id='.$params["programe_id"].'&duration='.$params["duration"].'&duration_type='.$params["duration_type"].$countryIdSearchQueryString.$batchIdSearchQueryString.$categoryIdSearchQueryString.$centerIdSearchQueryString.$courseTimingIdSearchQueryString.'&status='.$params["status"].'&submit=search');
+    //         $config['base_url'] = site_url('adminController/package_master/offline_pack/?search='.$params["search"].'&test_module_id='.$test_module_id.'&programe_id='.$params["programe_id"].'&duration='.$params["duration"].'&duration_type='.$params["duration_type"].$countryIdSearchQueryString.$batchIdSearchQueryString.$categoryIdSearchQueryString.$centerIdSearchQueryString.$courseTimingIdSearchQueryString.'&status='.$params["status"].'&submit=search');
             
 
-            $packageData    = $this->Package_master_model->search_offline_package_masters($test_module_id,$params);
+    //         $packageData    = $this->Package_master_model->search_offline_package_masters($test_module_id,$params);
 
-            $config['total_rows'] = $this->Package_master_model->search_offline_package_masters($test_module_id,$params,true);
-        }
-        else {
-            $packageData = $this->Package_master_model->get_offline_package_masters($test_module_id,$params);
-        }
+    //         $config['total_rows'] = $this->Package_master_model->search_offline_package_masters($test_module_id,$params,true);
+    //     }
+    //     else {
+    //         $packageData = $this->Package_master_model->get_offline_package_masters($test_module_id,$params);
+    //     }
 
-        $this->pagination->initialize($config);
+    //     $this->pagination->initialize($config);
 
-        foreach($packageData as $key => $c){
-            $catData=$this->Package_master_model->getPackCategory($c['package_id']);
-            foreach ($catData as $key2 => $c) {                
-                $packageData[$key]['Package_category'][$key2]=$c;                       
-            }             
-        }
-        foreach($packageData as $key => $c){ 
-            $batchData=$this->Package_master_model->getPackBatch($c['package_id']);
-            foreach ($batchData as $key2 => $b) {                
-                $packageData[$key]['Package_batch'][$key2]=$b;                       
-            }               
-        }
-        foreach($packageData as $key => $c){ 
-            $timingData=$this->Package_master_model->getPackTiming($c['package_id']);
-            foreach ($timingData as $key2 => $b) {                
-                $packageData[$key]['Package_timing'][$key2]=$b;                       
-            }               
-        }
+    //     foreach($packageData as $key => $c){
+    //         $catData=$this->Package_master_model->getPackCategory($c['package_id']);
+    //         foreach ($catData as $key2 => $c) {                
+    //             $packageData[$key]['Package_category'][$key2]=$c;                       
+    //         }             
+    //     }
+    //     foreach($packageData as $key => $c){ 
+    //         $batchData=$this->Package_master_model->getPackBatch($c['package_id']);
+    //         foreach ($batchData as $key2 => $b) {                
+    //             $packageData[$key]['Package_batch'][$key2]=$b;                       
+    //         }               
+    //     }
+    //     foreach($packageData as $key => $c){ 
+    //         $timingData=$this->Package_master_model->getPackTiming($c['package_id']);
+    //         foreach ($timingData as $key2 => $b) {                
+    //             $packageData[$key]['Package_timing'][$key2]=$b;                       
+    //         }               
+    //     }
 
-        $allCountries                   = $this->Country_model->get_all_active_countries_with_active_physical_branches(ACADEMY_DIVISION_PKID);
-        $data['all_countries']          = $allCountries;
-        $data['package_masters']        = $packageData;
-        $data['total_rows']             = $config['total_rows'];
-        $data['test_module_id']         = $test_module_id;
-        $data['course_timing']          = $this->Course_timing_model->get_all_course_timing_active();
-        $data['all_test_module']        = $this->Test_module_model->get_all_test_module_active();
-        if($test_module_id) {
-            $data['all_programe_masters'] = $this->Programe_master_model->getTestPrograme($test_module_id);
-        }
-        else {
-            $data['all_programe_masters'] = $this->Programe_master_model->get_all_programe_masters_active();
-        }
+    //     $allCountries                   = $this->Country_model->get_all_active_countries_with_active_physical_branches(ACADEMY_DIVISION_PKID);
+    //     $data['all_countries']          = $allCountries;
+    //     $data['package_masters']        = $packageData;
+    //     $data['total_rows']             = $config['total_rows'];
+    //     $data['test_module_id']         = $test_module_id;
+    //     $data['course_timing']          = $this->Course_timing_model->get_all_course_timing_active();
+    //     $data['all_test_module']        = $this->Test_module_model->get_all_test_module_active();
+    //     if($test_module_id) {
+    //         $data['all_programe_masters'] = $this->Programe_master_model->getTestPrograme($test_module_id);
+    //     }
+    //     else {
+    //         $data['all_programe_masters'] = $this->Programe_master_model->get_all_programe_masters_active();
+    //     }
 
-        if(isset($params["programe_id"]) && !empty($params["programe_id"])) {
-            $data["all_category"]       = $this->Category_master_model->get_category_forPack($test_module_id,$params["programe_id"]);
-        }
+    //     if(isset($params["programe_id"]) && !empty($params["programe_id"])) {
+    //         $data["all_category"]       = $this->Category_master_model->get_category_forPack($test_module_id,$params["programe_id"]);
+    //     }
         
-        $data['all_batch']              = $this->Batch_master_model->get_all_batch_active();
-        $data['all_duration_type']      = $this->Duration_type_model->get_all_duration_type_active();  
-        $data['all_branch']             = $this->Center_location_model->getNonOverseasIsPhysicalBranch();
-        $data['_view'] = 'package_master/offline_pack';
-        $this->load->view('layouts/main',$data);
-    }
+    //     $data['all_batch']              = $this->Batch_master_model->get_all_batch_active();
+    //     $data['all_duration_type']      = $this->Duration_type_model->get_all_duration_type_active();  
+    //     $data['all_branch']             = $this->Center_location_model->getNonOverseasIsPhysicalBranch();
+    //     $data['_view'] = 'package_master/offline_pack';
+    //     $this->load->view('layouts/main',$data);
+    // }
 
     function ajax_get_online_package_list(){        
        
@@ -1157,6 +1157,9 @@ class Package_master extends MY_Controller{
     function ajax_getOnlineOfflinePackInfo(){
 
         $package_id = $this->input->post('package_id', true);
+        $category_name =null;
+        $batch_name =null;
+        $course_timing =null;
         if(isset($package_id)){            
             $packageData =  $this->Package_master_model->getOnlineOfflinePackInfo($package_id);
             foreach($packageData as $key => $c){
@@ -1204,7 +1207,7 @@ class Package_master extends MY_Controller{
                             $course_timing .= $pt['course_timing'].', ';
                         }
                     
-                    $y .= '<tr>                        
+                    $x .= '<tr>                        
                         <td>'.$p["package_name"].'</td>  
                         <td>'.$p["test_module_name"].'</td>
                         <td>'.$p["programe_name"].'</td>
@@ -1217,8 +1220,8 @@ class Package_master extends MY_Controller{
                     </tr>';
                     }
 
-            $z='</tbody></table>';
-            $response = $x.$y.$z;            
+            $x.='</tbody></table>';
+            $response = $x;            
             echo json_encode($response);
         }else{
             header('Content-Type: application/json');
@@ -1230,6 +1233,8 @@ class Package_master extends MY_Controller{
     function ajax_getPracticePackInfo(){
 
         $package_id = $this->input->post('package_id', true);
+        $category_name =null;
+        $batch_name =null;
         if(isset($package_id)){            
             $packageData =  $this->Package_master_model->getPracticePackInfo($package_id);
             foreach($packageData as $key => $c){
@@ -1275,7 +1280,7 @@ class Package_master extends MY_Controller{
                         }
                         
                     
-                    $y .= '<tr>                        
+                        $x = '<tr>                        
                         <td>'.$p["package_name"].'</td>  
                         <td>'.$p["test_module_name"].'</td>
                         <td>'.$p["programe_name"].'</td>
@@ -1287,9 +1292,9 @@ class Package_master extends MY_Controller{
                     </tr>';
                     }
 
-            $z='</tbody></table>';
-            $response = $x.$y.$z;            
-            echo json_encode($response);
+                    $x ='</tbody></table>';
+            //$response = $x;            
+            echo json_encode($x);
         }else{
             header('Content-Type: application/json');
             $response = ['msg'=>'package info error!', 'status'=>'false'];
@@ -1301,6 +1306,7 @@ class Package_master extends MY_Controller{
     function ajax_getPackageSchedule(){
         
         $package_id = $this->input->post('package_id', true);
+        $pack_category_id = null;
         $batch_id = $this->input->post('batch_id', true);
         if(isset($package_id) and isset($batch_id)){            
             $packageData=  $this->Package_master_model->getPackageProfile($package_id);

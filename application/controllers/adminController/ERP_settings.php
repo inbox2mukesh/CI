@@ -61,7 +61,7 @@ class ERP_settings extends MY_Controller{
             $this->Student_model->add_money_to_wallet();
             $by_user=$_SESSION['UserId'];
             //activity update start           
-                $activity_name= ADD_MONEY_TO_WALLET;
+                $activity_name= 'ADD_MONEY_TO_WALLET';
                 $description='Added test money to wallet';
                 $res=$this->addUserActivity($activity_name,$description,$student_package_id=0,$by_user);
             //activity update end

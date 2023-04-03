@@ -49,7 +49,7 @@ public function index_post()
             else { // other country
                 if(base_url()!=BASEURL){
                     $subject = "Verification code- WOSA";
-                    $email_message='Hi, please confirm your details by entering the <b>Verification code '.$otp.'</b> Valid for 10 minutes only Regards '.COMPANY;
+                    $email_message='Hi, please confirm your details by entering the <b>Verification code '.$otp.'</b> Verification code is Valid for 10 minutes only'.COMPANY;
                     $mailData=[]; 
                     $mailData['fname']         = $std_data->fname;
                     $mailData['email']         = $std_data->email;               

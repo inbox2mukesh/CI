@@ -525,7 +525,7 @@ class Our_students extends MY_Controller
             'LAST-ID:' . $s,
         );
 
-        
+        $msg = null;
         $this->load->library('form_validation');
         $this->form_validation->set_rules('otp', 'OTP', 'required');
         if ($this->form_validation->run()) {

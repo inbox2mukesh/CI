@@ -10,10 +10,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Forgot_password extends MY_Controller {
 
     function __construct() {
-        parent::__construct();        
+        parent::__construct();   
+        $this->load->model('User_model');     
     }
 
-    function index(){
+    function index()
+    {
         
         if($this->_is_logged_in()){
             redirect('adminController/dashboard');
@@ -24,8 +26,7 @@ class Forgot_password extends MY_Controller {
         $data['message'] = '';
         $data['base_url'] = base_url();
         if (isset($_REQUEST['sbmt_fp']) && $_REQUEST['sbmt_fp'] <> "") {
-            extract($_REQUEST);
-            $this->load->model('User_model');
+            extract($_REQUEST);  
             $res = $this->User_model->checkEmail($email);
             if($res>0){                
                 if(ENVIRONMENT!='production'){
@@ -62,7 +63,7 @@ class Forgot_password extends MY_Controller {
                redirect('/adminController/forgot_password');
             }
         }       
-       
+        $data['title'] = 'Forgot Password';
         $data['_view'] = 'forgot_password';
         $this->load->view('layouts/login_layout',$data);
     }   

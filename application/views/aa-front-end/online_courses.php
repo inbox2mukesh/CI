@@ -57,10 +57,12 @@
             <select class="selectpicker form-control" name="duration" id="duration" onChange="GetOnlinePack();" disabled="disabled" data-live-search="true">
               <option value="">Select Duration</option>
               <?php
+              if(isset($allOnlineCourseDuration) && !empty($allOnlineCourseDuration->error_message))
+              {
               foreach ($allOnlineCourseDuration->error_message->data as $p) {
               ?>
                 <option value="<?php echo $p->duration; ?>"><?php echo $p->duration . ' ' . $p->duration_type; ?></option>
-              <?php } ?>
+              <?php } }?>
             </select>
           </div>
         </div>

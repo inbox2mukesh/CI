@@ -29,6 +29,8 @@ class Practice_packages extends MY_Controller{
         //access control ends
         $data['all_testModule'] = $this->Practice_package_model->get_all_testModule();
         $this->load->library('pagination');
+        $courseTimingIdSearchQueryString = null;
+        $batchIdSearchQueryString = null;
         $params['limit'] = RECORDS_PER_PAGE; 
         $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
         $config = $this->config->item('pagination');

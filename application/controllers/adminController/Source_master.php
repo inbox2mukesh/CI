@@ -43,7 +43,7 @@ class Source_master extends MY_Controller{
         $this->pagination->initialize($config);
         $data['title'] = 'Sources';
         $data['source_master'] = $this->Source_master_model->get_all_source($params);
-        $data['origin_pack'] = getOMLeads();
+        // $data['origin_pack'] = getOMLeads();
         $data['_view'] = 'source_master/index';
         $this->load->view('layouts/main',$data);
     }
@@ -113,7 +113,7 @@ class Source_master extends MY_Controller{
                 redirect('adminController/source_master/add');
             }
         } else {
-            $data['origin_pack'] = getOMForSource();
+            // $data['origin_pack'] = getOMForSource();
             $data['_view'] = 'source_master/add';
             $this->load->view('layouts/main', $data);
         }
@@ -134,7 +134,7 @@ class Source_master extends MY_Controller{
         //access control ends
         $data['title'] = 'Edit source';
         $data['source_master'] = $this->Source_master_model->get_source($id);
-		$data['origin_pack'] = getOMLeads();
+		// $data['origin_pack'] = getOMLeads();
         if (isset($data['source_master']['id'])) {
 			if($data['source_master']['is_static']==1){
 				 redirect('adminController/error_cl/index');
@@ -200,7 +200,7 @@ class Source_master extends MY_Controller{
                     redirect('adminController/source_master/edit/' . $id);
                 }
             } else {
-                $data['origin_pack'] = getOMLeads();
+                // $data['origin_pack'] = getOMLeads();
                 $data['_view'] = 'source_master/edit';
                 $this->load->view('layouts/main', $data);
             }
@@ -222,11 +222,11 @@ class Source_master extends MY_Controller{
         //access control ends
         $data['title'] ='Source Diteles';
         $data['source_master'] = $this->Source_master_model->get_source($id);
-		$data['origin_pack'] = getOMLeads();
+		// $data['origin_pack'] = getOMLeads();
         if (isset($data['source_master']['id'])) {
 			
             $data['source_om'] = $this->Source_master_model->get_source_om($id);
-			$data['origin_pack'] = getOMLeads();
+			// $data['origin_pack'] = getOMLeads();
             $data['_view'] = 'source_master/view';
             $this->load->view('layouts/main', $data);
         } else

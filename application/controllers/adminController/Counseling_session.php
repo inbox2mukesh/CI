@@ -919,7 +919,7 @@ class Counseling_session extends MY_Controller{
         $cn = $this->router->fetch_class().''.'.php';
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
-        
+        $params =[];
         //access control ends
         $data['title'] = 'Counseling Session general info';
         $data['generalInfo'] = $this->Counseling_session_model->get_general_info($params);	

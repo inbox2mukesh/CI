@@ -78,6 +78,7 @@ class Classroom_post extends MY_Controller{
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         $data['si'] = 0;
+        $params=[];
         //access control ends
         $userBranch=[];
         $UserFunctionalBranch= $this->User_model->getUserFunctionalBranch($_SESSION['UserId']);
@@ -144,11 +145,9 @@ class Classroom_post extends MY_Controller{
                         array_push($classroomData2, $classroomData1);
                        }           
                     }
-                }else{
-                    $classroomData2 = [];
                 }                
             }else{
-                $classroomData2 = $this->Classroom_model->get_all_classroom($_SESSION['roleName'],$u['test_module_id'],$u['programe_id'],$u['category_id'],$u['batch_id'],$u['center_id'],$params);
+                $classroomData2 = $this->Classroom_model->get_all_classroom($_SESSION['roleName'],$userBranch,$params);
                 $data['all_test_module']= $this->Test_module_model->get_all_test_module_active();
                 $data['all_batches'] = $this->Batch_master_model->get_all_batch_active();
                 $data['all_branch'] = $this->Center_location_model->getAcademyBranch($_SESSION['roleName'],$userBranch);               
@@ -189,6 +188,7 @@ class Classroom_post extends MY_Controller{
         //access control ends
 
         $userBranch=[];
+        $params=[];
         $UserFunctionalBranch= $this->User_model->getUserFunctionalBranch($_SESSION['UserId']);
         foreach ($UserFunctionalBranch as $b){
             array_push($userBranch,$b['center_id']);
@@ -272,7 +272,7 @@ class Classroom_post extends MY_Controller{
                     $classroomData2 = [];
                 }                
             }else{
-                $classroomData2 = $this->Classroom_model->get_all_classroom($_SESSION['roleName'],$u['test_module_id'],$u['programe_id'],$u['category_id'],$u['batch_id'],$u['center_id'],$params);
+                $classroomData2 = $this->Classroom_model->get_all_classroom($_SESSION['roleName'],$userBranch,$params);
                 $data['all_test_module']= $this->Test_module_model->get_all_test_module_active();
                 $data['all_batches'] = $this->Batch_master_model->get_all_batch_active();
                 $data['all_branch'] = $this->Center_location_model->getAcademyBranch($_SESSION['roleName'],$userBranch);               

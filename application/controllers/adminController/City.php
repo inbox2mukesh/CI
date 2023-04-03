@@ -117,7 +117,7 @@ class City extends MY_Controller{
         }
     }
 
-    function edit($city_id){ 
+    function edit($city_id=0){ 
 
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -168,7 +168,7 @@ class City extends MY_Controller{
                     redirect('adminController/city/index');
                 }else{
                     $this->session->set_flashdata('flsh_msg', UPDATE_FAILED_MSG);           
-                    redirect('adminController/city/edit/'.$city);
+                    redirect('adminController/city/edit/'.$city_id);
                 }                
             }
             else

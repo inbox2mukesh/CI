@@ -41,9 +41,10 @@
 
         if(ENVIRONMENT=='development' or ENVIRONMENT=='testing'){
             $del = $this->User_model->clean_employee_tran();
+            $by_user = $_SESSION['UserId'];
             if($del){            
                 //activity update start
-                    $activity_name= EMPLOYEE_CLEANED;
+                    $activity_name= 'EMPLOYEE_CLEANED';
                     $description= '';
                     $res=$this->addUserActivity($activity_name,$description,$student_package_id=0,$by_user);
                 //activity update end
@@ -87,7 +88,7 @@
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         //access control ends        
         $user_id2 =  base64_decode($user_id);
-                    
+        $by_user = $_SESSION['UserId'];            
         //activity update start
             $activity_name= TRAINER_ACCESS_REMOVED;
             $description= '';
@@ -709,6 +710,7 @@
         $todaystr = strtotime($today);
         $UserActivityData= $this->User_model->getUserActivityToday($_SESSION['UserId'],$todaystr);
         $mData = $this->User_model->get_user_branch($_SESSION['UserId']);
+        $fb ='';
         foreach ($mData as $b) {
             $fb .= $b['center_name'].', ';
         }

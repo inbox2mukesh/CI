@@ -320,7 +320,7 @@ class Mock_test extends MY_Controller{
         $this->form_validation->set_rules('programe_id','program','required');
         $this->form_validation->set_rules('title','CSV title','required|trim');   
         $this->form_validation->set_rules('active','active','required');
-
+        $params = [];
         $by_user=$_SESSION['UserId'];
         
         if($this->form_validation->run())    

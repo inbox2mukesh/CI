@@ -140,7 +140,7 @@
                         <td><?php echo $p['programe_name']; ?></td>	
                         <td>
                             <?php 
-                               echo $p['Category']['category_name'];
+                               echo $p['Category'];
                             
                             ?>                                
                         </td>

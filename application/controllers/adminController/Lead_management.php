@@ -84,7 +84,7 @@ class Lead_management extends MY_Controller{
         $this->load->view('layouts/main',$data);
         
     }
-    function get_lead_CSV()
+    function get_lead_CSV($id=0)
     {
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -97,6 +97,7 @@ class Lead_management extends MY_Controller{
         $object->setActiveSheetIndex(0);
         $table_columns = array("Username", "Email-ID", "Mobile No.", "CRS Score", 'OTP status',"Date");
         $column = 0;
+        $params = [];
         foreach($table_columns as $field)
         {
         $object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
@@ -313,14 +314,15 @@ class Lead_management extends MY_Controller{
         $data['followup_status'] = $this->Followup_model->get_all_followup_active();
         $data['alluser'] = $this->User_model->get_all_user_forReference();
         $data['title'] = 'All Leads';
-
+        $enquiry_purpose_id =0;
          //Filter form data
         if($this->input->server('REQUEST_METHOD') === 'POST')
         {
+            $enquiry_purpose_id = $this->input->post('enquiry_purpose_id');
             $params['search_text'] = $this->input->post('search_text'); 
             $params['lead_via'] = $this->input->post('lead_via'); 
             $params['active'] = $this->input->post('active'); 
-            $params['enquiry_purpose_id'] = $this->input->post('enquiry_purpose_id'); 
+            $params['enquiry_purpose_id'] = $enquiry_purpose_id; 
             $params['option_followup_status'] = $this->input->post('option_followup_status');
             $params['leadCreateddate'] = $this->input->post('leadCreateddate'); 
             $params['nxt_followupdate'] = $this->input->post('nxt_followupdate'); 
@@ -461,6 +463,7 @@ class Lead_management extends MY_Controller{
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         $data['si'] = 0;
+        $pack_cb = null;
         //access control ends
 
         $data['title'] = 'Add new lead';
@@ -486,7 +489,7 @@ class Lead_management extends MY_Controller{
 			    $UID = $this->_calculateUID($maxid);
                 $service_id =10;// for enquriy
                 if(isset($test_module_id)and isset($programe_id) and isset($center_id)){
-                    $response = $this->_calculateStatus($service_id,$center_id,$test_module_id,$programe_id,@$pack_cb);
+                    $response = $this->_calculateStatus($service_id,$center_id,$test_module_id,$programe_id,$pack_cb);
                     $student_identity = $response['student_identity'];
                     $details = $response['details'];
                 }else{

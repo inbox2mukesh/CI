@@ -45,11 +45,11 @@
                             <?php
                           
                                 $ext = pathinfo($r['image'], PATHINFO_EXTENSION);
-                                if( isset( $r['image']) and ( $ext=='JPG' or $ext=='jpg' or $ext=='jpeg' or $ext=='gif' or $ext=='png' or $ext=='svg' or  $ext=='webp') ){
+                                if( isset( $r['image']) and ( $ext=='JPG' or $ext=='jpg' or $ext=='jpeg' or $ext=='gif' or $ext=='png' or $ext=='svg' or  $ext=='webp') && $r['active']==1){
                             ?>
-                            <a href="<?php echo site_url(GALLERY_IMAGE_PATH.$r["image"]);?>" target="_blank"><img src= '<?php echo site_url(GALLERY_IMAGE_PATH.$r["image"]); ?>' style="width: 50px; height:50px"/></a>
+                            <a href="<?php echo site_url(GALLERY_IMAGE_PATH.$r["image"]);?>" target="_blank"><img src= '<?php echo site_url(GALLERY_IMAGE_PATH.''.$r["image"]); ?>' style="width: 50px; height:50px"/></a>
 
-                            <?php }elseif( isset($r['image']) and ($ext=='mp4' or $ext=='mp3') ){ ?> 
+                            <?php }elseif( isset($r['image']) and ($ext=='mp4' or $ext=='mp3') && $r['active']==1){ ?> 
 
                                 <?php echo '<a href="'.$link.'" target="_blank">'.OPEN_FILE.'</a>';?>
                             <?php }else{ ?>
@@ -64,7 +64,7 @@
                                 <?php if($r['active']==1){ ?>
                                 <input type="text" class="form-control" value="<?php echo $link; ?>" id="<?php echo $sr;?>">
                                 <button class="btn btn-info btn-xs" onclick="copy_link('<?php echo $sr;?>')"><span class="fa fa-copy"></span> Copy link</button>
-                                <?php }else{ echo NIL;?>
+                                <?php }else{ echo '-';?>
 
                                 <?php } ?>       
                             </div>                     

@@ -28,13 +28,13 @@
 							<label for="active" class="control-label">Active</label>
                         </div>
                     </div>
-                    <div class="col-md-12" style="margin-bottom:10px;">
+                    <!-- <div class="col-md-12" style="margin-bottom:10px;">
 					    <button type="button" class="btn btn-success rd-20" onclick="AddOM()">
                             <i class="fa fa-plush"></i>Add Origin & Medium
                         </button>
                     </div>
 		            <div id="OMALLData">			
-                    </div>		
+                    </div>		 -->
              
             </div>
             <div class="box-footer">

@@ -15,13 +15,13 @@
           </div>
           <div class="content-part">
             <!-- start announcement -->
- <?php if($_SESSION['classroom_id']){ ?>
-    <?php include('includes/student_announcements.php');?>
+			<?php if($_SESSION['classroom_id']){ ?>
+				<?php include('includes/student_announcements.php');?>
 
-     <?php
-     $class_row="";
-     include('includes/student_all_classroom_material.php');?>
- <?php } ?>
+				<?php
+				$class_row="";
+				include('includes/student_all_classroom_material.php');?>
+			<?php } ?>
 <!-- end announcement -->
 
           </div>
@@ -33,6 +33,42 @@
   <?php
   $idd = (isset($_SESSION["firstId"]))?'#'.$_SESSION["firstId"]:'';
 ?>
+<script>
+		// let baseurl= "<?php echo base_url(); ?>";
+		// //function formodule login
+		// function studentautologin()
+		// {
+		// 	$('.loader-cont').show();
+		// 	$.ajax({
+		// 		url: baseurl+'our_students/student_autoLogin',
+		// 		method:'POST',
+		// 		dataType:'json',
+		// 		success: function(resp)
+		// 		{
+		// 			if(resp.success == 1)
+		// 			{
+		// 				var url = 'http://'+resp.link;
+		// 				window.open(url, '_blank');
+		// 			}
+		// 			else if(resp.success == 0){
+		// 				$('#msg-content').html(resp.msg);
+		// 				$('#responsemsgmodal').modal('show');
+		// 				setTimeout(function(){
+		// 					$('#responsemsgmodal').modal('hide');
+		// 				},1500);
+		// 			}
+		// 			else{
+		// 				$('#msg-content').html('Something went wrong. Please try again later');
+		// 				$('#responsemsgmodal').modal('show');
+		// 				setTimeout(function(){
+		// 					$('#responsemsgmodal').modal('hide');
+		// 				},1500);
+		// 			}
+		// 			$('.loader-cont').hide();
+		// 		}
 
+		// 	});
+		// }
+	</script>
 
 

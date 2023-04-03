@@ -203,9 +203,9 @@ class Classroom extends MY_Controller{
             }else{                
                 $pattern = "/Trainer/i";
                 $isTrainer = preg_match($pattern, $_SESSION['roleName']);
-                
+                $userCourseAccess=[];$userBranch=[];$userBatch=[];$FunctionalCoursesList=[]; 
                 if($isTrainer){
-                    $userCourseAccess=[];$userBranch=[];$userBatch=[];$FunctionalCoursesList=[];  
+                     
                 $userCourseAccess=$this->Test_module_model->getFunctionalCourses($by_user);
                 foreach ($userCourseAccess as $u) {
                     array_push($FunctionalCoursesList,$u['test_module_id']);
@@ -251,7 +251,7 @@ class Classroom extends MY_Controller{
         }
         
         $UserAccessAsTrainer = $this->User_model->getUserAccessAsTrainer($_SESSION['UserId']);
-        $classroomData2 = [];
+        $classroomData2 = [];$params=[];
         if(!empty($UserAccessAsTrainer)){
             foreach ($UserAccessAsTrainer as $u) {
                $classroomData1 = $this->Classroom_model->get_classroom_by_access($u['test_module_id'],$u['programe_id'],$u['category_id'],$u['batch_id'],$u['center_id'],$params);
@@ -285,6 +285,7 @@ class Classroom extends MY_Controller{
         
            
         foreach($classroomData2 as $key => $cd){
+            $classroomData2[$key]['Category'] = null;
             $pattern = "/,/i";
             $isMultipeCategory = preg_match($pattern, $cd['category_id']);
             if($isMultipeCategory){
@@ -292,14 +293,17 @@ class Classroom extends MY_Controller{
                 $cat_arr_count = count($cat_arr);
                 for ($i=0; $i < $cat_arr_count; $i++) { 
                     $get_category_name = $this->Category_master_model->get_category_name($cat_arr[$i]);
-                    foreach ($get_category_name as $key2 => $m) {                
-                        $classroomData2[$key]['Category'][$key2].=$m.', ';                       
-                    }                    
+                    if(is_array($get_category_name))
+                    {
+                        foreach ($get_category_name as $key2 => $m) {                
+                            $classroomData2[$key]['Category'].=$m.', ';                       
+                        }  
+                    }                                                    
                 }
             }else{
                 $get_category_name = $this->Category_master_model->get_category_name($cd['category_id']);
                 foreach ($get_category_name as $key2 => $m) {                
-                    $classroomData2[$key]['Category'][$key2]=$m;                       
+                    $classroomData2[$key]['Category']=$m;                       
                 }
             }
         }
@@ -317,7 +321,7 @@ class Classroom extends MY_Controller{
         $classroom_id =  $this->input->post('classroom_id');    
         $response= $this->Classroom_model->show_classroom_desc($classroom_id);
         $category_id = $response['category_id'];
-
+        $catName =null;
             $pattern = "/,/i";
             $isMultipeCategory = preg_match($pattern, $category_id);
             if($isMultipeCategory){               

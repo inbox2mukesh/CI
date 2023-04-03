@@ -174,6 +174,45 @@ class News extends MY_Controller{
 			if($this->form_validation->run())     
             {   
                 $by_user=$_SESSION['UserId'];
+                if(!file_exists(NEWS_FILE_PATH)){
+                    mkdir(NEWS_FILE_PATH, 0777, true);
+                }
+
+                $config['upload_path']  = NEWS_FILE_PATH;
+                $config['allowed_types']= WEBP_FILE_TYPES;
+                $config['encrypt_name'] = FALSE;       
+                $this->load->library('upload',$config);
+
+                if($this->upload->do_upload("media_file")){
+                    $flag_mediaFile=1;
+                    $data = array('upload_data' => $this->upload->data());
+                    $image= $data['upload_data']['file_name'];
+
+                    $params = array( 
+                    'title' => $this->input->post('title'),
+                    'body' => $this->input->post('body',false),                    
+                    'media_file' => $image,
+                    'news_date'=>$this->input->post('news_date'), 
+                    'active' => $this->input->post('active') ? $this->input->post('active') : 0,
+                    'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
+                    'by_user' => $by_user,
+                    'URLslug'=>$this->input->post('URLslug'), 
+                );
+                unlink(NEWS_FILE_PATH.$this->input->post('hid_media_file')); 
+
+                }else{
+                    
+                    $params = array( 
+                        'title' => $this->input->post('title'),
+                        'body' => $this->input->post('body',false),                    
+                        //'media_file' => $image,
+                        'news_date'=>$this->input->post('news_date'), 
+                        'active' => $this->input->post('active') ? $this->input->post('active') : 0,
+                        'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
+                        'by_user' => $by_user,
+                        'URLslug'=>$this->input->post('URLslug'), 
+                    );
+                }
                         
                         $params = array(
                             'title' => $this->input->post('title'),
@@ -187,45 +226,7 @@ class News extends MY_Controller{
                         );
 
 
-                        if(!file_exists(NEWS_FILE_PATH)){
-                            mkdir(NEWS_FILE_PATH, 0777, true);
-                        }
-
-                        $config['upload_path']  = NEWS_FILE_PATH;
-                        $config['allowed_types']= WEBP_FILE_TYPES;
-                        $config['encrypt_name'] = FALSE;       
-                        $this->load->library('upload',$config);
-
-                        if($this->upload->do_upload("media_file")){
-                            $flag_mediaFile=1;
-                            $data = array('upload_data' => $this->upload->data());
-                            $image= $data['upload_data']['file_name'];
-
-                            $params = array( 
-                            'title' => $this->input->post('title'),
-                            'body' => $this->input->post('body',false),                    
-                            'media_file' => $image,
-                            'news_date'=>$this->input->post('news_date'), 
-                            'active' => $this->input->post('active') ? $this->input->post('active') : 0,
-                            'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
-                            'by_user' => $by_user,
-                            'URLslug'=>$this->input->post('URLslug'), 
-                        );
-                        unlink(NEWS_FILE_PATH.$this->input->post('hid_media_file')); 
-
-                        }else{
-                            
-                            $params = array( 
-                                'title' => $this->input->post('title'),
-                                'body' => $this->input->post('body',false),                    
-                                //'media_file' => $image,
-                                'news_date'=>$this->input->post('news_date'), 
-                                'active' => $this->input->post('active') ? $this->input->post('active') : 0,
-                                'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
-                                'by_user' => $by_user,
-                                'URLslug'=>$this->input->post('URLslug'), 
-                            );
-                        }
+                       
 
                     $configp['upload_path']      = NEWS_FILE_PATH;
                     $configp['allowed_types']    = WEBP_FILE_TYPES;

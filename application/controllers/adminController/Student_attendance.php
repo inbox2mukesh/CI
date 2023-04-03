@@ -37,6 +37,7 @@ class Student_attendance extends MY_Controller{
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         $data['si'] = 0;
+        $params = [];
         //access control ends
 
         $UserFunctionalBranch= $this->User_model->getUserFunctionalBranch($_SESSION['UserId']);
@@ -430,7 +431,7 @@ class Student_attendance extends MY_Controller{
                     $date=date_create($c['date']);
                     $att_date = date_format($date,"M d, Y");
                     
-                    $y .= '<tr>                        
+                    $x .= '<tr>                        
                         <td>'.$att_date.'</td>     
                         <td>'.$c['time'].'</td> 
                         <td style="color:'.$color_m.'">'.$presence_m.'</td>                        
@@ -440,10 +441,10 @@ class Student_attendance extends MY_Controller{
                     </tr>';
             }
                    
-        $z = '</tbody></table></div>';
-        $resp=$x.$y.$z;
+            $x .= '</tbody></table></div>';
+        //$resp=$x.$y.$z;
         header('Content-Type: application/json');
-        $response = ['msg'=>$resp, 'status'=>'true'];
+        $response = ['msg'=>$x, 'status'=>'true'];
         echo json_encode($response);
     }
 
@@ -503,7 +504,7 @@ class Student_attendance extends MY_Controller{
                     $date=date_create($c['date']);
                     $att_date = date_format($date,"M d, Y");
                     
-                    $y .= '<tr>                        
+                    $x .= '<tr>                        
                         <td>'.$att_date.'</td>     
                         <td>'.$c['time'].'</td> 
                         <td style="color:'.$color_m.'">'.$presence_m.'</td>
@@ -513,10 +514,10 @@ class Student_attendance extends MY_Controller{
                     </tr>';
             }
                    
-        $z = '</tbody></table></div>';
-        $resp=$x.$y.$z;
+        $x.= '</tbody></table></div>';
+        //$resp=$x.$y.$z;
         header('Content-Type: application/json');
-        $response = ['msg'=>$resp, 'status'=>'true'];
+        $response = ['msg'=>$x, 'status'=>'true'];
         echo json_encode($response);
     }
 
@@ -576,7 +577,7 @@ class Student_attendance extends MY_Controller{
                     $date=date_create($c['date']);
                     $att_date = date_format($date,"M d, Y");
                     
-                    $y .= '<tr>                        
+                    $x .= '<tr>                        
                         <td>'.$att_date.'</td>     
                         <td>'.$c['time'].'</td> 
                         <td style="color:'.$color_m.'">'.$presence_m.'</td>
@@ -587,10 +588,10 @@ class Student_attendance extends MY_Controller{
                     </tr>';
             }
                    
-        $z = '</tbody></table></div></div>';
-        $resp=$x.$y.$z;
+            $x .= '</tbody></table></div></div>';
+        //$resp=$x.$y.$z;
         header('Content-Type: application/json');
-        $response = ['msg'=>$resp, 'status'=>'true'];
+        $response = ['msg'=>$x, 'status'=>'true'];
         echo json_encode($response);
     }
 

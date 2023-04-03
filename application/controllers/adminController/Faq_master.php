@@ -29,7 +29,7 @@ class Faq_master extends MY_Controller{
         $params['limit'] = RECORDS_PER_PAGE; 
         $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
         $config = $this->config->item('pagination');
-        $config['base_url'] = site_url('adminController/faq_master/index/'.$test_module_id.'?');
+        $config['base_url'] = site_url('adminController/faq_master/index/?');
 
         $config['total_rows'] = $this->Faq_master_model->get_all_faq_master_count();
         $this->pagination->initialize($config);

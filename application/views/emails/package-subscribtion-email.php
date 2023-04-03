@@ -35,7 +35,7 @@
 </tr>
 <?php } ?>
 
-<?php if($batch_name !=''){ ?>
+<?php if(isset($batch_name) && $batch_name !=''){ ?>
 <tr>
 	<td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;">Batch</td>
 	<td valign="top" style="padding:4px;"><?php echo $batch_name;?></td>

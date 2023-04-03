@@ -249,7 +249,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="refresh_page();">
                     <span aria-hidden="true">×</span></button>
                 <h4 class="modal-heading text-info">Attended status</h4>
-                <h5 class="msg_session"></h5>
+                
             </div>
             <div class="modal-body">
                 <div class="clearfix">
@@ -274,6 +274,8 @@
                     <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal" onclick="refresh_page();">
             Close
             </button> -->
+          <!--   <h5 class="msg_session"></h5> -->
+            <div class="col-md-12 msg_session" style="text-align: center;"></div>
                     <button type="button" class="btn btn-info rd-20" id="saveSessionStatus" onclick="saveSessionStatuscc();">Save Status</button>
                 </div>
             </div>
@@ -333,8 +335,11 @@
                     $('.msg_session').html("Successfully update");
 
                     $('.msg_session').css('color', 'green');
-                    location.reload();
-                } else {
+                   // location.reload();
+
+                    setTimeout(function(){
+   window.location.reload();
+}, 2000);                } else {
                     $('.msg_session').html("Error....try again!");
                     $('.msg_session').css('color', 'red');
                 }

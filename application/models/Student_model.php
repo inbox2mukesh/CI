@@ -824,6 +824,7 @@
         
         $this->db->select('
             s.fname,
+            s.lname,
             s.email,
             s.mobile,
             s.username,

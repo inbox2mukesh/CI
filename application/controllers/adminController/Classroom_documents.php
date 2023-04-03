@@ -88,6 +88,7 @@ class Classroom_documents extends MY_Controller{
         //access control ends
         
 		$userBranch=[];
+        $params=[];
         $UserFunctionalBranch= $this->User_model->getUserFunctionalBranch($_SESSION['UserId']);		
         foreach ($UserFunctionalBranch as $b){			
             array_push($userBranch,$b['center_id']);
@@ -274,6 +275,7 @@ class Classroom_documents extends MY_Controller{
         $data['si'] = 0;
         //access control ends
 		$userBranch=[];
+        $params=[];
 		$UserFunctionalBranch= $this->User_model->getUserFunctionalBranch($_SESSION['UserId']);		
 		foreach ($UserFunctionalBranch as $b){
 			array_push($userBranch,$b['center_id']);
@@ -301,6 +303,7 @@ class Classroom_documents extends MY_Controller{
                 $data['all_branch'] = $this->Center_location_model->getAcademyBranch($_SESSION['roleName'],$userBranch);               
             }
             foreach($classroomData2 as $key => $cd){
+                $classroomData2[$key]['Category'] = null;
                 $pattern = "/,/i";
                 $isMultipeCategory = preg_match($pattern, $cd['category_id']);
                 if($isMultipeCategory){
@@ -308,14 +311,17 @@ class Classroom_documents extends MY_Controller{
                     $cat_arr_count = count($cat_arr);
                     for ($i=0; $i < $cat_arr_count; $i++) { 
                         $get_category_name = $this->Category_master_model->get_category_name($cat_arr[$i]);
-                        foreach ($get_category_name as $key2 => $m) {                
-                            $classroomData2[$key]['Category'][$key2].=$m.', ';                       
-                        }                    
+                        if(is_array($get_category_name))
+                        {
+                            foreach ($get_category_name as $key2 => $m) {                
+                                $classroomData2[$key]['Category'].=$m.', ';                       
+                            } 
+                        }                
                     }
                 }else{
                     $get_category_name = $this->Category_master_model->get_category_name($cd['category_id']);
                     foreach ($get_category_name as $key2 => $m) {                
-                        $classroomData2[$key]['Category'][$key2]=$m;                       
+                        $classroomData2[$key]['Category']=$m;                       
                     }
                 }
             }
@@ -397,8 +403,9 @@ class Classroom_documents extends MY_Controller{
 										$config['upload_path']   = CLASSROOM_DOCUMENTS_IMAGE_PATH;
 										$config['allowed_types'] = WEBP_FILE_TYPES;
 										$config['encrypt_name']  = FALSE;
+                                        $this->load->library('upload',$config);
                                         $this->upload->initialize($config);
-										$this->load->library('upload',$config);
+										
 										$section=$old_section;
 										
 										if($this->upload->do_upload('classroom_documents_section'.$i)){	
@@ -484,6 +491,7 @@ class Classroom_documents extends MY_Controller{
         //access control ends
 		
 		$userBranch=[];
+        $params=[];
 		$UserFunctionalBranch= $this->User_model->getUserFunctionalBranch($_SESSION['UserId']);		
 		foreach ($UserFunctionalBranch as $b){
 			array_push($userBranch,$b['center_id']);

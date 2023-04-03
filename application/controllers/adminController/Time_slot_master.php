@@ -43,14 +43,14 @@ class Time_slot_master extends MY_Controller{
             foreach($slotData as $b){
 
                 $t = $b['time_slot'].' '.$b['type'];            
-                $y .= 'echo "<option value="'.$t.'">'.$t.'</option>";';
+                $x .= 'echo "<option value="'.$t.'">'.$t.'</option>";';
             }
 
-            $z = '</select>
+            $x.= '</select>
                         <span class="text-danger"><?php echo form_error("time_slot'.$i.'");?></span>
                     </div>
                 </div>';
-            $res.= $x.$y.$z;    
+            $res= $x;    
         }        
         echo $res;        
     }

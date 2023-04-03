@@ -13,6 +13,19 @@ class User_model extends CI_Model{
         parent::__construct();
     }
 
+    function checkEmail($email=null){
+
+        // $this->db->from('user'); 
+        // $this->db->where(array('email'=>$email,'active'=>1,'portal_access'=>1));       
+        // return $this->db->count_all_results();
+        $this->db->select('email,personal_email');
+        $this->db->from('user');
+        $this->db->where(array('email'=>$email,'active'=>1,'portal_access'=>1));
+        $this->db->or_where('personal_email',$email);
+        return $this->db->get('')->row_array();
+
+    }
+
     public function auto_init_erp_softly(){
 
         if(ENVIRONMENT=='development' or ENVIRONMENT=='testing'){
@@ -432,17 +445,7 @@ class User_model extends CI_Model{
         return $this->db->get('')->row_array();
     }
 
-    function checkEmail($email)
-    {
-        $this->db->select('email,personal_email');
-        $this->db->from('user');
-        $this->db->where(array('email'=>$email,'active'=>1,'portal_access'=>1));
-        $this->db->or_where('personal_email',$email);
-        return $this->db->get('')->row_array();
-        // $this->db->from('user'); 
-        // $this->db->where(array('email'=>$email,'active'=>1,'portal_access'=>1));       
-        // return $this->db->count_all_results();
-    }
+    
 
     function update_user_pwd($email,$params)
     {                    

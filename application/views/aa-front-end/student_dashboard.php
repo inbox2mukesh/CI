@@ -1,27 +1,5 @@
-<style>
-        *{margin:0px;padding:0px;}
-        .loader-cont {position: fixed;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;background: rgba(0,0,0, 0.8);z-index: 99999999;top: 0;}        
-        .loader4 {width:45px;height:45px;display:inline-block;padding:0px;border-radius:100%;border:5px solid;border-top-color:#d72a22;border-bottom-color:rgba(255,255,255, 0.3);border-left-color:#d72a22;border-right-color:rgba(255,255,255, 0.3);-webkit-animation: loader4 1s ease-in-out infinite;animation: loader4 1s ease-in-out infinite;}
-        @keyframes loader4 {
-            from {transform: rotate(0deg);}
-            to {transform: rotate(360deg);}
-        }
-        @-webkit-keyframes loader4 {
-            from {-webkit-transform: rotate(0deg);}
-            to {-webkit-transform: rotate(360deg);}
-        }
-		.sidebarnav .list li button { background: none;border: none;color: #000;}
-		.sidebarnav .list li button:hover { color: #d72a22;}
-
-		.studentresponse-modal .modal-header {align-items: center;border-bottom: solid 1px #ebebeb;}
-		.studentresponse-modal .modal-header h5 { display: inline-block; margin-top: 8px;}
-		.studentresponse-modal .modal-header button.close { font-size: 34px;display: inline-block;}
-		.studentresponse-modal div#msg-content { text-align: center;font-weight: bold;font-size: 15px;}
-		.studentresponse-modal .modal-sm {display: flex; width: 100%;height: 100%;align-items: center;justify-content: center;margin: 0 !important;}
-		.studentresponse-modal .modal-sm .modal-content {max-width: 450px;width: 100%;}
-    </style>
-	<div class="loader-cont" style="display:none;">
-    <div class="loader4"></div>   
+<div class="loader-cont" style="display:none;">
+	 <div class="loader4"></div>   
 </div>
 <?php
 $packActive=0;

@@ -156,6 +156,28 @@
 							<span class="text-danger media_file_err"><?php echo form_error('media_file');?></span>
 						</div>
 					</div>
+					<div class="col-md-6">	
+						<label for="dateTime" class="control-label"><span class="text-danger">*</span>Start Date Time </label>
+						<div class="form-group has-feedback">
+							<input type="text" name="start_dateTime" id="dateTime" class="form-control user_activity_report_datetimepicker input-ui-100 removeerrmessage" value="<?php echo $this->input->post('dateTime'); ?>" />
+							<span class="text-danger dateTime_err"><?php echo form_error('dateTime');?></span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<label for="till_date" class="control-label">End Date Time</label>
+						<div class="form-group has-feedback">
+							<input type="text" name="end_dateTime" value="<?php echo $this->input->post('end_dateTime'); ?>" class="noBackDatep form-control input-ui-100 removeerrmessage" id="till_date" autocomplete="off"  maxlength="10"/>
+							<span class="text-danger till_date_err"><?php echo form_error('till_date');?></span>
+							<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+						</div>
+					</div>	
+					<!-- <div class="col-md-6">	
+						<label for="dateTime" class="control-label"><span class="text-danger">*</span>End Date Time </label>
+						<div class="form-group has-feedback">
+							<input type="text" name="end_dateTime" id="dateTime" class="form-control noBackDatep input-ui-100 removeerrmessage" value="<?php echo $this->input->post('dateTime'); ?>" />
+							<span class="text-danger dateTime_err"><?php echo form_error('dateTime');?></span>
+						</div>
+					</div> -->
 
 					<div class="col-md-12">
 						<label for="body" class="control-label">Body</label>
@@ -186,9 +208,29 @@
     </div>
 </div>
 
-
 <?php ob_start(); ?>
+
 <script>
+ $(".user_activity_report_datetimepicker").datetimepicker({
+format: 'DD-MM-YYYY HH:mm',
+minDate:caDate
+});
+
+
+
+$('.user_activity_report_datetimepicker').on('dp.change', function(e){ 
+var dt=$(this).val();
+var dtp=dt.split(" ");	
+dateMin = moment(dt, 'DD-MM-YYYY HH:mm');
+$(".noBackDatep").val('');	
+$(".noBackDatep").datetimepicker({
+	minDate: dateMin,
+	format: 'DD-MM-YYYY HH:mm',				
+	
+					
+});		
+
+})  
 $('#classroom_ann_add_form').on('submit', function(e){
         e.preventDefault();
 		var flag=1;

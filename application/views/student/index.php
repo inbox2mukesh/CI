@@ -17,7 +17,6 @@
                     </div>
                     <?php echo $this->session->flashdata('flsh_msg');?>
                 </div>
-
                 <div class="table-ui-scroller">
                 <div class="box-body table-responsive table-cb-none mheight200" id="printableArea">
                     <table class="table table-striped table-bordered table-sm">
@@ -44,7 +43,7 @@
                              }else{
                                 $sr=0;            
                              }
-
+                             
                             foreach($students as $s){$zero=0;$one=1;$pk='id'; $table='students';$sr++;
                             if($s['loggedIn']==1){
                                 $class='liveStd';
@@ -127,10 +126,16 @@
                             <td>
                                 <?php
                                 $test_prog_name="";
+                                if(is_array($s['Pack']) && isset($s['Pack']))
+                                {
                                     foreach ($s['Pack'] as $p) {
                                         $test_prog_name .= $p['test_module_name'].'-'.$p['programe_name'].', ';
                                     }
-                                    echo rtrim($test_prog_name,', ');
+                                    $test_prog_name = rtrim($test_prog_name,', ');
+
+                                }
+                                echo $test_prog_name;
+                                    
                                 ?>
                             </td>
                             <td>

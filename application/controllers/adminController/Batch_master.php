@@ -98,7 +98,7 @@ class Batch_master extends MY_Controller{
         }        
     }
     
-    function edit($batch_id){  
+    function edit($batch_id=0){  
 
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -130,7 +130,7 @@ class Batch_master extends MY_Controller{
                     //activity update start             
                         $activity_name= BATCH_MASTER_UPDATE;
                         unset($data['batch_master']['batch_id'],$data['batch_master']['created'],$data['batch_master']['modified']);//unset extras from array
-                        $uaID = 'batch_master'.$id;
+                        $uaID = 'batch_master'.$batch_id;
                         $diff1 =  json_encode(array_diff($data['batch_master'], $params));//old
                         $diff2 =  json_encode(array_diff($params,$data['batch_master']));//new
                         $description = str_replace(UA_FIND, UA_REPLACE, $diff1.UA_SEP.$diff2);

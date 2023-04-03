@@ -16,10 +16,11 @@ class Cron_tab extends MY_Controller{
         
         $this->load->model('Student_package_model');       
         $packHoldData = $this->Student_package_model->getPackHoldData();
-        $holdDateTo= $phd['holdDateTo'];
+        $holdDateTo= '';
         $holdDateTo = date('d-m-Y', strtotime($holdDateTo. ' + 1 days'));
         $remarks = "Pack On hold is realeased on $holdDateTo ";
         foreach ($packHoldData as $phd) {
+            $holdDateTo= $phd['holdDateTo'];
             $params1 = array(
                 'student_package_id'=>$phd['student_package_id'],
                 'student_id'=>$phd['student_id'],

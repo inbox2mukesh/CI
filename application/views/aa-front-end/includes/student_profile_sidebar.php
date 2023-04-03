@@ -3,11 +3,11 @@
 						<button onclick="myFunction()" id="toggle" class="closed dropbtn">DASHBOARD MENU <span class="pull-right"><i class="fa fa-angle-right font-18 icon-rotate"></i></span></button>
 					</div>
 					<!-- sidebar -->
-					<div class="sidebarnav sidemenu-content" id="myDropdown">
+					<div class="sidebarnav sidemenu-content student-dashboard-btn" id="myDropdown">
 						<!-- Start Sidebar menu -->
 						<div class="scrollbar scrollbar-use-navbar scrollbar-bg-white">
 							<ul class="list list-bg-white">
-								<li><a href="<?php echo base_url('our_students/student_dashboard');?>" class="text-uppercase  <?php if($segment=="student_dashboard"){ echo "active-text"; }?>">Dashboard</a></li>							
+								<li><a href="<?php echo base_url('our_students/student_dashboard');?>" class="text-uppercase  <?php if($segment=="student_dashboard"){ echo "active-text"; }?>">Dashboard</a></li>	
 								<li>
 									<button type="button" class="link-arrow text-uppercase" onclick="studentautologin();">Practice Portal</button>
 								</li>

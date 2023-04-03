@@ -108,7 +108,7 @@ class Programe_master extends MY_Controller{
     }  
 
     
-    function edit($programe_id){
+    function edit($programe_id=0){
        
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -137,7 +137,7 @@ class Programe_master extends MY_Controller{
                     //activity update start             
                         $activity_name= PROGRAME_UPDATE;
                         unset($data['programe_master']['programe_id'],$data['programe_master']['created'],$data['programe_master']['modified']);//unset extras from array
-                        $uaID = 'programe_master'.$id;
+                        $uaID = 'programe_master'.$programe_id;
                         $diff1 =  json_encode(array_diff($data['programe_master'], $params));//old
                         $diff2 =  json_encode(array_diff($params,$data['programe_master']));//new
                         $description = str_replace(UA_FIND, UA_REPLACE, $diff1.UA_SEP.$diff2);

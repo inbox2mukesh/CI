@@ -220,7 +220,7 @@ class Student extends MY_Controller{
         $cn = $this->router->fetch_class().''.'.php';
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}        
-
+        $by_user = $_SESSION['UserId'];
         $student_id = $this->input->post('student_id', TRUE);
         $waiverHistoryData = $this->Waiver_model->getWaiverHistory_($student_id);
         $y='';
@@ -352,7 +352,7 @@ class Student extends MY_Controller{
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         //access control ends
-
+        $by_user=$_SESSION['UserId'];
         $student_id = $this->input->post('student_id', TRUE);
         $refundHistoryData = $this->Refund_model->getRefundHistory($student_id);
         $y='';
@@ -540,7 +540,7 @@ class Student extends MY_Controller{
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         //access control ends
-
+        $by_user=$_SESSION['UserId'];
         $this->load->library('form_validation');
         $this->form_validation->set_rules('withdrawl_method', 'Payment Mode', 'required');
         $this->form_validation->set_rules('withdrawl_amount', 'Withdrawl Amount', 'required|trim');
@@ -613,7 +613,7 @@ class Student extends MY_Controller{
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         //access control ends
         $this->load->model('Document_type_model');
-
+        $by_user=$_SESSION['UserId'];
         $this->load->library('form_validation');
         $this->form_validation->set_rules('document_typeDoc', 'Doc Type', 'trim');
         if($this->form_validation->run() == FALSE) {
@@ -662,7 +662,7 @@ class Student extends MY_Controller{
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         //access control ends
         $this->load->model('Counseling_session_model');
-
+        $by_user=$_SESSION['UserId'];
         $this->load->library('form_validation');
         $this->form_validation->set_rules('session_booking_remarks', 'Remarks', 'required|trim');
         if($this->form_validation->run() == FALSE) {
@@ -987,7 +987,7 @@ class Student extends MY_Controller{
         $getPackageId = $this->Student_package_model->getExamPackageId($student_package_id);
         $package_id = $getPackageId['package_id'];
         /////////////////////////////////////////////////////////////              
-        if($student_package_id and $student_id)
+        if($student_package_id && $student_id)
         {            
             $this->load->library('form_validation');
             $this->form_validation->set_rules('payment_type','Payment type','required');
@@ -1270,16 +1270,18 @@ class Student extends MY_Controller{
     }    
 
     //non-real function
-    function sell_online_pack_($wid,$package_id,$sid,$mail_sent,$enrolledBy_homeBranch){
+    function sell_online_pack_($wid,$package_id,$sid,$mail_sent,$enrolledBy_homeBranch)
+    {
         
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
-        $mn='sell_online_pack_';     
+        $mn='sell_online_pack_';    
+        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         //access control ends 
         $by_user=$_SESSION['UserId'];
         $this->load->model('Classroom_model');      
-
+        $pack_category_id=null; 
         $package_data= $this->Package_master_model->get_package_master($package_id);
         $duration_type = $package_data['duration_type_name'];
         $duration      = $package_data['duration'];         
@@ -1298,7 +1300,9 @@ class Student extends MY_Controller{
           //  $duration=$duration;
         }      
         $duration = $duration.' days'; 
-          
+        $discount_code = null;
+        $centerCode = null;
+        $batch_id= null;$pack_center_id  = null;   
         $package_name       = $package_data['package_name'];
         $discounted_amount  = $package_data['discounted_amount']*100;
         //$duration = $duration.' days';
@@ -1507,7 +1511,7 @@ class Student extends MY_Controller{
             }*/
             //promocode updation end//
 
-            if($use_wallet and $paidBywallet>0){
+            if($use_wallet && $paidBywallet>0){
 
                 $remarks1 = "Initial payment and with Wallet worth: Rs. ".$paidBywallet/100;
                 if($discount_type=='Waiver' and $waiver>0){
@@ -1626,6 +1630,7 @@ class Student extends MY_Controller{
         $duration      = $package_data['duration'];
         $duration_type = $package_data['duration_type_name'];
         $duration      = $package_data['duration'];
+        $pack_center_id = $package_data['center_id'];
         
         $dt = $duration.' '.$duration_type;        
         
@@ -1839,9 +1844,9 @@ class Student extends MY_Controller{
         if($use_wallet and $paidBywallet>0){
 
             $remarks1 = "Initial payment and with Wallet worth: Rs. ".$paidBywallet/100;
-            if($discount_type=='Waiver' and $waiver>0){
+            if($discount_type=='Waiver' && $waiver>0){
                 $remarks2 = " Waiver worth Rs. ".number_format($actually_used_amount,2);
-            }elseif($discount_type=='Discount' and $other_discount>0){
+            }elseif($discount_type=='Discount' && $other_discount>0){
                 $remarks2 = " Promo Discount worth Rs. ".number_format($other_discount/100,2);
             }elseif($discount_type=='None'){
                 $remarks2 = '';
@@ -1852,9 +1857,9 @@ class Student extends MY_Controller{
         }else{
 
             $remarks1 = "Initial payment";
-            if($discount_type=='Waiver' and $waiver>0){
+            if($discount_type=='Waiver' && $waiver>0){
                 $remarks2 = " Waiver worth Rs. ".number_format($actually_used_amount,2);
-            }elseif($discount_type=='Discount' and $other_discount>0){
+            }elseif($discount_type=='Discount' && $other_discount>0){
                 $remarks2 = " Promo Discount worth Rs. ".number_format($other_discount/100,2);
             }elseif($discount_type=='None'){
                 $remarks2 = '';
@@ -1913,18 +1918,15 @@ class Student extends MY_Controller{
             $res=$this->addUserActivity($activity_name,$description,$student_package_id,$by_user);
         //activity update end
         $getTestName = $this->Test_module_model->getTestName($pack_test_module_id);
-        $getProgramName = $this->Programe_master_model->getProgramName($pack_programe_id);
-        $getBatchName = $this->Batch_master_model->getBatchName($batch_id);
+        $getProgramName = $this->Programe_master_model->getProgramName($pack_programe_id);        
         $get_centerName = $this->Center_location_model->get_centerName($pack_center_id);        
         //////////////////status update end///////////////////////// 
-
         $subject = 'Dear User, your package subscribed successfully at '.COMPANY.'';
         $email_message='Your package subscribed successfully at '.COMPANY.' details are as below:';
         $mailData                   = $this->Student_model->getMailData_pp($student_package_id);
         $mailData['email_message']  = $email_message;
         $mailData['test_module_name']= $getTestName['test_module_name'];
         $mailData['programe_name']  = $getProgramName['programe_name'];
-        $mailData['batch_name']     = $getBatchName['batch_name'];
         $mailData['center_name']    = $get_centerName['center_name'];
         $mailData['thanks']         = THANKS;
         $mailData['team']           = WOSA;
@@ -2063,7 +2065,7 @@ class Student extends MY_Controller{
            //$duration=$duration;
         }      
         $duration = $duration.' days';
-
+        $pack_category_id = null;
         $package_name     = $package_data['package_name'];
         $discounted_amount= $package_data['discounted_amount']*100;
         //$duration = $duration.' days';
@@ -2437,7 +2439,7 @@ class Student extends MY_Controller{
         $idd1 = $this->Student_package_model->updateNewDueCommittmentDate($student_package_id,$params);
         $idd2 = $this->Student_package_model->update_transaction($params2);
         if($idd1 and $idd2){
-            $get_UID = $this->Student_model->get_UID($datas['student_id']);
+            $get_UID = $this->Student_model->get_UID($student_id);
             $UID = $get_UID['UID'];
             //activity update start
                 $activity_name= DUE_DATE_EXTENSION;
@@ -2548,7 +2550,7 @@ class Student extends MY_Controller{
                 $idd2 = $this->Student_package_model->update_transaction($params2);
                 if($idd1 and $idd2){ 
                     $add_payment = CURRENCY .$add_payment/100;
-                    $get_UID = $this->Student_model->get_UID($datas['student_id']);
+                    $get_UID = $this->Student_model->get_UID($student_id);
                     $UID = $get_UID['UID'];
                 //activity update start
                     $activity_name= PAYMENT_ADDED;
@@ -2663,10 +2665,10 @@ class Student extends MY_Controller{
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         //access control ends
         $by_user=$_SESSION['UserId'];
-
+        $wsCount = 0;
         $getAmountPaid=$this->Student_package_model->getAmountPaid($student_package_id);
         $org_amount_paid = $getAmountPaid['amount_paid'];
-
+        $student_identity = null;
         $offlineCount=$this->Package_master_model->getOfflinePackActiveCount($student_id);
         $onlineCount=$this->Package_master_model->getOnlinePackActiveCount($student_id);
         $ppCount=$this->Practice_package_model->getpp_PackActiveCount($student_id);
@@ -2838,7 +2840,8 @@ class Student extends MY_Controller{
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         //access control ends
         $by_user=$_SESSION['UserId'];
-
+        $wsCount = 0;
+        $service_id=0;
         //get offline class package taken if any
         $offlineCount=$this->Package_master_model->getOfflinePackActiveCount($student_id);
         $onlineCount=$this->Package_master_model->getOnlinePackActiveCount($student_id);
@@ -2967,7 +2970,8 @@ class Student extends MY_Controller{
     }
     
     //non-real function
-    function branch_switch_adjustment_($center_id,$service_id,$student_package_id,$student_id,$test_module_id,$programe_id,$amount_paid,$cutting_amount,$restAmount){
+    //$center_id,$service_id,$student_package_id,$student_id,$test_module_id,$programe_id); 
+    function branch_switch_adjustment_($center_id=null,$service_id=null,$student_package_id=null,$student_id=null,$test_module_id=null,$programe_id=null,$amount_paid=null,$cutting_amount=null,$restAmount=null){
 
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -3077,7 +3081,7 @@ class Student extends MY_Controller{
         );
         $idd6 = $this->Student_model->add_withdrawl($withdrawlData);
         if($idd1 and $idd2 and $idd3 and $idd4 and $idd5 and $idd6){
-            $get_UID = $this->Student_model->get_UID($datas['student_id']);
+            $get_UID = $this->Student_model->get_UID($student_id);
             $UID = $get_UID['UID']; 
             //activity update start
                 $add_payment = CURRENCY.' '.$cutting_amount/100;
@@ -3143,7 +3147,7 @@ class Student extends MY_Controller{
         $params3 = array('student_id'=>$student_id,'details'=>$params2['remarks'], 'student_identity'=> $student_identity,'by_user'=>$by_user);
         $idd3 = $this->Student_journey_model->update_studentJourney($params3);
         if($idd1 and $idd2 and $idd3){
-            $get_UID = $this->Student_model->get_UID($datas['student_id']);
+            $get_UID = $this->Student_model->get_UID($student_id);
             $UID = $get_UID['UID'];
             //activity update start                
                 $activity_name= BATCH_UPDATE;
@@ -3203,7 +3207,7 @@ class Student extends MY_Controller{
         $idd4=$this->Student_model->update_student($student_id,$params4);
 
         if($idd1 and $idd2 and $idd3){
-            $get_UID = $this->Student_model->get_UID($datas['student_id']);
+            $get_UID = $this->Student_model->get_UID($student_id);
             $UID = $get_UID['UID'];
             //activity update start                
                 $activity_name= PACK_TERMINATION;
@@ -3277,7 +3281,7 @@ class Student extends MY_Controller{
         ); 
         $idd2 = $this->Student_package_model->update_transaction($params2);
         if($idd1 and $idd2 ){
-            $get_UID = $this->Student_model->get_UID($datas['student_id']);
+            $get_UID = $this->Student_model->get_UID($student_id);
             $UID = $get_UID['UID'];
             //activity update start 
                 $activity_name= MANAGE_START_DATE;
@@ -3387,7 +3391,7 @@ class Student extends MY_Controller{
        
         
         if($idd1 and $idd2 and $idd3){
-            $get_UID = $this->Student_model->get_UID($datas['student_id']);
+            $get_UID = $this->Student_model->get_UID($student_id);
             $UID = $get_UID['UID'];
             //activity update start                
                 $activity_name= PACK_HOLD;
@@ -3450,7 +3454,7 @@ class Student extends MY_Controller{
         ); 
         $idd2 = $this->Student_package_model->update_transaction($params2);
         if($idd1 and $idd2){
-            $get_UID = $this->Student_model->get_UID($datas['student_id']);
+            $get_UID = $this->Student_model->get_UID($student_id);
             $UID = $get_UID['UID'];
             //activity update start                
                 $activity_name= PACK_UNHOLD;
@@ -3464,7 +3468,7 @@ class Student extends MY_Controller{
 
     }
 
-    function reactivate_pack_against_partial_refund_($student_package_id,$student_id){
+    function reactivate_pack_against_partial_refund_($student_package_id=0,$student_id=0){
 
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -3479,7 +3483,7 @@ class Student extends MY_Controller{
         $idd1=$this->Student_package_model->update_student_pack($student_package_id,$params);
          
         if($idd1){
-            $get_UID = $this->Student_model->get_UID($datas['student_id']);
+            $get_UID = $this->Student_model->get_UID($student_id);
             $UID = $get_UID['UID']; 
             //activity update start                
                 $activity_name= PACK_REACTIVATION;
@@ -3492,7 +3496,7 @@ class Student extends MY_Controller{
         }
     }
 
-    function reactivate_pack_($student_package_id,$student_id){
+    function reactivate_pack_($student_package_id=0,$student_id=0){
 
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -3526,7 +3530,7 @@ class Student extends MY_Controller{
         $idd1=$this->Student_package_model->update_student_pack($student_package_id,$params1);
         $idd2=$this->Student_package_model->update_transaction($params2); 
         if($idd1 and $idd2){
-            $get_UID = $this->Student_model->get_UID($datas['student_id']);
+            $get_UID = $this->Student_model->get_UID($student_id);
             $UID = $get_UID['UID']; 
             //activity update start                
                 $activity_name= PACK_REACTIVATION;
@@ -3745,6 +3749,10 @@ class Student extends MY_Controller{
 
         $id = $this->input->post('student_id', TRUE);
         $by_user = $this->input->post('by_user', TRUE);
+        $wid = 0;
+        $amount = 0;
+        $remarks = null;                
+        $name = null;
         if($id!=''){ 
             $waiver_approved = $this->Waiver_model->get_waiver_approved_count($id,$by_user);
             if($waiver_approved>0){
@@ -3760,7 +3768,7 @@ class Student extends MY_Controller{
                 echo json_encode($response);
             }else{
                 header('Content-Type: application/json');
-                $response = ['msg'=>'No waiver approved any for this student', 'status'=>'false', 'wid'=>@$wid, 'amount'=>@$amount,'remarks'=>@$remarks,'name'=>@$name ];
+                $response = ['msg'=>'No waiver approved any for this student', 'status'=>'false', 'wid'=>$wid, 'amount'=>$amount,'remarks'=>$remarks,'name'=>$name ];
                 echo json_encode($response);
             }                        
 
@@ -3777,6 +3785,10 @@ class Student extends MY_Controller{
         $id = $this->input->post('student_id', TRUE);
         $by_user = $this->input->post('by_user', TRUE);
         $type = $this->input->post('type', TRUE);
+        $wid = 0;
+        $amount = 0;
+        $remarks = null;                
+        $name = null;
         if($id!='') { 
 
             $refund_approved = $this->Refund_model->get_refund_approved_count($id,$by_user);
@@ -3793,7 +3805,7 @@ class Student extends MY_Controller{
                 echo json_encode($response);
             }else{
                 header('Content-Type: application/json');
-                $response = ['msg'=>'No refund approved for this student', 'status'=>'false', 'wid'=>@$wid, 'amount'=>@$amount,'remarks'=>@$remarks,'name'=>@$name ];
+                $response = ['msg'=>'No refund approved for this student', 'status'=>'false', 'wid'=>@$wid, 'amount'=>$amount,'remarks'=>$remarks,'name'=>$name ];
                 echo json_encode($response);
             }                        
 

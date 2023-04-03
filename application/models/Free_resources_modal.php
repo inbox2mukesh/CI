@@ -78,7 +78,7 @@
             fr.description,
             fr.URLslug,
             CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
-            date_format(fr.modified, "%D %b %Y") as `created`,
+            date_format(fr.created, "%D %b %Y") as `created`,
         ');
         $this->db->from('free_resources fr');
         $this->db->join('content_type_masters ctm', 'ctm.id= fr.content_type_id');

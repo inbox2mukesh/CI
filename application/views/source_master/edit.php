@@ -28,31 +28,31 @@
 							<label for="active" class="control-label">Active</label>						
 						</div>
                     </div>
-                    <div class="col-md-12" style="margin-bottom:10px;">
+                    <!-- <div class="col-md-12" style="margin-bottom:10px;">
 					    <button type="button" class="btn btn-success rd-20" onclick="AddOM()">
                             <i class="fa fa-plush"></i>Add Origin & Medium
                         </button>
-                    </div>
-		            <div id="OMALLData">
+                    </div> -->
+		            <!-- <div id="OMALLData">
                         <?php
-						$selectAllMedium=array();
-						foreach($source_om as $key=>$val){
+						// $selectAllMedium=array();
+						// foreach($source_om as $key=>$val){
 							
-							$select_origin_type=$val['origin_type'];
-							$select_origin=$val['origin'];
-							$select_medium=$val['medium'];
-							$selectAllMedium[$select_origin_type.'-'.$select_origin][]=$select_medium;
+						// 	$select_origin_type=$val['origin_type'];
+						// 	$select_origin=$val['origin'];
+						// 	$select_medium=$val['medium'];
+						// 	$selectAllMedium[$select_origin_type.'-'.$select_origin][]=$select_medium;
 							
-						}
-						$j=1;
-						foreach($source_om as $key=>$val){
+						// }
+						// $j=1;
+						// foreach($source_om as $key=>$val){
 							
-							$select_origin_type=$val['origin_type'];
-							$select_origin=$val['origin'];
-							$select_medium=$val['medium'];
-							$origin_array=$origin_pack[$select_origin_type]['origin'];
-							$medium_array=$origin_array[$select_origin]['medium'];
-							$selectMediumArray=$selectAllMedium[$select_origin_type.'-'.$select_origin];
+						// 	$select_origin_type=$val['origin_type'];
+						// 	$select_origin=$val['origin'];
+						// 	$select_medium=$val['medium'];
+						// 	$origin_array=$origin_pack[$select_origin_type]['origin'];
+						// 	$medium_array=$origin_array[$select_origin]['medium'];
+						// 	$selectMediumArray=$selectAllMedium[$select_origin_type.'-'.$select_origin];
 							#pr($selectMediumArray);
 							
 						?>
@@ -139,10 +139,10 @@
 								</div>
 		</div>
 						<?php 
-						$j++;
-						}
+						//$j++;
+						//}
 						?>					
-                    </div>					
+                    </div>					 -->
                 </div>
             </div>
             <div class="box-footer">

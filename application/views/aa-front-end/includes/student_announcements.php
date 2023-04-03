@@ -43,7 +43,7 @@ if(!empty($announcements->error_message->data))
       //alert();
       //console.log('kk')
     refresh_announcements();
-          $("<?php echo $idd;?>").load(window.location.href + " <?php echo $idd;?>" );
+          $("<?php echo (isset($idd) && $idd !='')? $idd:0;?>").load(window.location.href + " <?php (isset($idd) && $idd !='')? $idd:0; ?>" );
     }, 60000);// 60000=1m ,300000=5m
 
   })
