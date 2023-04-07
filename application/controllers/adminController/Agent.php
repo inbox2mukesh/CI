@@ -202,8 +202,11 @@ class Agent extends MY_Controller{
         $enquiry_id = $this->Student_enquiry_model->add_enquiry($params);
         if($enquiry_id){
 
-            $subject = 'Hi! your enquiry sent successfully';
-            $email_message = 'Hi! your enquiry sent successfully at our Enquiry team. We will get back to soon.';
+            // $subject = 'Hi! your enquiry sent successfully';
+            // $email_message = 'Hi! your enquiry sent successfully at our Enquiry team. We will get back to soon.';
+            $enquiry_content = enquiry_email();
+            $subject = $enquiry_content['subject'];
+            $email_message = $enquiry_content['content'];
             $mailData['fname']          = $params['fname'];                
             $mailData['email']          = $params['email'];
             $mailData['email_message']  = $email_message;
@@ -356,9 +359,15 @@ class Agent extends MY_Controller{
                 $test_module_name = $stdInfo['test_module_name'];
                 $email = $stdInfo['email'];
                 $mobile = $stdInfo['mobile'];
-                $fname = $stdInfo['fname'];                
-                $subject='Hi! Your Enquiry response from- Western Overseas Immigration'; 
-                $email_message='Dear '.$fname.':<br/>'.$this->input->post('admin_reply').' ';
+                $fname = $stdInfo['fname'];  
+                $enquiry_no = $stdInfo['enquiry_no'];
+                $admin_reply = $this->input->post('admin_reply');
+                $enquiry_content =admin_enquiry_reply_email($enquiry_no,$admin_reply);
+                $subject = $enquiry_content['subject'];
+                $email_message = $enquiry_content['content']; 
+                $email_footer_content = $enquiry_content['email_footer_content'];             
+                // $subject='Hi! Your Enquiry response from- Western Overseas Immigration'; 
+                // $email_message='Dear '.$fname.':<br/>'.$this->input->post('admin_reply').' ';
                     $mailData=[];                    
                     $mailData['fname']          = $fname;                
                     $mailData['email']          = $email;

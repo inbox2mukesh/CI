@@ -20,7 +20,9 @@ class Walkin extends MY_Controller{
 
         $id = $this->input->post('id', true);
         $otp = rand(1000,10000);
-        $message = 'Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
+        $email_content = otp_send_verification_email($otp);
+        $email_message = $email_content['content'];
+        $subject = $email_content['subject'];
         $params=array('OTP'=>$otp);
         $updateOTP = $this->Walkin_model->update_walkin($id,$params);
         $mobileEmailData = $this->Walkin_model->getOTP($id);
@@ -28,8 +30,8 @@ class Walkin extends MY_Controller{
         //$this->_call_smaGateway($mobileEmailData['mobile'],$message);
         if(base_url()!=BASEURL){
             //MAIL
-            $subject = "OTP verification- WOSA";
-            $email_message='Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
+            // $subject = "OTP verification- WOSA";
+            // $email_message='Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
             $mailData = []; 
             $mailData['fname']         = $mobileEmailData['fname'];
             $mailData['email']         = $mobileEmailData['email'];               

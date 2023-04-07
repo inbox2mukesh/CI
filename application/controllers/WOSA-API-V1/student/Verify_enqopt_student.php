@@ -33,8 +33,12 @@ class Verify_enqopt_student extends REST_Controller {
                     if($idd){
                         
                         $enqData = $this->Student_enquiry_model->get_enquiry_data($enquiry_id);
-                        $subject = 'Hi! your enquiry sent successfully';
-                        $email_message = "Hi! your enquiry sent successfully at our Enquiry team.<br> Your Enquiry Id:$enqData[enquiry_no].<br> We will get back to soon.";
+                        // $subject = 'Hi! your enquiry sent successfully';
+                        // $email_message = "Hi! your enquiry sent successfully at our Enquiry team.<br> Your Enquiry Id:$enqData[enquiry_no].<br> We will get back to soon.";
+                        $enquiry_content = enquiry_email($enqData['enquiry_no']);
+                        $subject = $enquiry_content['subject'];
+                        $email_message = $enquiry_content['content'];
+
                         $mailData['fname']          = $enqData['fname'];                
                         $mailData['email']          = $enqData['email'];
                         $mailData['email_message']  = $email_message;

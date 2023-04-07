@@ -108,10 +108,10 @@ class Book_session extends REST_Controller{
             if(base_url()!=BASEURL){
                 $message='Hi, thanks for booking an event with us. Event details are sent on your email. For more info login to westernoverseas.online Regards Western Overseas';
                 //$this->_call_smaGateway($mobile,$message);
-            }
-            $subject = 'Dear '.$std_data->fname.', your session booked successfully';
-            $email_message= 'Your session booked successfully. Details are as below:';
-                        
+            }            
+            $email_content = session_booked(); 
+            $subject = $email_content['subject'];
+            $email_message= $email_content['content'];        
             $mailData['fname']  = $std_data->fname;
             $mailData['session_type']  = $std_data->session_type;
             $mailData['date']  = $std_data->booking_date;

@@ -32,8 +32,11 @@ public function index_post()
         $email=$std_data->email;
         $booking_id=$this->Become_agent_model->booking_detail_save($std_data);
         if($booking_id){           
-            $subject = 'Hi! your enquiry sent successfully';
-            $email_message='Thank you for contacting us. Our team will get in touch with you soon.';
+            // $subject = 'Hi! your enquiry sent successfully';
+            // $email_message='Thank you for contacting us. Our team will get in touch with you soon.';
+            $enquiry_content = enquiry_email();
+            $subject = $enquiry_content['subject'];
+            $email_message = $enquiry_content['content'];
             $mailData['fname']          = $name;                
             $mailData['email']          = $email;
             $mailData['email_message']  = $email_message;

@@ -48,8 +48,12 @@ public function index_post()
             }
             else { // other country
                 if(base_url()!=BASEURL){
-                    $subject = "Verification code- WOSA";
-                    $email_message='Hi, please confirm your details by entering the <b>Verification code '.$otp.'</b> Verification code is Valid for 10 minutes only'.COMPANY;
+                    // $subject = "Verification code- WOSA";
+                    // $email_message='Hi, please confirm your details by entering the <b>Verification code '.$otp.'</b> Verification code is Valid for 10 minutes only'.COMPANY;
+                    $email_content = otp_send_verification_email($otp);
+                    $email_message = $email_content['content'];
+                    $subject = $email_content['subject'];
+
                     $mailData=[]; 
                     $mailData['fname']         = $std_data->fname;
                     $mailData['email']         = $std_data->email;               

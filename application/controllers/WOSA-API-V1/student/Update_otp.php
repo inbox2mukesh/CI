@@ -39,8 +39,12 @@ class Update_otp extends REST_Controller {
           }
           
           if($send_email_flag ==1){
-            $subject = "Verification code- WOSA";
-            $email_message='Hi, please confirm your details by entering the <b>Verification code '.$otp.'</b> Verification Code is Valid for 10 minutes only Regards '.COMPANY;
+            // $subject = "Verification code- WOSA";
+            // $email_message='Hi, please confirm your details by entering the <b>Verification code '.$otp.'</b> Verification Code is Valid for 10 minutes only Regards '.COMPANY;
+            $email_content = otp_send_verification_email($otp);
+            $email_message = $email_content['content'];
+            $subject = $email_content['subject'];
+
             $mailData=[]; 
             $mailData['fname']         = $mobileData['fname'];
             $mailData['email']         = $mobileData['email'];               

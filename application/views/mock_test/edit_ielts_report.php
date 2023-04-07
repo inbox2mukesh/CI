@@ -60,7 +60,7 @@
 					<div class="col-md-3">
 						<label for="listening" class="control-label"><span class="text-danger">*</span>Listening</label>
 						<div class="form-group has-feedback">
-							<input type="text" name="listening" value="<?php echo ($this->input->post('listening') ? $this->input->post('listening') : $reportRow['listening']); ?>" class="form-control" id="listening" onblur="validateMockTestScore(this.value,this.id)"/>
+							<input type="text" name="listening" value="<?php echo ($this->input->post('listening') ? $this->input->post('listening') : $reportRow['listening']); ?>" class="form-control score" id="listening" onblur="validateMockTestScore(this.value,this.id)" />
 							<span class="text-danger listening_err"><?php echo form_error('listening');?></span>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 					<div class="col-md-3">
 						<label for="reading" class="control-label"><span class="text-danger">*</span>Reading</label>
 						<div class="form-group has-feedback">
-							<input type="text" name="reading" value="<?php echo ($this->input->post('reading') ? $this->input->post('reading') : $reportRow['reading']); ?>" class="form-control" id="reading" onblur="validateMockTestScore(this.value,this.id)"/>
+							<input type="text" name="reading" value="<?php echo ($this->input->post('reading') ? $this->input->post('reading') : $reportRow['reading']); ?>" class="form-control score" id="reading" onblur="validateMockTestScore(this.value,this.id)"/>
 							<span class="text-danger reading_err"><?php echo form_error('reading');?></span>
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 					<div class="col-md-3">
 						<label for="writing" class="control-label"><span class="text-danger">*</span>Writing</label>
 						<div class="form-group has-feedback">
-							<input type="text" name="writing" value="<?php echo ($this->input->post('writing') ? $this->input->post('writing') : $reportRow['writing']); ?>" class="form-control" id="writing" onblur="validateMockTestScore(this.value,this.id)"/>
+							<input type="text" name="writing" value="<?php echo ($this->input->post('writing') ? $this->input->post('writing') : $reportRow['writing']); ?>" class="form-control score" id="writing" onblur="validateMockTestScore(this.value,this.id)"/>
 							<span class="text-danger writing_err"><?php echo form_error('writing');?></span>
 						</div>
 					</div>
@@ -84,7 +84,7 @@
 					<div class="col-md-3">
 						<label for="speaking" class="control-label"><span class="text-danger">*</span>Speaking</label>
 						<div class="form-group has-feedback">
-							<input type="text" name="speaking" value="<?php echo ($this->input->post('speaking') ? $this->input->post('speaking') : $reportRow['speaking']); ?>" class="form-control" id="speaking" onblur="validateMockTestScore(this.value,this.id)"/>
+							<input type="text" name="speaking" value="<?php echo ($this->input->post('speaking') ? $this->input->post('speaking') : $reportRow['speaking']); ?>" class="form-control score" id="speaking" onblur="validateMockTestScore(this.value,this.id)"/>
 							<span class="text-danger speaking_err"><?php echo form_error('speaking');?></span>
 						</div>
 					</div>
@@ -92,7 +92,7 @@
 					<div class="col-md-3">
 						<label for="oa" class="control-label"><span class="text-danger">*</span>Over All</label>
 						<div class="form-group has-feedback">
-							<input type="text" name="oa" value="<?php echo ($this->input->post('oa') ? $this->input->post('oa') : $reportRow['oa']); ?>" class="form-control" id="oa" onblur="validateMockTestScore(this.value,this.id)"/>
+							<input type="text" name="oa" value="<?php echo ($this->input->post('oa') ? $this->input->post('oa') : $reportRow['oa']); ?>" class="form-control score" id="oa" onblur="validateMockTestScore(this.value,this.id)"/>
 							<span class="text-danger oa_err"><?php echo form_error('oa');?></span>
 						</div>
 					</div>
@@ -108,3 +108,14 @@
 		</div>
     </div>
 </div>
+<script src="<?php echo site_url(''.DESIGN_VERSION.'/js/jquery-3.6.0.min.js?v='.JS_CSS_VERSION);?>"></script>
+<script>
+            $( document ).ready(function() {
+                $('.score').keydown(function (e) {
+					var inputval = this.value;	
+					var self = $(this);
+					self.val(self.val().replace(/[^a-zA-Z0-9.]/, ""));				
+      			});
+            });
+
+</script>

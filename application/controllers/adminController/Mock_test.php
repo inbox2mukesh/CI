@@ -134,7 +134,7 @@ class Mock_test extends MY_Controller{
                     //activity update end
 
                     $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
-                  //  redirect('adminController/mock_test/ViewUploadedReport_/'.$id.'/'.$test_module_id);
+                   redirect('adminController/mock_test/ViewUploadedReport_/'.$id.'/'.$test_module_id);
                 }else{
                     $this->session->set_flashdata('flsh_msg', FAILED_MSG);
                     redirect('adminController/mock_test/edit_ielts_report_/'.$id);
@@ -312,14 +312,13 @@ class Mock_test extends MY_Controller{
         $cn = $this->router->fetch_class().''.'.php';
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}     
-        //access control ends        
-
+        //access control ends    
         $data['title'] = 'Upload Mock test report(.CSV)';
         $this->load->library('form_validation');
         $this->form_validation->set_rules('test_module_id','Test','required');
         $this->form_validation->set_rules('programe_id','program','required');
         $this->form_validation->set_rules('title','CSV title','required|trim');   
-        $this->form_validation->set_rules('active','active','required');
+        // $this->form_validation->set_rules('active','active','required');
         $params = [];
         $by_user=$_SESSION['UserId'];
         
@@ -337,7 +336,7 @@ class Mock_test extends MY_Controller{
                 'test_module_id'=>$test_module_id,
                 'programe_id'=> $programe_id,
                 'title'=>$title,
-                'active'=>$active,
+                'active'=>1,
                 'by_user'=> $by_user
             );
             $id = $this->Mock_test_model->saveCSV($params1);

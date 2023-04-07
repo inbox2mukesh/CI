@@ -602,8 +602,11 @@ class Lead_management extends MY_Controller{
             $params = array_merge($params, array("lead_uid"=>$order_id));
             $this->Followup_model->insert_lead($params);
 
-            $subject = 'Hi! your enquiry sent successfully';
-            $email_message = 'Hi! your enquiry sent successfully at our Enquiry team. We will get back to soon.';
+            // $subject = 'Hi! your enquiry sent successfully';
+            // $email_message = 'Hi! your enquiry sent successfully at our Enquiry team. We will get back to soon.';
+            $email_content = enquiry_email();
+            $subject = $email_content['subject'];  
+            $email_message = $email_content['content']; 
             $mailData['fname']          = $params['fname'];                
             $mailData['email']          = $params['email'];
             $mailData['email_message']  = $email_message;

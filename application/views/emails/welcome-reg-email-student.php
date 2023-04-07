@@ -13,6 +13,11 @@
 	</p>
 	</td>
 </tr>
+<tr>
+	<td align="left">	
+		<p><?php echo isset($email_footer_text) ? $email_footer_text:''; ?></p>	
+	</td>
+</tr>
 
 <tr>
 	<td align="left">	

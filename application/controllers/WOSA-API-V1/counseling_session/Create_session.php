@@ -187,9 +187,11 @@ class Create_session extends REST_Controller{
                //$this->_call_smaGateway($opt_mobileno,$message);
                 //$this->_call_smaGateway($mobile,$message);
             }
-            $subject = 'Dear '.$std_data->fname.', your session booked successfully';
-            $email_message= 'Your session booked successfully. Details are as below:';
-                        
+            // $subject = 'Dear '.$std_data->fname.', your session booked successfully';
+            // $email_message= 'Your session booked successfully. Details are as below:';
+            $email_content = session_booked(); 
+            $subject = $email_content['subject'];
+            $email_message= $email_content['content'];            
             $mailData['fname']  = $std_data->fname;
             $mailData['session_type']  = $std_data->session_type;
             $mailData['date']  = $std_data->booking_date;

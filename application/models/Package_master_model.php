@@ -1442,7 +1442,7 @@ class Package_master_model extends CI_Model
         }else{
             $this->db->where(array('spkg.student_package_id'=>$id,'pack_type'=>'online','spkg.status'=>'succeeded'));
         }               
-        $this->db->order_by('spkg.`requested_on` DESC');
+        $this->db->order_by('spkg.`student_package_id` DESC');
         return $this->db->get('')->result_array();
     }
 
@@ -1496,7 +1496,7 @@ class Package_master_model extends CI_Model
         }else{
             $this->db->where(array('spkg.student_id'=>$id,'pack_type'=>'offline','spkg.status'=>'succeeded'));
         }               
-        $this->db->order_by('spkg.`requested_on` DESC');
+        $this->db->order_by('spkg.`student_package_id` DESC');
         return $this->db->get('')->result_array();
     }
 

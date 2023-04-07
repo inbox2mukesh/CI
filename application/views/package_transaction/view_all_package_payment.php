@@ -156,7 +156,7 @@
                                         echo $json_string['last_payment_error']['message'];
                                     } 
                                     else {                                       
-                                        if($json_string['status'] !="N")
+                                        if(isset($json_string['status']) && $json_string['status'] !="N")
                                         {
                                             echo ucwords($json_string['status']);
                                         }

@@ -766,7 +766,7 @@ class Practice_package_model extends CI_Model
         }else{
             $this->db->where(array('spkg.student_package_id'=>$id,'pack_type'=>'practice','spkg.status'=>'succeeded'));
         }               
-        $this->db->order_by('spkg.`requested_on` DESC');
+        $this->db->order_by('spkg.`student_package_id` DESC');
         return $this->db->get('')->result_array();
     }
 

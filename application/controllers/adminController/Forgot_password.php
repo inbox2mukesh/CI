@@ -38,8 +38,11 @@ class Forgot_password extends MY_Controller {
                 $updated = $this->User_model->update_user_pwd($email, $params);
                 if(base_url()!=BASEURL and $updated){
                     //MAIL
-                    $subject = 'Hi, Password reset successfully- Team WOSA';
-                    $email_message='Your Password reset successfully. Details are as below:';
+                    // $subject = 'Hi, Password reset successfully- Team WOSA';
+                    // $email_message='Your Password reset successfully. Details are as below:';
+                    $email_content = forgot_password_email($plain_pwd);
+                    $subject = $email_content['subject'];
+                    $email_message= $email_content['content'];
                     $mailData               = array();
                     $mailData['email']      = $email;
                     $mailData['password']   = $plain_pwd;

@@ -1,3 +1,11 @@
+<style>
+  .form-checkbox input:checked + label:before {
+    background: #d1d1d1;
+}
+  .form-checkbox input:checked + label:after {
+    border-color: #fff;
+  }
+</style>
 <div class="row">
     <div class="col-md-12">
         <div class="box box-info">
@@ -74,7 +82,7 @@
 
           <div class="col-md-12">
             <div class="form-group form-checkbox">
-              <input type="checkbox" name="active" value="1" id="active" checked="checked"/>
+              <input type="checkbox" name="active" value="1" id="active" checked="checked" disabled="true"/>
               <label for="active" class="control-label">Active</label>
             </div>
           </div>         

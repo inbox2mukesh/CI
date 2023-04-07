@@ -50,7 +50,7 @@
                         <td><?php echo $c['to_fname'].' '.$c['to_lname'].'-'.$c['to_mobile']; ?></td>
                         <td><?php echo $c['from_fname'].' '.$c['from_lname'].'-'.$c['from_mobile']; ?></td><td><?php echo $c['ref_fname'].' '.$c['ref_lname'].'-'.$c['ref_mobile']; ?></td>
                         <td><?php echo $c['amount']; ?></td>
-                        <td><?php echo $c['actually_used_amount']; ?></td>	
+                        <td><?php echo $c['actually_used_amount']/100; ?></td>	
                         <td><?php echo $c['remarks']; ?></td>
                         <td><?php echo $c['created']; ?></td>
                         <td>

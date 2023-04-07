@@ -67,14 +67,20 @@ class Verify_student extends REST_Controller {
                    //$this->_call_smaGateway($studentInfo['mobile'],$message);
 
                     if(base_url()!=BASEURL){
-                        $subject = 'Dear '.$studentInfo['fname'].', you are registered successfully at '.COMPANY.'';
-                        $email_message = 'You are registered successfully at '.COMPANY.' Your details are as below:';
+                        // $subject = 'Dear '.$studentInfo['fname'].', you are registered successfully at '.COMPANY.'';
+                        // $email_message = 'You are registered successfully at '.COMPANY.' Your details are as below:';
+                        $email_content = student_registration();
+                        $subject = $email_content['subject'];
+                        $email_message = $email_content['content'];
+                        $footer_text = $email_content['email_footer_content'];
+
                         $mailData  = $this->Student_model->getMailData_forReg($lastId);
                         $mailData['UID']            = $mailData['UID'];
                         $mailData['password']       = $plain_pwd;
                         $mailData['email_message']  = $email_message;
                         $mailData['thanks']         = THANKS;
                         $mailData['team']           = WOSA;
+                        $mailData['email_footer_text'] = $footer_text;
                         $this->sendEmailTostd_creds_($subject,$mailData);
                     }
 

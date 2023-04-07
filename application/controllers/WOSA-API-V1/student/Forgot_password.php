@@ -48,8 +48,11 @@ public function __construct() {
                     
                     if(base_url()!=BASEURL){
                         $mailData = $this->Student_model->get_student_short($lastId);
-                        $subject = 'Dear User, your password has been reset successfully';
-                        $email_message = 'Dear User, your password has been reset successfully. Your new password are as below:';
+                        // $subject = 'Dear User, your password has been reset successfully';
+                        // $email_message = 'Dear User, your password has been reset successfully. Your new password are as below:';
+                        $email_content = forgot_password_email($plain_pwd);
+                        $subject = $email_content['subject'];
+                        $email_message = $email_content['content'];
                         $mailData['password']       = $plain_pwd;
                         $mailData['email_message']  = $email_message;
                         $mailData['thanks']         = THANKS;

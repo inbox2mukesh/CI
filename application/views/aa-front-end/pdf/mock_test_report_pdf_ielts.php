@@ -126,9 +126,9 @@
   <td width="10%" align="center" style="font-size:12pt;height:53px;font-weight:bold; border:solid 1px #666666;margin: 0px;padding:0px 10px;vertical-align: middle;">
       <?php
       if($RT_report_data->error_message->data->gender_name=='Male'){
-        $gender_name = 'M';
+        $gender_name = 'Male';
       }elseif($RT_report_data->error_message->data->gender_name=='Female'){
-         $gender_name = 'F';
+         $gender_name = 'Female';
       }else{
  
         $gender_name='N/A';

@@ -220,8 +220,11 @@ class Enquiry extends MY_Controller{
         if(base_url()!=BASEURL){
             
             //MAIL
-            $subject = "Verification code verification- WOSA";
-            $email_message='Hi, please confirm your details by entering the Verification code '.$otp.'Verification code is Valid for 10 minutes only Regards</br>'.COMPANY;
+            // $subject = "Verification code verification- WOSA";
+            // $email_message='Hi, please confirm your details by entering the Verification code '.$otp.'Verification code is Valid for 10 minutes only Regards</br>'.COMPANY;
+            $email_content = otp_send_verification_email($otp);
+            $email_message = $email_content['content'];
+            $subject = $email_content['subject'];
             $mailData=[]; 
             $mailData['fname']         = $params['fname'];
             $mailData['email']         = $params['email'];               

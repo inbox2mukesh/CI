@@ -141,9 +141,11 @@ class Student_enquiry extends MY_Controller{
                 $test_module_name = $stdInfo['test_module_name'];
                 $email = $stdInfo['email'];
                 $mobile = $stdInfo['mobile'];
-                $fname = $stdInfo['fname'];                
-                $subject='Hi! Your Enquiry response from- Western Overseas'; 
-                $email_message="Hi, Your Enquiry response (Enquiry Number:$stdInfo[enquiry_no])  from- Western Overseas are as below:<br/> ".$this->input->post('admin_reply').' ';
+                $fname = $stdInfo['fname'];  
+                $admin_reply =   $this->input->post('admin_reply');
+                $email_content = admin_enquiry_reply_email($stdInfo['enquiry_no'],$admin_reply) ;          
+                $subject= $email_content['subject']; 
+                $email_message = $email_content['content']; 
                     $mailData=[];                    
                     $mailData['fname']          = $fname;                
                     $mailData['email']          = $email;
@@ -189,8 +191,11 @@ class Student_enquiry extends MY_Controller{
             $description= 'New enquiry having PK-ID '.$enquiry_id.' added';
             $res=$this->addUserActivity($activity_name,$description,$student_package_id=0,$by_user);
         //activity update end
-        $subject = 'Hi! your enquiry sent successfully';
-        $email_message = 'Hi! your enquiry sent successfully at our Enquiry team. We will get back to soon.';
+        // $subject = 'Hi! your enquiry sent successfully';
+        // $email_message = 'Hi! your enquiry sent successfully at our Enquiry team. We will get back to soon.';
+        $enquiry_content = enquiry_email($enquiry_id);
+        $subject = $enquiry_content['subject'];
+        $email_message = $enquiry_content['content'];
         $mailData['fname']          = $enqData['fname'];                
         $mailData['email']          = $enqData['email'];
         $mailData['email_message']  = $email_message;
@@ -274,9 +279,12 @@ class Student_enquiry extends MY_Controller{
                     $params3 = array('student_id'=>$student_id, 'student_identity'=> $student_identity,'details'=> $details,'by_user'=>$by_user);
                     $idd = $this->Student_model->update_student($student_id, $params2);
                     $std_journey = $this->Student_journey_model->update_studentJourney($params3);
-
-                    $subject='Registration successfull- WOSA'; 
-                    $email_message='Dear '.ucfirst($this->input->post('fname')).', You are registered successfully at Western Overseas.Details are as below:';
+                    $email_content = student_registration();
+                    $subject = $email_content['subject'];
+                    $email_message = $email_content['content'];
+                    $footer_text = $email_content['email_footer_content'];
+                    // $subject='Registration successfull- WOSA'; 
+                    // $email_message='Dear '.ucfirst($this->input->post('fname')).', You are registered successfully at Western Overseas.Details are as below:';
                         $mailData=[];
                         $mailData['password']       = $plain_pwd;
                         $mailData['fname']          = $enqData['fname'];                
@@ -284,6 +292,7 @@ class Student_enquiry extends MY_Controller{
                         $mailData['email_message']  = $email_message;
                         $mailData['thanks']         = THANKS;
                         $mailData['team']           = WOSA;
+                        $mailData['email_footer_text'] = $footer_text;
                         if(base_url()!=BASEURL){               
                             $this->sendEmailTostd_creds_($subject,$mailData);
                         }                 

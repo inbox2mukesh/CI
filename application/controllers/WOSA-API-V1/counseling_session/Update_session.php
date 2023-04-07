@@ -33,8 +33,11 @@ public function index_post()
              if($std_data1->email_send_flag == 1)
              {
                 $mailData = [];  
-                $subject='SESSION BOOKING CONFIRMATION - Western Overseas Immigration';
-                $email_message='Thankyou for booking an session. Here are the details:'; 
+                // $subject='SESSION BOOKING CONFIRMATION - Western Overseas Immigration';
+                // $email_message='Thankyou for booking an session. Here are the details:'; 
+                $email_content = session_booked(); 
+                $subject = $email_content['subject'];
+                $email_message= $email_content['content'];
                 $mailData['student_name']        =$session_data['fname'].' '.$session_data['lname'];                        
                 $mailData['refno']               = $session_data['sessBookingNo']; 
                 $mailData['email']               = $session_data['email'];   
@@ -52,8 +55,11 @@ public function index_post()
 
                /* email send to admin */
                $mailData1 = [];  
-                $subject='NEW SESSION BOOKING MADE - Western Overseas Immigration';
-                $email_message='New session booking made. Here are the details:'; 
+                // $subject='NEW SESSION BOOKING MADE - Western Overseas Immigration';
+                // $email_message='New session booking made. Here are the details:'; 
+                $email_content = session_booked(); 
+                $subject = $email_content['subject'];
+                $email_message= $email_content['content'];
                 $mailData1['student_name']        =$session_data['fname'].' '.$session_data['lname'];                        
                 $mailData1['refno']               = $session_data['sessBookingNo']; 
                 $mailData1['email']               = CU_EMAIL2;   

@@ -12,7 +12,11 @@
 </p>
 </td>
 </tr>
-
+<tr>
+<td style="font-size:16px; color:#333; line-height:24px; text-align: justify">
+<p style="padding:5px 0px;margin:0px;"><?php isset($email_footer_content)?$email_footer_content:'' ; ?></p>	
+</td>
+</tr>
 
 
 <tr>

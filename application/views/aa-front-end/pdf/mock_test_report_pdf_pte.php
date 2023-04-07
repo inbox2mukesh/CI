@@ -269,9 +269,9 @@ echo $writing;
 <div style="float:right;width:59%;font-size:12px;font-weight:400;text-align:left; font-weight:bold;">
 <?php
   if($RT_report_data->error_message->data->gender_name=='Male'){
-    $gender_name = 'M';
+    $gender_name = 'Male';
   }elseif($RT_report_data->error_message->data->gender_name=='Female'){
-    $gender_name = 'F';
+    $gender_name = 'Female';
   }else{ 
     $gender_name='N/A';
   }

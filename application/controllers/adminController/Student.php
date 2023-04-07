@@ -97,14 +97,20 @@ class Student extends MY_Controller{
                     $idd = $this->Student_model->update_student($studentid['id'],$params);
                     if(base_url()!=BASEURL){               
                         $studentInfo = $this->Student_model->get_student($studentid['id']);
-                        $subject = 'Dear '.$studentInfo['fname'].', you are registered successfully at '.COMPANY.'';
-                        $email_message = 'You are registered successfully at '.COMPANY.' Your details are as below:';
+                        // $subject = 'Dear '.$studentInfo['fname'].', you are registered successfully at '.COMPANY.'';
+                        // $email_message = 'You are registered successfully at '.COMPANY.' Your details are as below:';
+                        $email_content = student_registration();
+                        $subject = $email_content['subject'];
+                        $email_message = $email_content['content'];
+                        $footer_text = $email_content['email_footer_content'];
+
                         $mailData  = $this->Student_model->getMailData_forReg($studentid['id']);
                         $mailData['UID']            = $mailData['UID'];
                         $mailData['password']       = $plain_pwd;
                         $mailData['email_message']  = $email_message;
                         $mailData['thanks']         = THANKS;
                         $mailData['team']           = WOSA;
+                        $mailData['email_footer_text'] = $footer_text;
                         $this->sendEmailTostd_creds_($subject,$mailData);
                     } 
                     $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
@@ -1592,11 +1598,14 @@ class Student extends MY_Controller{
             $getBatchName = $this->Batch_master_model->getBatchName($batch_id);
             $get_centerName = $this->Center_location_model->get_centerName($pack_center_id);
 
-            if(isset($mail_sent)){
-
-                $subject = 'Dear User, your package subscribed successfully at '.COMPANY.'';
-                $email_message='Your package subscribed successfully at '.COMPANY.' details are as below:';
+            if(isset($mail_sent))
+            {
                 $mailData                   = $this->Student_model->getMailData($student_package_id);
+                // $subject = 'Dear User, your package subscribed successfully at '.COMPANY.'';
+                // $email_message='Your package subscribed successfully at '.COMPANY.' details are as below:';
+                $email_content = package_purchase($mailData['package_name']);
+                $subject = $email_content['subject'];
+                $email_message = $email_content['content'];
                 $mailData['email_message']  = $email_message;
                 $mailData['test_module_name']= $getTestName['test_module_name'];
                 $mailData['programe_name']  = $getProgramName['programe_name'];
@@ -1921,9 +1930,12 @@ class Student extends MY_Controller{
         $getProgramName = $this->Programe_master_model->getProgramName($pack_programe_id);        
         $get_centerName = $this->Center_location_model->get_centerName($pack_center_id);        
         //////////////////status update end///////////////////////// 
-        $subject = 'Dear User, your package subscribed successfully at '.COMPANY.'';
-        $email_message='Your package subscribed successfully at '.COMPANY.' details are as below:';
+        // $subject = 'Dear User, your package subscribed successfully at '.COMPANY.'';
+        // $email_message='Your package subscribed successfully at '.COMPANY.' details are as below:';
         $mailData                   = $this->Student_model->getMailData_pp($student_package_id);
+        $email_content = package_purchase($mailData['package_name']);
+        $subject = $email_content['subject'];
+        $email_message = $email_content['content'];
         $mailData['email_message']  = $email_message;
         $mailData['test_module_name']= $getTestName['test_module_name'];
         $mailData['programe_name']  = $getProgramName['programe_name'];
@@ -2364,9 +2376,12 @@ class Student extends MY_Controller{
             $getBatchName = $this->Batch_master_model->getBatchName($batch_id);
             $get_centerName = $this->Center_location_model->get_centerName($pack_center_id);
             if(isset($mail_sent)){
-                $subject = 'Dear User, your package subscribed successfully at '.COMPANY.'';
-                $email_message='Your package subscribed successfully at '.COMPANY.' details are as below:';
+                // $subject = 'Dear User, your package subscribed successfully at '.COMPANY.'';
+                // $email_message='Your package subscribed successfully at '.COMPANY.' details are as below:';
                 $mailData                   = $this->Student_model->getMailData($student_package_id);
+                $email_content = package_purchase($mailData['package_name']);
+                $subject = $email_content['subject'];
+                $email_message = $email_content['content'];
                 $mailData['email_message']  = $email_message;
                 $mailData['test_module_name']= $getTestName['test_module_name'];
                 $mailData['programe_name']  = $getProgramName['programe_name'];
@@ -3718,8 +3733,11 @@ class Student extends MY_Controller{
         if($id)
         {
             $otp = rand(1000,10000);            
-            $subject='Email OTP verification';                   
-            $email_message='Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
+            // $subject='Email OTP verification';                   
+            // $email_message='Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
+            $email_content = otp_send_verification_email($otp);
+            $email_message = $email_content['content'];
+            $subject = $email_content['subject'];
             $mailData                 = [];
             $mailData['fname']        = 'User';
             $mailData['email']        = $email;
@@ -3840,7 +3858,7 @@ class Student extends MY_Controller{
         if($amount_due==0){
             $allowed = 0;
             header('Content-Type: application/json');
-            $response = ['msg'=>'You are not allowed to Rembursed waiver because you have no dues.', 'status'=>'false'];
+            $response = ['msg'=>'You are not allowed to Reimbursed waiver because you have no dues.', 'status'=>'false'];
             echo json_encode($response);
         }elseif($amount_due==$waiver2){
             $allowed = 1;
@@ -3849,12 +3867,12 @@ class Student extends MY_Controller{
         }elseif($amount_due<$waiver2){
             $allowed = 0;
             header('Content-Type: application/json');
-            $response = ['msg'=>'You are not allowed to Rembursed waiver because you have no dues.', 'status'=>'false'];
+            $response = ['msg'=>'You are not allowed to Reimbursed waiver because waiver amount is greater than dues.', 'status'=>'false'];
             echo json_encode($response);
         }else{
             $allowed = 0;
             header('Content-Type: application/json');
-            $response = ['msg'=>'You are not allowed to Rembursed waiver because you have no dues.', 'status'=>'false'];
+            $response = ['msg'=>'You are not allowed to Reimbursed waiver because you have no dues.', 'status'=>'false'];
             echo json_encode($response);
         }
 
@@ -3876,6 +3894,7 @@ class Student extends MY_Controller{
             'modified'          => date("d-m-Y h:i:s A"),
         ); 
         $params4 = array('active'=>0,'actually_used_amount'=>$waiver); 
+        $idd1=null;$idd2=null;$idd3=null;
         if($allowed==1){
             $idd1 = $this->Student_package_model->update_student_pack_payment_for_waiver_remburse($student_package_id,$params);
             $idd2 = $this->Student_package_model->update_transaction($params2);        
@@ -3886,20 +3905,21 @@ class Student extends MY_Controller{
             //activity update start
                 $waiver = $waiver/100;
                 $activity_name = WAIVER_REMBURSE;
-                $description = 'Waiver Rembursed worth '.CURRENCY.'  '.$waiver.' for student '.$UID.' ';
+                $description = 'Waiver Reimbursed worth '.CURRENCY.'  '.$waiver.' for student '.$UID.' ';
                 $res=$this->addUserActivity($activity_name,$description,$student_package_id,$by_user);
             //activity update end
+            if($idd1 && $idd2 && $idd3){
+                header('Content-Type: application/json');
+                $response = ['msg'=>'Wow! Waiver Reimbursed successfully for this student', 'status'=>'true'];
+                echo json_encode($response);
+            }else{
+                header('Content-Type: application/json');
+                $response = ['msg'=>'Oh.! Waiver Reimbursed failed! Try later', 'status'=>'false'];
+                echo json_encode($response);
+            }
         }              
        
-        if($idd1 and $idd2 and $idd3){
-            header('Content-Type: application/json');
-            $response = ['msg'=>'Wow! waiver rembursed successfully for this student', 'status'=>'true'];
-            echo json_encode($response);
-        }else{
-            header('Content-Type: application/json');
-            $response = ['msg'=>'Oh.! waiver reremburse_refund_mbursment failed! Try later', 'status'=>'false'];
-            echo json_encode($response);
-        }        
+                
     }
 
     //non-real function
