@@ -17,6 +17,7 @@ class Enquiry extends MY_Controller{
         $this->load->model('Student_service_masters_model');
         $this->load->model('Center_location_model');
         $this->load->model('Student_journey_model'); 
+        $this->load->helper('common'); 
     }    
 
     function enquiry_submit() 

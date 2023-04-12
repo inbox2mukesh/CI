@@ -224,7 +224,7 @@
                               <div class="form-group">
                                 <lable class="font-weight-600">Select Package Start Date<span class="text-red">*</span></lable>
                                 <div class="has-feedback">
-                                  <input class="fstinput removeerrmessage datepicker" name="packstartdate" placeholder="DD-MM-YYYY" autocomplete="off" id="packagestartdate_<?php echo $p->package_id; ?>" readonly>
+                                  <input class="fstinput removeerrmessage datepicker" name="packstartdate" placeholder="DD-MM-YYYY" autocomplete="off" id="packagestartdate_<?php echo $p->package_id; ?>" >
                                   <span class="fa fa-calendar form-group-icon"></span>
                                   <div class="validation font-11 red-text packagestartdate_<?php echo $p->package_id; ?>_err"></div>
                                 </div>

@@ -177,13 +177,13 @@ echo $writing;
 </div> 
 </div>
       
-<div class="gridtb" style="margin-top:9px; margin-bottom:9px; display: flow-root; clear: both;">
+<!-- <div class="gridtb" style="margin-top:9px; margin-bottom:9px; display: flow-root; clear: both;">
 <div style="width:36%; float:left;font-size: 12px; font-weight:400; text-align: right; padding-right:0px;">Listening</div>
 <div style="width: 13%; float: left; font-weight: bold;font-size: 12px; text-align: center"><?php echo $RT_report_data->error_message->data->listening;?></div>
 <div style="float: right; width: 51%">
 <div style="height: 12px; background-color: #d72a22; margin-top:3px; width:<?php echo $RT_report_data->error_message->data->listening;?>%"></div>
 </div> 
-</div>
+</div> -->
       
 <div class="gridtb" style="margin-top:9px; margin-bottom:9px; display: flow-root; clear: both;">
 <div style="width:36%; float:left;font-size: 12px; font-weight:400; text-align: right; padding-right:0px;">Spelling</div>

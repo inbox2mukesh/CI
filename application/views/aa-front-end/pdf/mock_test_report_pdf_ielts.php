@@ -31,7 +31,7 @@
 <tr>
   <td width="8%" rowspan="3" align="right" valign="top" style="font-size:15pt;; font-weight: bold; line-height:20px;">Note</td>
   <td width="2%" align="center" valign="top" style="line-height:20px;padding: 4px 0px;">&#8226;</td>
-  <td width="90%" align="left" valign="top" style="font-size: 12pt; font-weight: bold; line-height:20px; padding:4px 0px;">Admission to undergradute and post gradute courses should be based on the Academic Reading and Writing Modules.</td>     
+  <td width="90%" align="left" valign="top" style="font-size: 12pt; font-weight: bold; line-height:20px; padding:4px 0px;">Admission to undergraduate and post graduate courses should be based on the Academic Reading and Writing Modules.</td>     
 </tr>
 <tr>
   <td align="center" valign="top" style="line-height:20px; padding: 4px 0px;">&#8226;</td>
@@ -39,7 +39,7 @@
 </tr>
 <tr>
   <td align="center" valign="top" style="line-height: 20px;padding: 4px 0px;">&#8226;</td>
-  <td align="left" valign="top" style="font-size: 12pt; font-weight: bold; line-height: 20px;padding:6px 0px;">It is recomended that the candidate's language ability as indicated in this Test Report Form be re-assessed after two years from the date of the test.</td>
+  <td align="left" valign="top" style="font-size: 12pt; font-weight: bold; line-height: 20px;padding:6px 0px;">It is recommended that the candidate's language ability as indicated in this Test Report Form be re-assessed after two years from the date of the test.</td>
 </tr>
 </table> 
       
@@ -198,7 +198,7 @@
     </td>
   </tr>
 </table>
-      
+      <?php //print_r($RT_report_data); ?>
 <table width="100%" cellpadding="0" cellspacing="10">
   <tr>
     <td width="10%" align="right" valign="middle" style="font-size:11pt; font-weight: bold; line-height:16px;">Listening</td>

@@ -133,6 +133,22 @@
         return $this->db->get('')->row_array();
     }
 
+    function get_ID_by_UID($id){
+
+        $this->db->select('UID,plain_pwd');
+        $this->db->from('`students`');       
+        $this->db->where(array('UID'=>$id));
+        return $this->db->get('')->row_array();
+    }
+
+    function checkUniqueUid($id)
+    {
+        $this->db->select('*');
+        $this->db->from('`students`');       
+        $this->db->where(array('UID'=>$id));
+        return $this->db->count_all_results();
+
+    }
     function getStudentCurrentStatus($id){
 
         $this->db->select('student_identity,center_id,test_module_id,programe_id');
@@ -289,7 +305,7 @@
 
     function get_studentId_byEmail($email){
         
-        $this->db->select('id');
+        $this->db->select('id,UID');
         $this->db->from('students');
         $this->db->where(array('email'=> $email));
         return $this->db->get('')->row_array();

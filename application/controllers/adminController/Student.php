@@ -26,7 +26,8 @@ class Student extends MY_Controller{
         $this->load->model('Country_model');
         $this->load->model('Center_location_model');
         $this->load->model('Waiver_model');
-        $this->load->model('Student_attendance_model');  
+        $this->load->model('Student_attendance_model'); 
+        $this->load->helper('common'); 
         //echo date('d-m-Y');
         $today=strtotime(date('d-m-Y'));
         //echo date('d-m-Y');

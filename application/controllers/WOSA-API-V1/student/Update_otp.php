@@ -15,6 +15,7 @@ class Update_otp extends REST_Controller {
       parent::__construct();
       $this->load->database();
       $this->load->model('Student_model');
+      $this->load->helper('common'); 
     }
 
     
@@ -52,8 +53,6 @@ class Update_otp extends REST_Controller {
             $mailData['thanks']        = THANKS;
             $mailData['team']          = WOSA;               
             echo $email = $this->sendEmailTostd_walkinOTP_($subject,$mailData);
-            die('test');
-            // print_r();
         }
 
          

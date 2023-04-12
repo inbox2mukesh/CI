@@ -76,7 +76,7 @@
             <?php echo $this->session->flashdata('flsh_msg'); ?>
 
             <div  class="table-ui-scroller">
-            <div class="table-responsive table-hr-scroller mheight200" id="printableArea">        
+            <div class="table-responsive table-hr-scroller mheight200" id="printableArea">   
                 <table class="table table-striped table-bordered table-sm">
                       <thead>
                             <tr>

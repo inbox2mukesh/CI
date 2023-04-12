@@ -21,11 +21,13 @@ public function __construct(){
     $this->load->model('Student_journey_model');
     $this->load->model('Student_service_masters_model');
     $this->load->model('Center_location_model');
+    $this->load->helper('common'); 
 }
 
 
 public function index_post()
 {  
+    
     if(!$this->Authenticate($this->input->get_request_header('API-KEY'))) {            
         $data['error_message'] = [ "success" => 2, "message" => UNAUTHORIZED, "data"=>''];
     }else{
@@ -36,11 +38,12 @@ public function index_post()
         $tc = $mobile_count+$email_count;
         //student add
         if($tc==0){
+           
             $otp = rand(1000,10000);      
             $ccode=ltrim($std_data->country_code,"+");
             $opt_mobileno=$ccode.''.$std_data->mobile;
             if (DEFAULT_COUNTRY == 101) //india
-            { 
+            {             
                 if(base_url()!=BASEURL){           
                 $message = 'Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
                 $this->_call_smaGateway($opt_mobileno,$message);  
@@ -62,6 +65,7 @@ public function index_post()
                     $mailData['team']          = WOSA;               
                     $this->sendEmailTostd_walkinOTP_($subject,$mailData);
                 }
+                 
             }            
            
             $countryData =$this->Country_model->get_country_id($std_data->country_code);
@@ -69,8 +73,6 @@ public function index_post()
             $maxid = $this->Student_model->getMax_UID();
 			$UID = $this->_calculateUID($maxid);
             $service_id =ONLINE_SIGNUP;
-            
-
             if(isset($std_data->center_id)){
                 $center_id = $std_data->center_id;
             }else{

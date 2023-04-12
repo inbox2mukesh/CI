@@ -24,7 +24,7 @@ class Book_session extends REST_Controller{
         $this->load->model('Student_service_masters_model');
         $this->load->model('Student_model');
         $this->load->model('Student_journey_model');
-
+        $this->load->helper('common'); 
         $this->load->library('email');
         $this->email->set_mailtype("html");
         $this->email->set_newline("\r\n");

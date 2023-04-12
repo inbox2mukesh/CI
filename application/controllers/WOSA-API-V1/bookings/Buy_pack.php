@@ -33,6 +33,7 @@ class Buy_pack extends REST_Controller{
         $this->email->set_mailtype("html");
         $this->email->set_newline("\r\n");
         $this->email->from(ADMISSION_EMAIL, FROM_NAME);
+        $this->load->helper('common'); 
     }
 
     public function index_post()

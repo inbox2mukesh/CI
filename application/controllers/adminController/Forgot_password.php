@@ -11,7 +11,8 @@ class Forgot_password extends MY_Controller {
 
     function __construct() {
         parent::__construct();   
-        $this->load->model('User_model');     
+        $this->load->model('User_model');   
+        $this->load->helper('common');   
     }
 
     function index()

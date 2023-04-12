@@ -29,6 +29,7 @@
 										echo '<span>
 												<a href="'.site_url(EMP_IMAGE_PATH.$user['image']).'" target="_blank">'.$user['image'].'</a>
 											</span>';
+											echo '<input type="hidden" name="uploaded_image" id="uploaded_image" value="'.EMP_IMAGE_PATH.$user['image'].'">';
 									}else{
 										echo NO_FILE;
 									}

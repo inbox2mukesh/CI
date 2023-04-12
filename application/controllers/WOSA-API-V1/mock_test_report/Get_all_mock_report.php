@@ -23,15 +23,14 @@ class Get_all_mock_report extends REST_Controller {
           $data['error_message'] = [ "success" => 2, "message" => UNAUTHORIZED, "data"=>''];
           
         }else{
-          $id = $this->input->get_request_header('STUDENT-ID');
+          $id = $this->input->get_request_header('STUDENT-ID');//get_ID_by_UID($id);
           $UIDdata = $this->Student_model->get_UID($id);
           $UID = $UIDdata['UID'];
           $ieltsData = $this->Mock_test_model->get_all_mt_report_ielts($UID);
           $pteData = $this->Mock_test_model->get_all_mt_report_pte($UID); 
           $toeflData = $this->Mock_test_model->get_all_mt_report_toefl($UID);
 
-          $bData = array_merge($ieltsData, $pteData, $toeflData);
-
+          $bData = array_merge($ieltsData, $pteData, $toeflData);          
           if(!empty($bData)){
             $data['error_message'] = [ "success" => 1, "message" => "success", "data"=> $bData];    
           }else{

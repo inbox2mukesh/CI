@@ -18,8 +18,8 @@
 										<h2><?php echo ucfirst($p->title);?></h2>
 										<ul> 
 											<li><span class="mr-5 font-weight-600">Test Type:</span><?php echo ucfirst($p->test_module_name.'-'.$p->programe_name);?></li>
-											<li><span class="mr-5 font-weight-600">Test Date:</span><?php echo $p->Date_of_Test;?></li>
-											<li><span class="mr-5 font-weight-600">Report Issue On:</span><?php echo $p->Date_of_Report;?></li>
+											<li><span class="mr-5 font-weight-600">Test Date:</span><?php echo date('jS F y',strtotime($p->Date_of_Test));?></li>
+											<li><span class="mr-5 font-weight-600">Report Issue On:</span><?php echo date('jS F y',strtotime($p->Date_of_Report));;?></li>
 										</ul>
 										<div class="ftr-btm"> <a href="<?php echo base_url('our_students/mock_test_reports_download/'.base64_encode($p->id).'/'.base64_encode($p->test_module_name));?>" target="_blank" class="btn btn-wht mt-5">Download Report</a> </div>
 									</div>

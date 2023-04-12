@@ -876,7 +876,8 @@
                             <tr><?php echo TR_ONLINE_OFFLINE; ?></tr>
                         </thead>
                         <tbody id="myTable">
-                        <?php foreach ($student_package_online as $sp) {
+                        <?php
+                            foreach ($student_package_online as $sp) {
                             $encId = base64_encode($sp['student_id']);
                             $url = site_url('adminController/student/student_transaction_/' . $sp['student_package_id'] . '/' . $encId);
                             $classroom_id = $sp['classroom_id'];
@@ -907,7 +908,7 @@
                                             echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="' . $sp['packCloseReason'] . ' "  >' . DEACTIVE . '</a></span>';
                                     }else if (($sp['packCloseReason'] == 'Partial Refund' AND $sp['package_status'] == 1)) {
                                         echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
-                                    }else if ($sp['packCloseReason'] == 'Have to be start' AND $sp['active']==0) {
+                                    }else if ($sp['packCloseReason'] == 'Have to be start' AND $sp['package_status']==0) {
                                         echo '<span class="text-red"><a href="javascript:void(0);"data-toggle="tooltip" title="Have to be start"  >' . DEACTIVE . '</a></span>';
                                     }else{
                                         echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="Deactive/Expired pack"  >' . DEACTIVE . '</a></span>';

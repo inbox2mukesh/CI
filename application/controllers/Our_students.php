@@ -13,6 +13,7 @@ class Our_students extends MY_Controller
         parent::__construct();
         $this->load->model('Enquiry_purpose_model');
         $this->load->model('News_model');
+        $this->load->helper(['foumodule_api']);
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
             'STUDENT-ID:' . @$this->session->userdata('student_login_data')->id,
@@ -24,6 +25,7 @@ class Our_students extends MY_Controller
         $GLOBALS['announcements'] = json_decode($this->_curlGetData(base_url(GET_ANNOUNCEMENTS_URL), $headers));
         $GLOBALS['serviceData'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers));
         $GLOBALS['newsData'] = json_decode($this->_curlGetData(base_url(GET_NEWS_DATA_URL), $headers));
+        
         
     }
     function createClassroomSession()
@@ -414,7 +416,7 @@ class Our_students extends MY_Controller
             if($response->error_message->success==0 AND $response->error_message->message == 'fresh'){ 
                 //New registration and insert enquiry data api
                 $response_reg = json_decode($this->_curPostData(base_url(SUBMIT_STD_URL), $headers, $params));      
-                if ($response_reg->error_message->success == 1) {
+                if (isset($response_reg->error_message) && $response_reg->error_message->success == 1) {
                     $_SESSION['lastId_std'] = $response_reg->error_message->data;
                     $msg = '<div class="alert alert-success alert-dismissible">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -428,7 +430,7 @@ class Our_students extends MY_Controller
                     unset($_SESSION['lastId_std']);                  
                     $msg = '<div class="alert alert-warning alert-dismissible">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>FAILED:</strong> Somethink went wrong. Try Again <a href="#" class="alert-link"></a>.
+                    <strong>FAILED:</strong> Something went wrong. Try Again <a href="#" class="alert-link"></a>.
                     </div>';
                     header('Content-Type: application/json');
                     $response = ['msg' => $msg, 'status' =>0];
@@ -459,7 +461,7 @@ class Our_students extends MY_Controller
             );               
             //  
             $response1= json_decode($this->_curPostData(base_url(UPDATE_OTP), $headers, $student_params=null));
-            if($response1->error_message->success==1)
+            if(isset($response1->error_message) && $response1->error_message->success==1)
             {
                 //opt send success
                 //open otp popup                    
@@ -477,7 +479,7 @@ class Our_students extends MY_Controller
                 unset($_SESSION['lastId_std']);
                 $msg = '<div class="alert alert-warning alert-dismissible">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>FAILED:</strong> Somethink went wrong. Try Again <a href="#" class="alert-link"></a>.
+                    <strong>FAILED:</strong> Something went wrong. Try Again <a href="#" class="alert-link"></a>.
                 </div>';
                 header('Content-Type: application/json');
                 $response = ['msg' => $msg, 'status' =>0];
@@ -733,6 +735,9 @@ class Our_students extends MY_Controller
                 header('Content-Type: application/json');
                 $response = ['msg' => $response->error_message->message, 'status' => 'true'];
                 echo json_encode($response);
+                $loggedin_id = $this->session->userdata('student_login_data')->id;
+                $student = $this->Student_model->get_student($loggedin_id);
+                $response_fourmodule = fourmodule_new_password($student['UID'],$this->input->post('np'));
                 die();
             } else {
                 header('Content-Type: application/json');

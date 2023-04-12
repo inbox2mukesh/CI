@@ -17,6 +17,7 @@ class Verify_enqopt_student extends REST_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('Student_enquiry_model');
+        $this->load->helper('common'); 
     }
 
     public function index_post()

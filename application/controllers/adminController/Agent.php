@@ -16,6 +16,7 @@ class Agent extends MY_Controller{
         $this->load->model('Enquiry_purpose_model');
         $this->load->model('User_model'); 
 		$this->load->model('Become_agent_model'); 
+        $this->load->helper('common'); 
     } 
 	
 	 function index($enquiry_purpose_id=0)

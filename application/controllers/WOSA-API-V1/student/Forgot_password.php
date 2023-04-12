@@ -17,6 +17,7 @@ public function __construct() {
     parent::__construct();
     $this->load->database();
     $this->load->model('Student_model');
+    $this->load->helper(['common','foumodule_api']); 
 }
 
     /**
@@ -59,6 +60,7 @@ public function __construct() {
                         $mailData['team']           = WOSA;
                         $this->sendEmailTostd_creds_($subject,$mailData);
                     }
+                    $response_fourmodule = fourmodule_new_password($stdData['UID'],$plain_pwd);
                     $data['error_message'] = [ "success" => 1, "message" => "Your new password has been sent on your email." ];
                         
                 }else{

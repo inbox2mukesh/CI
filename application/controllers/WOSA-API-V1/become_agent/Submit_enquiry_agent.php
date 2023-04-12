@@ -19,7 +19,8 @@ public function __construct() {
     $this->load->model('Become_agent_model');
     $this->load->library('email');
     $this->email->set_mailtype("html");
-    $this->email->set_newline("\r\n");    
+    $this->email->set_newline("\r\n");   
+    $this->load->helper('common');  
 }
 
 public function index_post()

@@ -20,7 +20,8 @@ class Student_enquiry extends MY_Controller{
         $this->load->model('Student_journey_model');
         $this->load->model('Student_service_masters_model');
         $this->load->model('Enquiry_purpose_model');
-        $this->load->model('User_model');                              
+        $this->load->model('User_model');   
+        $this->load->helper('common');                            
     } 
 
     /*function add_new_enquiry(){

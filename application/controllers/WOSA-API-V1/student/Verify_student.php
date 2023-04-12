@@ -17,6 +17,7 @@ class Verify_student extends REST_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('Student_model');
+        $this->load->helper('common'); 
     }
 
     public function index_post()

@@ -130,7 +130,7 @@
 			<!--End Content Middle Part---->	
 	
 			<!--Footer Start---->
-			<div style="background: rgb(255,119,1);background: linear-gradient(90deg, rgba(255,119,1,1) 0%, rgba( 255,10,5,1) 100%); padding:20px; color: #ffffff; font-size:16px; height:50px; line-height:24px;bottom: 0;background-color: #ff0a05; position: fixed; width:100%; margin-top:220px;">
+			<div style="background: rgb(255,119,1);background: linear-gradient(90deg, rgba(255,119,1,1) 0%, rgba( 255,10,5,1) 100%); padding:20px; color: #ffffff; font-size:16px; height:50px; line-height:24px;bottom: 0;background-color: #ff0a05; position: fixed; width:100%; margin-top:50px;">
 					This is a Score Report generated on the basis of Practice Test conducted by Western Overseas and is not valid for any immigration purposes.
 			</div>
 			<!--Footer End---->

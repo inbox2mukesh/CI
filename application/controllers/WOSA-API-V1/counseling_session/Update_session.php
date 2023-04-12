@@ -16,6 +16,7 @@ public function __construct() {
     parent::__construct();
     $this->load->database();
     $this->load->model('Counseling_session_model'); 
+    $this->load->helper('common'); 
 }
 public function index_post()
 {  

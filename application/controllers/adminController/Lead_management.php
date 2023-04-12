@@ -18,7 +18,8 @@ class Lead_management extends MY_Controller{
         $this->load->model('Enquiry_purpose_model');
         $this->load->model('Immigration_tools_model');             
         $this->load->model('Division_master_model');             
-        $this->load->model('Student_model');             
+        $this->load->model('Student_model'); 
+        $this->load->helper('common');             
     }
 
     function crs_list(){

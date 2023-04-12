@@ -14,6 +14,7 @@ class Walkin extends MY_Controller{
         $this->load->model('Center_location_model');
         $this->load->model('Student_model');
         $this->load->model('Walkin_model');
+        $this->load->helper('common'); 
     }
 
     public function resendOTP(){

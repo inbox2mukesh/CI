@@ -477,7 +477,7 @@
             $data['branch_list']=$this->Center_location_model->funtionalBranchListByDivision($division_ids);
         }
         if(isset($data['user']['id'])){
-
+            
             $this->load->library('form_validation');
             $this->form_validation->set_rules('employeeCode','Employe Code','required|trim|integer');
             $this->form_validation->set_rules('fname','First name','required'); 
@@ -496,6 +496,7 @@
              
             if($this->form_validation->run())     
             {   
+                
                 $by_user=$_SESSION['UserId'];
                 $upload = 0;
                 if($this->input->post('country_id')){
@@ -525,6 +526,7 @@
                     $data1 = array('upload_data' => $this->upload->data());
                     $image= $data1['upload_data']['file_name'];
                     $upload = 1;
+                    unlink($this->input->post('uploaded_image'));
                 }else{                   
                     $image=$data['user']['image'];
                 }
@@ -540,6 +542,7 @@
 
                 if($active==0){
                     $portal_access =0;
+                    
                     $params = array(
                     'employeeCode' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('employeeCode')))),
                     'image'     => $image,                    
@@ -824,12 +827,12 @@
         $x ='<select name="role_id" id="role_id" class="form-control selectpicker selectpicker-ui-100" data-show-subtext="true" data-live-search="true" onchange="display_trainerCourse(this.value);"><option value="">Select role</option>';                        
             foreach($all_roles as $r){                
                 $selected=($r['id'] == $role_id) ? ' selected="selected"' : "";
-                $y .= '<option value="'.$r['id'].'" "'.$selected.'">'.$r['name'].'</option>';
+                $x .= '<option value="'.$r['id'].'" "'.$selected.'">'.$r['name'].'</option>';
             } 
                         
-        $z = '</select><span class="text-danger role_id_err"></span>';
+            $x .= '</select><span class="text-danger role_id_err"></span>';
 
-        $roldDD = $x.$y.$z; 
+        $roldDD = $x; 
         $userData = $this->User_model->getUserSpecialAccess($user_id);
         if($roldDD){                
             header('Content-Type: application/json');
