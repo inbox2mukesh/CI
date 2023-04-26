@@ -188,8 +188,12 @@ We are committed to providing a supportive and conducive learning environment th
 					
 					</div>	
                         <div class="sp-line"></div>
-					 <div class="crd-disc">			
-								<p>At Western Overseas Immigration we believe in transparency and efficiency in dealing with each and every client across a vast variety of Visa and Immigration Services. </p>							
+					 <div class="crd-disc">	
+						<?php if(DEFAULT_COUNTRY == 38) { ?>		
+								<p>If you wish to study, work or extent your visa in Canada, our expert immigration and VISA services will help you apply for the application. We also take PR and citizenship cases and cover various visa types to create an easy pathway to secure your visa success. Rely on us and migrate through RCIC expert visa consultants.</p>	
+							<?php } elseif(DEFAULT_COUNTRY == 13) {?>
+								<p>Our pride is to serve you the best Australian immigration and VISA services. Individuals planning to stay, work and study further in the country get genuine assistance from our MARA-certified visa consultants. So migrate and settle in Australia through our expert support.</p>
+								<?php } ?>
 							 <div class="view-btn">Click Here <i class="fa fa-angle-right"></i></div>
 					</div>					
 	
@@ -224,7 +228,14 @@ We are committed to providing a supportive and conducive learning environment th
 					</div>	
            <div class="sp-line"></div>
 					 <div class="crd-disc">			
-								<p>Wide range of online coaching programs for IELTS, PTE, TOEFL, and others offer students the convenience of making the best choice. Test preparation for you will involve only enrolling yourself in our programs, and our certified trainers will make you achieve a good score. Ensure your success with us!</p>							
+								
+								<?php if(DEFAULT_COUNTRY == 38) { ?>		
+								<p>IELTS | TOEFL | PTE | No longer be hard to study | Online coaching programs formulated by English language experts will ensure your success. Advanced learning strategies are incorporated to aid students in learning at a fast pace. Dig into the pool of professional courses and choose your preferred option fulfilling your needs.</p>	
+							<?php } elseif(DEFAULT_COUNTRY == 13) {?>
+								<p>We are launching new IELTS, PTE, and TOEFL online coaching programs to boost English competence and Self-confidence. Experts have invested their knowledge, experience and expertise to design online courses standing up to students' expectations. The key to success lies in our online coaching. Let's start preparing!AU Test preparation practice packs</p>	
+								<?php } else { ?>	
+									<p>Wide range of online coaching programs for IELTS, PTE, TOEFL, and others offer students the convenience of making the best choice. Test preparation for you will involve only enrolling yourself in our programs, and our certified trainers will make you achieve a good score. Ensure your success with us!</p>	
+								<?php } ?>
 								 <div class="view-btn">Click Here <i class="fa fa-angle-right"></i></div>
 					</div>	 
 	
@@ -275,8 +286,13 @@ We are committed to providing a supportive and conducive learning environment th
 				</div>
 				<div class="sp-line"></div>	
 				<div class="crd-disc">				
-				<p>Online preparation practice packs for IELTS, PTE, TOEFL, and other English proficiency tests are made for students who want to improve their English skills with expert guidance. Our small-duration courses help students to get command over the English language and achieve their desired score. Book your course today!
-</p>							
+							<?php if(DEFAULT_COUNTRY == 38) { ?>		
+								<p>We provided updated content for IELTS, PTE and TOEFL through our Test preparation practice pack that helps students do enough practice to ace the exam. Access to live expert classes, mock tests, Videos sessions, and real-time test analysis are a few aspects of our online practice packs. Let's get started to have success.</p>	
+							<?php } elseif(DEFAULT_COUNTRY == 13) {?>
+								<p>Our exclusive Test preparation practice packs have benefited students in securing their success at IELTS, PTE, and TOEFL exams. Students can practice and develop their test techniques with the latest sample papers in the programs. Choose your path to success with us, and start practising to ace the exam.</p>	
+								<?php } else { ?>	
+									<p>Online preparation practice packs for IELTS, PTE, TOEFL, and other English proficiency tests are made for students who want to improve their English skills with expert guidance. Our small-duration courses help students to get command over the English language and achieve their desired score. Book your course today!</p>	
+								<?php } ?>						
 				<div class="view-btn">Click Here <i class="fa fa-angle-right"></i></div>
 				</div>	
 		</a>
