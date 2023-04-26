@@ -43,15 +43,20 @@
 												}else{
 													$c = 'IN';
 												}
-        										
-        										foreach($countryCode->error_message->data as $p){ 
-										          if (trim($p->iso3) == $c){
-										            $sel = "selected";
-										          }else{
-										            $sel = "";
-										          }
+											if($countryCode->error_message->data)
+											{
+												foreach($countryCode->error_message->data as $p){ 
+													if (trim($p->iso3) == $c){
+													  $sel = "selected";
+													}else{
+													  $sel = "";
+													}
+													?>
+													<option value="<?php echo $p->country_code.'|'.$p->iso3; ?>" <?php echo $sel; ?>><?php echo $p->country_code. '- ' . $p->iso3; ?></option>
+
+													<?php }	
+												
 										    ?>
-          									<option value="<?php echo $p->country_code.'|'.$p->iso3; ?>" <?php echo $sel; ?>><?php echo $p->country_code. '- ' . $p->iso3; ?></option>
 									        <?php } ?>
 										</select>
 										<div class="p-validation country_code_err"><?php echo form_error('country_code');?></div>
@@ -96,11 +101,12 @@
 		<div class="modal fade" id="modal-reg-OTP" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
+				<!-- <div class="hide" role="alert" id="mail_otp_msg_danger" style="margin-bottom: 25px;"></div> -->
 					<div class="modal-body">
 						<div class="reg-modal clearfix"> <span class="cross-btn pull-right text-white hide-btn" data-dismiss="modal"><i class="fa fa-close font-20"></i></span>
 							<div class="reg-otp-info text-center text-white ">
 								<h3>ENTER VERIFICATION CODE</h3>
-								<p class="mb-10 font-12">Verification Code has been sent on your<?php if (DEFAULT_COUNTRY == 101){ echo " mobile";} else { echo " email";} ?> .</p>
+								<p class="mb-10 font-12" id="mail_otp_msg_danger">Verification Code has been sent on your<?php if (DEFAULT_COUNTRY == 101){ echo " mobile";} else { echo " email";} ?> .</p>
 									<div class="form-group">
 									
 									<div class="subs-group" id="main_sec">
@@ -379,18 +385,24 @@ function Send_registration()
 
 if (flag == 0) {
 return false;
-} else {		
+} else {
     $.ajax({
         url: "<?php echo site_url('our_students/registration');?>",
         type: 'post',
         data: {fname: fname, lname: lname, mobile: mobile, email:email,country_code:country_code,dob:dob},                
         success: function(response){	
-			
+			// alert(response.status);
           if(response.status==1)
 		  {
 			   $('#modal-register').modal('hide');
 			   $('#modal-reg-OTP').modal('show');   		
           }
+		  else if(response.status=='11')
+        {
+		  	$('#modal-register').modal('hide');
+			$('#modal-reg-OTP').modal('show');
+          	$('#mail_otp_msg_danger').html(response.msg);
+        }
 		  else
 		  {
 			$('.complaintBtnDiv_pro').hide(); 

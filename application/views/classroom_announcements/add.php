@@ -159,14 +159,14 @@
 					<div class="col-md-6">	
 						<label for="dateTime" class="control-label"><span class="text-danger">*</span>Start Date Time </label>
 						<div class="form-group has-feedback">
-							<input type="text" name="start_dateTime" id="dateTime" class="form-control user_activity_report_datetimepicker input-ui-100 removeerrmessage" value="<?php echo $this->input->post('dateTime'); ?>" />
+							<input type="text" name="start_dateTime" id="start_dateTime" class="form-control user_activity_report_datetimepicker input-ui-100 removeerrmessage" value="<?php echo $this->input->post('dateTime'); ?>" />
 							<span class="text-danger dateTime_err"><?php echo form_error('dateTime');?></span>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<label for="till_date" class="control-label">End Date Time</label>
 						<div class="form-group has-feedback">
-							<input type="text" name="end_dateTime" value="<?php echo $this->input->post('end_dateTime'); ?>" class="noBackDatep form-control input-ui-100 removeerrmessage" id="till_date" autocomplete="off"  maxlength="10"/>
+							<input type="text" name="end_dateTime" value="<?php echo $this->input->post('end_dateTime'); ?>" class="noBackDatep form-control input-ui-100 removeerrmessage" id="end_dateTime" autocomplete="off"  maxlength="10"/>
 							<span class="text-danger till_date_err"><?php echo form_error('till_date');?></span>
 							<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
 						</div>
@@ -180,9 +180,9 @@
 					</div> -->
 
 					<div class="col-md-12">
-						<label for="body" class="control-label">Body</label>
+						<label for="body" class="control-label">Body</label><span class="text-danger body_err" id="body_err"></span>
 						<div class="form-group has-feedback">
-							<textarea name="body" class="form-control myckeditor" id="body"><?php echo $this->input->post('body'); ?></textarea>
+							<textarea name="body" class="form-control removeerrmessage validatewordcount" id="body"><?php echo $this->input->post('body'); ?></textarea>
 							<span class="glyphicon glyphicon-text-size form-control-feedback"></span>
 							<span class="text-danger body_err"><?php echo form_error('body');?></span>
 						</div>
@@ -211,6 +211,11 @@
 <?php ob_start(); ?>
 
 <script>
+
+$(document).ready(function(){
+		checkWordCountCkEditor('body');
+		
+	});
  $(".user_activity_report_datetimepicker").datetimepicker({
 format: 'DD-MM-YYYY HH:mm',
 minDate:caDate

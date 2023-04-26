@@ -128,7 +128,7 @@ if(count($STD_WALLET_HISTORY->error_message->data)>0){
 						<div class="modal-scroll scroll-style">
 						<?php 
 
-if(count($SPECIAL_PROMOCODES->error_message->data)>0){
+if(is_countable($SPECIAL_PROMOCODES->error_message->data) && count($SPECIAL_PROMOCODES->error_message->data)>0){
 						foreach($SPECIAL_PROMOCODES->error_message->data as $p)
 						{ 
 							if($p->discount_type == "Percentage")

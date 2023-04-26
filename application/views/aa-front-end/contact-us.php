@@ -65,19 +65,32 @@
 					</div>
 				   <?php }elseif(DEFAULT_COUNTRY==101){ ?>
 					<?php foreach ($longBranchesOverseas->error_message->data as $p){  ?>
-		<div class="col-md-4 col-sm-6">
-			<div class="branch-box mb-20 wht-bg">
-				<h4 class="mt-0"><?php echo $p->center_name;?></h4>
-				<div class="content">
-					<p><i class="fa fa-map-marker"></i> <span><?php echo $p->address_line_1;?></span></p>
-					<p><i class="fa fa-phone"></i> <span><a href="tel:<?php echo $p->contact;?>"><?php echo $p->contact;?></a></span> </p>
-					<p><i class="fa fa-envelope-o"></i><span> 
-					<a href="mailto:<?php echo $p->email;?>"><?php echo $p->email;?></a></span> </p>
-				</div>
-				<?php if($p->feedbackLink){ ?>
-					<div class="ft-btm"><a href="<?php echo $p->feedbackLink;?>"  target="_blank" class="btn btn-red btn-md">Give Feedback</a> </div><?php } ?>
-			</div>
-		</div>
+		
+				<?php if(isset($p->center_name) && strtolower($p->center_name) != 'online') { ?>
+					<div class="col-md-4 col-sm-6">
+						<div class="branch-box mb-20 wht-bg">
+							<h4 class="mt-0"><?php echo $p->center_name;?></h4>
+						
+							<div class="content">
+								<?php if(isset($p->address_line_1) && $p->address_line_1) { ?>
+									<p><i class="fa fa-map-marker"></i> <span><?php echo $p->address_line_1;?></span></p>
+								<?php } ?>
+								<?php if(isset($p->contact) && $p->contact) { ?>
+									<p><i class="fa fa-phone"></i> <span><a href="tel:<?php echo $p->contact;?>"><?php echo $p->contact;?></a></span> </p>
+								<?php } ?>
+								<?php if(isset($p->email) && $p->email) { ?>
+									<p><i class="fa fa-envelope-o"></i><span> 
+									<a href="mailto:<?php echo $p->email;?>"><?php echo $p->email;?></a></span> </p>
+								<?php } ?>
+							</div>
+							<?php if($p->feedbackLink){ ?>
+								<div class="ft-btm"><a href="<?php echo $p->feedbackLink;?>"  target="_blank" class="btn btn-red btn-md">Give Feedback</a> </div>
+							<?php } ?>
+						</div>
+					</div>
+				<?php } ?>	
+			
+		
 	<?php } ?>
 				   <?php }else{ ?>
 				   <?php } ?>
@@ -93,19 +106,31 @@
 	<!--Australia Branch-->
 	<div class="row row-eq-height">
 	<?php foreach ($longBranchesOverseas->error_message->data as $p){  ?>
-		<div class="col-md-4 col-sm-6">
-			<div class="branch-box mb-20 wht-bg">
-				<h4 class="mt-0"><?php echo $p->center_name;?></h4>
-				<div class="content">
-					<p><i class="fa fa-map-marker"></i> <span><?php echo $p->address_line_1;?></span></p>
-					<p><i class="fa fa-phone"></i> <span><a href="tel:<?php echo $p->contact;?>"><?php echo $p->contact;?></a></span> </p>
-					<p><i class="fa fa-envelope-o"></i><span> 
-					<a href="mailto:<?php echo $p->email;?>"><?php echo $p->email;?></a></span> </p>
-				</div>
-				<?php if($p->feedbackLink){ ?>
-					<div class="ft-btm"><a href="<?php echo $p->feedbackLink;?>"  target="_blank" class="btn btn-red btn-md">Give Feedback</a> </div><?php } ?>
-			</div>
-		</div>
+			<?php if(isset($p->center_name) && strtolower($p->center_name) != 'online') { ?>
+				<div class="col-md-4 col-sm-6">
+					<div class="branch-box mb-20 wht-bg">
+						<h4 class="mt-0"><?php echo $p->center_name;?></h4>
+					
+						<div class="content">
+							<?php if(isset($p->address_line_1) && $p->address_line_1) { ?>
+								<p><i class="fa fa-map-marker"></i> <span><?php echo $p->address_line_1;?></span></p>
+							<?php } ?>
+							<?php if(isset($p->contact) && $p->contact) { ?>
+								<p><i class="fa fa-phone"></i> <span><a href="tel:<?php echo $p->contact;?>"><?php echo $p->contact;?></a></span> </p>
+							<?php } ?>
+							<?php if(isset($p->email) && $p->email) { ?>
+								<p><i class="fa fa-envelope-o"></i><span> 
+								<a href="mailto:<?php echo $p->email;?>"><?php echo $p->email;?></a></span> </p>
+							<?php } ?>
+						</div>
+						<?php if($p->feedbackLink){ ?>
+							<div class="ft-btm"><a href="<?php echo $p->feedbackLink;?>"  target="_blank" class="btn btn-red btn-md">Give Feedback</a> </div>
+						<?php } ?>
+					</div>
+				</div>	
+			<?php } ?>
+			
+		
 	<?php } ?>
 	</div>
 

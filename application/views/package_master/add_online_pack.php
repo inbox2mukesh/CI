@@ -32,7 +32,7 @@
 					<div class="col-md-4">
 						<label for="package_name" class="control-label"><span class="text-danger">*</span>Pack Name</label>
 						<div class="form-group">
-							<input type="text" name="package_name" value="<?php echo $this->input->post('package_name'); ?>" class="form-control input-ui-100 removeerrmessage" id="package_name" maxlength="45"/>
+							<input type="text" name="package_name" value="<?php echo $this->input->post('package_name'); ?>" class="form-control input-ui-100 removeerrmessage" id="package_name" maxlength="60"/>
 							<span class="text-danger package_name_err"><?php echo form_error('package_name');?></span>
 						</div>
 					</div>
@@ -214,7 +214,7 @@
 					<div class="col-md-12">
 						<label for="package_desc" class="control-label"><span class="text-danger">*</span>Package Description</label>
 						<div class="form-group has-feedback">
-							<textarea name="package_desc" class="form-control myckeditor textarea-ui-16" id="package_desc"><?php echo $this->input->post('package_desc'); ?></textarea>
+							<textarea name="package_desc" class="form-control removeerrmessage validatewordcount textarea-ui-16" id="package_desc"><?php echo $this->input->post('package_desc'); ?></textarea>
 							<span class="glyphicon glyphicon-text-size form-control-feedback"></span>
 							<span class="text-danger package_desc_err"><?php echo form_error('package_desc');?></span>
 						</div>
@@ -369,7 +369,11 @@ $(document).ready(function(){
 			$(".currency-symbol").html('<?php echo DISCOUNT_MULTIPLE_COUNTRY_CURRENCY; ?>');
 		}
 	});
-})
+});
+$(document).ready(function(){
+		checkWordCountCkEditor('package_desc');
+		
+	});
 </script>
 <?php
 global $customJs;

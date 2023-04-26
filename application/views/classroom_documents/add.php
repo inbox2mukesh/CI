@@ -57,7 +57,7 @@
 						<label for="programe_id" class="control-label">Program</label>
 						<div class="form-group">
 							<select name="programe_id" id="programe_id" class="form-control selectpicker selectpicker-ui-100" data-show-subtext="true" data-live-search="true" onchange="get_category_forPack(this.value);loadClassroom();">
-								<option data-subtext="" value="">Select program</option>
+								<option data-subtext="" value="">Select Program</option>
 								<?php 
 								foreach($all_programe_masters as $p)
 								{
@@ -252,6 +252,7 @@
 									    <?php 
 										if($section_type=='text'){ 
 										?>
+										<span class="text-danger classroom_documents_section<?php echo $i?>_err" id="classroom_documents_section<?php echo $i?>_err">*</span>
 	                                     <textarea  rows="4" cols="100" placeholder="Add Text" class="form-control classroom_documents_section" id="classroom_documents_section<?php echo $i?>" name="classroom_documents_section<?php echo $i?>"><?php echo $classroom_documents_section?></textarea>
 										<?php 
 										} else if($section_type=='image'){
@@ -353,7 +354,7 @@
 		evt.preventDefault();
 	}
 });
-$('#classroomdoc_add_form').on('submit', function(e){
+$(document).on('submit','#classroomdoc_add_form', function(e){
         e.preventDefault();
 		var flag=1;		
 		var classroom_id=$('#classroom_id').val();
@@ -504,8 +505,6 @@ $('#classroomdoc_add_form').on('submit', function(e){
 
 
 <script>
-	  
-	 
     var DEMO_IMAGE_URL='<?php echo site_url(CLASSROOM_DOCUMENTS_IMAGE_PATH."no-image.png");?>';
 	function AddRow(type){
 		
@@ -538,7 +537,8 @@ $('#classroomdoc_add_form').on('submit', function(e){
 				$(this).find('.section_type').val(type);
 				html='';
 				if(type=='text'){
-				   CKEDITOR.replace('classroom_documents_section'+i);
+				    CKEDITOR.replace('classroom_documents_section'+i);
+				   //checkWordCountCkEditor('classroom_documents_section'+i);
 				   $(this).find('#classroom_documents_section'+i).next("span").addClass('classroom_documents_section'+i+'_err');
 				}else if(type=='image'){
 					 var id='classroom_documents_section'+i;
@@ -586,8 +586,11 @@ $('#classroomdoc_add_form').on('submit', function(e){
 			type=$(this).find('.section_type').val();
 			if(type=='text'){
 				var editor = CKEDITOR.instances['classroom_documents_section'+total_section];
-    if (editor) { editor.destroy(true); }
-				   CKEDITOR.replace('classroom_documents_section'+i);
+    			/* if (editor) { 
+					editor.destroy(true); 
+				} */
+				CKEDITOR.replace('classroom_documents_section'+i);
+				//checkWordCountCkEditor('classroom_documents_section'+i);
 				   $(this).find('#classroom_documents_section'+i).next("span").addClass('classroom_documents_section'+i+'_err');
 				}
 			else if(type=='image'){
@@ -650,7 +653,8 @@ function updateCkEditer(){
 	$("#EmployeeTierId .ClassroomDocumentsDiv").each(function(){
 		type=$(this).find('.section_type').val();
 		if(type=='text'){
-			CKEDITOR.replace('classroom_documents_section'+i);
+			// CKEDITOR.replace('classroom_documents_section'+i);
+			checkWordCountCkEditor('classroom_documents_section'+i);
 		}
 	});
 	i++;

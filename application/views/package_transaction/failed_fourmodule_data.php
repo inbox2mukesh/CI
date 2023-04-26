@@ -177,8 +177,10 @@
                                 <th>Mobile No.</th>
                                 <th>Email</th>                             
                                 <th>Package Detail</th> 
+                                <th>Requested On</th>
                                 <th>Fourmodule API Call</th>                                                             
-                                <th>Fourmodule API Status</th>                                                             
+                                <th>Fourmodule API Status</th>
+                                <th>Fourmodule API JSON</th>                                                             
                                 <th>Fourmodule API Response</th> 
                                 <th>Action</th> 
                             </tr>
@@ -211,8 +213,10 @@
                                     $date_end=date_create($s['expired_on']);
                                     $date_end=date_format($date_end,"d-m-Y");
                                     echo $s['test_module_name'].' - '.$s['programe_name'].' - '.$s['package_name'].' - '.$s['package_duration'].' - '.$s['batch_name'].' - Start: '.$date_st.' - Expired: '.$date_end; ?></td>                                  
+                                    <td><?php echo $s['requested_on'];?></td>
                                     <td><?php if($s['fourmodule_api_called'] == 1) { echo "Enrollment API";} else if($s['fourmodule_api_called'] == 2){ echo "Re-Enrollment API";} else { echo "Add-program API";}?></td>
                                     <td><?php echo $s['fourmodule_status'];?></td>
+                                    <td><?php echo $s['fourmodule_json'];?></td>
                                     <td><?php echo $s['fourmodule_response'];?></td>
                                     <td>
                                     <?php if($this->Role_model->_has_access_('Package_transaction','update_fourmodulestatus')){ ?>    

@@ -236,12 +236,25 @@ function Send_registration(){
         type: 'post',
         data: {fname: fname, lname: lname, mobile: mobile, email:email,country_code:country_code,dob:dob},                
         success: function(response){
-    alert(response)
-          if(response.status=='true')
-      {
+    // alert(response)
+          if(response.status==1)
+        {
          $('#modal-register').modal('hide');
          $('#modal-reg-OTP').modal('show');       
           }
+        //   else if(response.status=='11')
+        // {
+        //   // $('#modal-register').modal('hide');
+        //   // $('#modal-reg-OTP').modal('show');
+        //   // $('#mail_otp_msg_danger').removeClass('hide');
+        //   // $('#mail_otp_msg_danger').html(response.msg);
+        //   $('#modal-register').modal('hide');
+			  //  $('#modal-reg-OTP').modal('show');
+        //   //   setTimeout(function() { 
+        //   //   $('#modal-register').modal('hide');
+        //   //   $('#modal-reg-OTP').modal('show');
+        //   //  }, 1000);
+        // }
       else
       {
          $('.complaintBtnDiv_pro').hide(); 

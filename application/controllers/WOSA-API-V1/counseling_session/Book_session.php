@@ -127,7 +127,7 @@ class Book_session extends REST_Controller{
                 $this->email->from(ADMISSION_EMAIL, FROM_NAME);
                 $this->email->to($email);
                 $this->email->subject($subject);
-                $body = $this->load->view('emails/sendEmail_SessionBooking.php',$mailData,TRUE);
+                $body = $this->load->view('emails/sendEmail_SessionBooking',$mailData,TRUE);
                 $this->email->message($body);
                 $this->email->send();
             }

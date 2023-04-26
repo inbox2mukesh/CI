@@ -139,11 +139,27 @@
 						<span class="text-danger media_file_err"><?php echo form_error('media_file');?></span>
 						</div>						
 					</div>
+					<div class="col-md-6">	
+						<label for="dateTime" class="control-label"><span class="text-danger">*</span>Start Date Time </label>
+						<div class="form-group has-feedback">
+							<input type="text" name="start_dateTime" id="start_dateTime" class="noBackDatep form-control input-ui-100 removeerrmessage" value="<?php echo date('d-m-Y H:i:s',strtotime($announcements['start_date'])); ?>" />
+							<span class="text-danger dateTime_err"><?php echo form_error('dateTime');?></span>
+							<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<label for="till_date" class="control-label">End Date Time</label>
+						<div class="form-group has-feedback">
+							<input type="text" name="end_dateTime" value="<?php echo $announcements['end_date']; ?>" class="noBackDatep form-control input-ui-100 removeerrmessage" id="end_dateTime" autocomplete="off"  maxlength="10"/>
+							<span class="text-danger till_date_err"><?php echo form_error('end_dateTime');?></span>
+							<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+						</div>
+					</div>
 
 					<div class="col-md-12">
-						<label for="body" class="control-label">Body</label>
+						<label for="body" class="control-label">Body</label><span class="text-danger body_err"><?php echo form_error('body');?></span>
 						<div class="form-group has-feedback">
-							<textarea name="body" class="form-control myckeditor" id="body"><?php echo ($this->input->post('body') ? $this->input->post('body') : $announcements['body']); ?></textarea>
+							<textarea name="body" class="form-control removeerrmessage validatewordcount99" id="body"><?php echo ($this->input->post('body') ? $this->input->post('body') : $announcements['body']); ?></textarea>
 							<span class="glyphicon glyphicon-text-size form-control-feedback"></span>
 							<span class="text-danger body_err"><?php echo form_error('body');?></span>
 						</div>
@@ -171,6 +187,26 @@
 
 <?php ob_start(); ?>
 <script>
+	$(".user_activity_report_datetimepicker").datetimepicker({
+format: 'DD-MM-YYYY HH:mm:ss',
+minDate:caDate
+});
+
+
+
+$('.user_activity_report_datetimepicker').on('dp.change', function(e){ 
+var dt=$(this).val();
+var dtp=dt.split(" ");	
+dateMin = moment(dt, 'DD-MM-YYYY HH:mm');
+$(".noBackDatep").val('');	
+$(".noBackDatep").datetimepicker({
+	minDate: dateMin,
+	format: 'DD-MM-YYYY HH:mm:ss',				
+	
+					
+});		
+
+})  
 $('#classroom_ann_edit_form').on('submit', function(e){
         e.preventDefault();
 		var flag=1;
@@ -199,7 +235,12 @@ $('#classroom_ann_edit_form').on('submit', function(e){
 		} 
        
     });
+	$(document).ready(function(){
+		checkWordCountCkEditor('body');
+		
+	});
 	</script>
+	
 
 <?php
 global $customJs;

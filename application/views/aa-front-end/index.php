@@ -141,10 +141,11 @@ We take the MARA professional Code of Conduct very seriously and make sure that 
 				</p>
 <?php } else {?>
 	<p class="text-center">
-					 Western Overseas Immigration is proudly serving migrants with student visa services and after study immigration services. Working directly with a widespread network of colleges, agents and official channel partners, Western Overseas Immigration brings not only the vast experience but also the rich values to the international grounds. We believe in providing the best services while being completely transparent with our clients. We uphold the client's confidentiality and provide solutions based on correct assessment.<br/><br/>
+	At Western Overseas, we proudly offer a versatile platform for online coaching in English proficiency tests such as IELTS, PTE, TOEFL, and others. Our comprehensive courses are designed to provide students with all the necessary tools and resources to succeed in these exams.<br><br>
 
-The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizenship Consultants), being of an immigrant origin himself understands the value of genuine and right guidance. It is these values that has led Western Overseas Immigration to establish not just local but an international network of agents and working partnerships with well established education providers worldwide.
+Expert Lectures, Grammar Tutorials, Practice Modules, Doubt-Clearing Sessions, Feedback Classes, and One-to-One Interaction make our coaching classes different and successful. We believe success in English proficiency exams requires hard work, perseverance, and dedication. Our coaching classes emphasize these values and motivate students to strive for excellence.<br><br>
 
+We are committed to providing a supportive and conducive learning environment that empowers students to achieve their goals in English proficiency exams. Join us to unlock new doors of opportunities through online coaching.
 				</p>
 	<?php }?>
 			</div>
@@ -223,7 +224,7 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 					</div>	
            <div class="sp-line"></div>
 					 <div class="crd-disc">			
-								<p>Introducing all new service catered to students looking to clear their language proficiency tests. Get a dedicated Student Dashboard, Digital Classrooms, Live interactive Classes, Study Material, Video Tutorials, Recorded Lectures and Practice Portal for Real Testing Experience.</p>							
+								<p>Wide range of online coaching programs for IELTS, PTE, TOEFL, and others offer students the convenience of making the best choice. Test preparation for you will involve only enrolling yourself in our programs, and our certified trainers will make you achieve a good score. Ensure your success with us!</p>							
 								 <div class="view-btn">Click Here <i class="fa fa-angle-right"></i></div>
 					</div>	 
 	
@@ -274,7 +275,7 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 				</div>
 				<div class="sp-line"></div>	
 				<div class="crd-disc">				
-				<p>Looking for a Self Paced Practice Portal for the Real Exam Like Testing Experience? Look no further. Introducing All Advanced Testing Platform like no other. Automated Scoring, Sectional Tests, Mock tests and more.
+				<p>Online preparation practice packs for IELTS, PTE, TOEFL, and other English proficiency tests are made for students who want to improve their English skills with expert guidance. Our small-duration courses help students to get command over the English language and achieve their desired score. Book your course today!
 </p>							
 				<div class="view-btn">Click Here <i class="fa fa-angle-right"></i></div>
 				</div>	
@@ -320,7 +321,7 @@ The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizen
 					</div>	
                         <div class="sp-line"></div>
 					 <div class="crd-disc">			
-								<p>At Western Overseas Immigration we believe in transparency and efficiency in dealing with each and every client across a vast variety of Visa and Immigration Services. </p>							
+								<p>We are the Pioneer of IELTS | PTE | TOEFL Reality Test. Our great invention is helping thousands of under-confident students overcome their exam phobia. Students also take the exam to check their preparation level. Book your slot for the upcoming Reality test and get an accurate evaluation of English proficiency. </p>							
 							 <div class="view-btn">Click Here <i class="fa fa-angle-right"></i></div>
 					</div>					
 	

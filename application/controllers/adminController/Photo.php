@@ -23,22 +23,46 @@ class Photo extends MY_Controller{
         $cn = $this->router->fetch_class().''.'.php';
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
-        
+        $this->load->library("pagination");
+        $data['title'] = 'Photo';
+        $uriSegment = 3; 
+        $totalRec = $this->Photo_model->get_all_photo_count();
         //access control ends
-        $this->load->library('Cacher');
-        $this->cacher->initiate_cache(CACHE_ENGINE);
-
-        $this->load->library('pagination');
-        $params['limit'] = RECORDS_PER_PAGE; 
-        $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
-        $config = $this->config->item('pagination');
-        $config['base_url'] = site_url('adminController/photo/index/'.$test_module_id.'?');
-        $config['total_rows'] = $this->Photo_model->get_all_photo_count($test_module_id);
-        $this->pagination->initialize($config);
-        $data['title'] = 'Photo';        
-        $data['photo'] = $this->Photo_model->get_all_photo($test_module_id,$params);
+        // $this->load->library('Cacher');
+        // $this->cacher->initiate_cache(CACHE_ENGINE);
+        $pagearr['baseurl']    = site_url('adminController/photo/index/'); 
+        $pagearr['totalcount']    = $this->Photo_model->get_all_photo_count();
+        $pagearr['perpage']    = 2;//$this->perPage;
+        $params['limit'] = $pagearr['perpage'];
+        $params['offset'] = ($test_module_id) ? $test_module_id : 0;
+        $data['photo'] = $this->Photo_model->get_all_photo($params);   
+        $data['links'] = $this->pagination($pagearr);
         $data['_view'] = 'photo/index';
         $this->load->view('layouts/main',$data); 
+    }
+
+
+    function pagination($pagearray=[])
+    {
+        $this->load->library('pagination');
+        $config['base_url']         = $pagearray['baseurl'];
+        $config['use_page_numbers'] = TRUE;
+        $config['total_rows']       = $pagearray['totalcount'];
+        $config['per_page']         = $pagearray['perpage'];
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="pageno hide"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';//</div>
+        $config['cur_tag_open']     = '<li class="active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li><span class="more-pagination"></span>';        
+        $config['next_link']        = '<span class="iconarrow iconarrow fa fa-angle-right"></span>';
+        $config['prev_link']        = '<span class="iconarrow fa fa-angle-left"></span>';        
+        $config['first_link']       = '<span class="iconarrow fa fa-angle-double-left"></span>';
+        $config['last_link']        = '<span class="iconarrow fa fa-angle-double-right"></span>';
+        $config['num_links'] = 1;
+        $data['prevlink']=$config['prev_link'];
+        $this->pagination->initialize($config);
+        return $this->pagination->create_links();
     }
     /*
      * Adding a new photo

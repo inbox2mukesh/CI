@@ -18,7 +18,7 @@ class Identify_api extends REST_Controller {
     } 
     
     public function index_get()
-    { 
+    {
         if(!$this->Authenticate($this->input->get_request_header('API-KEY'))) {            
           $data['error_message'] = [ "success" => 2, "message" => UNAUTHORIZED, "data"=>''];
         }else{

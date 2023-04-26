@@ -2109,41 +2109,66 @@ abstract class REST_Controller extends CI_Controller {
         $result = curl_exec($ch);
     }
 
-    function _calculateUID($maxid){
+    function _calculateUID($maxid)
+    {
+        $alpha = range('A','Z');
+        $num = rand(100000,999999);
+        $randkey = array_rand($alpha);
+        $cntycode = '38';
+        if(DEFAULT_COUNTRY == 38)
+        {
+            $cntycode = 'CA';
+        }
+        else if(DEFAULT_COUNTRY == 13)
+        {
+            $cntycode = 'AU';
+        }
+        else{
+            $cntycode = 'OL';
+        }
+        $generatedUID =  $cntycode.''.$alpha[$randkey].''.$num;
+        $checkuidexits = $this->Student_model->checkUniqueUid($generatedUID);
+        if($checkuidexits)
+        {
+            $this->_calculateUID();
+        }
+        else{
+            return $generatedUID;
+        }       
         
-        if($maxid==''){
-            return $new_uid  = 'A00001';
-        }
-        $numbers = preg_replace('/[^0-9]/', '', $maxid);
-        $letters = preg_replace('/[^a-zA-Z]/', '', $maxid);
-        if($numbers<99999){               
-            $nn=$numbers+1;
-            $letter_count = strlen($letters);
-            if($letter_count==1){                    
-                $loop = 5;
-                $nn =str_pad($nn,$loop,"0",STR_PAD_LEFT);
-                $new_uid = $letters.$nn;
-            }elseif($letter_count>1){ 
-                $number_count = strlen($nn);
-                $loop = 6- $letter_count;
-                $nn =str_pad($nn,$loop,"0",STR_PAD_LEFT);
-                $new_uid = $letters.$nn;
-            }else{
-                $new_uid =''; 
-            }
+        // if($maxid==''){
+        //     return $new_uid  = 'A00001';
+        // }
+        // $numbers = preg_replace('/[^0-9]/', '', $maxid);
+        // $letters = preg_replace('/[^a-zA-Z]/', '', $maxid);
+        // if($numbers<99999){               
+        //     $nn=$numbers+1;
+        //     $letter_count = strlen($letters);
+        //     if($letter_count==1){                    
+        //         $loop = 5;
+        //         $nn =str_pad($nn,$loop,"0",STR_PAD_LEFT);
+        //         $new_uid = $letters.$nn;
+        //     }elseif($letter_count>1){ 
+        //         $number_count = strlen($nn);
+        //         $loop = 6- $letter_count;
+        //         $nn =str_pad($nn,$loop,"0",STR_PAD_LEFT);
+        //         $new_uid = $letters.$nn;
+        //     }else{
+        //         $new_uid =''; 
+        //     }
 
-        }elseif($numbers>=99999){  
+        // }elseif($numbers>=99999){  
 
-            $letters= ++$letters;
-            $nn=1;
-            $loop = 6- $letter_count;
-            $nn =str_pad($nn,$loop,"0",STR_PAD_LEFT);
-            $new_uid = $letters.$nn;               
+        //     $letters= ++$letters;
+        //     $nn=1;
+        //     $loop = 6- $letter_count;
+        //     $nn =str_pad($nn,$loop,"0",STR_PAD_LEFT);
+        //     $new_uid = $letters.$nn;               
                 
-        }else{
-            $new_uid ='';
-        }
-        return $new_uid;
+        // }else{
+        //     $new_uid ='';
+        // }
+        // return $new_uid;
     }
 
     function _GetTP($pack_cb, $test_module_id, $programe_id)
@@ -2193,26 +2218,28 @@ abstract class REST_Controller extends CI_Controller {
                     $tp = '';
                 }
             }
-        } elseif ($test_module_id == PTE_ID) {
-
+        } elseif ($test_module_id == PTE_ID) 
+        {
+            $tp = '';
             if ($pack_cb == 'pp' or $pack_cb == 'practice') {
                 $tp = '121' . 'PTE-Practice-Pack';
             } else {
                 $tp = '107' . 'PTE';
             }
-        } elseif ($test_module_id == SE_ID) {
-            $tp = '110' . 'SPOKEN';
-        } elseif ($test_module_id == RT_ID) {
-            $tp = '';
-        } elseif ($test_module_id == CELPIP_ID) {
-            $tp = '108' . 'CELPIP';
-        } elseif ($test_module_id == OET_ID) {
-            $tp = '109' . 'OET';
-        }elseif ($test_module_id == TOEFL_ID) {
-            $tp = '111' . 'TOEFL';
-        } else {
-            $tp = '';
-        }
+        } 
+        // elseif ($test_module_id == SE_ID) {
+        //     $tp = '110' . 'SPOKEN';
+        // } elseif ($test_module_id == RT_ID) {
+        //     $tp = '';
+        // } elseif ($test_module_id == CELPIP_ID) {
+        //     $tp = '108' . 'CELPIP';
+        // } elseif ($test_module_id == OET_ID) {
+        //     $tp = '109' . 'OET';
+        // }elseif ($test_module_id == TOEFL_ID) {
+        //     $tp = '111' . 'TOEFL';
+        // } else {
+        //     $tp = '';
+        // }
         return $tp;
     }
 
@@ -2240,6 +2267,7 @@ abstract class REST_Controller extends CI_Controller {
         $this->email->from(ADMISSION_EMAIL, FROM_NAME); 
         $this->email->to($data['email']);
         $this->email->subject($subject);
+        // $this->email->set_header('Content-Type', 'text/html');
         $body = $this->load->view('emails/welcome-reg-email-student.php',$data,TRUE);
         $this->email->message($body);
         $this->email->send();

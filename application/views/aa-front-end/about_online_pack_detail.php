@@ -53,18 +53,18 @@
 	<!--End Why Canada Section-->
 <script>
 		// make a new multiSelect instance
-		const multi = new MultiSelect({
-			pleaseSelectOptionValue: 'nothingHere'
-		});
-		function sendData() {
-			// get the <select> values
-			const values = multi.getJson(false);
-			console.log(values);
-			// validate
-			if(multi.simpleValidate()) {
-				// make something
-			} else {
-				//make something
-			}
-		}
+		// const multi = new MultiSelect({
+		// 	pleaseSelectOptionValue: 'nothingHere'
+		// });
+		// function sendData() {
+		// 	// get the <select> values
+		// 	const values = multi.getJson(false);
+		// 	console.log(values);
+		// 	// validate
+		// 	if(multi.simpleValidate()) {
+		// 		// make something
+		// 	} else {
+		// 		//make something
+		// 	}
+		// }
 </script>

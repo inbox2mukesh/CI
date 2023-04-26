@@ -36,10 +36,11 @@
 								<div class="form-group">
 
 									<lable>Password<span class="text-red">*</span></lable>
-
-									<input type="password" class="fstinput" id="password" name="password" placeholder="Enter Password" value='<?php echo get_cookie('wosa_pwd_f');?>'>
-
+									<div class="login-pwd-cont">
+										<input type="password" class="fstinput" id="password" name="password" placeholder="Enter Password" value='<?php echo get_cookie('wosa_pwd_f');?>'>
+										<span class="fa fa-eye-slash" id="passBtn"></span>
 										<div class="p-validation password_error"><?php echo form_error('username');?>
+									</div>
 
 							    </div>
 
@@ -144,12 +145,9 @@
       $(".password_error").text("Please enter password");
 
       return false;
+	  
 
-    }
-
-
-
- 
+    } 
 
    
 
@@ -327,6 +325,11 @@ $("#forgot_password").click(function()
 
 });
 
-
+const PassBtn = document.querySelector('#passBtn');
+PassBtn.addEventListener('click', () => {
+	const input = document.querySelector('#password');
+	input.getAttribute('type') === 'password' ? input.setAttribute('type', 'text') : input.setAttribute('type', 'password');
+	$(".fa-eye-slash").toggleClass("fa-eye");
+}); 
 
   </script>

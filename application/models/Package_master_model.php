@@ -2094,7 +2094,7 @@ class Package_master_model extends CI_Model
     }
     function get_all_package_payment($params = array())
     {
-        $this->db->select('`history.id`, `history.student_id`, `history.student_package_id`, `history.checkout_token_no`, `history.page`, `history.active`, `history.created`, `history.modified`, std.fname,std.lname,spkg.payment_id,spkg.order_id,spkg.status,spkg.captured,spkg.payment_full_response,std.UID,std.mobile,std.email,state.state_name,city.city_name, pgm.`programe_name,batch_master.batch_name,spkg.subscribed_on,spkg.expired_on,tm.`test_module_name`,spkg.package_name,spkg.package_duration,spkg.pack_type,CONCAT(FORMAT(spkg.`amount`/100,2)) AS amount_paid,spkg.`currency`,country.name as country_name,std.country_code');
+        $this->db->select('`history.id`, `history.student_id`, `history.student_package_id`, `history.checkout_token_no`, `history.page`, `history.active`, `history.created`, `history.modified`, std.fname,std.lname,spkg.payment_id,spkg.order_id,spkg.status,spkg.captured,spkg.payment_full_response,std.UID,std.mobile,std.email,state.state_name,city.city_name, pgm.`programe_name,batch_master.batch_name,spkg.subscribed_on,spkg.expired_on,tm.`test_module_name`,spkg.package_name,spkg.package_duration,spkg.pack_type,CONCAT(FORMAT(spkg.`amount`/100,2)) AS amount_paid,spkg.`currency`,country.name as country_name,std.country_code,spkg.requested_on');
         $this->db->from('`checkout_page_history` history');       
         $this->db->join('`students` std', 'std.`id`= history.`student_id`');
         $this->db->join('`state`', 'state.`state_id`= std.`state_id`', 'left');
@@ -2158,7 +2158,7 @@ class Package_master_model extends CI_Model
 
     function get_package_payment_status()
     {
-        $this->db->select('spkg.status');
+        $this->db->select('spkg.status,spkg.requested_on');
         $this->db->from('`checkout_page_history` history'); 
         $this->db->join('`student_package` spkg', 'spkg.`checkout_token_no`= history.`checkout_token_no`', 'INNER');
         $this->db->group_by('spkg.status');
@@ -2188,7 +2188,7 @@ class Package_master_model extends CI_Model
 
     function get_failed_fourmodule_data()
     {
-        $this->db->select('std.fname,std.lname,std.email,std.mobile,std.UID,std.country_code,sp.fourmodule_api_called,sp.fourmodule_status,sp.fourmodule_response,sp.package_name,sp.package_duration,sp.subscribed_on,sp.expired_on,sp.student_package_id,tm.`test_module_name`,pgm.`programe_name,batch_master.batch_name,sp.fourmodule_json');
+        $this->db->select('std.fname,std.lname,std.email,std.mobile,std.UID,std.country_code,sp.fourmodule_api_called,sp.fourmodule_status,sp.fourmodule_response,sp.package_name,sp.package_duration,sp.subscribed_on,sp.expired_on,sp.student_package_id,tm.`test_module_name`,pgm.`programe_name,batch_master.batch_name,sp.fourmodule_json,sp.requested_on');
         $this->db->from('`student_package` sp');  
         $this->db->join('`students` std', 'std.`id`= sp.`student_id`'); 
         $this->db->join('`test_module` tm','sp.`test_module_id`=tm.`test_module_id`'); 
@@ -2201,7 +2201,7 @@ class Package_master_model extends CI_Model
     }
     function get_success_fourmodule_data()
     {
-        $this->db->select('std.fname,std.lname,std.email,std.mobile,std.UID,std.country_code,sp.fourmodule_api_called,sp.fourmodule_status,sp.fourmodule_response,sp.package_name,sp.package_duration,sp.subscribed_on,sp.expired_on,sp.student_package_id,tm.`test_module_name`,pgm.`programe_name,batch_master.batch_name,sp.fourmodule_json');
+        $this->db->select('std.fname,std.lname,std.email,std.mobile,std.UID,std.country_code,sp.fourmodule_api_called,sp.fourmodule_status,sp.fourmodule_response,sp.package_name,sp.package_duration,sp.subscribed_on,sp.expired_on,sp.student_package_id,tm.`test_module_name`,pgm.`programe_name,batch_master.batch_name,sp.fourmodule_json,sp.requested_on');
         $this->db->from('`student_package` sp');  
         $this->db->join('`students` std', 'std.`id`= sp.`student_id`'); 
         $this->db->join('`test_module` tm','sp.`test_module_id`=tm.`test_module_id`'); 

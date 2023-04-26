@@ -1,10 +1,5 @@
 <div class="modal-change-password">
-    <div class="modal fade" id="modal-md" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-		
-		
-
-		
-		
+    <div class="modal fade" id="modal-md" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">		
       <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="modal-header">
@@ -16,19 +11,28 @@
               <div class="form-row clearfix">
                 <div class="form-group col-md-12">
                   <label>Previous Password<span class="red-text">*</span></label>
-                  <input type="password" class="fstinput"  id="cp" name="cp"  maxlength="14" autocomplete="off">
-                  <div class="validation cp_err"><?php echo form_error('cp');?></div>
+                  <div class="login-pwd-cont">
+                    <input type="password" class="fstinput"  id="cp" name="cp"  maxlength="14" autocomplete="off">
+                    <span class="fa onepass fa-eye-slash" id="prepassBtn"></span>
+                    <div class="validation cp_err"><?php echo form_error('cp');?></div>
+                  </div>
                 </div>
                 <div class="form-group col-md-12">
                   <label>New Password<span class="red-text">*</span></label>
-                  <input id="np" name="np" type="password" class="fstinput" placeholder="" autocomplete="off"> 
-                  <div class="validation np_err"><?php echo form_error('np');?></div>
+                  <div class="login-pwd-cont">
+                    <input id="np" name="np" type="password" class="fstinput" placeholder="" autocomplete="off">
+                    <span class="fa twopass fa-eye-slash" id="npBtn"></span> 
+                    <div class="validation np_err"><?php echo form_error('np');?></div>
+                  </div>
                 </div>
                 <div class="form-group col-md-12">
                   <label>Retype Password<span class="red-text">*</span></label>
-                  <input type="password" class="fstinput" id="cnp" name="cnp" autocomplete="off">
-<div class="validation cnp_err"><?php echo form_error('cnp');?></div>
-                   </div>
+                  <div class="login-pwd-cont">
+                    <input type="password" class="fstinput" id="cnp" name="cnp" autocomplete="off">
+                    <span class="fa threepass fa-eye-slash" id="cnpBtn"></span> 
+                    <div class="validation cnp_err"><?php echo form_error('cnp');?></div>
+                  </div>
+                </div>
                 <div class="col-md-12 text-right">
                   <button type="button" class="btn btn-blue btn-mdl"  onclick="return submit_newpassword();" >CHANGE PASSWORD</button>
                 </div>
@@ -109,5 +113,25 @@ function submit_newpassword()
     
   }
 
+  const PreBtn = document.querySelector('#prepassBtn');
+  PreBtn.addEventListener('click', () => {
+  const input = document.querySelector('#cp');
+  input.getAttribute('type') === 'password' ? input.setAttribute('type', 'text') : input.setAttribute('type', 'password');
+  $('.onepass').toggleClass("fa-eye");
+  });
+
+  const npBtn = document.querySelector('#npBtn');
+  npBtn.addEventListener('click', () => {
+  const input = document.querySelector('#np');
+  input.getAttribute('type') === 'password' ? input.setAttribute('type', 'text') : input.setAttribute('type', 'password');
+  $('.twopass').toggleClass("fa-eye");
+  });
+
+  const cnpBtn = document.querySelector('#cnpBtn');
+  cnpBtn.addEventListener('click', () => {
+  const input = document.querySelector('#cnp');
+  input.getAttribute('type') === 'password' ? input.setAttribute('type', 'text') : input.setAttribute('type', 'password');
+  $('.threepass').toggleClass("fa-eye");
+  });
 
   </script>

@@ -27,7 +27,6 @@ public function __construct(){
 
 public function index_post()
 {  
-    
     if(!$this->Authenticate($this->input->get_request_header('API-KEY'))) {            
         $data['error_message'] = [ "success" => 2, "message" => UNAUTHORIZED, "data"=>''];
     }else{
@@ -42,7 +41,7 @@ public function index_post()
             $otp = rand(1000,10000);      
             $ccode=ltrim($std_data->country_code,"+");
             $opt_mobileno=$ccode.''.$std_data->mobile;
-            if (DEFAULT_COUNTRY == 101) //india
+            if (DEFAULT_COUNTRY == 101 || $std_data->country_code == '91') //india
             {             
                 if(base_url()!=BASEURL){           
                 $message = 'Hi, please confirm your details by entering the OTP '.$otp.' Valid for 10 minutes only Regards Western Overseas';
@@ -132,7 +131,7 @@ public function index_post()
             $last_id = $this->Student_model->add_student($std_params);
             $std_params2 = array('student_id'=>$last_id, 'student_identity'=> $std_params['student_identity'],'details'=> $details);
             $this->Student_journey_model->update_studentJourney($std_params2);          
-            $data['error_message'] = [ "success" => 1, "message" => "Verification code sent on your Email. Please enter..", 'data'=> $last_id];           
+            $data['error_message'] = [ "success" => 1, "message" => "Verification code sent on your Email. Please enter..", 'data'=> $last_id,'UID'=>$UID];           
         }else{
             $data['error_message'] = [ "success" => 0, "message" => "Your Email or Mobile no already registered with us! Please try with diffrent ids or login", 'data'=>'' ];
             $this->set_response($data, REST_Controller::HTTP_CREATED);   

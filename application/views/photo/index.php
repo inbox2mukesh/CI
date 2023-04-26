@@ -79,7 +79,7 @@
                 </table>
             </div>
                 <div class="pull-right">
-                    <?php echo $this->pagination->create_links(); ?>                    
+                <?php echo $links; ?>                  
                 </div>                
             </div>
         </div>

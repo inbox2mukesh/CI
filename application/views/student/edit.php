@@ -331,13 +331,14 @@
                         <div class="col-md-4">
                             <label for="center_id" class="control-label"><span class="text-danger">*</span>Branch</label>
                             <div class="form-group">
-                                <select name="center_id" id="center_id" class="form-control selectpicker selectpicker-ui-100" data-show-subtext="true" data-live-search="true" onchange="unsetPackRadio();">
-                                    <option value="">Select Branch</option>
+                                <select name="center_id" id="center_id" class="form-control selectpicker selectpicker-ui-100" data-show-subtext="true" data-live-search="false" onchange="unsetPackRadio();">
+                                    <!-- <option value="">Select Branch</option> -->
+                                    <option value="10">ONLINE</option>
                                     <?php
-                                    foreach ($all_branch as $b) {
-                                        $selected = ($b['center_id'] == $student['center_id']) ? ' selected="selected"' : "";
-                                        echo '<option value="' . $b['center_id'] . '" >' . $b['center_name'] . '</option>';
-                                    }
+                                    // foreach ($all_branch as $b) {
+                                    //     $selected = ($b['center_id'] == $student['center_id']) ? ' selected="selected"' : "";
+                                    //     echo '<option value="' . $b['center_id'] . '" >' . $b['center_name'] . '</option>';
+                                    // }
                                     ?>
                                 </select>
                                 <span class="text-danger"><?php echo form_error('center_id'); ?></span>

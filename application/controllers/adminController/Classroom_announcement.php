@@ -117,6 +117,8 @@ class Classroom_announcement extends MY_Controller{
                             'subject' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('subject')))),
                             'body' => $this->input->post('body',false),                    
                             'media_file'=>$image,
+                            'start_date' => $this->input->post('start_dateTime'),
+                            'end_date' => $this->input->post('end_dateTime'),
                             'active'=>$this->input->post('active') ? $this->input->post('active') : 0,
                             'by_user' => $by_user,
                         );
@@ -165,20 +167,21 @@ class Classroom_announcement extends MY_Controller{
             $data['all_trainer']=$this->User_model->get_all_trainer_active($_SESSION['roleName'],$userBranch);
             foreach($classroomData2 as $key => $cd){
                 $pattern = "/,/i";
+                $classroomData2[$key]['Category']='';
                 $isMultipeCategory = preg_match($pattern, $cd['category_id']);
                 if($isMultipeCategory){
                     $cat_arr = explode(',', $cd['category_id']);
-                    $cat_arr_count = count($cat_arr);
+                    $cat_arr_count = count($cat_arr);                    
                     for ($i=0; $i < $cat_arr_count; $i++) { 
                         $get_category_name = $this->Category_master_model->get_category_name($cat_arr[$i]);
                         foreach ($get_category_name as $key2 => $m) {                
-                            $classroomData2[$key]['Category'][$key2].=$m.', ';                       
+                            $classroomData2[$key]['Category'].=$m.', ';                       
                         }                    
                     }
                 }else{
                     $get_category_name = $this->Category_master_model->get_category_name($cd['category_id']);
                     foreach ($get_category_name as $key2 => $m) {                
-                        $classroomData2[$key]['Category'][$key2]=$m;                       
+                        $classroomData2[$key]['Category']=$m;                       
                     }
                 }
             }            
@@ -206,7 +209,8 @@ class Classroom_announcement extends MY_Controller{
 
         $data['title'] = 'Edit Classroom Announcement';
         $data['announcements'] = $this->Announcements_model->get_announcements($id);
-        $classroom_id = $data['online_class_schedule']['classroom_id'];
+        // pr($data['announcements']);
+        $classroom_id = (isset($data['online_class_schedule']))?$data['online_class_schedule']['classroom_id']:'';
         $params=[];
         if(isset($data['announcements']['id'])){
 
@@ -222,9 +226,13 @@ class Classroom_announcement extends MY_Controller{
 					'subject' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('subject')))),
                     'body' => $this->input->post('body',false),                    
 					'media_file' => $this->input->post('media_file') ? $this->input->post('media_file') : NULL,
+                    'start_date' => date('Y-m-d H:i:s',strtotime($this->input->post('start_dateTime'))),
+                    'end_date' => $this->input->post('end_dateTime'),
                     'active' => $this->input->post('active') ? $this->input->post('active') : 0,
                     'by_user' => $by_user,
                 );
+                // pr($params,1);
+            
                         if(!file_exists(ANNOUNCEMENT_FILE_PATH)){
                             mkdir(ANNOUNCEMENT_FILE_PATH, 0777, true);
                         }
@@ -244,6 +252,8 @@ class Classroom_announcement extends MY_Controller{
                                 'subject' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('subject')))),
                                 'body' => $this->input->post('body',false),                    
                                 'media_file' => $image,
+                                'start_date' => date('Y-m-d H:i:s',strtotime($this->input->post('start_dateTime'))),
+                                'end_date' => date('Y-m-d H:i:s',strtotime($this->input->post('end_dateTime'))),
                                 'active' => $this->input->post('active'),
                                 'by_user' => $by_user,
                             );
@@ -252,6 +262,8 @@ class Classroom_announcement extends MY_Controller{
                                 'classroom_id'=>$this->input->post('classroom_id'),
                                 'subject' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('subject')))),
                                 'body' => $this->input->post('body',false),
+                                'start_date' => date('Y-m-d H:i:s',strtotime($this->input->post('start_dateTime'))),
+                                'end_date' => date('Y-m-d H:i:s',strtotime($this->input->post('end_dateTime'))),
                                 'active' => $this->input->post('active'),
                                 'by_user' => $by_user,
                             );
@@ -305,6 +317,7 @@ class Classroom_announcement extends MY_Controller{
                 }
                 foreach($classroomData2 as $key => $cd){
                     $pattern = "/,/i";
+                    $classroomData2[$key]['Category']['category_name'] = '';
                     $isMultipeCategory = preg_match($pattern, $cd['category_id']);
                     if($isMultipeCategory){
                         $cat_arr = explode(',', $cd['category_id']);
@@ -312,13 +325,13 @@ class Classroom_announcement extends MY_Controller{
                         for ($i=0; $i < $cat_arr_count; $i++) { 
                             $get_category_name = $this->Category_master_model->get_category_name($cat_arr[$i]);
                             foreach ($get_category_name as $key2 => $m) {                
-                                $classroomData2[$key]['Category'][$key2].=$m.', ';                       
+                                $classroomData2[$key]['Category']['category_name'].=$m.', ';                       
                             }                    
                         }
                     }else{
                         $get_category_name = $this->Category_master_model->get_category_name($cd['category_id']);
                         foreach ($get_category_name as $key2 => $m) {                
-                            $classroomData2[$key]['Category'][$key2]=$m;                       
+                            $classroomData2[$key]['Category']['category_name']=$m;                       
                         }
                     }
                 }            

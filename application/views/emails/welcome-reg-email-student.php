@@ -15,7 +15,7 @@
 </tr>
 <tr>
 	<td align="left">	
-		<p><?php echo isset($email_footer_text) ? $email_footer_text:''; ?></p>	
+		<p style="word-break:break-word;font-size:16px;"><?php echo isset($email_footer_text) ? $email_footer_text:''; ?></p>	
 	</td>
 </tr>
 

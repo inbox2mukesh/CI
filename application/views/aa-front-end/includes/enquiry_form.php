@@ -75,22 +75,27 @@ if(isset($this->session->userdata('student_login_data')->id)){
       <label>DOB<span class="text-red">*</span></label>
       <div class="has-feedback">
         <input type="tel" data-inputmask="'alias': 'date'" class="fstinput form-control dob_mask" name="dob" id="dob_qnform" placeholder="dd/mm/yyyy" value="<?php if(isset($this->session->userdata('student_login_data')->dob)) {   echo $this->session->userdata('student_login_data')->dob; } else { echo "";}?>" autocomplete="off" onchange="validatedob(this.value,this.id)" <?php echo $readOnly;?>>
-        <!-- <input class="fstinput datepicker" name="dob" placeholder="mm/dd/yyyy" id="dob_qnform" autocomplete='off'> <span class="fa fa-calendar form-group-icon"> -->
+        <!-- <input class="fstinput datepicker" name="dob" placeholder="mm/dd/yyyy" id="dob_qnform" autocomplete='off'> <span class="fa fa-calendar form-group-icon"> style="display:none;"-->
         </span>
       </div>
       <span class="valid-validation dob_qnform_err"></span>
     </div>
         <?php 
+        $hide = '';
+        if($this->router->fetch_class() != 'home')
+        {
+          $hide = 'style="display:none;"';
+        }
          if(isset($service_id))
          {
         ?>
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" <?php echo $hide; ?>>
       <label>Services<span class="text-red">*</span></label>
       <input type="text" class="fstinput form-control" name="enquiry_purpose_id" id="enquiry_purpose_id"  value="<?php echo $enquiry_purpose_name;?>" autocomplete="off"  readonly>
     </div>
     
     <?php } else {?>
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-12" <?php echo $hide; ?>>
       <label>Services<span class="text-red">*</span></label>
       <select class="form-control selectpicker" name="enquiry_purpose_id" id="enquiry_purpose_id">
       <option value="">Select Services</option>
@@ -413,6 +418,10 @@ $(".hide-btn").click(function()
           $('#message_qnform').val('');
           //$('.enqBtn').show();
           //window.location.href='<?php echo current_url(); ?>'
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+          
         } 
         else if(response.status == 2)
         {

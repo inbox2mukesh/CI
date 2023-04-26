@@ -8,16 +8,17 @@
 use Restserver\Libraries\REST_Controller;
 defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . 'libraries/REST_Controller.php';    
-     
+require_once APPPATH . '/libraries/traits/fourmoduleTrait.php';   
 class Forgot_password extends REST_Controller {
-    
+use fourmoduleTrait;  
 public function __construct() {
     
     error_reporting(0);
     parent::__construct();
     $this->load->database();
     $this->load->model('Student_model');
-    $this->load->helper(['common','foumodule_api']); 
+    $this->load->helper('common');
+    $this->load->helper('foumodule_api');
 }
 
     /**
@@ -44,7 +45,24 @@ public function __construct() {
                 $params = array( 
                     'password' => md5($plain_pwd),
                 );
-                $idd = $this->Student_model->update_student($lastId,$params);
+                $headers1 = array(
+                    'username'=>$stdData['UID'],
+                    'action'=>'checkUser',            
+                    );// fourmodule user check
+
+                $param_base = $this->_fourmoduleapi__bind_params();
+                //$params_fourmodule =array_merge($param_base,$headers1);
+                $identify_api= $this-> __checkuserExists(array_merge($param_base,$headers1));
+                if($identify_api != 0 && !empty($stdData))
+                {
+                    $response_fourmodule = fourmodule_new_password($stdData['UID'],$plain_pwd);
+                    $foourmodule_resp = json_decode($response_fourmodule);                    
+                }
+                if(!empty($lastId))
+                {
+                    $idd = $this->Student_model->update_student($lastId,$params);
+                }
+                            
                 if($idd){
                     
                     if(base_url()!=BASEURL){
@@ -60,10 +78,11 @@ public function __construct() {
                         $mailData['team']           = WOSA;
                         $this->sendEmailTostd_creds_($subject,$mailData);
                     }
-                    $response_fourmodule = fourmodule_new_password($stdData['UID'],$plain_pwd);
+                    
                     $data['error_message'] = [ "success" => 1, "message" => "Your new password has been sent on your email." ];
                         
-                }else{
+                }
+                else{
                     $data['error_message'] = [ "success" => 0, "message" => "Oops..failed to generate. Please try again!" , 'data'=>[] ];
                 }
                 

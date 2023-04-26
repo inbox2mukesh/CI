@@ -11,8 +11,11 @@
                 </div>
                 <div class="form-group">
                   <lable>Password<span class="text-white">*</span></lable>
-                  <input id="password" name="password" class="fstinput" type="password" placeholder="Enter password" value='<?php echo get_cookie('wosa_pwd_f');?>'>
-                  <div class="p-validation"><?php echo form_error('password');?></div>
+                  <div class="login-pwd-cont">
+                    <input type="password" id="password" name="password" class="fstinput" placeholder="Enter password" value='<?php echo get_cookie('wosa_pwd_f');?>'>
+                    <span class="fa fa-eye-slash" id="passBtnstu"></span>
+                    <div class="p-validation"><?php echo form_error('password');?></div>
+                  </div>
                 </div>
                   <?php 
                   if(get_cookie('wosa_username_f') and get_cookie('wosa_pwd_f') ){
@@ -37,10 +40,24 @@
   </section>
   <script type="text/javascript">
     $("#forgot_password_n").click(function()
-{
-  
-  $('#modal-login').modal('hide');
-  $('#modal-password').modal('show');  
-});
+    {
+      
+      $('#modal-login').modal('hide');
+      $('#modal-password').modal('show');  
+    });
+
+$(document).ready( function(){
+  $("#passBtnstu").on("click",function(){
+    var hrl = $(this).prev().attr("type");
+    if ( hrl === 'password' ) {
+      $(this).prev().attr("type","text");
+      $(".fa-eye-slash").addClass("fa-eye");
+    } else {
+      $(this).prev().attr("type","password");
+      $(".fa-eye-slash").removeClass("fa-eye");
+    }
+  })
+})
+
 
   </script>

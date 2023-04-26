@@ -12,7 +12,7 @@
 					<div class="col-md-3">
 						<label for="package_name" class="control-label"><span class="text-danger">*</span>Pack Name</label>
 						<div class="form-group">
-							<input type="text" name="package_name" value="<?php echo ($this->input->post('package_name') ? $this->input->post('package_name') : $package_master['package_name']); ?>" class="form-control input-ui-100 removeerrmessage" id="package_name" maxlength="45"/>
+							<input type="text" name="package_name" value="<?php echo ($this->input->post('package_name') ? $this->input->post('package_name') : $package_master['package_name']); ?>" class="form-control input-ui-100 removeerrmessage" id="package_name" maxlength="60"/>
 							<span class="text-danger package_name_err"><?php echo form_error('package_name');?></span>
 						</div>
 					</div>

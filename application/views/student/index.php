@@ -96,8 +96,10 @@
                             <td class="<?php echo $class;?>"><?php echo $s['fname'].' '.$s['lname']; ?></td>
                             <td>
                                 <?php
-                                    if(@$s['Pack']){
+                                    // if(@$s['Pack']){
                                         $classname="";
+                                if(!empty($s) && is_array($s['Pack']) && isset($s['Pack']))
+                                {
                                         foreach ($s['Pack'] as $p) {
                                             if($p['classroom_name'] !="")
                                             {
@@ -106,9 +108,11 @@
                                             
                                         }
                                         echo rtrim($classname,', ');
-                                    }else{
-                                        echo DEFINE_NIL;
-                                    }
+                                    
+                                }
+                                else{
+                                    echo DEFINE_NIL;
+                                }
                                 ?>
                             </td>
                             <td>
@@ -126,7 +130,7 @@
                             <td>
                                 <?php
                                 $test_prog_name="";
-                                if(is_array($s['Pack']) && isset($s['Pack']))
+                                if(!empty($s) && is_array($s['Pack']) && isset($s['Pack']))
                                 {
                                     foreach ($s['Pack'] as $p) {
                                         $test_prog_name .= $p['test_module_name'].'-'.$p['programe_name'].', ';
@@ -141,6 +145,8 @@
                             <td>
                                 <?php
                                 $batch_name="";
+                                if(!empty($s) && is_array($s['Pack']) && isset($s['Pack']))
+                                {
                                     foreach ($s['Pack'] as $p) {
                                         if($p['batch_name'] !="")
                                         {
@@ -149,16 +155,20 @@
                                         
                                     }
                                  echo rtrim($batch_name,', ');
+                                }
                                 ?>
                             </td>
 
                             <td>
                                 <?php
                                 $center_name="";
+                                if(!empty($s) && is_array($s['Pack']) && isset($s['Pack']))
+                                {
                                     foreach ($s['Pack'] as $p) {
                                          $center_name .= $p['center_name'].', ';
                                     }
                                    echo rtrim($center_name,', ');
+                                }
                                 ?>
                             </td>
 

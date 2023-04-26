@@ -12,7 +12,7 @@ class Our_students extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Enquiry_purpose_model');
-        $this->load->model('News_model');
+        $this->load->model(['News_model','Student_model']);
         $this->load->helper(['foumodule_api']);
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
@@ -412,11 +412,12 @@ class Our_students extends MY_Controller
                 'EMAIL:'.$this->input->post('email', true), 
                 );           
                    // check student mobile no/email is exist in db or not
-            $response= json_decode($this->_curlGetData(base_url(GET_STUDENT_EXISTENCE_URL), $headers));            
+            $response= json_decode($this->_curlGetData(base_url(GET_STUDENT_EXISTENCE_URL), $headers)); 
+            // pr($response,1);          
             if($response->error_message->success==0 AND $response->error_message->message == 'fresh'){ 
                 //New registration and insert enquiry data api
                 $response_reg = json_decode($this->_curPostData(base_url(SUBMIT_STD_URL), $headers, $params));      
-                if (isset($response_reg->error_message) && $response_reg->error_message->success == 1) {
+                if (!empty($response_reg->error_message) && $response_reg->error_message->success == 1) {
                     $_SESSION['lastId_std'] = $response_reg->error_message->data;
                     $msg = '<div class="alert alert-success alert-dismissible">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -457,25 +458,26 @@ class Our_students extends MY_Controller
             $headers = array(
             'API-KEY:'.WOSA_API_KEY, 
             'STUDENT-ID:'.$response->error_message->student_id, 
-            'SEND-EMAIL-FLAG:1',               
-            );               
-            //  
-            $response1= json_decode($this->_curPostData(base_url(UPDATE_OTP), $headers, $student_params=null));
+            'SEND-EMAIL-FLAG: 1',               
+            ); 
+            $response1= json_decode($this->_curPostData(base_url(UPDATE_OTP), $headers,['student_id'=>$response->error_message->student_id]));
+            // print_r($response1); 
             if(isset($response1->error_message) && $response1->error_message->success==1)
             {
                 //opt send success
-                //open otp popup                    
+                //open otp popup                
                 $_SESSION['lastId_std'] = $response->error_message->student_id;
                 $msg = '<div class="alert alert-success alert-dismissible">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong>SUCCESS:</strong> Verification code sent on your Email. Please enter.. <a href="#" class="alert-link"></a>.
-                </div>'.'ppp'.$response->error_message->student_id;
+                </div>';
                 header('Content-Type: application/json');
-                $response = ['msg' => $msg, 'status' =>1];
+                $response = ['msg' => $msg, 'status' =>11];
                 echo json_encode($response);    
             }
             else 
-            {                    //error....opt not send
+            {    
+              //error....opt not send
                 unset($_SESSION['lastId_std']);
                 $msg = '<div class="alert alert-warning alert-dismissible">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -732,12 +734,13 @@ class Our_students extends MY_Controller
             );
             $response = json_decode($this->_curPostData(base_url(CHANGE_PWD_URL), $headers, $params));
             if ($response->error_message->success == 1) {
-                header('Content-Type: application/json');
-                $response = ['msg' => $response->error_message->message, 'status' => 'true'];
-                echo json_encode($response);
                 $loggedin_id = $this->session->userdata('student_login_data')->id;
                 $student = $this->Student_model->get_student($loggedin_id);
                 $response_fourmodule = fourmodule_new_password($student['UID'],$this->input->post('np'));
+                header('Content-Type: application/json');
+                $response = ['msg' => $response->error_message->message, 'status' => 'true'];
+                echo json_encode($response);
+                session_unset();              
                 die();
             } else {
                 header('Content-Type: application/json');

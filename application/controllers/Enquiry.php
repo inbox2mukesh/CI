@@ -232,7 +232,7 @@ class Enquiry extends MY_Controller{
             $mailData['email_message'] = $email_message;
             $mailData['thanks']        = THANKS;
             $mailData['team']          = WOSA;               
-           echo  $this->sendEmailTostd_walkinOTP_($subject,$mailData);
+            $this->sendEmailTostd_walkinOTP_($subject,$mailData);
         }
         
         if($enquiry_id){  

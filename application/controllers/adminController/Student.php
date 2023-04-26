@@ -5,9 +5,13 @@
  * @author          Haroon
  *
  **/
+
 require_once APPPATH . '/libraries/traits/getEmployeFunctionalBranch.php';
+require_once APPPATH . '/libraries/traits/fourmoduleTrait.php';
 class Student extends MY_Controller{
+    protected $headers_fourmodule = [];
     use getEmployeFunctionalBranch;
+    use fourmoduleTrait;
     function __construct(){
         parent::__construct();
         if (!$this->_is_logged_in()) {redirect('adminController/login');}        
@@ -43,10 +47,11 @@ class Student extends MY_Controller{
         $this->Student_attendance_model->backupAttendance($today);
         $this->Waiver_model->deactivateApprovedWaiverNotUsedAfterTwoDays($today);
         $this->Refund_model->deactivateApprovedRefundNotUsedAfterTwoDays($today); 
+        $this->headers_fourmodule= array('authorization:'.FOURMODULE_KEY); 
     }
 
     function clear_all_(){
-        if(ENVIRONMENT=='development' or ENVIRONMENT=='testing'){
+        if(ENVIRONMENT=='development' or ENVIRONMENT=='testing' or ENVIRONMENT=='staging'){
             $this->Student_model->delete_all_student_tran();
             $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
             redirect('adminController/student/index');
@@ -1274,7 +1279,8 @@ class Student extends MY_Controller{
         else
             show_error(ITEM_NOT_EXIST);
         ////////////////////////////////////////////////////////////        
-    }    
+    } 
+       
 
     //non-real function
     function sell_online_pack_($wid,$package_id,$sid,$mail_sent,$enrolledBy_homeBranch)
@@ -1282,10 +1288,10 @@ class Student extends MY_Controller{
         
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
-        $mn='sell_online_pack_';    
-        
+        $mn='sell_online_pack_';        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         //access control ends 
+        $this->load->helper('foumodule_api_helper');
         $by_user=$_SESSION['UserId'];
         $this->load->model('Classroom_model');      
         $pack_category_id=null; 
@@ -1586,12 +1592,15 @@ class Student extends MY_Controller{
             $std_journey=$this->Student_journey_model->update_studentJourney($params4);
 
             $get_UID = $this->Student_model->get_UID($sid);
-            $UID = $get_UID['UID']; 
+            $UID = $get_UID['UID'];
+            $PLAIN_PWD = $get_UID['plain_pwd'];
             //activity update start
             $activity_name = SOLD_ONLINE_PACK;
             $description = 'Sold Online pack to student '.$UID.' ';
             $res=$this->addUserActivity($activity_name,$description,$student_package_id,$by_user);
             //activity update end
+
+            
             
             //////////////////status update end/////////////////////////
             $getTestName = $this->Test_module_model->getTestName($pack_test_module_id);
@@ -1607,6 +1616,7 @@ class Student extends MY_Controller{
                 $email_content = package_purchase($mailData['package_name']);
                 $subject = $email_content['subject'];
                 $email_message = $email_content['content'];
+                $mailData['email_footer_content'] = $email_content['email_footer_content'];
                 $mailData['email_message']  = $email_message;
                 $mailData['test_module_name']= $getTestName['test_module_name'];
                 $mailData['programe_name']  = $getProgramName['programe_name'];
@@ -1620,7 +1630,59 @@ class Student extends MY_Controller{
                 }
             }else{ /*do nothing*/ }
             
+            $paack_type = ($country_code == '+91' || $country_code == '91')?'0':'1';
+            $fetch_fourmodule_pack_id=fetch_fourmodule_pack_id($getTestName['test_module_name'],$getProgramName['programe_name'],$paack_type);         
+        
+        $params = array(                          
+            "pack_id"=>$fetch_fourmodule_pack_id,            
+        );
+        $headers1 = array(
+            'username'=>$mailData['UID'],
+            'action'=>'checkUser',            
+            );
+        $param_base = $this->_fourmoduleapi__bind_params();
+        $params_fourmodule =array_merge($param_base,$headers1);
+        $identify_api= $this->_identify_fourmoduleapi($params_fourmodule,$params);
+        
+        $usrfulname = $mailData['fname'].' '. $mailData['lname'];              
+       // 1=Enrollment api   2=Re-Enrollment api 3=Add-program api
+      if(isset($identify_api))
+      {
+        // $param_base = $this->_fourmoduleapi__bind_params();
+        $params = array(      
+                    "pack_id"=>$fetch_fourmodule_pack_id,                                     
+                    "name"=>$usrfulname,                                        
+                    "token"=>$UID,                                        
+                    "start_date"=>$mailData['subscribed_on'],                                        
+                    "end_date"=>$mailData['expired_on'], 
+                    "username"=>$UID,
+                    "password"=>$PLAIN_PWD,                                        
+                    );   
+        $params_fourmodule = $this->__setFourmoduleapi($identify_api,$params);      
+        $response_fourmodule=$this->_curPostData_fourmodules(FOURMODULE_URL, $this->headers_fourmodule, $params_fourmodule); 
+        // pr($response_fourmodule,1);
+        $response_fourmodule_p=json_decode($response_fourmodule);
+        $response_fourmodule_success_status=$response_fourmodule_p->success;
+        } else {
+            $response_fourmodule_p='';
+            $response_fourmodule_success_status='0';
+            $identify_api=0;
+        } 
+        $params_fourmoduleh=json_encode($params_fourmodule);
+        $params_fourmodule = array(       
+            "fourmodule_status"=>$response_fourmodule_success_status,                 
+            "fourmodule_response"=>$response_fourmodule,                 
+            "fourmodule_api_called"=>$identify_api,                                         
+            "fourmodule_json"=>$params_fourmoduleh,                                         
+            );
+           // echo $student_package_id; 
+         //  print_r($params_fourmodule);
+        $this->Student_model->updateFourmoduleStatus($student_package_id,$params_fourmodule);  
+            
     }
+    //formodule api function
+
+    
 
     //non-real function
     function sell_practice_pack_($wid,$package_id,$sid,$mail_sent,$offlineCount,$onlineCount,$ppCount,$enrolledBy_homeBranch){
@@ -1956,80 +2018,52 @@ class Student extends MY_Controller{
         else {
             $set_pack_type=1; // for other countries
         }
-        $fetch_fourmodule_pack_id=fetch_fourmodule_pack_id($getTestName['test_module_name'],$getProgramName['programe_name'],$set_pack_type);         
+        // $fetch_fourmodule_pack_id=fetch_fourmodule_pack_id($getTestName['test_module_name'],$getProgramName['programe_name'],$set_pack_type);         
         
-        $headers1 = array(
-        'API-KEY:'.WOSA_API_KEY, 
-        'STUDENT-ID:'.$sid,                           
-        'TEST-MODULE-ID:'.$pack_test_module_id,            
-        'PROGRAME-ID:'.$pack_programe_id,            
-        );
-        $identify_api= json_decode($this->_curlGetData(base_url(IDENTIFY_FOURMODULE_API), $headers1));                
+        // $headers1 = array(
+        // 'API-KEY:'.WOSA_API_KEY, 
+        // 'STUDENT-ID:'.$sid,                           
+        // 'TEST-MODULE-ID:'.$pack_test_module_id,            
+        // 'PROGRAME-ID:'.$pack_programe_id,            
+        // );
+        // $identify_api= json_decode($this->_curlGetData(base_url(IDENTIFY_FOURMODULE_API), $headers1));                
        // 1=Enrollment api   2=Re-Enrollment api 3=Add-program api
-       
-      if(isset($identify_api))
-      {
-       
-       if($identify_api == 1)//Enrollment api
-       {
-            $headers_fourmodule= array(
-            'authorization:'.FOURMODULE_KEY,                           
-            );  
-            $params_fourmodule = array(
-            "api" => "enrolment", 
-            "action"=>'enrol_student', 
-            "centre_id"=>FOURMODULE_ONL_BRANCH_ID, 
-            "domain_id"=>FOURMODULE_DOMAIN_ID,        
-            "pack_id"=>$fetch_fourmodule_pack_id,                                     
-            "name"=>$mailData['fname'].' '. $mailData['lname'],                                        
-            "token"=>$mailData['UID'],                                        
-            "start_date"=>$mailData['subscribed_on'],                                        
-            "end_date"=>$mailData['expired_on'], 
-            "username"=>$UID,
-            "password"=>$PLAIN_PWD,                                        
-            );                          
-            // Call Enrollment apie
-           $response_fourmodule= $this->_curPostData_fourmodules(FOURMODULE_URL, $headers_fourmodule, $params_fourmodule);
-        }
-       else if($identify_api == 2)//Re-Enrollment api
-       {
-            $headers_fourmodule = array(
-            'Authorization:'.FOURMODULE_KEY,                                      
-            );
-            $params_fourmodule = array(
-            "api" => "enrolment", 
-            "action"=>'Re_enrolment', 
-            "centre_id"=>FOURMODULE_ONL_BRANCH_ID, 
-            "domain_id"=>FOURMODULE_DOMAIN_ID,        
-            "pack_id"=>$fetch_fourmodule_pack_id,                                     
-            "name"=>$mailData['fname'].' '. $mailData['lname'],                                        
-            "token"=>$mailData['UID'],                                        
-            "start_date"=>$mailData['subscribed_on'],                                        
-            "end_date"=>$mailData['expired_on'],                                        
-            ); 
-            $response_fourmodule=$this->_curPostData_fourmodules(FOURMODULE_URL, $headers_fourmodule, $params_fourmodule);
-        }
-       else {//add program
-        $headers_fourmodule = array(
-            'Authorization:'.FOURMODULE_KEY,                                      
-            );
-            $params_fourmodule = array(
-            "api" => "enrolment", 
-            "action"=>'Add_program', 
-            "centre_id"=>FOURMODULE_ONL_BRANCH_ID, 
-            "domain_id"=>FOURMODULE_DOMAIN_ID,        
-            "pack_id"=>$fetch_fourmodule_pack_id,                                     
-            "name"=>$mailData['fname'].' '. $mailData['lname'],                                        
-            "token"=>$mailData['UID'],                                        
-            "start_date"=>$mailData['subscribed_on'],                                        
-            "end_date"=>$mailData['expired_on'],                                        
-            ); 
-            $response_fourmodule=$this->_curPostData_fourmodules(FOURMODULE_URL, $headers_fourmodule, $params_fourmodule); 
-       }
-      
-        $response_fourmodule_p=json_decode($response_fourmodule);
-        $response_fourmodule_success_status=$response_fourmodule_p->success;
-        } else {
+       //$fetch_fourmodule_pack_id=fetch_fourmodule_pack_id($getTestName['test_module_name'],$getProgramName['programe_name'],$set_pack_type);     
+        
+        $paack_type = ($country_code == '+91' || $country_code == '91')?'0':'1';
+        $fetch_fourmodule_pack_id=fetch_fourmodule_pack_id($getTestName['test_module_name'],$getProgramName['programe_name'],$paack_type);         
+                
+                $params = array(                          
+                    "pack_id"=>$fetch_fourmodule_pack_id,            
+                );
+                $headers1 = array(
+                    'username'=>$mailData['UID'],
+                    'action'=>'checkUser',            
+                    );
+                $param_base = $this->_fourmoduleapi__bind_params();
+                $params_fourmodule =array_merge($param_base,$headers1);
+                $identify_api= $this->_identify_fourmoduleapi($params_fourmodule,$params);
+                
+                $usrfulname = $mailData['fname'].' '. $mailData['lname'];              
+                // 1=Enrollment api   2=Re-Enrollment api 3=Add-program api
+                if(isset($identify_api))
+                {
+                // $param_base = $this->_fourmoduleapi__bind_params();
+                $params = array(      
+                            "pack_id"=>$fetch_fourmodule_pack_id,                                     
+                            "name"=>$usrfulname,                                        
+                            "token"=>$UID,                                        
+                            "start_date"=>$mailData['subscribed_on'],                                        
+                            "end_date"=>$mailData['expired_on'], 
+                            "username"=>$UID,
+                            "password"=>$PLAIN_PWD,                                        
+                            );   
+                $params_fourmodule = $this->__setFourmoduleapi($identify_api,$params);      
+                $response_fourmodule=$this->_curPostData_fourmodules(FOURMODULE_URL, $this->headers_fourmodule, $params_fourmodule); 
+                // pr($response_fourmodule,1);
+                $response_fourmodule_p=json_decode($response_fourmodule);
+                $response_fourmodule_success_status=$response_fourmodule_p->success;
+                } else {
             $response_fourmodule_p='';
             $response_fourmodule_success_status='0';
         $identify_api=0;
@@ -3305,14 +3339,14 @@ class Student extends MY_Controller{
                 $res=$this->addUserActivity($activity_name,$description,$student_package_id,$by_user);
             //activity update end
             unset($_SESSION['current_start_date']);
-
-            $subject = 'Dear User, your package subscription date updated';
-           $email_message='Your package subscription date updated from '.$currtent_start_date. ' to '.$new_start_date.'';
+            $emailcontent = package_purchase_update($currtent_start_date,$new_start_date); 
+            $email_message = $emailcontent['content'];
+            $subject = $emailcontent['subject'];
             $mailData                   = $this->Student_model->getMailData($student_package_id);
-            $mailData['email_message']  = $email_message;
-            
+            $mailData['email_message']  = $email_message;            
             $mailData['thanks']         = THANKS;
-            $mailData['team']           = WOSA;
+            $mailData['team']           = WOSA; 
+            $mailData['email_footer_text'] =  $emailcontent['email_footer_text'];         
             if(base_url()!=BASEURL){
                 $this->sendEmailTostd_manage_start_date($subject,$mailData);
                 //$this->_call_smaGateway($this->input->post('mobile'),PACK_SUBSCRIPTION_SMS);

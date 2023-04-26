@@ -5,15 +5,17 @@
  * @author          
  *
  **/
+require_once APPPATH . '/libraries/traits/fourmoduleTrait.php';
 class Booking extends MY_Controller{
-    
+    use fourmoduleTrait;
     function __construct(){
         parent::__construct();   
         $this->load->library("session");
 
-        $this->load->helper(['url','foumodule_api_helper']);
+        $this->load->helper(['url','foumodule_api']);
 
-        require_once('application/libraries/stripe-php/init.php');  
+        require_once('application/libraries/stripe-php/init.php');
+        $this->headers_fourmodule= array('authorization:'.FOURMODULE_KEY);   
     }
 
     function index(){        
@@ -114,6 +116,7 @@ class Booking extends MY_Controller{
                 
                 if($response->error_message->success==1){
                     $_SESSION['lastId_std'] = $response->error_message->data;
+                    $_SESSION['UID'] = $response->error_message->UID;
                     $_SESSION['actionFor'] = "booking"; // booking=online,offline,practice,reality test booking
                     $msg = '<div class="alert alert-success alert-dismissible">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -229,9 +232,9 @@ class Booking extends MY_Controller{
             redirect('/');
             die();
         }
-
+        //echo $_SESSION['book_pack_type'];
         // fourmodule api checking 
-        if($_SESSION['book_pack_type'] == "practice")
+        if($_SESSION['book_pack_type'] == "practice" || $_SESSION['book_pack_type'] == "online")
         {     
             if(isset($_SESSION['fourmodule_pack_id']))       
             {
@@ -249,21 +252,36 @@ class Booking extends MY_Controller{
                 $set_pack_type=1; // for other countries
             }
             //fourmodule pack id is set
-            $fetch_fourmodule_pack_id=fetch_fourmodule_pack_id($data['packdetail']->error_message->data->test_module_name,$data['packdetail']->error_message->data->programe_name,$set_pack_type);  
-            $_SESSION['fourmodule_pack_id']=$fetch_fourmodule_pack_id; 
+            
+             
             
            // echo $_SESSION['fourmodule_pack_id'].'pp';
            // die();
             // $params_list_pack = array( 'api'=>"enrolment",'action'=>"pack_list",'centre_id'=>FOURMODULE_ONL_BRANCH_ID,'pack_type'=>$set_pack_type,'domain_id'=>FOURMODULE_DOMAIN_ID); 
             // $response=$this->_curPostData_fourmodules(FOURMODULE_URL, $headers_fourmodule, $params_list_pack);           
             ///*identify which api is call based on pack info            
+            // $headers1 = array(
+            // 'API-KEY:'.WOSA_API_KEY, 
+            // 'STUDENT-ID:'.$_SESSION['lastId_std'],                           
+            // 'TEST-MODULE-ID:'.$data['packdetail']->error_message->data->test_module_id,            
+            // 'PROGRAME-ID:'.$data['packdetail']->error_message->data->programe_id,            
+            // );
+            $this->load->model(['Test_module_model','Programe_master_model']);
+            $getTestName = $this->Test_module_model->getTestName($data['packdetail']->error_message->data->test_module_id);
+            $getProgramName = $this->Programe_master_model->getProgramName($data['packdetail']->error_message->data->programe_id);
+            $fetch_fourmodule_pack_id=fetch_fourmodule_pack_id($getTestName['test_module_name'],$getProgramName['programe_name'],$set_pack_type);
+            $_SESSION['fourmodule_pack_id']=$fetch_fourmodule_pack_id;
+            $params = array(                          
+                "pack_id"=>$fetch_fourmodule_pack_id,            
+            );    
             $headers1 = array(
-            'API-KEY:'.WOSA_API_KEY, 
-            'STUDENT-ID:'.$_SESSION['lastId_std'],                           
-            'TEST-MODULE-ID:'.$data['packdetail']->error_message->data->test_module_id,            
-            'PROGRAME-ID:'.$data['packdetail']->error_message->data->programe_id,            
-            );
-            $identify_api= json_decode($this->_curlGetData(base_url(IDENTIFY_FOURMODULE_API), $headers1));                
+                'username'=>$this->session->userdata('student_login_data')->UID,
+                'action'=>'checkUser',            
+                );
+            $param_base = $this->_fourmoduleapi__bind_params();
+            $params_fourmodule =array_merge($param_base,$headers1);
+            $identify_api= $this->_identify_fourmoduleapi($params_fourmodule,$params);
+            // $identify_api= json_decode($this->_curlGetData(base_url(IDENTIFY_FOURMODULE_API), $headers1));                
             $_SESSION['fourmodule_identify_api']=$identify_api;
             // 1=Enrollment api 2=Re-Enrollment api 3=Add-program api 
       }
@@ -716,7 +734,7 @@ class Booking extends MY_Controller{
                 "pack_id"=>$_SESSION['fourmodule_pack_id'],                                     
                 "name"=>$this->session->userdata('student_login_data')->fname.' '. $this->session->userdata('student_login_data')->lname,                                        
                 "token"=>$this->session->userdata('student_login_data')->UID,                                        
-                "start_date"=>$packdetail->error_message->data->subscribed_on,                                        
+                "start_date"=>$packdetail->error_message->data->subscribed_on, 
                 "end_date"=>$packdetail->error_message->data->expired_on, 
                 "username"=>$this->session->userdata('student_login_data')->UID,
                 "password"=>$this->session->userdata('student_login_data')->plain_pwd,                                       
@@ -986,8 +1004,10 @@ class Booking extends MY_Controller{
                 "pack_id"=>$_SESSION['fourmodule_pack_id'],                                     
                 "name"=>$this->session->userdata('student_login_data')->fname.' '. $this->session->userdata('student_login_data')->lname,                                        
                 "token"=>$this->session->userdata('student_login_data')->UID,                                        
-                "start_date"=>$packdetail->error_message->data->subscribed_on,                                        
-                "end_date"=>$packdetail->error_message->data->expired_on,                                        
+                "start_date"=>$packdetail->error_message->data->subscribed_on,                            
+                "end_date"=>$packdetail->error_message->data->expired_on,
+                "username"=>$this->session->userdata('student_login_data')->UID,
+                "password"=>$this->session->userdata('student_login_data')->plain_pwd,                                        
                 );                          
                 // Call Enrollment apie
                $response_fourmodule= $this->_curPostData_fourmodules(FOURMODULE_URL, $headers_fourmodule, $params_fourmodule);
@@ -1005,7 +1025,7 @@ class Booking extends MY_Controller{
                 "pack_id"=>$_SESSION['fourmodule_pack_id'],                                     
                 "name"=>$this->session->userdata('student_login_data')->fname.' '. $this->session->userdata('student_login_data')->lname,                                        
                 "token"=>$this->session->userdata('student_login_data')->UID,                                        
-                "start_date"=>$packdetail->error_message->data->subscribed_on,                                        
+                "start_date"=>$packdetail->error_message->data->subscribed_on,                         
                 "end_date"=>$packdetail->error_message->data->expired_on,                                        
                 ); 
                 $response_fourmodule=$this->_curPostData_fourmodules(FOURMODULE_URL, $headers_fourmodule, $params_fourmodule);

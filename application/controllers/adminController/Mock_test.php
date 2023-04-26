@@ -21,13 +21,12 @@ class Mock_test extends MY_Controller{
         $this->load->model('Student_package_model');                   
     }
 
-    function ViewUploadedReport_($id,$test_module_id){
+    function ViewUploadedReport_($id,$test_module_id=null){
 
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
         $mn = $this->router->fetch_method();        
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
-        
         //access control ends         
         if($test_module_id==IELTS_ID) {
            $data['title'] = 'Mock Test Report- IELTS';
@@ -93,7 +92,7 @@ class Mock_test extends MY_Controller{
 
         $data['title'] = 'Edit IELTS Report';
         $data['reportRow'] = $this->Mock_test_model->get_ieltsReport_row($id);
-        
+        $uploadedcsvrow = $data['reportRow']['CSVgroupId'];
         if(isset($data['reportRow']['id']))
         {
             $this->load->library('form_validation');           
@@ -134,7 +133,7 @@ class Mock_test extends MY_Controller{
                     //activity update end
 
                     $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
-                   redirect('adminController/mock_test/ViewUploadedReport_/'.$id.'/'.$test_module_id);
+                   redirect('adminController/mock_test/ViewUploadedReport_/'.$uploadedcsvrow.'/'.$test_module_id);
                 }else{
                     $this->session->set_flashdata('flsh_msg', FAILED_MSG);
                     redirect('adminController/mock_test/edit_ielts_report_/'.$id);
@@ -161,7 +160,7 @@ class Mock_test extends MY_Controller{
 
         $data['title'] = 'Edit PTE Report';
         $data['reportRow'] = $this->Mock_test_model->get_pteReport_row($id);
-        
+        $uploadedcsvrow = $data['reportRow']['CSVgroupId'];
         if(isset($data['reportRow']['id']))
         {
             $this->load->library('form_validation');           
@@ -205,7 +204,7 @@ class Mock_test extends MY_Controller{
                      }                                        
                      //activity update end
                     $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
-                    redirect('adminController/mock_test/ViewUploadedReport_/'.$id.'/'.$test_module_id);
+                    redirect('adminController/mock_test/ViewUploadedReport_/'.$uploadedcsvrow.'/'.$test_module_id);
                 }else{
                     $this->session->set_flashdata('flsh_msg', FAILED_MSG);
                     redirect('adminController/mock_test/edit_pte_report_/'.$id);
@@ -232,7 +231,7 @@ class Mock_test extends MY_Controller{
 
         $data['title'] = 'Edit TOEFL Report';
         $data['reportRow'] = $this->Mock_test_model->get_toeflReport_row($id);
-        
+        $uploadedrowid = $data['reportRow']['CSVgroupId'];
         if(isset($data['reportRow']['id']))
         {
             $this->load->library('form_validation');           
@@ -270,7 +269,7 @@ class Mock_test extends MY_Controller{
                      }                                        
                      //activity update end
                     $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
-                    redirect('adminController/mock_test/ViewUploadedReport_/'.$id.'/'.$test_module_id);
+                    redirect('adminController/mock_test/ViewUploadedReport_/'.$uploadedrowid.'/'.$test_module_id);
                 }else{
                     $this->session->set_flashdata('flsh_msg', FAILED_MSG);
                     redirect('adminController/mock_test/edit_toefl_report_/'.$id);
@@ -343,9 +342,14 @@ class Mock_test extends MY_Controller{
 
             $file = $_FILES['csvFile']['tmp_name'];
             $handle = fopen($file, "r");
-            $c = 0;
+            $errorcnt= 0;
+            $c =0;
+            $candidate_id= [];
+            $params2 = [];
+            $errormsg = '';//'Invalid Score is added or Repeative Candidate IDs';
             if($test_module_id==IELTS_ID or $test_module_id==IELTS_CD_ID){
-
+                
+                
                 while(($filesop = fgetcsv($handle, 1000, ",")) !== false){
                 
                     $Test_Type          = $filesop[0];
@@ -359,37 +363,53 @@ class Mock_test extends MY_Controller{
                     $writing            = $filesop[8];
                     $speaking           = $filesop[9];
                     $oa                 = $filesop[10];
-
-                    $params2 = array(
-                        'CSVgroupId'        => $id,
-                        'Test_Type'         => $Test_Type,
-                        'Centre_Number'     => $Centre_Number,
-                        'Candidate_Number'  => $Candidate_Number,
-                        'Candidate_ID'      => $Candidate_ID,
-                        'Date_of_Test'      => $Date_of_Test,
-                        'Date_of_Report'    => $Date_of_Report,
-                        'listening'         => $listening,
-                        'reading'           => $reading,
-                        'writing'           => $writing,
-                        'speaking'          => $speaking,
-                        'oa'                => $oa
-                    );
-                    if($c>0){
-                        $idd=$this->Mock_test_model->saveCSVrecords_ielts($params2);
+                    if(!in_array($Candidate_ID,$candidate_id))
+                    {
+                        $candidate_id[]=$Candidate_ID;                        
+                        
+                        if($this->validate_IELTS_score($listening) != 1 || $this->validate_IELTS_score($reading) != 1 || $this->validate_IELTS_score($writing) != 1 || $this->validate_IELTS_score($speaking) != 1)
+                        {
+                            $errorcnt++;
+                            $errormsg ='Invalid Score';                             
+                        }
                     }
-                    $c = $c + 1;
+                    else{
+                        $errorcnt++;
+                        $errormsg ='Repeative Candidate IDs.'; 
+                    }
+                    if($Candidate_Number !='')
+                    {
+                        $params2[] = [
+                            'CSVgroupId'        => $id,
+                            'Test_Type'         => $Test_Type,
+                            'Centre_Number'     => $Centre_Number,
+                            'Candidate_Number'  => $Candidate_Number,
+                            'Candidate_ID'      => $Candidate_ID,
+                            'Date_of_Test'      => $Date_of_Test,
+                            'Date_of_Report'    => $Date_of_Report,
+                            'listening'         => $listening,
+                            'reading'           => $reading,
+                            'writing'           => $writing,
+                            'speaking'          => $speaking,
+                            'oa'                => $oa
+                        ];
+
+                    }
+                }
+                if($errorcnt == 0)
+                {
+                    $idd=$this->Mock_test_model->saveCSVrecords_ielts($params2);
                 }
 
             }else if($test_module_id==PTE_ID){
 
                 while(($filesop = fgetcsv($handle, 1000, ",")) !== false){
-                
                     $Test_Taker_ID = $filesop[0];
                     $Registration_ID = $filesop[1];
                     $Test_Centre_ID = $filesop[2];
                     $Date_of_Test = $filesop[3];
                     $Date_of_Report = $filesop[4];
-                    $oa = $filesop[6];
+                    $oa = $filesop[5];
                     $listening = $filesop[6];
                     $reading = $filesop[7];
                     $writing = $filesop[8];
@@ -400,8 +420,23 @@ class Mock_test extends MY_Controller{
                     $sp = $filesop[13];
                     $vo = $filesop[14];
                     $wd = $filesop[15];
+
+                    if(!in_array($Registration_ID,$candidate_id))
+                    {
+                            $candidate_id[]=$Registration_ID;  
+                            if($this->validate_PTE_score($listening) != 2 || $this->validate_PTE_score($reading) != 2 || $this->validate_PTE_score($writing) != 2 || $this->validate_PTE_score($speaking) != 2 || $this->validate_PTE_score($gr)!= 2|| $this->validate_PTE_score($of)!= 2|| $this->validate_PTE_score($pr)!= 2|| $this->validate_PTE_score($sp)!= 2|| $this->validate_PTE_score($vo)!= 2 || $this->validate_PTE_score($wd)!= 2)
+                            {
+                                $errorcnt++;
+                                $errormsg ='Invalid Score';                             
+                            }                    
+                    }
+                    else{
+                        $errorcnt++;
+                        $errormsg ='Repeative Candidate IDs.'; 
+                    }
                     
-                    $params2 = array(
+                   
+                    $params2[] = [
                         'CSVgroupId'        => $id,
                         'Test_Taker_ID'     => $Test_Taker_ID,
                         'Registration_ID'   => $Registration_ID,
@@ -419,13 +454,12 @@ class Mock_test extends MY_Controller{
                         'sp'                => $sp,
                         'vo'                => $vo,
                         'wd'                => $wd,
-                    );
-                    if($c>0){
-                        $idd=$this->Mock_test_model->saveCSVrecords_pte($params2);
-                    }
-                    $c = $c + 1;
+                    ];
                 }
-
+                if($errorcnt == 0)
+                {
+                    $idd=$this->Mock_test_model->saveCSVrecords_pte($params2);
+                }
             }else if($test_module_id==TOEFL_ID){
 
                 while(($filesop = fgetcsv($handle, 1000, ",")) !== false){
@@ -435,13 +469,26 @@ class Mock_test extends MY_Controller{
                     $Test_Centre_ID = $filesop[2];
                     $Date_of_Test = $filesop[3];
                     $Date_of_Report = $filesop[4];
-                    $oa = $filesop[6];
+                    $oa = $filesop[5];
                     $listening = $filesop[6];
                     $reading = $filesop[7];
                     $speaking = $filesop[8];
                     $writing = $filesop[9];
+                    if(!in_array($Registration_ID,$candidate_id))
+                    {
+                            $candidate_id[]=$Registration_ID; 
+                            if($this->validate_TOEFL_score($listening) != 2 || $this->validate_TOEFL_score($reading) != 2 || $this->validate_TOEFL_score($writing) != 2 || $this->validate_TOEFL_score($speaking) != 2 || $this->validate_TOEFL_score('',$oa)!= 2)
+                            {
+                                $errorcnt++;
+                                $errormsg ='Invalid Score is added'; 
+                            }                        
+                    }
+                    else{
+                        $errorcnt++;
+                        $errormsg ='Repeative Candidate IDs.'; 
+                    }
                     
-                    $params2 = array(
+                    $params2[] = [
                         'CSVgroupId'        => $id,
                         'Test_Taker_ID'     => $Test_Taker_ID,
                         'Registration_ID'   => $Registration_ID,
@@ -453,15 +500,28 @@ class Mock_test extends MY_Controller{
                         'reading'           => $reading,
                         'writing'           => $writing,
                         'speaking'          => $speaking,                        
-                    );
-                    if($c>0){
-                        $idd=$this->Mock_test_model->saveCSVrecords_toefl($params2);
-                    }
-                    $c = $c + 1;
+                    ];
+                    // if($c>0){
+                    //     $idd=$this->Mock_test_model->saveCSVrecords_toefl($params2);
+                    // }
+                    // $c = $c + 1;
+                }
+                if($errorcnt == 0)
+                {
+                    $idd=$this->Mock_test_model->saveCSVrecords_toefl($params2);
                 }
 
             }else{
-                $this->session->set_flashdata('flsh_msg', FAILED_MSG);
+                if($errormsg != '')
+                {
+                    $this->session->set_flashdata('flsh_msg', '<div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>FAILED:</strong>'.$errormsg.'<a href="#" class="alert-link"></a>.
+                </div>');
+                }
+                else{
+                    $this->session->set_flashdata('flsh_msg', FAILED_MSG);
+                } 
                 redirect('adminController/mock_test/upload_mock_test');
             }
 
@@ -478,7 +538,16 @@ class Mock_test extends MY_Controller{
                 $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
                 redirect('adminController/mock_test/all_MockTest_Uploaded');
             }else{
-                $this->session->set_flashdata('flsh_msg', FAILED_MSG);
+                if($errormsg != '')
+                {
+                    $this->session->set_flashdata('flsh_msg', '<div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>FAILED:</strong>'.$errormsg.'<a href="#" class="alert-link"></a>.
+                </div>');
+                }
+                else{
+                    $this->session->set_flashdata('flsh_msg', FAILED_MSG);
+                }                
                 redirect('adminController/mock_test/upload_mock_test');
             }            
         }
@@ -490,6 +559,59 @@ class Mock_test extends MY_Controller{
             $this->load->view('layouts/main',$data);
         }
 
+    }
+
+    function validate_IELTS_score($score=null)
+    {
+        $pattern_score ="/[^0-9abnABN.]/";
+        $pattern_status = "/\b(na)*(NA)*(ab)*(AB)\b/i";
+        $validate = 1;
+        // echo preg_match($pattern_status,$score);
+        if(preg_match($pattern_status,$score) == 0 && preg_match($pattern_score,$score) != 0)
+        {
+            $validate--;
+        }
+        elseif($score > 9)
+        {
+            $validate--;
+        }
+        return $validate;
+    }
+    function validate_PTE_score($score=null)
+    {
+        $pattern_score ="/[^0-9abnABN]/";
+        $pattern_status = "/\b(na)*(NA)*(ab)*(AB)\b/i";
+        $validate = 2;
+        // echo preg_match($pattern_status,$score);
+        if(preg_match($pattern_status,$score) == 0 && preg_match($pattern_score,$score) != 0)
+        {
+            $validate--;
+        }
+        elseif($score > 90)
+        {
+            $validate--;
+        }
+        return $validate;
+    }
+    function validate_TOEFL_score($score=null,$overall=null)
+    {
+        $pattern_score ="/[^0-9abnABN]/";
+        $pattern_status = "/\b(na)*(NA)*(ab)*(AB)\b/i";
+        $validate = 2;
+        // echo preg_match($pattern_status,$score);
+        if(preg_match($pattern_status,$score) == 0 && preg_match($pattern_score,$score) != 0)
+        {
+            $validate--;
+        }
+        elseif($score > 30 )
+        {
+            $validate--;
+        }
+        elseif($overall!=null && $overall > 120 )
+        {
+            $validate--;
+        }
+        return $validate;
     }
 
     function all_MockTest_Uploaded(){

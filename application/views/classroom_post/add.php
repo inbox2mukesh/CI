@@ -159,8 +159,10 @@
 					</div>
 
 					<div class="col-md-12">
+					<span class="text-danger body_err" id="body_err"></span>
 						<label for="body" class="control-label"><span class="text-danger">*</span>Body</label>
 						<div class="form-group has-feedback">
+							<span class="text-danger body_err" id="body_err"></span>
 							<textarea name="body" class="form-control myckeditor_new removeerrmessage" id="body"><?php echo $this->input->post('body'); ?></textarea>
 							<span class="text-danger body_err"><?php echo form_error('body');?></span>
 						</div>
@@ -189,10 +191,11 @@
 
 <?php ob_start(); ?>
 <script>
-	CKEDITOR.replaceAll( 'myckeditor_new', {
-	removeButtons: 'Source',
-    // The rest of options...
-} );
+// 	CKEDITOR.replaceAll( 'myckeditor_new', {
+// 	removeButtons: 'Source',
+//     // The rest of options...
+// } );
+checkWordCountCkEditor('myckeditor_new');
 	var element = CKEDITOR.document.getById( 'myckeditor_new' );
 element.on( 'click', function( ev ) {
 	alert('pp')

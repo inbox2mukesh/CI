@@ -15,8 +15,8 @@
       </div>
 
       <div class="form-group has-feedback">
-        <input type="password" name="passwrd" value='<?php echo $callfromview->dataDecryption(get_cookie(COOKIE_PWD));?>' class="form-control input-ui-100" placeholder="Enter PASSWORD">
-        <span class="fa fa-key form-control-feedback"></span>
+        <input type="password" name="passwrd" value='<?php echo $callfromview->dataDecryption(get_cookie(COOKIE_PWD));?>' class="form-control input-ui-100" id="dashlogin" placeholder="Enter PASSWORD">
+        <span class="fa fa-eye-slash form-control-feedback" id="dashBtn"></span>
       </div>
 
       <div class="row">
@@ -108,6 +108,13 @@ $(document).keypress("u",function(e) {
   }
 });
 <?php } ?>
+
+const dashBtn = document.querySelector('#dashBtn');
+  dashBtn.addEventListener('click', () => {
+  const input = document.querySelector('#dashlogin');
+  input.getAttribute('type') === 'password' ? input.setAttribute('type', 'text') : input.setAttribute('type', 'password');
+  $('.fa-eye-slash').toggleClass("fa-eye");
+  });
 </script>
 </body>
 

@@ -93,7 +93,7 @@ else {
   <?php } ?>
   <!--ENDS--->
   <!--SECTION: SHARED DOC--->
-  <?php if (isset($allClassroomMaterial) &&  isset($_SESSION['classroom_id']) && count($allClassroomMaterial->error_message->data->classroom_doc) > 0) { 
+  <?php if (isset($allClassroomMaterial) &&  isset($_SESSION['classroom_id']) && is_countable($allClassroomMaterial->error_message->data->classroom_doc) && count($allClassroomMaterial->error_message->data->classroom_doc) > 0) { 
    
     ?>
   <div class="clearfix"> 

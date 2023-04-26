@@ -217,7 +217,7 @@
 
     function checkStudentExistence($mobile,$email){
 
-        $this->db->select('id,fresh,active,is_otp_verified,is_email_verified');
+        $this->db->select('id,fresh,active,is_otp_verified,is_email_verified,created,UID');
         $this->db->from('`students`');
        // $this->db->where(array('mobile'=> $mobile,'email'=>$email));       
        $this->db->where(array('mobile'=>$mobile)); 
@@ -706,7 +706,7 @@
 
     function getPassword($id){
 
-        $this->db->select('password');
+        $this->db->select('password,UID');
         $this->db->from('`students`'); 
         $this->db->where(array('id'=>$id));     
         return $this->db->get('')->row_array();
@@ -808,9 +808,11 @@
         
         $this->db->select('
             s.fname,
+            s.lname,
             s.email,
             s.mobile,
             s.username,
+            s.UID,
             pkg.`package_name`,
             pkg.`amount` AS amount,
             pkg.`discounted_amount` AS discounted_amount,

@@ -14,7 +14,7 @@
 					<div class="col-md-3">
 						<label for="package_name" class="control-label"><span class="text-danger">*</span>Package Name/Title</label>
 						<div class="form-group">
-							<input type="text" name="package_name" value="<?php echo ($this->input->post('package_name') ? $this->input->post('package_name') : $practice_packages['package_name']); ?>" class="form-control input-ui-100 removeerrmessage" id="package_name" maxlength="45"/>
+							<input type="text" name="package_name" value="<?php echo ($this->input->post('package_name') ? $this->input->post('package_name') : $practice_packages['package_name']); ?>" class="form-control input-ui-100 removeerrmessage" id="package_name" maxlength="60"/>
 							<span class="text-danger package_name_err"><?php echo form_error('package_name');?></span>
 						</div>
 					</div>
@@ -220,7 +220,7 @@
 					<div class="col-md-12">
 						<label for="package_desc" class="control-label"><span class="text-danger">*</span>Package Description</label>
 						<div class="form-group has-feedback">
-							<textarea name="package_desc" class="form-control myckeditor" id="package_desc"><?php echo ($this->input->post('package_desc') ? $this->input->post('package_desc') : $practice_packages['package_desc']); ?></textarea>
+							<textarea name="package_desc" class="form-control removeerrmessage validatewordcount" id="package_desc"><?php echo ($this->input->post('package_desc') ? $this->input->post('package_desc') : $practice_packages['package_desc']); ?></textarea>
 							<span class="glyphicon glyphicon-text-size form-control-feedback"></span>
 							<span class="text-danger package_desc_err"><?php echo form_error('package_desc');?></span>
 						</div>
@@ -241,6 +241,10 @@
 
 <?php ob_start(); ?>
 <script>
+	$(document).ready(function(){
+		checkWordCountCkEditor('package_desc');
+		
+	});
 	$('#practicepack_edit_form').on('submit', function(e){
         e.preventDefault();
 		var flag=1;

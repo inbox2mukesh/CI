@@ -20,13 +20,13 @@
 
 <table width="100%" cellpadding="0" cellspacing="1" style="margin-bottom: 10px;font-size: 14px; border:solid 1px #f3eedd">
 <tr>
-	<td width="50%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left; padding:4px;">Course</td>
+	<td width="50%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left; padding:4px;font-size:13px;">Course</td>
 	<td valign="top" style="padding:4px;"><?php echo $test_module_name;?></td>
 </tr>
 
 <?php if($programe_name !='' and $programe_name !='None'){ ?>
 <tr>
-	<td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;">Program</td>
+	<td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;font-size:13px;">Program</td>
 	<td valign="top" style="padding:4px;">
     <?php 
       echo $programe_name;
@@ -37,13 +37,13 @@
 
 <?php if(isset($batch_name) && $batch_name !=''){ ?>
 <tr>
-	<td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;">Batch</td>
+	<td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;font-size:13px;">Batch</td>
 	<td valign="top" style="padding:4px;"><?php echo $batch_name;?></td>
 </tr>
 <?php } ?>
 <?php if($pack_type !="practice") {?>
 <tr>
-	<td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;">Branch</td>
+	<td valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;font-size:13px;">Branch</td>
 	<td valign="top" style="padding:4px;"><?php if($center_name){echo $center_name;}else{echo NA;}?></td>
 </tr>
 <?php }?>
@@ -143,8 +143,14 @@
 
 </td>
 </tr>
-
-
+<tr>
+  
+</tr>
+<tr>
+<td align="left" style="word-break:break-word;font-size:14px;">
+  <p><?php echo $email_footer_content ; ?></p>
+</td>
+</tr>
 <tr>
 <td align="left">	
 <a href="<?php echo base_url('my_login');?>" style="background-color: #131945;border: none;color: white;padding:8px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 15px;border-radius: 4px; margin-top:10px;">LOGIN</a>	

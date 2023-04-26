@@ -90,7 +90,7 @@
   <?php } ?>
   <!--ENDS--->
   <!--SECTION: SHARED DOC--->
-  <?php if (isset($allClassroomMaterial) && isset($_SESSION['classroom_id']) && count($allClassroomMaterial->error_message->data->classroom_doc) > 0) { ?>
+  <?php if (isset($allClassroomMaterial) && isset($_SESSION['classroom_id']) && is_countable($allClassroomMaterial->error_message->data->classroom_doc) && count($allClassroomMaterial->error_message->data->classroom_doc) > 0) { ?>
   <div class="col-md-12 clearfix"> 
     <div class="head-title">
     <div class="top-title mb-20 mt-20 text-uppercase">Recent Classroom Material
@@ -141,7 +141,7 @@
   <?php }?>
    <!--ENDS--->
    <?php
- if (isset($allClassroomMaterial) && count($allClassroomMaterial->error_message->data->classroom_schedule) == 0 AND count($allClassroomMaterial->error_message->data->classroom_doc) == 0 AND count($allClassroomMaterial->error_message->data->classroom_lecture) == 0)
+ if (isset($allClassroomMaterial) && (is_countable($allClassroomMaterial->error_message->data->classroom_schedule) && count($allClassroomMaterial->error_message->data->classroom_schedule) == 0) && (count($allClassroomMaterial->error_message->data->classroom_doc) == 0 && is_countable($allClassroomMaterial->error_message->data->classroom_doc)) && (is_countable($allClassroomMaterial->error_message->data->classroom_lecture) && count($allClassroomMaterial->error_message->data->classroom_lecture) == 0))
  {
  ?>
  <div class="col-md-12">

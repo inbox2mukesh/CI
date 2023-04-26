@@ -697,12 +697,14 @@ class Student_package_model extends CI_Model
         $this->db->select('student_package_id');
         $this->db->from('`student_package`');
         $this->db->where(array('student_id'=> $id,'pack_type'=>'practice','status'=>'succeeded'));
+        $this->db->or_where('pack_type','online');
         $num_rows=$this->db->get('')->num_rows();
         if($num_rows > 0)
         {
             $this->db->select('student_package_id');
             $this->db->from('`student_package`');
             $this->db->where(array('student_id'=> $id,'pack_type'=>'practice','status'=>'succeeded','test_module_id'=>$test_module_id,'programe_id'=>$programe_id));
+            $this->db->or_where('pack_type','online');
             $num_rows2=$this->db->get('')->num_rows();
             if($num_rows2 > 0)   {
                 return 2; // Call Re-Enrollment api

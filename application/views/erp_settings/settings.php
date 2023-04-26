@@ -4,7 +4,7 @@
             <div class="box-header bg-danger">
                 <h3 class="box-title text-primary"><?php echo $title;?></h3>
             	<div class="box-tools"> 
-                    <?php if(ENVIRONMENT=='development' or ENVIRONMENT=='testing'){ ?>
+                    <?php if(ENVIRONMENT=='development' or ENVIRONMENT=='testing' or ENVIRONMENT=='staging'){ ?>
                         <a href="<?php echo site_url('adminController/ERP_settings/set_erp_softly'); ?>" class="btn btn-danger btn-sm">Init ERP(Softly)</a>
                         <a href="<?php echo site_url('adminController/ERP_settings/set_erp_hardly'); ?>" class="btn btn-danger btn-sm">Init ERP(Hardly)</a>
                         <a href="<?php echo site_url('adminController/role/auto_clean_assigned_role'); ?>" class="btn btn-danger btn-sm link-btn-ui-100">Empty Access Role</a>

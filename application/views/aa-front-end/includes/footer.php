@@ -183,9 +183,11 @@
 </script>
 <script type="text/javascript">
 	$(function() {
-		$('.marquee-news-ticker').jConveyorTicker({
-			force_loop: true
-		});
+		if($(".marquee-news-ticker li").length > 0) { 
+			$('.marquee-news-ticker').jConveyorTicker({
+				force_loop: true
+			});
+		}
 	});
 </script>
 <?php if (ENVIRONMENT == "production" or ENVIRONMENT == "production_testing") { ?>
@@ -435,30 +437,39 @@
 
 		function validatedob(data, id) {
 			if (data != "") {
-				var idd = '.' + id + '_err';
-				var dt = data.split("/");
-				if (dt[1] == '02') {
-					if (dt[0] > 29) {
-						$(idd).text('Please enter the valid date of birth');
-						return false;
-					} else {
-						$(idd).text('');
-					}
-				}
-				var pattern = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
-				if (pattern.test(data) == false) {
-					$(idd).text('Please enter the valid date of birth');
-					return false;
-				} else {
-					$(idd).text('');
-				}
-				dt = dt[2] + '-' + dt[1] + '-' + dt[0];
-				if (isDateOver15(new Date(dt)) == false) {
-					$(idd).text('You must have at least 15 years of age');
+				const today = new Date();
+				const dob = new Date(data);
+				const diffTime = Math.floor(today - dob);
+				const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)/31/12); 
+				
+				if(diffDays < 15)				
+					$('#'+id).reset();
 					return false;
 				}
+				// var idd = '.' + id + '_err';
+				// var dt = data.split("/");
+				// if (dt[1] == '02') {
+				// 	if (dt[0] > 29) {
+				// 		$(idd).text('Please enter the valid date of birth');
+				// 		return false;
+				// 	} else {
+				// 		$(idd).text('');
+				// 	}
+				// }
+				// var pattern = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+				// if (pattern.test(data) == false) {
+				// 	$(idd).text('Please enter the valid date of birth');
+				// 	return false;
+				// } else {
+				// 	$(idd).text('');
+				// }
+				// dt = dt[2] + '-' + dt[1] + '-' + dt[0];
+				// if (isDateOver15(new Date(dt)) == false) {
+				// 	$(idd).text('You must have at least 15 years of age');
+				// 	return false;
+				// }
 			}
-		}
+		// }
 
 		function isDateOver15(dateOfBirth) {
 			const date15YrsAgo = new Date();

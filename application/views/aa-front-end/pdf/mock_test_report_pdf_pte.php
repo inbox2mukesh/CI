@@ -228,7 +228,7 @@ echo $writing;
         
 <div class="gridtb" style="margin-top:10px; margin-bottom:10px; display: flow-root;">
 <div style="width:40%; float:left;font-size: 12px; font-weight:400; text-align: right;">Test Centre Country:</div>   
-<div style="float: right; width:59%;font-size: 12px;font-weight:400; text-align:left; font-weight: bold;"><?php echo $RT_report_data->error_message->data->Test_Centre_ID;?> </div>  
+<div style="float: right; width:59%;font-size: 12px;font-weight:400; text-align:left; font-weight: bold;"><?php echo 'INDIA';?> </div>  
 </div>
         
 <div class="gridtb" style="margin-top:10px; margin-bottom:10px; display: flow-root;">

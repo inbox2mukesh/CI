@@ -283,9 +283,9 @@
 					</div>					 -->
 
 					<div class="col-md-12">
-						<label for="package_desc" class="control-label">Package Description</label>
+						<label for="package_desc" class="control-label">Package Description</label><span class="text-danger package_desc_err" id="package_desc_err"></span>
 						<div class="form-group has-feedback">
-							<textarea name="package_desc" class="form-control myckeditor" id="package_desc"><?php echo $this->input->post('package_desc'); ?></textarea>
+							<textarea name="package_desc" class="form-control removeerrmessage validatewordcount" id="package_desc"><?php echo $this->input->post('package_desc'); ?></textarea>
 							<span class="glyphicon glyphicon-text-size form-control-feedback"></span>
 						</div>
 					</div>
@@ -318,6 +318,10 @@
 </div>
 <?php ob_start();?>
 <script type="text/javascript">
+	$(document).ready(function(){
+		checkWordCountCkEditor('package_desc');
+		
+	});
 	<?php if(!empty($this->input->post("country_id"))) {
 		$countryId = $this->input->post("country_id");
 		?>

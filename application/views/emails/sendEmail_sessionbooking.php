@@ -7,8 +7,9 @@
     <td style="font-size:14px; color:#333; line-height:24px; text-align: justify">  
 
         <p style="font-size:14px; padding: 0px; margin: 0px">Dear <?php echo trim($student_name);?>,</p>
-        <p style="font-size:14px; padding: 0px; margin-top:15px;word-break:break-word;"><span style="font-weight:bold">Ref.No: </span> <?php echo $refno;?>,</p>
+        
         <p style="font-size:14px; padding: 0px; margin-top:15px;word-break:break-word;"><?php echo $email_message; ?></p>
+        <p style="font-size:14px; padding: 0px; margin-top:15px;word-break:break-word;"><span style="font-weight:bold">Ref.No: </span> <?php echo $refno;?>,</p>
 
         <div style="margin-top:10px; margin-bottom:10px;">
         <table width="100%" cellspacing="0" cellpadding="0" style="font-size:14px;">

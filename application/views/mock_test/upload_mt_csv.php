@@ -53,11 +53,11 @@
               <select name="programe_id" id="programe_id" class="form-control selectpicker selectpicker-ui-100" data-show-subtext="true" data-live-search="true">
                 <option data-subtext="" value="">Select program</option>
                 <?php 
-                foreach($all_programe_masters as $p)
+                /* foreach($all_programe_masters as $p)
                 {
                   $selected = ($p['programe_id'] == $this->input->post('programe_id')) ? ' selected="selected"' : "";
                   echo '<option value="'.$p['programe_id'].'" '.$selected.'>'.$p['programe_name'].'</option>';
-                } 
+                }  */
                 ?>
               </select>
               <span class="text-danger programe_id_err"><?php echo form_error('programe_id');?></span>
@@ -75,7 +75,7 @@
           <div class="col-md-3">
             <label for="csvFile" class="control-label"><span class="text-danger">*</span>CSV</label>
             <div class="form-group">
-              <input type="file" name="csvFile" value="<?php echo $this->input->post('csvFile'); ?>" class="form-control input-ui-100" id="csvFile"/>             
+              <input type="file" name="csvFile" value="<?php echo $this->input->post('csvFile'); ?>" class="form-control input-ui-100" id="csvFile" accept=".csv,.xlsx"/>             
               <span class="text-danger csvFile_err"><?php echo form_error('csvFile');?></span>
             </div>
           </div>

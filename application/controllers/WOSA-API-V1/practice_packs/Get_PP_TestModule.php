@@ -22,7 +22,7 @@ class Get_PP_TestModule extends REST_Controller {
         if(!$this->Authenticate($this->input->get_request_header('API-KEY'))) {            
             $data['error_message'] = [ "success" => 2, "message" => UNAUTHORIZED, "data"=>''];
         }else{
-          $country_id = $this->input->get_request_header('COUNTRY-ID');
+          $country_id = DEFAULT_COUNTRY;
           $bData = $this->Practice_package_model->Get_pp_TestModule($country_id);
           if(!empty($bData)){
             $data['error_message'] = [ "success" => 1, "message" => "success", "data"=> $bData];    

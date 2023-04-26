@@ -36,7 +36,8 @@ class Mock_test_model extends CI_Model
         return $this->db->count_all_results();
     }
 
-    function get_toefl_report_count($id){
+    function get_toefl_report_count($id)
+    {
 
         $this->db->from('mock_test_report_toefl');
         $this->db->where(array('CSVgroupId'=>$id));
@@ -50,6 +51,7 @@ class Mock_test_model extends CI_Model
             $this->db->limit($params['limit'], $params['offset']);
         }
         $this->db->select('*');
+        $this->db->where(array('CSVgroupId'=>$id));
         $this->db->from('`mock_test_report_ielts`');
         return $this->db->get('')->result_array();
     }
@@ -61,6 +63,7 @@ class Mock_test_model extends CI_Model
             $this->db->limit($params['limit'], $params['offset']);
         }
         $this->db->select('*');
+        $this->db->where(array('CSVgroupId'=>$id));
         $this->db->from('`mock_test_report_pte`');
         return $this->db->get('')->result_array();
     }
@@ -72,7 +75,8 @@ class Mock_test_model extends CI_Model
             $this->db->limit($params['limit'], $params['offset']);
         }
         $this->db->select('*');
-        $this->db->from('`mock_test_report_toefl`');
+        $this->db->where(array('CSVgroupId'=>$id));
+        $this->db->from('`mock_test_report_toefl`');        
         return $this->db->get('')->result_array();
     }
 
@@ -467,19 +471,20 @@ function get_mt_report_data_toefl($report_id,$UID){
 
     function saveCSVrecords_ielts($params){
 
-        $this->db->insert('mock_test_report_ielts',$params);
+        // $this->db->insert('mock_test_report_ielts',$params);
+        $this->db->insert_batch('mock_test_report_ielts',$params);
         return $this->db->insert_id();
     }
 
     function saveCSVrecords_pte($params){
 
-        $this->db->insert('mock_test_report_pte',$params);
+        $this->db->insert_batch('mock_test_report_pte',$params);
         return $this->db->insert_id();
     }
 
     function saveCSVrecords_toefl($params){
 
-        $this->db->insert('mock_test_report_toefl',$params);
+        $this->db->insert_batch('mock_test_report_toefl',$params);
         return $this->db->insert_id();
     }
 

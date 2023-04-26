@@ -63,4 +63,58 @@ function fetch_fourmodule_pack_id($test_module_name,$programe_name,$pack_type)
      
      return $fourmodule_pack_id; 
 }
+
+
+function _curPostData_fourmodules($url, $headers, $params)
+    {
+        
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => TRUE,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => $params,
+            CURLOPT_HTTPHEADER => $headers,
+        ));
+        $response = curl_exec($curl);
+       
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            return $response;
+        }
+    }
+
+if(!function_exists('fourmodule_new_password'))
+{
+    function fourmodule_new_password($uid=null,$password=null)
+    {
+        $ci = &get_instance();
+        $headers_fourmodule= array(
+            'authorization:'.FOURMODULE_KEY,                           
+            );  
+            $params_fourmodule = array(
+            "api" => "login", 
+            "action"=>'password_change', 
+            "centre_id"=>FOURMODULE_ONL_BRANCH_ID, 
+            "domain_id"=>FOURMODULE_DOMAIN_ID,        
+            "token"=>$uid,
+            "password"=>$password,                                        
+            );                          
+            // Call Enrollment apie
+           return _curPostData_fourmodules(FOURMODULE_URL, $headers_fourmodule, $params_fourmodule);
+
+    }
+
+}
+
+
+
+
 ?>

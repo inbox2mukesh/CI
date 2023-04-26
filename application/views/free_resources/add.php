@@ -97,10 +97,10 @@
 					<?php 	
 			            $description=$this->input->post('description');
 			        ?>
-                     <div class="col-md-12">
-						<label for="zoom_link" class="control-label">Description<span class="text-danger">*</span></label>
+                     <div class="col-md-12">					 
+						<label for="zoom_link" class="control-label">Description<span class="text-danger">*</span></label><span class="text-danger description_err" id="description_err"></span>
 						<div class="form-group">
-						    <textarea id="description" name="description" rows="4" cols="163" placeholder="description..." class=" form-control removeerrmessage" maxlength="100"><?php echo $description ?></textarea>
+						    <textarea id="description" name="description" rows="4" cols="163" placeholder="description..." class="form-control removeerrmessage validatewordcount"><?php echo $description ?></textarea>
 							<span class="text-danger description_err"><?php echo form_error('description');?></span>
 						</div>
 					</div>
@@ -180,6 +180,7 @@
 									    <?php 
 										if($section_type=='text'){ 
 										?>
+										<span class="text-danger free_resources_section<?php echo $i?>_err" id="free_resources_section<?php echo $i?>_err"></span>
 	                                     <textarea  rows="4" cols="100" placeholder="Add Text" class="form-control free_resources_section" id="free_resources_section<?php echo $i?>" name="free_resources_section<?php echo $i?>"><?php echo $free_resources_section?></textarea>
 										<?php 
 										} else if($section_type=='image'){
@@ -443,7 +444,8 @@ $('#freeresourse_add_form').on('submit', function(e){
 				$(this).find('.section_type').val(type);
 				html='';
 				if(type=='text'){
-				  CKEDITOR.replace('free_resources_section'+i);
+				//   CKEDITOR.replace('free_resources_section'+i);
+				checkWordCountCkEditor('classroom_documents_section'+i);
 				  $(this).find('#free_resources_section'+i).next("span").addClass('free_resources_section'+i+'_err');
 				   
 				}else if(type=='image'){
@@ -546,7 +548,8 @@ function updateCkEditer(){
 	$("#EmployeeTierId .employeeTierDiv").each(function(){
 		type=$(this).find('.section_type').val();
 		if(type=='text'){
-			CKEDITOR.replace('free_resources_section'+i);
+			// CKEDITOR.replace('free_resources_section'+i);
+			checkWordCountCkEditor('free_resources_section'+i);
 		}
 	});
 	i++;
@@ -657,6 +660,10 @@ function isAudio(i){
 		$("#previewAudio"+i).attr("src",'');
 	} 
 }
+$(document).ready(function(){
+		checkWordCountCkEditor('description');
+		
+	});
 </script>
 
 <?php
