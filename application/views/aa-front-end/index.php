@@ -232,7 +232,7 @@ We are committed to providing a supportive and conducive learning environment th
 								<?php if(DEFAULT_COUNTRY == 38) { ?>		
 								<p>IELTS | TOEFL | PTE | No longer be hard to study | Online coaching programs formulated by English language experts will ensure your success. Advanced learning strategies are incorporated to aid students in learning at a fast pace. Dig into the pool of professional courses and choose your preferred option fulfilling your needs.</p>	
 							<?php } elseif(DEFAULT_COUNTRY == 13) {?>
-								<p>We are launching new IELTS, PTE, and TOEFL online coaching programs to boost English competence and Self-confidence. Experts have invested their knowledge, experience and expertise to design online courses standing up to students' expectations. The key to success lies in our online coaching. Let's start preparing!AU Test preparation practice packs</p>	
+								<p>We are launching new IELTS, PTE, and TOEFL online coaching programs to boost English competence and Self-confidence. Experts have invested their knowledge, experience and expertise to design online courses standing up to students' expectations. The key to success lies in our online coaching. Let's start preparing!</p>	
 								<?php } else { ?>	
 									<p>Wide range of online coaching programs for IELTS, PTE, TOEFL, and others offer students the convenience of making the best choice. Test preparation for you will involve only enrolling yourself in our programs, and our certified trainers will make you achieve a good score. Ensure your success with us!</p>	
 								<?php } ?>
