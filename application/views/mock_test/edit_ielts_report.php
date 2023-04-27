@@ -117,60 +117,60 @@
 <script src="<?php echo site_url(''.DESIGN_VERSION.'/js/jquery-3.6.0.min.js?v='.JS_CSS_VERSION);?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-            $( document ).ready(function() {
-                $('.score').keyup(function (e) {
-					$(this).next().html("");
-					var inputval = this.value;	
-					var self = $(this);
-					self.val(self.val().replace(/[^naNA0-9.]/, ""));				
-					if(self.val().length > 3 || self.val() > 9 )
-					{
-						self.val(self.val().replace(inputval, ""));
-					}
-      			});
-            });
-
-			// $(document).on("blur",'.score',function(){
-			// 	var thisVal = $(this).val().trim();
-			// 	if(thisVal) {
-			// 		var checkVal = thisVal / 0.5;
-			// 		if(!Number.isInteger(checkVal)) {
-			// 			$(this).val("");
-			// 			$(this).next().html("Please enter only number or 0.5 format values.")
+            // $( document ).ready(function() {
+            //     $('.score').keyup(function (e) {
+					
+			// 		$(this).next().html("");
+			// 		var inputval = this.value;	
+			// 		var self = $(this);
+			// 		//self.val(self.val().replace(/[^naNAbB0-9.]/, ""));			
+					
+			// 		// if(self.val().length > 3 || self.val() > 9 ) 
+			// 		// {
+			// 		// 	self.val(self.val().replace(inputval, ""));
+			// 		// }
+			// 		// else 
+			// 		if(inputval.match(/[^naNAbB0-9.]/) || !Number.isInteger(inputval/0.5))
+			// 		{
+			// 			self.val(self.val().replace(inputval, ""));
 			// 		}
-			// 	}
-			// });
+			// 		// if(!Number.isInteger(inputval/0.5))
+			// 		// {
+			// 		// 	self.val(self.val().replace(inputval, ""));
+			// 		// }
+      		// 	});
+            // });
 			$('#edit_ielts_marks').validate({
 				ignore:[],
 					rules:{
 						'oa':{
 							required: true,
 							// max: 9,
-    						lettersallowed : true,
+    						//lettersallowed : true,
 							validatescore : true,
 						},
 						'listening':{
 							required: true,
 							// max: 9,
-    						lettersallowed : true,
+    						//lettersallowed : true,
 							validatescore : true,
 						},
 						'reading':{
 							required: true,
 							// max: 9,
-							lettersallowed : true,
+							//lettersallowed : true,
 							validatescore : true,
 						},
 						'writing':{
 							required: true,
 							// max: 9,
-							lettersallowed : true,
+							//lettersallowed : true,
 							validatescore : true,
 						},
 						'speaking':{
 							required: true,
 							// max: 9,
-							lettersallowed : true,
+							//lettersallowed : true,
 							validatescore : true,
 						},			
 						
@@ -200,10 +200,7 @@
 				}
 
 			});
-			jQuery.validator.addMethod("lettersallowed", function(value, element) {
-				return this.optional(element) || value <= 9 || value == 'NA' || value == 'AB';
-			}, "* Amount must be greater than zero");
 			jQuery.validator.addMethod("validatescore", function(value, element) {
-				return this.optional(element) || Number.isInteger(value/0.5);
+				return this.optional(element) || Number.isInteger(value/0.5) == true || value == 'NA' || value == 'AB' || value == 'na' || value == 'ab';
 			}, "Please enter only number or 0.5 format values.");
 </script>

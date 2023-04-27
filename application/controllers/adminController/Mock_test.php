@@ -366,8 +366,8 @@ class Mock_test extends MY_Controller{
                     if(!in_array($Candidate_ID,$candidate_id))
                     {
                         $candidate_id[]=$Candidate_ID;                        
-                        
-                        if($this->validate_IELTS_score($listening) != 1 || $this->validate_IELTS_score($reading) != 1 || $this->validate_IELTS_score($writing) != 1 || $this->validate_IELTS_score($speaking) != 1)
+                        // pr($this->validate_IELTS_score($listening),1);
+                        if($this->validate_IELTS_score($listening) != 3 || $this->validate_IELTS_score($reading) != 3 || $this->validate_IELTS_score($writing) != 3 || $this->validate_IELTS_score($speaking) != 3)
                         {
                             $errorcnt++;
                             $errormsg ='Invalid Score';                             
@@ -399,6 +399,9 @@ class Mock_test extends MY_Controller{
                 if($errorcnt == 0)
                 {
                     $idd=$this->Mock_test_model->saveCSVrecords_ielts($params2);
+                }
+                else{
+                    $this->Mock_test_model->removeCSV($id);
                 }
 
             }else if($test_module_id==PTE_ID){
@@ -565,13 +568,16 @@ class Mock_test extends MY_Controller{
     {
         $pattern_score ="/[^0-9abnABN.]/";
         $pattern_status = "/\b(na)*(NA)*(ab)*(AB)\b/i";
-        $validate = 1;
-        // echo preg_match($pattern_status,$score);
+        $validate = 3;
         if(preg_match($pattern_status,$score) == 0 && preg_match($pattern_score,$score) != 0)
         {
             $validate--;
         }
         elseif($score > 9)
+        {
+            $validate--;
+        }
+        elseif(fmod($score/0.5,1) !=0)
         {
             $validate--;
         }

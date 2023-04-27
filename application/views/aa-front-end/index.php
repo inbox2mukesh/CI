@@ -139,7 +139,16 @@ Western Overseas is where your talents are valued and dreams are nurtured. India
 We take the MARA professional Code of Conduct very seriously and make sure that young and skilled people aspiring to immigrate to Australia in search of a great lifestyle and excellent job opportunities are never disappointed. If you are a skilled migrant looking to move to Australia, your suitability will be assessed on a points system. Your work experience, qualifications, and language proficiency will be expressed in points. Alternatively, you can obtain an immigration visa to Australia through the Australian Family Migration and Humanitarian Programs as well.
 
 				</p>
-<?php } else {?>
+<?php } 
+elseif(DEFAULT_COUNTRY==38)
+{ ?>
+<p>
+Western Overseas Immigration is proudly serving migrants with student visa services and after study immigration services. Working directly with a widespread network of colleges, agents and official channel partners, Western Overseas Immigration brings not only the vast experience but also the rich values to the international grounds. We believe in providing the best services while being completely transparent with our clients. We uphold the client's confidentiality and provide solutions based on correct assessment.<br><br>
+The Director Mr. Ankit Kumar (Registered with College of Immigration and Citizenship Consultants), being of an immigrant origin himself understands the value of genuine and right guidance. It is these values that has led Western Overseas Immigration to establish not just local but an international network of agents and working partnerships with well established education providers worldwide.
+</p>
+
+<?php }
+else {?>
 	<p class="text-center">
 	At Western Overseas, we proudly offer a versatile platform for online coaching in English proficiency tests such as IELTS, PTE, TOEFL, and others. Our comprehensive courses are designed to provide students with all the necessary tools and resources to succeed in these exams.<br><br>
 

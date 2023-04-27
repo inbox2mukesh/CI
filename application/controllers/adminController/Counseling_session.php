@@ -173,7 +173,7 @@ class Counseling_session extends MY_Controller{
 		$current_DateTime = date("d-m-Y G:i:0");
         $current_DateTimeStr = strtotime($current_DateTime);
         $current_DateTimeStr_after=$current_DateTimeStr;
-		$this->Counseling_session_model->deactivate_shedule($current_DateTimeStr_after);
+		// $this->Counseling_session_model->deactivate_shedule($current_DateTimeStr_after);
 		
         $data['title'] = 'Add Counseling Session';
         $this->load->library('form_validation');
@@ -182,9 +182,7 @@ class Counseling_session extends MY_Controller{
         {
         	$this->form_validation->set_rules('meeting_link','meeting link','required|trim');	
         }
-		$this->form_validation->set_rules('session_date','session date','required|trim');
-		
-		
+		$this->form_validation->set_rules('session_date','session date','required|trim');	
 		$this->form_validation->set_rules('duration','Duration','required|trim');	
 		//$this->form_validation->set_rules('paypal_link','paypal link','required|trim');	 
 		$this->form_validation->set_rules('counseling_session_time_requerd','select at least one time slot','required|trim');

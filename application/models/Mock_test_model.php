@@ -476,6 +476,12 @@ function get_mt_report_data_toefl($report_id,$UID){
         return $this->db->insert_id();
     }
 
+    function removeCSV($id=null)
+    {
+        $this->db->where('id',$id);
+        $this->db->delete('mock_test_report_masters');
+    }
+
     function saveCSVrecords_pte($params){
 
         $this->db->insert_batch('mock_test_report_pte',$params);
