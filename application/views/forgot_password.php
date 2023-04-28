@@ -25,8 +25,10 @@
 
 
 </body>
+<?php ob_start(); 
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
+?>
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>  -->
 <script>
 <?php if(ENVIRONMENT=="production" or ENVIRONMENT=="production_testing"){ ?>
 $(document).bind("contextmenu",function(e){
@@ -56,5 +58,7 @@ $(document).keypress("u",function(e) {
     return true;
   }
 });
-<?php } ?>
+<?php } global $customJs;
+  $customJs .= ob_get_clean(); ?>
+</script>
 
