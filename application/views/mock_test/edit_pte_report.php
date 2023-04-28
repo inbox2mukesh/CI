@@ -274,7 +274,7 @@
 
 			});
 			jQuery.validator.addMethod("lettersallowed", function(value, element) {
-				return this.optional(element) || value <= 90 || value == 'NA' || value == 'AB';
+				return this.optional(element) || value <= 90 || value == 'NA' || value == 'AB'|| value == 'na' || value == 'ab';
 			}, "* Amount must be greater than zero");
 
 

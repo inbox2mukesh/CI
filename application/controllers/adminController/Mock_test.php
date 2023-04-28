@@ -367,7 +367,7 @@ class Mock_test extends MY_Controller{
                     {
                         $candidate_id[]=$Candidate_ID;                        
                         // pr($this->validate_IELTS_score($listening),1);
-                        if($this->validate_IELTS_score($listening) != 3 || $this->validate_IELTS_score($reading) != 3 || $this->validate_IELTS_score($writing) != 3 || $this->validate_IELTS_score($speaking) != 3)
+                        if($this->validate_IELTS_score($listening) != 3 || $this->validate_IELTS_score($reading) != 3 || $this->validate_IELTS_score($writing) != 3 || $this->validate_IELTS_score($speaking) != 3 || $this->validate_IELTS_score($oa) != 3)
                         {
                             $errorcnt++;
                             $errormsg ='Invalid Score';                             
@@ -427,7 +427,7 @@ class Mock_test extends MY_Controller{
                     if(!in_array($Registration_ID,$candidate_id))
                     {
                             $candidate_id[]=$Registration_ID;  
-                            if($this->validate_PTE_score($listening) != 2 || $this->validate_PTE_score($reading) != 2 || $this->validate_PTE_score($writing) != 2 || $this->validate_PTE_score($speaking) != 2 || $this->validate_PTE_score($gr)!= 2|| $this->validate_PTE_score($of)!= 2|| $this->validate_PTE_score($pr)!= 2|| $this->validate_PTE_score($sp)!= 2|| $this->validate_PTE_score($vo)!= 2 || $this->validate_PTE_score($wd)!= 2)
+                            if($this->validate_PTE_score($listening) != 2 || $this->validate_PTE_score($reading) != 2 || $this->validate_PTE_score($writing) != 2 || $this->validate_PTE_score($speaking) != 2 || $this->validate_PTE_score($gr)!= 2|| $this->validate_PTE_score($of)!= 2|| $this->validate_PTE_score($pr)!= 2|| $this->validate_PTE_score($sp)!= 2|| $this->validate_PTE_score($vo)!= 2 || $this->validate_PTE_score($wd)!= 2 || $this->validate_PTE_score($oa)!= 2)
                             {
                                 $errorcnt++;
                                 $errormsg ='Invalid Score';                             
@@ -462,6 +462,9 @@ class Mock_test extends MY_Controller{
                 if($errorcnt == 0)
                 {
                     $idd=$this->Mock_test_model->saveCSVrecords_pte($params2);
+                }
+                else{
+                    $this->Mock_test_model->removeCSV($id);
                 }
             }else if($test_module_id==TOEFL_ID){
 
@@ -512,6 +515,9 @@ class Mock_test extends MY_Controller{
                 if($errorcnt == 0)
                 {
                     $idd=$this->Mock_test_model->saveCSVrecords_toefl($params2);
+                }
+                else{
+                    $this->Mock_test_model->removeCSV($id);
                 }
 
             }else{

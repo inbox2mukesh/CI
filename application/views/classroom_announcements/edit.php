@@ -142,10 +142,14 @@
 					<div class="col-md-6">	
 						<label for="dateTime" class="control-label"><span class="text-danger">*</span>Start Date Time </label>
 						<div class="form-group has-feedback">
+						<input type="text" name="end_dateTime" value="<?php echo $announcements['start_date']; ?>" class="noBackDatep form-control input-ui-100 removeerrmessage" id="end_dateTime" autocomplete="off"  maxlength="10"/>
+							<span class="text-danger dateTime_err"><?php echo form_error('dateTime');?></span>
+						</div>
+						<!-- <div class="form-group has-feedback">
 							<input type="text" name="start_dateTime" id="start_dateTime" class="noBackDatep form-control input-ui-100 removeerrmessage" value="<?php echo date('d-m-Y H:i:s',strtotime($announcements['start_date'])); ?>" />
 							<span class="text-danger dateTime_err"><?php echo form_error('dateTime');?></span>
 							<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-						</div>
+						</div> -->
 					</div>
 					<div class="col-md-6">
 						<label for="till_date" class="control-label">End Date Time</label>

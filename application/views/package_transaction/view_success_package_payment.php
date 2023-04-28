@@ -219,7 +219,7 @@
                                     echo $s['test_module_name'].' - '.$s['programe_name'].' - '.$s['package_name'].' - '.$s['package_duration'].' - '.$s['batch_name'].' - Start: '.$date_st.' - Expired: '.$date_end; ?></td>
                                     <td><?php echo $s['currency'].' '. $s['amount_paid'] ;?></td>
                                     <td><?php echo $s['status']; ?></td>
-                                    <td><?php echo $s['created']; ?></td>
+                                    <td><?php echo $s['requested_on']; ?></td>
                                     <td><a href="javascript:void(0)" class="text-black"><?php echo $s['checkout_token_no']; ?></a></td>
                                     <td><a href="javascript:void(0)" class="text-black"><?php echo $s['order_id']; ?></a></td>
                                     <td><a href="javascript:void(0)" class="text-black"><?php echo $s['payment_id']; ?></a></td>

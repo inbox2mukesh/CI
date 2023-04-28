@@ -234,6 +234,12 @@ if ($packdetail->error_message->data->amount == $packdetail->error_message->data
 </section>
 <script>
   $(document).ready(function() {
+    if ($('.read_agree').is(":checked")) {
+      $('#make_payment').prop('disabled', false);
+    } else {
+      $('#make_payment').prop('disabled', true);
+    }
+
     $("#entered_promocode").keypress(function() {
       //  alert('')
       $('#bulkmsg').html('');

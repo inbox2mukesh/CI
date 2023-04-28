@@ -32,7 +32,7 @@ class Photo extends MY_Controller{
         // $this->cacher->initiate_cache(CACHE_ENGINE);
         $pagearr['baseurl']    = site_url('adminController/photo/index/'); 
         $pagearr['totalcount']    = $this->Photo_model->get_all_photo_count();
-        $pagearr['perpage']    = 2;//$this->perPage;
+        $pagearr['perpage']    = 10;
         $params['limit'] = $pagearr['perpage'];
         $params['offset'] = ($test_module_id) ? $test_module_id : 0;
         $data['photo'] = $this->Photo_model->get_all_photo($params);   

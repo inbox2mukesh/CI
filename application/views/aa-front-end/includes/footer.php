@@ -442,8 +442,9 @@
 				const diffTime = Math.floor(today - dob);
 				const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)/31/12); 
 				
-				if(diffDays < 15)				
-					$('#'+id).reset();
+				if(diffDays < 15)	
+					$('.regdob_err').html('Age should be minimum 15 years');			
+					$('#'+id).val('');
 					return false;
 				}
 				// var idd = '.' + id + '_err';

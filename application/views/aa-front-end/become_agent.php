@@ -202,7 +202,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Message<span class="red-text">*</span></label>
-							<textarea name="address" id="address_ba" placeholder="" rows="5" class="t-area form-control removeerrmessage validatewordcount"  style="height:inherit!important;max-height:inherit!important"></textarea>
+							<textarea name="address" id="address_ba" placeholder="" rows="5" class="t-area form-control removeerrmessage validatewordcount"  style="height:inherit!important;max-height:inherit!important" maxlength="200"></textarea>
 							<div class="valid-validation address_ba_err"></div>
 						</div>
 					</div>
@@ -274,7 +274,7 @@ $('.validatewordcount').keyup(function (event) {
 		// $("#msg_despChar").text('')
 		return false;
 	} else {
-		$("." + id_err).text('else Entered Characters : ' + charlenght + '  Entered Words : ' + words)
+		$("." + id_err).text('Entered Characters : ' + charlenght + '  Entered Words : ' + words)
 		// $("#msg_despChar").text('Entered Characters : ' + charlenght + '  Entered Words : ' + words);
 		return false;
 	}	

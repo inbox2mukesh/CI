@@ -211,8 +211,9 @@
                         <div class="col-md-3">
                             <label for="father_dob" class="control-label">Father's DOB</label>
                             <div class="form-group has-feedback">                                
-                                <input type="text" data-inputmask="'alias': 'date'" class="fstinput form-control dob_mask input-ui-100" name="father_dob" id="father_dob" placeholder="dd/mm/yyyy" id="dob" autocomplete="off" value="<?php echo ($this->input->post('father_dob') ? $this->input->post('father_dob') : $student['father_dob']); ?>">
-                                <span class="glyphicon glyphicon-calendar form-control-feedback text-info"></span>
+                                <input type="text" data-inputmask="'alias': 'date'" class="fstinput form-control dob_mask input-ui-100" name="father_dob" id="father_dob" placeholder="dd/mm/yyyy" id="dob" autocomplete="off" value="<?php echo ($this->input->post('father_dob') ? $this->input->post('father_dob') : $student['father_dob']); ?>" onblur="validatefatherdob(this.value,this.id);">
+                                <span class="text-danger father_dob_err"></span>
+                                <span class="glyphicon glyphicon-calendar form-control-feedback text-info "></span>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -1693,6 +1694,23 @@ function check_all_validation_pp()
     else {
     return false;
     } 
+
+}
+
+function validatefatherdob(data, id)
+{
+            if (data != "") {
+				const today = new Date();
+				const dob = new Date(data);
+				const diffTime = Math.floor(today - dob);
+				const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)/31/12); 
+				
+				if(diffDays < 28)	
+					$('.father_dob_err').html('Age should be minimum 25 years');			
+					$('#'+id).val('');
+					return false;
+				
+            }
 
 }
 

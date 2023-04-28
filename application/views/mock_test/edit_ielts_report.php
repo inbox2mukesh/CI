@@ -117,61 +117,68 @@
 <script src="<?php echo site_url(''.DESIGN_VERSION.'/js/jquery-3.6.0.min.js?v='.JS_CSS_VERSION);?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-            // $( document ).ready(function() {
-            //     $('.score').keyup(function (e) {
+            $( document ).ready(function() {
+				var pattern = /^\b[0-9]+\.[0-9]\b$/i;
+					var intRegex = /^\d+$/;
+					var floatRegex = /^((\d+(\.\d *)?)+\.|((\d*\.)?\d+))$/;	
+                $('.score').keyup(function (e) {
 					
-			// 		$(this).next().html("");
-			// 		var inputval = this.value;	
-			// 		var self = $(this);
-			// 		//self.val(self.val().replace(/[^naNAbB0-9.]/, ""));			
+					$(this).next().html("");
+					var inputval = this.value;	
+					var self = $(this);
+								
 					
-			// 		// if(self.val().length > 3 || self.val() > 9 ) 
-			// 		// {
-			// 		// 	self.val(self.val().replace(inputval, ""));
-			// 		// }
-			// 		// else 
-			// 		if(inputval.match(/[^naNAbB0-9.]/) || !Number.isInteger(inputval/0.5))
-			// 		{
-			// 			self.val(self.val().replace(inputval, ""));
-			// 		}
-			// 		// if(!Number.isInteger(inputval/0.5))
-			// 		// {
-			// 		// 	self.val(self.val().replace(inputval, ""));
-			// 		// }
-      		// 	});
-            // });
+					if(inputval.match(/[^naNAbB0-9.]/))
+					{
+						self.val(self.val().replace(inputval, ""));
+					}
+					else if(floatRegex.test(inputval)){
+						if(!Number.isInteger(inputval/0.5) )
+						{
+							self.val(self.val().replace(inputval, ""));
+						}
+						else if(inputval.length > 3 || inputval > 9)
+						{
+							self.val(self.val().replace(inputval, ""));
+						}
+					}
+					// else if(!napatt.test(inputval) && !abpatt.test(inputval)){
+					// 	self.val(self.val().replace(inputval, ""));
+					// }
+      			});
+				  $('.score').focusout(function (e) {
+					
+					$(this).next().html("");
+					var inputval = this.value;	
+					var self = $(this);
+					var napatt = /^\b[N]+[A]\b$/i;		
+					var abpatt = /^\b[A]+[B]\b$/i;		
+					if(!napatt.test(inputval) && !abpatt.test(inputval) && !floatRegex.test(inputval)){
+						self.val(self.val().replace(inputval, ""));
+					}
+					else if(!floatRegex.test(inputval) && inputval.length > 2)
+					{
+						self.val(self.val().replace(inputval, ""));
+					}
+      			});
+            });
 			$('#edit_ielts_marks').validate({
 				ignore:[],
 					rules:{
 						'oa':{
 							required: true,
-							// max: 9,
-    						//lettersallowed : true,
-							validatescore : true,
 						},
 						'listening':{
 							required: true,
-							// max: 9,
-    						//lettersallowed : true,
-							validatescore : true,
 						},
 						'reading':{
 							required: true,
-							// max: 9,
-							//lettersallowed : true,
-							validatescore : true,
 						},
 						'writing':{
 							required: true,
-							// max: 9,
-							//lettersallowed : true,
-							validatescore : true,
 						},
 						'speaking':{
 							required: true,
-							// max: 9,
-							//lettersallowed : true,
-							validatescore : true,
 						},			
 						
 
@@ -200,7 +207,4 @@
 				}
 
 			});
-			jQuery.validator.addMethod("validatescore", function(value, element) {
-				return this.optional(element) || Number.isInteger(value/0.5) == true || value == 'NA' || value == 'AB' || value == 'na' || value == 'ab';
-			}, "Please enter only number or 0.5 format values.");
 </script>

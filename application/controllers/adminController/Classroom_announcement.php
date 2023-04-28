@@ -117,8 +117,8 @@ class Classroom_announcement extends MY_Controller{
                             'subject' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('subject')))),
                             'body' => $this->input->post('body',false),                    
                             'media_file'=>$image,
-                            'start_date' => $this->input->post('start_dateTime'),
-                            'end_date' => $this->input->post('end_dateTime'),
+                            'start_date' => date('Y-m-d H:i:s',strtotime($this->input->post('start_dateTime'))),
+                            'end_date' => date('Y-m-d H:i:s',strtotime($this->input->post('end_dateTime'))),
                             'active'=>$this->input->post('active') ? $this->input->post('active') : 0,
                             'by_user' => $by_user,
                         );
@@ -227,7 +227,7 @@ class Classroom_announcement extends MY_Controller{
                     'body' => $this->input->post('body',false),                    
 					'media_file' => $this->input->post('media_file') ? $this->input->post('media_file') : NULL,
                     'start_date' => date('Y-m-d H:i:s',strtotime($this->input->post('start_dateTime'))),
-                    'end_date' => $this->input->post('end_dateTime'),
+                    'end_date' => date('Y-m-d H:i:s',strtotime($this->input->post('end_dateTime'))),
                     'active' => $this->input->post('active') ? $this->input->post('active') : 0,
                     'by_user' => $by_user,
                 );

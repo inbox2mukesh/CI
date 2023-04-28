@@ -2140,7 +2140,7 @@ class Package_master_model extends CI_Model
     }
     function get_success_package_payment()
     {
-        $this->db->select('`history.id`, `history.student_id`, `history.student_package_id`, `history.checkout_token_no`, `history.page`, `history.active`, `history.created`, `history.modified`, std.fname,std.lname,spkg.payment_id,spkg.order_id,spkg.status,spkg.captured,spkg.payment_full_response,std.UID,std.mobile,std.email,state.state_name,city.city_name, pgm.`programe_name,batch_master.batch_name,spkg.subscribed_on,spkg.expired_on,tm.`test_module_name`,spkg.package_name,spkg.package_duration,spkg.pack_type,CONCAT(FORMAT(spkg.`amount`/100,2)) AS amount_paid,spkg.`currency`,country.name as country_name');
+        $this->db->select('`history.id`, `history.student_id`, `history.student_package_id`, `history.checkout_token_no`, `history.page`, `history.active`, `history.created`, `history.modified`, std.fname,std.lname,spkg.payment_id,spkg.order_id,spkg.status,spkg.captured,spkg.payment_full_response,std.UID,std.mobile,std.email,state.state_name,city.city_name, pgm.`programe_name,batch_master.batch_name,spkg.subscribed_on,spkg.expired_on,tm.`test_module_name`,spkg.package_name,spkg.package_duration,spkg.pack_type,CONCAT(FORMAT(spkg.`amount`/100,2)) AS amount_paid,spkg.`currency`,country.name as country_name,`spkg`.requested_on');
         $this->db->from('`checkout_page_history` history');       
         $this->db->join('`students` std', 'std.`id`= history.`student_id`');
         $this->db->join('`state`', 'state.`state_id`= std.`state_id`','left');
