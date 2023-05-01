@@ -1075,13 +1075,19 @@
         
     }
     
+    function gettodaycounselling($todaystr)
+    {
+        $this->db->select('id,duration')
+            ->where(array('session_date_time_str <='=>strtotime($todaystr),'active'=>1));
+        return $this->db->get('counseling_sessions')->result_array();
+    }
     function deactivate_shedule($todaystr){
 
         $params = array('active'=> 0);
-        $this->db->where('session_date_time_str <= ',$todaystr);
+        $this->db->where('session_date_time_str <=',$todaystr);
         $this->db->update('counseling_sessions',$params);
         
-        $this->db->where('session_end_date_time_str <= ',$todaystr);
+        $this->db->where('session_end_date_time_str <=',$todaystr);
         $this->db->update('counseling_sessions_group',$params);
     }
 

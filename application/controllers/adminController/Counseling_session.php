@@ -533,7 +533,7 @@ class Counseling_session extends MY_Controller{
         $current_DateTimeStr = strtotime($current_DateTime);
         //$current_DateTimeStr_after = $current_DateTimeStr + 3600; #1 Hr
 		$current_DateTimeStr_after=$current_DateTimeStr;
-		$this->Counseling_session_model->deactivate_shedule($current_DateTimeStr_after);
+		// $this->Counseling_session_model->deactivate_shedule($current_DateTimeStr_after);
 		
 		$data['title'] ='Counseling Session Details';
 		$data['counseling_session_group'] = $this->Counseling_session_model->get_counseling_sessions_group($id);

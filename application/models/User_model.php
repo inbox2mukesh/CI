@@ -447,13 +447,24 @@ class User_model extends CI_Model{
 
     
 
-    function update_user_pwd($email,$params)
+    function update_user_pwd($email,$params,$emailtype)
     {                    
         //$password = $params['password'];
-        return $this->db->query("update `user` SET 
+        if($emailtype == 0)
+        {
+            return $this->db->query("update `user` SET 
             `password` = '".$params['password']."'
             where email = '".$email."' 
-        ");
+            ");
+        }
+        else{
+            return $this->db->query("update `user` SET 
+            `password` = '".$params['password']."'
+            where personal_email = '".$email."' 
+            ");
+
+        }
+        
     }
 
     function get_all_user_count()

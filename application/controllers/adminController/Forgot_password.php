@@ -35,17 +35,23 @@ class Forgot_password extends MY_Controller {
                 }else{
                     $plain_pwd = $this->_getorderTokens(PWD_LEN);
                 }
+                $is_personal=0;
+                $recieveremail = $res['email'];
+                if(empty($res['email']))
+                {
+                    $is_personal=1;
+                    $recieveremail = $res['personal_email'];
+                }
                 $params = array('password'=> md5($plain_pwd));
-                $updated = $this->User_model->update_user_pwd($email, $params);
+                $updated = $this->User_model->update_user_pwd($recieveremail,$params,$is_personal);
+                
                 if(base_url()!=BASEURL ){ //and $updated
                     //MAIL
-                    // $subject = 'Hi, Password reset successfully- Team WOSA';
-                    // $email_message='Your Password reset successfully. Details are as below:';
                     $email_content = forgot_password_email($plain_pwd);
                     $subject = $email_content['subject'];
                     $email_message= $email_content['content'];
                     $mailData               = array();
-                    $mailData['email']      = $email;
+                    $mailData['email']      = $recieveremail;
                     $mailData['password']   = $plain_pwd;
                     $mailData['email_message'] = $email_message;
                     $mailData['thanks']        = THANKS;

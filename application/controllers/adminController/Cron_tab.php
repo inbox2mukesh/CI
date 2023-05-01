@@ -255,9 +255,16 @@ class Cron_tab extends MY_Controller{
     function cronJob_deactiveCounsellingSession(){        
         $this->load->model('Counseling_session_model');
         $current_DateTime = date("d-m-Y G:i:0");
-        $current_DateTimeStr = strtotime($current_DateTime);       
-        $current_DateTimeStr_after=$current_DateTimeStr;
-        $cronData = $this->Counseling_session_model->deactivate_shedule($current_DateTimeStr_after);
+        
+        $list = $this->Counseling_session_model->gettodaycounselling($current_DateTime);
+        foreach($list as $key => $lists)
+        {
+            // strtotime($current_DateTime.' + '.$lists['duration'].' minute');
+            $current_DateTimeStr = strtotime($current_DateTime.' + '.$lists['duration'].' minute'); 
+            $cronData = $this->Counseling_session_model->deactivate_shedule($current_DateTimeStr);
+        }
+        // pr($list);
+        
     }
     
 }
