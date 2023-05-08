@@ -70,9 +70,21 @@ if ($packdetail->error_message->data->amount == $packdetail->error_message->data
             </div>
 
              <input type="hidden" name="wallet_amount" id="wallet_amount" value="0" />          
-
+             <?php 
+             $cgst_prcnt = $packdetail->error_message->cgst_tax_per;
+             $sgst_prcnt = $packdetail->error_message->sgst_tax_per;
+             $cgst_tax = number_format(($price2 * $cgst_prcnt)/100,2);
+             $sgst_tax = number_format(($price2 * $sgst_prcnt)/100,2);
+             $amt_to_pay = $price2 + $cgst_tax + $sgst_tax;
+             ?>
             <div class="check-info font-weight-600" id="summerysection">
               <div>Original Price <span class="pull-right"><?php echo $packdetail->error_message->data->currency_code; ?> <?php echo $price2; ?></span></div>
+              <div>CGST@<?php echo $packdetail->error_message->cgst_tax_per.'%' ?>              
+                <span class="pull-right"><?php echo $packdetail->error_message->data->currency_code; ?> 
+                <?php echo  $cgst_tax ?></span></div>
+                <div>SGST@<?php echo $sgst_prcnt.'%' ?>              
+                <span class="pull-right"><?php echo $packdetail->error_message->data->currency_code; ?> 
+                <?php echo $sgst_tax ?></span></div>
               <!-- <div class="hide">General Discount <span class="pull-right">(-) INR 2,000</span></div> -->
               <div class="hide" id="promocode_label">Promotion Code
                 <span title="Removed Promo Code" id="removePromoCode" class="cursor_pointer"><i class="fa fa-times-circle text-red size-11" aria-hidden="true"></i></span><span class="pull-right">(-) <?php echo $packdetail->error_message->data->currency_code; ?> <span id="promocode_label_val"></span></span>
@@ -83,7 +95,7 @@ if ($packdetail->error_message->data->amount == $packdetail->error_message->data
               <div class="hide">Applied From Wallet <span class="pull-right">(-) INR 5,000</span></div>
             </div>
             <div class="ftr-btm">Total to be paid
-              <span class="pull-right text-red"><?php echo $packdetail->error_message->data->currency_code; ?> <span class="final_paid_amt"><?php echo $price2; ?></span></span>
+              <span class="pull-right text-red"><?php echo $packdetail->error_message->data->currency_code; ?> <span class="final_paid_amt"><?php echo $amt_to_pay; ?></span></span>              
             </div>
             <input type="hidden" name="original_amount" id="original_amount" value="<?php echo $price2; ?>" />
             <input type="hidden" name="promocode_applied_id" id="promocode_applied_id" value="0" />
@@ -92,7 +104,11 @@ if ($packdetail->error_message->data->amount == $packdetail->error_message->data
             <input type="hidden" name="promocode_amount" id="promocode_amount" value="0" />
             <input type="hidden" name="wallet_amount_used" id="wallet_amount_used" value="0" />
             <input type="hidden" name="wallet_amount" id="wallet_amount" value="0" />
-            <input type="hidden" name="payable_amount" id="payable_amount" value="<?php echo $price2; ?>" />
+            <input type="hidden" name="payable_amount" id="payable_amount" value="<?php echo $amt_to_pay; ?>" />
+            <input type="hidden" name="cgst_amt" id="cgst_amt" value="<?php echo $cgst_tax; ?>" />
+            <input type="hidden" name="sgst_amt" id="sgst_amt" value="<?php echo $sgst_tax; ?>" />
+            <input type="hidden" name="cgst_prcnt" id="cgst_prcnt" value="<?php echo $cgst_prcnt; ?>" />
+            <input type="hidden" name="sgst_prcnt" id="sgst_prcnt" value="<?php echo $sgst_prcnt; ?>" />
             <input type="hidden" name="center_id" id="center_id" value="<?php echo $center_id; ?>" />
             <input type="hidden" name="currency_code" id="currency_code" value="<?php echo $packdetail->error_message->data->currency_code; ?>" />
             <input type="hidden" name="duration_type" id="duration_type" value="<?php echo $packdetail->error_message->data->duration_type; ?>" />

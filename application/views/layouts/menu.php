@@ -235,7 +235,10 @@
 
 <li> <a href="#"> <i class="fa fa-database text-light"></i><span>Master Inputs </span> </a>
   <ul class="treeview-menu">
-    
+  <?php
+        if($this->Role_model->_has_access_('tax_master','index')){
+    ?>
+    <li> <a href="<?php echo site_url('adminController/tax_master/index');?>"><i class="fa fa-list-ul"></i>Tax Master</a> </li><?php } ?>
     <?php
         if($this->Role_model->_has_access_('division_master','index')){
     ?>

@@ -1153,10 +1153,38 @@ class Package_master extends MY_Controller{
             echo json_encode($response);
         }
     }
+    function ajax_getPackPrice_new(){       
+       
+        $package_id = $this->input->post('package_id');
+        $response = [];
+        if(isset($package_id)){            
+            $response['packprice'] =  $this->Package_master_model->getPackPrice($package_id);
+            $response['cgst'] =  $this->Package_master_model->get_tax_detail('CGST');
+            $response['sgst'] =  $this->Package_master_model->get_tax_detail('SGST');
+            $packprice = $response['packprice']['discounted_amount'];
+            $cgst = $this->Package_master_model->get_tax_detail('CGST');
+            $sgst = $this->Package_master_model->get_tax_detail('SGST');
+            $cgst_tax_per = (!empty($cgst))?$cgst['tax_per']:0;
+            $sgst_tax_per = (!empty($sgst))?$sgst['tax_per']:0;
+            $cgst_tax = number_format(($packprice * $cgst_tax_per)/100);
+            $sgst_tax = number_format(($packprice * $sgst_tax_per)/100);
+            $response['totalamt'] = $packprice + $cgst_tax + $sgst_tax;
+            // $packinfo = $this->load->view('student/practicepack_info',['packageData'=>$packageData,'cgst'=>$cgst['tax_per'],'sgst'=>$sgst['tax_per'],'amountpaid'=>$paidamt],true);
+            // $response = array('packinfo'=>$packinfo,'amountpayable'=>$totalamt);
+            echo json_encode($response);
+        }else{
+            header('Content-Type: application/json');
+            $response = ['msg'=>'price error!', 'status'=>'false'];
+            echo json_encode($response);
+        }
+    }
 
     function ajax_getOnlineOfflinePackInfo(){
 
         $package_id = $this->input->post('package_id', true);
+        $payingamt = $this->input->post('paidamount', true);
+        $cgst = $this->Package_master_model->get_tax_detail('CGST');
+        $sgst = $this->Package_master_model->get_tax_detail('SGST');
         $category_name =null;
         $batch_name =null;
         $course_timing =null;
@@ -1180,48 +1208,15 @@ class Package_master extends MY_Controller{
                     $packageData[$key]['Package_timing'][$key2]=$b;                       
                 }               
             }
-            $x = '<h4><b>Pack Info:</b> </h4>
-                <table class="table table-striped table-bordered table-sm">
-                    <thead style="background-color: pink">
-                    <tr>
-                        <th>Package Name</th>
-                        <th>Course</th>
-                        <th>Program</th>
-                        <th>Category</th>
-                        <th>Batch</th>
-                        <th>Course Type</th>
-                        <th>Price</th>
-                        <th>Duration</th>
-                    </tr>
-                    </thead>
-                    <tbody id="myTable">';
-                    
-                    foreach($packageData as $p){
-                        foreach ($p['Package_category'] as $pc) {
-                            $category_name .= $pc['category_name'].', ';
-                        }
-                        foreach ($p['Package_batch'] as $pc) {
-                            $batch_name .= $pc['batch_name'].', ';
-                        }
-                        foreach ($p['Package_timing'] as $pt) {
-                            $course_timing .= $pt['course_timing'].', ';
-                        }
-                    
-                    $x .= '<tr>                        
-                        <td>'.$p["package_name"].'</td>  
-                        <td>'.$p["test_module_name"].'</td>
-                        <td>'.$p["programe_name"].'</td>
-                        <td>'.rtrim($category_name,', ').'</td> 
-                        <td>'.rtrim($batch_name,', ').'</td> 
-                        <td>'.rtrim($course_timing,', ').'</td>                                       
-                        <td>'.$p["discounted_amount"].'</td>
-                        <td>'.$p["duration"].' '.$p["duration_type"].'</td>
-                        
-                    </tr>';
-                    }
-
-            $x.='</tbody></table>';
-            $response = $x;            
+            $package_amt = $packageData[0]['package_amount'] ;
+            $cgst_tax_per = (!empty($cgst))?$cgst['tax_per']:0;
+            $sgst_tax_per = (!empty($sgst))?$sgst['tax_per']:0;
+            $cgst_tax = number_format(($package_amt * $cgst_tax_per)/100);
+            $sgst_tax = number_format(($package_amt * $sgst_tax_per)/100);
+            $totalamt = $package_amt + $cgst_tax + $sgst_tax;
+            $packinfo = $this->load->view('student/packageinfo',['packageData'=>$packageData,'cgst'=>$cgst_tax_per,'sgst'=>$sgst_tax_per,'cgst_amt'=>$cgst_tax,'sgst_amt'=>$sgst_tax,'amountpaid'=>$payingamt,'amountpayable'=>$totalamt],true);
+            $response = array('packinfo'=>$packinfo,'amountpayable'=>$totalamt);
+            //$response = $this->load->view('student/packageinfo',['packageData'=>$packageData,'cgst'=>$cgst['tax_per'],'sgst'=>$sgst['tax_per']],true);            
             echo json_encode($response);
         }else{
             header('Content-Type: application/json');
@@ -1233,6 +1228,7 @@ class Package_master extends MY_Controller{
     function ajax_getPracticePackInfo(){
 
         $package_id = $this->input->post('package_id', true);
+        $paidamt = $this->input->post('paidamount', true);
         $category_name =null;
         $batch_name =null;
         if(isset($package_id)){            
@@ -1254,47 +1250,18 @@ class Package_master extends MY_Controller{
                 foreach ($timingData as $key2 => $b) {                
                     $packageData[$key]['Package_timing'][$key2]=$b;                       
                 }               
-            }
-            $x = '<h4><b>Pack Info:</b> </h4>
-                <table class="table table-striped table-bordered table-sm">
-                    <thead style="background-color: pink">
-                    <tr>
-                        <th>Package Name</th>
-                        <th>Course</th>
-                        <th>Program</th>
-                        <th>Category</th>
-                        <th>Batch</th>
-                       
-                        <th>Price</th>
-                        <th>Duration</th>
-                    </tr>
-                    </thead>
-                    <tbody id="myTable">';
-                    
-                    foreach($packageData as $p){
-                        foreach ($p['Package_category'] as $pc) {
-                            $category_name .= $pc['category_name'].', ';
-                        }
-                        foreach ($p['center_name'] as $pc) {
-                            $batch_name .= $pc['center_name'].', ';
-                        }
-                        
-                    
-                        $x = '<tr>                        
-                        <td>'.$p["package_name"].'</td>  
-                        <td>'.$p["test_module_name"].'</td>
-                        <td>'.$p["programe_name"].'</td>
-                        <td>'.rtrim($category_name,', ').'</td> 
-                        <td>'.$p['center_name'].'</td>                                                            
-                        <td>'.$p["discounted_amount"].'</td>
-                        <td>'.$p["duration"].' '.$p["duration_type"].'</td>
-                        
-                    </tr>';
-                    }
-
-                    $x ='</tbody></table>';
-            //$response = $x;            
-            echo json_encode($x);
+            } 
+            $package_amt = $packageData[0]['package_amount'] ;          
+            $cgst = $this->Package_master_model->get_tax_detail('CGST');
+            $sgst = $this->Package_master_model->get_tax_detail('SGST');
+            $cgst_tax_per = (!empty($cgst))?$cgst['tax_per']:0;
+            $sgst_tax_per = (!empty($sgst))?$sgst['tax_per']:0;
+            $cgst_tax = number_format(($package_amt * $cgst_tax_per)/100);
+            $sgst_tax = number_format(($package_amt * $sgst_tax_per)/100);
+            $totalamt = $package_amt + $cgst_tax + $sgst_tax;
+            $packinfo = $this->load->view('student/practicepack_info',['packageData'=>$packageData,'cgst'=>$cgst_tax_per,'sgst'=>$sgst_tax_per,'cgst_amt'=>$cgst_tax,'sgst_amt'=>$sgst_tax,'amountpaid'=>$paidamt,'amountpayable'=>$totalamt],true);
+            $response = array('packinfo'=>$packinfo,'amountpayable'=>$totalamt);
+            echo json_encode($response);
         }else{
             header('Content-Type: application/json');
             $response = ['msg'=>'package info error!', 'status'=>'false'];

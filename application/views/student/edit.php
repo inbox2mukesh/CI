@@ -441,6 +441,7 @@
                                     <span class="text-danger batch_id_off_err"><?php echo form_error('batch_id_off'); ?></span>
                                 </div>
                             </div>
+                            <input type="hidden" name="estimatetax" id="estimatetax" value="">
                             <div class="col-md-4">
                                 <label for="method_off" class="control-label"><span class="text-danger">*</span>Payment mode</label>
                                 <div class="form-group">
@@ -530,549 +531,23 @@
                             </div>
                         </div>
                         <!-- offline class pack ends-->
-
-                        <!-- online class pack -->                        
-                        <div id="packbox_online" class="edit-gray-bg" style="display: none;">
-                            <div class="col-md-12 edit-rh">
-                                <div class="bg-info">Online class pack booking!</div>
-                            </div>
-                            <?php if ($student['wallet'] / 100 > 0) { ?>
-                                <div class="col-md-12">
-                                    <div class="form-group form-checkbox">
-                                        <input type="checkbox" name="use_wallet_on" value="1" id='use_wallet_on' data-val="<?php echo $student['wallet'] / 100; ?>"/>
-                                        <label for="use_wallet_on" class="control-label">Use Wallet Amount?
-                                            (<?php echo $student['wallet'] / 100; ?>)</label>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <div class="col-md-4">
-                                <label for="package_id" class="control-label"><span class="text-danger">*</span>Online Class
-                                    Package <span class="text-info">(Format: Pack Name | Price | Pack Validity)</span>
-                                </label>
-                                <div class="form-group">
-                                    <select name="package_id" id="package_id" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep" data-show-subtext="true" data-live-search="true" onchange="getPackPrice(this.value);removePromocode('other_discount');getOnlineOfflinePackInfo(this.value);getPackBatch(this.value,this.id)">
-                                        <option value="">Select pack</option>
-                                    </select>
-                                    <span class="text-danger package_id_err"><?php echo form_error('package_id'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-12 packInfo"> </div>
-                            <div class="col-md-4">
-                                <label for="batch_id" class="control-label"><span class="text-danger">*</span>Batch</label>
-                                <div class="form-group packBatch">
-                                    <select name="batch_id" id="batch_id" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep" data-live-search="true" onchange="getPackageSchedule_online(this.value);">
-                                        <option value="">Select Batch</option>
-                                    </select>
-                                    <span class="text-danger batch_id_err"><?php echo form_error('batch_id'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="method" class="control-label"><span class="text-danger">*</span>Payment
-                                    mode</label>
-                                <div class="form-group">
-                                    <select name="method" id="method" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep" data-show-subtext="true" data-live-search="true">
-                                        <?php echo PAYMENT_OPTIONS; ?>
-                                    </select>
-                                    <span class="text-danger method_err"><?php echo form_error('method'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="discount_type" class="control-label text-success"><span class="text-danger">*</span>Discount type</label>
-                                <div class="form-group">
-                                    <select name="discount_type" id="discount_type" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep"  data-show-subtext="true" data-live-search="true" onchange="showDiscountTypeFields_online(this.value)">
-                                        <!-- <option value="">Select type</option> -->
-                                         <!-- <option value="Discount">Promocode</option>  -->
-                                        <?php if(WOSA_ONLINE_DOMAIN == 1){?> 
-                                        <option value="Waiver">Waiver</option>                                       
-                                        <?php } ?>
-                                        <option value="None" selected>None</option>
-                                    </select>
-                                    <span class="text-danger discount_type_err"><?php echo form_error('discount_type'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 waiverField_online" style="display: none;">
-                                <label for="waiver" class="control-label">Waiver amount</label>
-                                <div class="form-group">
-                                    <input type="text" name="waiver" value="<?php echo $this->input->post('waiver') ? $this->input->post('waiver') : $waiver_amount_given; ?>" class="form-control input-ui-100" id="waiver" readonly />
-                                    <span class="text-danger waiver_err"><?php echo form_error('waiver'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 waiverField_online" style="display: none;">
-                                <label for="waiver_by" class="control-label">Waiver By</label>
-                                <div class="form-group">
-                                    <input type="text" name="waiver_by" value="<?php echo $this->input->post('waiver_by') ? $this->input->post('waiver_by') : $waiver_from_fname . ' ' . $waiver_from_lname; ?>" class="form-control input-ui-100" id="waiver_by" readonly />
-                                    <span class="text-danger waiver_by_err"><?php echo form_error('waiver_by'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 discountField_online" style="display: none;">
-                                <label for="other_discount" class="control-label">Discount</label>
-                                <a href="javascript:void(0)" class="text-info promocode-txt" data-toggle="modal" data-target="#modal-Discount-PromoCode" name="<?php echo $student['id']; ?>" id="<?php echo $student['id']; ?>" title="Promocode" onclick="getApplicablePromocode(this.id);">Show Promo Code</a> |
-                                <a href="javascript:void(0)" class="text-warning" name="removePromocode" id="removePromocode" title="Remove Promocode" onclick="removePromocode('other_discount');">Remove Promo Code</a>
-                                <div class="form-group">
-                                    <input type="text" name="other_discount" value="<?php echo ($this->input->post('other_discount') ? $this->input->post('other_discount') : 0); ?>" class="form-control input-ui-100 removeerrmessage" id="other_discount" readonly />
-                                    <span class="text-danger other_discount_err"><?php echo form_error('other_discount'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="amount_paid" class="control-label"><span class="text-danger">*</span>Amount paid
-                                    <span class="text-warning"><i>(You may edit amount if any dues)</i></span></label>
-                                <div class="form-group">
-                                    <input type="text" name="amount_paid" id="amount_paid" value="<?php echo $this->input->post('amount_paid'); ?>" class="form-control chknum1 input-ui-100 removeerrmessage" onblur="validate_amount_paid(this.value);" maxlength="5" autocomplete="off" />
-                                    <span class="text-danger amount_paid_err"><?php echo form_error('amount_paid'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="start_date" class="control-label"><span class="text-danger">*</span>Start Date<span class="packScheduleInfo text-success"></span></label>
-                                <div class="form-group has-feedback">
-                                    <input type="text" name="start_date" value="<?php echo ($this->input->post('start_date') ? $this->input->post('start_date') : $tomarrow); ?>" class="datepicker_timezone form-control input-ui-100 removeerrmessage change_startdate" id="start_date" autocomplete="off" readonly="readonly"/>
-                                    <span class="glyphicon glyphicon-calendar form-control-feedback text-info"></span>
-                                    <span class="text-danger start_date_err"><?php echo form_error('start_date'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="due_commitment_date" class="control-label">Due Commitment Date (If any)</label>
-                                <div class="form-group has-feedback">
-                                    <input type="text" name="due_commitment_date" value="<?php echo ($this->input->post('due_commitment_date') ? $this->input->post('due_commitment_date') : ''); ?>" class="datepicker_timezone form-control input-ui-100" id="due_commitment_date" autocomplete="off" readonly="readonly"/>
-                                    <span class="glyphicon glyphicon-calendar form-control-feedback text-info"></span>
-                                    <span class="text-danger due_commitment_date_err"><?php echo form_error('due_commitment_date'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="tran_id" class="control-label">Transaction ID (If any)</label>
-                                <div class="form-group">
-                                    <input type="text" name="tran_id" id="tran_id" value="<?php echo ($this->input->post('tran_id') ? $this->input->post('tran_id') : ''); ?>" class="form-control input-ui-100" maxlength="16" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="payment_file" class="control-label">Payment Slip
-                                    <?php echo PAYMENT_SCREENSHOT_ALLOWED_LABEL; ?></label>
-                                <div class="form-group">
-                                    <input type="file" name="payment_file" id="image" value="<?php echo $this->input->post('payment_file'); ?>" class="form-control input-file-ui-100 input-file-ui" onchange="validate_file_type_paymentSlip(this.id)" />
-                                    <span class="text-danger image_err"><?php echo form_error('payment_file'); ?></span>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary add_std_pack rd-20" onclick="return check_all_validation();">
-                                    <?php echo ONLINE_LABEL; ?> <i class="fa fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
+                         <input type="hidden" name="cgsttax" id="cgsttax" value="<?php echo $cgst_tax_per?>">
+                         <input type="hidden" name="sgsttax" id="sgsttax" value="<?php echo $sgst_tax_per ?>">       
+                        <!-- online class pack online_class_pacl_booking.php-->                        
+                        <?php $this->load->view('student/online_class_pack_booking');?>
                         <!-- online class pack ends-->
 
-                        <!-- practice pack -->
-                        <div id="packbox_pp" class="edit-gray-bg" style="display: none;">
-                            <div class="col-md-12 edit-rh">
-                                <div class="bg-info">
-                                    Student payment management for Practice pack!
-                                </div>
-                            </div>
-                            <?php if ($student['wallet'] / 100 > 0) { ?>
-                                <div class="col-md-12">
-                                    <div class="form-group form-checkbox">
-                                        <input type="checkbox" name="use_wallet_pp" value="1" id='use_wallet_pp' />
-                                        <label for="use_wallet_pp" class="control-label">Use Wallet Amount?
-                                            (<?php echo $student['wallet'] / 100; ?>)</label>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <div class="col-md-4">
-                                <label for="package_id_pp" class="control-label"><span class="text-danger">*</span>
-                                    Pack <span class="text-info">( Format: Pack Name | Offer Price | Org. Price | Pack
-                                        Validity )</span> </label>
-                                <div class="form-group">
-                                    <select name="package_id_pp" id="package_id_pp" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep" data-show-subtext="true" data-live-search="true" onchange="getPackPrice(this.value);getOnlineOfflinePackInfo(this.value);">
-                                        <option value="">Select package</option>
-                                    </select>
-                                    <span class="text-danger package_id_pp_err"><?php echo form_error('package_id_pp'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-12 packInfo"></div>
-                            <div class="col-md-4">
-                                <label for="method_pp" class="control-label"><span class="text-danger">*</span>Payment mode</label>
-                                <div class="form-group">
-                                    <select name="method_pp" id="method_pp" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep" data-live-search="true">
-                                        <?php echo PAYMENT_OPTIONS; ?>
-                                    </select>
-                                    <span class="text-danger method_pp_err"><?php echo form_error('method_pp'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="discount_type_pp" class="control-label text-success"><span class="text-danger">*</span>Discount type</label>
-                                <div class="form-group">
-                                    <select name="discount_type_pp" id="discount_type_pp" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep" data-show-subtext="true" data-live-search="true" onchange="showDiscountTypeFields_pp(this.value)">
-                                    <?php if(WOSA_ONLINE_DOMAIN == 1){?> 
-                                        <option value="Waiver">Waiver</option>                                       
-                                        <?php } ?>
-                                        <option value="None">None</option>
-                                    </select>
-                                    <span class="text-danger discount_type_pp_err"><?php echo form_error('discount_type_pp'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 waiverField_pp" style="display: none;">
-                                <label for="waiver_pp" class="control-label">Waiver amount</label>
-                                <div class="form-group">
-                                    <input type="text" name="waiver_pp" value="<?php echo $this->input->post('waiver_pp') ? $this->input->post('waiver_pp') : $waiver_amount_given; ?>" class="form-control input-ui-100" id="waiver_pp" readonly />
-                                    <span class="text-danger waiver_err"><?php echo form_error('waiver_pp'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 waiverField_pp" style="display: none;">
-                                <label for="waiver_by_pp" class="control-label">Waiver By</label>
-                                <div class="form-group">
-                                    <input type="text" name="waiver_by_pp" value="<?php echo $this->input->post('waiver_by_pp') ? $this->input->post('waiver_by_pp') : $waiver_from_fname . ' ' . $waiver_from_lname; ?>" class="form-control input-ui-100" id="waiver_by_pp" readonly />
-                                </div>
-                            </div>
-                            <div class="col-md-4 discountField_pp" style="display: none;">
-                                <label for="other_discount_pp" class="control-label">Discount</label>
-                                <a href="javascript:void(0)" class="text-info" data-toggle="modal" data-target="#modal-Discount-PromoCode" name="<?php echo $student['id']; ?>" id="<?php echo $student['id']; ?>" title="Promocode" onclick="getApplicablePromocode(this.id);">Show Promo Code*</a> |
-                                <a href="javascript:void(0)" class="text-warning" name="removePromocode_pp" id="removePromocode_pp" title="Remove Promocode" onclick="removePromocode('other_discount_pp');">Remove Promo Code</a>
-                                <div class="form-group">
-                                    <input type="text" class="form-control input-ui-100" name="other_discount_pp" value="<?php echo ($this->input->post('other_discount_pp') ? $this->input->post('other_discount_pp') : 0); ?>" class="form-control removeerrmessage" id="other_discount_pp" readonly />
-                                    <span class="text-danger other_discount_err"><?php echo form_error('other_discount_pp'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="amount_paid_pp" class="control-label"><span class="text-danger">*</span>Amount
-                                    paid <span class="text-warning"><i>(You may edit amount if any dues)</i></span></label>
-                                <div class="form-group">
-                                    <input type="text" name="amount_paid_pp" id="amount_paid_pp" value="<?php echo $this->input->post('amount_paid_pp'); ?>" class="form-control chknum1 input-ui-100 removeerrmessage" onblur="validate_amount_paid_pp(this.value);" maxlength="5" autocomplete="off" />
-                                    <span class="text-danger amount_paid_err"><?php echo form_error('amount_paid_pp'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="start_date_pp" class="control-label"><span class="text-danger">*</span>Package Starting Date</label>
-                                <div class="form-group has-feedback">
-                                    <input type="text" name="start_date_pp" id="start_date_pp" value="<?php echo ($this->input->post('start_date_pp') ? $this->input->post('start_date_pp') : $tomarrow); ?>" class="datepicker_timezone form-control input-ui-100 removeerrmessage change_startdate" autocomplete="off" readonly="readonly" />
-                                    <span class="glyphicon glyphicon-calendar form-control-feedback text-info"></span>
-                                    <span class="text-danger start_date_pp_err"><?php echo form_error('start_date_pp'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="due_commitment_date_pp" class="control-label">Due Commitment Date (If any)</label>
-                                <div class="form-group has-feedback">
-                                    <input type="text" name="due_commitment_date_pp" value="<?php echo ($this->input->post('due_commitment_date_pp') ? $this->input->post('due_commitment_date_pp') : ''); ?>" class="datepicker_timezone form-control input-ui-100" id="due_commitment_date_pp" autocomplete="off" readonly="readonly" />
-                                    <span class="glyphicon glyphicon-calendar form-control-feedback text-info"></span>
-                                    <span class="text-danger due_commitment_date_pp_err"><?php echo form_error('due_commitment_date_pp'); ?></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="tran_id_pp" class="control-label">Transaction ID (If any)</label>
-                                <div class="form-group">
-                                    <input type="text" name="tran_id_pp" id="tran_id_pp" value="<?php echo ($this->input->post('tran_id_off') ? $this->input->post('tran_id_pp') : ''); ?>" class="form-control input-ui-100" maxlength="16" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="payment_file_pp" class="control-label">Payment Slip
-                                    <?php echo PAYMENT_SCREENSHOT_ALLOWED_LABEL; ?></label>
-                                <div class="form-group">
-                                    <input type="file" name="payment_file_pp" id="image_pp" value="<?php echo $this->input->post('payment_file_pp'); ?>" class="form-control input-file-ui-100 input-file-ui" onchange="validate_file_type_paymentSlip_pp(this.id)" />
-                                    <span class="text-danger image_pp_err"><?php echo form_error('payment_file'); ?></span>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-warning add_std_pack rd-20"  onclick="return check_all_validation_pp();">
-                                    <?php echo PP_LABEL; ?> <i class="fa fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- practice pack ends-->
-                       
-                        <?php if (count($student_package_offline) > 0) { ?>
-                            <div class="col-md-12">
-                                <div class="head-bg" role="alert"> Inhouse Class Pack </div>
-                                <div class="form-group bg-success" style="padding-top:10px;padding-bottom:10px;">
-                                    <!-- table start -->
-                                    <div class="table-ui-scroller">
-                                        <div class="box-body table-responsive table-hr-scroller table-cb-none mheight200">
-                                            <table class="table table-striped table-bordered table-sm">
-                                            <thead class="bg-success">
-                                                <tr class="bg-info"><?php echo TR_OFFLINE; ?></tr>
-                                            </thead>
-                                            <tbody id="myTable">
-                                                <?php foreach ($student_package_offline as $sp) {
-                                                        $encId = base64_encode($sp['student_id']);
-                                                        $url = site_url('adminController/student/student_transaction_/' . $sp['student_package_id'] . '/' . $encId);
-                                                        $classroom_id = $sp['classroom_id'];
-                                                        $classroom_name = $sp['classroom_name'];
-                                                        if ($sp['waiver_by']) {
-                                                            $waiver_by = $sp['waiver_by'];
-                                                        } else {
-                                                            $waiver_by = NA;
-                                                        }
-                                                    ?>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="<?php echo site_url('adminController/student/adjust_online_and_inhouse_pack_/' . $sp['student_package_id']); ?>" class="btn btn-info btn-xs" data-toggle="tooltip" title="Update Payment/Dues"><span class="fa fa-usd"></span></a>
-                                                                <a href="<?php echo $url; ?>" class="btn btn-warning btn-xs" data-toggle="tooltip" title="Transaction history"><span class="fa fa-history"></span></a>
-                                                                <?php if ($sp['payment_file'] != '') { ?>
-                                                                    <a href="<?php echo base_url(PAYMENT_SCREENSHOT_FILE_PATH_INHOUSE . $sp['payment_file']); ?>" target="_blank" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Transaction file"><span class="fa fa-download"></span></a>
-                                                                <?php } ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php
-                                                                if ($sp['packCloseReason'] == NULL) {
-                                                                    echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
-                                                                } else if ($sp['packCloseReason'] == 'Partial Refund' or $sp['packCloseReason'] == 'Full Refund' or $sp['packCloseReason'] == 'Pack Terminated' or $sp['packCloseReason'] == 'Course switched' or $sp['packCloseReason'] == 'Branch switched' or $sp['packCloseReason'] == 'Pack on hold' or $sp['packCloseReason'] == 'Due
-                                                                    ') {
-                                                                    echo '<span class="text-danger"><a href="javascript:void(0);" data-toggle="tooltip" title="' . $sp['packCloseReason'] . ' "  >' . DEACTIVE . '</a></span>';
-                                                                } else {
-                                                                    echo '<span class="text-danger"><a href="javascript:void(0);" data-toggle="tooltip" title="Deactive/Expired pack"  >' . DEACTIVE . '</a></span>';
-                                                                }
-                                                                ?>
-                                                            </td>
-                                                            <td><?php echo $sp['package_name']; ?></td>
-                                                            <td><?php echo $sp['package_cost'] . '/' . $sp['package_duration']; ?></td>
-                                                            <td><a id="showdata_<?php echo $sp['student_package_id']; ?>" href="javascript:void(0)" onmouseover="show_classroom_desc('<?php echo $classroom_name; ?>','<?php echo $classroom_id; ?>','<?php echo $sp['student_package_id'];?>')" data-toggle="tooltip" data-placement="top"><?php echo $classroom_name; ?></a></td>
-                                                            <td><?php echo $sp['amount_paid']; ?></td>
-                                                            <td><?php echo $sp['amount_paid_by_wallet']; ?></td>
-                                                            <td><?php echo $sp['ext_amount']; ?></td>
-                                                            <td><?php echo $sp['waiver']; ?></td>
-                                                            <td><?php echo $waiver_by; ?></td>
-                                                            <td><?php echo $sp['other_discount']; ?></td>
-                                                            <?php if ($sp['amount_due'] == '0.00') { ?>
-                                                                <td class="bg-green"><?php echo $sp['amount_due']; ?></td>
-                                                            <?php } else { ?>
-                                                                <td class="bg-orange"><?php echo $sp['amount_due']; ?></td>
-                                                            <?php } ?>
-                                                            <td class="bg-danger"><?php echo $sp['irr_dues']; ?></td>
-                                                            <td>
-                                                                <?php
-                                                                if ($sp['due_commitment_date']) {
-                                                                    echo date('d-m-Y', $sp['due_commitment_date']);
-                                                                } else {
-                                                                    echo NA;
-                                                                }
-                                                                ?>
-                                                            </td>
-                                                            <td>
-                                                        <?php
-                                                          if(strtotime(date('d-m-Y')) <= strtotime($sp['holdDateTo'])){
-                                                                echo $sp['holdDateFrom'].' - '. $sp['holdDateTo'];
-                                                            }else { echo "N/A";}
-                                                        ?></td>
-                                                            <td><?php echo $sp['amount_refund']; ?></td>
-                                                            <td><?php echo date('d-m-Y', $sp['subscribed_on']); ?></td>                 
-                                                            <td><?php echo date('d-m-Y', $sp['expired_on']); ?></td>
-                                                            <td><?php echo $sp['requested_on']; ?></td>                 
-                                                        </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <!-- table ends -->
-                                </div>
-                            </div>
-                        <?php } ?>
+                        <!-- practice pack practice_pack_booking.php-->
+                        <?php $this->load->view('student/practice_pack_booking');?>
+                        
+                        <!-- practice pack ends inhouse_pack_booking.php-->
+                        <?php $this->load->view('student/inhouse_pack_booking_list');?>
+                        <?php $this->load->view('student/online_pack_booking_list');?>
+                        <?php $this->load->view('student/practice_pack_booking_list');?>
 
-    <?php if (count($student_package_online) > 0) { ?>
-    <div class="col-md-12">
-        <div class="head-bg" role="alert"> Online Class Pack </div>
-            <div class="form-group bg-success" style="padding-top:10px;padding-bottom:10px;">
-            <!-- table start -->
-            <div class="table-ui-scroller">
-                <div class="box-body table-responsive table-hr-scroller table-cb-none mheight200">
-                    <table class="table table-striped table-bordered table-sm">
-                        <thead class="bg-success">
-                            <tr><?php echo TR_ONLINE_OFFLINE; ?></tr>
-                        </thead>
-                        <tbody id="myTable">
-                        <?php
-                            foreach ($student_package_online as $sp) {
-                            $encId = base64_encode($sp['student_id']);
-                            $url = site_url('adminController/student/student_transaction_/' . $sp['student_package_id'] . '/' . $encId);
-                            $classroom_id = $sp['classroom_id'];
-                            $classroom_name = $sp['classroom_name'];
-                            $holdDateFrom = $sp['holdDateFrom'];
-                            $holdDateTo = $sp['holdDateTo'];
-                            if(WOSA_ONLINE_DOMAIN==1){
-                                if($sp['waiver_by']) {
-                                    $waiver_by = $sp['waiver_by'];
-                                }else{
-                                    $waiver_by = NA;
-                                }
-                            }
-                        ?>
-                        <tr>
-                            <td>
-                                <a href="<?php echo site_url('adminController/student/adjust_online_and_inhouse_pack_/' . $sp['student_package_id']); ?>" class="btn btn-info btn-xs" data-toggle="tooltip" title="Update Payment/Dues"><span class="fa fa-usd"></span> </a>
-                                <a href="<?php echo $url; ?>" class="btn btn-warning btn-xs" data-toggle="tooltip" title="Transaction history"><span class="fa fa-history"></span> </a>
-                                <?php if (isset($sp['payment_file'])) { ?>
-                                    <a href="<?php echo base_url(PAYMENT_SCREENSHOT_FILE_PATH_ONLINE . $sp['payment_file']); ?>" target="_blank" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Transaction file"><span class="fa fa-download"></span> </a>
-                                <?php } ?>
-                            </td>
-                            <td style="text-align: center;">
-                                <?php
-                                    if($sp['packCloseReason'] == NULL) {
-                                        echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
-                                    }else if (($sp['packCloseReason'] == 'Partial Refund' AND $sp['package_status'] == 0) or $sp['packCloseReason'] == 'Full Refund' or $sp['packCloseReason'] == 'Pack Terminated' or $sp['packCloseReason'] == 'Course switched' or $sp['packCloseReason'] == 'Branch switched' or ( $sp['packCloseReason'] == 'Pack on hold' AND $sp['onHold'] == 1) or $sp['packCloseReason'] == 'Due') {
-                                            echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="' . $sp['packCloseReason'] . ' "  >' . DEACTIVE . '</a></span>';
-                                    }else if (($sp['packCloseReason'] == 'Partial Refund' AND $sp['package_status'] == 1)) {
-                                        echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
-                                    }else if ($sp['packCloseReason'] == 'Have to be start' AND $sp['package_status']==0) {
-                                        echo '<span class="text-red"><a href="javascript:void(0);"data-toggle="tooltip" title="Have to be start"  >' . DEACTIVE . '</a></span>';
-                                    }else{
-                                        echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="Deactive/Expired pack"  >' . DEACTIVE . '</a></span>';
-                                    }
-                                   
-                                    ?>
-                                     <div><?php echo $sp['packCloseReason'];?></div>
-                                    </td>
-                                    <td><?php echo $sp['package_name']; ?></td>
-                                    <td><?php echo $sp['test_module_name'].'/'.$sp['programe_name']; ?></td>
-                                    <td><?php echo $sp['package_cost'] . '/' . $sp['package_duration']; ?></td>
-                                    <td><a class="text-blue" id="showdata_<?php echo $sp['student_package_id']; ?>" href="javascript:void(0)" onmouseover="show_classroom_desc('<?php echo $classroom_name; ?>','<?php echo $classroom_id; ?>','<?php echo $sp['student_package_id']; ?>')" data-toggle="tooltip" data-placement="top"><?php echo $classroom_name; ?></a></td>
-                                    <!-- <td><?php echo $sp['payment_id']; ?></td> -->
-                                    <td><?php echo $sp['amount_paid']; ?></td>
-                                    <td><?php echo $sp['amount_paid_by_wallet']; ?></td>
-                                    <td><?php echo $sp['ext_amount']; ?></td>
-                                    <?php if(WOSA_ONLINE_DOMAIN==1){ ?>
-                                        <td><?php echo $sp['waiver']; ?></td>
-                                        <td><?php echo $waiver_by; ?></td>
-                                    <?php } ?>
-                                    <!-- <td><?php echo $sp['other_discount']; ?></td> -->
-                                    <?php if ($sp['amount_due'] == '0.00') { ?>
-                                        <td ><?php echo $sp['amount_due']; ?></td>
-                                    <?php } else { ?>
-                                    <td style="color:red"><?php echo $sp['amount_due']; ?></td><?php } ?>
-                                    <?php if ($sp['irr_dues'] == '0.00') { ?>
-                                        <td ><?php echo $sp['irr_dues']; ?></td>
-                                    <?php } else { ?>
-                                    <td style="color:red"><?php echo $sp['irr_dues']; ?></td>
-                                    <?php } ?>
-                                    <td>
-                                    <?php
-                                        if($sp['due_commitment_date'] != 0){
-                                            echo date('d-m-Y', $sp['due_commitment_date']);
-                                        }else{
-                                            echo NA;
-                                        }
-                                    ?>
-                                    </td>
-                                    <td><?php echo $sp['amount_refund']; ?></td>
-                                    <td><?php echo date('d-m-Y', $sp['subscribed_on']); ?></td>
-                                    <td>
-                                        <?php
-                                            if(strtotime(date('d-m-Y')) <= strtotime($sp['holdDateTo'])){
-                                                echo $sp['holdDateFrom'].' to '. $sp['holdDateTo'];
-                                            }else { echo "N/A";}
-                                        ?>                                            
-                                    </td>
-                                    <td><?php echo date('d-m-Y', $sp['expired_on']); ?></td>
-                                    <td><?php echo $sp['requested_on']; ?></td>                 
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
-        </div>
-        <!-- table ends -->
-        </div>
-    </div>
-    <?php } ?>
+    
 
-                        <?php if (count($student_package_pp) > 0) { ?>
-                            <div class="col-md-12">
-                                <div class="head-bg" role="alert">Practice Pack </div>
-                                <div class="form-group bg-warning" style="padding-top:10px;padding-bottom:10px;">
-                                    <!-- table start -->
-                                    <div class="table-ui-scroller">
-                                        <div class="box-body table-responsive table-hr-scroller table-cb-none mheight200">
-                                            <table class="table table-striped table-bordered table-sm pp-bg">
-                                                <thead class="bg-warning">
-                                                    <tr class="bg-warning">
-                                                        <?php echo TR_PRACTICE_PACK; ?>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="myTable">
-                                                    <?php foreach ($student_package_pp as $sp) {
-                                                        $encId = base64_encode($sp['student_id']);
-                                                        $url = site_url('adminController/student/student_transaction_/' . $sp['student_package_id'] . '/' . $encId);
-                                                        if(WOSA_ONLINE_DOMAIN==1){
-                                                            if($sp['waiver_by']) {
-                                                                $waiver_by = $sp['waiver_by'];
-                                                            }else{
-                                                                $waiver_by = NA;
-                                                            }
-                                                        }
-                                                    ?>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="<?php echo site_url('adminController/student/adjust_practice_pack_/' . $sp['student_package_id']); ?>" class="btn btn-info btn-xs" data-toggle="tooltip" title="Update Payment/Dues"><span class="fa fa-usd"></span></a>
-                                                                <a href="<?php echo $url; ?>" class="btn btn-warning btn-xs" data-toggle="tooltip" title="Transaction history"><span class="fa fa-history"></span></a>
-                                                                <?php if ($sp['payment_file'] != '') { ?>
-                                                                    <a href="<?php echo base_url(PAYMENT_SCREENSHOT_FILE_PATH_PP . $sp['payment_file']); ?>" target="_blank" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Transaction file"><span class="fa fa-download"></span></a>
-                                                                <?php } ?>
-                                                            </td>
-                                                            <td style="text-align: center;">
-                                                                <?php
-                                                                  if ($sp['packCloseReason'] == NULL) {
-                                                                    echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
-                                                                } else if (($sp['packCloseReason'] == 'Partial Refund' AND $sp['package_status'] == 0) or $sp['packCloseReason'] == 'Full Refund' or $sp['packCloseReason'] == 'Pack Terminated' or $sp['packCloseReason'] == 'Course switched' or $sp['packCloseReason'] == 'Branch switched' or $sp['packCloseReason'] == 'Pack on hold' or $sp['packCloseReason'] == 'Due') {
-                                                                    echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="' . $sp['packCloseReason'] . ' "  >' . DEACTIVE . '</a></span>';
-                                                                } 
-                                                                else if (($sp['packCloseReason'] == 'Partial Refund' AND $sp['package_status'] == 1)) {
-                                                                    echo '<span class="text-success"><a href="javascript:void(0);"data-toggle="tooltip" title="Active Pack"  >' . ACTIVE . '</a></span>';
-                                                                }else if ($sp['packCloseReason'] == 'Have to be start' AND $sp['package_status']==0) {
-                                                                    echo '<span class="text-res"><a href="javascript:void(0);"data-toggle="tooltip" title="Have to be start"  >' . DEACTIVE . '</a></span>';
-                                                                }else {
-                                                                    echo '<span class="text-red"><a href="javascript:void(0);" data-toggle="tooltip" title="Deactive/Expired pack"  >' . DEACTIVE . '</a></span>';
-                                                                }
-                                                                ?>
-                                                                
-                                                                <div><?php echo $sp['packCloseReason']?></div>
-                                                            </td>
-                                                            <td><?php echo $sp['package_name']; ?></td>
-                                                            <td><?php echo $sp['test_module_name'] . '/' . $sp['programe_name']; ?></td>
-                                                            <td><?php echo $sp['package_cost'] . '/' . $sp['package_duration'] ?></td>
-                                                            <td><?php echo $sp['amount_paid']; ?></td>
-                                                            <td><?php echo $sp['amount_paid_by_wallet']; ?></td>
-                                                            <td><?php echo $sp['ext_amount']; ?></td>
-                                                            <?php if(WOSA_ONLINE_DOMAIN==1){ ?>
-                                                                <td><?php echo $sp['waiver']; ?></td>
-                                                                <td><?php echo $waiver_by; ?></td>
-                                                            <?php } ?>
-                                                            <!-- <td><?php echo $sp['other_discount']; ?></td> -->
-                                                            <?php if ($sp['amount_due'] == '0.00') { ?>
-                                                                <td ><?php echo $sp['amount_due']; ?></td>
-                                                            <?php } else { ?>
-                                                                <td style="color:red"><?php echo $sp['amount_due']; ?></td>
-                                                            <?php } ?>
-                                                            <?php if ($sp['irr_dues'] == '0.00') { ?>
-                                                                <td ><?php echo $sp['irr_dues']; ?></td>
-                                                            <?php } else { ?>
-                                                                <td style="color:red"><?php echo $sp['irr_dues']; ?></td>
-                                                            <?php } ?>
-                                                            <td>
-                                                                <?php
-                                                                if ($sp['due_commitment_date'] != 0) {
-                                                                    echo date('d-m-Y', $sp['due_commitment_date']);
-                                                                } else {
-                                                                    echo NA;
-                                                                }
-                                                                ?>
-                                                            </td>
-                                                            <td><?php echo $sp['amount_refund']; ?></td>
-                                                            <td><?php echo date('d-m-Y', $sp['subscribed_on']); ?></td>
-                                                            <td>
-                                                            <?php
-                                                                if(strtotime(date('d-m-Y')) <= strtotime($sp['holdDateTo'])){
-                                                                    echo $sp['holdDateFrom'].' to '. $sp['holdDateTo'];
-                                                                }else { echo "N/A";}
-                                                            ?></td>                                                           
-                                                            <td><?php echo date('d-m-Y', $sp['expired_on']); ?></td>
-                                                            <td><?php echo $sp['requested_on']; ?></td>
-                                                        </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <!-- table ends -->
-                                </div>
-                            </div>
-                        <?php } ?>
+                        
 
                         <!-- counselling booked data start-->
                         <?php if (count($student_counselling) > 0) { ?>
@@ -1632,6 +1107,14 @@ function check_all_validation()
     flag=0;
     } else { $(".start_date_err").html(''); }  
 
+    var packprice = $('#packPrice').val();
+    var amtpaid = $('#amount_paid').val();
+    if( amtpaid < packprice && $('#due_commitment_date').val() == "")
+    {			
+    $(".due_commitment_date_err").html('The Due Commitment Date field is required.');
+    flag=0;
+    } else { $(".due_commitment_date_err").html(''); } 
+
     if(flag == 1)
     {
         var con = confirm('<?php echo SUBMISSION_CONFIRM ?>');
@@ -1679,7 +1162,15 @@ function check_all_validation_pp()
     {			
     $(".start_date_pp_err").html('The Package Starting Date field is required.');
     flag=0;
-    } else { $(".start_date_pp_err").html(''); }  
+    } else { $(".start_date_pp_err").html(''); }
+
+    var packprice = $('#packPrice').val();
+    var amtpaid = $('#amount_paid_pp').val();
+    if( amtpaid < packprice && $('#due_commitment_date_pp').val() == "")
+    {			
+    $(".due_commitment_date_pp_err").html('The Due Commitment Date field is required.');
+    flag=0;
+    } else { $(".due_commitment_date_pp_err").html(''); } 
 
     if(flag == 1)
     {

@@ -269,7 +269,10 @@ class Student_package_model extends CI_Model
         $add_payment = $params['add_payment'];
         $active = $params['active'];
         $packCloseReason = $params['packCloseReason'];
-
+        $cgst_amt = $params['cgst_amt'];
+        $sgst_amt = $params['sgst_amt'];
+        $total_amt = $params['total_amt'];
+        $tax_detail = $params['tax_detail'];
         if($params['due_commitment_date']){
           $due_commitment_date = $params['due_commitment_date'];
         }else{
@@ -283,7 +286,11 @@ class Student_package_model extends CI_Model
                 `amount_due` = `amount_due` - '".$add_payment."',
                 `active` = '".$active."',
                 `due_commitment_date` = '".$due_commitment_date."',
-                `packCloseReason` = '".$packCloseReason."'  
+                `packCloseReason` = '".$packCloseReason."',
+                `cgst_amt` = '".$cgst_amt."', 
+                `sgst_amt` = '".$sgst_amt."', 
+                `total_amt` = '".$total_amt."',
+                `tax_detail` = '".$tax_detail."' 
                 where student_package_id = '".$student_package_id."' 
             ");
 
@@ -321,12 +328,20 @@ class Student_package_model extends CI_Model
         $add_payment = $params['add_payment'];
         $expired_on = $params['expired_on'];
         $active = $params['active'];
+        $cgst_amt = $params['cgst_amt'];
+        $sgst_amt = $params['sgst_amt'];
+        $total_amt = $params['total_amt'];
+        $tax_detail = $params['tax_detail'];
         return $this->db->query("update `student_package` SET
             `ext_amount` = `ext_amount` + '".$add_payment."',
             `expired_on` = '".$expired_on."',
             `expired_on_str` = '".strtotime($expired_on)."',
             `packCloseReason` = NULL,
-            `active` = '".$active."' 
+            `active` = '".$active."' ,
+            `cgst_amt` = '".$cgst_amt."', 
+            `sgst_amt` = '".$sgst_amt."', 
+            `total_amt` = '".$total_amt."',
+            `tax_detail` = '".$tax_detail."' 
             where student_package_id = '".$student_package_id."' 
         ");
     }

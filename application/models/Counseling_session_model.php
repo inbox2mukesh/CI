@@ -630,7 +630,8 @@
             $this->db->where('((session_date_from BETWEEN "'.$start_date. '" and "'.$end_date.'") OR (session_date_to BETWEEN "'.$start_date. '" and "'.$end_date.'"))');
 
         }
-        $this->db->order_by('session_date_from','asc');
+        // $this->db->group_by('session_date_from');
+        $this->db->order_by('id','desc');
         return $this->db->get()->result_array();
         
         
@@ -1077,18 +1078,30 @@
     
     function gettodaycounselling($todaystr)
     {
-        $this->db->select('id,duration')
+        // echo strtotime($todaystr);
+        $this->db->select('id,duration,counseling_sessions_group_id')
             ->where(array('session_date_time_str <='=>strtotime($todaystr),'active'=>1));
         return $this->db->get('counseling_sessions')->result_array();
     }
     function deactivate_shedule($todaystr){
 
         $params = array('active'=> 0);
-        $this->db->where('session_date_time_str <=',$todaystr);
+        $this->db->where('session_date_time_str =',$todaystr);
         $this->db->update('counseling_sessions',$params);
         
-        $this->db->where('session_end_date_time_str <=',$todaystr);
+        $this->db->where('session_end_date_time_str =',$todaystr);
         $this->db->update('counseling_sessions_group',$params);
+    }
+
+    function deactivate_shedule_new($id,$groupid)
+    {
+        $params = array('active'=> 0);
+        $this->db->where('id',$id);
+        $this->db->update('counseling_sessions',$params);
+        
+        $this->db->where('id',$groupid);
+        $this->db->update('counseling_sessions_group',$params);
+
     }
 
      function checkStudentExistence($data){

@@ -107,7 +107,13 @@ class Update_pack extends REST_Controller{
                 {
                     $mailData=[];
                 }
-                
+
+                $cgst = $this->Package_master_model->get_tax_detail('CGST');
+                $sgst = $this->Package_master_model->get_tax_detail('SGST');
+                $mailData['cgst_per']  = (!empty($cgst))?$cgst['tax_per']:0;
+                $mailData['sgst_per']  = (!empty($sgst))?$sgst['tax_per']:0;
+                $mailData['cgst_amt']  = $studata['cgst_amt'];
+                $mailData['sgst_amt']  = $studata['sgst_amt'];;
                 $mailData['email_message']  = $email_message;
                 $mailData['test_module_name']=$getTestName['test_module_name'];
                 $mailData['programe_name']  = $getProgramName['programe_name'];

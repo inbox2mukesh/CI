@@ -547,14 +547,29 @@
 									<label for="use_wallet" class="control-label">Use Wallet Amount? (<?php echo $wallet['wallet'] / 100; ?>)</label>
 								</div>
 							<?php } ?>
-
+							
 							<label for="add_payment" class="control-label text-success ap" style="display: none;"><span class="text-danger">*</span>Add payment</label>
 							<label for="add_payment" class="control-label text-success rp" style="display: none;"><span class="text-danger">*</span>Refund payment <span class="text-info"><i>(NOTE: Full refund will do pack De-active and Partial refund will keep it at your choice.)</i></span></label>
 							<div class="form-group has-feedback pf" style="display: none;">
-								<input type="text" name="add_payment" placeholder="Enter amount" class="form-control chknum1 input-ui-100" id="add_payment" onblur="check_payment(this.value,'<?php echo $walletBalance; ?>');" maxlength="5" />
+								<input type="text" name="add_payment" placeholder="Enter amount" class="form-control chknum1 input-ui-100" id="add_payment" onblur="check_payment(this.value,'<?php echo $walletBalance; ?>');calculate_tax('summerysection_cleardues',this.value);" maxlength="5" />
 								<span class="form-control-feedback"><i class="fa fa-usd"></i></span>
 								<span class="text-danger ad"><?php echo form_error('add_payment'); ?></span>
 							</div>
+							<div class="check-info font-weight-600" id="summerysection_cleardues" style="display:none;">
+								<div>Original Price <span class="pull-right" id="orignalprice"><?php echo CURRENCY ?> 100</span></div>
+								<div>CGST@<?php echo $cgst_tax_per ?>%<span class="pull-right" id="cgst_tax_new">INR 19</span></div>
+								<div>SGST@<?php echo $sgst_tax_per ?>%<span class="pull-right" id="sgst_tax_new">INR 9</span></div>
+								<div>Total Payable Amount(Incl. all Taxes)<span class="pull-right" id="totalamount">INR 9</span></div>
+								<input type="hidden" name="totalpayableamt" id="totalpayableamt" value="">
+								<!-- <div class="hide">General Discount <span class="pull-right">(-) INR 2,000</span></div> -->
+								<div class="hide" id="promocode_label">Promotion Code
+									<span title="Removed Promo Code" id="removePromoCode" class="cursor_pointer"><i class="fa fa-times-circle text-red size-11" aria-hidden="true"></i></span><span class="pull-right">(-) INR <span id="promocode_label_val"></span></span>
+								</div>
+								<!--              <div>Promotion Code <span class="ml-5 font-12">10% Off</span> <span class="pull-right">(-) INR 1,000</span></div>-->
+								<div class="d-line"></div>
+								<!--<div>Final Price <span class="pull-right">Rs. <span class="final_paid_amt">100</span></span></div>-->
+								<div class="hide">Applied From Wallet <span class="pull-right">(-) INR 5,000</span></div>
+								</div>
 							<div class="form-group has-feedback pf" style="display: none;">
 								<label for="due_commitment_date_next" class="control-label text-success"> Next Due Commitment Date</label>
 								<input type="text" name="due_commitment_date_next" class="DateVariryBetweendueplusfive_days_holdenddate form-control input-ui-100" id="due_commitment_date_next" maxlength="10" autocomplete="off" onchange="enableBtn_packPayment_due_commitment(this.value);" data-date-format="dd-mm-yyyy" readonly="readonly" />
@@ -589,7 +604,7 @@
 							<div class="col-md-6">
 								<div class="form-group has-feedback">
 									<label for="add_payment_pe" class="control-label text-success"><span class="text-danger">*</span>Pack Extension Charge</label>
-									<input type="text" name="add_payment_pe" placeholder="Enter Extension charge" class="form-control chknum1 input-ui-100" id="add_payment_pe" maxlength="5" />
+									<input type="text" name="add_payment_pe" placeholder="Enter Extension charge" class="form-control chknum1 input-ui-100" id="add_payment_pe" maxlength="5" onblur="calculate_tax('summerysection_packextension',this.value);"/>
 									<span class="form-control-feedback"><i class="fa fa-usd"></i></span>
 									<span class="add_payment_pe_err text-danger"></span>
 								</div>
@@ -609,6 +624,13 @@
 								</div>
 							</div>
 						</div>
+					</div>
+					<div class="check-info font-weight-600" id="summerysection_packextension" style="display:none;">
+								<div>Original Price <span class="pull-right" id="orignalprice"><?php echo CURRENCY ?> 100</span></div>
+								<div>CGST@<?php echo $cgst_tax_per ?>%<span class="pull-right" id="cgst_tax_new">INR 19</span></div>
+								<div>SGST@<?php echo $sgst_tax_per ?>%<span class="pull-right" id="sgst_tax_new">INR 9</span></div>
+								<div>Total Payable Amount(Incl. all Taxes)<span class="pull-right" id="totalamount">INR 9</span></div>
+								<input type="hidden" name="totalpayableamt" id="totalpayableamt" value="">
 					</div>
 					<!-- pack extension form closed-->
 

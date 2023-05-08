@@ -772,6 +772,10 @@ class Student extends MY_Controller{
         $offlineCount=$this->Package_master_model->getOfflinePackTakenCount($id);        
         $onlineCount=$this->Package_master_model->getOnlinePackActiveCount($id);
         $ppCount=$this->Practice_package_model->getpp_PackActiveCount($id);
+        $cgst = $this->Package_master_model->get_tax_detail('CGST');
+        $sgst = $this->Package_master_model->get_tax_detail('SGST');
+        $data['cgst_tax_per'] = (!empty($cgst))?$cgst['tax_per']:0;
+        $data['sgst_tax_per'] = (!empty($sgst))?$sgst['tax_per']:0;
         $rtCount = 0;
         $examCount=0;
         //get session booked
@@ -997,6 +1001,11 @@ class Student extends MY_Controller{
         $programe_id =  $serviceId['programe_id'];
         $center_id =  $serviceId['center_id'];
         $getPackageId = $this->Student_package_model->getExamPackageId($student_package_id);
+        $cgst = $this->Package_master_model->get_tax_detail('CGST');
+        $sgst = $this->Package_master_model->get_tax_detail('SGST');
+        $data['cgst_tax_per'] = (!empty($cgst))?$cgst['tax_per']:0;
+        $data['sgst_tax_per'] = (!empty($sgst))?$sgst['tax_per']:0;
+        $tax_arr = json_encode(['cgst'=>$data['cgst_tax_per'],'sgst'=>$data['sgst_tax_per']]);
         $package_id = $getPackageId['package_id'];
         /////////////////////////////////////////////////////////////              
         if($student_package_id && $student_id)
@@ -1035,22 +1044,29 @@ class Student extends MY_Controller{
                 $this->db->trans_start();                                
                 if($payment_type=='Add payment'){
                     
+                    $org_pr = $this->input->post('add_payment', TRUE);
                     $use_wallet = $this->input->post('use_wallet', TRUE);                    
                     $add_payment = $this->input->post('add_payment', TRUE)*100;
                     $remarks = $this->input->post('remarks', TRUE);
+                    $total_amt = $this->input->post('totalpayableamt',TRUE)*100;
+                    $cgst_amt = (($org_pr * $data['cgst_tax_per'])/100)*100;
+                    $sgst_amt = (($org_pr * $data['sgst_tax_per'])/100)*100;
                     if($this->input->post('due_commitment_date_next')){
                         $due_commitment_date = strtotime($this->input->post('due_commitment_date_next', TRUE));
                     }else{
                         $due_commitment_date ='';
                     }                    
-                    $response = $this->add_payment_($add_payment,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id);                    
+                    $response = $this->add_payment_($add_payment,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id,$total_amt,$cgst_amt,$sgst_amt,$tax_arr);                    
 
                 }elseif($payment_type=='Adjustment-PE'){
-                    
+                    $org_pr = $this->input->post('add_payment', TRUE);
                     $use_wallet = $this->input->post('use_wallet_pe', TRUE);    
                     $add_payment = $this->input->post('add_payment_pe', TRUE)*100;
                     $newDate = date("d-m-Y", strtotime($this->input->post('expired_on')));
-                    $response = $this->pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id);                    
+                    $total_amt = $this->input->post('totalpayableamt',TRUE)*100;
+                    $cgst_amt = (($org_pr * $data['cgst_tax_per'])/100)*100;
+                    $sgst_amt = (($org_pr * $data['sgst_tax_per'])/100)*100;
+                    $response = $this->pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id,$total_amt,$cgst_amt,$sgst_amt,$tax_arr);                    
 
                 }elseif($payment_type=='Adjustment-BS'){
                     
@@ -1152,6 +1168,11 @@ class Student extends MY_Controller{
         $test_module_id =  $serviceId['test_module_id'];
         $programe_id =  $serviceId['programe_id'];
         $center_id =  $serviceId['center_id'];
+        $cgst = $this->Package_master_model->get_tax_detail('CGST');
+        $sgst = $this->Package_master_model->get_tax_detail('SGST');
+        $data['cgst_tax_per'] = (!empty($cgst))?$cgst['tax_per']:0;
+        $data['sgst_tax_per'] = (!empty($sgst))?$sgst['tax_per']:0;
+        $tax_arr = json_encode(['cgst'=>$data['cgst_tax_per'],'sgst'=>$data['sgst_tax_per']]);
         /////////////////////////////////////////////////////////////            
         if($student_package_id and $student_id){
 
@@ -1186,23 +1207,32 @@ class Student extends MY_Controller{
                 //tran start
                 $this->db->trans_start();                
                 if($payment_type=='Add payment'){
-
+                    $org_pr = $this->input->post('add_payment', TRUE);
                     $use_wallet = $this->input->post('use_wallet', TRUE); 
                     $add_payment = $this->input->post('add_payment', TRUE)*100;
                     $remarks = $this->input->post('remarks', TRUE);
+                    $total_amt = $this->input->post('totalpayableamt',TRUE)*100;
+                    $cgst_amt = (($org_pr * $data['cgst_tax_per'])/100)*100;
+                    $sgst_amt = (($org_pr * $data['sgst_tax_per'])/100)*100;
                     if($this->input->post('due_commitment_date_next', TRUE)){
                         $due_commitment_date = strtotime($this->input->post('due_commitment_date_next', TRUE));
                     }else{
                         $due_commitment_date ='';
                     }                    
-                    $response = $this->add_payment_($add_payment,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id);  
+                    $response = $this->add_payment_($add_payment,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id,$total_amt,$cgst_amt,$sgst_amt,$tax_arr);  
 
                 }elseif($payment_type=='Adjustment-PE'){
-                    
+                    $org_pr = $this->input->post('add_payment', TRUE);
+                    $use_wallet = $this->input->post('use_wallet', TRUE); 
+                    $add_payment = $this->input->post('add_payment', TRUE)*100;
+                    $remarks = $this->input->post('remarks', TRUE);
+                    $total_amt = $this->input->post('totalpayableamt',TRUE)*100;
+                    $cgst_amt = (($org_pr * $data['cgst_tax_per'])/100)*100;
+                    $sgst_amt = (($org_pr * $data['sgst_tax_per'])/100)*100;
                     $use_wallet = $this->input->post('use_wallet_pe', TRUE);
                     $add_payment = $this->input->post('add_payment_pe', TRUE)*100;
                     $newDate = date("d-m-Y", strtotime($this->input->post('expired_on', TRUE)));
-                    $response = $this->pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id);                     
+                    $response = $this->pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id,$total_amt,$cgst_amt,$sgst_amt,$tax_arr);                     
 
                 }elseif($payment_type=='Adjustment-BS'){
                     $center_id = $this->input->post('center_id', TRUE);                    
@@ -1315,9 +1345,38 @@ class Student extends MY_Controller{
         $duration = $duration.' days'; 
         $discount_code = null;
         $centerCode = null;
-        $batch_id= null;$pack_center_id  = null;   
+        $batch_id= null;$pack_center_id  = null; 
+        // $amt_ext_tax_paid = $this->input->post('amount_paid');
+        // $cgst = $this->Package_master_model->get_tax_detail('CGST');
+        // $sgst = $this->Package_master_model->get_tax_detail('SGST');
+        // $package_name       = $package_data['package_name'];
+        // $discountedamount  = $package_data['discounted_amount'];
+        // $pack_basic_amt = $package_data['discounted_amount'];
+        // $cgst_tax = number_format(($amt_ext_tax_paid * $cgst['tax_per'])/100);
+        // $sgst_tax = number_format(($amt_ext_tax_paid * $sgst['tax_per'])/100);
+        // $amount_paid = ($discountedamount + $sgst_tax + $cgst_tax);
+        // // pr($sgst_tax,1);
+        // //calculate total amount including tax
+        // $total_cgst_tax = number_format(($pack_basic_amt * $cgst['tax_per'])/100);
+        // $total_sgst_tax = number_format(($pack_basic_amt * $sgst['tax_per'])/100);
+        // $discounted_amount = ($discountedamount + $total_sgst_tax + $total_cgst_tax)*1000; 
+
+        $amt_ext_tax_paid = $this->input->post('amount_paid');
+        $cgst = $this->Package_master_model->get_tax_detail('CGST');
+        $sgst = $this->Package_master_model->get_tax_detail('SGST');
         $package_name       = $package_data['package_name'];
-        $discounted_amount  = $package_data['discounted_amount']*100;
+        $discountedamount  = $package_data['discounted_amount']*100;
+        $pack_basic_amt = $package_data['discounted_amount'];
+        $cgst_tax = ($amt_ext_tax_paid * $cgst['tax_per'])/100;
+        $sgst_tax = ($amt_ext_tax_paid * $sgst['tax_per'])/100;
+        $amount_paid = ($discountedamount + $sgst_tax + $cgst_tax);
+        $tax_detail = json_encode(['cgst'=>$cgst['tax_per'],'sgst'=>$sgst['tax_per']]);
+        // pr($sgst_tax,1);
+        //calculate total amount including tax
+        $total_cgst_tax = ($pack_basic_amt * $cgst['tax_per'])/100;
+        $total_sgst_tax = ($pack_basic_amt * $sgst['tax_per'])/100;
+        $discounted_amount = ($package_data['discounted_amount'] + $total_sgst_tax + $total_cgst_tax)*100; 
+        
         //$duration = $duration.' days';
         $startDate = $this->input->post('start_date');
         //$subscribed_on = date("Y-m-d", strtotime($this->input->post('start_date')));
@@ -1359,11 +1418,13 @@ class Student extends MY_Controller{
         }else{
             $updateWaiver = 0;
             $waiver = 0; $other_discount = 0;
-        }        
-        $amount_paid = $this->input->post('amount_paid');
+        }    
+        
+        
+        $amount_payable = $this->input->post('amount_payable',TRUE);//$this->input->post('amount_paid');
         if($amount_paid==''){$amount_paid=0;}else{$amount_paid =$amount_paid*100;}
-        $amount_due = $discounted_amount-($amount_paid+$waiver+$other_discount);
-
+        $amount_due = $package_data['discounted_amount']-$amt_ext_tax_paid;//($amount_paid+$waiver+$other_discount);
+        // pr($amount_due,1);
         if($amount_due<=0){
             $amount_due=0;
         }
@@ -1481,13 +1542,17 @@ class Student extends MY_Controller{
                 'classroom_id'  => $classroom_id,                            
                 'payment_id'    => 'pay_'.$order_id,
                 'order_id'      => $order_id,
-                'amount'        => $discounted_amount,
+                'amount'        => $discountedamount,
+                'cgst_amt'      => $cgst_tax*100,
+                'sgst_amt'      => $sgst_tax*100,
+                'total_amt'     => $discounted_amount*100,
+                'tax_detail'    =>$tax_detail,
                 'waiver_by'     => $this->input->post('waiver_by', TRUE),
                 'other_discount'=> $other_discount,
                 'promocode_used'=> $discount_code,
                 'waiver'        => $actually_used_amount*100,
-                'amount_paid'   => $amount_paid+$paidBywallet,
-                'amount_due'    => $amount_due,
+                'amount_paid'   =>$amount_payable*100,
+                'amount_due'    => $amount_due*100,
                 'amount_paid_by_wallet' => $paidBywallet,
                 'package_duration'=>$dt,
                 'tran_id'       => $tran_id,
@@ -1507,6 +1572,7 @@ class Student extends MY_Controller{
                 'expired_on'    => $expired_on,
                 'expired_on_str' => strtotime($expired_on),
                 'requested_on' => date("d-m-Y h:i:s A"),
+                'total_paid_ext_tax'=>$amt_ext_tax_paid*100
             );
             $this->db->insert('student_package', $params2);
             $student_package_id =  $this->db->insert_id();
@@ -1618,6 +1684,10 @@ class Student extends MY_Controller{
                 $email_message = $email_content['content'];
                 $mailData['email_footer_content'] = $email_content['email_footer_content'];
                 $mailData['email_message']  = $email_message;
+                $mailData['cgst_per']  = $cgst['tax_per'];
+                $mailData['sgst_per']  = $sgst['tax_per'];
+                $mailData['cgst_amt']  = $cgst_tax;
+                $mailData['sgst_amt']  = $sgst_tax;
                 $mailData['test_module_name']= $getTestName['test_module_name'];
                 $mailData['programe_name']  = $getProgramName['programe_name'];
                 $mailData['batch_name']     = $getBatchName['batch_name'];
@@ -1719,10 +1789,32 @@ class Student extends MY_Controller{
         $duration=$duration-1;
            //$duration=$duration;
         }      
-        $duration = $duration.' days';          
-
+        $duration = $duration.' days';
+        // $amt_ext_tax_paid = $this->input->post('amount_paid_pp')*100;
+        // $cgst = $this->Package_master_model->get_tax_detail('CGST');
+        // $sgst = $this->Package_master_model->get_tax_detail('SGST');
+        
         $package_name       = $package_data['package_name'];
-        $discounted_amount  = $package_data['discounted_amount']*100;
+        // $discountedamount  = $package_data['discounted_amount']*100;
+        // $pack_basic_amt = $package_data['discounted_amount'];
+        // $cgst_tax = number_format(($amt_ext_tax_paid * $cgst['tax_per'])/100)*100;
+        // $sgst_tax = number_format(($amt_ext_tax_paid * $sgst['tax_per'])/100)*100;
+        // $discounted_amount = ($discountedamount + $sgst_tax + $cgst_tax); 
+        $amt_ext_tax_paid = $this->input->post('amount_paid_pp');
+        $cgst = $this->Package_master_model->get_tax_detail('CGST');
+        $sgst = $this->Package_master_model->get_tax_detail('SGST');
+        $package_name       = $package_data['package_name'];
+        $discountedamount  = $package_data['discounted_amount']*100;
+        $pack_basic_amt = $package_data['discounted_amount'];
+        $cgst_tax = ($amt_ext_tax_paid * $cgst['tax_per'])/100;
+        $sgst_tax = ($amt_ext_tax_paid * $sgst['tax_per'])/100;
+        $amount_paid = ($discountedamount + $sgst_tax + $cgst_tax);
+        $tax_detail = json_encode(['cgst'=>$cgst['tax_per'],'sgst'=>$sgst['tax_per']]);
+        //calculate total amount including tax
+        $total_cgst_tax = ($pack_basic_amt * $cgst['tax_per'])/100;
+        $total_sgst_tax = ($pack_basic_amt * $sgst['tax_per'])/100;
+        $discounted_amount = ($package_data['discounted_amount'] + $total_sgst_tax + $total_cgst_tax)*100; 
+        // pr($cgst_tax,1);
        // $duration = $duration.' days';
         $subscribed_on = date("d-m-Y", strtotime($this->input->post('start_date_pp')));
         $datee=date_create($subscribed_on);
@@ -1752,10 +1844,12 @@ class Student extends MY_Controller{
             $updateWaiver = 0;
             $waiver = 0; $other_discount = 0;
         }        
-        $amount_paid = $this->input->post('amount_paid_pp', TRUE);
+        
+        $amount_payable = $this->input->post('amount_payable_pp',TRUE);////$this->input->post('amount_paid_pp', TRUE);
         if($amount_paid==''){$amount_paid=0;}else{$amount_paid =$amount_paid*100;} 
-        $amount_due = $discounted_amount-($amount_paid+$waiver+$other_discount);
-
+        //$amount_due = $discounted_amount-($amount_paid+$waiver+$other_discount);
+        $amount_due = $package_data['discounted_amount']-$amt_ext_tax_paid;
+        // pr($amount_due,1);
         if($amount_due<=0){
             $amount_due=0;
         }
@@ -1787,7 +1881,8 @@ class Student extends MY_Controller{
         if($amount_due>0){
             $due_commitment_date=strtotime($this->input->post('due_commitment_date_pp'));
         }else{$due_commitment_date='';}
-        $amount_due = $discounted_amount-($amount_paid+$waiver+$other_discount);
+        
+        // $amount_due = $discounted_amount-($amount_paid+$waiver+$other_discount);
         //wallet case: start
             $use_wallet = $this->input->post('use_wallet_pp');
                 if($use_wallet and $amount_due>0){
@@ -1871,14 +1966,18 @@ class Student extends MY_Controller{
                 'payment_id'    => 'pay_'.$order_id,
                 'order_id'      => $order_id,
                 'tran_id'       => $tran_id,
-                'amount'        => $discounted_amount,
+                'amount'        => $discountedamount,
+                'cgst_amt'      => $cgst_tax*100,
+                'sgst_amt'      => $sgst_tax*100,
+                'total_amt'     => $discounted_amount,
+                'tax_detail'    =>$tax_detail,
                 'amount_paid_by_wallet' => $paidBywallet,
                 'waiver_by'     => $this->input->post('waiver_by_pp', TRUE),
                 'other_discount'=> $other_discount,
                 'promocode_used'=> $discount_code,
                 'waiver'        => $actually_used_amount*100,
-                'amount_paid'   => $amount_paid+$paidBywallet,
-                'amount_due'    => $amount_due,                
+                'amount_paid'   => $amount_payable*100,
+                'amount_due'    => $amount_due*100,                
                 'payment_file'  => $payment_file,
                 'due_commitment_date'=> $due_commitment_date,
                 'currency'      => CURRENCY,
@@ -1897,6 +1996,7 @@ class Student extends MY_Controller{
                 'package_name'    => $package_name,
                 'package_duration'=>$dt,
                 'requested_on' => date("d-m-Y h:i:s A"),
+                'total_paid_ext_tax'=>$amt_ext_tax_paid*100
             );       
         $this->db->insert('student_package', $params2);
         $student_package_id =  $this->db->insert_id();
@@ -2000,6 +2100,10 @@ class Student extends MY_Controller{
         $subject = $email_content['subject'];
         $email_message = $email_content['content'];
         $mailData['email_message']  = $email_message;
+        $mailData['cgst_per']  = $cgst['tax_per'];
+        $mailData['sgst_per']  = $sgst['tax_per'];
+        $mailData['cgst_amt']  = $cgst_tax;
+        $mailData['sgst_amt']  = $sgst_tax;
         $mailData['test_module_name']= $getTestName['test_module_name'];
         $mailData['programe_name']  = $getProgramName['programe_name'];
         $mailData['center_name']    = $get_centerName['center_name'];
@@ -2114,7 +2218,7 @@ class Student extends MY_Controller{
         $duration = $duration.' days';
         $pack_category_id = null;
         $package_name     = $package_data['package_name'];
-        $discounted_amount= $package_data['discounted_amount']*100;
+        $discounted_amount= $this->input->post('amount_payable');///$package_data['discounted_amount']*100;
         //$duration = $duration.' days';
         $startDate = $this->input->post('start_date_off');
         $subscribed_on= date("d-m-Y", strtotime($this->input->post('start_date_off')));
@@ -2504,8 +2608,8 @@ class Student extends MY_Controller{
     }
 
     //non-real function
-    function add_payment_($add_payment,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id){        
-      
+    function add_payment_($add_payment,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id,$total_amt,$cgst_amt,$sgst_amt,$tax_arr){        
+         
        //access control start
         $cn = $this->router->fetch_class().''.'.php';
         $mn='add_payment_';       
@@ -2524,13 +2628,13 @@ class Student extends MY_Controller{
             $packRestart=0;
             $packCloseReason=$getPackExpiry['packCloseReason'];
         }      
-
+        
         $walllet = $this->Student_model->getWalletAmount($student_id);
         $walletAmount=$walllet['wallet'];
 
         $getDues=$this->Student_package_model->getDues($student_package_id);
         $amount_due = $getDues['amount_due'];
-
+       
         if($use_wallet){
             //use wallet case
             if($walletAmount>=$amount_due){
@@ -2550,10 +2654,18 @@ class Student extends MY_Controller{
                 'by_user'       => $by_user,
                 'active'        => $packRestart,
                 'packCloseReason'=> $packCloseReason,
+                'cgst_amt'          =>$cgst_amt,
+                'sgst_amt'          =>$sgst_amt,
+                'total_amt'         =>$total_amt,
+                'tax_detail'        =>$tax_arr,
             ); 
             $params2 = array(                    
                 'student_package_id'=> $student_package_id,
                 'amount'            => $add_payment,
+                'cgst_amt'          =>$cgst_amt,
+                'sgst_amt'          =>$sgst_amt,
+                'total_amt'         =>$total_amt,
+                'tax_detail'        =>$tax_arr,
                 'remarks'           => $remarks,
                 'student_id'        => $student_id,
                 'type'              => '+',
@@ -2563,7 +2675,7 @@ class Student extends MY_Controller{
             );           
             $idd1=$this->Student_package_model->update_student_pack_payment($student_package_id,$params);
             $idd2 = $this->Student_package_model->update_transaction($params2); 
-            $finalWalletAmount = $walletAmount-$params2['amount'];
+            $finalWalletAmount = $walletAmount-$total_amt;
             $idd3=$this->Student_model->update_student_wallet_payment($student_id,$finalWalletAmount);
             if($idd1 and $idd2){ 
                 return 1;
@@ -2573,6 +2685,7 @@ class Student extends MY_Controller{
             //use wallet case end
 
         }else{
+            
             if($add_payment<$amount_due){
                 $this->form_validation->set_rules('due_commitment_date_next','Due committment date','required');
             }
@@ -2582,10 +2695,18 @@ class Student extends MY_Controller{
                 'by_user'       => $by_user,
                 'packCloseReason'=> $packCloseReason,
                 'active'        => $packRestart,
+                'cgst_amt'          =>$cgst_amt,
+                'sgst_amt'          =>$sgst_amt,
+                'total_amt'         =>$total_amt,
+                'tax_detail'        =>$tax_arr,
             ); 
             $params2 = array(                    
                 'student_package_id'=> $student_package_id,
                 'amount'            => $add_payment,
+                'cgst_amt'          =>$cgst_amt,
+                'sgst_amt'          =>$sgst_amt,
+                'total_amt'         =>$total_amt,
+                'tax_detail'        =>$tax_arr,
                 'remarks'           => $remarks,
                 'student_id'        => $student_id,
                 'type'              => '+',
@@ -2593,9 +2714,9 @@ class Student extends MY_Controller{
                 'created'           => date("d-m-Y h:i:s A"),
                 'modified'          => date("d-m-Y h:i:s A"),
             );
-           
+            
             if($params2['amount']>0){
-
+                 
                 $idd1 = $this->Student_package_model->update_student_pack_payment($student_package_id,$params);
                 $idd2 = $this->Student_package_model->update_transaction($params2);
                 if($idd1 and $idd2){ 
@@ -2882,7 +3003,7 @@ class Student extends MY_Controller{
     }
 
     //non-real function
-    function pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id){
+    function pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id,$total_amt,$cgst_amt,$sgst_amt,$tax_arr){
 
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -2934,7 +3055,11 @@ class Student extends MY_Controller{
                 'active'        => 1,
                 'packCloseReason'=> NULL,
                 'expired_on'    => $newDate,
-                 'expired_on_str' => strtotime($newDate),
+                'expired_on_str' => strtotime($newDate),
+                'cgst_amt'          =>$cgst_amt,
+                'sgst_amt'          =>$sgst_amt,
+                'total_amt'         =>$total_amt,
+                'tax_detail'        =>$tax_arr,
             );
             $params2 = array(                    
                 'student_package_id'=> $student_package_id,
@@ -2976,6 +3101,10 @@ class Student extends MY_Controller{
                 'packCloseReason'=> NULL,
                 'expired_on'    => $newDate,
                 'expired_on_str' => strtotime($newDate),
+                'cgst_amt'          =>$cgst_amt,
+                'sgst_amt'          =>$sgst_amt,
+                'total_amt'         =>$total_amt,
+                'tax_detail'        =>$tax_arr,
             );
             $params2 = array(                    
                 'student_package_id'=> $student_package_id,
@@ -4169,5 +4298,15 @@ class Student extends MY_Controller{
         else
             show_error(ITEM_NOT_EXIST);
     } */ 
+
+    function ajax_gettax_detail()
+    {
+        $cgst = $this->Package_master_model->get_tax_detail('CGST');
+        $sgst = $this->Package_master_model->get_tax_detail('SGST');
+        $cgst_tax_per = (!empty($cgst))?$cgst['tax_per']:0;
+        $sgst_tax_per = (!empty($sgst))?$sgst['tax_per']:0;
+        $tax_arr = array('cgst_per'=>$cgst_tax_per,'sgst_per'=>$sgst_tax_per);
+        echo json_encode($tax_arr);
+    }
     
 }

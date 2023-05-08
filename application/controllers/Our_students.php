@@ -169,9 +169,9 @@ class Our_students extends MY_Controller
              $this->load->model('Student_package_model');
             
             $today=strtotime(date('d-m-Y'));
-            $yesterday = date('d-m-Y', strtotime($today. ' - 1 days'));
+            $yesterday = date('d-m-Y', strtotime($today. '-24 hour'));
             $yesterdayStr = strtotime($yesterday);
-            $this->Package_master_model->DeactivateExpiredPack($today);
+            $this->Package_master_model->DeactivateExpiredPack($yesterdayStr);
             $this->Student_package_model->calculateIrrDuesForExpiredPack($today);
             $this->Package_master_model->startPackByStartDate($today); 
             $this->Package_master_model->startPackOnHold($today);        

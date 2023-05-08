@@ -97,6 +97,14 @@
     <td width="50%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;">Amount paid</td>
     <td valign="top" style="padding:4px;"><?php echo $currency.' '. $amount_paid;?></td>
   </tr>
+  <tr>
+  <td width="50%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;">CGST@<?php echo $cgst_per.'%'; ?></td>
+    <td valign="top" style="padding:4px;"><?php echo $currency.' '. $cgst_amt/100;?></td>
+  </tr>
+  <tr>
+  <td width="50%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;">SGST@<?php echo $sgst_per.'%';?></td>
+    <td valign="top" style="padding:4px;"><?php echo $currency.' '. $sgst_amt/100;?></td>
+  </tr>
 
   <?php if($waiver>0){ ?>
   <tr>

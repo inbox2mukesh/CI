@@ -16,7 +16,7 @@ class Practice_packages extends MY_Controller{
         $this->load->model('Programe_master_model');
         $this->load->model('Category_master_model');
         $this->load->model('Duration_type_model'); 
-        //$this->load->model('Discount_model');
+        $this->load->model('Package_master_model');
     }
     
     function index($test_module_id=0){
@@ -470,6 +470,21 @@ class Practice_packages extends MY_Controller{
         $package_id = $this->input->post('package_id');
         if(isset($package_id)){            
             $response =  $this->Practice_package_model->getPackPrice($package_id);
+            echo json_encode($response);
+        }else{
+            header('Content-Type: application/json');
+            $response = ['msg'=>'price error!', 'status'=>'false'];
+            echo json_encode($response);
+        }
+    }
+    function ajax_getPackPrice_new(){        
+       
+        $package_id = $this->input->post('package_id');
+        $response=[];
+        if(isset($package_id)){
+            $response['packprice'] =  $this->Practice_package_model->getPackPrice($package_id);
+            $response['cgst'] =  $this->Package_master_model->get_tax_detail('CGST');
+            $response['sgst'] =  $this->Package_master_model->get_tax_detail('SGST');
             echo json_encode($response);
         }else{
             header('Content-Type: application/json');

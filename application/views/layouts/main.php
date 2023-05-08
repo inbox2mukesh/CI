@@ -261,32 +261,7 @@ if (!$.cookie("noticeaccepted")){
 <!-- prabhat -->
 
 <script>
-<?php if(ENVIRONMENT=="production" or ENVIRONMENT=="production_testing"){ ?>
-$(document).bind("contextmenu",function(e){
-    return false;
-});
-//67-c,86-v,85-u,117-f6,73-i,88-x,83-s,80-p
-document.onkeydown = function(e){
-  if(e.ctrlKey && 
-      (
-      e.keyCode === 85 ||
-      e.keyCode === 117 ||
-      e.keyCode === 73 ||      
-      e.keyCode === 80 ||
-      e.keyCode === 83)){
-        return false;
-  }else{
-    return true;
-  }
-};
-$(document).keypress("u",function(e) {
-  if(e.ctrlKey){
-    return false;
-  }else{
-    return true;
-  }
-});
-<?php } ?>
+
 
  var browserName = (function (agent){
     switch (true) {
@@ -336,7 +311,7 @@ startDate: caDate,
 autoclose:true,
 });
 
-
+var currency = "<?php echo CURRENCY ?>";
 </script>
 <?php
 global $customJs;

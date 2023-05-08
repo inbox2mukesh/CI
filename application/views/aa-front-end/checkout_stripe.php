@@ -38,6 +38,12 @@ if ($packdetail->error_message->data->amount == $packdetail->error_message->data
 } else {
   $flag = 0;
 }
+
+$cgst_prcnt = $packdetail->error_message->cgst_tax_per;
+$sgst_prcnt = $packdetail->error_message->sgst_tax_per;
+$cgst_tax = number_format(($price2 * $cgst_prcnt)/100);
+$sgst_tax = number_format(($price2 * $sgst_prcnt)/100);
+$amt_to_pay = $price2 + $cgst_tax + $sgst_tax;
 ?>
 <section class="bg-lighter checkout">
   <div class="container">
@@ -145,12 +151,12 @@ if ($packdetail->error_message->data->amount == $packdetail->error_message->data
                 </div>
               
             <div class="ftr-btm">Total To be Paid
-              <span class="pull-right text-red"><?php echo $packdetail->error_message->data->currency_code; ?> <span class="final_paid_amt"><?php echo $price2; ?></span></span>
+              <span class="pull-right text-red"><?php echo $packdetail->error_message->data->currency_code; ?> <span class="final_paid_amt"><?php echo $amt_to_pay; ?></span></span>
             </div>
-            <input type="hidden" name="payable_amount" id="payable_amount" value="<?php echo $price2; ?>" />
+            <input type="hidden" name="payable_amount" id="payable_amount" value="<?php echo $amt_to_pay; ?>" />
            
             
-            <input type="hidden" name="payable_amount" id="payable_amount" value="<?php echo $price2; ?>" />
+            <input type="hidden" name="payable_amount" id="payable_amount" value="<?php echo $amt_to_pay; ?>" />
            
             <input type="hidden" name="currency_code" id="currency_code" value="<?php echo $packdetail->error_message->data->currency_code; ?>" />
 

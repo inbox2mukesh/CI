@@ -9,56 +9,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 ::selection { background-color: #E13300; color: white; }
 ::-moz-selection { background-color: #E13300; color: white; }
-
-body {
-	background-color: #fff;
-	margin: 40px;
-	font: 13px/20px normal Helvetica, Arial, sans-serif;
-	color: #4F5155;
-}
-
-a {
-	color: #003399;
-	background-color: transparent;
-	font-weight: normal;
-}
-
-h1 {
-	color: #444;
-	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
-	font-size: 19px;
-	font-weight: normal;
-	margin: 0 0 14px 0;
-	padding: 14px 15px 10px 15px;
-}
-
-code {
-	font-family: Consolas, Monaco, Courier New, Courier, monospace;
-	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
-	display: block;
-	margin: 14px 0 14px 0;
-	padding: 12px 10px 12px 10px;
-}
-
-#container {
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	box-shadow: 0 0 8px #D0D0D0;
-}
-
-p {
-	margin: 12px 15px 12px 15px;
-}
+*{margin:0px;padding:0px;}
+body {background-color: #fff;font: 13px/20px normal Helvetica, Arial, sans-serif;color: #4F5155;}
+img{max-width: 100%;}
+a {color: #003399;background-color: transparent;font-weight: normal;}
+.page-not-found-cont h1 {color: #444;background-color: transparent;border-bottom: 1px solid #D0D0D0;font-size: 32px;font-weight: normal;margin: 0 0 14px 0;padding: 14px 15px 30px 15px;text-align: center;font-weight: bold;}
+#container {display: flex;flex-direction: column;justify-content: center; width: 100%;height: 100vh;}
+.page-not-found-cont {display: flex;flex-direction: column;justify-content: center; margin: 0 auto; max-width: 350px;}
+.page-not-found-cont p {text-align: center;font-size: 25px;line-height: 30px; margin: 0;}
+.page-not-found-cont .logo {text-align: center;display: flex;justify-content: center;padding: 10px 0;}
+.not-fount-button-cont {display: flex;justify-content: space-around;padding: 15px;}
+.not-fount-button-cont a {padding: 10px 35px;border: 1px solid #ccc;border-radius: 100px;text-decoration: none;font-size: 14px;color: #fff;background: #626262;}
+.not-fount-button-cont a.home-btn {background: #d72a22;}
+.not-fount-button-cont a:hover{background:#000}
 </style>
 </head>
 <body>
 	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+		<div class="page-not-found-cont">
+			<div class="logo"><img src="resources-f/images/logo-sm-online.png" alt=""></div>
+			<img src="resources-f/images/no-data-found.webp" alt="">
+			<h1><?php echo $heading; ?></h1>
+			<p><?php echo $message; ?></p>
+			<div class="not-fount-button-cont">
+				<a href="javascript:void(0)" class="home-btn">Go Home</a>
+				<a href="javascript:void(0)" class="contact-btn">Contact Us</a>
+			</div>			
+		</div>
 	</div>
 </body>
 </html>

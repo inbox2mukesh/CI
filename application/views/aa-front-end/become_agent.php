@@ -109,7 +109,7 @@
 
 					<div class="col-md-3 col-sm-6">
 						<div class="form-group">
-							<label>Last Name<span class="red-text">*</span></label>
+							<label>Last Name</label>
 							<input type="text" name="lname" id="lname_ba" class="fstinput removeerrmessage allow_alphabets" placeholder="" class="" onKeyPress="return noNumbers(event)" autocomplete="off">
 							<div class="valid-validation lname_err lname_ba_err"></div>
 						</div>
@@ -350,13 +350,13 @@ $('#address_ba_old').keyup(function(event) {
 			$(".fname_ba_err").text("")
 		}
 
-		if (lname == "" || lname == null) {
-			$(".lname_ba_err").text("Please Enter Last Name");
-			flag = 0;
+		// if (lname == "" || lname == null) {
+		// 	$(".lname_ba_err").text("Please Enter Last Name");
+		// 	flag = 0;
 
-		} else {
-			$(".lname_ba_err").text("")
-		}
+		// } else {
+		// 	$(".lname_ba_err").text("")
+		// }
 
 		if (email == "" || email == null) {
 			$(".email_ba_err").text("Please Enter Email Id");

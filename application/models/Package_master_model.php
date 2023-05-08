@@ -46,7 +46,8 @@ class Package_master_model extends CI_Model
             pgm.`programe_name`,
             tm.`test_module_name`,
             cl.`center_name`,
-            dt.duration_type
+            dt.duration_type,
+            pkg.`discounted_amount` as package_amount
         ');
         $this->db->from('`package_masters` pkg');
         $this->db->join('`test_module` tm', 'pkg.`test_module_id`=tm.`test_module_id`');
@@ -71,7 +72,8 @@ class Package_master_model extends CI_Model
             pgm.`programe_name`,
             tm.`test_module_name`,
             cl.`center_name`,
-            dt.duration_type
+            dt.duration_type,
+            pkg.`discounted_amount` as package_amount
         ');
         $this->db->from('`practice_package_masters` pkg');
         $this->db->join('`test_module` tm', 'pkg.`test_module_id`=tm.`test_module_id`');
@@ -1430,6 +1432,12 @@ class Package_master_model extends CI_Model
             spkg.`onHold`,
             `holdDateFrom`,
             `holdDateTo`,
+            spkg.tax_detail,
+            FORMAT(spkg.`amount`/100,2) as package_amount,
+            FORMAT(spkg.cgst_amt/100,2) as cgst_amt,
+            FORMAT(spkg.sgst_amt/100,2) as sgst_amt,
+            FORMAT(spkg.total_amt/100,2) as total_amt,
+            FORMAT(spkg.total_paid_ext_tax/100,2) as total_paid_ext_tax
         ');
         $this->db->from('`student_package` spkg');
         $this->db->join('`package_masters` pkg', 'pkg.`package_id`= spkg.`package_id`');
@@ -1484,6 +1492,12 @@ class Package_master_model extends CI_Model
             cl.center_name,
             cr.classroom_name,
             spkg.classroom_id,
+            spkg.tax_detail,
+            FORMAT(spkg.`amount`/100,2) as package_amount,
+            FORMAT(spkg.cgst_amt/100,2) as cgst_amt,
+            FORMAT(spkg.sgst_amt/100,2) as sgst_amt,
+            FORMAT(spkg.total_amt/100,2) as total_amt,
+            FORMAT(spkg.total_paid_ext_tax/100,2) as total_paid_ext_tax
         ');
         $this->db->from('`student_package` spkg');
         $this->db->join('`package_masters` pkg', 'pkg.`package_id`= spkg.`package_id`');
@@ -1563,6 +1577,12 @@ class Package_master_model extends CI_Model
             tm.test_module_name,
             tm.test_module_id,
             lm.`language`,
+            spkg.tax_detail,
+            FORMAT(spkg.`amount`/100,2) as package_amount,
+            FORMAT(spkg.cgst_amt/100,2) as cgst_amt,
+            FORMAT(spkg.sgst_amt/100,2) as sgst_amt,
+            FORMAT(spkg.total_amt/100,2) as total_amt,
+            FORMAT(spkg.total_paid_ext_tax/100,2) as total_paid_ext_tax
         ');
         $this->db->from('`student_package` spkg');
         $this->db->join('`exam_venue_dates` evd', 'evd.`id`= spkg.`package_id`');
@@ -1668,6 +1688,12 @@ class Package_master_model extends CI_Model
             cl.center_name,
             cl.center_id,
             b.batch_name,
+            spkg.tax_detail,
+            FORMAT(spkg.`amount`/100,2) as package_amount,
+            FORMAT(spkg.cgst_amt/100,2) as cgst_amt,
+            FORMAT(spkg.sgst_amt/100,2) as sgst_amt,
+            FORMAT(spkg.total_amt/100,2) as total_amt, 
+            FORMAT(spkg.total_paid_ext_tax/100,2) as total_paid_ext_tax
         ');
         $this->db->from('`student_package` spkg');
         $this->db->join('`package_masters` pkg', 'pkg.`package_id`= spkg.`package_id`');
@@ -2219,5 +2245,12 @@ class Package_master_model extends CI_Model
         $this->db->from('`student_package`'); 
         $this->db->where(array('student_package_id'=>$student_package_id));
         return $this->db->get('')->row_array();  
+    }
+    function get_tax_detail($taxname=null)
+    {
+        $this->db->select('tax_name,tax_per')
+             ->from('tax_master')
+             ->where(array('tax_name'=>$taxname,'active'=>1));
+        return $this->db->get('')->row_array();
     }
 }

@@ -177,7 +177,7 @@ if(isset($dup)){
 					<div class="col-md-4">	
 						<label for="dateTime" class="control-label"><span class="text-danger">*</span>Date Time </label>
 						<div class="form-group has-feedback">
-							<input type="text" name="dateTime" id="dateTime" class="form-control user_activity_report_datetimepicker input-ui-100 removeerrmessage" value="<?php echo $this->input->post('dateTime'); ?>" />
+							<input type="text" name="dateTime" id="dateTime" class="form-control user_activity_report_datetimepicker input-ui-100 removeerrmessage"  value="<?php echo $this->input->post('dateTime'); ?>" />
 							<span class="text-danger dateTime_err"><?php echo form_error('dateTime');?></span>
 						</div>
 					</div>
@@ -189,8 +189,10 @@ if(isset($dup)){
 							<span class="text-danger till_date_err"><?php echo form_error('till_date');?></span>
 							<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
 						</div>
-					</div>					
-
+					</div>	
+					<div class="col-md-12" id="schedule-date">				
+						<button type="button" class="btn btn-info btn-sm del" onclick="deleteUserDivision(1,4)">ACADEMY<i class="fa fa-close cross-icn"></i></button>
+					</div>
 					<div class="col-md-4">
 						<label for="class_duration" class="control-label"><span class="text-danger">*</span>Class Duration(In Minutes)</label>
 						<div class="form-group has-feedback">
@@ -276,7 +278,7 @@ if(isset($dup)){
 </div>
 <?php ob_start();?> 
 <script>
-
+localStorage.clear();
 function check_duplicate_sch(){	
 	var flag;
 	var class_arr = {};
@@ -358,13 +360,18 @@ function check_duplicate_sch(){
 	}	
 }
 
-
- 	$(".user_activity_report_datetimepicker").datetimepicker({
-        format: 'DD-MM-YYYY HH:mm',
-		minDate:caDate
-    });
-
-	$('.user_activity_report_datetimepicker').on('dp.change', function(e){ 
+// function getdatetimeofschedule(selectedate)
+// {
+// 	let scDatelist = localStorage.getItem('datelist');
+// 	if(scDatelist != '')
+// 	{
+// 		scDatelist += selectedate+',';
+// 	}
+// 	localStorage.setItem('datelist', scDatelist);
+// 	let Datelist  = localStorage.getItem('datelist');
+// 	alert(Datelist);
+// }
+$('.user_activity_report_datetimepicker').on('dp.change', function(e){ 
 		var dt=$(this).val();
 		var dtp=dt.split(" ");	
 		$(".noBackDatep").val('');	
@@ -373,6 +380,32 @@ function check_duplicate_sch(){
 				startDate:dtp[0],
 				autoclose: true,					
 			});		
+		
+	})
+
+ 	$(".user_activity_report_datetimepicker").datetimepicker({
+        format: 'DD-MM-YYYY HH:mm',
+		minDate:caDate
+    });
+
+	$('.user_activity_report_datetimepicker').on('dp.change', function(e){ 
+		var dt=$(this).val();
+		// alert(dt);
+		var dtp=dt.split(" ");	
+		$(".noBackDatep").val('');	
+		$(".noBackDatep").datepicker("destroy");
+		$(".noBackDatep").datepicker({					
+				startDate:dtp[0],
+				autoclose: true,					
+			});
+		let scDatelist = localStorage.getItem('datelist');	
+		if(scDatelist != '')
+		{
+			scDatelist += selectedate+',';
+		}
+		localStorage.setItem('datelist', scDatelist);
+		let Datelist  = localStorage.getItem('datelist');
+		alert(scDatelist);	
 		
 	})       
 </script>

@@ -6,7 +6,7 @@
  *
  **/
 global $customJS;
-define('JS_CSS_VERSION', '0.0.3');
+define('JS_CSS_VERSION', '0.0.10');
 define('ADMIN', 'Super Admin');
 ///////////////////////////////////settings start///////////////////////////////////////
 include_once(FCPATH.'application/config/setting-constants.php');
@@ -122,7 +122,8 @@ define('TWT', 'https://twitter.com/westernoverseaa');
 	define('SUPPORT_CONTACT','+61-430-439-035');
 	define('PAN_ACCOUNT_NUMBER', '1010101010');
 	define('GST_NUMBER', '1111122222');
-
+	define('SUPPORT_EMAIL','support@westernoverseas.online');
+	define('OTP_VALIDATE_TIME','10 minutes');
 	define('ADMIN_EMAIL','info@westernoverseas.com.au');
 	define('ADMISSION_EMAIL', 'info@westernoverseas.com.au');
 	define('FROM_NAME','Western Overseas Education & Migration Consultant');
@@ -395,7 +396,6 @@ define('GET_ALL_ORDER_DATE_URL', 'WOSA-API-V1/student/AllOrderDate');
 define('UPDATE_OTP', 'WOSA-API-V1/student/Update_otp');
 define('STU_PACK_START_DATE', 'WOSA-API-V1/student/Get_student_pack_date');
 define('GET_CLASS_SCH_URL_LONG_COUNT', 'WOSA-API-V1/student/Get_class_schedule_long_count');
-
 //announcements
 define('GET_ANNOUNCEMENTS_URL', 'WOSA-API-V1/student/Get_announcement');
 define('GET_ALL_ANNOUNCEMENTS_URL', 'WOSA-API-V1/student/Get_all_announcement');
@@ -933,8 +933,12 @@ if(WOSA_ONLINE_DOMAIN==1){
 	<th>Course/Program</th>
 	<th>Price/Duration</th>
 	<th>Classroom</th>
-	<th>Paid(Total)</th>
-	<th>Paid By Wallet</th>
+	<th>Package Amount</th>
+	<th>Tax(es)</th>
+	<th>Total Price (Incl. Taxes)</th>
+	<th>Total Paid(Excl. Tax)</th>
+	<th>Total Tax(s)</th>
+	<th>Total Paid(Incl. Tax)</th>
 	<th>Ext. Amount</th>
 	<th>Waiver</th>
 	<th>Waiver By</th>
@@ -954,8 +958,13 @@ if(WOSA_ONLINE_DOMAIN==1){
 	<th>Course/Program</th>
 	<th>Price/Duration</th>
 	<th>Classroom</th>
-	<th>Paid(Total)</th>
-	<th>Paid By Wallet</th>
+	<th>Package Amount</th>
+	<th>Tax(es)</th>
+	<th>Total Price (Incl. Taxes)</th>
+	<th>Total Paid(Excl. Tax)</th>
+	<th>Total Tax(s)</th>
+	<th>Total Paid(Incl. Tax)</th>
+	<th>Paid By Wallet</th>	
 	<th>Ext. Amount</th>
 	<th>Dues</th>
 	<th>Irr. Dues</th>
@@ -974,8 +983,13 @@ if(WOSA_ONLINE_DOMAIN==1){
 	<th>Pack</th>
 	<th>Course/Program</th>
 	<th>Price/Duration</th>
-	<th>Paid(Total)</th>
-	<th>Paid By Wallet</th>
+	<th>Package Amount</th>
+	<th>Tax(es)</th>
+	<th>Total Price (Incl. Taxes)</th>
+	<th>Total Paid(Excl. Tax)</th>
+	<th>Total Tax(s)</th>
+	<th>Total Paid(Incl. Tax)</th>
+	<th>Paid By Wallet</th>	
 	<th>Ext. Amount</th>
 	<th>Waiver</th>
 	<th>Waiver By</th>
@@ -994,8 +1008,13 @@ if(WOSA_ONLINE_DOMAIN==1){
 	<th>Pack</th>
 	<th>Course/Program</th>
 	<th>Price/Duration</th>
-	<th>Paid(Total)</th>
-	<th>Paid By Wallet</th>
+	<th>Package Amount</th>
+	<th>Tax(es)</th>
+	<th>Total Price (Incl. Taxes)</th>
+	<th>Total Paid(Excl. Tax)</th>
+	<th>Total Tax(s)</th>
+	<th>Total Paid(Incl. Tax)</th>
+	<th>Paid By Wallet</th>	
 	<th>Ext. Amount</th>
 	<th>Dues</th>
 	<th>Irr. Dues</th>
@@ -1184,7 +1203,6 @@ define('TEST_PREPARATION_TOPIC_UPDATE', 'Test preparation material topic added')
  include_once(FCPATH.'application/config/rajan-constants.php');
  include_once(FCPATH.'application/config/vikram-constants.php');
  include_once(FCPATH.'application/config/harpreet-constants.php');
-
 /*****************Code End By Neelu*******/
 
 define('SERVICE_IMAGE_ALLOWED_TYPES', 'jpg|png|jpeg|webp');

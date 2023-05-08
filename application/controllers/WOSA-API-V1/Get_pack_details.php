@@ -27,7 +27,10 @@ class Get_pack_details extends REST_Controller {
           
           $pack_type = $this->input->get_request_header('PACK-TYPE');
           $package_id = $this->input->get_request_header('PACKAGE-ID');
-
+          $cgst = $this->Package_master_model->get_tax_detail('CGST');
+          $sgst = $this->Package_master_model->get_tax_detail('SGST');
+          $cgst_per = (!empty($cgst))?$cgst['tax_per']:0;
+          $sgst_per = (!empty($sgst))?$sgst['tax_per']:0;
           if($pack_type=='offline' or $pack_type=='inhouse' or $pack_type=='online'){
             $bData = $this->Package_master_model->getPackageDetails($package_id);
           }elseif($pack_type=='practice'){
@@ -41,7 +44,7 @@ class Get_pack_details extends REST_Controller {
           }
           
           if(!empty($bData)){
-            $data['error_message'] = [ "success" => 1, "message" => "success", "data"=> $bData];    
+            $data['error_message'] = [ "success" => 1, "message" => "success", "data"=> $bData,"cgst_tax_per"=>$cgst_per, "sgst_tax_per"=>$sgst_per];    
           }else{
             $data['error_message'] = [ "success" => 0, "message" => "No Pack found!", "data"=> $bData];     
           }

@@ -315,6 +315,7 @@
 										<span class="text-danger"><?php echo form_error('payment_type'); ?></span>
 									</div>
 								</div>
+								
 
 							<?php } elseif ($sp['packCloseReason'] == 'Partial Refund' and $sp['package_status'] == 1) { ?>
 								<div class="col-md-12">
@@ -451,7 +452,7 @@
 								<label for="add_payment" class="control-label text-success ap" style="display: none;"><span class="text-danger">*</span>Add payment</label>
 								<label for="add_payment" class="control-label text-success rp" style="display: none;"><span class="text-danger">*</span>Refund payment <span class="text-info"><i>(NOTE: Full refund will do pack De-active and Partial refund will keep it at your choice.)</i></span></label>
 								<div class="form-group has-feedback pf" style="display: none;">
-									<input type="text" name="add_payment" placeholder="Enter amount" class="form-control input-ui-100 chknum1" id="add_payment" onblur="check_payment(this.value,'<?php echo $walletBalance; ?>','pp');" maxlength="5" />
+									<input type="text" name="add_payment" placeholder="Enter amount" class="form-control input-ui-100 chknum1" id="add_payment" onblur="check_payment(this.value,'<?php echo $walletBalance; ?>','pp');calculate_tax('summerysection_cleardues',this.value);" maxlength="5" />
 									<span class="form-control-feedback"><i class="fa fa-usd"></i></span>
 									<span class="text-danger ad"><?php echo form_error('add_payment'); ?></span>
 								</div>
@@ -461,7 +462,22 @@
 									<span class="glyphicon form-control-feedback"><i class="fa fa-calendar"></i></span>
 									<span class="text-danger dcdn"><?php echo form_error('due_commitment_date_next'); ?></span>
 								</div>
-							</div>
+								<div class="check-info font-weight-600" id="summerysection_cleardues" style="display:none;">
+								<div>Original Price <span class="pull-right" id="orignalprice"><?php echo CURRENCY ?> 100</span></div>
+								<div>CGST@<?php echo $cgst_tax_per ?>%<span class="pull-right" id="cgst_tax_new">INR 19</span></div>
+								<div>SGST@<?php echo $sgst_tax_per ?>%<span class="pull-right" id="sgst_tax_new">INR 9</span></div>
+								<div>Total Payable Amount(Incl. all Taxes)<span class="pull-right" id="totalamount">INR 9</span></div>
+								<input type="hidden" name="totalpayableamt" id="totalpayableamt" value="">
+								<!-- <div class="hide">General Discount <span class="pull-right">(-) INR 2,000</span></div> -->
+								<div class="hide" id="promocode_label">Promotion Code
+									<span title="Removed Promo Code" id="removePromoCode" class="cursor_pointer"><i class="fa fa-times-circle text-red size-11" aria-hidden="true"></i></span><span class="pull-right">(-) INR <span id="promocode_label_val"></span></span>
+								</div>
+								<!--              <div>Promotion Code <span class="ml-5 font-12">10% Off</span> <span class="pull-right">(-) INR 1,000</span></div>-->
+								<div class="d-line"></div>
+								<!--<div>Final Price <span class="pull-right">Rs. <span class="final_paid_amt">100</span></span></div>-->
+								<div class="hide">Applied From Wallet <span class="pull-right">(-) INR 5,000</span></div>
+								</div>
+							</div>			
 
 							<div class="col-md-12 pf" style="display: none;">
 								<label for="remarks" class="control-label"> Remarks</label>
@@ -490,11 +506,12 @@
 								<div class="col-md-6">
 									<label for="add_payment_pe" class="control-label text-success"><span class="text-danger">*</span>Pack Extension Charge</label>
 									<div class="form-group has-feedback">
-										<input type="text" name="add_payment_pe" placeholder="Enter Extension charge" class="form-control input-ui-100" id="add_payment_pe" maxlength="5" />
+										<input type="text" name="add_payment_pe" placeholder="Enter Extension charge" class="form-control input-ui-100" id="add_payment_pe" maxlength="5"  onblur="calculate_tax('summerysection_packextension',this.value);"/>
 										<span class="form-control-feedback"><i class="fa fa-usd"></i></span>
 										<span class="add_payment_pe_err text-danger"></span>
 									</div>
 								</div>
+								
 								<?php
 								$newDate = date("d-m-Y", strtotime($sp['expired_on2']));
 								$newDate2 = date('d-m-Y', strtotime($newDate . ' +1 day'));
@@ -509,8 +526,16 @@
 										<span class="expired_on_err text-danger"></span>
 									</div>
 								</div>
+								<div class="check-info font-weight-600" id="summerysection_packextension" style="display:none;">
+								<div>Original Price <span class="pull-right" id="orignalprice"><?php echo CURRENCY ?> 100</span></div>
+								<div>CGST@<?php echo $cgst_tax_per ?>%<span class="pull-right" id="cgst_tax_new">INR 19</span></div>
+								<div>SGST@<?php echo $sgst_tax_per ?>%<span class="pull-right" id="sgst_tax_new">INR 9</span></div>
+								<div>Total Payable Amount(Incl. all Taxes)<span class="pull-right" id="totalamount">INR 9</span></div>
+								<input type="hidden" name="totalpayableamt" id="totalpayableamt" value="">
+								</div>
 							</div>
 						</div>
+						
 						<!-- pack extension form closed-->
 
 						<!-- Branch switch form -->

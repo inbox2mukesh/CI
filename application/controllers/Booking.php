@@ -84,7 +84,6 @@ class Booking extends MY_Controller{
            
            // check student mobile no/email is exist in db or not
             $response= json_decode($this->_curlGetData(base_url(GET_STUDENT_EXISTENCE_URL), $headers));
-           
             /* CASE For student booking*/
             // CASE 1 : Fresh user, call registration api once registration process done then redirect to checkout page
             if($response->error_message->success==0 AND $response->error_message->message == 'fresh'){   
@@ -378,7 +377,8 @@ class Booking extends MY_Controller{
             'API-KEY:'.WOSA_API_KEY, 
             'STUDENT-ID:'.$_SESSION['lastId_std'],               
         );          
-        $data['STD_INFO']=json_decode($this->_curlGetData(base_url(GET_STD_INFO_URL), $headers1));       
+        $data['STD_INFO']=json_decode($this->_curlGetData(base_url(GET_STD_INFO_URL), $headers1)); 
+        $response =null;      
         //for reality test case
         if($_SESSION['book_pack_type'] == "reality test")
         {
@@ -428,7 +428,7 @@ class Booking extends MY_Controller{
         }
         else  //for other case
         {
-
+            $tax_detail = json_encode(['cgst'=>$this->input->post('cgst_prcnt'),'sgst'=>$this->input->post('cgst_prcnt')]);
             $transaction_id='';           
             $status="initiated";
             $method="";
@@ -444,8 +444,10 @@ class Booking extends MY_Controller{
             "email"  => $data['STD_INFO']->error_message->data->email, 
             "center_id" => $this->input->post('center_id'), 
             "dob" => $data['STD_INFO']->error_message->data->dob, 
-            "package_id" => $_SESSION['book_packid'], 
-            "amount_paid" => $this->input->post('payable_amount'), 
+            "package_id" => $_SESSION['book_packid'],
+            "cgst_amt" => $this->input->post('cgst_amt')*100,
+            "sgst_amt" => $this->input->post('sgst_amt')*100, 
+            "amount_paid" => $this->input->post('payable_amount'),  
             "other_discount" =>  $this->input->post('promocode_amount'), 
             "use_wallet" =>  $this->input->post('wallet_amount_used'), 
             "promoCodeId_val" =>  $this->input->post('promocode_applied_id'), 
@@ -464,8 +466,11 @@ class Booking extends MY_Controller{
             "promocode"=>$this->input->post('promocode'), 
             "payment_id"=>$payment_id,      
             "order_id"=>$order_id,      
-            "checkout_token_no"=>$_SESSION['checkout_token_no'],      
-            );               
+            "checkout_token_no"=>$_SESSION['checkout_token_no'], 
+            "tax_detail"=>$tax_detail,
+            "total_paid_ext_tax"=>$this->input->post('original_amount'),   
+            ); 
+            // pr();              
             
             $response= json_decode($this->_curPostData(base_url(BUY_PACK), $headers, $params));
         }      

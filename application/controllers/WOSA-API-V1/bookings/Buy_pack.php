@@ -225,6 +225,9 @@ class Buy_pack extends REST_Controller{
                 'checkout_token_no'    =>$std_data->checkout_token_no,
                 'country_code'    =>$std_data->country_code,
                 'requested_on' => date("d-m-Y h:i:s A"),
+                'cgst_amt'=>$std_data->cgst_amt,
+                'sgst_amt'=>$std_data->sgst_amt,
+                'total_paid_ext_tax'=>$std_data->total_paid_ext_tax,
             );       
             $this->db->insert('student_package', $params2);
 

@@ -27,7 +27,14 @@ class Check_student_existence extends REST_Controller{
             $email = $this->input->get_request_header('EMAIL');
             $bData = $this->Student_model->checkStudentExistence($mobile,$email); 
             if(!empty($bData)){
-                $data['error_message'] = [ "success" => 1, "message" => "existing", 'student_id' => $bData['id'], 'active' => $bData['active'], 'fresh' => $bData['fresh'], 'is_otp_verified'=>$bData['is_otp_verified'],'created_at'=>$bData['created'],'UID'=>$bData['UID'] ];
+                if(DEFAULT_COUNTRY != 101)
+                {
+                    $data['error_message'] = [ "success" => 1, "message" => "existing", 'student_id' => $bData['id'], 'active' => $bData['active'], 'fresh' => $bData['fresh'], 'is_otp_verified'=>$bData['is_otp_verified'],'created_at'=>$bData['created'],'UID'=>$bData['UID'] ];
+                }
+                else{
+                    $data['error_message'] = [ "success" => 1, "message" => "existing", 'student_id' => $bData['id'], 'active' => $bData['active'], 'fresh' => $bData['fresh'], 'is_email_verified'=>$bData['is_otp_verified'],'created_at'=>$bData['created'],'UID'=>$bData['UID'] ];
+                }
+                
             }else{
               $data['error_message'] = [ "success" => 0, "message" => "fresh", 'student_id' => null, 'active' => null, 'fresh' => null, 'is_otp_verified'=>null ];
             }            

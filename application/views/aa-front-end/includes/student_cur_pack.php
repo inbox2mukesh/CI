@@ -1,7 +1,7 @@
 <div class="col-md-7">
 <div class="lt-gray-box">
 <div class="classroom-box">
-<h4>Your Classrooms </h4>
+<h4>Your Classrooms</h4>
 <!-- <p class="font-weight-600 text-red">You don't have any Classrooms</p>
 <div class="font-weight-600 mt-10 mb-10 text-blue">Purchase Packages to reflect Classrooms.</div> -->
 <!--
@@ -13,10 +13,11 @@
 <?php
 
 foreach($curPack->error_message->data as $p)
-{                         
+{
+	                     
 $daysLeft = strtotime($p->expired_on) - strtotime(date('d-m-Y'));
 $daysLeft = round($daysLeft / (60 * 60 * 24));
-
+   
 $daysLeft=$daysLeft+1;
 if($daysLeft==0)
 {
@@ -32,7 +33,7 @@ if(strtotime($p->expired_on) < strtotime(date('d-m-Y')))
 	$daysLeft=NA;
 
 }
-
+// echo $daysLeft; 
 //$_SESSION['packActive']=$p->package_status;
 ?>
 
@@ -53,7 +54,7 @@ if(strtotime($p->expired_on) < strtotime(date('d-m-Y')))
 <li class="mt-10"> <span class="font-weight-600">Package Status: </span> 
 <?php
 
-if($p->package_status==1 and $p->package_status==1){ 
+if($p->package_status==1 && $daysLeft >=1){ 
 
 
 ?><span class="text-green font-weight-600 ">ACTIVE</span>

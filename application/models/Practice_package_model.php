@@ -755,6 +755,12 @@ class Practice_package_model extends CI_Model
             cl.center_id,
             `holdDateFrom`,
             `holdDateTo`,
+            spkg.tax_detail,
+            FORMAT(spkg.`amount`/100,2) as package_amount,
+            FORMAT(spkg.cgst_amt/100,2) as cgst_amt,
+            FORMAT(spkg.sgst_amt/100,2) as sgst_amt,
+            FORMAT(spkg.total_amt/100,2) as total_amt, 
+            FORMAT(spkg.total_paid_ext_tax/100,2) as total_paid_ext_tax
         ');
         $this->db->from('`student_package` spkg');
         $this->db->join('`practice_package_masters` pkg', 'pkg.`package_id`= spkg.`package_id`');
