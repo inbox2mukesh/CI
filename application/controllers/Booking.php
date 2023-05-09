@@ -468,7 +468,7 @@ class Booking extends MY_Controller{
             "order_id"=>$order_id,      
             "checkout_token_no"=>$_SESSION['checkout_token_no'], 
             "tax_detail"=>$tax_detail,
-            "total_paid_ext_tax"=>$this->input->post('original_amount'),   
+            "total_paid_ext_tax"=>$this->input->post('original_amount')*100,   
             ); 
             // pr();              
             

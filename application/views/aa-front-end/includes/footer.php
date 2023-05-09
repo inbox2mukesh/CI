@@ -444,7 +444,7 @@
 				if(diffDays < 15)
 				{	
 				
-					$('.dob_qnform_err').html('Age should be minimum 15 years');			
+					$('.'+id+'_err').html('Age should be minimum 15 years');			
 					$('#'+id).val('');
 					return false;
 				}

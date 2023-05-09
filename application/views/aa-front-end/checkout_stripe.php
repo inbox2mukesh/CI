@@ -41,8 +41,8 @@ if ($packdetail->error_message->data->amount == $packdetail->error_message->data
 
 $cgst_prcnt = $packdetail->error_message->cgst_tax_per;
 $sgst_prcnt = $packdetail->error_message->sgst_tax_per;
-$cgst_tax = number_format(($price2 * $cgst_prcnt)/100);
-$sgst_tax = number_format(($price2 * $sgst_prcnt)/100);
+$cgst_tax = number_format(($price2 * $cgst_prcnt)/100,2);
+$sgst_tax = number_format(($price2 * $sgst_prcnt)/100,2);
 $amt_to_pay = $price2 + $cgst_tax + $sgst_tax;
 ?>
 <section class="bg-lighter checkout">
@@ -153,10 +153,10 @@ $amt_to_pay = $price2 + $cgst_tax + $sgst_tax;
             <div class="ftr-btm">Total To be Paid
               <span class="pull-right text-red"><?php echo $packdetail->error_message->data->currency_code; ?> <span class="final_paid_amt"><?php echo $amt_to_pay; ?></span></span>
             </div>
-            <input type="hidden" name="payable_amount" id="payable_amount" value="<?php echo $amt_to_pay; ?>" />
+            <input type="hidden" name="payable_amount" id="payable_amount" value="<?php echo $amt_to_pay*100; ?>" />
            
             
-            <input type="hidden" name="payable_amount" id="payable_amount" value="<?php echo $amt_to_pay; ?>" />
+            <input type="hidden" name="original_amount" id="original_amount" value="<?php echo $price2*100; ?>" />
            
             <input type="hidden" name="currency_code" id="currency_code" value="<?php echo $packdetail->error_message->data->currency_code; ?>" />
 
