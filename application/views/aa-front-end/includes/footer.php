@@ -435,27 +435,40 @@
 			$('.checkout_btn').text('Checkout');
 		});
 
-		function validatedob(data=null, id) {
-			if(data != "")
-			{
-				let today = new Date();
+		function validatedob(data=null, id=null) {
+			let dob ='';
+			if (data != "") {
+				dob = new Date(data);
 			}
 			else{
-				let today = $('#'+id);
+				
+				dob = $('#hidden_dob').val();//new Date($('#hidden_dob').val());
+				// alert(dob);
 			}
-				const dob = new Date(data);
+				const today = new Date();
+				// const dob = new Date(data);
 				const diffTime = Math.floor(today - dob);
 				let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)/31/12); 
-				if(diffDays < 15)
+				// alert(dob);
+				// alert(diffTime);
+				if( diffDays < 15 )
 				{	
-				
+					// alert(dob);
 					$('.'+id+'_err').html('Age should be minimum 15 years');			
 					$('#'+id).val('');
 					return false;
 				}
+				// else if(isNaN(diffDays))
+				// {	
+				// 	// alert(dob);
+				// 	$('.'+id+'_err').html('Age should be minimum 15 years');			
+				// 	$('#'+id).val('');
+				// 	return false;
+				// }
 				else{
 					$('.'+id+'_err').html('');
 				}
+			//}
 				// else{
 				// 	return true;
 				// }
