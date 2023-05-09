@@ -136,3 +136,13 @@ if(!function_exists('package_purchase_update')){
         return $tobeSend;     
     }
 }
+
+function get_tax_details()
+{
+    $ci = &get_instance();
+    $cgst = $ci->Package_master_model->get_tax_detail('CGST');
+    $sgst = $ci->Package_master_model->get_tax_detail('SGST');
+    $cgst_tax_per = (!empty($cgst))?$cgst['tax_per']:0;
+    $sgst_tax_per = (!empty($sgst))?$sgst['tax_per']:0;
+    return json_encode(['cgst'=>$cgst_tax_per,'sgst'=>$sgst_tax_per]);
+}

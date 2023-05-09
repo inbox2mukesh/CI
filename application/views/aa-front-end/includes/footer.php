@@ -440,13 +440,18 @@
 				const today = new Date();
 				const dob = new Date(data);
 				const diffTime = Math.floor(today - dob);
-				const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)/31/12); 
+				let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)/31/12); 
+				if(diffDays < 15)
+				{	
 				
-				if(diffDays < 15)	
-					$('.regdob_err').html('Age should be minimum 15 years');			
+					$('.dob_qnform_err').html('Age should be minimum 15 years');			
 					$('#'+id).val('');
 					return false;
 				}
+			}
+				// else{
+				// 	return true;
+				// }
 				// var idd = '.' + id + '_err';
 				// var dt = data.split("/");
 				// if (dt[1] == '02') {

@@ -46,10 +46,10 @@ $(document).ready(function(){
     }
 });
 //for replace all textarea to ckeditor
-CKEDITOR.replaceAll( 'myckeditor', {
-	removeButtons: 'Source',
-    // The rest of options...
-} );
+// CKEDITOR.replaceAll( 'myckeditor', {
+// 	removeButtons: 'Source',
+//     // The rest of options...
+// } );
 //CKEDITOR.replaceAll('myckeditor');
 $(".textarea").wysihtml5();
 //config.allowedContent = true;
@@ -1941,6 +1941,7 @@ function validate_amount_paid(myval) {
 			$('#due_commitment_date').val('');
 		}
 		else {
+			$('#due_commitment_date').prop('required', true);
 			$('#due_commitment_date').prop('disabled', false);
 			$('#due_commitment_date').val('');
 		}
@@ -3713,12 +3714,30 @@ function remburse_waiver() {
 		data: { wid: wid, waiver: waiver, waiver_by: waiver_by, student_package_id: student_package_id, student_id: student_id, by_user: by_user },
 		success: function (response) {
 			if (response.status == 'true') {
-				$('.waiver_msg_success').text(response.msg)
-				$('#waiver_btn').hide();
-				window.location.href = window.location.href
+				Swal.fire({
+					title: 'Waiver Reimbursed',
+					text: response.msg,
+					icon: 'success',					
+				  }).then((result) => {
+					if (result.isConfirmed) {					
+						window.location.href = window.location.href;
+						$('#waiver_btn').hide();
+					}
+				  });
+				
 			} else {
-				$('.waiver_msg_failed').text(response.msg)
-				$('#waiver_btn').show();
+				// $('.waiver_msg_failed').text(response.msg)
+				// $('#waiver_btn').show();
+				Swal.fire({
+					title: 'Waiver Reimbursement',
+					text: response.msg,
+					icon: 'success',					
+				  }).then((result) => {
+					if (result.isConfirmed) {					
+						window.location.href = window.location.href;
+						$('#waiver_btn').show();
+					}
+				  });
 			}
 		}
 	});
@@ -3920,41 +3939,96 @@ function getPackageSchedule_online(batch_id){
 		}
 	});
 }
-function getOnlineOfflinePackInfo(package_id) {
+function hidepackinfo_()
+{
+	$('.packInfo').empty();
+}
+function getOnlineOfflinePackInfo(amount=null) {
 	var type = $('input[name=pack_cb]:checked').val();
-	//alert(type)
+	var totalamt = $('#estimatetax').val();
+	// var package_id = $('#package_id').find(":selected").val();
+	// alert(amount);
 	if (type == 'offline' || type == 'online'){
+		var package_id = $('#package_id').find(":selected").val();
+		var amntpaying = $('#amount_paid').val();
 		$.ajax({
 			url: WOSA_ADMIN_URL + 'package_master/ajax_getOnlineOfflinePackInfo',
 			async: true,
 			type: 'post',
-			data: { package_id: package_id },
+			data: { paidamount:amount,package_id: package_id },
 			dataType: 'json',
 			success: function (response) {
 				if (response.status == 'false') {
 					$('.packInfo').html(response.msg);
 				} else {
-					$('.packInfo').html(response);
+					if(totalamt != response.amountpayable && amntpaying == '')
+					{
+						$('#amount_payable').val(response.amountpayable);
+					}
+					else if(amntpaying == ''){
+						$('#amount_payable').val(totalamt);
+					}
+					
+					$('.packInfo').html(response.packinfo);
 				}
 			}
 		});
 	} else if (type == 'pp') {
+		var package_id = $('#package_id_pp').find(":selected").val();
+		var amntpaying = $('#amount_paid_pp').val();
 		$.ajax({
 			url: WOSA_ADMIN_URL + 'package_master/ajax_getPracticePackInfo',
 			async: true,
 			type: 'post',
-			data: { package_id: package_id },
+			data: { paidamount:amount,package_id: package_id },
 			dataType: 'json',
 			success: function (response) {
 				if (response.status == 'false') {
 					$('.packInfo').html(response.msg);
 				} else {
-					$('.packInfo').html(response);
+					if(totalamt != response.amountpayable && amntpaying == '')
+					{
+						$('#amount_payable_pp').val(response.amountpayable);
+					}
+					else if(amntpaying == ''){
+						$('#amount_payable_pp').val(totalamt);
+					}
+					
+					$('.packInfo').html(response.packinfo);
 				}
 			}
 		});
 	} else {
 	}
+}
+
+function calculatepayableamnt(type=null,payingamt=null)
+{
+	$('#amount_payable_pp').empty();
+	var tobepaid = $('#estimatetax').val();
+	var cgst = $('#cgsttax').val();
+	var sgst = $('#sgsttax').val();
+	var cgst_tax = Math.round((payingamt * cgst)/100);
+	var sgst_tax = Math.round((payingamt * sgst)/100);
+	var totalprice = parseInt(payingamt) + parseInt(cgst_tax) + parseInt(sgst_tax) ;
+	var id='';
+	if(type == 'onlinepack')
+	{
+		id ='amount_payable';
+	}
+	else{
+		id ='amount_payable_pp';
+	}
+	// alert(totalprice);
+	if(tobepaid > totalprice)
+	{
+		$('#'+id).val(totalprice);
+	}
+	else{
+		$('#'+id).val(tobepaid);
+	}
+
+	
 }
 function getPackBatch(package_id, pack_type) {
 	if (pack_type == 'package_id') {
@@ -3997,37 +4071,74 @@ function getPackBatch(package_id, pack_type) {
 	});
 }
 function getPackPrice(package_id) {
+	
 	var type = $('input[name=pack_cb]:checked').val();
 	$('#packPrice').val('');
 	if (type == 'offline' || type == 'online') {
+		
 		$.ajax({
-			url: WOSA_ADMIN_URL + 'package_master/ajax_getPackPrice',
+			url: WOSA_ADMIN_URL + 'package_master/ajax_getPackPrice_new',
 			type: 'post',
 			data: { package_id: package_id },
 			success: function (response) {
 				var obj = JSON.parse(response);
-				var discounted_amount = obj.discounted_amount
+				var discounted_amount = parseInt(obj.packprice.discounted_amount);
+				let cgst_tax_amt = 0;
+				let sgst_tax_amt = 0;
+				// alert(obj.cgst.tax_per);
+				if(obj.cgst == null)
+				{
+					alert('CGST Tax is not available. Please add CGST if want to include the CGST');
+				}
+				else{cgst_tax_amt = parseFloat(obj.cgst.tax_per);}
+				if(obj.sgst == null)
+				{
+					alert('SGST Tax is not available. Please add SGST if want to include the SGST');
+				}
+				else{sgst_tax_amt = parseFloat(obj.sgst.tax_per);}				
+				var cgst_tax = Math.round((discounted_amount * cgst_tax_amt)/100);
+				var sgst_tax = Math.round((discounted_amount * sgst_tax_amt)/100);
+				var totalprice = discounted_amount + cgst_tax + sgst_tax ;
 				if (response.status == 'false') {
 					$('.msg').html(response.msg);
 					$('#packPrice').val('');
 				} else {
+					$('#amount_payable').val(totalprice);
+					$('#estimatetax').val(totalprice);
 					$('#packPrice').val(discounted_amount);
 				}
 			}
 		});
 	} else if (type == 'pp') {
 		$.ajax({
-			url: WOSA_ADMIN_URL + 'practice_packages/ajax_getPackPrice',
+			url: WOSA_ADMIN_URL + 'practice_packages/ajax_getPackPrice_new',
 			type: 'post',
 			data: { package_id: package_id },
 			success: function (response) {
 				var obj = JSON.parse(response);
-				var discounted_amount = obj.discounted_amount
+				var discounted_amount = parseInt(obj.packprice.discounted_amount);
+				let cgst_tax_amt = 0;
+				let sgst_tax_amt = 0;
+				// alert(obj.cgst.tax_per);
+				if(obj.cgst == null)
+				{
+					alert('CGST Tax is not available. Please add CGST if want to include the CGST');
+				}
+				else{cgst_tax_amt = parseFloat(obj.cgst.tax_per);}
+				if(obj.sgst == null)
+				{
+					alert('SGST Tax is not available. Please add SGST if want to include the SGST');
+				}
+				else{sgst_tax_amt = parseFloat(obj.sgst.tax_per);}
+				var cgst_tax = Math.round((discounted_amount * cgst_tax_amt)/100);
+				var sgst_tax = Math.round((discounted_amount * sgst_tax_amt)/100);
+				var totalprice = discounted_amount + cgst_tax + sgst_tax ;
 				if (response.status == 'false') {
 					$('.msg').html(response.msg);
 					$('#packPrice').val('');
 				} else {
-					//alert(response)
+					$('#amount_payable_pp').val(totalprice);
+					$('#estimatetax').val(totalprice);
 					$('#packPrice').val(discounted_amount);
 				}
 			}
@@ -6481,7 +6592,8 @@ function updateResourcesSectionCkEditer() {
 	$("#EmployeeTierId .employeeTierDiv").each(function () {
 		type = $(this).find('.section_type').val();
 		if (type == 'text') {
-			CKEDITOR.replace('free_resources_section' + i);
+			// CKEDITOR.replace('free_resources_section' + i);
+			checkWordCountCkEditor('free_resources_section'+i);
 		}
 		i++;
 	});
@@ -6492,7 +6604,8 @@ function updateClassroomDocumentsCkEditer() {
 	$("#EmployeeTierId .ClassroomDocumentsDiv").each(function () {
 		type = $(this).find('.section_type').val();
 		if (type == 'text') {
-			CKEDITOR.replace('classroom_documents_section' + i);
+			// CKEDITOR.replace('classroom_documents_section' + i);
+			checkWordCountCkEditor('classroom_documents_section'+i);
 		}
 		i++;
 	});
@@ -8404,6 +8517,17 @@ function validateMockTestScore(val,fieldId) {
 		return false;
 	}	
 }
+function validateToeflMockTestScore(val,fieldId) {
+	class_err = '.' + fieldId + '_err';
+	if(val=='NA' || val=='AB' || val.match(/^-?\d*(\.\d+)?$/)){
+		$(class_err).text('');
+		$('.sbm').prop('disabled', false);
+	}else {
+		$('.sbm').prop('disabled', true);		
+		$(class_err).text('Please enter valid value! Only numbers,NA and AB are allowed');
+		return false;
+	}	
+}
 
 
 
@@ -8799,3 +8923,229 @@ $(document).on('click', '#hcancel_upload', function () {
 	document.getElementById('filelist').innerHTML = '';
 
 });
+//word count limit
+$('.validatewordcount').keyup(function () {
+	alert('asdfads');
+	var id = $(this).attr('id');
+	var id_err = id + '_err'; //create class for message display
+	// var maxCount = $(this).data('count');
+	var minCount = $(this).data('min-count');
+	var entervword = $(this).val();
+	var words = entervword.split(" ");
+	charlenght = entervword.length;
+	// word length
+	words = words.filter(function (words) {
+		return words.length > 0
+	}).length;
+	// $("#msg_despChar").text('')
+	$("." + id_err).text('Entered Characters : ' + charlenght);
+	if (charlenght < minCount) {
+		$("." + id_err).text('Minimum length should ' + minCount + ' characters ' + '     Entered Characters : ' + charlenght + '  Entered Words : ' + words);
+		// $("#msg_despChar").text('')
+		return false;
+	} else {
+		$("." + id_err).text('Entered Characters : ' + charlenght + '  Entered Words : ' + words)
+		// $("#msg_despChar").text('Entered Characters : ' + charlenght + '  Entered Words : ' + words);
+		return false;
+	}
+});
+
+//----------------ck editor----------------------
+function checkWordCountCkEditor(id) {
+	var editornew = CKEDITOR.replace(id, {
+		toolbar: [{
+				name: 'document',
+				groups: ['mode', 'document', 'doctools'],
+				items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']
+			},
+			//{ name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+			//{ name: 'editing', groups: [ 'find', 'selection' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+			//{ name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+			'/',
+			{
+				name: 'basicstyles',
+				groups: ['basicstyles', 'cleanup'],
+				items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat']
+			},
+			{
+				name: 'paragraph',
+				groups: ['list', 'indent', 'blocks', 'align', 'bidi'],
+				items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']
+			},
+			//{ name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+			//{ name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+			'/',
+			{
+				name: 'styles',
+				items: ['Format', 'Font', 'FontSize']
+			},
+			{
+				name: 'colors',
+				items: ['TextColor', 'BGColor']
+			},
+			{
+				name: 'tools',
+				items: ['Maximize', 'ShowBlocks']
+			},
+			{
+				name: 'others',
+				items: ['-']
+			},
+			//{ name: 'about', items: [ 'About' ] }
+		],
+		toolbarGroups: [{
+				name: 'document',
+				groups: ['mode', 'document', 'doctools']
+			},
+			//{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+			//{ name: 'editing', groups: [ 'find', 'selection' ] },
+			//{ name: 'forms' },
+			'/',
+			{
+				name: 'basicstyles',
+				groups: ['basicstyles', 'cleanup']
+			},
+			{
+				name: 'paragraph',
+				groups: ['list', 'indent', 'blocks', 'align', 'bidi']
+			},
+			//{ name: 'links' },
+			//{ name: 'insert' },
+			'/',
+			{
+				name: 'styles'
+			},
+			{
+				name: 'colors'
+			},
+			{
+				name: 'tools'
+			},
+			{
+				name: 'others'
+			},
+			//{ name: 'about' }
+		],
+		removeButtons: 'Source',
+		/*extraPlugins: 'wordcount',
+		wordcount: {
+			showWordCount: true,
+			maxWordCount: 3 
+		}
+		/*wordcount: {
+			showWordCount: true, 
+			showCharCount: false,
+			maxWordCount: 3,
+			//maxCharCount: 10,
+			paragraphsCountGreaterThanMaxLengthEvent: function (currentLength, maxLength) {
+				$("#informationparagraphs").css("background-color", "crimson").css("color", "white").text(currentLength + "/" + maxLength + " - paragraphs").show();
+			},
+			wordCountGreaterThanMaxLengthEvent: function (currentLength, maxLength) {
+				$("#informationword").css("background-color", "crimson").css("color", "white").text(currentLength + "/" + maxLength + " - word").show();
+			},
+			charCountGreaterThanMaxLengthEvent: function (currentLength, maxLength) {
+				$("#informationchar").css("background-color", "crimson").css("color", "white").text(currentLength + "/" + maxLength + " - char").show();
+			},
+			charCountLessThanMaxLengthEvent: function (currentLength, maxLength) {
+				$("#informationchar").css("background-color", "white").css("color", "black").hide();
+			},
+			paragraphsCountLessThanMaxLengthEvent: function (currentLength, maxLength) {
+				$("#informationparagraphs").css("background-color", "white").css("color", "black").hide();
+			},
+			wordCountLessThanMaxLengthEvent: function (currentLength, maxLength) {
+				$("#informationword").css("background-color", "white").css("color", "black").hide();
+			}
+		}*/
+	});
+	editornew.on('key', function(evt) {
+		var MaxLengthWord = parseInt('300');
+		var minLengthWord = parseInt('300');
+		setTimeout(function() {
+			var chtml = CKEDITOR.instances[id].getData();
+			var str = CKEDITOR.instances[id].getData().replace(/<[^>]*>/gi, '');
+			str = str.replace(/\&nbsp;/g, '').trim();
+			var strWord = 0;
+			$("." + id + '_err').html('');
+			if (str.length > 0) {
+				strWord = str.split(' ').length;
+			} else {
+				$("." + id + '_err').html('Enter Message');
+			}
+			if (strWord > 1 && strWord < minLengthWord) {
+				$("." + id + '_err').html('Allowed Minimum ' + minLengthWord + ' Words');
+			}
+			if (strWord > MaxLengthWord) {
+				var xxx = strWord - MaxLengthWord;
+				var strext = str.split(' ').slice(parseInt(-xxx)).join(' ');
+				chtml = chtml.split(" ").slice(0, parseInt(-xxx)).join(" ");
+				CKEDITOR.instances[id].setData(chtml);
+				strWord = MaxLengthWord;
+			}
+			$("#" + id + "_counter_label").html('Entered Word :' + strWord);
+			$("#" + id).val(str);
+		}, 10);
+	});
+}
+
+$(document).on("input", ".allow_alphabets", function(evt) {
+	var self = $(this);
+	self.val(self.val().replace(/[^a-zA-Z ]/, ""));
+	if ((evt.which < 65 || evt.which > 90)) {
+		evt.preventDefault();
+	}
+});
+$(document).on("input", ".allow_decimal", function(evt) {
+	var self = $(this);
+	self.val(self.val().replace(/[^0-9\.]/g, ''));
+	if ((evt.which != 46 || self.val().indexOf('.') != -1) && (evt.which < 48 || evt.which > 57)) {
+		evt.preventDefault();
+	}
+});
+
+function percentage_validation(field) {
+	var field_id = $(field).attr('id');
+	var x = $(field).val();
+	$('.' + field_id + '_err').html('');
+	var x = parseFloat(x);
+	if (isNaN(x)) {
+		$(field).val('');
+		$('.' + field_id + '_err').html('Enter valid percentage');
+	} else if (x >= 100) {
+		$(field).val('');
+		$('.' + field_id + '_err').html('Enter valid percentage');
+	}
+	return true;
+}
+
+function calculate_tax(summerdivid=null,price)
+{
+	alert(price);
+	let cgst_per = 0;
+	let sgst_per = 0;
+	var prc = parseFloat(price).toFixed(2);
+	$.ajax({
+		url: WOSA_ADMIN_URL + 'student/ajax_gettax_detail',
+		dataType:'json',
+		async: false,
+		success: function(data){
+			cgst_per = parseFloat(data.cgst_per);
+			sgst_per = parseFloat(data.sgst_per);
+		}
+	});
+	var  cgst_tax = (price * cgst_per)/100;
+	var  sgst_tax = (price * sgst_per)/100;
+	var cgst_amt = parseFloat(cgst_tax).toFixed(2);
+	var sgst_amt = parseFloat(sgst_tax).toFixed(2)
+	var total = parseFloat(prc) + parseFloat(cgst_amt) + parseFloat(sgst_amt);
+	$('#'+summerdivid+' #orignalprice').html(currency+'&nbsp;'+prc);
+	$('#'+summerdivid+' #cgst_tax_new').html(currency+'&nbsp;'+cgst_amt);
+	$('#'+summerdivid+' #sgst_tax_new').html(currency+'&nbsp;'+sgst_amt);
+	$('#'+summerdivid+' #totalamount').html(currency+'&nbsp;'+ parseFloat(total).toFixed(2));
+	$('#'+summerdivid+' #totalpayableamt').val(parseFloat(total).toFixed(2));
+	//$('#'+summerdivid).show();
+	if(price)
+	{
+		$('#'+summerdivid).show();
+	}
+	
+}

@@ -34,12 +34,13 @@ class Student extends MY_Controller{
         $this->load->helper('common'); 
         //echo date('d-m-Y');
         $today=strtotime(date('d-m-Y'));
+        $tax_detail = get_tax_details();
         //echo date('d-m-Y');
         $yesterday = date('d-m-Y', strtotime(date('d-m-Y'). ' - 1 days'));
         $yesterdayStr = strtotime($yesterday);
         $this->Package_master_model->DeactivateExpiredPack($today);
         $this->Student_package_model->calculateIrrDuesForExpiredPack($today);
-        $this->Package_master_model->startPackByStartDate($today); 
+        $this->Package_master_model->startPackByStartDate($today,$tax_detail); 
         $this->Package_master_model->startPackOnHold($today);        
         $this->Package_master_model->activatePackWhichIsOnHold_finished($today);        
         $this->Student_package_model->suspendPackAfterDueCommittmentDate($yesterdayStr);

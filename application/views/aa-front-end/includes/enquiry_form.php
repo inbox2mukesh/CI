@@ -74,7 +74,7 @@ if(isset($this->session->userdata('student_login_data')->id)){
     <div class="form-group col-md-6 col-sm-6">
       <label>DOB<span class="text-red">*</span></label>
       <div class="has-feedback">
-        <input type="tel" data-inputmask="'alias': 'date'" class="fstinput form-control dob_mask" name="dob" id="dob_qnform" placeholder="dd/mm/yyyy" value="<?php if(isset($this->session->userdata('student_login_data')->dob)) {   echo $this->session->userdata('student_login_data')->dob; } else { echo "";}?>" autocomplete="off" onchange="validatedob(this.value,this.id)" <?php echo $readOnly;?>>
+        <input type="text" data-inputmask="'alias': 'date'" class="fstinput form-control dob_mask" name="dob" id="dob_qnform" placeholder="dd/mm/yyyy" value="<?php if(isset($this->session->userdata('student_login_data')->dob)) {   echo $this->session->userdata('student_login_data')->dob; } else { echo "";}?>" autocomplete="off" onchange="validatedob(this.value,this.id)" <?php echo $readOnly;?>>
         <!-- <input class="fstinput datepicker" name="dob" placeholder="mm/dd/yyyy" id="dob_qnform" autocomplete='off'> <span class="fa fa-calendar form-group-icon"> style="display:none;"-->
         </span>
       </div>
