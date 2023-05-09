@@ -435,9 +435,14 @@
 			$('.checkout_btn').text('Checkout');
 		});
 
-		function validatedob(data, id) {
-			if (data != "") {
-				const today = new Date();
+		function validatedob(data=null, id) {
+			if(data != "")
+			{
+				let today = new Date();
+			}
+			else{
+				let today = $('#'+id);
+			}
 				const dob = new Date(data);
 				const diffTime = Math.floor(today - dob);
 				let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)/31/12); 
@@ -451,7 +456,6 @@
 				else{
 					$('.'+id+'_err').html('');
 				}
-			}
 				// else{
 				// 	return true;
 				// }
