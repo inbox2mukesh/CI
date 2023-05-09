@@ -448,6 +448,9 @@
 					$('#'+id).val('');
 					return false;
 				}
+				else{
+					$('.'+id+'_err').html('');
+				}
 			}
 				// else{
 				// 	return true;
