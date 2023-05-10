@@ -4008,9 +4008,9 @@ function calculatepayableamnt(type=null,payingamt=null)
 	var tobepaid = $('#estimatetax').val();
 	var cgst = $('#cgsttax').val();
 	var sgst = $('#sgsttax').val();
-	var cgst_tax = Math.round((payingamt * cgst)/100);
-	var sgst_tax = Math.round((payingamt * sgst)/100);
-	var totalprice = parseInt(payingamt) + parseInt(cgst_tax) + parseInt(sgst_tax) ;
+	var cgst_tax = parseFloat((payingamt * cgst)/100).toFixed(2);
+	var sgst_tax = parseFloat((payingamt * sgst)/100).toFixed(2);
+	var totalprice = parseFloat(payingamt) + parseFloat(cgst_tax) + parseFloat(sgst_tax) ;
 	var id='';
 	if(type == 'onlinepack')
 	{
@@ -9119,7 +9119,7 @@ function percentage_validation(field) {
 
 function calculate_tax(summerdivid=null,price)
 {
-	alert(price);
+	// alert(price);
 	let cgst_per = 0;
 	let sgst_per = 0;
 	var prc = parseFloat(price).toFixed(2);

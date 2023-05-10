@@ -3568,8 +3568,27 @@ margin-bottom:0px;}
 .mediaFile span.input-ui-relative{position: inherit!important;}
 /* new css added by surinder */
 .mediaFile input#upload_image {width: 94%;}
-.mediaFile .input-ui-relative .checkfile:after{height: 15px;}
+.mediaFile .input-ui-relative span.checkfile:after{height: 15px;}
+.mediaFile .input-ui-relative span.active:after {height: 48px;}
+
+.student-bottom-holder {display: block;width: 100%;padding: 2% 0.6%;border-top: 1px solid #ccc;margin: 2% 0;border-bottom: 1px solid #ccc;background: #f1f1f1;}
+h2.student-heading {margin: 0 0 15px;font-weight: 600;}
+
+span#dashBtn.fa-eye:before {content: "\f06e";}
+span#dashBtn {cursor: pointer; pointer-events: inherit;}
+
 @media screen and (max-width:1440px)
 {
-	.mediaFile input#upload_image {width: 90%;}	
+	.mediaFile input#upload_image {width: 90%;}
+	#packbox_online{overflow: hidden;}
+	.tb-package-information {width: 100%;display: flex;flex-direction: column;overflow-x: scroll;overflow-y: hidden;margin:0px 0 45px;}	
+	.tb-package-information::-webkit-scrollbar-track {border-radius: 20px;background-color: transparent;}
+	.tb-package-information::-webkit-scrollbar {height:3px;width:3px;background-color: transparent;}
+	.tb-package-information::-webkit-scrollbar-thumb {border-radius:30px;background-color: #AFAFAF;}
+	.tb-package-information::-webkit-scrollbar-thumb:hover {background-color: #666;}
+	.tb-package-information table {margin: 25px 0;}
+	/* .tb-package-information table th, .tb-package-information table td {min-width: 230px;} */
+	.tb-package-information table tr th:nth-child(4), .tb-package-information table tr th:nth-child(9) {min-width: 240px !important;}
+	.tb-package-information table tr th:nth-child(10) {min-width:150px !important;}
+	.student-edit_widget .edit-gray-bg{overflow: hidden;}
 }
