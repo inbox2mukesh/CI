@@ -58,16 +58,21 @@
                                     <td><a class="text-blue" id="showdata_<?php echo $sp['student_package_id']; ?>" href="javascript:void(0)" onmouseover="show_classroom_desc('<?php echo $classroom_name; ?>','<?php echo $classroom_id; ?>','<?php echo $sp['student_package_id']; ?>')" data-toggle="tooltip" data-placement="top"><?php echo $classroom_name; ?></a></td>
                                     <!-- <td><?php echo $sp['payment_id']; ?></td> -->
                                     <td><?php echo $sp['package_cost']; ?></td>
-                                    <td><span>CGST-<?php echo CURRENCY.' '.$sp['cgst_amt'] ?></span></br><span>SGST-<?php echo CURRENCY.' '.$sp['sgst_amt'] ?></span></td>
-                                    <?php $totalpackamt = $sp['package_amount'] + $sp['cgst_amt']+$sp['sgst_amt']; ?>
+                                    <!-- <td><span>CGST-<?php echo CURRENCY.' '.$sp['cgst_amt'] ?></span></br><span>SGST-<?php echo CURRENCY.' '.$sp['sgst_amt'] ?></span></td> -->
+                                    <!-- <?php $totalpackamt = $sp['package_amount'] + $sp['cgst_amt']+$sp['sgst_amt']; ?> -->
                                     <?php $totalTax = number_format($sp['cgst_amt']+$sp['sgst_amt'],2); ?>
-                                    <td><?php echo CURRENCY.' '.$totalpackamt; ?></td>
+                                    <!-- <td><?php echo CURRENCY.' '.$totalpackamt; ?></td> -->
                                     <td><?php echo CURRENCY.' '.number_format($sp['total_paid_ext_tax'],2); ?></td>
                                     <td><?php echo CURRENCY.' '.$totalTax; ?></td>
-                                    <td><?php echo CURRENCY.' '.number_format($sp['amount_paid'],2); ?></td>
                                     <td><?php echo $sp['amount_paid_by_wallet']; ?></td>
-                                    
                                     <td><?php echo $sp['ext_amount']; ?></td>
+                                    <td><?php echo $sp['ext_total_tax']; ?></td>
+                                    <td><?php echo $sp['ext_total_amt']; ?></td>
+                                    <td><?php echo $sp['amount_refund']; ?></td>
+                                    <td><?php echo CURRENCY.' '.number_format($sp['amount_paid'],2); ?></td>
+                                    <!-- <td><?php echo $sp['amount_paid_by_wallet']; ?></td> -->
+                                    
+                                    <!-- <td><?php echo $sp['ext_amount']; ?></td> -->
                                     <?php if(WOSA_ONLINE_DOMAIN==1){ ?>
                                         <td><?php echo $sp['waiver']; ?></td>
                                         <td><?php echo $waiver_by; ?></td>
@@ -91,7 +96,7 @@
                                         }
                                     ?>
                                     </td>
-                                    <td><?php echo $sp['amount_refund']; ?></td>
+                                    <!-- <td><?php echo $sp['amount_refund']; ?></td> -->
                                     <td><?php echo date('d-m-Y', $sp['subscribed_on']); ?></td>
                                     <td>
                                         <?php

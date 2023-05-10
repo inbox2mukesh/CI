@@ -58,22 +58,20 @@
                                                             <td><?php echo $sp['test_module_name'] . '/' . $sp['programe_name']; ?></td>
                                                             <td><?php echo $sp['package_cost'] . '/' . $sp['package_duration'] ?></td>                                          
                                                             <td><?php echo $sp['package_cost']; ?></td>
-                                                            <td><span>CGST-<?php echo CURRENCY.' '.$cgst_amt ?></span></br><span>SGST-<?php echo CURRENCY.' '.$sgst_amt ?></span></td>
                                                             <!-- price + taxes -->
-                                                            <?php $totalpackamt = $sp['package_amount'] + $sgst_amt+$cgst_amt; 
+                                                            <?php 
                                                             $totaltax = $sp['cgst_amt']+$sp['sgst_amt'];
+                                                            $totalpaidamt = $sp['total_paid_ext_tax'] + $totaltax;                                                      
                                                             ?>
-                                                            <td><?php echo CURRENCY.' '.number_format($totalpackamt,2); ?></td>
+                                                            
                                                             <td><?php echo  CURRENCY.' '.number_format($sp['total_paid_ext_tax'],2); ?></td>
-                                                            
                                                             <td><?php echo CURRENCY.' '.number_format($sp['cgst_amt']+$sp['sgst_amt'],2); ?></td>
-                                                            <td><?php echo CURRENCY.' '.number_format($sp['amount_paid'],2); ?></td>
                                                             <td><?php echo $sp['amount_paid_by_wallet']; ?></td>
-                                                            <!-- <td><?php echo $sp['package_cost']; ?></td>
-                                                            <td><?php echo $sp['package_cost']; ?></td>
-                                                            <td><span>CGST-<?php echo CURRENCY.' '.$sp['cgst_amt'] ?></span></br><span>SGST-<?php echo CURRENCY.' '.$sp['sgst_amt'] ?></span></td> -->
-                                                            
                                                             <td><?php echo $sp['ext_amount']; ?></td>
+                                                            <td><?php echo $sp['ext_total_tax']; ?></td>
+                                                            <td><?php echo $sp['ext_total_amt']; ?></td>
+                                                            <td><?php echo $sp['amount_refund']; ?></td>
+                                                            <td><?php echo CURRENCY.' '.number_format($totalpaidamt,2); ?></td>
                                                             <?php if(WOSA_ONLINE_DOMAIN==1){ ?>
                                                                 <td><?php echo $sp['waiver']; ?></td>
                                                                 <td><?php echo $waiver_by; ?></td>
@@ -98,7 +96,7 @@
                                                                 }
                                                                 ?>
                                                             </td>
-                                                            <td><?php echo $sp['amount_refund']; ?></td>
+                                                            
                                                             <td><?php echo date('d-m-Y', $sp['subscribed_on']); ?></td>
                                                             <td>
                                                             <?php

@@ -265,14 +265,16 @@ class Student_package_model extends CI_Model
     }
 
     function update_student_pack_payment($student_package_id,$params){
+        // pr($params);
 
         $add_payment = $params['add_payment'];
         $active = $params['active'];
         $packCloseReason = $params['packCloseReason'];
         $cgst_amt = $params['cgst_amt'];
         $sgst_amt = $params['sgst_amt'];
-        $total_amt = $params['total_amt'];
+        $amount_paid = $params['amount_paid'];
         $tax_detail = $params['tax_detail'];
+        $total_amt_ext_tax =$params['total_amt_ext_tax'];
         if($params['due_commitment_date']){
           $due_commitment_date = $params['due_commitment_date'];
         }else{
@@ -282,24 +284,28 @@ class Student_package_model extends CI_Model
         if($due_commitment_date){
 
             return $this->db->query("update `student_package` SET 
-                `amount_paid` = `amount_paid` + '".$add_payment."',
+                `amount_paid` ='". $amount_paid."',
                 `amount_due` = `amount_due` - '".$add_payment."',
                 `active` = '".$active."',
                 `due_commitment_date` = '".$due_commitment_date."',
                 `packCloseReason` = '".$packCloseReason."',
                 `cgst_amt` = '".$cgst_amt."', 
-                `sgst_amt` = '".$sgst_amt."', 
-                `total_amt` = '".$total_amt."',
-                `tax_detail` = '".$tax_detail."' 
+                `sgst_amt` = '".$sgst_amt."',
+                `tax_detail` = '".$tax_detail."',
+                `total_paid_ext_tax`='".$total_amt_ext_tax."'
                 where student_package_id = '".$student_package_id."' 
             ");
 
         }else{
             return $this->db->query("update `student_package` SET 
-                `amount_paid` = `amount_paid` + '".$add_payment."',
+                `amount_paid` = '".$amount_paid."',
                 `amount_due` = `amount_due` - '".$add_payment."',
                 `active` = '".$active."',                
-                `packCloseReason` = '".$packCloseReason."' 
+                `packCloseReason` = '".$packCloseReason."',
+                `cgst_amt` = '".$cgst_amt."', 
+                `sgst_amt` = '".$sgst_amt."',
+                `tax_detail` = '".$tax_detail."',
+                `total_paid_ext_tax`='".$total_amt_ext_tax."'
                 where student_package_id = '".$student_package_id."' 
             ");
         }
@@ -328,20 +334,18 @@ class Student_package_model extends CI_Model
         $add_payment = $params['add_payment'];
         $expired_on = $params['expired_on'];
         $active = $params['active'];
-        $cgst_amt = $params['cgst_amt'];
-        $sgst_amt = $params['sgst_amt'];
-        $total_amt = $params['total_amt'];
-        $tax_detail = $params['tax_detail'];
+        $total_tax = $params['total_tax'];
+        $ext_total_amt = $params['ext_total_amt'];
+        // $total_amt = $params['total_amt'];
+        // $tax_detail = $params['tax_detail'];
         return $this->db->query("update `student_package` SET
             `ext_amount` = `ext_amount` + '".$add_payment."',
             `expired_on` = '".$expired_on."',
             `expired_on_str` = '".strtotime($expired_on)."',
             `packCloseReason` = NULL,
-            `active` = '".$active."' ,
-            `cgst_amt` = '".$cgst_amt."', 
-            `sgst_amt` = '".$sgst_amt."', 
-            `total_amt` = '".$total_amt."',
-            `tax_detail` = '".$tax_detail."' 
+            `active` = '".$active."' , 
+            `ext_total_tax`= `ext_total_tax` + '".$total_tax."',
+            `ext_total_amt`= `ext_total_amt` + '".$ext_total_amt."'
             where student_package_id = '".$student_package_id."' 
         ");
     }

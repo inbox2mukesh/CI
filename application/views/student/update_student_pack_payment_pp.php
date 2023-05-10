@@ -105,7 +105,12 @@
 									<span class="form-control-feedback"><i class="fa fa-usd"></i></span>
 								</div>
 							</div>
-
+							<input type="hidden" name="cgst_amt" id="cgst_amt" value="<?php echo $sp['cgst_amt']
+						?>">
+						<input type="hidden" name="sgst_amt" id="sgst_amt" value="<?php echo $sp['sgst_amt']
+						?>">
+						<input type="hidden" name="base_amt" id="base_amt" value="<?php echo $sp['total_paid_ext_tax']
+						?>">
 							<div class="col-md-3">
 								<label for="amount_due" class="control-label text-danger">Dues</label>
 								<div class="form-group has-feedback">

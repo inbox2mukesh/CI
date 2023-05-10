@@ -100,11 +100,16 @@
 								<input type="text" name="batch_id" value="<?php echo $sp['batch_name']; ?>" class="form-control input-ui-100" id="batch_id" disabled />
 							</div>
 						</div>
-
+					    <input type="hidden" name="cgst_amt" id="cgst_amt" value="<?php echo $sp['cgst_amt']
+						?>">
+						<input type="hidden" name="sgst_amt" id="sgst_amt" value="<?php echo $sp['sgst_amt']
+						?>">
+						<input type="hidden" name="base_amt" id="base_amt" value="<?php echo $sp['total_paid_ext_tax']
+						?>">
 						<div class="col-md-3">
 							<label for="amount" class="control-label text-success">Amount Paid</label>
 							<div class="form-group has-feedback">
-								<input type="text" name="amount" value="<?php echo $sp['amount_paid']; ?>" class="form-control input-ui-100" id="amount" disabled />
+								<input type="text" name="amount" value="<?php echo $sp['amount_paid']; ?>" class="form-control input-ui-100" id="amount" readonly />
 								<span class="form-control-feedback"><i class="fa fa-usd"></i></span>
 							</div>
 						</div>
@@ -551,7 +556,7 @@
 							<label for="add_payment" class="control-label text-success ap" style="display: none;"><span class="text-danger">*</span>Add payment</label>
 							<label for="add_payment" class="control-label text-success rp" style="display: none;"><span class="text-danger">*</span>Refund payment <span class="text-info"><i>(NOTE: Full refund will do pack De-active and Partial refund will keep it at your choice.)</i></span></label>
 							<div class="form-group has-feedback pf" style="display: none;">
-								<input type="text" name="add_payment" placeholder="Enter amount" class="form-control chknum1 input-ui-100" id="add_payment" onblur="check_payment(this.value,'<?php echo $walletBalance; ?>');calculate_tax('summerysection_cleardues',this.value);" maxlength="5" />
+								<input type="text" name="add_payment" placeholder="Enter amount" class="form-control chknum1 input-ui-100" id="add_payment" onblur="check_payment(this.value,'<?php echo $walletBalance; ?>');calculate_tax('summerysection_cleardues',this.value);" maxlength="5" value=""/>
 								<span class="form-control-feedback"><i class="fa fa-usd"></i></span>
 								<span class="text-danger ad"><?php echo form_error('add_payment'); ?></span>
 							</div>

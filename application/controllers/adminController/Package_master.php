@@ -1211,8 +1211,8 @@ class Package_master extends MY_Controller{
             $package_amt = $packageData[0]['package_amount'] ;
             $cgst_tax_per = (!empty($cgst))?$cgst['tax_per']:0;
             $sgst_tax_per = (!empty($sgst))?$sgst['tax_per']:0;
-            $cgst_tax = number_format(($package_amt * $cgst_tax_per)/100);
-            $sgst_tax = number_format(($package_amt * $sgst_tax_per)/100);
+            $cgst_tax = number_format(($package_amt * $cgst_tax_per)/100,2);
+            $sgst_tax = number_format(($package_amt * $sgst_tax_per)/100,2);
             $totalamt = $package_amt + $cgst_tax + $sgst_tax;
             $packinfo = $this->load->view('student/packageinfo',['packageData'=>$packageData,'cgst'=>$cgst_tax_per,'sgst'=>$sgst_tax_per,'cgst_amt'=>$cgst_tax,'sgst_amt'=>$sgst_tax,'amountpaid'=>$payingamt,'amountpayable'=>$totalamt],true);
             $response = array('packinfo'=>$packinfo,'amountpayable'=>$totalamt);
@@ -1256,8 +1256,8 @@ class Package_master extends MY_Controller{
             $sgst = $this->Package_master_model->get_tax_detail('SGST');
             $cgst_tax_per = (!empty($cgst))?$cgst['tax_per']:0;
             $sgst_tax_per = (!empty($sgst))?$sgst['tax_per']:0;
-            $cgst_tax = number_format(($package_amt * $cgst_tax_per)/100);
-            $sgst_tax = number_format(($package_amt * $sgst_tax_per)/100);
+            $cgst_tax = number_format(($package_amt * $cgst_tax_per)/100,2);
+            $sgst_tax = number_format(($package_amt * $sgst_tax_per)/100,2);
             $totalamt = $package_amt + $cgst_tax + $sgst_tax;
             $packinfo = $this->load->view('student/practicepack_info',['packageData'=>$packageData,'cgst'=>$cgst_tax_per,'sgst'=>$sgst_tax_per,'cgst_amt'=>$cgst_tax,'sgst_amt'=>$sgst_tax,'amountpaid'=>$paidamt,'amountpayable'=>$totalamt],true);
             $response = array('packinfo'=>$packinfo,'amountpayable'=>$totalamt);

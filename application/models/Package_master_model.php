@@ -1437,14 +1437,16 @@ class Package_master_model extends CI_Model
             FORMAT(spkg.cgst_amt/100,2) as cgst_amt,
             FORMAT(spkg.sgst_amt/100,2) as sgst_amt,
             FORMAT(spkg.total_amt/100,2) as total_amt,
-            FORMAT(spkg.total_paid_ext_tax/100,2) as total_paid_ext_tax
+            FORMAT(spkg.total_paid_ext_tax/100,2) as total_paid_ext_tax,
+            FORMAT(spkg.ext_total_tax/100,2) as ext_total_tax,
+            FORMAT(spkg.ext_total_amt/100,2) as ext_total_amt
         ');
         $this->db->from('`student_package` spkg');
         $this->db->join('`package_masters` pkg', 'pkg.`package_id`= spkg.`package_id`');
         $this->db->join('`programe_masters` pgm', 'pkg.`programe_id`= pgm.`programe_id`');
         $this->db->join('`test_module` tm', 'pkg.`test_module_id`=tm.`test_module_id`');
         $this->db->join('`center_location` cl', 'cl.`center_id`= spkg.`center_id`', 'left');
-        $this->db->join('`classroom` cr', 'cr.`id`= spkg.`classroom_id`', 'left');
+        $this->db->join('`classroom` cr', 'cr.`id`= spkg.`classroom_id`', 'left');        
         if($token=='Bysid'){
             $this->db->where(array('spkg.student_id'=>$id,'pack_type'=>'online','spkg.status'=>'succeeded'));
         }else{
@@ -1497,7 +1499,9 @@ class Package_master_model extends CI_Model
             FORMAT(spkg.cgst_amt/100,2) as cgst_amt,
             FORMAT(spkg.sgst_amt/100,2) as sgst_amt,
             FORMAT(spkg.total_amt/100,2) as total_amt,
-            FORMAT(spkg.total_paid_ext_tax/100,2) as total_paid_ext_tax
+            FORMAT(spkg.total_paid_ext_tax/100,2) as total_paid_ext_tax,
+            FORMAT(spkg.ext_total_tax/100,2) as ext_total_tax,
+            FORMAT(spkg.ext_total_amt/100,2) as ext_total_amt
         ');
         $this->db->from('`student_package` spkg');
         $this->db->join('`package_masters` pkg', 'pkg.`package_id`= spkg.`package_id`');

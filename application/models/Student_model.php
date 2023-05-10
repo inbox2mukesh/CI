@@ -822,6 +822,8 @@
             FORMAT(spkg.`waiver`/100,2) AS waiver,
             FORMAT(spkg.`other_discount`/100,2) AS other_discount,           
             FORMAT(spkg.`amount_due`/100,2) AS amount_due,
+            FORMAT(spkg.`cgst_amt`/100,2) AS cgst_amt,
+            FORMAT(spkg.`sgst_amt`/100,2) AS sgst_amt,
             FORMAT(spkg.`amount_refund`/100,2) AS amount_refund,           
             spkg.`waiver_by`,
             spkg.`currency`,
