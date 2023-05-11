@@ -268,5 +268,102 @@ class Cron_tab extends MY_Controller{
         // pr($list);
         
     }
+    function cronJob_run_role(){      
+               
+        $controllers = get_filenames(APPPATH . 'controllers/adminController', FALSE, TRUE);
+        foreach($controllers as $k => $v ){
+            if(strpos($v, '.php') === FALSE){
+                unset($controllers[$k] );
+            }
+        }
+        foreach($controllers as $controller){            
+            $excludedController=array(
+                'Dashboard.php','Ckeditor.php','Login.php','Error_cl.php','Cron_tab.php','Forgot_password.php','Gender.php','Leads.php','Time_slot_master.php','Student_post.php','Discount.php','Classroom_post.php','Common.php','Url_slug.php','Sitemap.php',
+            );
+            if(in_array($controller, $excludedController)){
+
+            }else{
+                $controller_data = $this->Role_model->check_controller($controller);
+                if(count($controller_data)>0){
+                    $id = $controller_data[0]['id'];
+                    $params = array(
+                        'controller_name' => $controller,
+                    );
+                    $this->Role_model->update_controller($id,$params);
+                    $controller_id=$id;
+
+                }else{
+                    $params = array(
+                        'controller_name' => $controller,
+                        'controller_alias' => $controller,
+                    );
+                    $controller_id = $this->Role_model->add_controller($params);
+                } 
+                include_once APPPATH . 'controllers/adminController/' . $controller;
+                $methods = get_class_methods(str_replace( '.php', '', $controller));
+                foreach($methods as $method){ 
+
+                    $excludedMethod=array(                    
+                        'walk_dir', 
+                        'CheckImgExt', 
+                        'browse',
+                        'get_instance',
+                        'logout',
+                        'Forgot_password', 
+                        'profile_', 
+                        'change_password',
+                        'dashboard',
+                        'crypto_rand_secure_',
+                        'getUnicode_',
+                        'schedule_discount',
+                        'morning_attendance_',
+                        'evening_attendance_',
+                        'addUserActivity',
+                        'clear_all_',
+                        'displayRefundHistory_',
+                        'adjust_online_and_inhouse_pack_',
+                        'adjust_practice_pack_',
+                        'student_transaction_', 
+                        'user_activity_',
+                        'set_erp_softly',
+                        'set_erp_hardly',
+                        'add_money_to_wallet',
+                    );  
+                    if(in_array($method, $excludedMethod)){              
+
+                    }else{
+
+                        $method_data = $this->Role_model->check_method($method,$controller_id);
+                        if(count($method_data)>0){
+                        }else{                   
+                            if(substr($method, 0, 5) === "ajax_" or substr($method, 0, 9) === "sendEmail" or substr($method, 0, 7) === "sendSMS" or substr($method, 0, 1) === "_" or substr($method, 0, 8) === "cronJob_" or substr($method, 0, 5) === "auto_"){
+                                $bool=0;
+                            }else{
+                                $bool=1;
+                            }
+                            if($bool==1){
+                                $params = array(
+                                    'controller_id'=>$controller_id,
+                                    'method_name' => $method,
+                                    'method_alias' => $method,
+                                );
+                                $this->Role_model->add_method($params);
+                            }else{
+
+                            }                        
+                        }                    
+                    }         
+                    
+                }                
+            }           
+
+        }
+        //activity update start              
+            $activity_name= ROLE_REFRESH;
+            $description= 'All the module refreshed';
+            $res=$this->addUserActivity($activity_name,$description,$student_package_id=0,$by_user);
+        //activity update end
+       
+    }
     
 }

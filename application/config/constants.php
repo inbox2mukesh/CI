@@ -6,7 +6,7 @@
  *
  **/
 global $customJS;
-define('JS_CSS_VERSION', '0.0.11');
+define('JS_CSS_VERSION', '0.0.12');
 define('ADMIN', 'Super Admin');
 ///////////////////////////////////settings start///////////////////////////////////////
 include_once(FCPATH.'application/config/setting-constants.php');
@@ -933,21 +933,20 @@ if(WOSA_ONLINE_DOMAIN==1){
 	<th>Course/Program</th>
 	<th>Price/Duration</th>
 	<th>Classroom</th>
-	<th>Package Amount</th>
-	<th>Tax(es)</th>
-	<th>Total Price (Incl. Taxes)</th>
+	<th>Orignal Amount</th>	
 	<th>Total Paid(Excl. Tax)</th>
 	<th>Total Tax(s)</th>
-	<th>Total Paid(Incl. Tax)</th>
+	<th>Paid By Wallet</th>	
 	<th>Ext. Amount</th>
 	<th>Ext. Total Tax</th>
 	<th>Ext. Total Amount Paid</th>
+	<th>Wallet Refund</th>
 	<th>Waiver</th>
 	<th>Waiver By</th>
+	<th>Total Paid(Incl. Tax)</th>
 	<th>Dues</th>
 	<th>Irr. Dues</th>
-	<th>Due Commitment Date</th>
-	<th>Wallet Refund</th>
+	<th>Due Commitment Date</th>	
 	<th>Pack Start Date</th>
 	<th>Pack Hold Date</th>
 	<th>Expiry</th>
@@ -993,6 +992,8 @@ if(WOSA_ONLINE_DOMAIN==1){
 	<th>Ext. Total Tax</th>
 	<th>Ext. Total Amount Paid</th>
 	<th>Wallet Refund</th>
+	<th>Waiver</th>
+	<th>Waiver By</th>
 	<th>Total Paid(Incl. Tax)</th>
 	<th>Dues</th>
 	<th>Irr. Dues</th>
