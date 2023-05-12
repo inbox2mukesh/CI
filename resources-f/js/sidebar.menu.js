@@ -94,6 +94,8 @@ $(function() {
 		$(".fa-angle-right").toggleClass("drp-rotate");
 	});
 });
+
+
 /*-----END SIDEBAR DROPDOWN MENU---*/
 
 

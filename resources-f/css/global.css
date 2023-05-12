@@ -43,9 +43,13 @@ body .post-info li{list-style: inherit;list-style-position: inside;}
 }
 .student-dashboard-btn .list li button { background: none;border: none;color: #000;padding: 0;}
 .student-dashboard-btn .list li button:hover { color: #d72a22;}
-.studentresponse-modal .modal-header {align-items: center;border-bottom: solid 1px #ebebeb;}
-.studentresponse-modal .modal-header h5 { display: inline-block; margin-top: 8px;}
-.studentresponse-modal .modal-header button.close { font-size: 34px;display: inline-block;}
-.studentresponse-modal div#msg-content { text-align: center;font-weight: bold;font-size: 15px;}
+.studentresponse-modal .modal-header {align-items: center;border-bottom: solid 1px #ebebeb;background: #d72a22 !important;border-radius: 10px 10px 0 0 !important;padding: 5px 15px !important;}
+.studentresponse-modal .modal-header h5 { display: inline-block; margin-top: 8px;color: #fff !important;}
+.studentresponse-modal .modal-header button.close { font-size: 34px;display: inline-block;color: #fff;}
+.studentresponse-modal div#msg-content { text-align: center;font-weight: bold;font-size: 15px;padding:20px 0 !important;background: #fff !important;border-radius: 0px 0px 10px 10px;}
 .studentresponse-modal .modal-sm {display: flex; width: 100%;height: 100%;align-items: center;justify-content: center;margin: 0 !important;}
 .studentresponse-modal .modal-sm .modal-content {max-width: 450px;width: 100%;}
+
+.login-pwd-cont {position: relative;}
+.login-pwd-cont span {position: absolute;right: 9px;top: 15px;z-index: 99;cursor: pointer;}
+.login-pwd-cont .fa-eye:before {content: "\f06e" !important;}

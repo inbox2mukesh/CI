@@ -48,4 +48,20 @@ config.toolbarGroups = [
 	//config.extraPlugins = 'imageuploader';
 config.extraPlugins = 'imageuploader';
 config.removePlugins = 'showblocks,sourcearea,save,newpage,preview,print,templates,undo,redo,find,replace,selectall,blocks,';
+
+// config.extraPlugins = 'wordcount,notification';
+// config.wordcount = {
+
+//     // Whether or not you want to show the Word Count
+//     showWordCount: true,
+
+//     // Whether or not you want to show the Char Count
+//     showCharCount: false,
+    
+//     // Maximum allowed Word Count
+//     maxWordCount: 300,
+
+//     // Maximum allowed Char Count
+//     // maxCharCount: 10
+// };
 };
