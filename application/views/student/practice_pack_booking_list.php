@@ -1,4 +1,4 @@
-<?php if (count($student_package_pp) > 0) {?>
+<?php if (count($student_package_pp) > 0) { ?>
                             <div class="col-md-12">
                                 <div class="head-bg" role="alert">Practice Pack </div>
                                 <div class="form-group bg-warning" style="padding-top:10px;padding-bottom:10px;">
@@ -60,23 +60,22 @@
                                                             <td><?php echo $sp['package_cost']; ?></td>
                                                             <!-- price + taxes -->
                                                             <?php 
-                                                            $totaltax = $sp['cgst_amt']+$sp['sgst_amt'];
+                                                            $totaltax = ($sp['cgst_amt']+$sp['sgst_amt'])/100;
                                                             $totalpaidamt = $sp['total_paid_ext_tax'] + $totaltax;                                                      
                                                             ?>
                                                             
-                                                            <td><?php echo  CURRENCY.' '.number_format($sp['total_paid_ext_tax'],2); ?></td>
-                                                            <td><?php echo CURRENCY.' '.number_format($sp['cgst_amt']+$sp['sgst_amt'],2); ?></td>
+                                                            <td><?php echo  CURRENCY.' '.$sp['total_paid_ext_tax']; ?></td>
+                                                            <td><?php echo CURRENCY.' '.($sp['cgst_amt']+$sp['sgst_amt'])/100; ?></td>
                                                             <td><?php echo $sp['amount_paid_by_wallet']; ?></td>
                                                             <td><?php echo $sp['ext_amount']; ?></td>
                                                             <td><?php echo $sp['ext_total_tax']; ?></td>
                                                             <td><?php echo $sp['ext_total_amt']; ?></td>
-                                                            <td><?php echo $sp['amount_refund']; ?></td>
-                                                            <td><?php echo CURRENCY.' '.number_format($totalpaidamt,2); ?></td>
+                                                            <td><?php echo $sp['amount_refund']; ?></td>                                                            
                                                             <?php if(WOSA_ONLINE_DOMAIN==1){ ?>
                                                                 <td><?php echo $sp['waiver']; ?></td>
                                                                 <td><?php echo $waiver_by; ?></td>
                                                             <?php } ?>
-                                                            <!-- <td><?php echo $sp['other_discount']; ?></td> -->
+                                                            <td><?php echo CURRENCY.' '.$sp['amount_paid']; ?></td>
                                                             <?php if ($sp['amount_due'] == '0.00') { ?>
                                                                 <td ><?php echo $sp['amount_due']; ?></td>
                                                             <?php } else { ?>

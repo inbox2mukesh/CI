@@ -12,7 +12,7 @@
 <?php
 
   // classroom schedule section
-  if (isset($allClassroomMaterial) && count($allClassroomMaterial->error_message->data->classroom_schedule) > 0)
+  if (!empty($allClassroomMaterial) && count($allClassroomMaterial->error_message->data->classroom_schedule) > 0)
   { ?>
   <?php
       $i = 0;

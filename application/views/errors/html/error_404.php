@@ -27,13 +27,13 @@ a {color: #003399;background-color: transparent;font-weight: normal;}
 <body>
 	<div id="container">
 		<div class="page-not-found-cont">
-			<div class="logo"><img src="resources-f/images/logo-sm-online.png" alt=""></div>
+			<div class="logo"><img src="<?php echo LOGO ; ?>" alt=""></div>
 			<img src="resources-f/images/no-data-found.webp" alt="">
 			<h1><?php echo $heading; ?></h1>
 			<p><?php echo $message; ?></p>
 			<div class="not-fount-button-cont">
-				<a href="javascript:void(0)" class="home-btn">Go Home</a>
-				<a href="javascript:void(0)" class="contact-btn">Contact Us</a>
+				<a href="<?php echo BASEURL;?>" class="home-btn">Go Home</a>
+				<a href="<?php echo BASEURL.'contact-us';?>" class="contact-btn">Contact Us</a>
 			</div>			
 		</div>
 	</div>

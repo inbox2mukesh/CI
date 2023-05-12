@@ -268,7 +268,7 @@ class Online_class_schedule extends MY_Controller{
 		if($this->form_validation->run()){
 
             $tillDate = $this->input->post('till_date');            
-            $dateTime = $this->input->post('dateTime');
+            $dateTime = $this->input->post('dateTime_');
             $class_duration="+".$this->input->post('class_duration');
             $classDate_dateTime = trim(substr($dateTime,0,10));
             $date_create=date_create($classDate_dateTime);
@@ -279,7 +279,15 @@ class Online_class_schedule extends MY_Controller{
             $datetime2 = strtotime($tillDate);
             $Diff = $datetime2-$datetime1;
             $dayDiff=$Diff/86400;
-
+            $dtetime = explode(",",$dateTime);
+            $dteTimeStr ='';
+            for($d=0;$d<count($dtetime);$d++)
+            {
+                $date = new DateTime($dtetime[$d]);
+                $dateTime = $date->format('d-m-Y G:i:00');            
+                $nameOfDay = date('D', strtotime($this->input->post('dateTime')));
+                $dteTimeStr .= strtotime($dateTime).',';                
+            }
             $date = new DateTime($dateTime);
             $dateTime = $date->format('d-m-Y G:i:00');            
             $nameOfDay = date('D', strtotime($this->input->post('dateTime')));
@@ -287,7 +295,7 @@ class Online_class_schedule extends MY_Controller{
             $classroom_id=$this->input->post('classroom_id');
 
             foreach($classroom_id as $c){ 
-            for($i=0;$i<=$dayDiff;$i++){
+            // for($i=0;$i<=$dayDiff;$i++){
 
                 $thisdate = date('d-m-Y', strtotime($this->input->post('dateTime') . ' +'.$i.' day'));
                 $dateTime = date('d-m-Y H:i:s', strtotime($this->input->post('dateTime') . ' +'.$i.' day'));
@@ -297,8 +305,8 @@ class Online_class_schedule extends MY_Controller{
                 $strdate_end = strtotime($enddate_end);
                 $params = array(
                     'classroom_id' => $c,
-                    'dateTime'=> $dateTime,
-                    'strdate'=>  $dateTimeStr,
+                    'dateTime'=> $this->input->post('dateTime_'),
+                    'strdate'=>  rtrim($dteTimeStr,','),
                     'strdate_end'=>  $strdate_end,
                     'dayname' => $nameOfDay,
                     'till_date' => $tillDate,
@@ -308,9 +316,10 @@ class Online_class_schedule extends MY_Controller{
                     'conf_URL' => $this->input->post('conf_URL'),
                     'active' => 1,
                     'by_user' => $_SESSION['UserId'],
-                );           
+                ); 
+                // pr($params,1);          
                 $idd = $this->Online_class_schedule_model->add_schedule($params);
-                }  
+                // }  
             }       
  
             if($idd){

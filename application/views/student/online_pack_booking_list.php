@@ -60,24 +60,21 @@
                                     <td><?php echo $sp['package_cost']; ?></td>
                                     <!-- <td><span>CGST-<?php echo CURRENCY.' '.$sp['cgst_amt'] ?></span></br><span>SGST-<?php echo CURRENCY.' '.$sp['sgst_amt'] ?></span></td> -->
                                     <!-- <?php $totalpackamt = $sp['package_amount'] + $sp['cgst_amt']+$sp['sgst_amt']; ?> -->
-                                    <?php $totalTax = number_format($sp['cgst_amt']+$sp['sgst_amt'],2); ?>
+                                    <?php $cgst= $sp['cgst_amt']; $sgst = $sp['sgst_amt']; $totalTax_ = ($cgst + $sgst)/100; ?>
                                     <!-- <td><?php echo CURRENCY.' '.$totalpackamt; ?></td> -->
-                                    <td><?php echo CURRENCY.' '.number_format($sp['total_paid_ext_tax'],2); ?></td>
-                                    <td><?php echo CURRENCY.' '.$totalTax; ?></td>
+                                    <td><?php echo CURRENCY.' '.$sp['total_paid_ext_tax']?></td>
+                                    <td><?php echo CURRENCY.' '.$totalTax_; ?></td>
                                     <td><?php echo $sp['amount_paid_by_wallet']; ?></td>
                                     <td><?php echo $sp['ext_amount']; ?></td>
                                     <td><?php echo $sp['ext_total_tax']; ?></td>
-                                    <td><?php echo $sp['ext_total_amt']; ?></td>
-                                    <td><?php echo $sp['amount_refund']; ?></td>
-                                    <td><?php echo CURRENCY.' '.number_format($sp['amount_paid'],2); ?></td>
-                                    <!-- <td><?php echo $sp['amount_paid_by_wallet']; ?></td> -->
+                                    <td><?php echo $sp['ext_total_amt']; ?></td>                
                                     
-                                    <!-- <td><?php echo $sp['ext_amount']; ?></td> -->
+                                    <td><?php echo $sp['amount_refund']; ?></td>
                                     <?php if(WOSA_ONLINE_DOMAIN==1){ ?>
                                         <td><?php echo $sp['waiver']; ?></td>
                                         <td><?php echo $waiver_by; ?></td>
                                     <?php } ?>
-                                    <!-- <td><?php echo $sp['other_discount']; ?></td> -->
+                                    <td><?php echo CURRENCY.' '.$sp['amount_paid']; ?></td>  
                                     <?php if ($sp['amount_due'] == '0.00') { ?>
                                         <td ><?php echo $sp['amount_due']; ?></td>
                                     <?php } else { ?>
@@ -86,7 +83,10 @@
                                         <td ><?php echo $sp['irr_dues']; ?></td>
                                     <?php } else { ?>
                                     <td style="color:red"><?php echo $sp['irr_dues']; ?></td>
-                                    <?php } ?>
+                                    <?php } ?>                                   
+                                    
+                                    <!-- <td><?php echo $sp['other_discount']; ?></td> -->
+                                    
                                     <td>
                                     <?php
                                         if($sp['due_commitment_date'] != 0){
@@ -96,7 +96,7 @@
                                         }
                                     ?>
                                     </td>
-                                    <!-- <td><?php echo $sp['amount_refund']; ?></td> -->
+                                    
                                     <td><?php echo date('d-m-Y', $sp['subscribed_on']); ?></td>
                                     <td>
                                         <?php
@@ -106,8 +106,8 @@
                                         ?>                                            
                                     </td>
                                     <td><?php echo date('d-m-Y', $sp['expired_on']); ?></td>
-                                    <td><?php echo $sp['requested_on']; ?></td>                 
-                        </tr>
+                                    <td><?php echo $sp['requested_on']; ?></td> 
+                                    
                     <?php } ?>
                 </tbody>
             </table>

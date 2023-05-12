@@ -1057,15 +1057,16 @@ class Student extends MY_Controller{
                     $sgst_amt = (($org_pr * $data['sgst_tax_per'])/100);
                     $cgst_amt_ttl = ($cgst_amt + $this->input->post('cgst_amt'))*100;
                     $sgst_amt_ttl = ($sgst_amt + $this->input->post('sgst_amt'))*100;
-                    $current_amt_ext_tax = ($this->input->post('base_amt')+$org_pr)*100;
-                    $current_amt_inc_tax = $org_pr +$cgst_amt+$sgst_amt;
-                    $total_paid_incl_tax = ($current_amt_inc_tax + $this->input->post('amount',TRUE))*100;
+                    //$current_amt_ext_tax = ($this->input->post('base_amt')+$org_pr)*100;
+                    $amount_paid = ($org_pr +$cgst_amt+$sgst_amt)*100;
+                    //$amount_paid = ($current_amt_inc_tax + $this->input->post('amount',TRUE))*100;
                     if($this->input->post('due_commitment_date_next')){
                         $due_commitment_date = strtotime($this->input->post('due_commitment_date_next', TRUE));
                     }else{
                         $due_commitment_date ='';
-                    }                    
-                    $response = $this->add_payment_($org_pr*100,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id,$total_paid_incl_tax,$cgst_amt_ttl,$sgst_amt_ttl,$tax_arr,$current_amt_ext_tax);                    
+                    }
+                    //$add_payment,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id,$total_amt,$cgst_amt,$sgst_amt,$tax_arr,$totalpayment                    
+                    $response = $this->add_payment_($org_pr*100,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id,$amount_paid,$cgst_amt*100,$sgst_amt*100,$tax_arr);                    
 
                 }elseif($payment_type=='Adjustment-PE'){
                     $org_pr = $this->input->post('add_payment_pe', TRUE);
@@ -1239,17 +1240,15 @@ class Student extends MY_Controller{
                     $remarks = $this->input->post('remarks', TRUE);                    
                     $cgst_amt = (($org_pr * $data['cgst_tax_per'])/100);
                     $sgst_amt = (($org_pr * $data['sgst_tax_per'])/100);
-                    $cgst_amt_ttl = ($cgst_amt + $this->input->post('cgst_amt'))*100;
-                    $sgst_amt_ttl = ($sgst_amt + $this->input->post('sgst_amt'))*100;
-                    $current_amt_ext_tax = ($this->input->post('base_amt')+$org_pr)*100;
-                    $current_amt_inc_tax = $org_pr +$cgst_amt+$sgst_amt;
-                    $total_paid_incl_tax = ($current_amt_inc_tax + $this->input->post('amount',TRUE))*100;
+                    //$cgst_amt_ttl = ($cgst_amt + $this->input->post('cgst_amt'))*100;
+                    //$sgst_amt_ttl = ($sgst_amt + $this->input->post('sgst_amt'))*100;
+                    $amount_paid = ($org_pr +$cgst_amt+$sgst_amt)*100;
                     if($this->input->post('due_commitment_date_next', TRUE)){
                         $due_commitment_date = strtotime($this->input->post('due_commitment_date_next', TRUE));
                     }else{
                         $due_commitment_date ='';
                     }                    
-                    $response = $this->add_payment_($org_pr*100,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id,$total_paid_incl_tax,$cgst_amt_ttl,$sgst_amt_ttl,$tax_arr,$current_amt_ext_tax);  
+                    $response = $this->add_payment_($org_pr*100,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id,$amount_paid,$cgst_amt*100,$sgst_amt*100,$tax_arr);  
 
                 }elseif($payment_type=='Adjustment-PE'){
                     $org_pr = $this->input->post('add_payment_pe', TRUE);
@@ -1608,6 +1607,7 @@ class Student extends MY_Controller{
                 'requested_on' => date("d-m-Y h:i:s A"),
                 'total_paid_ext_tax'=>$amt_ext_tax_paid*100
             );
+            // pr($params2,1);
             $this->db->insert('student_package', $params2);
             $student_package_id =  $this->db->insert_id();
             //promocode updation start// 
@@ -2642,7 +2642,7 @@ class Student extends MY_Controller{
     }
 
     //non-real function
-    function add_payment_($add_payment,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id,$total_amt,$cgst_amt,$sgst_amt,$tax_arr,$totalpayment){        
+    function add_payment_($add_payment,$use_wallet,$due_commitment_date,$remarks,$student_package_id,$student_id,$total_amt,$cgst_amt,$sgst_amt,$tax_arr){        
          
        //access control start
         $cn = $this->router->fetch_class().''.'.php';
@@ -2702,7 +2702,6 @@ class Student extends MY_Controller{
                 'cgst_amt'          =>$cgst_amt,
                 'sgst_amt'          =>$sgst_amt,
                 'tax_detail'        =>$tax_arr,
-                'total_amt_ext_tax' =>$totalpayment,
                 'amount_paid' =>$total_amt,
             ); 
             $params2 = array(                    
@@ -2756,7 +2755,6 @@ class Student extends MY_Controller{
                 'cgst_amt'          =>$cgst_amt,
                 'sgst_amt'          =>$sgst_amt,
                 'tax_detail'        =>$tax_arr,
-                'total_amt_ext_tax' =>$totalpayment,
                 'amount_paid' =>$total_amt,
             ); 
             $params2 = array(                    
@@ -2773,6 +2771,7 @@ class Student extends MY_Controller{
                 'created'           => date("d-m-Y h:i:s A"),
                 'modified'          => date("d-m-Y h:i:s A"),
             );
+            // pr($params,1);
             if($params2['amount']>0){
                  
                 $idd1 = $this->Student_package_model->update_student_pack_payment($student_package_id,$params);

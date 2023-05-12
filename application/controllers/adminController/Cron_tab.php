@@ -53,7 +53,6 @@ class Cron_tab extends MY_Controller{
     function cronJob_custom_fetchCRSLeads(){        
         $this->load->model('Immigration_tools_model');
         $cronData = $this->Immigration_tools_model->cron_get_all_crs_score();
-        redirect('adminController/lead_management/crs_list');
     }
 
     function cronJob_copydbtotesting(){

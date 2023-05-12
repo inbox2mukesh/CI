@@ -13,42 +13,42 @@
             </div>
             <?php echo $this->session->flashdata('flsh_msg'); ?>
 			<?php $dup=$this->session->flashdata('flsh_msg_duplicate');?>
-<?php
-if(isset($dup)){
-?>
-<div class="col-md-12">
-<h5><b>Duplicate schedule found. Please create unique schedule</b></h5>
-	<table class="table table-bordered" style="border: 1px solid #f4f4f4">
-  <thead>
-    <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Dates</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td width="10%" style="background-color:#ffd5cf">Duplicate</td>
-      <td><?php 
-	 	foreach($dup['duplicate_record'] as $duplicate){ ?>
-		<span class="label label-danger"><?php echo $duplicate;?></span>
-		<?php } ?>
-	  </td> 
-    </tr>
-	<?php if(!empty($dup['valid_record'])) {?>
-	<tr>
-      <td  width="10%" style="background-color:#ccffee">Valid</td>
-      <td><?php 
-	 	foreach($dup['valid_record'] as $valid){ ?>
-			<span class="label label-success"><?php echo $valid;?></span>
-		<?php } ?>
-	 </td> 
-    </tr>
-	<?php }?>   
-  </tbody>
-</table>
-<br>
-</div>
-<?php }?>
+			<?php
+			if(isset($dup)){
+			?>
+			<div class="col-md-12">
+			<h5><b>Duplicate schedule found. Please create unique schedule</b></h5>
+				<table class="table table-bordered" style="border: 1px solid #f4f4f4">
+			<thead>
+				<tr>
+				<th scope="col">Title</th>
+				<th scope="col">Dates</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				<td width="10%" style="background-color:#ffd5cf">Duplicate</td>
+				<td><?php 
+					foreach($dup['duplicate_record'] as $duplicate){ ?>
+					<span class="label label-danger"><?php echo $duplicate;?></span>
+					<?php } ?>
+				</td> 
+				</tr>
+				<?php if(!empty($dup['valid_record'])) {?>
+				<tr>
+				<td  width="10%" style="background-color:#ccffee">Valid</td>
+				<td><?php 
+					foreach($dup['valid_record'] as $valid){ ?>
+						<span class="label label-success"><?php echo $valid;?></span>
+					<?php } ?>
+				</td> 
+				</tr>
+				<?php }?>   
+			</tbody>
+			</table>
+			<br>
+			</div>
+			<?php }?>
 	
             <?php 
 			//$attributes = array('name' => 'schform');
@@ -177,7 +177,8 @@ if(isset($dup)){
 					<div class="col-md-4">	
 						<label for="dateTime" class="control-label"><span class="text-danger">*</span>Date Time </label>
 						<div class="form-group has-feedback">
-							<input type="text" name="dateTime" id="dateTime" class="form-control user_activity_report_datetimepicker input-ui-100 removeerrmessage"  value="<?php echo $this->input->post('dateTime'); ?>" />
+							<input type="text" name="dateTime" id="dateTime" class="form-control user_activity_report_datetimepicker input-ui-100 removeerrmessage"  value="<?php echo $this->input->post('dateTime'); ?>" onfocusout="getmultipledates(this.value);"/>
+							<input type="hidden" name="dateTime_" id="dateTime_" class="form-control user_activity" value="">
 							<span class="text-danger dateTime_err"><?php echo form_error('dateTime');?></span>
 						</div>
 					</div>
@@ -191,7 +192,7 @@ if(isset($dup)){
 						</div>
 					</div>	
 					<div class="col-md-12" id="schedule-date">				
-						<button type="button" class="btn btn-info btn-sm del" onclick="deleteUserDivision(1,4)">ACADEMY<i class="fa fa-close cross-icn"></i></button>
+						<!-- <button type="button" class="btn btn-info btn-sm del" onclick="deleteUserDivision(1,4)">ACADEMY<i class="fa fa-close cross-icn"></i></button> -->
 					</div>
 					<div class="col-md-4">
 						<label for="class_duration" class="control-label"><span class="text-danger">*</span>Class Duration(In Minutes)</label>
@@ -360,17 +361,7 @@ function check_duplicate_sch(){
 	}	
 }
 
-// function getdatetimeofschedule(selectedate)
-// {
-// 	let scDatelist = localStorage.getItem('datelist');
-// 	if(scDatelist != '')
-// 	{
-// 		scDatelist += selectedate+',';
-// 	}
-// 	localStorage.setItem('datelist', scDatelist);
-// 	let Datelist  = localStorage.getItem('datelist');
-// 	alert(Datelist);
-// }
+
 $('.user_activity_report_datetimepicker').on('dp.change', function(e){ 
 		var dt=$(this).val();
 		var dtp=dt.split(" ");	
@@ -397,17 +388,38 @@ $('.user_activity_report_datetimepicker').on('dp.change', function(e){
 		$(".noBackDatep").datepicker({					
 				startDate:dtp[0],
 				autoclose: true,					
-			});
-		let scDatelist = localStorage.getItem('datelist');	
-		if(scDatelist != '')
-		{
-			scDatelist += selectedate+',';
-		}
-		localStorage.setItem('datelist', scDatelist);
-		let Datelist  = localStorage.getItem('datelist');
-		alert(scDatelist);	
+			});	
+	});
+	let scdList = [];
+	
+	
+	function getmultipledates(datetme = null)
+	{
+		scdList.push(datetme);
+		var timebuttonlist ='';		
+		$.each(scdList,function(key,value){
+			let remvefunctionname = "removemultipledates('"+value+"')";
+			timebuttonlist +='<button type="button" class="btn btn-info btn-sm del">'+value+'<i class="fa fa-close cross-icn" data-dtime="'+value+'" id="datetimebuttonfacicon" onclick="'+remvefunctionname+'"></i></button>';
+		});
+		$('#schedule-date').html(timebuttonlist);
+		$('#dateTime_').val(scdList);
+		//localStorage.setItem('dateList',scdList);
 		
-	})       
+	}     
+
+	function removemultipledates(dattimeval)
+	{		
+		var timebuttonlists='';	
+		$('#schedule-date').empty();
+		let sclist = scdList.pop(dattimeval);		
+		$.each(scdList,function(key,value){
+			let remvefunctionname = "removemultipledates('"+value+"')";
+			timebuttonlists +='<button type="button" class="btn btn-info btn-sm del">'+value+'<i class="fa fa-close cross-icn" data-dtime="'+value+'" id="datetimebuttonfacicon" onclick="'+remvefunctionname+'"></i></button>';
+		});
+		$('#schedule-date').html(timebuttonlists);
+		$('#dateTime_').val(scdList);
+		//localStorage.setItem('dateList',scdList);
+	} 
 </script>
 <?php global $customJs;
 $customJs=ob_get_clean();

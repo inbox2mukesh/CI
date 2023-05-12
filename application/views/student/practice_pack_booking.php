@@ -1,3 +1,6 @@
+<?php
+        $tomarrow = '';
+    ?>
 <div id="packbox_pp" class="edit-gray-bg" style="display: none;">
                             <div class="col-md-12 edit-rh">
                                 <div class="bg-info">

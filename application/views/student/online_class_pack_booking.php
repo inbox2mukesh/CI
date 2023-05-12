@@ -1,4 +1,7 @@
 <!-- online_class_pacl_booking.php -->
+<?php
+        $tomarrow = '';
+    ?>
 <div id="packbox_online" class="edit-gray-bg" style="display: none;">
                             <div class="col-md-12 edit-rh">
                                 <div class="bg-info">Online class pack booking!</div>

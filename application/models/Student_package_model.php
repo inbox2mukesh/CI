@@ -284,28 +284,28 @@ class Student_package_model extends CI_Model
         if($due_commitment_date){
 
             return $this->db->query("update `student_package` SET 
-                `amount_paid` ='". $amount_paid."',
+                `amount_paid` =`amount_paid` + '". $amount_paid."',
                 `amount_due` = `amount_due` - '".$add_payment."',
                 `active` = '".$active."',
                 `due_commitment_date` = '".$due_commitment_date."',
                 `packCloseReason` = '".$packCloseReason."',
-                `cgst_amt` = '".$cgst_amt."', 
-                `sgst_amt` = '".$sgst_amt."',
+                `cgst_amt` = `cgst_amt`+'".$cgst_amt."', 
+                `sgst_amt` = `sgst_amt`+'".$sgst_amt."',
                 `tax_detail` = '".$tax_detail."',
-                `total_paid_ext_tax`='".$total_amt_ext_tax."'
+                `total_paid_ext_tax`= `total_paid_ext_tax`+'".$add_payment."'
                 where student_package_id = '".$student_package_id."' 
             ");
 
         }else{
             return $this->db->query("update `student_package` SET 
-                `amount_paid` = '".$amount_paid."',
+                `amount_paid` =`amount_paid` + '". $amount_paid."',
                 `amount_due` = `amount_due` - '".$add_payment."',
                 `active` = '".$active."',                
                 `packCloseReason` = '".$packCloseReason."',
-                `cgst_amt` = '".$cgst_amt."', 
-                `sgst_amt` = '".$sgst_amt."',
+                `cgst_amt` = `cgst_amt`+'".$cgst_amt."', 
+                `sgst_amt` = `sgst_amt`+'".$sgst_amt."',
                 `tax_detail` = '".$tax_detail."',
-                `total_paid_ext_tax`='".$total_amt_ext_tax."'
+                `total_paid_ext_tax`= `total_paid_ext_tax`+'".$add_payment."'
                 where student_package_id = '".$student_package_id."' 
             ");
         }
