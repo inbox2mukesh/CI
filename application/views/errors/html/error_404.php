@@ -32,8 +32,8 @@ a {color: #003399;background-color: transparent;font-weight: normal;}
 			<h1><?php echo $heading; ?></h1>
 			<p><?php echo $message; ?></p>
 			<div class="not-fount-button-cont">
-				<a href="<?php echo BASEURL;?>" class="home-btn">Go Home</a>
-				<a href="<?php echo BASEURL.'contact-us';?>" class="contact-btn">Contact Us</a>
+				<a href="<?php echo site_url();?>" class="home-btn">Go Home</a>
+				<a href="<?php echo site_url('contact-us');?>" class="contact-btn">Contact Us</a>
 			</div>			
 		</div>
 	</div>
