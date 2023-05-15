@@ -446,6 +446,7 @@ define('STUDENT_AUTO_LOGIN', 'WOSA-API-V1/faqs/Get_all_faq');
 define('GET_REC_LEC_URL_FILTER', 'WOSA-API-V1/recorded_lectures/Get_recorded_lectures_filter');
 
 define('GET_STUDENT_EXISTENCE_URL', 'WOSA-API-V1/Check_student_existence');
+define('ERROR_LOG', 'WOSA-API-V1/error_log/Submit_error_log');
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*

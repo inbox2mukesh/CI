@@ -489,4 +489,12 @@
     <li> <a href="<?php echo site_url('adminController/city/index');?>"><i class="fa fa-list-ul"></i> City List</a> </li><?php } ?>    
   </ul>
 </li>
+<li> <a href="#"> <i class="fa fa-map-marker text-light"></i> <span>Logs</span> </a>
+  <ul class="treeview-menu">
+    <?php
+        if($this->Role_model->_has_access_('error_log_list','index')){
+    ?>
+    <li> <a href="<?php echo site_url('adminController/error_log_list/index');?>"><i class="fa fa-plus"></i> 404 Error log</a> </li><?php } ?>    
+  </ul>
+</li>
 
