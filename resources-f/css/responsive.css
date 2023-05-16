@@ -6,6 +6,11 @@
     .w-title{font-size: 16px;}
     .w-subInfo ul li{line-height: 18px; font-size: 13px;}
 } */
+
+@media screen and (min-width:993px) and (max-width:1100px){
+    .sl-form {width: 350px;}
+}
+
 @media screen and (min-width:1200px) and (max-width:1365px){
     .pp-scroll{max-height:265px!important;min-height:265px!important;}
     .PP-box-info .form-group{margin-bottom:22px;}
@@ -23,7 +28,7 @@
 
 @media screen and (min-width:1441px) and (max-width:2560px){
     .pp-scroll{max-height:265px!important;min-height:265px!important;}
-    .sl-form{top:-35vw;}
+    .sl-form{top:-36vw;}
 }
 
 
