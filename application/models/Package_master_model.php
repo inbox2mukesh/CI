@@ -1159,9 +1159,9 @@ class Package_master_model extends CI_Model
         if($programe_id){
             $this->db->where(array('pkg.programe_id'=>$programe_id));
         }else{ }
-        if($category_id){
-            $this->db->where(array('pkg.category_id'=>$category_id));
-        }else{ }
+        // if($category_id){
+        //     $this->db->where(array('pkg.category_id'=>$category_id));
+        // }else{ }
         if($duration){
             $this->db->where(array('pkg.duration'=>$duration));
         }else{ }
@@ -1874,6 +1874,9 @@ class Package_master_model extends CI_Model
             spkg.`method`,
             spkg.`active` as package_status,
             spkg.`pack_type`,
+            spkg.`tax_detail`,
+            CONCAT("'.CURRENCY.' ", FORMAT(spkg.`cgst_amt`/100,2)) AS cgst_amt,
+            CONCAT("'.CURRENCY.' ", FORMAT(spkg.`sgst_amt`/100,2)) AS sgst_amt,
             CONCAT("'.CURRENCY.' ", FORMAT(spkg.`amount`/100,2)) AS amount,
             CONCAT("'.CURRENCY.' ", FORMAT(spkg.`amount_paid`/100,2)) AS amount_paid,
             CONCAT("'.CURRENCY.' ", FORMAT(spkg.`waiver`/100,2)) AS waiver,
@@ -2256,5 +2259,29 @@ class Package_master_model extends CI_Model
              ->from('tax_master')
              ->where(array('tax_name'=>$taxname,'active'=>1));
         return $this->db->get('')->row_array();
+    }
+    function get_transaction_history($params = [])
+    {
+        if(isset($params) && !empty($params))
+        {
+            $this->db->limit($params['limit'], $params['offset']);
+        }
+        $this->db->select('tch.remarks,pkg.amount,pkg.cgst_amt,pkg.sgst_amt,pkg.total_amt,pkg.tax_detail,pkg.amount_paid,pkg.total_paid_ext_tax,subscribed_on,pkg.package_name,CONCAT(std.fname,std.lname) as student_name,pkg.waiver,pkg.waiver_by,usr.fname,usr.lname')
+                ->join('`student_transaction_history` tch', 'tch.`student_package_id` = pkg.`student_package_id`')
+                ->join('`students` std', 'std.`id` = pkg.`student_id`','right')
+                ->join('`user` usr', 'usr.`id` = pkg.`by_user`','right')
+                ->from('student_package pkg')
+                ->group_by('pkg.student_package_id')
+                ->order_by('pkg.student_package_id','DESC');
+        return $this->db->get('student_transaction_history')->result_array();
+    }
+    function get_transaction_history_count($params = [])
+    {
+        $this->db->select('tch.remarks,pkg.amount,pkg.cgst_amt,pkg.sgst_amt,pkg.total_amt,pkg.tax_detail,pkg.amount_paid,pkg.total_paid_ext_tax,subscribed_on,pkg.package_name,CONCAT(std.fname,std.lname) as student_name,pkg.waiver')
+                ->join('`student_transaction_history` tch', 'tch.`student_package_id` = pkg.`student_package_id`', 'left')
+                ->join('`students` std', 'std.`id` = pkg.`student_id`', 'left')
+                ->from('student_package pkg')
+                ->order_by('pkg.student_package_id','DESC');
+        return $this->db->get('student_transaction_history')->num_rows();
     }
 }

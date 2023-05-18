@@ -260,14 +260,14 @@ class Online_class_schedule extends MY_Controller{
         $data['classroom_id'] = (isset($classroom_id))?$classroom_id:'';
         $this->load->library('form_validation');
         $this->form_validation->set_rules('classroom_id[]','Classroom','required'); 
-        $this->form_validation->set_rules('dateTime','Date Time','required|trim|min_length[16]|max_length[19]');
-        $this->form_validation->set_rules('till_date','Date Till','required|trim|min_length[10]|max_length[10]');
+        //$this->form_validation->set_rules('dateTime_','Date Time','required|trim|min_length[16]|max_length[19]');
+        //$this->form_validation->set_rules('till_date','Date Till','required|trim|min_length[10]|max_length[10]');
         $this->form_validation->set_rules('class_duration','Class duration','required|trim|integer|min_length[2]|max_length[3]');  
 		$this->form_validation->set_rules('topic','Class Topic','required|trim|max_length[50]');
 		
 		if($this->form_validation->run()){
-
-            $tillDate = $this->input->post('till_date');            
+            // pr('sadfasd',1);
+            // $tillDate = $this->input->post('till_date');            
             $dateTime = $this->input->post('dateTime_');
             $class_duration="+".$this->input->post('class_duration');
             $classDate_dateTime = trim(substr($dateTime,0,10));
@@ -276,50 +276,53 @@ class Online_class_schedule extends MY_Controller{
             $calssTime = trim(substr($this->input->post('dateTime'),11));
            
             $datetime1 = strtotime($classDate_from);
-            $datetime2 = strtotime($tillDate);
-            $Diff = $datetime2-$datetime1;
-            $dayDiff=$Diff/86400;
+            // $datetime2 = strtotime($tillDate);
+            // $Diff = $datetime2-$datetime1;
             $dtetime = explode(",",$dateTime);
-            $dteTimeStr ='';
-            for($d=0;$d<count($dtetime);$d++)
-            {
-                $date = new DateTime($dtetime[$d]);
-                $dateTime = $date->format('d-m-Y G:i:00');            
-                $nameOfDay = date('D', strtotime($this->input->post('dateTime')));
-                $dteTimeStr .= strtotime($dateTime).',';                
-            }
-            $date = new DateTime($dateTime);
-            $dateTime = $date->format('d-m-Y G:i:00');            
-            $nameOfDay = date('D', strtotime($this->input->post('dateTime')));
-            $dateTimeStr = strtotime($dateTime);
+            $dayDiff=count($dtetime);
+            
+            // $dteTimeStr ='';
+            // for($d=0;$d<count($dtetime);$d++)
+            // {
+            //     $date = new DateTime($dtetime[$d]);
+            //     $dateTime = $date->format('d-m-Y G:i:00');            
+            //     $nameOfDay = date('D', strtotime($this->input->post('dateTime')));
+            //     $dteTimeStr .= strtotime($dateTime).',';                
+            // }
+            
             $classroom_id=$this->input->post('classroom_id');
+            
 
             foreach($classroom_id as $c){ 
-            // for($i=0;$i<=$dayDiff;$i++){
+            for($i=0;$i<$dayDiff;$i++){
+                // echo $dtetime[$i];
+                $date = new DateTime($dtetime[$i]);
+                $dateTime = $date->format('d-m-Y G:i:00');            
+                // $nameOfDay = date('D', strtotime($dtetime[$i]));
+                $dateTimeStr = strtotime($dtetime[$i]);
 
-                $thisdate = date('d-m-Y', strtotime($this->input->post('dateTime') . ' +'.$i.' day'));
-                $dateTime = date('d-m-Y H:i:s', strtotime($this->input->post('dateTime') . ' +'.$i.' day'));
+                //$thisdate = date('d-m-Y', strtotime($this->input->post('dateTime') . ' +'.$i.' day'));
+                //$dateTime = date('d-m-Y H:i:s', strtotime($this->input->post('dateTime') . ' +'.$i.' day'));
                 $nameOfDay = date('D', strtotime($dateTime));
                 $dateTimeStr = strtotime($dateTime);  
                 $enddate_end= date('d-m-Y H:i:s', strtotime($class_duration.' minutes', strtotime($dateTime)));
                 $strdate_end = strtotime($enddate_end);
                 $params = array(
                     'classroom_id' => $c,
-                    'dateTime'=> $this->input->post('dateTime_'),
-                    'strdate'=>  rtrim($dteTimeStr,','),
+                    'dateTime'=> $dateTime,
+                    'strdate'=>  rtrim($dateTimeStr,','),
                     'strdate_end'=>  $strdate_end,
                     'dayname' => $nameOfDay,
-                    'till_date' => $tillDate,
+                    'till_date' => '',
                     'topic' => $this->input->post('topic'),
                     'class_duration' => $this->input->post('class_duration'),
-                    'trainer_id' => $this->input->post('trainer_id'),
                     'conf_URL' => $this->input->post('conf_URL'),
                     'active' => 1,
                     'by_user' => $_SESSION['UserId'],
                 ); 
                 // pr($params,1);          
                 $idd = $this->Online_class_schedule_model->add_schedule($params);
-                // }  
+                }  
             }       
  
             if($idd){

@@ -790,9 +790,13 @@ class Student extends MY_Controller{
         $data['WSdocFieldDisplay']=$data['docFieldDisplay']=$data['RTdocFieldDisplay']=$this->Student_model->RTdocFieldDisplay($id);        
         //Get waiver approved if any
         $data['waiver_approved']=$this->Waiver_model->get_waiver_approved_count($id,$by_user);
+    //    pr($data['waiver_approved'],1 );
         if($data['waiver_approved']>0){
             $data['waiver_approved_details'] = $this->Waiver_model->get_waiver_approved_details($id,$by_user);
             $wid = $data['waiver_approved_details']['wid'];
+            $data['waiver_amount_given'] = $data['waiver_approved_details']['amount'];
+            $data['waiver_from_name']= $data['waiver_approved_details']['from_fname'].' '.$data['waiver_approved_details']['from_lname'];
+            // pr($data['waiver_approved_details'],1);
         }
         //Get refund approved if any
         $data['refund_approved']=$this->Refund_model->get_refund_approved_count($id,$by_user);
@@ -1456,7 +1460,8 @@ class Student extends MY_Controller{
         
         $amount_payable = $this->input->post('amount_payable',TRUE);//$this->input->post('amount_paid');
         if($amount_paid==''){$amount_paid=0;}else{$amount_paid =$amount_paid*100;}
-        $amount_due = $package_data['discounted_amount']-$amt_ext_tax_paid;//($amount_paid+$waiver+$other_discount);
+        $amt_ext_tax_paid_m = $amt_ext_tax_paid * 100;
+        $amount_due = ($package_data['discounted_amount']*100)-($amt_ext_tax_paid_m+$waiver+$other_discount);//+$other_discount
         // pr($amount_due,1);
         if($amount_due<=0){
             $amount_due=0;
@@ -1584,8 +1589,8 @@ class Student extends MY_Controller{
                 'other_discount'=> $other_discount,
                 'promocode_used'=> $discount_code,
                 'waiver'        => $actually_used_amount*100,
-                'amount_paid'   =>$amount_payable*100,
-                'amount_due'    => $amount_due*100,
+                'amount_paid'   =>($amount_payable)*100,
+                'amount_due'    => $amount_due,
                 'amount_paid_by_wallet' => $paidBywallet,
                 'package_duration'=>$dt,
                 'tran_id'       => $tran_id,
@@ -1639,7 +1644,7 @@ class Student extends MY_Controller{
 
             }else{
 
-                $remarks1 = "Initial payment";
+                $remarks1 = "Initial payment (Incl. Tax) CGST@".$cgst['tax_per'].' - '.CURRENCY.' '.$cgst_tax.' SGST@'.$sgst['tax_per'].'-'.CURRENCY.' '.$sgst_tax;
                 if($discount_type=='Waiver' and $waiver>0){
                     $remarks2 = " Waiver worth Rs. ".number_format($actually_used_amount,2);
                 }elseif($discount_type=='Discount' and $other_discount>0){
@@ -1654,13 +1659,18 @@ class Student extends MY_Controller{
             $params3 = array(                    
                 'student_package_id'=> $student_package_id,
                 'remarks'           => $remarks,
-                'amount'            => $amount_paid+$paidBywallet,                   
+                'amount'            => ($amount_payable+$paidBywallet)*100, 
+                'cgst_amt'          => $cgst_tax*100,
+                'sgst_amt'          => $sgst_tax*100,
+                'total_amt'         => $amount_payable*100,
+                'tax_detail'        => $tax_detail,                     
                 'student_id'        => $sid,
                 'type'              => '+',
                 'by_user'           => $by_user,
                 'created'           => date("d-m-Y h:i:s A"),
                  'modified'          => date("d-m-Y h:i:s A"),
             );
+            // pr($params3,1);
             $idd2 = $this->Student_package_model->update_transaction($params3);
             if($wid and $updateWaiver==1){
                 $params4 = array('active'=>0,'actually_used_amount'=>$actually_used_amount);
@@ -1789,7 +1799,8 @@ class Student extends MY_Controller{
     
 
     //non-real function
-    function sell_practice_pack_($wid,$package_id,$sid,$mail_sent,$offlineCount,$onlineCount,$ppCount,$enrolledBy_homeBranch){
+    function sell_practice_pack_($wid,$package_id,$sid,$mail_sent,$offlineCount,$onlineCount,$ppCount,$enrolledBy_homeBranch)
+    {
         
         $discount_code = null;
         $centerCode = null;
@@ -1882,7 +1893,9 @@ class Student extends MY_Controller{
         $amount_payable = $this->input->post('amount_payable_pp',TRUE);////$this->input->post('amount_paid_pp', TRUE);
         if($amount_paid==''){$amount_paid=0;}else{$amount_paid =$amount_paid*100;} 
         //$amount_due = $discounted_amount-($amount_paid+$waiver+$other_discount);
-        $amount_due = $package_data['discounted_amount']-$amt_ext_tax_paid;
+        // $amount_due = $package_data['discounted_amount']-$amt_ext_tax_paid;
+        $amt_ext_tax_paid_m = $amt_ext_tax_paid*100;
+        $amount_due = ($package_data['discounted_amount']*100)-($amt_ext_tax_paid_m+$waiver+$other_discount);//+$other_discount
         // pr($amount_due,1);
         if($amount_due<=0){
             $amount_due=0;
@@ -2011,7 +2024,7 @@ class Student extends MY_Controller{
                 'promocode_used'=> $discount_code,
                 'waiver'        => $actually_used_amount*100,
                 'amount_paid'   => $amount_payable*100,
-                'amount_due'    => $amount_due*100,                
+                'amount_due'    => $amount_due,                
                 'payment_file'  => $payment_file,
                 'due_commitment_date'=> $due_commitment_date,
                 'currency'      => CURRENCY,
@@ -2031,7 +2044,8 @@ class Student extends MY_Controller{
                 'package_duration'=>$dt,
                 'requested_on' => date("d-m-Y h:i:s A"),
                 'total_paid_ext_tax'=>$amt_ext_tax_paid*100
-            );       
+            );   
+            // pr($params2,1);    
         $this->db->insert('student_package', $params2);
         $student_package_id =  $this->db->insert_id();
         //promocode updation start//
@@ -2062,7 +2076,7 @@ class Student extends MY_Controller{
 
         }else{
 
-            $remarks1 = "Initial payment";
+            $remarks1 = "Initial payment (Incl. Tax) CGST@".$cgst['tax_per'].' - '.CURRENCY.' '.$cgst_tax.' SGST@'.$sgst['tax_per'].'-'.CURRENCY.' '.$sgst_tax;
             if($discount_type=='Waiver' && $waiver>0){
                 $remarks2 = " Waiver worth Rs. ".number_format($actually_used_amount,2);
             }elseif($discount_type=='Discount' && $other_discount>0){
@@ -2077,7 +2091,11 @@ class Student extends MY_Controller{
         $params3 = array(                    
             'student_package_id'=> $student_package_id,
             'remarks'           => $remarks,
-            'amount'            => $amount_paid+$paidBywallet,                   
+            'amount'            => ($amount_payable+$paidBywallet)*100, 
+            'cgst_amt'          => $cgst_tax*100,
+            'sgst_amt'          => $sgst_tax*100,
+            'total_amt'         => $amount_payable*100,
+            'tax_detail'        => $tax_detail,                 
             'student_id'        => $sid,
             'type'              => '+',
             'by_user'           => $by_user,
@@ -2711,7 +2729,7 @@ class Student extends MY_Controller{
                 'sgst_amt'          =>$sgst_amt,
                 'total_amt'         =>$total_amt,
                 'tax_detail'        =>$tax_arr,
-                'remarks'           => $remarks,
+                'remarks'           =>'Add Payment',
                 'student_id'        => $student_id,
                 'type'              => '+',
                 'by_user'           => $by_user,
@@ -2764,7 +2782,7 @@ class Student extends MY_Controller{
                 'sgst_amt'          =>$sgst_amt,
                 'total_amt'         =>$total_amt,
                 'tax_detail'        =>$tax_arr,
-                'remarks'           => $remarks,
+                'remarks'           =>'Add Payment',
                 'student_id'        => $student_id,
                 'type'              => '+',
                 'by_user'           => $by_user,

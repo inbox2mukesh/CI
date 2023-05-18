@@ -24,6 +24,7 @@
                                 <select id="country_id" name="country_id[]" class="form-control inDis selectpicker ccode selectCountry selectpicker-ui-100" data-live-search="true" data-show-subtext="true" data-actions-box="true" multiple="multiple">
                                     <option data-subtext="" value="" disabled>Select Country</option>
                                     <?php 
+                                    if(!empty($all_countries)){
                                     foreach($all_countries as $p) {
                                         $selected = "";
                                         if(in_array($p['country_id'],$this->input->get('country_id'))) {
@@ -31,6 +32,7 @@
                                         }
                                         echo '<option  value="'.$p['country_id'].'" '.$selected.'>'.$p['name'].'</option>';
                                     }
+                                }
                                     ?>
                                 </select>
                             </div>
@@ -42,6 +44,7 @@
                                 <select name="test_module_id" id="test_module_id" class="form-control selectpicker selectpicker-ui-100" data-show-subtext="true" data-live-search="true" onchange="reflectPgmBatch(this.value,'classroom_schedule');">
                                     <option value="">Select course</option>
                                     <?php 
+                                    if(!empty($all_test_module)){
                                     foreach($all_test_module as $p)
                                     {
                                         if($test_module_id) {
@@ -52,6 +55,7 @@
                                         }
                                         echo '<option value="'.$p['test_module_id'].'" '.$selected.'>'.$p['test_module_name'].'</option>';
                                     } 
+                                }
                                     ?>
                                 </select>
                             </div>
@@ -63,11 +67,13 @@
                                 <select name="programe_id" id="programe_id" class="form-control selectpicker selectpicker-ui-100" data-show-subtext="true" data-live-search="true" onchange="get_category_forPack(this.value);">
                                     <option data-subtext="" value="">Select program</option>
                                     <?php 
+                                    if(!empty($all_programe_masters)){
                                     foreach($all_programe_masters as $p)
                                     {
                                         $selected = ($p['programe_id'] == $this->input->get('programe_id')) ? ' selected="selected"' : "";
                                         echo '<option value="'.$p['programe_id'].'" '.$selected.'>'.$p['programe_name'].'</option>';
                                     } 
+                                }
                                     ?>
                                 </select>
                             </div>
@@ -81,6 +87,7 @@
                                 <select name="category_id[]" id="category_id" class="form-control selectpicker selectpicker-ui-100" data-show-subtext="true" data-live-search="true" data-actions-box="true" multiple="multiple">
                                     <option value="" disabled="disabled">Select Category</option>
                                     <?php 
+                                    if(!empty($all_category)){
                                     foreach($all_category as $p){
                                         $selected='';
                                         if(in_array($p['category_id'],$category_id_post)){
@@ -88,6 +95,7 @@
                                         }
                                         echo '<option data-subtext="'.$p['category_id'].'" value="'.$p['category_id'].'" '.$selected.'>'.$p['test_module_name'].' | '.$p['programe_name'].' | '.$p['category_name'].'</option>';
                                     } 
+                                }
                                     ?>
                                 </select>
                             </div>
@@ -98,10 +106,12 @@
                                 <select name="duration_type" id="duration_type" class="form-control selectpicker selectpicker-ui-100">
                                     <option value="">Select</option>
                                     <?php 
+                                    if(!empty($all_duration_type)){
                                     foreach($all_duration_type as $p){
                                         $selected = ($p['id'] == $this->input->get('duration_type')) ? ' selected="selected"' : "";
                                         echo '<option value="'.$p['id'].'" '.$selected.'>'.$p['duration_type'].'</option>';
                                     } 
+                                }
                                     ?>
                                 </select>
                             </div>

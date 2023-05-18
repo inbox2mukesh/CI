@@ -23,10 +23,19 @@
                             $batch_name .= $pc['center_name'].', ';
                         } 
                         $package_price = $p["discounted_amount"];
-                        $cgst_tax_amt = number_format(($package_price * $cgst)/100);
-                        $sgst_tax = number_format(($package_price * $sgst)/100);
-                        $totalamt = $package_price + $cgst_tax + $sgst_tax;
-                        // $amtpaid = $amountpaid;
+                        $cgst_tax_amt = $cgst_amt;
+                        $sgst_tax_amt = $sgst_amt;
+                        // $amountpayable = 
+                        if($discount_type == 'Waiver')
+                        {
+                            $package_price = $package_amt;
+                            $cgst_tax_amt = number_format(($package_price * $cgst)/100,2);
+                            $sgst_tax_amt = number_format(($package_price * $sgst)/100,2);
+                            $amountpayable = $package_price + $cgst_tax_amt + $sgst_tax_amt;
+                            
+                        }
+                        
+                        // $amtpaid = $amountpaid;($discount_type != 'Waiver')?$amountpayable:$totalamtpayable
                         ?>                  
                     
                         <tr>                        
@@ -35,10 +44,14 @@
                         <td><?php echo $p["programe_name"] ?></td>
                         <td><?php echo rtrim($category_name,', ') ?></td> 
                         <td><?php echo $p['center_name'] ?></td>                                                            
-                        <td><?php echo $p["discounted_amount"] ?></td>
-                        <td><span>CGST(<?php echo '@'.$cgst .'%'?>) -<?php echo $cgst_amt ?></span></br><span>SGST(<?php echo '@'.$sgst .'%'?>)-<?php echo $sgst_amt ?></span></td>
-                        <td><?php echo CURRENCY.' '.$amountpayable ?></td>
-                        <td><?php echo $amountpaid ; ?></td>                      
+                        <td><?php if($discount_type != 'Waiver') { ?>
+                        <?php echo $p["discounted_amount"]; } else { ?>
+                        
+                            <?php echo CURRENCY.' '.$package_price.'( '.$p["discounted_amount"].'-'.$waiveramt.')'; } ?>
+                        </td>
+                        <td><span>CGST(<?php echo '@'.$cgst .'%'?>) -<?php echo $cgst_tax_amt ?></span></br><span>SGST(<?php echo '@'.$sgst .'%'?>)-<?php echo $sgst_tax_amt ?></span></td>
+                        <td><?php echo CURRENCY.' '.$amountpayable; ?></td>
+                        <td id="amountpaid"><?php echo $amountpaid ; ?></td>                      
                         <td><?php echo $p["duration"].' '.$p["duration_type"] ?></td>
                         
                     </tr>

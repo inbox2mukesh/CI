@@ -36,10 +36,14 @@
                     <td><?php echo rtrim($category_name,', ') ?></td> 
                     <td><?php echo rtrim($batch_name,', ') ?></td> 
                     <td><?php echo rtrim($course_timing,', ') ?></td>                                       
-                    <td><?php echo $p["discounted_amount"] ?></td>
+                    <td><?php if($discount_type != 'Waiver') { ?>
+                    <?php echo $p["discounted_amount"]; } else { ?>
+                    
+                        <?php echo CURRENCY.' '.$package_amt.'( '.$p["discounted_amount"].'-'.$waiveramt.')'; } ?>
+                    </td>
                     <td><span>CGST(<?php echo $cgst .'%'?>) -<?php echo $cgst_amt ?></span></br><span>SGST(<?php echo $sgst .'%'?>)-<?php echo $sgst_amt ?></span></td>
-                    <td><?php echo CURRENCY.' '.$amountpayable ?></td>
-                    <td><?php echo $amountpaid ; ?></td>
+                    <td id="tbpackprice"><?php echo CURRENCY.' '.$amountpayable ?></td>
+                    <td id="amountpaid"><?php echo $amountpaid ; ?></td>
                     <td><?php echo $p["duration"].' '.$p["duration_type"] ?></td>
             </tr>
             <?php } ?>

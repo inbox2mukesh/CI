@@ -373,6 +373,7 @@ class Role_model extends CI_Model
 			$cn =$cn.'.php';
 		}
         $method_id =null;
+        $controller_id = null;
 		if(!empty($cn) && !empty($mn)){
             
 			$role_id=$_SESSION['roleId'];

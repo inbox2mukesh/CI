@@ -1183,6 +1183,8 @@ class Package_master extends MY_Controller{
 
         $package_id = $this->input->post('package_id', true);
         $payingamt = $this->input->post('paidamount', true);
+        $discount_type = $this->input->post('discounttype', true);
+        $waiveramt = $this->input->post('waiveramt', true);
         $cgst = $this->Package_master_model->get_tax_detail('CGST');
         $sgst = $this->Package_master_model->get_tax_detail('SGST');
         $category_name =null;
@@ -1209,13 +1211,17 @@ class Package_master extends MY_Controller{
                 }               
             }
             $package_amt = $packageData[0]['package_amount'] ;
+            if($discount_type == 'Waiver')
+            {
+                $package_amt = $package_amt - $waiveramt;
+            } 
             $cgst_tax_per = (!empty($cgst))?$cgst['tax_per']:0;
             $sgst_tax_per = (!empty($sgst))?$sgst['tax_per']:0;
             $cgst_tax = ($package_amt * $cgst_tax_per)/100;
             $sgst_tax = ($package_amt * $sgst_tax_per)/100;
             $totalamt = $package_amt + $cgst_tax + $sgst_tax;
-            $packinfo = $this->load->view('student/packageinfo',['packageData'=>$packageData,'cgst'=>$cgst_tax_per,'sgst'=>$sgst_tax_per,'cgst_amt'=>$cgst_tax,'sgst_amt'=>$sgst_tax,'amountpaid'=>$payingamt,'amountpayable'=>$totalamt],true);
-            $response = array('packinfo'=>$packinfo,'amountpayable'=>$totalamt);
+            $packinfo = $this->load->view('student/packageinfo',['packageData'=>$packageData,'cgst'=>$cgst_tax_per,'sgst'=>$sgst_tax_per,'cgst_amt'=>$cgst_tax,'sgst_amt'=>$sgst_tax,'amountpaid'=>$payingamt,'package_amt'=>$package_amt,'amountpayable'=>$totalamt,'discount_type'=>$discount_type,'waiveramt'=>$waiveramt],true);
+            $response = array('packinfo'=>$packinfo,'amountpayable'=>$totalamt,'packamount'=>$package_amt);
             //$response = $this->load->view('student/packageinfo',['packageData'=>$packageData,'cgst'=>$cgst['tax_per'],'sgst'=>$sgst['tax_per']],true);            
             echo json_encode($response);
         }else{
@@ -1229,6 +1235,8 @@ class Package_master extends MY_Controller{
 
         $package_id = $this->input->post('package_id', true);
         $paidamt = $this->input->post('paidamount', true);
+        $discount_type = $this->input->post('discounttype', true);
+        $waiveramt = $this->input->post('waiveramt', true);
         $category_name =null;
         $batch_name =null;
         if(isset($package_id)){            
@@ -1251,16 +1259,24 @@ class Package_master extends MY_Controller{
                     $packageData[$key]['Package_timing'][$key2]=$b;                       
                 }               
             } 
-            $package_amt = $packageData[0]['package_amount'] ;          
+            
+            $package_amt = $packageData[0]['package_amount'] ; 
+            if($discount_type == 'Waiver')
+            {
+                $package_amt = $package_amt - $waiveramt;
+            }         
             $cgst = $this->Package_master_model->get_tax_detail('CGST');
             $sgst = $this->Package_master_model->get_tax_detail('SGST');
             $cgst_tax_per = (!empty($cgst))?$cgst['tax_per']:0;
             $sgst_tax_per = (!empty($sgst))?$sgst['tax_per']:0;
             $cgst_tax = ($package_amt * $cgst_tax_per)/100;
             $sgst_tax = ($package_amt * $sgst_tax_per)/100;
+            
+            
             $totalamt = $package_amt + $cgst_tax + $sgst_tax;
-            $packinfo = $this->load->view('student/practicepack_info',['packageData'=>$packageData,'cgst'=>$cgst_tax_per,'sgst'=>$sgst_tax_per,'cgst_amt'=>$cgst_tax,'sgst_amt'=>$sgst_tax,'amountpaid'=>$paidamt,'amountpayable'=>$totalamt],true);
-            $response = array('packinfo'=>$packinfo,'amountpayable'=>$totalamt);
+            
+            $packinfo = $this->load->view('student/practicepack_info',['packageData'=>$packageData,'cgst'=>$cgst_tax_per,'sgst'=>$sgst_tax_per,'cgst_amt'=>$cgst_tax,'sgst_amt'=>$sgst_tax,'amountpaid'=>$paidamt,'amountpayable'=>$totalamt,'package_amt'=>$package_amt,'discount_type'=>$discount_type,'waiveramt'=>$waiveramt],true);
+            $response = array('packinfo'=>$packinfo,'amountpayable'=>$totalamt,'packamount'=>$package_amt);
             echo json_encode($response);
         }else{
             header('Content-Type: application/json');

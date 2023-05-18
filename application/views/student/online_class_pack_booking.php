@@ -49,7 +49,7 @@
                             <div class="col-md-4">
                                 <label for="discount_type" class="control-label text-success"><span class="text-danger">*</span>Discount type</label>
                                 <div class="form-group">
-                                    <select name="discount_type" id="discount_type" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep"  data-show-subtext="true" data-live-search="true" onchange="showDiscountTypeFields_online(this.value)">
+                                    <select name="discount_type" id="discount_type" class="form-control selectpicker selectpicker-ui-100 select_removeerrmessagep"  data-show-subtext="true" data-live-search="true" onchange="showDiscountTypeFields_online(this.value);getOnlineOfflinePackInfo();">
                                         <!-- <option value="">Select type</option> -->
                                          <!-- <option value="Discount">Promocode</option>  -->
                                         <?php if(WOSA_ONLINE_DOMAIN == 1){?> 
@@ -60,6 +60,7 @@
                                     <span class="text-danger discount_type_err"><?php echo form_error('discount_type'); ?></span>
                                 </div>
                             </div>
+                            <input type ="hidden" name ="waiver_amt" id="waiver_amt" value="">
                             <div class="col-md-4 waiverField_online" style="display: none;">
                                 <label for="waiver" class="control-label">Waiver amount</label>
                                 <div class="form-group">
@@ -70,7 +71,7 @@
                             <div class="col-md-4 waiverField_online" style="display: none;">
                                 <label for="waiver_by" class="control-label">Waiver By</label>
                                 <div class="form-group">
-                                    <input type="text" name="waiver_by" value="<?php echo $this->input->post('waiver_by') ? $this->input->post('waiver_by') : $waiver_from_fname . ' ' . $waiver_from_lname; ?>" class="form-control input-ui-100" id="waiver_by" readonly />
+                                    <input type="text" name="waiver_by" value="<?php echo $this->input->post('waiver_by') ? $this->input->post('waiver_by') : $waiver_from_name ; ?>" class="form-control input-ui-100" id="waiver_by" readonly />
                                     <span class="text-danger waiver_by_err"><?php echo form_error('waiver_by'); ?></span>
                                 </div>
                             </div>
@@ -87,7 +88,7 @@
                                 <label for="amount_paid" class="control-label"><span class="text-danger">*</span>Amount paid
                                     <span class="text-warning"><i>(You may edit amount if any dues)</i></span></label>
                                 <div class="form-group">
-                                    <input type="text" name="amount_paid" id="amount_paid" value="<?php echo $this->input->post('amount_paid'); ?>" class="form-control chknum1 input-ui-100 removeerrmessage" onblur="validate_amount_paid(this.value);" onkeyup="calculatepayableamnt('onlinepack',this.value);" onfocusout="getOnlineOfflinePackInfo(this.value);" maxlength="5" autocomplete="off" />
+                                    <input type="text" name="amount_paid" id="amount_paid" value="<?php echo $this->input->post('amount_paid'); ?>" class="form-control chknum1 input-ui-100 removeerrmessage" onblur="validate_amount_paid(this.value);" onkeyup="calculatepayableamnt('onlinepack',this.value);"  maxlength="5" autocomplete="off" />
                                     <span class="text-danger amount_paid_err"><?php echo form_error('amount_paid'); ?></span>
                                 </div>
                             </div>

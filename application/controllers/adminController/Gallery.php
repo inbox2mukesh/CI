@@ -60,9 +60,9 @@ class Gallery extends MY_Controller{
                 'title'  => $this->input->post('title'),
                 'by_user' => $by_user,
             );
-            if(!file_exists(GALLERY_IMAGE_PATH)){
-                mkdir(GALLERY_IMAGE_PATH, 0777, true);
-            }
+            if(!is_dir(GALLERY_IMAGE_PATH)){
+                mkdir(GALLERY_IMAGE_PATH, 0755, true);
+            }
             $params = array(
                 'active' => $this->input->post('active') ? $this->input->post('active') : 0,
                 'image' =>  $this->input->post('file_hidden'),
@@ -162,7 +162,7 @@ class Gallery extends MY_Controller{
                         'by_user' => $by_user,
                     );  
                 if(!file_exists(GALLERY_IMAGE_PATH)){
-                    mkdir(GALLERY_IMAGE_PATH, 0777, true);
+                    mkdir(GALLERY_IMAGE_PATH, 0755, true);
                 }
                 /* $config['upload_path']   = GALLERY_IMAGE_PATH;
                 $config['allowed_types'] = GALLERY_ALLOWED_TYPES;

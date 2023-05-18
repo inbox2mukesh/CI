@@ -300,6 +300,7 @@ class Cron_tab extends MY_Controller{
                 } 
                 include_once APPPATH . 'controllers/adminController/' . $controller;
                 $methods = get_class_methods(str_replace( '.php', '', $controller));
+                if(!empty($methods) && (is_array($methods) || is_object($methods))){
                 foreach($methods as $method){ 
 
                     $excludedMethod=array(                    
@@ -353,15 +354,11 @@ class Cron_tab extends MY_Controller{
                         }                    
                     }         
                     
-                }                
+                }
+            }                
             }           
 
-        }
-        //activity update start              
-            $activity_name= ROLE_REFRESH;
-            $description= 'All the module refreshed';
-            $res=$this->addUserActivity($activity_name,$description,$student_package_id=0,$by_user);
-        //activity update end
+        } 
        
     }
     

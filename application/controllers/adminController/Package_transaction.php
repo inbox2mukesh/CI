@@ -214,6 +214,35 @@ class Package_transaction extends MY_Controller{
         $data['_view'] = 'package_transaction/success_fourmodule_data';
         $this->load->view('layouts/main', $data);
     }
+    function alltransationsbreakdown($pageno=1)
+    {
+        //access control start
+        $cn = $this->router->fetch_class().''.'.php';
+        $mn = $this->router->fetch_method();        
+        if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
+        
+        //access control ends
+        $UserFunctionalBranch = $this->User_model->getUserFunctionalBranch($_SESSION['UserId']);
+        $userBranch=[];
+        foreach ($UserFunctionalBranch as $b){
+            array_push($userBranch,$b['center_id']);
+        }
+        $data['all_testModule'] = $this->Package_master_model->get_all_testModule_tran();
+        $data['title'] = 'Transaction Break Down';
+        $this->load->library('pagination');
+        $config = $this->config->item('pagination');
+        $config['per_page'] = 100;//RECORDS_PER_PAGE;
+        $params['limit'] = 100;//RECORDS_PER_PAGE; 
+        $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;         
+        $config['base_url'] = site_url('adminController/package_transaction/alltransationsbreakdown/');
+        $config['total_rows'] = $this->Package_master_model->get_transaction_history_count($params);
+        // pr($config['total_rows'],1);
+        $this->pagination->initialize($config);        
+        $data['transaction'] = $this->Package_master_model->get_transaction_history($params);
+       
+        $data['_view'] = 'package_transaction/transaction_breakdown';
+        $this->load->view('layouts/main',$data);
+    }
 
     
 }

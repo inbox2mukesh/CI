@@ -60,12 +60,12 @@
                                                             <td><?php echo $sp['package_cost']; ?></td>
                                                             <!-- price + taxes -->
                                                             <?php 
-                                                            $totaltax = ($sp['cgst_amt']+$sp['sgst_amt'])/100;
+                                                            $totaltax = ($sp['cgst_amt']+$sp['sgst_amt']);
                                                             $totalpaidamt = $sp['total_paid_ext_tax'] + $totaltax;                                                      
                                                             ?>
                                                             
                                                             <td><?php echo  CURRENCY.' '.$sp['total_paid_ext_tax']; ?></td>
-                                                            <td><?php echo CURRENCY.' '.($sp['cgst_amt']+$sp['sgst_amt'])/100; ?></td>
+                                                            <td><?php echo CURRENCY.' '.number_format($totaltax,2); ?></td>
                                                             <td><?php echo $sp['amount_paid_by_wallet']; ?></td>
                                                             <td><?php echo $sp['ext_amount']; ?></td>
                                                             <td><?php echo $sp['ext_total_tax']; ?></td>

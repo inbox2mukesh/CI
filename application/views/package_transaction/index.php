@@ -28,6 +28,9 @@
                                 <th>Pack/Cost</th>
                                 <th>Type</th>
                                 <th>Amount Paid</th>
+                                <th>Tax Rates</th>
+                                <th>CGST</th>
+                                <th>SGST</th>
                                 <th>Waiver</th>
                                 <th>Dis.</th>
                                 <th>Dues</th>
@@ -83,6 +86,8 @@
                                         } else {
                                             echo '<span class="text-danger">' . DEACTIVE . '</span>';
                                         }
+                                        $taxdetail = json_decode($s['tax_detail']);
+                                        // $taxdetail =$s['tax_detail'];
                                         ?>
                                     </td>
                                     <td><?php echo $s['fname'] . ' ' . $s['lname']; ?></td>
@@ -90,6 +95,9 @@
                                     <td><?php echo $package_name . SEP . $s['amount']; ?></td>
                                     <td><?php echo $pack_type; ?></td>
                                     <td><?php echo $s['amount_paid']; ?></td>
+                                    <td><?php echo (!empty($taxdetail))?'CGST@'.$taxdetail->cgst.'<br>SGST@'.$taxdetail->sgst:''; ?></td>                              
+                                    <td><?php echo $s['cgst_amt']; ?></td>
+                                    <td><?php echo $s['sgst_amt']; ?></td>                                
                                     <td><?php echo $s['waiver']; ?></td>
                                     <td><?php echo $s['other_discount']; ?></td>
                                     <td><?php echo $s['amount_due']; ?></td>
