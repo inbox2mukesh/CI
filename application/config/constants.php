@@ -6,7 +6,7 @@
  *
  **/
 global $customJS;
-define('JS_CSS_VERSION', '0.0.12');
+define('JS_CSS_VERSION', '0.0.17');
 define('ADMIN', 'Super Admin');
 ///////////////////////////////////settings start///////////////////////////////////////
 include_once(FCPATH.'application/config/setting-constants.php');
@@ -446,6 +446,7 @@ define('STUDENT_AUTO_LOGIN', 'WOSA-API-V1/faqs/Get_all_faq');
 define('GET_REC_LEC_URL_FILTER', 'WOSA-API-V1/recorded_lectures/Get_recorded_lectures_filter');
 
 define('GET_STUDENT_EXISTENCE_URL', 'WOSA-API-V1/Check_student_existence');
+// define('ERROR_LOG', 'WOSA-API-V1/error_log/Submit_error_log');
 define('ERROR_LOG', 'WOSA-API-V1/error_log/Submit_error_log');
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -512,7 +513,7 @@ define('POST_REPLY_IMAGE_PATH', './uploads/student_post_reply/');
 define('STUDENT_POST_PIC_FILE_PATH', './uploads/student_post/');
 define('EMP_IMAGE_PATH', './uploads/employees/');
 define('LIVE_LECTURE_IMAGE_PATH', './uploads/live_lecture/');
-define('GALLERY_IMAGE_PATH', '/uploads/gallery/');
+define('GALLERY_IMAGE_PATH', './uploads/gallery/');
 define('PROFILE_PIC_FILE_PATH', './uploads/profile_pic/');
 define('ANNOUNCEMENT_FILE_PATH', './uploads/classroom_announcements/');
 define('CLASSPOST_FILE_PATH', './uploads/classroom_post/');
@@ -756,7 +757,7 @@ define('UPDATE_LABEL', 'Update');
 define('UPDATE_STUDENT_LABEL', 'Update Student details');
 define('UPDATE_SAVE_LABEL', 'Save & Update');
 define('SEARCH_LABEL', 'Search');
-
+define('RESET_LABEL', 'Reset');
 define('DWN_LABEL', 'Download');
 define('ATTENDANCE_LABEL', 'Submit Attendance');
 define('INHOUSE_LABEL', 'Submit Inhouse Pack');
