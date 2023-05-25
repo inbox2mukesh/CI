@@ -94,6 +94,27 @@
 							<span class="text-danger free_resources_topic_err"><?php echo form_error('free_resources_topic[]');?></span>
 						</div>
 					</div>
+					<div class="col-md-6 margin-bottom-20">
+						<label for="keywords" class="control-label"><span class="text-danger">*</span>SEO Keywords</label>
+						<div class="form-group">
+						<input type="text" name="keywords" value="<?php echo (isset($keywords) && !empty($keywords))?$keywords:''; ?>" class="form-control input-ui-100 removeerrmessage" id="keywords" placeholder="SEO Keywords"  onpaste="return false" />
+						<span class="text-danger keywords_err"><?php echo form_error('keywords'); ?></span>
+						</div>
+					</div>
+					<div class="col-md-6 margin-bottom-20">
+						<label for="seo_title" class="control-label"><span class="text-danger">*</span>SEO Title</label>
+						<div class="form-group">
+						<input type="text" name="seo_title" value="<?php echo (isset($seo_title) && !empty($seo_title))?$seo_title:''; ?>" class="form-control input-ui-100 removeerrmessage" id="seo_title" placeholder="SEO Title"  onpaste="return false" />
+						<span class="text-danger seo_title_err"><?php echo form_error('seo_title'); ?></span>
+						</div>
+					</div>
+					<div class="col-md-12 margin-bottom-20">
+						<label for="seo_desc" class="control-label"><span class="text-danger">*</span>SEO Description</label>
+						<div class="form-group">
+						<textarea name="seo_desc" value="<?php echo (isset($seo_desc) && !empty($seo_title))?$seo_title:''; ?>" class="form-control input-ui-100 removeerrmessage" id="seo_desc" placeholder="SEO Description"  onpaste="return false" rows="4" style="resize:none;"></textarea>
+						<span class="text-danger seo_desc_err"><?php echo form_error('seo_title'); ?></span>
+						</div>
+					</div>
 					<?php 	
 			            $description=$this->input->post('description');
 			        ?>
@@ -287,7 +308,9 @@ $('#freeresourse_add_form').on('submit', function(e){
 		var total_section=$('#total_section').val();
 		var description=$('#description').val();
 		var section_no1=$('#section_no1').val();
-		
+		var keywords = $('#keywords').val();
+		var seo_title = $('#seo_title').val();
+		var seo_desc = $('#seo_desc').val();
 		if(content_type_id == "")
 		{			
 			$(".content_type_id_err").html('The Content Type field is required.');
@@ -318,6 +341,23 @@ $('#freeresourse_add_form').on('submit', function(e){
 			flag=0;
 		} else { $(".description_err").html(''); }
 
+		if(keywords == "")
+		{			
+			$(".keywords_err").html('The Keyword field is required.');
+			flag=0;
+		} else { $(".keywords_err").html(''); }
+
+		if(seo_title == "")
+		{			
+			$(".seo_title_err").html('The SEO Title field is required.');
+			flag=0;
+		} else { $(".seo_title_err").html(''); }
+
+		if(seo_desc == "")
+		{			
+			$(".seo_desc_err").html('The SEO Description field is required.');
+			flag=0;
+		} else { $(".seo_desc_err").html(''); }
 
 		var flg=0;
 		$(".section_no").each(function(i)
@@ -352,12 +392,13 @@ $('#freeresourse_add_form').on('submit', function(e){
 				flag=0;
 			} else { $(".section_no"+i+'_err').html(''); }
           
-			if(typeof CKEDITOR.instances["free_resources_section"+i] !== 'undefined' && CKEDITOR.instances["free_resources_section"+i].getData().replace(/(<([^>]+)>)/ig,"").trim() == "") {	
-				$('.free_resources_section'+i+"_err").html('The Text field is required.');
-				flag=0;
-				$("#comm_err").text("");
-			}
-			else if(($('#free_resources_section'+i).val()=="" &&  $('#free_resources_section'+i).attr("type") == "file")) {				
+			// if(typeof CKEDITOR.instances["free_resources_section"+i] !== 'undefined' && CKEDITOR.instances["free_resources_section"+i].getData().replace(/(<([^>]+)>)/ig,"").trim() == "") {	
+			// 	$('.free_resources_section'+i+"_err").html('The Text field is required.');
+			// 	flag=0;
+			// 	$("#comm_err").text("");
+			// }
+			// else 
+			if(($('#free_resources_section'+i).val()=="" &&  $('#free_resources_section'+i).attr("type") == "file")) {				
 				$('.free_resources_section'+i+"_err").html('The File Input is required.');
 			     $("#comm_err").text("");
 				 flag=0;
@@ -368,34 +409,6 @@ $('#freeresourse_add_form').on('submit', function(e){
 				//flag=1;
 				
 			}
-		
-			/* if(free_Section.toLowerCase() === 'textarea' ) {
-				alert('yes')
-				
-		   if(CKEDITOR.instances.free_Section.getData() == "")
-		   {
-			 flag=0;			
-			 $('.'+free_Section+"_err").html('The Text field is required.');
-			 $("#comm_err").text("");
-		   }
-		   else {
-			 $("."+free_Section+"_err").html('');
-			// $(".free_resources_section1_err").html('');
-		   }
-		 }
-		 else if(free_Section.nodeName.toLowerCase() === 'input')
-		 {			
-		  if($('#'+free_Section).val() == "")
-		   {
-			 flag=0;
-			 $('.'+free_Section+"_err").html('The File Input is required.');
-			 $("#comm_err").text("");
-		   }
-		   else {
-			$('.'+free_Section+"_err").html('');
-		   }
-		 } */
-
 		}	
 		
 	
@@ -445,7 +458,7 @@ $('#freeresourse_add_form').on('submit', function(e){
 				html='';
 				if(type=='text'){
 				//   CKEDITOR.replace('free_resources_section'+i);
-				checkWordCountCkEditor('classroom_documents_section'+i);
+				checkWordCountCkEditor('free_resources_section'+i);
 				  $(this).find('#free_resources_section'+i).next("span").addClass('free_resources_section'+i+'_err');
 				   
 				}else if(type=='image'){

@@ -7,7 +7,8 @@
   <div class="login-box-body">
     <p class="login-box-msg text-bold">WOSA ADMIN LOGIN PORTAL</p>
     <?php echo $this->session->flashdata('flsh_msg');?>
-    <form action="" name="login" id="login" method="post" >      
+    <?php $attributes = array('name'=>'login', 'id'=>'login'); ?>
+    <?php echo form_open('adminController/login');?>
       
       <div class="form-group has-feedback">
         <input type="text" name="email" value='<?php echo $callfromview->dataDecryption(get_cookie(COOKIE_USERNAME));?>' class="form-control input-ui-100" placeholder="Enter Employee code">
@@ -42,7 +43,7 @@
         </div>
 
       </div>
-    </form>
+    <?php form_close(); ?>
   </div>
   
 </div>

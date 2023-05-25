@@ -18,7 +18,7 @@
 					<div class="col-md-6">
 						<label for="tax_per" class="control-label"><span class="text-danger">*</span>Tax percentage</label>
 						<div class="form-group has-feedback">
-							<input type="text" name="tax_per" value="<?php echo $Tax['tax_per']; ?>" class="form-control allow_decimal" id="tax_per" maxlength="5" autocomplete="off" ondrop="return false;" onpaste="return false;" onchange="return percentage_validation(this);" />
+							<input type="text" name="tax_per" value="<?php echo $Tax['tax_per']; ?>" class="form-control allow_decimal" id="tax_per" maxlength="5" autocomplete="off" ondrop="return false;" onpaste="return false;" onblur="percentage_validation(this);" pattern="^[0-9]+(\.[0-9]+)?$"/>
 							<span class="text-danger tax_per_err"><?php echo form_error('tax_per'); ?></span>
 						</div>
 					</div>
@@ -43,3 +43,10 @@
 		</div>
 	</div>
 </div>
+<?php ob_start();?> 
+<script>
+
+</script>
+<?php global $customJs;
+$customJs=ob_get_clean();
+?> 

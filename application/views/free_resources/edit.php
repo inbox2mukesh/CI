@@ -128,6 +128,27 @@ border-radius: 10px;
 							<span class="text-danger free_resources_topic_err"><?php echo form_error('free_resources_topic[]');?></span>
 						</div>
 					</div>
+					<div class="col-md-6 margin-bottom-20">
+						<label for="keywords" class="control-label"><span class="text-danger">*</span>SEO Keywords</label>
+						<div class="form-group">
+						<input type="text" name="keywords" value="<?php echo (isset($keywords) && !empty($keywords))?$keywords:$free_resources['seo_keywords']; ?>" class="form-control input-ui-100 removeerrmessage" id="keywords" placeholder="SEO Keywords"  onpaste="return false" />
+						<span class="text-danger keywords_err"><?php echo form_error('keywords'); ?></span>
+						</div>
+					</div>
+					<div class="col-md-6 margin-bottom-20">
+						<label for="seo_title" class="control-label"><span class="text-danger">*</span>SEO Title</label>
+						<div class="form-group">
+						<input type="text" name="seo_title" value="<?php echo (isset($seo_title) && !empty($seo_title))?$seo_title:$free_resources['seo_title']; ?>" class="form-control input-ui-100 removeerrmessage" id="seo_title" placeholder="SEO Title"  onpaste="return false" />
+						<span class="text-danger seo_title_err"><?php echo form_error('seo_title'); ?></span>
+						</div>
+					</div>
+					<div class="col-md-12 margin-bottom-20">
+						<label for="seo_desc" class="control-label"><span class="text-danger">*</span>SEO Description</label>
+						<div class="form-group">
+						<textarea name="seo_desc" value="" class="form-control input-ui-100 removeerrmessage" id="seo_desc" placeholder="SEO Description"  onpaste="return false" rows="4" style="resize:none;"><?php echo (isset($seo_desc) && !empty($seo_title))?$seo_title:$free_resources['seo_desc']; ?></textarea>
+						<span class="text-danger seo_desc_err"><?php echo form_error('seo_title'); ?></span>
+						</div>
+					</div>
 					<?php 	
 			            $description=$this->input->post('description');
 						if(empty($description)){
@@ -367,7 +388,9 @@ $('#freeresourse_edit_form').on('submit', function(e){
 		var total_section=$('#total_section').val();
 		var description=$('#description').val();
 		var section_no1=$('#section_no1').val();
-		
+		var keywords = $('#keywords').val();
+		var seo_title = $('#seo_title').val();
+		var seo_desc = $('#seo_desc').val();
 		var old_image=$('#old_image').val();
 		if(content_type_id == "")
 		{			
@@ -399,7 +422,23 @@ $('#freeresourse_edit_form').on('submit', function(e){
 			flag=0;
 		} else { $(".description_err").html(''); }		
 		
+		if(keywords == "")
+		{			
+			$(".keywords_err").html('The Keyword field is required.');
+			flag=0;
+		} else { $(".keywords_err").html(''); }
 
+		if(seo_title == "")
+		{			
+			$(".seo_title_err").html('The SEO Title field is required.');
+			flag=0;
+		} else { $(".seo_title_err").html(''); }
+
+		if(seo_desc == "")
+		{			
+			$(".seo_desc_err").html('The SEO Description field is required.');
+			flag=0;
+		} else { $(".seo_desc_err").html(''); }
 		var flg=0;
 		$(".section_no").each(function(i)
 		{		

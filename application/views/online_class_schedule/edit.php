@@ -201,23 +201,6 @@ if(isset($dup))
 						</div>
 					</div>
 
-					<!-- <div class="col-md-6">
-						<label for="trainer_id" class="control-label">Trainer</label>
-						<div class="form-group">
-							<select id="trainer_id" name="trainer_id" class="form-control selectpicker" data-show-subtext="true" data-live-search="true">
-								<option value="">Select Trainer</option>
-								<?php 
-								foreach($all_trainer as $b){
-									$selected = ($b['trainer_id'] == $online_class_schedule['trainer_id']) ? ' selected="selected"' : "";
-									$name = $b['fname'].' '.$b['lname'];
-									echo '<option value="'.$b['trainer_id'].'" '.$selected.'>'.$name.'</option>';
-								} 
-								?>
-							</select>
-							<span class="text-danger trainer_id_err"><?php echo form_error('trainer_id');?></span>
-						</div>
-					</div> -->
-
 					<div class="col-md-4">
 						<label for="conf_URL" class="control-label">Conf. Link</label>
 						<div class="form-group has-feedback">

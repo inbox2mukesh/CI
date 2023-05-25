@@ -94,6 +94,8 @@ class Country extends MY_Controller{
             );            
             $idd = $this->Country_model->add_country($params);
             if($idd){
+                $this->auto_loadCaching(CACHE_ENGINE);
+                $this->auto_cacheUpdate_front(WOSA_API_DIR,'Get_country_code'); 
                 //activity update start              
                     $activity_name= COUNTRY_ADD;
                     $description= 'New country '.$params['name'].' added';
@@ -156,6 +158,8 @@ class Country extends MY_Controller{
                 ); 
                 $id = $this->Country_model->update_country($country_id,$params);
                 if($id){
+                    $this->auto_loadCaching(CACHE_ENGINE);
+                    $this->auto_cacheUpdate_front(WOSA_API_DIR,'Get_country_code');
                     //activity update start              
                         $activity_name= COUNTRY_UPDATE;
                         unset($data['country']['country_id'],$data['country']['created'],$data['country']['modified']);//unset extras from array
@@ -188,25 +192,5 @@ class Country extends MY_Controller{
         }
         else
             show_error(ITEM_NOT_EXIST);
-    }   
-   
-    /*function remove($id)
-    {
-        //access control start
-        $cn = $this->router->fetch_class().''.'.php';
-        $mn = $this->router->fetch_method();        
-        if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
-        //access control ends
-
-        $country = $this->Country_model->get_country($id);
-        if(isset($country['country_id']))
-        {
-            $this->Country_model->delete_country($id);
-            $this->session->set_flashdata('flsh_msg', DEL_MSG);
-            redirect('adminController/country/index');
-        }
-        else
-            show_error(ITEM_NOT_EXIST);
-    }*/    
-    
+    } 
 }

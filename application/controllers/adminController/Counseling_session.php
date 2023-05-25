@@ -671,36 +671,28 @@ class Counseling_session extends MY_Controller{
         $this->load->model('Counseling_session_model');
         $id = $this->input->post('id', true);
         $active = $this->input->post('active', true);
-        $table = $this->input->post('table', true);
-		
-		if($table=='counseling_sessions_group'){
-			
-			if($active==1){
-				
+        $table = $this->input->post('table', true);		
+		if($table=='counseling_sessions_group')
+		{			
+			if($active==1){				
 				$params=array(
 			        'active' =>1
 		        );
 				$this->Counseling_session_model->update_counseling_session_group($id,$params);
 				$this->db->where('counseling_sessions_group_id',$id);
-				$this->db->update('counseling_sessions',$params);
-				
-			}else{
-				
+				$this->db->update('counseling_sessions',$params);				
+			}else{				
 				$params=array(
 			        'active' =>0
 		        );
 				$this->Counseling_session_model->update_counseling_session_group($id,$params);
 				$this->db->where('counseling_sessions_group_id',$id);
-				$this->db->update('counseling_sessions',$params);
-				
-					
-			}
-			
-		}else if($table=='counseling_sessions'){
-			
+				$this->db->update('counseling_sessions',$params);				
+			}			
+		}else if($table=='counseling_sessions')
+		{			
 			$counseling_sessions_group_id = $this->input->post('counseling_sessions_group_id', true);
-			if($active==1){
-				
+			if($active==1){				
 				$params=array(
 			        'active' =>1
 		        );
@@ -789,33 +781,22 @@ class Counseling_session extends MY_Controller{
 
     function add_session_status_()
     {
-	 $id = $this->input->post('session_booking_id', true);
-	 
-
-    $params=array(
-    'remark' => $this->input->post('session_booking_remarks', true),
-    'attended' => $this->input->post('is_attended', true)        
-    );
-	$t=$this->Counseling_session_model->update_student_session($id,$params);
-	if($t)
-	{
-		echo 1;
-	}
-	else {
-		echo 0;
-	}
-
-
+	 	$id = $this->input->post('session_booking_id', true);
+	     $params=array(
+    		'remark' => $this->input->post('session_booking_remarks', true),
+    		'attended' => $this->input->post('is_attended', true)        
+    	);
+		$t=$this->Counseling_session_model->update_student_session($id,$params);		
+		if($t)
+		{echo 1;}
+		else {echo 0;}
     }
-    function get_counselinglead_CSV($session_type=NULL,$booking_pdate=NULL,$session_datew=NULL,$service_id=NULL,$session_pdate=NULL,$payment_type=NULL){
-
-
-
+    function get_counselinglead_CSV($session_type=NULL,$booking_pdate=NULL,$session_datew=NULL,$service_id=NULL,$session_pdate=NULL,$payment_type=NULL)
+	{
         $data['title'] = 'Lead CSV Data' ;         
         $this->load->library("excel");
         $object = new PHPExcel();
         $object->setActiveSheetIndex(0);
-
        $table_columns = array("Student", "Mobile", "Email-ID", "Session type", "Service", "Booking DateTime", "Session DateTime","Message","Payment Date","Payment Type","Payment Status","Txn id","Remark",'Has-attended?');
         $column = 0;
           foreach($table_columns as $field)
@@ -823,38 +804,26 @@ class Counseling_session extends MY_Controller{
            $object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
            $column++;
           }
-          //echo $service_id;
-    		//echo "ppp";
-    		
-			
           if(($session_type !=0 || $session_type !='' ) || ($booking_pdate !=0 || $booking_pdate !='' ) || ($session_datew !=0 || $session_datew !='') || ($service_id !=0 || $service_id !='') || ($session_pdate!=0 || $session_pdate!='' ) || ($payment_type !=0 || $payment_type !=''))
-    	 {
-    		
-			if($booking_pdate !=0)
-			{
-				$booking_pdate=str_replace("%20"," ",$booking_pdate);
+    	 	{    		
+				if($booking_pdate !=0)
+				{
+					$booking_pdate=str_replace("%20"," ",$booking_pdate);
+				}
+				if($session_datew !=0)
+				{
+					$session_datew=str_replace("%20"," ",$session_datew);
+				}
+				if($session_pdate !=0)
+				{
+					$session_pdate=str_replace("%20"," ",$session_pdate);
+				}			
+				$data['get_lead_CSV'] = $this->Counseling_session_model->get_all_booked_counselling_list_completed_csv($session_type,$booking_pdate,$session_datew,$service_id,$session_pdate,$payment_type);
 			}
-			if($session_datew !=0)
-			{
-				$session_datew=str_replace("%20"," ",$session_datew);
+			else {				
+				$data['get_lead_CSV']= $this->Counseling_session_model->get_all_booked_counselling_list_completed_csv();
 			}
-			if($session_pdate !=0)
-			{
-				$session_pdate=str_replace("%20"," ",$session_pdate);
-			}
-			
-            $data['get_lead_CSV'] = $this->Counseling_session_model->get_all_booked_counselling_list_completed_csv($session_type,$booking_pdate,$session_datew,$service_id,$session_pdate,$payment_type);
-
-    	}
-    	else {
-    		
-    		  $data['get_lead_CSV']= $this->Counseling_session_model->get_all_booked_counselling_list_completed_csv();
-    	}
-          
-		//print_r($data['get_lead_CSV']);
-	//die();
           $excel_row = 2;
-
           foreach($data['get_lead_CSV'] as $row)
           {
             

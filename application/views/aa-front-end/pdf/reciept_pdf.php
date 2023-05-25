@@ -79,7 +79,7 @@
             $p_wai = explode(' ', $Reciept_data->error_message->data->waiver);
             if ($Reciept_data->error_message->data->waiver != '0.00') { ?>
                 <div style="clear: both;">
-                    <div style=" float: left; width: 50%; padding-bottom: 4px; font-size: 13px; text-transform: uppercase;"><b>DISCOUNT - PROMO - 10%</b></div>
+                    <div style=" float: left; width: 50%; padding-bottom: 4px; font-size: 13px; text-transform: uppercase;"><b>Waiver</b></div>
                     <div style=" float: right;  width: 50%; padding-bottom: 4px; text-align: right; font-size: 13px; text-transform: uppercase; font-weight: 500;"> <?php echo $Reciept_data->error_message->data->waiver; ?></div>
                 </div>
                 <div style="clear: both; border-bottom:1px dotted #ccc; margin-bottom: 20px;"></div>
@@ -88,9 +88,9 @@
             $price_intial = $Reciept_data->error_message->data->amount;
             $cgst_prcnt = $Reciept_data->error_message->cgst_tax_per;
             $sgst_prcnt = $Reciept_data->error_message->sgst_tax_per;
-            $cgst_tax = number_format(($price_intial * $cgst_prcnt)/100);
-            $sgst_tax = number_format(($price_intial * $sgst_prcnt)/100);
-            $amt_to_pay = $price_intial + $cgst_tax + $sgst_tax; 
+            $cgst_tax = $Reciept_data->error_message->data->cgst_amt;
+            $sgst_tax = $Reciept_data->error_message->data->sgst_amt;
+            $amt_to_pay = $Reciept_data->error_message->data->amount_paid; 
             ?>
             <div style="clear: both;">
                 <div style=" float: left; width: 50%; padding-bottom: 4px; font-size: 13px; text-transform: uppercase;"><b>CGST@<?php echo $cgst_prcnt ?></b></div>

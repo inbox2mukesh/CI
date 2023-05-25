@@ -6,20 +6,33 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<?php
-	/* $directoryURI = $_SERVER['REQUEST_URI'];
+	$directoryURI = $_SERVER['REQUEST_URI'];
 	$path = parse_url($directoryURI, PHP_URL_PATH);
-	$components = explode('/', $path);
-	$page= $components[2];
-	$page3= $components[3];// view pages
+	$components = array_filter(explode('/', $path));
+	$page ='';
 	$this->load->helper('static_meta_helper');
-	echo get_meta_tag($page); */
+	if(count($components)<=2 && !empty($components))
+	{
+		if(!isset($components[2]))
+		{
+			$components[2]=$components[1];
+		}
+		$page= ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
+		echo get_meta_tag($page);	
+		
+	}
+	else if(count($components)>3)
+	{
+		$page1 = ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
+		$page_url = ((ENVIRONMENT == 'production'))?$components[3]:$components[4];
+		echo dynamic_meta_tag_data($page1,$page_url);
+	}
+		
+		if(isset($title)){
+	?>
 	
-	?>	
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
 	<title><?php echo $title; ?></title>
-	<?php if (DEFAULT_COUNTRY == 38) // canada 
+	<?php } if (DEFAULT_COUNTRY == 38) // canada 
 	{ ?>
 		<meta name="google-site-verification" content="TWahbwzXobBcHLN37jpUOgPFpl67Di8nEZ4YmKxDK0I" />
 		<!-- Google Tag Manager -->
@@ -81,6 +94,24 @@
 			})(window, document, 'script', 'dataLayer', 'GTM-KWNJTJJ');
 		</script>
 		<!-- End Google Tag Manager -->
+		<!-- START FACEBOOK PIXEL-->
+		<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '581914803129863'); 
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+    <img height="1" width="1" 
+    src="https://www.facebook.com/tr?id=581914803129863&ev=PageView&noscript=1"/>
+</noscript>
+	<!-- END FACEBOOK PIXEL-->
 	<?php } ?>	
 	<link href="<?php echo base_url(DESIGN_VERSION_F . '/images/favicon.png'); ?>" rel="shortcut icon" type="image/png">
 	<!-- Stylesheet -->

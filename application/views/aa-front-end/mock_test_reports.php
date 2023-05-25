@@ -70,11 +70,13 @@
 												<label>Select Subject<span class="red-text">*</span></label>
 												<select class="selectpicker form-control" id="request_subject" name="request_subject">
 													<option value="">Select</option>
-														<?php      
+														<?php  
+														if(isset($requestSubject) && !empty($requestSubject->error_message->data)) 
+														{   
 														foreach($requestSubject->error_message->data as $p){        
 														?>
 														<option value="<?php echo $p->id;?>"><?php echo $p->subject;?></option>
-														<?php } ?>
+														<?php } }?>
 												</select>
 												<div class="valid-validation request_subject_err"></div>
 											</div>

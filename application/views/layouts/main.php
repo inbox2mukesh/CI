@@ -258,6 +258,7 @@ if (!$.cookie("noticeaccepted")){
 
 });
 </script>
+
 <!-- prabhat -->
 
 <script>
@@ -313,6 +314,7 @@ autoclose:true,
 
 var currency = "<?php echo CURRENCY ?>";
 </script>
+
 <?php
 global $customJs;
 echo $customJs;

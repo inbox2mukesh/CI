@@ -2260,28 +2260,112 @@ class Package_master_model extends CI_Model
              ->where(array('tax_name'=>$taxname,'active'=>1));
         return $this->db->get('')->row_array();
     }
+    function get_distinctusers()
+    {
+        $this->db->distinct();
+        $this->db->select('usr.id,usr.fname,usr.lname')
+                 ->join('`user` usr', 'usr.`id` = pkg.`by_user`','left')
+                 ->where('pkg.`by_user` !=','');
+        return $this->db->get('student_package pkg')->result_array();
+    }
+    function get_distinctcourse()
+    {
+        $this->db->distinct();
+        $this->db->select('pkg.test_module_id,tm.test_module_name')
+                 ->join('`test_module` tm', 'tm.`test_module_id` = pkg.`test_module_id`','left');
+        return $this->db->get('student_package pkg')->result_array();
+    }
     function get_transaction_history($params = [])
     {
         if(isset($params) && !empty($params))
         {
             $this->db->limit($params['limit'], $params['offset']);
+            if((!empty($params['filtertype']) && $params['filtertype']!='reset'))
+            {
+                $this->db->like('tch.remarks',$params['filtertype']);
+            }
+            if((!empty($params['search']) && $params['search']['search_text']!=''))
+            {
+                $this->db->like('std.fname',$params['search']['search_text']);
+                $this->db->or_like('std.lname',$params['search']['search_text']);
+                $this->db->or_like('std.UID',$params['search']['search_text']);
+                $this->db->or_like('std.email',$params['search']['search_text']);
+                $this->db->or_like('std.mobile',$params['search']['search_text']);
+            }
+            if((!empty($params['search']) && $params['search']['paymentdate']!=''))
+            {
+                $exploded_date = explode(' - ',$params['search']['paymentdate']);
+                $date2 = trim($exploded_date[1]);
+                $todate = explode("/",$date2);
+                $finaltodate = $todate[2]."-".$todate[1]."-".$todate[0];
+                $from = date('Y-m-d',strtotime($exploded_date[0]));
+                $this->db->where('DATE_FORMAT(convert(str_to_date(pkg.requested_on, "%d-%m-%Y"), DATE),"%Y-%m-%d") BETWEEN "'.$from.'" AND "'.$finaltodate.'"');
+            }
+            if((isset($params['search']['added_by']) && $params['search']['added_by']!=''))
+            {
+                $this->db->where_in('pkg.by_user',$params['search']['added_by']);
+            }
+            if((!empty($params['search']['courses']) && $params['search']['courses']!=''))
+            {
+                $this->db->where_in('pkg.test_module_id',$params['search']['courses']);
+            }
         }
-        $this->db->select('tch.remarks,pkg.amount,pkg.cgst_amt,pkg.sgst_amt,pkg.total_amt,pkg.tax_detail,pkg.amount_paid,pkg.total_paid_ext_tax,subscribed_on,pkg.package_name,CONCAT(std.fname,std.lname) as student_name,pkg.waiver,pkg.waiver_by,usr.fname,usr.lname')
+        $this->db->select('tch.amount as total_paid_ext_tax,tch.remarks,pkg.amount,tch.cgst_amt,tch.sgst_amt,tch.total_amt,tch.amount,pkg.amount_paid,pkg.tax_detail,subscribed_on,pkg.package_name,CONCAT(std.fname,std.lname) as student_name,pkg.waiver,pkg.waiver_by,usr.fname,usr.lname,std.UID,std.email,std.mobile,tm.test_module_name,pkg.requested_on,pkg.payment_id')
                 ->join('`student_transaction_history` tch', 'tch.`student_package_id` = pkg.`student_package_id`')
                 ->join('`students` std', 'std.`id` = pkg.`student_id`','right')
+                ->join('`test_module` tm', 'tm.`test_module_id` = pkg.`test_module_id`','right')
                 ->join('`user` usr', 'usr.`id` = pkg.`by_user`','right')
-                ->from('student_package pkg')
-                ->group_by('pkg.student_package_id')
-                ->order_by('pkg.student_package_id','DESC');
-        return $this->db->get('student_transaction_history')->result_array();
+                ->from('student_package pkg')  
+                ->where("(tch.remarks like '%payment%' or tch.remarks like '%refund%' or tch.remarks like '%extension%')")          
+                ->order_by('tch.tran_id','DESC');
+        return $this->db->get()->result_array();
     }
     function get_transaction_history_count($params = [])
     {
-        $this->db->select('tch.remarks,pkg.amount,pkg.cgst_amt,pkg.sgst_amt,pkg.total_amt,pkg.tax_detail,pkg.amount_paid,pkg.total_paid_ext_tax,subscribed_on,pkg.package_name,CONCAT(std.fname,std.lname) as student_name,pkg.waiver')
-                ->join('`student_transaction_history` tch', 'tch.`student_package_id` = pkg.`student_package_id`', 'left')
-                ->join('`students` std', 'std.`id` = pkg.`student_id`', 'left')
-                ->from('student_package pkg')
-                ->order_by('pkg.student_package_id','DESC');
-        return $this->db->get('student_transaction_history')->num_rows();
+        if(isset($params) && !empty($params))
+        {
+            $this->db->limit($params['limit'], $params['offset']);
+            if((!empty($params['filtertype']) && $params['filtertype']!='reset'))
+            {
+                $this->db->like('tch.remarks',$params['filtertype']);
+            }
+            else{
+                $this->db->like('tch.remarks','payment')
+                ->or_like('tch.remarks','refund')
+                ->or_like('tch.remarks','extension');
+            }
+            if((!empty($params['search']) && $params['search']['search_text']!=''))
+            {
+                $this->db->like('std.fname',$params['search']['search_text']);
+                $this->db->or_like('std.lname',$params['search']['search_text']);
+                $this->db->or_like('std.UID',$params['search']['search_text']);
+                $this->db->or_like('std.email',$params['search']['search_text']);
+                $this->db->or_like('std.mobile',$params['search']['search_text']);
+            }
+            if((!empty($params['search']) && $params['search']['paymentdate']!=''))
+            {
+                $exploded_date = explode(' - ',$params['search']['paymentdate']);
+                $date2 = trim($exploded_date[1]);
+                $todate = explode("/",$date2);
+                $finaltodate = $todate[2]."-".$todate[1]."-".$todate[0];
+                $from = date('Y-m-d',strtotime($exploded_date[0]));
+                $this->db->where('DATE_FORMAT(convert(str_to_date(pkg.requested_on, "%d-%m-%Y"), DATE),"%Y-%m-%d") BETWEEN "'.$from.'" AND "'.$finaltodate.'"');
+            }
+            if((isset($params['search']['added_by']) && $params['search']['added_by']!=''))
+            {
+                $this->db->where_in('pkg.by_user',$params['search']['added_by']);
+            }
+            if((!empty($params['search']['courses']) && $params['search']['courses']!=''))
+            {
+                $this->db->where_in('pkg.test_module_id',$params['search']['courses']);
+            }
+        }
+        $this->db->select('tch.amount as total_paid_ext_tax,tch.remarks,pkg.amount,tch.cgst_amt,tch.sgst_amt,tch.total_amt,tch.amount,pkg.amount_paid,pkg.tax_detail,subscribed_on,pkg.package_name,CONCAT(std.fname,std.lname) as student_name,pkg.waiver,pkg.waiver_by,usr.fname,usr.lname,std.UID,std.email,std.mobile,tm.test_module_name,pkg.requested_on,pkg.payment_id')
+                ->join('`student_transaction_history` tch', 'tch.`student_package_id` = pkg.`student_package_id`')
+                ->join('`students` std', 'std.`id` = pkg.`student_id`','right')
+                ->join('`test_module` tm', 'tm.`test_module_id` = pkg.`test_module_id`','right')
+                ->join('`user` usr', 'usr.`id` = pkg.`by_user`','right')
+                ->from('student_package pkg') ;
+        return $this->db->get()->num_rows();
     }
 }

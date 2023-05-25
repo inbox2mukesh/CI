@@ -111,7 +111,8 @@ class Tax_master extends MY_Controller
                     'active'             => $this->input->post('active'),
                     'tax_name'             => $this->input->post('tax_name'),
                     'tax_per'             => $this->input->post('tax_per'),
-                    'by_user'             => $by_user
+                    'by_user'             => $by_user,
+                    'modified'            => date('Y-m-d H:i:s'),
                 );
                 $dup = $this->Tax_master_model->dupliacte_tax_master($DocId, $params);
                 if ($dup == 'DUPLICATE') {

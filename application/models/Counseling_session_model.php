@@ -1086,10 +1086,11 @@
     function deactivate_shedule($todaystr){
 
         $params = array('active'=> 0);
-        $this->db->where('session_date_time_str =',$todaystr);
+        $this->db->where('session_date_time_str <=',$todaystr);
         $this->db->update('counseling_sessions',$params);
         
-        $this->db->where('session_end_date_time_str =',$todaystr);
+        // $this->db->where('session_from_to_date <=',$todaystr);
+        $this->db->where('session_end_date_time_str <=',$todaystr);
         $this->db->update('counseling_sessions_group',$params);
     }
 
@@ -1194,24 +1195,20 @@
         }*/
 
 
-        $this->db->select(' `sess.id`, `is_otp_verified`, `todayDate`, `fname`, `lname`, `email`, `dob`, `country_code`, `mobile`, `session_id`, `cs.session_type`, `booking_date`, `booking_date_str`, `booking_time_slot`, `cs.amount`, `sess.active`, `payment_status`, `txn_id`, `payment_date`, `payment_gross`, `response`, `sess.created`,enquiry_purpose_name as service_name,attended,remark,,sess.message,sess.created,sessBookingNo,payment_type');
+        $this->db->select('`sess.id`, `is_otp_verified`, `todayDate`, `fname`, `lname`, `email`, `dob`, `country_code`, `mobile`, `session_id`, `cs.session_type`, `booking_date`, `booking_date_str`, `booking_time_slot`, `cs.amount`, `sess.active`, `payment_status`, `txn_id`, `payment_date`, `payment_gross`, `response`, `sess.created`,enquiry_purpose_name as service_name,attended,remark,,sess.message,sess.created,sessBookingNo,payment_type');
 
         $this->db->from('`students_counseling` sess');
         if($session_type){
-            $this->db->where(array('sess.session_type'=>$session_type));
-            
+            $this->db->where(array('sess.session_type'=>$session_type));            
         }
         if($session_otp !=0){
-            $this->db->where(array('sess.is_otp_verified'=>$session_otp));
-            
+            $this->db->where(array('sess.is_otp_verified'=>$session_otp));            
         }
         if(($payment_type !=0 && $payment_type !='' )){
-            $this->db->where(array('sess.payment_type'=>$payment_type));
-            
+            $this->db->where(array('sess.payment_type'=>$payment_type));            
         }
         if($session_paymentStatus !=0){
-            $this->db->where(array('sess.payment_status'=>$session_paymentStatus));
-            
+            $this->db->where(array('sess.payment_status'=>$session_paymentStatus));            
         }
         if($service_id !=0){
             $this->db->where(array('sess.service_id'=>$service_id));

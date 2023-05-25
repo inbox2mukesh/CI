@@ -310,14 +310,14 @@
 <li> <a href="#"> <i class="fa fa-desktop text-light"></i> <span> Counseling Sessions </span> </i> </a>
   <ul class="treeview-menu">
   <?php 
-      if($this->Role_model->_has_access_('counseling_session','index')){
+      if($this->Role_model->_has_access_('counseling_session','index') && DEFAULT_COUNTRY != 101){
     ?>
   <li>
       <a href="<?php echo site_url('adminController/counseling_session/index');?>"><i class="fa fa-list"></i>Counseling List</a>
       </li>
       <?php }?>
   <?php 
-      if($this->Role_model->_has_access_('counseling_session','general')){
+      if($this->Role_model->_has_access_('counseling_session','general')&& DEFAULT_COUNTRY != 101){
     ?>
       <li>
       <a href="<?php echo site_url('adminController/counseling_session/general');?>"><i class="fa fa-list"></i>Counseling General Info</a>

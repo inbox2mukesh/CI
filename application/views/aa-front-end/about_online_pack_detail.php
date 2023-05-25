@@ -1,19 +1,4 @@
-<!-- Modal Apply Now -->
-	<!-- <div class="modal-form fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true" class="font-18"><i class="fa fa-times"></i></span> </button>
-				</div>
-				<div class="modal-body">
-					<?php //include('includes/enquiry_form.php');?>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	<!-- End Modal Apply Now -->
-	<!--Start Why Canada Section-->
-	<section>
+<section>
 		<div class="container">
 			 <div class="head-title font-weight-400 text-uppercase mb-20">About Online <span class="text-red font-weight-600">Coaching</span></div>
 			<div class="row" id="order-flex">

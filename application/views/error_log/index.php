@@ -45,6 +45,7 @@
                             <th class="th-0">Sr.</th>                            
                             <th class="th-1">URL</th>
                             <th class="th-2">IP Address</th>
+                            <th class="th-2">User Agent</th>
                             <th class="th-3">Date & Time</th>                          
                         </tr>
                         </thead>
@@ -56,6 +57,7 @@
                                 <td><?php echo $r ; ?></td>
                                 <td><?php echo $lists['error_log_url'] ; ?></td>
                                 <td><?php echo $lists['ip_address'] ; ?></td>
+                                <td><?php echo $lists['user_agent'] ; ?></td>
                                 <td><?php echo date('d-m-Y h:i:s',strtotime($lists['log_date'])) ; ?></td>
                             </tr>
                             <?php } ?>

@@ -141,7 +141,7 @@
   <?php }?>
    <!--ENDS--->
    <?php
- if (isset($allClassroomMaterial) && (is_countable($allClassroomMaterial->error_message->data->classroom_schedule) && count($allClassroomMaterial->error_message->data->classroom_schedule) == 0) && (count($allClassroomMaterial->error_message->data->classroom_doc) == 0 && is_countable($allClassroomMaterial->error_message->data->classroom_doc)) && (is_countable($allClassroomMaterial->error_message->data->classroom_lecture) && count($allClassroomMaterial->error_message->data->classroom_lecture) == 0))
+if (empty($allClassroomMaterial->error_message->data))
  {
  ?>
  <div class="col-md-12">

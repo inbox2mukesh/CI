@@ -1,12 +1,6 @@
 <!-- Start subscribe -->
 
-<style>
-
-	
-
-	.bg-red-theme{background-color: #FEFAEE !important;}
-
-</style>
+<style>	.bg-red-theme{background-color: #FEFAEE !important;}</style>
 
 
 

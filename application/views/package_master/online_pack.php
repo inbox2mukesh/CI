@@ -145,7 +145,7 @@
                                     <?php 
                                     foreach($course_timing as $p){
                                         $selected='';
-                                        if(in_array($p['id'],$course_timing_post)){
+                                        if(is_array($course_timing_post) && in_array($p['id'],$course_timing_post)){
                                             $selected='selected="selected"';
                                         }
                                         echo '<option value="'.$p['id'].'" '.$selected.'>'.$p['course_timing'].'</option>';

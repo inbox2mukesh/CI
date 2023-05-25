@@ -150,24 +150,93 @@ if(!function_exists('get_meta_tag_data')){
         else if($country_id ==13)
         {
             $meta = '                
-            <meta name="description" content="" />
-            <meta name="keywords" content="" />
-            <meta name="author" content="" />
-            <title></title>
-            ';
-            return $meta;      
+                    <meta name="description" content="Western Overseas is one of the best immigration consultants Australia. If you planning to immigrate to Australia then we are all set to help you out." />
+                    <meta name="keywords" content="Immigration Consultant " />
+                    <meta name="author" content="" />
+                    <title>Best Immigration Consultants in Australia | Western Overseas</title>
+                    ';
+                return $meta;    
         } 
         else if($country_id ==101)
         {
-            $meta = '                
-            <meta name="description" content="" />
-            <meta name="keywords" content="" />
-            <meta name="author" content="" />
-            <title></title>
-            ';
-            return $meta; 
-
+                $meta = '                
+                <meta name="description" content="" />
+                <meta name="keywords" content="" />
+                <meta name="author" content="" />
+                <title></title>
+                ';
+                if($page=='about-online-coaching'){
+                    $meta = '               
+                    <meta name="description" content="Are you Confused about choosing IELTS, PTE, TOEFL, and Duolingo? No worries! Western overseas online coaching is the best approach to studying online." />
+                    <meta name="keywords" content="IELTS online coaching, PTE online coaching, TOEFL online coaching" />
+                    <title>IELTS Online Coaching Near Me to Get a high band score</title>
+                    ';
+                }            
+                else if($page=='online-courses'){
+                    $meta = '               
+                    <meta name="description" content="IELTS practice test online is available for learners who want to enhance their English communication skills and t achieve high band scores in the IELTS test." />
+                    <meta name="keywords" content="IELTS practice test online, ielts online course, ielts Online test" />
+                    <meta name="author" content="" />
+                    <title>Ace Your IELTS Practice Test Online: Top Strategies</title>
+                    ';
+                }
+                else if($page=='articles'){
+                    $meta = '               
+                    <meta name="description" content="Ielts online updates is an intensive way to keep candidates up to date for IELTS, PTE, and other proficiency tests. Read articles, to learn more from experts." />
+                    <meta name="keywords" content="Ielts online updates" />
+                    <meta name="author" content="" />
+                    <title>Get Online News and Updates | Western Overseas</title>
+                    ';
+                }
+                else if($page=='test-preparation-material'){
+                    $meta = '               
+                    <meta name="description" content="The IELTS Preparation Materials are accessible online to help students to practice at home. Also, students will understand the pattern and structure of exams." />
+                    <meta name="" />
+                    <meta name="keywords" content="IELTS Preparation Materials, IELTS test  Materials" />
+                    <title>The Best IELTS Preparation Materials | Western Overseas</title>
+                    ';
+                }
+                else if($page=='news'){
+                    $meta = '               
+                    <meta name="description" content="Ielts online updates is an intensive way to keep candidates up to date for IELTS, PTE, and other proficiency tests. Read articles, to learn more from experts." />
+                    <meta name="keywords" content="Ielts online updates" />
+                    <title>Get Online News and Updates | Western Overseas</title>
+                    ';
+                }
+                else{
+                    $meta = '                
+                    <meta name="description" content="Western Overseas offers a wide range of IELTS Online Coaching courses. Also, we offer PTE, TOEFL, DUOLINGO, and all foreign language courses. Let’s Enrol today!" />
+                    <meta name="keywords" content="IELTS online coaching, PTE online coaching, TOEFL online coaching, Ielts Online" />
+                    <meta name="author" content="" />
+                    <title>Get Started IELTS Online Coaching | Western Overseas</title>
+                    ';
+                } 
+                return $meta; 
         } 
     }   
+}
+
+if(!function_exists('dynamic_meta_tag_data'))
+{
+    function dynamic_meta_tag_data($page,$page_url)
+    {
+        $ci = &get_instance();
+        $ci->load->model('Url_slug_model');
+        $content = $ci->Url_slug_model->getmetaDetails($page,$page_url);
+        // pr($content);
+        $description='';
+        if(!empty($content))
+        {
+            $description = $content[0]['seo_desc'];
+            $keywords = $content[0]['seo_keywords'];
+            $title = $content[0]['seo_title'];
+        }
+        return $meta = '<meta name="description" content="'.$description.'" />
+                <meta name="keywords" content="'.$keywords.'" />
+                <meta name="author" content="" />
+                <title>'.$title.'</title>
+                ';
+
+    }
 }
 ?>

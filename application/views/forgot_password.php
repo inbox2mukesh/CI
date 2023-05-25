@@ -7,7 +7,8 @@
   <div class="login-box-body">
     <p class="login-box-msg text-bold"><?php echo $title;?></p>
     <?php echo $this->session->flashdata('flsh_msg');?>
-    <form action="" name="fp" id="fp" method="post">      
+    <?php $attributes = array('name'=>'fp', 'id'=>'fp'); ?>
+    <?php echo form_open('adminController/Forgot_password');?>     
       <div class="form-group has-feedback">
         <input type="email" name="email" class="form-control input-ui-100" placeholder="Enter E-mail">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -18,7 +19,7 @@
           <input type="submit" name="sbmt_fp" class="btn btn-danger btn-block btn-flat" value="Submit" />        
         </div>
       </div>
-    </form>
+      <?php form_close(); ?>
   </div>
   
 </div>

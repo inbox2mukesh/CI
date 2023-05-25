@@ -58,5 +58,20 @@
 			return 0;
 		}
     }
+    function getmetaDetails($page,$page_url)
+    {
+        if($page == 'articles')
+        {
+            $tablename = 'free_resources';
+        }
+        elseif($page == 'test-preparation-material')
+        {
+            $tablename = 'test_preparation_material';
+        }
+        $this->db->select('seo_title,seo_keywords,seo_desc');
+        $this->db->from($tablename);
+        $this->db->where('URLslug',$page_url);
+        return $this->db->get()->result_array();
+    }
 
 }

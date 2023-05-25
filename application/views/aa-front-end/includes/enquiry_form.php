@@ -98,9 +98,9 @@ if(isset($this->session->userdata('student_login_data')->id)){
       <label>Services<span class="text-red">*</span></label>
       <select class="form-control selectpicker" name="enquiry_purpose_id" id="enquiry_purpose_id">
       <option value="">Select Services</option>
-        <?php  foreach ($serviceDataAll->error_message->data  as $d) { ?>          
+        <?php  if(!empty($serviceDataAll)){ foreach ($serviceDataAll->error_message->data  as $d) { ?>          
           <option value="<?php echo $d->id; ?>"><?php echo $d->enquiry_purpose_name; ?></option>
-        <?php } ?>
+        <?php } }?>
       </select>
       <span class="valid-validation purpose_err"></span>
     </div>
@@ -250,6 +250,9 @@ $(".hide-btn").click(function()
           $('#enq_reg_opt_success_message').text('Hi! your enquiry sent successfully at our Enquiry team. We will get back to soon.');
           $('#enq_reg_opt_danger').addClass('hide');
           $('.enqBtn').prop('disabled', true);
+          <?php if(DEFAULT_COUNTRY==101){ ?>        
+            gtag('event', 'conversion', {'send_to': 'AW-11071945767/rYbECPGWmp8YEKf4wZ8p'});
+          <?php } ?>
          <?php
          if(empty($this->session->userdata('student_login_data')))
          { ?>

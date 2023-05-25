@@ -150,7 +150,7 @@
 									{
 										$clssroomProperty = $p['test_module_name'].'-'.$p['programe_name'].'-'.$p['Category']['category_name'].'-'.$p['batch_name'].'-'.$p['center_name'];
 										$selected='';
-										if(in_array($p['id'],$classroom_id_post)){
+										if(isset($classroom_id_post) && in_array($p['id'],$classroom_id_post)){
 										$selected='selected="selected"';
 										}
 										if($classroom_id){
@@ -177,22 +177,10 @@
 					<div class="col-md-4">	
 						<label for="dateTime" class="control-label"><span class="text-danger">*</span>Date Time </label>
 						<div class="form-group has-feedback">
-							<input type="text" name="dateTime" id="dateTime" class="form-control user_activity_report_datetimepicker input-ui-100 removeerrmessage"  value="<?php echo $this->input->post('dateTime'); ?>" onfocusout="getmultipledates(this.value);"/>
+							<input type="text" name="dateTime" id="dateTime" class="form-control user_activity_report_datetimepicker input-ui-100 removeerrmessage"  value="<?php echo $this->input->post('dateTime'); ?>" onfocusout="getmultipledates(this.value);" autocomplete="off"/>
 							<input type="hidden" name="dateTime_" id="dateTime_" class="form-control user_activity" value="">
 							<span class="text-danger dateTime_err"><?php echo form_error('dateTime');?></span>
 						</div>
-					</div>
-
-					<div class="col-md-4">
-						<label for="till_date" class="control-label">Till Date<?php echo DATE_FORMAT_LABEL;?></label>
-						<div class="form-group has-feedback">
-							<input type="text" name="till_date" value="<?php echo $this->input->post('till_date'); ?>" class="noBackDatep form-control input-ui-100 removeerrmessage" id="till_date" autocomplete="off" readonly="readonly" maxlength="10"/>
-							<span class="text-danger till_date_err"><?php echo form_error('till_date');?></span>
-							<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-						</div>
-					</div>	
-					<div class="col-md-12" id="schedule-date">				
-						<!-- <button type="button" class="btn btn-info btn-sm del" onclick="deleteUserDivision(1,4)">ACADEMY<i class="fa fa-close cross-icn"></i></button> -->
 					</div>
 					<div class="col-md-4">
 						<label for="class_duration" class="control-label"><span class="text-danger">*</span>Class Duration(In Minutes)</label>
@@ -201,7 +189,19 @@
 							<span class="glyphicon glyphicon-time form-control-feedback"></span>
 							<span class="text-danger class_duration_err"><?php echo form_error('class_duration');?></span>
 						</div>
+					</div>					
+					<!-- <div class="col-md-4">
+						<label for="till_date" class="control-label">Till Date<?php echo DATE_FORMAT_LABEL;?></label>
+						<div class="form-group has-feedback">
+							<input type="text" name="till_date" value="<?php echo $this->input->post('till_date'); ?>" class="noBackDatep form-control input-ui-100 removeerrmessage" id="till_date" autocomplete="off" readonly="readonly" maxlength="10"/>
+							<span class="text-danger till_date_err"><?php echo form_error('till_date');?></span>
+							<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+						</div>
+					</div>	 -->
+					<div class="col-md-12" id="schedule-date">				
+						<!-- <button type="button" class="btn btn-info btn-sm del" onclick="deleteUserDivision(1,4)">ACADEMY<i class="fa fa-close cross-icn"></i></button> -->
 					</div>
+					
 
 					<div class="col-md-4">
 						<label for="topic" class="control-label"><span class="text-danger">*</span>Class Topic</label>
@@ -212,23 +212,6 @@
 						</div>
 					</div>
 
-					<!-- <div class="col-md-6">
-						<label for="trainer_id" class="control-label">Trainer</label>
-						<div class="form-group">
-							<select id="trainer_id" name="trainer_id" class="form-control selectpicker" data-show-subtext="true" data-live-search="true">
-								<option value="">Select Trainer</option>
-								<?php 
-								foreach($all_trainer as $b){
-									$selected = ($b['trainer_id'] == $this->input->post('trainer_id')) ? ' selected="selected"' : "";
-									$name = $b['fname'].' '.$b['lname'];
-									echo '<option value="'.$b['trainer_id'].'" '.$selected.'>'.$name.'</option>';
-								} 
-								?>
-							</select>
-							<span class="text-danger trainer_id_err"><?php echo form_error('trainer_id');?></span>
-						</div>
-					</div> -->
-
 					<div class="col-md-4">
 						<label for="conf_URL" class="control-label">Conf. Link</label>
 						<div class="form-group has-feedback">
@@ -236,15 +219,7 @@
 							<span class="glyphicon glyphicon-link form-control-feedback"></span>
 							<span class="text-danger conf_URL_err"><?php echo form_error('conf_URL');?></span>
 						</div>
-					</div>					
-					<?php /*?>		
-					<div class="col-md-12">
-						<div class="form-group form-checkbox">						
-							<input type="checkbox" name="active" value="1" id="active" checked="checked" readonly/>		
-							<label for="active" class="control-label">Active</label>					
-						</div>
-					</div>	
-					<?php */?>				
+					</div>			
 					
 				</div>
 			</div>
@@ -395,15 +370,18 @@ $('.user_activity_report_datetimepicker').on('dp.change', function(e){
 	
 	function getmultipledates(datetme = null)
 	{
-		scdList.push(datetme);
-		var timebuttonlist ='';		
-		$.each(scdList,function(key,value){
-			let remvefunctionname = "removemultipledates('"+value+"')";
-			timebuttonlist +='<button type="button" class="btn btn-info btn-sm del">'+value+'<i class="fa fa-close cross-icn" data-dtime="'+value+'" id="datetimebuttonfacicon" onclick="'+remvefunctionname+'"></i></button>';
-		});
-		$('#schedule-date').html(timebuttonlist);
-		$('#dateTime_').val(scdList);
-		//localStorage.setItem('dateList',scdList);
+		if(datetme !='' && scdList.includes(datetme) == false)
+		{	
+			scdList.push(datetme);
+			var timebuttonlist ='';		
+			$.each(scdList,function(key,value){
+				let remvefunctionname = "removemultipledates('"+value+"')";
+				timebuttonlist +='<button type="button" class="btn btn-info btn-sm del">'+value+'<i class="fa fa-close cross-icn" data-dtime="'+value+'" id="datetimebuttonfacicon" onclick="'+remvefunctionname+'"></i></button>';
+			});
+			$('#schedule-date').html(timebuttonlist);
+			$('#dateTime_').val(scdList);
+			$('#dateTime').val('');
+		}
 		
 	}     
 
@@ -411,7 +389,7 @@ $('.user_activity_report_datetimepicker').on('dp.change', function(e){
 	{		
 		var timebuttonlists='';	
 		$('#schedule-date').empty();
-		let sclist = scdList.pop(dattimeval);		
+		let sclist = scdList.remove(dattimeval);		
 		$.each(scdList,function(key,value){
 			let remvefunctionname = "removemultipledates('"+value+"')";
 			timebuttonlists +='<button type="button" class="btn btn-info btn-sm del">'+value+'<i class="fa fa-close cross-icn" data-dtime="'+value+'" id="datetimebuttonfacicon" onclick="'+remvefunctionname+'"></i></button>';
@@ -420,6 +398,16 @@ $('.user_activity_report_datetimepicker').on('dp.change', function(e){
 		$('#dateTime_').val(scdList);
 		//localStorage.setItem('dateList',scdList);
 	} 
+	Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
 </script>
 <?php global $customJs;
 $customJs=ob_get_clean();

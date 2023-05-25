@@ -56,6 +56,9 @@ class Free_resources extends MY_Controller{
 		$this->form_validation->set_rules('free_resources_topic[]','test type','required|trim');
 		$this->form_validation->set_rules('description','description','required|trim');
 		$this->form_validation->set_rules('URLslug','URL slug','required|trim');
+		$this->form_validation->set_rules('keywords','Keywords','required|trim');
+		$this->form_validation->set_rules('seo_title','SEO Title','required|trim');
+		$this->form_validation->set_rules('seo_desc','SEO Description','required|trim');		
 		if (empty($_FILES['image']['name']))
 		{
 			$this->form_validation->set_rules('image', 'image', 'required');
@@ -89,6 +92,9 @@ class Free_resources extends MY_Controller{
 				'title' => $this->input->post('title'),
 				'description'=>$this->input->post('description',false),
 				'URLslug'=>$this->input->post('URLslug'),
+				'seo_keywords'=>$this->input->post('keywords'),
+				'seo_title'=>$this->input->post('seo_title'),
+				'seo_desc'=>$this->input->post('seo_desc'),
 				'image'=>$image
             );
 			
@@ -227,7 +233,10 @@ class Free_resources extends MY_Controller{
 			$this->form_validation->set_rules('title','title','required|trim');
 			//$this->form_validation->set_rules('free_resources_topic[]','test type','required|trim');
 			$this->form_validation->set_rules('description','description','required|trim');
-			$this->form_validation->set_rules('URLslug','URL slug','required|trim');			
+			$this->form_validation->set_rules('URLslug','URL slug','required|trim');
+			$this->form_validation->set_rules('keywords','Keywords','required|trim');
+			$this->form_validation->set_rules('seo_title','SEO Title','required|trim');
+			$this->form_validation->set_rules('seo_desc','SEO Description','required|trim');			
 			$data['free_resources_test_list'] = $this->Free_resources_modal->getTestByFreeResourcesId($id);			
 			$data['free_resources_section_list']=$this->Free_resources_modal->getSectionByFreeResourcesId($id);			
 			if(empty($data['free_resources_test_list'])){
@@ -264,6 +273,9 @@ class Free_resources extends MY_Controller{
 					'title' => $this->input->post('title'),
 					'description'=>$this->input->post('description',false),
 					'URLslug'=>$this->input->post('URLslug'),
+					'seo_keywords'=>$this->input->post('keywords'),
+					'seo_title'=>$this->input->post('seo_title'),
+					'seo_desc'=>$this->input->post('seo_desc'),
 					'image'=>$image
 				);
 			

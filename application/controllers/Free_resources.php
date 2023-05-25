@@ -41,7 +41,7 @@ class Free_resources extends MY_Controller
             redirect('free_resources/index');
         }
         //$data['segment'] = $this->_getURI();
-        $data['title'] = "Articles";
+        // $data['title'] = "Articles";
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
         );

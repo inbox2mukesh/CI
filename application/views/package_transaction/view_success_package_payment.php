@@ -237,7 +237,9 @@
                                     <td><?php echo $s['page']; ?> Page</td>
                                     <td>
                                     <a data-toggle="modal" data-target="#exampleModalshortview<?php echo $sr; ?>" >Short View</a>
+                                    <?php if($_SESSION['roleName']==ADMIN) { ?>
                                     <a data-toggle="modal" data-target="#exampleModal<?php echo $sr; ?>" >Detail View</a>
+                                    <?php } ?>
                                     <div class="modal fade" id="exampleModalshortview<?php echo $sr; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                     <div class="modal-content">

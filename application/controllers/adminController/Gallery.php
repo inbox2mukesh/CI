@@ -62,7 +62,7 @@ class Gallery extends MY_Controller{
             );
             if(!is_dir(GALLERY_IMAGE_PATH)){
                 mkdir(GALLERY_IMAGE_PATH, 0755, true);
-            }
+            }
             $params = array(
                 'active' => $this->input->post('active') ? $this->input->post('active') : 0,
                 'image' =>  $this->input->post('file_hidden'),

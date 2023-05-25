@@ -233,6 +233,7 @@
 </div>
 <?php ob_start(); ?>
 <script>
+	CKEDITOR.replace('package_desc');
 	$('#onlinepack_edit_form').on('submit', function(e){
         e.preventDefault();
 		var flag=1;
