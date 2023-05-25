@@ -30,9 +30,9 @@ class Get_online_pack extends REST_Controller {
           $limit = $this->input->get_request_header('LIMIT');
           $offset = $this->input->get_request_header('OFFSET'); 
           $course_type = $this->input->get_request_header('COURSE-TYPE'); 
-          $this->auto_loadCaching(CACHE_ENGINE);
+          // $this->auto_loadCaching(CACHE_ENGINE);
           $bData = $this->Package_master_model->Get_online_pack($test_module_id,$programe_id,$category_id,$duration,$country_id,$course_type,$limit,$offset);
-          $this->auto_cacheOff();  
+          // $this->auto_cacheOff();  
           if(!empty($bData)){
             $data['error_message'] = [ "success" => 1, "message" => "success", "data"=> $bData];    
           }else{
