@@ -21,10 +21,10 @@
 		echo get_meta_tag($page);	
 		
 	}
-	else if(count($components)>3)
+	else if(count($components)>=3)
 	{
 		$page1 = ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
-		$page_url = ((ENVIRONMENT == 'production'))?$components[3]:$components[4];
+		$page_url = ((ENVIRONMENT == 'production'))?$components[2]:$components[3];
 		echo dynamic_meta_tag_data($page1,$page_url);
 	}
 		

@@ -223,7 +223,6 @@ if(!function_exists('dynamic_meta_tag_data'))
         $ci = &get_instance();
         $ci->load->model('Url_slug_model');
         $content = $ci->Url_slug_model->getmetaDetails($page,$page_url);
-        // pr($content);
         $description='';
         if(!empty($content))
         {

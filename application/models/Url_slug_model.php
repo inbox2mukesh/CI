@@ -60,9 +60,9 @@
     }
     function getmetaDetails($page,$page_url)
     {
-        if($page == 'articles')
+        if($page == 'visa-services')
         {
-            $tablename = 'free_resources';
+            $tablename = 'enquiry_purpose_masters';
         }
         elseif($page == 'test-preparation-material')
         {
