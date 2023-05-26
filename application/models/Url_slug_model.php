@@ -60,7 +60,7 @@
     }
     function getmetaDetails($page,$page_url)
     {
-        if($page == 'visa-services')
+        if($page == 'visa-services' || $page == 'about-online-coaching')
         {
             $tablename = 'enquiry_purpose_masters';
         }

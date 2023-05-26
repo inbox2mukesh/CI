@@ -11,6 +11,7 @@
 	$components = array_filter(explode('/', $path));
 	$page ='';
 	$this->load->helper('static_meta_helper');
+// 	pr($components);
 	if(count($components)<=2 && !empty($components))
 	{
 		if(!isset($components[2]))
@@ -23,8 +24,17 @@
 	}
 	else if(count($components)>=3)
 	{
-		$page1 = ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
-		$page_url = ((ENVIRONMENT == 'production'))?$components[2]:$components[3];
+	    if(strpos($path,'view'))
+	    {
+	        $page1 = ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
+		    $page_url = ((ENVIRONMENT == 'production'))?$components[3]:$components[4];
+	        
+	    }
+	    else{
+	        $page1 = ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
+		    $page_url = ((ENVIRONMENT == 'production'))?$components[2]:$components[3];
+	    }
+		
 		echo dynamic_meta_tag_data($page1,$page_url);
 	}
 		
