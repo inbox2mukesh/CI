@@ -27,80 +27,80 @@ if(!function_exists('get_meta_tag_data')){
         {
             if($page=='contact-us'){
                 $meta = '               
-                <meta name="description" content="Fulfill your dreams of studying and living in Canada with Western Overseas. Visit our St. Sydney and Mississauga cities situated offices for complete guidance. " />
+                <meta name="description" content="Fulfill your dreams of studying and living in Canada with Western Overseas. Visit our St. Sydney and Mississauga cities situated offices for complete guidance." />
                 <meta name="keywords" content="" />
                 <meta name="author" content="" />
-                <title>Immigrate to Canada through Western Overseas | Contact today</title>
+                <title>Contact us today to Immigrate to Canada | Western Overseas</title>
                 ';
             }
            else if($page=='faq'){
                 $meta = '               
-                <meta name="description" content="Land on a single platform to get an answer to every Canada visa query & clear doubts you have been struggling with for a long time. Western Overseas rules here." />
+                <meta name="description" content="If you are struggling to know Canada immigration queries. Such as online coaching, visa-related queries, foreign language, etc. Sign up today to read FAQs." />
                 <meta name="keywords" content="" />
                 <meta name="author" content="" />
-                <title>Get your answer to the most frequently asked questions </title>
+                <title>Get your answer to the most frequently asked questions</title>
                 ';
             }
             else if($page=='gallery'){
                 $meta = '               
-                <meta name="description" content="Rejoice in the beautiful moments & achievements of Western Overseas, making the company a giant face in the immigration world. We are trusted VISA consultants." />
+                <meta name="description" content="Enjoy the achievements of Western Overseas in the gallery and video section. Western Overseas has a great presence with trust in the immigration world." />
                 <meta name="keywords" content="" />
                 <meta name="author" content="" />
-                <title>Capture beautiful memories of Western Overseas here!</title>
+                <title>Highlights of beautiful memories at Western Overseas!</title>
                 ';
             }
             else if($page=='videos'){
                 $meta = '               
-                <meta name="description" content="Explore the VISA world by watching the latest videos uploaded by Western Overseas. Know what people have to say about us. Reach us today!" />
+                <meta name="description" content="Western Overseas have countless success stories of individuals and organizations in various fields and industries. Scroll down our pages to know more about us." />
                 <meta name="keywords" content="" />
                 <meta name="author" content="" />
-                <title>Watch the latest videos by Western Overseas | VISA World</title>
+                <title>Watch the latest success stories achieved | Western Overseas</title>
                 ';
             }
             else if($page=='why-canada'){
                 $meta = '               
-                <meta name="description" content="Dig-out core reasons inspiring students to study in Canada. We put the light over grounds good enough to see Canada as an opportunistic country for education. " />
-                <meta name="keywords" content="scholarship in canada, canada immigration consultants, minimum bank balance for canada student visa, canada study visa processing time, canada student visa processing time, how much bank balance is required for canada student visa" />
+                <meta name="description" content="Canada is a well-known country for a high-quality education to improve the standards of living. It is a safe country to enjoy benefits and peaceful experiences. " />
+                <meta name="keywords" content="" />
                 <meta name="author" content="" />
-                <title>Why Canada for study | Know reasons from Education experts</title>
+                <title>Canada for Higher Education | Exclusive courses Available!</title>
                 ';
             }
             else if($page=='become-agent'){
                 $meta = '               
-                <meta name="description" content="If you are a potential VISA agent & looking for a trusted tie-up with an expert immigration firm Western Overseas welcomes you. Apply now at our online portal." />
+                <meta name="description" content="If you are a potential VISA agent & looking for a tie-up with an expert immigration firm then Western Overseas welcomes you. Apply now at our online portal." />
                 <meta name="keywords" content="" />
                 <meta name="author" content="" />
-                <title>Unite with Western Overseas for high visa success in Canada</title>
+                <title>Become an agent partner to achieve success in Immigration</title>
                 ';
             }
             else if($page=='online-courses'){
                 $meta = '               
-                <meta name="description" content="Choose from upcoming IELTS online programs at a discounted price & enhance your skills to crack the exam with desired bands. Slots are limited. Book today!" />
+                <meta name="description" content="Western Overseas offers exclusive courses to prepare for your proficiency tests. Choose any one of the best courses at a discounted price & enhance your skills." />
                 <meta name="keywords" content="" />
                 <meta name="author" content="" />
-                <title>Bumper & exclusive Online IELTS coaching | Western Overseas </title>
+                <title>Find the best Quality Online Courses | Western Overseas</title>
                 ';
             }
             else if($page=='practice-packs'){
                 $meta = '               
-                <meta name="Immerse in IELTS preparation with Western Overseas and buy the best course depending on your English level. We help you master the IELTS exam. Join us today!" />
-                <meta name="" />
+                <meta name="description" content="Get familiar with the test format of English proficiency tests that helps you to score high and master your skills in Grammar, fluency, and lexical resources!" />
+                <meta name="keywords" content="practice packs, ielts practice pack" />
                 <meta name="author" content="" />
-                <title>Practice IELTS with Western Overseas to brush up your skills</title>
+                <title>Unlock Your Potential with Practice Packs! Western Overseas</title>
                 ';
             }
             else if($page=='term-condition'){
                 $meta = '               
-                <meta name="We believe in serving transparent VISA and IELTS services. Know what terms and conditions we work on and be informed in all manners before enrolling with us. " />
+                <meta name="description" content="We believe in serving transparent VISA and IELTS services. Know what terms and conditions we work on and be informed in all manners before enrolling with us." />
                 <meta name="" />
                 <meta name="author" content="" />
-                <title>Know our terms and conditions | Western Overseas </title>
+                <title>Terms & conditions | Western Overseas</title>
                 ';
             }
             else if($page=='visa-services'){
                 $meta = '               
                 <meta name="Immigrating to Canada won`t be a big deal anymore. We offer various visa services to satisfy different needs of immigration in Canada. Look into our expertise!" />
-                <meta name="" />
+                <meta name="keywords" content="visa service, study visa, travel visa, work visa" />
                 <meta name="author" content="" />
                 <title>Western Overseas | Deals in different visa domains | Canada</title>
                 ';
@@ -115,10 +115,10 @@ if(!function_exists('get_meta_tag_data')){
             }
             else if($page=='articles'){
                 $meta = '               
-                <meta name="Western Overseas devotes itself to letting students be upgraded via expert-written articles for IELTS, PTE, TOEFL, CELPIP, & foreign languages. Read them today!" />
-                <meta name="" />
+                <meta name="description" content="- Discover our latest articles to upgrade your knowledge of foreign languages and English proficiency exams. Read today to explore the best information" />
+                <meta name="keywords" content="" />
                 <meta name="author" content="" />
-                <title>Get English proficiency tests insights at Western Overseas</title>
+                <title>The Best Articles of All - To Prepare for proficiency tests</title>
                 ';
             }
             else if($page=='test-preparation-material'){
@@ -131,18 +131,26 @@ if(!function_exists('get_meta_tag_data')){
             }
             else if($page=='news'){
                 $meta = '               
-                <meta name="There is no other place than Western Overseas to grab the latest news and updates in the immigration world, Canada. We are a trusted source of information." />
+                <meta name="description" content="Nowadays it’s difficult to find the right information due to huge resources but we are a trusted source of information to grab the latest news and updates." />
                 <meta name="" />
                 <meta name="author" content="" />
-                <title>Trust Western Overseas for Canada immigration updates</title>
+                <title>Nowadays it’s difficult to find the right information due to huge resources but we are a trusted source of information to grab the latest news and updates.</title>
+                ';
+            }
+            else if($page=='about-online-pack'){
+                $meta = '               
+                <meta name="description" content="Explore our online experts tailored programs for IELTS, PTE, TOEFL, and CELPIP to start a smooth journey for English learning and other proficiency tests." />
+                <meta name="" />
+                <meta name="author" content="" />
+                <title>Affordable online packs to Achieve a high score | Western Overseas</title>
                 ';
             }
         else{
                 $meta = '                
                 <meta name="description" content="Western Overseas is an established immigration firm serving clients with quality visa services in different categories. Approach us for the best visa solution." />
-                <meta name="keywords" content="VISA, Canada, Study abroad, Immigration" />
+                <meta name="keywords" content="immigration Consultant Canada, Canada student visa processing time, Canada study visa processing time" />
                 <meta name="author" content="" />
-                <title>Western Overseas Regulated Canadian Immigration Consultant</title>
+                <title>Certified Immigration Consultant Canada | Western Overseas</title>
                 ';
             } 
                 return $meta;          
@@ -211,8 +219,9 @@ if(!function_exists('get_meta_tag_data')){
                     <title>Get Started IELTS Online Coaching | Western Overseas</title>
                     ';
                 } 
-                return $meta; 
+                
         } 
+        return $meta; 
     }   
 }
 

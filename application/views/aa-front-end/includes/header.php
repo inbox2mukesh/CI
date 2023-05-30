@@ -11,7 +11,6 @@
 	$components = array_filter(explode('/', $path));
 	$page ='';
 	$this->load->helper('static_meta_helper');
-// 	pr($components);
 	if(count($components)<=2 && !empty($components))
 	{
 		if(!isset($components[2]))
@@ -36,6 +35,10 @@
 	    }
 		
 		echo dynamic_meta_tag_data($page1,$page_url);
+	}
+	else
+	{
+	    echo get_meta_tag('');	
 	}
 		
 		if(isset($title)){
