@@ -13,7 +13,7 @@
 				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/aus-slider-2.webp');?>" class="img-fullwidth"></div>
 				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/aus-slider-3.webp');?>" class="img-fullwidth"></div>
 			</div>
-		</div>
+		</div> 
 
 		<div class="services-content mt-40">
 		<h2 class="font-weight-300 text-uppercase text-center">Our
