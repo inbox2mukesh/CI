@@ -19,7 +19,7 @@ class Home extends MY_Controller{
         $today = date('d-m-Y');
         $todaystr = strtotime($today);
         $data['segment'] = $this->_getURI();
-        $data['title'] = COMPANY;
+        // $data['title'] = COMPANY;
         $headers = array(
             'API-KEY:'.WOSA_API_KEY,   
         ); 
