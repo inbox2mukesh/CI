@@ -12,6 +12,7 @@
 			<div class="item"><img src="<?php echo base_url('resources-f/images/slider/aus-slider-1.webp');?>" class="img-fullwidth"></div>
 				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/aus-slider-2.webp');?>" class="img-fullwidth"></div>
 				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/aus-slider-3.webp');?>" class="img-fullwidth"></div>
+				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/aus-slider-4.webp');?>" class="img-fullwidth"></div>
 			</div>
 		</div> 
 
