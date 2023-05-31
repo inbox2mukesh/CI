@@ -138,14 +138,14 @@ border-radius: 10px;
 					<div class="col-md-6 margin-bottom-20">
 						<label for="seo_title" class="control-label"><span class="text-danger">*</span>SEO Title</label>
 						<div class="form-group">
-						<input type="text" name="seo_title" value="<?php echo (isset($seo_title) && !empty($seo_title))?$seo_title:$free_resources['seo_title']; ?>" class="form-control input-ui-100 removeerrmessage" id="seo_title" placeholder="SEO Title"  onpaste="return false" />
+						<input type="text" name="seo_title" value="<?php echo (isset($seo_title) && !empty($seo_title))?$seo_title:$free_resources['seo_title']; ?>" class="form-control input-ui-100 removeerrmessage" id="seo_title" placeholder="SEO Title" />
 						<span class="text-danger seo_title_err"><?php echo form_error('seo_title'); ?></span>
 						</div>
 					</div>
 					<div class="col-md-12 margin-bottom-20">
 						<label for="seo_desc" class="control-label"><span class="text-danger">*</span>SEO Description</label>
 						<div class="form-group">
-						<textarea name="seo_desc" value="" class="form-control input-ui-100 removeerrmessage" id="seo_desc" placeholder="SEO Description"  onpaste="return false" rows="4" style="resize:none;"><?php echo (isset($seo_desc) && !empty($seo_title))?$seo_title:$free_resources['seo_desc']; ?></textarea>
+						<textarea name="seo_desc" value="" class="form-control input-ui-100 removeerrmessage" id="seo_desc" placeholder="SEO Description" rows="4" style="resize:none;"><?php echo (isset($seo_desc) && !empty($seo_title))?$seo_title:$free_resources['seo_desc']; ?></textarea>
 						<span class="text-danger seo_desc_err"><?php echo form_error('seo_title'); ?></span>
 						</div>
 					</div>
