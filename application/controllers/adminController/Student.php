@@ -1076,6 +1076,7 @@ class Student extends MY_Controller{
                     $org_pr = $this->input->post('add_payment_pe', TRUE);
                     $use_wallet = $this->input->post('use_wallet_pe', TRUE);    
                     $add_payment = $this->input->post('add_payment_pe', TRUE)*100;
+                    $ext_remarks = $this->input->post('extension_remarks', TRUE); 
                     $newDate = date("d-m-Y", strtotime($this->input->post('expired_on')));
                     $total_amt = $this->input->post('totalpayableamt',TRUE)*100;
                     $cgst_amt = (($org_pr * $data['cgst_tax_per'])/100);
@@ -1088,7 +1089,7 @@ class Student extends MY_Controller{
                     // $sgst_amt_ttl = ($sgst_amt + $this->input->post('sgst_amt'))*100;
                     // $response = $this->pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id,$total_amt,$total_tax,$tax_arr);
 
-                    $response = $this->pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id,$total_amt,$total_tax,$tax_arr);                    
+                    $response = $this->pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id,$total_amt,$total_tax,$tax_arr,$ext_remarks);                 
 
                 }elseif($payment_type=='Adjustment-BS'){
                     
@@ -1259,7 +1260,7 @@ class Student extends MY_Controller{
                     $use_wallet = $this->input->post('use_wallet', TRUE); 
                     //$add_payment = $this->input->post('add_payment', TRUE)*100;
                     $remarks = $this->input->post('remarks', TRUE);
-                    
+                    $ext_remarks = $this->input->post('extension_remarks', TRUE);
                     $cgst_amt = (($org_pr * $data['cgst_tax_per'])/100)*100;
                     $sgst_amt = (($org_pr * $data['sgst_tax_per'])/100)*100;
                     $use_wallet = $this->input->post('use_wallet_pe', TRUE);
@@ -1269,7 +1270,7 @@ class Student extends MY_Controller{
                     $total_amt = $add_payment + $total_tax;
                     // $cgst_amt_ttl = ($cgst_amt + $this->input->post('cgst_amt'))*100;
                     // $sgst_amt_ttl = ($sgst_amt + $this->input->post('sgst_amt'))*100;
-                    $response = $this->pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id,$total_amt,$total_tax,$tax_arr);                     
+                    $response = $this->pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id,$total_amt,$total_tax,$tax_arr,$ext_remarks);                     
 
                 }elseif($payment_type=='Adjustment-BS'){
                     $center_id = $this->input->post('center_id', TRUE);                    
@@ -3078,9 +3079,7 @@ class Student extends MY_Controller{
     }
 
     //non-real function
-    function pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id,$total_amt,$total_tax,$tax_arr){
-        //$add_payment,$use_wallet,$newDate,$student_package_id,$student_id,$total_amt,$total_tax,$tax_arr
-
+    function pack_extension_adjustment_($add_payment,$use_wallet,$newDate,$student_package_id,$student_id,$total_amt,$total_tax,$tax_arr,$ext_remarks){
         //access control start
         $cn = $this->router->fetch_class().''.'.php';
         $mn='pack_extension_adjustment_';        
@@ -3092,8 +3091,7 @@ class Student extends MY_Controller{
         //get offline class package taken if any
         $offlineCount=$this->Package_master_model->getOfflinePackActiveCount($student_id);
         $onlineCount=$this->Package_master_model->getOnlinePackActiveCount($student_id);
-        $ppCount=$this->Practice_package_model->getpp_PackActiveCount($student_id); 
-        //$rtCount = $this->Realty_test_model->getRtPackActiveCount($student_id);
+        $ppCount=$this->Practice_package_model->getpp_PackActiveCount($student_id);
         $rtCount = 0;
 
         $academyServiceSum = $ppCount+$wsCount+$rtCount;
@@ -3135,6 +3133,7 @@ class Student extends MY_Controller{
                 'total_amt'         =>$total_amt,
                 'total_tax' =>$total_tax,
                 'ext_total_amt'=>$total_amt,
+                'ext_remarks'=>$ext_remarks,
             );
             $params2 = array(                    
                 'student_package_id'=> $student_package_id,
@@ -3146,8 +3145,6 @@ class Student extends MY_Controller{
                 'created'           => date("d-m-Y h:i:s A"),
                 'modified'          => date("d-m-Y h:i:s A"),
             ); 
-            
-            // pr($params,1);
             $idd1 = $this->Student_package_model->update_student_pack_payment_pack_extension($student_package_id,$params);
             $idd2 = $this->Student_package_model->update_transaction($params2);
             if($service_id>0){
@@ -3182,6 +3179,7 @@ class Student extends MY_Controller{
                 'tax_detail'        =>$tax_arr,
                 'total_tax' =>$total_tax,
                 'ext_total_amt'=>$total_amt,
+                'ext_remarks'=>$ext_remarks,
             );
             $params2 = array(                    
                 'student_package_id'=> $student_package_id,
@@ -3213,9 +3211,10 @@ class Student extends MY_Controller{
             $get_UID = $this->Student_model->get_UID($student_id);
             $UID = $get_UID['UID'];
             //activity update start
-                $add_payment = CURRENCY .' '.$add_payment;
+                // $add_payment = CURRENCY .' '.$add_payment;
                 $activity_name= PACK_EXTENSION;
-                $description= 'Payment worth '.CURRENCY.' '.$add_payment.' recieved for pack extension from studen '.$UID.'';
+                $payment_n = $add_payment/100;
+                $description= 'Payment worth '.CURRENCY.' '.$payment_n.' recieved for pack extension from studen '.$UID.'';
                 $res=$this->addUserActivity($activity_name,$description,$student_package_id,$by_user);
             //activity update end
             return 1;

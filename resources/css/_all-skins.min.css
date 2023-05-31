@@ -3577,6 +3577,15 @@ h2.student-heading {margin: 0 0 15px;font-weight: 600;}
 span#dashBtn.fa-eye:before {content: "\f06e";}
 span#dashBtn {cursor: pointer; pointer-events: inherit;}
 
+#schedule-date button {padding: 9px 20px !important;font-size: 14px;border-radius: 25px;}
+#schedule-date button.btn-warning {background: #d72a22 !important;}
+#schedule-date button.btn-success {background: #008d4c !important;}
+#schedule-date button.btn-sm {background: #5c5c5c;}
+#schedule-date button.btn-sm:hover{background:#000 !important;}
+#schedule-date button:last-child {background: #f1f1f1;color: #000;border:1px solid #000;}
+#schedule-date button:last-child:hover{color:#fff;}
+#schedule-date button:nth-child(4), #schedule-date button:nth-child(5) {background: #f79620;}
+
 @media screen and (max-width:1440px)
 {
 	.mediaFile input#upload_image {width: 90%;}

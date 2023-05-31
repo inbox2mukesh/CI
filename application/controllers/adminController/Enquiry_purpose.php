@@ -76,14 +76,11 @@ class Enquiry_purpose extends MY_Controller{
                 $image= $data['upload_data']['file_name'];
                 $params = array(
                     'active' => $this->input->post('active') ? $this->input->post('active') : 0,
-				    'enquiry_purpose_name'=> trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('enquiry_purpose_name')))),
+				'enquiry_purpose_name'=> trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('enquiry_purpose_name')))),
                     'image'  => $image,
                     'about_service' => $this->input->post('about_service',false),
                     'by_user' => $by_user,
                     'URLslug' => $this->input->post('URLslug'),
-                    'seo_keywords'=>$this->input->post('keywords'),
-                    'seo_title'=>$this->input->post('seo_title'),
-                    'seo_desc'=>$this->input->post('seo_desc'),
                 );                     
         }else{           
             $params = array(
@@ -92,9 +89,6 @@ class Enquiry_purpose extends MY_Controller{
                 'about_service' => $this->input->post('about_service',false),
                 'by_user' => $by_user,
                  'URLslug' => $this->input->post('URLslug'),
-                 'seo_keywords'=>$this->input->post('keywords'),
-				'seo_title'=>$this->input->post('seo_title'),
-				'seo_desc'=>$this->input->post('seo_desc'),
                 );
         }
         $id = $this->Enquiry_purpose_model->add_enquiry_purpose($params);
@@ -207,9 +201,6 @@ class Enquiry_purpose extends MY_Controller{
                         'about_service' => $this->input->post('about_service',false),
                         'by_user' => $by_user,
                         'URLslug' => $this->input->post('URLslug'),
-                        'seo_keywords'=>$this->input->post('keywords'),
-                        'seo_title'=>$this->input->post('seo_title'),
-                        'seo_desc'=>$this->input->post('seo_desc'),
                     );
             }
 				$result = $this->Enquiry_purpose_model->update_enquiry_purpose($id,$params);

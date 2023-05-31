@@ -585,6 +585,19 @@ function showDiscountTypeFields_online(discount_type) {
 		$('.waiverField_online').hide();
 		$('.discountField_online').hide();
 	}
+		// if(discount_type == 'Waiver') {
+		// 	let waiveramt = parseFloat($('#waiver').val());
+		// 	if(waiveramt > 0 && waiveramt != '')
+		// 	{
+		// 		let payableamt = parseFloat($('#amount_payable').val());
+		// 		//let waiveredpayablemat = payableamt - waiveramt;
+		// 		//$('#amount_payable').val(waiveredpayablemat);
+		// 		//$('#waiver_amt').val(waiveramt);
+		// 		let waiveredpackprice = parseFloat($('#packPrice').val()) -waiveramt;
+		// 		$('#packPrice').val(waiveredpackprice);
+		// 		//$('#myTable #tbpackprice').html(waiveredpackprice);
+		// 	}
+		// }
 	$("#amount_paid").val('');
 }
 function showDiscountTypeFields_pp(discount_type) {
@@ -603,6 +616,19 @@ function showDiscountTypeFields_pp(discount_type) {
 		$('.waiverField_pp').hide();
 		$('.discountField_pp').hide();
 	}
+	// if(discount_type == 'Waiver') {
+	// 	let waiveramt = parseFloat($('#waiver').val()).toFixed(2);
+	// 	if(waiveramt > 0 && waiveramt != '')
+	// 	{
+	// 		let payableamt = parseFloat($('#amount_payable_pp').val());
+	// 		let waiveredpayablemat = payableamt - waiveramt;
+	// 		$('#amount_payable_pp').val(waiveredpayablemat);
+	// 		$('#waiver_amt').val(waiveramt);
+	// 		let waiveredpackprice = parseFloat($('#packPrice').val()) -waiveramt;
+	// 		$('#packPrice').val(waiveredpackprice);
+	// 		$('#myTable #tbpackprice').html(waiveredpackprice);
+	// 	}
+	// }
 	$("#amount_paid_pp").val('');
 }
 function doBlankVenue() {
@@ -1894,6 +1920,7 @@ function validate_amount_paid_pp(myval) {
 			$('#due_commitment_date_pp').val('');
 		}
 	}
+	// $('#myTable #tbpackprice').html(currency+' '+myval);
 }
 function validate_amount_paid(myval) {
 	var val = $(".ppp:checked").val();
@@ -1946,6 +1973,7 @@ function validate_amount_paid(myval) {
 			$('#due_commitment_date').val('');
 		}
 	}
+	// $('#myTable #tbpackprice').html(currency+' '+myval);
 }
 function validate_form() {
 	var type = $('input[name=pack_cb]:checked').val();
@@ -3946,29 +3974,33 @@ function hidepackinfo_()
 function getOnlineOfflinePackInfo(amount=null) {
 	var type = $('input[name=pack_cb]:checked').val();
 	var totalamt = $('#estimatetax').val();
-	// var package_id = $('#package_id').find(":selected").val();
-	// alert(amount);
+	
 	if (type == 'offline' || type == 'online'){
 		var package_id = $('#package_id').find(":selected").val();
 		var amntpaying = $('#amount_paid').val();
+		var waiveramt = parseFloat($('#waiver').val());
+		var discounttype = $('#discount_type').find(":selected").val();
 		$.ajax({
 			url: WOSA_ADMIN_URL + 'package_master/ajax_getOnlineOfflinePackInfo',
 			async: true,
 			type: 'post',
-			data: { paidamount:amount,package_id: package_id },
+			data: { paidamount:amount,package_id: package_id,waiveramt:waiveramt,discounttype:discounttype },
 			dataType: 'json',
 			success: function (response) {
 				if (response.status == 'false') {
 					$('.packInfo').html(response.msg);
 				} else {
+					// var payableamount = 0;
 					if(totalamt != response.amountpayable && amntpaying == '')
 					{
-						$('#amount_payable').val(response.amountpayable);
+						payableamount = parseFloat(response.amountpayable).toFixed(2);
+						//$('#amount_payable_pp').val(parseFloat(response.amountpayable).toFixed(2));
 					}
 					else if(amntpaying == ''){
-						$('#amount_payable').val(totalamt);
+						payableamount = parseFloat(totalamt).toFixed(2);
 					}
-					
+					$('#amount_payable').val(payableamount);
+					$('#packPrice').val(response.packamount);
 					$('.packInfo').html(response.packinfo);
 				}
 			}
@@ -3976,25 +4008,30 @@ function getOnlineOfflinePackInfo(amount=null) {
 	} else if (type == 'pp') {
 		var package_id = $('#package_id_pp').find(":selected").val();
 		var amntpaying = $('#amount_paid_pp').val();
+		var waiveramt = parseFloat($('#waiver_pp').val());
+		var discounttype = $('#discount_type_pp').find(":selected").val();
 		$.ajax({
 			url: WOSA_ADMIN_URL + 'package_master/ajax_getPracticePackInfo',
 			async: true,
 			type: 'post',
-			data: { paidamount:amount,package_id: package_id },
+			data: { paidamount:amount,package_id: package_id,waiveramt:waiveramt,discounttype:discounttype },
 			dataType: 'json',
 			success: function (response) {
 				if (response.status == 'false') {
 					$('.packInfo').html(response.msg);
 				} else {
+					// var payableamount = 0;
 					if(totalamt != response.amountpayable && amntpaying == '')
 					{
-						$('#amount_payable_pp').val(response.amountpayable);
+						payableamount = parseFloat(response.amountpayable).toFixed(2);
+						//$('#amount_payable_pp').val(parseFloat(response.amountpayable).toFixed(2));
 					}
 					else if(amntpaying == ''){
-						$('#amount_payable_pp').val(totalamt);
+						payableamount = parseFloat(totalamt).toFixed(2);
 					}
-					
+					$('#amount_payable_pp').val(payableamount);
 					$('.packInfo').html(response.packinfo);
+					$('#packPrice').val(response.packamount);
 				}
 			}
 		});
@@ -4004,13 +4041,6 @@ function getOnlineOfflinePackInfo(amount=null) {
 
 function calculatepayableamnt(type=null,payingamt=null)
 {
-	$('#amount_payable_pp').empty();
-	var tobepaid = $('#estimatetax').val();
-	var cgst = $('#cgsttax').val();
-	var sgst = $('#sgsttax').val();
-	var cgst_tax = parseFloat((payingamt * cgst)/100).toFixed(2);
-	var sgst_tax = parseFloat((payingamt * sgst)/100).toFixed(2);
-	var totalprice = parseFloat(payingamt) + parseFloat(cgst_tax) + parseFloat(sgst_tax) ;
 	var id='';
 	if(type == 'onlinepack')
 	{
@@ -4019,16 +4049,48 @@ function calculatepayableamnt(type=null,payingamt=null)
 	else{
 		id ='amount_payable_pp';
 	}
-	// alert(totalprice);
-	if(tobepaid > totalprice)
+	var packpr = parseFloat($('#packPrice').val());
+	let waiveramt = parseFloat($('#waiver').val());	
+	if(discounttype == 'Waiver')
 	{
-		$('#'+id).val(totalprice);
+		payingamt = packpr - waiveramt;
 	}
-	else{
-		$('#'+id).val(tobepaid);
-	}
-
+	var tobepaid = parseFloat($('#estimatetax').val());
 	
+	if(payingamt != ''){
+			var cgst = $('#cgsttax').val();
+			var sgst = $('#sgsttax').val();
+			var cgst_tax = parseFloat((payingamt * cgst)/100);
+			var sgst_tax = parseFloat((payingamt * sgst)/100);
+			var totalprice = parseFloat(payingamt) + parseFloat(cgst_tax) + parseFloat(sgst_tax) ;
+			var discounttype = $('#discount_type').find(":selected").val();		
+			if(totalprice > tobepaid)
+			{
+				$('#'+id).val(parseFloat(tobepaid).toFixed(2));
+				$('#myTable #amountpaid').html(currency+' '+parseFloat(tobepaid).toFixed(2));
+			}
+			else{
+				// console.log({tobepaid});
+				$('#'+id).val(parseFloat(totalprice).toFixed(2));
+				// $('#amountpaid').html(parseFloat(totalprice).toFixed(2));
+				$('#myTable #amountpaid').html(currency+''+parseFloat(totalprice).toFixed(2));
+			}
+			// if(tobepaid < totalprice)
+			// {
+			// 	// payablemt_ = totalprice;
+			// 	console.log({tobepaid});
+			// 	$('#'+id).val(tobepaid);
+			// }
+			// else{
+			// 	console.log({totalprice});
+			// 	$('#'+id).val(totalprice);
+			// }
+			//console.log({payablemt_});
+			// $('#'+id).val(payablemt_);
+		}
+		else{
+			$('#'+id).val(tobepaid);
+		}	
 }
 function getPackBatch(package_id, pack_type) {
 	if (pack_type == 'package_id') {
@@ -4074,15 +4136,17 @@ function getPackPrice(package_id) {
 	
 	var type = $('input[name=pack_cb]:checked').val();
 	$('#packPrice').val('');
+	
+	
 	if (type == 'offline' || type == 'online') {
-		
+		$('#amount_paid').val('');
 		$.ajax({
 			url: WOSA_ADMIN_URL + 'package_master/ajax_getPackPrice_new',
 			type: 'post',
 			data: { package_id: package_id },
 			success: function (response) {
 				var obj = JSON.parse(response);
-				var discounted_amount = parseInt(obj.packprice.discounted_amount);
+				var discounted_amount = obj.packprice.discounted_amount;
 				let cgst_tax_amt = 0;
 				let sgst_tax_amt = 0;
 				// alert(obj.cgst.tax_per);
@@ -4090,33 +4154,34 @@ function getPackPrice(package_id) {
 				{
 					alert('CGST Tax is not available. Please add CGST if want to include the CGST');
 				}
-				else{cgst_tax_amt = parseFloat(obj.cgst.tax_per);}
+				else{cgst_tax_amt = parseFloat(obj.cgst.tax_per).toFixed(2);}
 				if(obj.sgst == null)
 				{
 					alert('SGST Tax is not available. Please add SGST if want to include the SGST');
 				}
-				else{sgst_tax_amt = parseFloat(obj.sgst.tax_per);}				
-				var cgst_tax = Math.round((discounted_amount * cgst_tax_amt)/100);
-				var sgst_tax = Math.round((discounted_amount * sgst_tax_amt)/100);
-				var totalprice = discounted_amount + cgst_tax + sgst_tax ;
+				else{sgst_tax_amt = parseFloat(obj.sgst.tax_per).toFixed(2);}				
+				var cgst_tax = (discounted_amount * cgst_tax_amt)/100;
+				var sgst_tax = (discounted_amount * sgst_tax_amt)/100;
+				var totalprice = parseFloat(discounted_amount) + parseFloat(cgst_tax) + parseFloat(sgst_tax) ;
 				if (response.status == 'false') {
 					$('.msg').html(response.msg);
 					$('#packPrice').val('');
 				} else {
-					$('#amount_payable').val(totalprice);
-					$('#estimatetax').val(totalprice);
+					$('#amount_payable_pp').val(parseFloat(totalprice).toFixed(2));
+					$('#estimatetax').val(parseFloat(totalprice).toFixed(2));
 					$('#packPrice').val(discounted_amount);
 				}
 			}
 		});
 	} else if (type == 'pp') {
+		$('#amount_paid_pp').val('');
 		$.ajax({
 			url: WOSA_ADMIN_URL + 'practice_packages/ajax_getPackPrice_new',
 			type: 'post',
 			data: { package_id: package_id },
 			success: function (response) {
 				var obj = JSON.parse(response);
-				var discounted_amount = parseInt(obj.packprice.discounted_amount);
+				var discounted_amount = obj.packprice.discounted_amount;
 				let cgst_tax_amt = 0;
 				let sgst_tax_amt = 0;
 				// alert(obj.cgst.tax_per);
@@ -4124,21 +4189,22 @@ function getPackPrice(package_id) {
 				{
 					alert('CGST Tax is not available. Please add CGST if want to include the CGST');
 				}
-				else{cgst_tax_amt = parseFloat(obj.cgst.tax_per);}
+				else{cgst_tax_amt = obj.cgst.tax_per;}
 				if(obj.sgst == null)
 				{
 					alert('SGST Tax is not available. Please add SGST if want to include the SGST');
 				}
-				else{sgst_tax_amt = parseFloat(obj.sgst.tax_per);}
-				var cgst_tax = Math.round((discounted_amount * cgst_tax_amt)/100);
-				var sgst_tax = Math.round((discounted_amount * sgst_tax_amt)/100);
-				var totalprice = discounted_amount + cgst_tax + sgst_tax ;
+				else{sgst_tax_amt = obj.sgst.tax_per;}
+				var cgst_tax = (discounted_amount * cgst_tax_amt)/100;
+				var sgst_tax = (discounted_amount * sgst_tax_amt)/100;
+				//var totalprice = discounted_amount + cgst_tax + sgst_tax ;
+				var totalprice = parseFloat(discounted_amount) + parseFloat(cgst_tax) + parseFloat(sgst_tax) ;
 				if (response.status == 'false') {
 					$('.msg').html(response.msg);
 					$('#packPrice').val('');
 				} else {
-					$('#amount_payable_pp').val(totalprice);
-					$('#estimatetax').val(totalprice);
+					$('#amount_payable_pp').val(parseFloat(totalprice).toFixed(2));
+					$('#estimatetax').val(parseFloat(totalprice).toFixed(2));
 					$('#packPrice').val(discounted_amount);
 				}
 			}
@@ -8925,7 +8991,6 @@ $(document).on('click', '#hcancel_upload', function () {
 });
 //word count limit
 $('.validatewordcount').keyup(function () {
-	alert('asdfads');
 	var id = $(this).attr('id');
 	var id_err = id + '_err'; //create class for message display
 	// var maxCount = $(this).data('count');
@@ -9072,7 +9137,7 @@ function checkWordCountCkEditor(id) {
 				$("." + id + '_err').html('Enter Message');
 			}
 			if (strWord > 1 && strWord < minLengthWord) {
-				$("." + id + '_err').html('Allowed Minimum ' + minLengthWord + ' Words');
+				$("." + id + '_err').html('Allowed Maximum ' + minLengthWord + ' Words');
 			}
 			if (strWord > MaxLengthWord) {
 				var xxx = strWord - MaxLengthWord;
@@ -9104,15 +9169,30 @@ $(document).on("input", ".allow_decimal", function(evt) {
 
 function percentage_validation(field) {
 	var field_id = $(field).attr('id');
+	var regex =  /^([0-9]{1,2}\.[0-9]{1,2})$/;
 	var x = $(field).val();
 	$('.' + field_id + '_err').html('');
-	var x = parseFloat(x);
+	var x = parseFloat(x).toFixed(1);
 	if (isNaN(x)) {
 		$(field).val('');
 		$('.' + field_id + '_err').html('Enter valid percentage');
 	} else if (x >= 100) {
 		$(field).val('');
 		$('.' + field_id + '_err').html('Enter valid percentage');
+	}
+	else if(!regex.test($(field).val()))
+	{
+		var splitval = x.split('.');
+		if(splitval[0] > 0)
+		{
+			$(field).val(parseFloat(splitval[0]).toFixed(1));
+		}
+		else{
+			$(field).val('');
+			$('.' + field_id + '_err').html('Enter valid percentage');
+
+		}
+		
 	}
 	return true;
 }
