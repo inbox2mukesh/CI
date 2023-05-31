@@ -166,15 +166,13 @@ class Counseling_session extends MY_Controller{
         if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
         $data['si'] = 0;
         //access control ends
-		
+		$current_DateTime = date("d-m-Y G:i:0");
+		$current_DateTimeStr = strtotime($current_DateTime);		
 		$this->load->model('Counseling_session_model');
-		$this->load->model('Time_slot_model');
-					
+		$this->load->model('Time_slot_model');					
 		$current_DateTime = date("d-m-Y G:i:0");
         $current_DateTimeStr = strtotime($current_DateTime);
         $current_DateTimeStr_after=$current_DateTimeStr;
-		// $this->Counseling_session_model->deactivate_shedule($current_DateTimeStr_after);
-		
         $data['title'] = 'Add Counseling Session';
         $this->load->library('form_validation');
         $this->form_validation->set_rules('session_title','session title','required|trim');
@@ -194,12 +192,11 @@ class Counseling_session extends MY_Controller{
 			$total_time_slot=$this->input->post('total_time_slot');
 			$session_date_array=explode(' - ',$session_date);
 			$session_date_from=trim($session_date_array[0]);
-			$session_date_to=trim($session_date_array[1]);
+			$session_date_to=trim($session_date_array[1]);			
 			$Diff = strtotime($session_date_to)-strtotime($session_date_from);
-            $dayDiff=$Diff/86400;
-						
+            $dayDiff=$Diff/86400;						
 			$add_data=false;
-				
+			$session_end_date_time_str=strtotime($session_date_to.' G:i:0')+$this->input->post('duration');
 			$params = array(
 				'active' =>1,
 				'session_type' => $this->input->post('session_title'),
@@ -208,24 +205,25 @@ class Counseling_session extends MY_Controller{
 				'session_from_to_date' => $session_date,
 				'zoom_link' => $this->input->post('meeting_link'),
 				'duration' => $this->input->post('duration'),
-				//'paypal_link' => $this->input->post('paypal_link'),
 				'session_date_from'=>$session_date_from,
 				'session_date_to'=>$session_date_to,
-            );
-			
+				'session_end_date_time_str'=>$session_end_date_time_str,
+            );			
 			$counseling_sessions_group_id=$this->Counseling_session_model->_add_counseling_sessions_group($params);
 			if(!empty($counseling_sessions_group_id)){
 				for($i=0; $i<=$dayDiff; $i++){
 					
 					$session_date_new=date('Y-m-d', strtotime($session_date_from.' +'.$i.' day'));
+					$session_end_date_new=date('Y-m-d', strtotime($session_date_to.' +'.$i.' day'));
 					$nameOfDay = date('D', strtotime($session_date_new));
 					
 					if($total_time_slot > 0){
 						
 						for($j=1; $j<=$total_time_slot; $j++){
-							
+							$duration = $this->input->post('duration')+1;
 							$time_slot=$this->input->post('counseling_session_time_slots'.$j);
 							$session_date_time_str=strtotime($session_date_new.' '.$time_slot);
+							$session_enddate_time_str=strtotime($session_end_date_new.' '.$time_slot .' +'.$duration.' minutes') ;//strtotime($session_end_date_new.' '.$time_slot);
 							$session_date_time=date('Y-m-d H:i:0',$session_date_time_str);
 							
 							$params = array(
@@ -239,10 +237,12 @@ class Counseling_session extends MY_Controller{
 							'duration' => $this->input->post('duration'),
 							'session_date_time'=>$session_date_time,
 							'session_date_time_str'=>$session_date_time_str,
+							'session_end_date_time_str'=>$session_enddate_time_str,
 							'dayname'=>$nameOfDay,
 							'time_slot'=>$time_slot,
 							'counseling_sessions_group_id'=>$counseling_sessions_group_id
 							);
+							// pr($params,1);
 							$id = $this->Counseling_session_model->add_c_session($params);						
 						}
 						
@@ -251,7 +251,7 @@ class Counseling_session extends MY_Controller{
 				
 				$session_end_date_time_str=$this->Counseling_session_model->getMaxSessionDateTimeStrBYSessionGroupID($counseling_sessions_group_id);
 				$params=array(
-					'session_end_date_time_str' =>$session_end_date_time_str
+					'session_end_date_time_str' =>$session_enddate_time_str
 				);
 				$count=$this->Counseling_session_model->get_all_counseling_session_active_count($counseling_sessions_group_id);
 			    if($count > 0){
