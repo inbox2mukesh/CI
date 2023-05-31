@@ -131,7 +131,7 @@ border-radius: 10px;
 					<div class="col-md-6 margin-bottom-20">
 						<label for="keywords" class="control-label"><span class="text-danger">*</span>SEO Keywords</label>
 						<div class="form-group">
-						<input type="text" name="keywords" value="<?php echo (isset($keywords) && !empty($keywords))?$keywords:$free_resources['seo_keywords']; ?>" class="form-control input-ui-100 removeerrmessage" id="keywords" placeholder="SEO Keywords"  onpaste="return false" />
+						<input type="text" name="keywords" value="<?php echo (isset($keywords) && !empty($keywords))?$keywords:$free_resources['seo_keywords']; ?>" class="form-control input-ui-100 removeerrmessage" id="keywords" placeholder="SEO Keywords"/>
 						<span class="text-danger keywords_err"><?php echo form_error('keywords'); ?></span>
 						</div>
 					</div>

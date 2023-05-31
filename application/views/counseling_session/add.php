@@ -23,7 +23,7 @@
 
 						<select name="session_title" id="session_title" class="form-control" onchange="checkSessionType()">
 						<?php foreach($sessiontypeList as $key=>$val){?>
-						<option value="<?php echo $key?>" <?php echo $key==$session_type ? 'selected="selected"':''?>>
+						<option value="<?php echo $key?>" <?php echo (isset($session_type) && $key==$session_type) ? 'selected="selected"':''?>>
 						<?php echo $val?></option>
 						<?php 
 						}?>	
