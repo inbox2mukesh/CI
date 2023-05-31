@@ -629,14 +629,24 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="check-info font-weight-600" id="summerysection_packextension" style="display:none;">
+						<div class="check-info font-weight-600" id="summerysection_packextension" style="display:none;">
 								<div>Original Price <span class="pull-right" id="orignalprice"><?php echo CURRENCY ?> 100</span></div>
 								<div>CGST@<?php echo $cgst_tax_per ?>%<span class="pull-right" id="cgst_tax_new">INR 19</span></div>
 								<div>SGST@<?php echo $sgst_tax_per ?>%<span class="pull-right" id="sgst_tax_new">INR 9</span></div>
 								<div>Total Payable Amount(Incl. all Taxes)<span class="pull-right" id="totalamount">INR 9</span></div>
 								<input type="hidden" name="totalpayableamt" id="totalpayableamt" value="">
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group has-feedback">
+								<label for="expired_on" class="control-label text-success"><span class="text-danger">*</span>Remarks</label>
+								<textarea name="extension_remarks" class="form-control input-ui-100" id="extension_remarks" maxlength="100" autocomplete="off" value=""></textarea>
+								</div>
+							</div>
+						</div>
 					</div>
+					
+					
 					<!-- pack extension form closed-->
 
 					<!-- Branch switch form -->
