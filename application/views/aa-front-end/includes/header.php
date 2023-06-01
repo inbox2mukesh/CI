@@ -21,7 +21,7 @@
 		echo get_meta_tag($page);	
 		
 	}
-	else if(count($components)>=3)
+	else if(count($components)>=3 && strpos('our_students',$directoryURI) < 0)
 	{
 	    if(strpos($path,'view'))
 	    {

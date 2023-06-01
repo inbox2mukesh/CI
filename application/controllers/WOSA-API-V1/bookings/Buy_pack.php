@@ -205,7 +205,7 @@ class Buy_pack extends REST_Controller{
                 'classroom_id'  => $classroom_id,                           
                 'payment_id'    => $std_data->payment_id,
                 'order_id'      => $std_data->order_id,                
-                'amount'        => $discounted_amount,
+                'amount'        => $discounted_amount*100,
                 'other_discount'=> $other_discount,
                 'promocode_used'=> $std_data->promocode,
                 'amount_paid'   => $amount_paid+$paidBywallet,
@@ -225,9 +225,9 @@ class Buy_pack extends REST_Controller{
                 'checkout_token_no'    =>$std_data->checkout_token_no,
                 'country_code'    =>$std_data->country_code,
                 'requested_on' => date("d-m-Y h:i:s A"),
-                'cgst_amt'=>$std_data->cgst_amt,
-                'sgst_amt'=>$std_data->sgst_amt,
-                'total_paid_ext_tax'=>$std_data->total_paid_ext_tax,
+                'cgst_amt'=>$std_data->cgst_amt*100,
+                'sgst_amt'=>$std_data->sgst_amt*100,
+                'total_paid_ext_tax'=>$std_data->total_paid_ext_tax*100,
             );       
             $this->db->insert('student_package', $params2);
 

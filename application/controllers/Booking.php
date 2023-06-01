@@ -13,7 +13,6 @@ class Booking extends MY_Controller{
         $this->load->library("session");
 
         $this->load->helper(['url','foumodule_api']);
-
         require_once('application/libraries/stripe-php/init.php');
         $this->headers_fourmodule= array('authorization:'.FOURMODULE_KEY);   
     }
@@ -447,7 +446,7 @@ class Booking extends MY_Controller{
             "package_id" => $_SESSION['book_packid'],
             "cgst_amt" => $this->input->post('cgst_amt')*100,
             "sgst_amt" => $this->input->post('sgst_amt')*100, 
-            "amount_paid" => $this->input->post('payable_amount'),  
+            "amount_paid" => $this->input->post('payable_amount')*100,  
             "other_discount" =>  $this->input->post('promocode_amount'), 
             "use_wallet" =>  $this->input->post('wallet_amount_used'), 
             "promoCodeId_val" =>  $this->input->post('promocode_applied_id'), 

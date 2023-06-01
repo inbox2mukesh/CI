@@ -3214,7 +3214,7 @@ class Student extends MY_Controller{
                 // $add_payment = CURRENCY .' '.$add_payment;
                 $activity_name= PACK_EXTENSION;
                 $payment_n = $add_payment/100;
-                $description= 'Payment worth '.CURRENCY.' '.$payment_n.' recieved for pack extension from studen '.$UID.'';
+                $description= 'Payment worth '.CURRENCY.' '.$payment_n.' recieved for pack extension from student '.$UID.'';
                 $res=$this->addUserActivity($activity_name,$description,$student_package_id,$by_user);
             //activity update end
             return 1;
