@@ -21,7 +21,7 @@
 		echo get_meta_tag($page);	
 		
 	}
-	else if(count($components)>=3 && strpos('our_students',$directoryURI) < 0)
+	else if(count($components)>=3 && !(strpos('our_students',$directoryURI)))
 	{
 	    if(strpos($path,'view'))
 	    {
@@ -31,7 +31,8 @@
 	    }
 	    else{
 	        $page1 = ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
-		    $page_url = ((ENVIRONMENT == 'production'))?$components[2]:$components[3];
+			// $page_url =$components[3];
+		    $page_url = ((ENVIRONMENT == 'production'))?$components[3]:$components[4];
 	    }
 		
 		echo dynamic_meta_tag_data($page1,$page_url);
