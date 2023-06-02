@@ -245,9 +245,10 @@
             u.fname as fnameu,
             u.lname as lnameu,
             u.id as uid,
+            s.ext_remarks
         ');
         $this->db->from('`student_transaction_history` sth');
-        //$this->db->join('`students` s', 's.`id`= sth.`student_id`', 'left');       
+        $this->db->join('`student_package` s', 's.`student_package_id`= sth.`student_id`', 'left');       
         $this->db->join('`user` u', 'u.`id`= sth.`by_user`', 'left');        
         $this->db->where(array('sth.student_package_id'=>$student_package_id, 'sth.student_id'=>$student_id));     
         return $this->db->get('')->result_array();

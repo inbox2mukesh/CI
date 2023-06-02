@@ -1609,7 +1609,7 @@ class Student extends MY_Controller{
                 'subscribed_on' => $subscribed_on,
                 'subscribed_on_str' => strtotime($subscribed_on),
                 'expired_on'    => $expired_on,
-                'expired_on_str' => strtotime($expired_on),
+                'expired_on_str' => strtotime($expired_on).' +24 hours',
                 'requested_on' => date("d-m-Y h:i:s A"),
                 'total_paid_ext_tax'=>$amt_ext_tax_paid*100
             );
@@ -2040,7 +2040,7 @@ class Student extends MY_Controller{
                 'subscribed_on' => $subscribed_on,
                 'subscribed_on_str' => strtotime($subscribed_on),
                 'expired_on'    => $expired_on,
-                'expired_on_str' => strtotime($expired_on),
+                'expired_on_str' => strtotime($expired_on).' +24 hours',
                 'package_name'    => $package_name,
                 'package_duration'=>$dt,
                 'requested_on' => date("d-m-Y h:i:s A"),
@@ -2457,7 +2457,7 @@ class Student extends MY_Controller{
                 'subscribed_on' => $subscribed_on,
                 'subscribed_on_str' => strtotime($subscribed_on),
                 'expired_on'    => $expired_on,
-                'expired_on_str' => strtotime($expired_on),
+                'expired_on_str' => strtotime($expired_on).' +24 hours',
                 'requested_on' => date("d-m-Y h:i:s A"),
             );       
         $this->db->insert('student_package', $params2);
@@ -3129,7 +3129,7 @@ class Student extends MY_Controller{
                 'active'        => 1,
                 'packCloseReason'=> NULL,
                 'expired_on'    => $newDate,
-                'expired_on_str' => strtotime($newDate),
+                'expired_on_str' => strtotime($newDate).' +24 hours',
                 'total_amt'         =>$total_amt,
                 'total_tax' =>$total_tax,
                 'ext_total_amt'=>$total_amt,
@@ -3174,7 +3174,7 @@ class Student extends MY_Controller{
                 'active'        => 1,
                 'packCloseReason'=> NULL,
                 'expired_on'    => $newDate,
-                'expired_on_str' => strtotime($newDate),
+                'expired_on_str' => strtotime($newDate).' +24 hours',
                 'total_amt'         =>$total_amt,
                 'tax_detail'        =>$tax_arr,
                 'total_tax' =>$total_tax,

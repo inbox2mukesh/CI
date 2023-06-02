@@ -236,8 +236,8 @@ class Practice_packages extends MY_Controller{
                     }
                     
                     if($idd){
-                        $this->auto_loadCaching(CACHE_ENGINE);
-                        $this->auto_cacheUpdate_front(WOSA_API_DIR,'practice_packs'); 
+                        // $this->auto_loadCaching(CACHE_ENGINE);
+                        // $this->auto_cacheUpdate_front(WOSA_API_DIR,'practice_packs'); 
                         $category_id = $this->input->post('category_id');
                         if(!empty($category_id)){
                         foreach($category_id as $c){
@@ -372,8 +372,8 @@ class Practice_packages extends MY_Controller{
                 }
                 $category_id = $this->input->post('category_id');
                 if($idd){
-                    $this->auto_loadCaching(CACHE_ENGINE);
-                    $this->auto_cacheUpdate_front(WOSA_API_DIR,'practice_packs');
+                    // $this->auto_loadCaching(CACHE_ENGINE);
+                    // $this->auto_cacheUpdate_front(WOSA_API_DIR,'practice_packs');
                     if(!empty($category_id)){
                         $this->Practice_package_model->delete_package_category($package_id);
                         foreach($category_id as $c){

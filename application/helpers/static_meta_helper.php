@@ -24,11 +24,11 @@ if(!function_exists('get_meta_tag_data')){
     function get_meta_tag_data($page,$country_id)
     {
         $meta = '                
-                <meta name="description" content="" />
-                <meta name="keywords" content="" />
-                <meta name="author" content="" />
-                <title></title>
-                ';
+            <meta name="description" content="" />
+            <meta name="keywords" content="" />
+            <meta name="author" content="" />
+            <title></title>
+            ';
         if($country_id ==38)
         {
             if($page=='contact-us'){
@@ -153,26 +153,30 @@ if(!function_exists('get_meta_tag_data')){
             }
         else{
                 $meta = '                
-                <meta name="description" content="WWestern Overseas is one of the best immigration consultants Australia. If you planning to immigrate to Australia then we are all set to help you out." />
-                <meta name="keywords" content="Immigration Consultant" />
+                <meta name="description" content="Western Overseas is an established immigration firm serving clients with quality visa services in different categories. Approach us for the best visa solution." />
+                <meta name="keywords" content="immigration Consultant Canada, Canada student visa processing time, Canada study visa processing time" />
                 <meta name="author" content="" />
-                <title>Best Immigration Consultants in Australia | Western Overseas</title>
+                <title>Certified Immigration Consultant Canada | Western Overseas</title>
                 ';
-            }         
+            }       
         }  
         else if($country_id ==13)
         {
             $meta = '                
-                    <meta name="description" content="Western Overseas is one of the best immigration consultants Australia. If you planning to immigrate to Australia then we are all set to help you out." />
-                    <meta name="keywords" content="Immigration Consultant " />
-                    <meta name="author" content="" />
-                    <title>Best Immigration Consultants in Australia | Western Overseas</title>
-                    ';
-                // return $meta;    
+                <meta name="description" content="WWestern Overseas is one of the best immigration consultants Australia. If you planning to immigrate to Australia then we are all set to help you out." />
+                <meta name="keywords" content="Immigration Consultant" />
+                <meta name="author" content="" />
+                <title>Best Immigration Consultants in Australia | Western Overseas</title>
+                ';  
         } 
         else if($country_id ==101)
         {
-                
+                $meta = '                
+                <meta name="description" content="" />
+                <meta name="keywords" content="" />
+                <meta name="author" content="" />
+                <title></title>
+                ';
                 if($page=='about-online-coaching'){
                     $meta = '               
                     <meta name="description" content="Are you Confused about choosing IELTS, PTE, TOEFL, and Duolingo? No worries! Western overseas online coaching is the best approach to studying online." />
@@ -218,8 +222,7 @@ if(!function_exists('get_meta_tag_data')){
                     <meta name="author" content="" />
                     <title>Get Started IELTS Online Coaching | Western Overseas</title>
                     ';
-                } 
-                
+                }                 
         } 
         return $meta; 
     }   

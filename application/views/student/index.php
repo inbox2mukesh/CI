@@ -6,7 +6,9 @@
             background-color:  #c2c2a3;
         }
     </style>
-
+<?php
+// pr($students); 
+?>
 <div class="student-index_widget">
     <div class="row">
         <div class="col-md-12">
@@ -98,7 +100,7 @@
                                 <?php
                                     // if(@$s['Pack']){
                                         $classname="";
-                                if(!empty($s) && is_array($s['Pack']) && isset($s['Pack']))
+                                if(array_key_exists('Pack',$s))
                                 {
                                         foreach ($s['Pack'] as $p) {
                                             if($p['classroom_name'] !="")

@@ -238,7 +238,7 @@ class Cron_tab extends MY_Controller{
     {
         
         $this->load->model('Package_master_model');
-        $today=strtotime(date('d-m-Y')." -24 hours");
+        $today=strtotime(date('d-m-Y'));
         $cronData = $this->Package_master_model->DeactivateExpiredPack($today);
     }
     function cronJob_calculateIrrDuesForExpiredPack(){

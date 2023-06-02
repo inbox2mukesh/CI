@@ -226,9 +226,9 @@
     <li class="active"><a href="<?php echo site_url('adminController/lead_management/followup_status_list'); ?>"><i class="fa fa-plus"></i> Followup Status Master</a></li>
     <?php }?>
     <?php
-        /*if($this->Role_model->_has_access_('web_media','index')){
+        if($this->Role_model->_has_access_('visa_banner','index')){
     ?>
-    <li> <a href="<?php echo site_url('adminController/web_media/index');?>"><i class="fa fa-list"></i> Web Media</a> </li><?php } */?>
+    <li> <a href="<?php echo site_url('adminController/visa_banner/index');?>"><i class="fa fa-list"></i>Visa-Services Banner</a> </li><?php } ?>
     <?php
         /*if($this->Role_model->_has_access_('web_banner','index')){
     ?>

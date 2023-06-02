@@ -132,8 +132,8 @@ class Package_master extends MY_Controller{
                         redirect('adminController/package_master/add_online_pack');
                     }
                     if($idd){
-                        $this->auto_loadCaching(CACHE_ENGINE);
-                        $this->auto_cacheUpdate_front(WOSA_API_DIR,'online_courses');
+                        // $this->auto_loadCaching(CACHE_ENGINE);
+                        // $this->auto_cacheUpdate_front(WOSA_API_DIR,'online_courses');
                         $course_timing = $this->input->post('course_timing');
                         $batch_id = $this->input->post('batch_id');
                         $category_id = $this->input->post('category_id');
@@ -303,8 +303,8 @@ class Package_master extends MY_Controller{
                 }
                 
                 if($idd){
-                    $this->auto_loadCaching(CACHE_ENGINE);
-                    $this->auto_cacheUpdate_front(WOSA_API_DIR,'online_courses');
+                    // $this->auto_loadCaching(CACHE_ENGINE);
+                    // $this->auto_cacheUpdate_front(WOSA_API_DIR,'online_courses');
                     $course_timing = $this->input->post('course_timing');
                     $batch_id = $this->input->post('batch_id');
                     $category_id = $this->input->post('category_id');

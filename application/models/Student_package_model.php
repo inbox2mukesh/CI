@@ -340,10 +340,12 @@ class Student_package_model extends CI_Model
         $active = $params['active'];
         $total_tax = $params['total_tax'];
         $ext_total_amt = $params['ext_total_amt'];
+        $ext_remarks = $params['ext_remarks'];
         // $total_amt = $params['total_amt'];
         // $tax_detail = $params['tax_detail'];
         return $this->db->query("update `student_package` SET
             `ext_amount` = `ext_amount` + '".$add_payment."',
+            `ext_remarks` = '".$ext_remarks."',
             `expired_on` = '".$expired_on."',
             `expired_on_str` = '".strtotime($expired_on)."',
             `packCloseReason` = NULL,

@@ -218,7 +218,7 @@ class Buy_pack extends REST_Controller{
                 'subscribed_on' => $std_data->pack_startdate,
                 'subscribed_on_str' => strtotime($std_data->pack_startdate),
                 'expired_on'    => $expired_on,
-                'expired_on_str'    =>strtotime($expired_on),
+                'expired_on_str'    =>strtotime($expired_on .' +24 hours'),
                 'pack_country_id'    => $std_data->pack_country_id,
                 'package_duration'    => $pkduration,
                 'package_name'    =>$package_data['package_name'],
