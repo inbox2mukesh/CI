@@ -1217,6 +1217,7 @@ define('PROVINCES_FILE_PATH', './uploads/provinces/');
 define('NEWS_FILE_PATH', './uploads/news/');
 define('PHOTO_IMAGE_PATH', './uploads/photo/');
 define('VIDEO_IMAGE_PATH', './uploads/video/');
+define('VISA_BANNER_IMAGE_PATH', './uploads/banner_image/');
 
 define('IIMMIGRATION_ALLOWED_TYPES', 'gif|jpg|png|jpeg|webp');
 define('PROVINCES_ALLOWED_TYPES', 'gif|jpg|png|jpeg|webp');
