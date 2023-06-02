@@ -60,13 +60,17 @@
     }
     function getmetaDetails($page,$page_url)
     {
-        if($page == 'visa-services' || $page == 'about-online-coaching')
+        if($page == 'articles')
         {
-            $tablename = 'enquiry_purpose_masters';
+            $tablename = 'free_resources';
         }
         elseif($page == 'test-preparation-material')
         {
             $tablename = 'test_preparation_material';
+        }
+        else if($page == 'visa-services' || $page == 'about-online-coaching')
+        {
+            $tablename = 'enquiry_purpose_masters';
         }
         $this->db->select('seo_title,seo_keywords,seo_desc');
         $this->db->from($tablename);
