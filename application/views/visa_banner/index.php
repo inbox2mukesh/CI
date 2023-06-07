@@ -4,7 +4,7 @@
             <div class="box-header bg-danger">
                 <h3 class="box-title text-primary"><?php echo $title; ?></h3>
                 <div class="box-tools">
-                    <a href="<?php echo site_url('adminController/tax_master/add'); ?>" class="btn btn-danger btn-sm">Add</a>
+                    <a href="<?php echo site_url('adminController/visa_banner/add'); ?>" class="btn btn-danger btn-sm">Add</a>
                 </div>
             </div>
             <?php echo $this->session->flashdata('flsh_msg');?>
@@ -17,7 +17,7 @@
                             <th>Added By</th>
                             <th>Created On</th>
                             <th>Modified On</th>
-                            <th><?php echo STATUS; ?></th>
+                            <!-- <th><?php echo STATUS; ?></th> -->
                             <th><?php echo ACTION; ?></th>
                         </tr>
                     </thead>
@@ -28,14 +28,14 @@
                         { ?>
                             <tr>
                             <td><?php echo ++$sr; ?></td>
-                            <td><img src="<?php echo BASEURL.VISA_BANNER_IMAGE_PATH.$bannlist['banner_img']; ?>" style="height: 100px;width:100px;"></td>
-                            <td><?php echo $bannlist['added_by'];?></td>
+                            <td><img src="<?php echo base_url(VISA_BANNER_IMAGE_PATH.$bannlist['banner_img']); ?>" style="height: 100px;width:100px;"></td>
+                            <td><?php echo $bannlist['username'];?></td>
                             <td><?php echo $bannlist['added_at'];?></td>
                             <td><?php echo $bannlist['modified_at'];?></td>
-                            <td></td>
+                            <!-- <td></td> -->
                             <td>
-                                <a href="http://localhost/wosa-online/adminController/free_resources/edit/17" class="btn btn-info btn-xs" data-toggle="tooltip" title="Edit"><span class="fa fa-pencil"></span> </a> 
-                                <a href="http://localhost/wosa-online/adminController/free_resources/view_details_/17" class="btn btn-info btn-xs" data-toggle="tooltip" title="view"><span class="fa fa-eye"></span> </a> 
+                            <?php if($this->Role_model->_has_access_('video','remove')){?>
+                                <a href="<?php echo site_url('adminController/visa_banner/remove/'.$bannlist['id']); ?>" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a><?php } ?>
                             </td>
                             </tr>
                         <?php }

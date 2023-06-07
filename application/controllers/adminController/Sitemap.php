@@ -20,26 +20,29 @@ class Sitemap extends MY_Controller{
          if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
          //access control ends
         //create all website links only take ancher tags
-        $html = file_get_contents(site_url());
-        $docm = new DOMDocument();
-        @$docm -> loadHTML($html);
-        $xp = new DOMXPath($docm);
-        // Only pull back A tags with an href attribute starting with "http".
-        $res = $xp -> query('//a[starts-with(@href, "http")]/@href');
-        if ($res -> length > 0)
-        {  
-        foreach ($res as $node)
-        {    
-        if (strpos($node -> nodeValue, site_url()) !== false) {    
-            if($node -> nodeValue !=site_url()."sitemap")
-        {
-          $values[] = $node->nodeValue;   
-        }  
-        }
-        }
-
-        $ress=array_unique($values);   
-
+        $values=[];
+        $urlarr = [site_url(),site_url().'articles',site_url().'test-preparation-material'];
+        for($i=0;$i<count($urlarr);$i++){
+                    $html = file_get_contents($urlarr[$i]);
+                    $docm = new DOMDocument();
+                    @$docm -> loadHTML($html);
+                    $xp = new DOMXPath($docm);
+                    // Only pull back A tags with an href attribute starting with "http".
+                    $res = $xp -> query('//a[starts-with(@href, "http")]//@href');                    
+                    if ($res -> length > 0)
+                    {  
+                        foreach ($res as $node)
+                        {    
+                            if (strpos($node -> nodeValue, site_url()) !== false) {    
+                                if($node -> nodeValue !=site_url()."sitemap")
+                                {
+                                $values[] = $node->nodeValue;   
+                                }  
+                            }
+                        }
+                        $ress=array_unique($values);   
+                    }
+                    
         }
         //--------ends----------
         //--------Create Xml file for generated links----------

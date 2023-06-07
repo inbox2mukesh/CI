@@ -183,10 +183,10 @@ if(isset($this->session->userdata('student_login_data')->id)){
 
 
 
-<script src="<?php echo site_url('resources-f/'); ?>js/date-mask.js"></script>
+<!-- <script src="<?php //echo site_url('resources-f/'); ?>js/date-mask.js"></script>
 <script id="rendered-js">
   $(".dob_mask:input").inputmask();
-</script>
+</script> -->
 <script type="text/javascript">
 
 $(".hide-btn").click(function()

@@ -30,7 +30,7 @@
                         }
 					//	echo $d->URLslug;
 					?>
-					<a href="<?php echo base_url('news/post/'.$d->URLslug);?>"> 
+					<a href="<?php echo base_url('news-detail/'.$d->URLslug);?>"> 
 						<div class="news-panel-info">
 							<div class="disc">
 								<img src="<?php echo base_url('uploads/news/'.$d->card_image);?>" alt="" title="" class="pull-right img-responsive ml-15">

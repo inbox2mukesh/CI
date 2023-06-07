@@ -22,11 +22,16 @@
                                                                 $waiver_by = NA;
                                                             }
                                                         }
-                                                        $tax_detail = json_decode($sp['tax_detail']); 
-                                                        $cgst_per = $tax_detail->cgst;
-                                                        $sgst_per = $tax_detail->sgst;
-                                                        $cgst_amt = ($sp['package_amount'] * $cgst_per)/100;
-                                                        $sgst_amt = ($sp['package_amount'] * $sgst_per)/100;
+                                                        $tax_detail = json_decode($sp['tax_detail']);
+                                                        $cgst_per =0;$sgst_per=0; $cgst_amt=0;$sgst_amt=0;
+                                                        if(!empty($tax_detail) && !empty($sp))
+                                                        {
+                                                            $cgst_per = $tax_detail->cgst;
+                                                            $sgst_per = $tax_detail->sgst;
+                                                            $cgst_amt = ($sp['package_amount'] * $cgst_per)/100;
+                                                            $sgst_amt = ($sp['package_amount'] * $sgst_per)/100;
+                                                        }
+                                                        
                                                     ?>
                                                         <tr>
                                                             <td>

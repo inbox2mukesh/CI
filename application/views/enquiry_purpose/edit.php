@@ -107,7 +107,7 @@ border-radius: 10px;
 								<input type="hidden" value="<?php echo SERVICE_IMAGE_PATH.''.$enquiry_purpose['image'];?>" name="hid_image"/>
             </div>
           </div>
-		  <div class="col-md-4 margin-bottom-20">
+		  			<div class="col-md-4 margin-bottom-20">
 						<label for="keywords" class="control-label"><span class="text-danger">*</span>SEO Keywords</label>
 						<div class="form-group">
 						<input type="text" name="keywords" value="<?php echo (isset($keywords) && !empty($keywords))?$keywords:$enquiry_purpose['seo_keywords']; ?>" class="form-control input-ui-100 removeerrmessage" id="keywords" placeholder="SEO Keywords" />

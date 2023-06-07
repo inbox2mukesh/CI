@@ -72,6 +72,10 @@
         {
             $tablename = 'enquiry_purpose_masters';
         }
+        elseif($page == 'news-detail')
+        {
+            $tablename = 'news';
+        }
         $this->db->select('seo_title,seo_keywords,seo_desc');
         $this->db->from($tablename);
         $this->db->where('URLslug',$page_url);

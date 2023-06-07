@@ -52,6 +52,9 @@ class News extends MY_Controller{
         $this->form_validation->set_rules('body','News Body','required|trim');
         $this->form_validation->set_rules('news_date','News Date','required|trim');
         $this->form_validation->set_rules('URLslug', 'URL ', 'required|max_length[140]');
+        $this->form_validation->set_rules('keywords', 'SEO Keywords ', 'required');
+        $this->form_validation->set_rules('seo_title', 'SEO Title ', 'required');
+        $this->form_validation->set_rules('seo_desc', 'SEO Description', 'required|max_length[200]');
         if (empty($_FILES['card_image']['name']))
         {
         $this->form_validation->set_rules('card_image', 'Document', 'required');
@@ -79,8 +82,8 @@ class News extends MY_Controller{
                 }
                 
                 $configp['upload_path']      = NEWS_FILE_PATH;
-            $configp['allowed_types']    = WEBP_FILE_TYPES;
-            $configp['encrypt_name']     = FALSE;  
+                $configp['allowed_types']    = WEBP_FILE_TYPES;
+                $configp['encrypt_name']     = FALSE;  
             $this->upload->initialize($configp);  
                  $this->load->library('upload',$configp);
 
@@ -91,9 +94,7 @@ class News extends MY_Controller{
                        $card_image=NULL; 
                     $this->upload->display_errors();
                 }
-               
-
-                        $params = array( 
+                $params = array( 
                             'title' => $this->input->post('title'),
                             'body' => $this->input->post('body',false),                    
                             'media_file' => $image,
@@ -103,6 +104,9 @@ class News extends MY_Controller{
                             'active' => $this->input->post('active') ? $this->input->post('active') : 0,
                             'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
                             'by_user' => $by_user,
+                            'seo_keywords'=>$this->input->post('keywords'),
+                            'seo_title'=>$this->input->post('seo_title'),
+                            'seo_desc'=>$this->input->post('seo_desc'),
                         );
                         $id = $this->News_model->add_news($params);
                         $tags= $this->input->post('tags');
@@ -159,12 +163,15 @@ class News extends MY_Controller{
             $this->form_validation->set_rules('title','News Title','required|trim');
             $this->form_validation->set_rules('body','News Body','required|trim');
             $this->form_validation->set_rules('news_date','News Date','required|trim');	
-            $this->form_validation->set_rules('URLslug', 'URL ', 'required|max_length[140]');	
-            if($this->input->post('hid_card_image') == "")
+            $this->form_validation->set_rules('URLslug', 'URL ', 'required|max_length[140]');
+            $this->form_validation->set_rules('keywords', 'SEO Keywords ', 'required');
+            $this->form_validation->set_rules('seo_title', 'SEO Title ', 'required');
+            $this->form_validation->set_rules('seo_desc', 'SEO Description', 'required|max_length[200]');	
+            if($this->input->post('hid_card_image') == "" && empty($_FILES['card_image']['name']))
             {
                 $this->form_validation->set_rules('card_image','Card image','required');
             }
-            if($this->input->post('hid_media_file') == "")
+            if($this->input->post('hid_media_file') == "" && empty($_FILES['media_file']['name']))
             {
                 $this->form_validation->set_rules('media_file','Media file','required');
             }
@@ -173,6 +180,7 @@ class News extends MY_Controller{
             
 			if($this->form_validation->run())     
             {   
+                // pr('asdfads',1);
                 $by_user=$_SESSION['UserId'];
                 if(!file_exists(NEWS_FILE_PATH)){
                     mkdir(NEWS_FILE_PATH, 0777, true);
@@ -197,6 +205,9 @@ class News extends MY_Controller{
                     'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
                     'by_user' => $by_user,
                     'URLslug'=>$this->input->post('URLslug'), 
+                    'seo_keywords'=>$this->input->post('keywords'),
+                    'seo_title'=>$this->input->post('seo_title'),
+                    'seo_desc'=>$this->input->post('seo_desc'),
                 );
                 unlink(NEWS_FILE_PATH.$this->input->post('hid_media_file')); 
 
@@ -211,6 +222,9 @@ class News extends MY_Controller{
                         'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
                         'by_user' => $by_user,
                         'URLslug'=>$this->input->post('URLslug'), 
+                        'seo_keywords'=>$this->input->post('keywords'),
+                        'seo_title'=>$this->input->post('seo_title'),
+                        'seo_desc'=>$this->input->post('seo_desc'),
                     );
                 }
                         
@@ -223,6 +237,9 @@ class News extends MY_Controller{
                             'active' => $this->input->post('active') ? $this->input->post('active') : 0,
                             'is_pinned' => $this->input->post('is_pinned') ? $this->input->post('is_pinned') : 0,
                             'by_user' => $by_user,
+                            'seo_keywords'=>$this->input->post('keywords'),
+                            'seo_title'=>$this->input->post('seo_title'),
+                            'seo_desc'=>$this->input->post('seo_desc'),
                         );
 
 
@@ -245,7 +262,7 @@ class News extends MY_Controller{
                     }
 
 
-
+                    // pr($params,1);
                 $idd = $this->News_model->update_news($id,$params);
                 $del = $this->News_model->delete_news_tags($id);
                 $tags= $this->input->post('tags');

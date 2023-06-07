@@ -458,7 +458,7 @@ foreach ($content as $content_data) {
                if(count($FREE_RESOURCE_SECTION_LIMITED->error_message->data) >0)
                {
               foreach ($FREE_RESOURCE_SECTION_LIMITED->error_message->data as $p) { ?>
-                <li><a href="<?php echo base_url() ?>articles/post/<?php echo $p->URLslug; ?>"><?php echo ucfirst($p->title); ?><p><?php echo $p->created; ?></p></a></li>
+                <li><a href="<?php echo base_url() ?>articles/<?php echo $p->URLslug; ?>"><?php echo ucfirst($p->title); ?><p><?php echo $p->created; ?></p></a></li>
               <?php }} else{?>
                 <li>No test Material found</li>
                 <?php }?>

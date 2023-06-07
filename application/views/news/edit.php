@@ -94,7 +94,27 @@
 							<span class="text-danger"><?php echo form_error('tags');?></span>
 						</div>
 					</div>
-				
+					<div class="col-md-4 margin-bottom-20">
+						<label for="keywords" class="control-label"><span class="text-danger">*</span>SEO Keywords</label>
+						<div class="form-group">
+						<input type="text" name="keywords" value="<?php echo (isset($keywords) && !empty($keywords))?$keywords:$news['seo_keywords']; ?>" class="form-control input-ui-100 removeerrmessage" id="keywords" placeholder="SEO Keywords" />
+						<span class="text-danger keywords_err"><?php echo form_error('keywords'); ?></span>
+						</div>
+					</div>
+					<div class="col-md-4 margin-bottom-20">
+						<label for="seo_title" class="control-label"><span class="text-danger">*</span>SEO Title</label>
+						<div class="form-group">
+						<input type="text" name="seo_title" value="<?php echo (isset($seo_title) && !empty($seo_title))?$seo_title:$news['seo_title']; ?>" class="form-control input-ui-100 removeerrmessage" id="seo_title" placeholder="SEO Title" />
+						<span class="text-danger seo_title_err"><?php echo form_error('seo_title'); ?></span>
+						</div>
+					</div>
+					<div class="col-md-12 margin-bottom-20">
+						<label for="seo_desc" class="control-label"><span class="text-danger">*</span>SEO Description</label>
+						<div class="form-group">
+						<textarea name="seo_desc" value="" class="form-control input-ui-100 removeerrmessage" id="seo_desc" placeholder="SEO Description" rows="4" style="resize:none;"><?php echo (isset($seo_desc) && !empty($seo_title))?$seo_title:$news['seo_desc']; ?></textarea>
+						<span class="text-danger seo_desc_err"><?php echo form_error('seo_title'); ?></span>
+						</div>
+					</div>
 					<div class="col-md-2">
 						<div class="form-group form-checkbox mt-30">
 							<input type="checkbox" name="is_pinned" value="1" <?php echo ($news['is_pinned']==1 ? 'checked="checked"' : ''); ?> id='is_pinned' />
@@ -175,7 +195,11 @@ $('#news_edit_form').on('submit', function(e){
 			$(".body_err").html('The Body field is required.');
 			flag=0;
 		} else { $(".body_err").html(''); }
-		
+		if(body.length < 300)
+		{			
+			$(".description_err").html('Description should be minimum of 300 words.');
+			flag=0;
+		} else { $(".description_err").html(''); }
 			
 		if(flag == 1)
 		{
@@ -183,6 +207,10 @@ $('#news_edit_form').on('submit', function(e){
 		} 
        
     });
+	$(document).ready(function(){
+			checkWordCountCkEditor('body');
+			
+		});
 	</script>
 
 <?php

@@ -181,18 +181,5 @@
          //print_r($this->db->last_query());exit;
     }
 
-    /****
-     *  insert banner image
-     */
-    function insert_banner($params=null)
-    {
-        $this->db->insert('visa_banner',$params);
-    }
-    function select_banner()
-    {
-        $this->db->select('*')
-             ->from('visa_banner');
-        return $this->db->get()->result_array();
-    }
 	
 }

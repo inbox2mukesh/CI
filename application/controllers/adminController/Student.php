@@ -3144,6 +3144,7 @@ class Student extends MY_Controller{
                 'by_user'           => $by_user,
                 'created'           => date("d-m-Y h:i:s A"),
                 'modified'          => date("d-m-Y h:i:s A"),
+                'user_remarks'      =>$ext_remarks,
             ); 
             $idd1 = $this->Student_package_model->update_student_pack_payment_pack_extension($student_package_id,$params);
             $idd2 = $this->Student_package_model->update_transaction($params2);
@@ -3190,6 +3191,7 @@ class Student extends MY_Controller{
                 'by_user'           => $by_user,
                 'created'           => date("d-m-Y h:i:s A"),
                 'modified'          => date("d-m-Y h:i:s A"),
+                'user_remarks'      =>$ext_remarks,
             );                    
             $idd1 = $this->Student_package_model->update_student_pack_payment_pack_extension($student_package_id,$params);
             $idd2 = $this->Student_package_model->update_transaction($params2);

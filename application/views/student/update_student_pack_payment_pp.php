@@ -542,7 +542,7 @@
 							<div class="row">
 							<div class="col-md-12">
 								<div class="form-group has-feedback">
-								<label for="expired_on" class="control-label text-success"><span class="text-danger">*</span>Remarks</label>
+								<label for="expired_on" class="control-label text-success">Remarks</label>
 								<textarea name="extension_remarks" class="form-control input-ui-100" id="extension_remarks" maxlength="100" autocomplete="off" value=""></textarea>
 								</div>
 							</div>

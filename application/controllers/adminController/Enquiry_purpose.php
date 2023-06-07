@@ -93,8 +93,8 @@ class Enquiry_purpose extends MY_Controller{
                 'by_user' => $by_user,
                  'URLslug' => $this->input->post('URLslug'),
                  'seo_keywords'=>$this->input->post('keywords'),
-                            'seo_title'=>$this->input->post('seo_title'),
-                            'seo_desc'=>$this->input->post('seo_desc'),
+                 'seo_title'=>$this->input->post('seo_title'),
+                 'seo_desc'=>$this->input->post('seo_desc'),
                 );
         }
         $id = $this->Enquiry_purpose_model->add_enquiry_purpose($params);
@@ -155,7 +155,7 @@ class Enquiry_purpose extends MY_Controller{
             $this->load->library('form_validation');
             $this->form_validation->set_rules('enquiry_purpose_name','enquiry_purpose name','required|trim|max_length[50]');
 			
-			if($data['enquiry_purpose']['enquiry_purpose_name'] !=$_POST['enquiry_purpose_name']){
+			if(!empty($_POST) && $data['enquiry_purpose']['enquiry_purpose_name'] !=$_POST['enquiry_purpose_name']){
 				
 				$this->form_validation->set_rules('enquiry_purpose_name','enquiry purpose name','required|trim|is_unique[enquiry_purpose_masters.enquiry_purpose_name ]|max_length[50]');
 			}
@@ -192,14 +192,14 @@ class Enquiry_purpose extends MY_Controller{
                     unlink($this->input->post('hid_image'));                     
                     $params = array(
                         'active' => $this->input->post('active') ? $this->input->post('active') : 0,
-                    'enquiry_purpose_name'=> trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('enquiry_purpose_name')))),
+                        'enquiry_purpose_name'=> trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ",$this->input->post('enquiry_purpose_name')))),
                         'image'  => $image,
                         'about_service' => $this->input->post('about_service',false),
                         'by_user' => $by_user,
                         'URLslug' => $this->input->post('URLslug'),
                         'seo_keywords'=>$this->input->post('keywords'),
-                            'seo_title'=>$this->input->post('seo_title'),
-                            'seo_desc'=>$this->input->post('seo_desc'),
+                         'seo_title'=>$this->input->post('seo_title'),
+                         'seo_desc'=>$this->input->post('seo_desc'),
                     );                     
             }else{
                //echo $this->upload->display_errors();
@@ -211,8 +211,8 @@ class Enquiry_purpose extends MY_Controller{
                         'by_user' => $by_user,
                         'URLslug' => $this->input->post('URLslug'),
                         'seo_keywords'=>$this->input->post('keywords'),
-                            'seo_title'=>$this->input->post('seo_title'),
-                            'seo_desc'=>$this->input->post('seo_desc'),
+                        'seo_title'=>$this->input->post('seo_title'),
+                        'seo_desc'=>$this->input->post('seo_desc'),
                     );
             }
 				$result = $this->Enquiry_purpose_model->update_enquiry_purpose($id,$params);

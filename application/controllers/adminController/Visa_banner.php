@@ -11,7 +11,7 @@ class Visa_banner extends MY_Controller{
     {
         parent::__construct();
         if (!$this->_is_logged_in()) {redirect('adminController/login');}
-        $this->load->model('Enquiry_purpose_model');  
+        $this->load->model('Visa_banner_model');  
     }
     function index()
     {
@@ -20,7 +20,7 @@ class Visa_banner extends MY_Controller{
        $mn = $this->router->fetch_method();        
        if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
        $data['title'] = 'Visa Services Banner';
-       $data['banner'] = $this->Enquiry_purpose_model->select_banner();
+       $data['banner'] = $this->Visa_banner_model->select_banner();
         $data['_view'] = 'visa_banner/index';
         $this->load->view('layouts/main',$data);
     }
@@ -38,9 +38,8 @@ class Visa_banner extends MY_Controller{
             mkdir(VISA_BANNER_IMAGE_PATH, 0777, true);
         }     
         $errorUploadType='';
-        if($this->input->post())
-        {
-            if(!empty($_FILES['banner']['name']) && count(array_filter($_FILES['banner']['name'])) > 0){ 
+        if(!empty($_FILES['banner']['name'])){
+                $insertedid=[];
                 $filesCount = count($_FILES['banner']['name']); 
                 for($i = 0; $i < $filesCount; $i++){ 
                     $_FILES['file']['name']     = $_FILES['banner']['name'][$i]; 
@@ -61,11 +60,40 @@ class Visa_banner extends MY_Controller{
                         $errorUploadType .= $_FILES['file']['name'].' | ';  
                     }
                     $params = array('banner_img'=>$uploadData[$i]['file_name'],'added_by'=>$by_user);
-                    $this->Enquiry_purpose_model->insert_banner($params);
+                    $insertedid[]=$this->Visa_banner_model->insert_banner($params);
                 }
-            }
+                if(!empty($insertedid))
+                {
+                        $activity_name= "Visa Banner Added";
+                        $description= ''.json_encode($params).'';
+                        $res=$this->addUserActivity($activity_name,$description,0,$by_user);
+                        //activity update end
+                        $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
+                        redirect('adminController/visa_banner/index');
+                        
+                }else{
+                    $this->session->set_flashdata('flsh_msg', FAILED_MSG);
+                    redirect('adminController/visa_banner/add');
+                }           
         }
         $data['_view'] = 'visa_banner/add';
         $this->load->view('layouts/main',$data);
+    }
+    function remove($id)
+    {
+        $data = $this->Visa_banner_model->get_banner_by_id($id);
+        $removedID = $this->Visa_banner_model->remove_banner($id);
+        if($removedID)
+        {
+             unlink(VISA_BANNER_IMAGE_PATH.$data->banner_img);
+             $this->session->set_flashdata('flsh_msg', DEL_MSG);
+            redirect('adminController/visa_banner/index');
+        }
+        else{
+            $this->session->set_flashdata('flsh_msg', DEL_MSG_FAILED);
+            redirect('adminController/visa_banner/add');
+        }  
+       
+
     }
 }

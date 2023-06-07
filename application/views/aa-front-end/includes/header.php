@@ -22,8 +22,7 @@
 		
 	}
 	else if(count($components)>=3 && empty(strpos($directoryURI,'our_students')))
-	{
-		
+	{		
 	    if(strpos($path,'view'))
 	    {
 	        $page1 = ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
@@ -32,7 +31,7 @@
 	    }
 	    else{
 	        $page1 = (ENVIRONMENT == 'production')?$components[1]:$components[2];
-			$page_url = (ENVIRONMENT == 'production')?$components[4]:$components[4];
+			$page_url = (ENVIRONMENT == 'production')?$components[2]:$components[3];
 	    }		
 		echo dynamic_meta_tag_data($page1,$page_url);
 	}
@@ -65,6 +64,30 @@
 				f.parentNode.insertBefore(j, f);
 			})(window, document, 'script', 'dataLayer', 'GTM-MX66WH3');
 		</script>
+		<script type="application/ld+json">
+		{
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		"name": "Western Overseas Immigration",
+		"alternateName": "Western Overseas Canada",
+		"url": "https://westernoverseas.ca/",
+		"logo": "https://westernoverseas.ca/resources-f/images/logo-sm.webp",
+		"contactPoint": {
+			"@type": "ContactPoint",
+			"telephone": "9025371344",
+			"contactType": "customer service",
+			"contactOption": "TollFree",
+			"areaServed": "CA",
+			"availableLanguage": "en"
+		},
+		"sameAs": [
+			"https://westernoverseas.ca/",
+			"https://www.facebook.com/westernoverseascanada/",
+			"https://www.instagram.com/westernoverseascanada/?hl=en",
+			"https://www.youtube.com/WesternOverseas"
+		]
+		}
+		</script>
 		<!-- End Google Tag Manager -->
 	<?php } else if (DEFAULT_COUNTRY == 13) //Australia
 	{ ?>
@@ -86,6 +109,31 @@
 				f.parentNode.insertBefore(j, f);
 			})(window, document, 'script', 'dataLayer', 'GTM-T479XDP');
 		</script>
+		<script type="application/ld+json">
+		{
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		"name": "Western Overseas Education & Immigration Consultant",
+		"alternateName": "Western Overseas Australia",
+		"url": "https://westernoverseas.com.au/",
+		"logo": "https://westernoverseas.com.au/resources-f/images/logo-sm-aus.png",
+		"contactPoint": {
+			"@type": "ContactPoint",
+			"telephone": "61430 439 035",
+			"contactType": "customer service",
+			"contactOption": "TollFree",
+			"areaServed": "AU",
+			"availableLanguage": "en"
+		},
+		"sameAs": [
+			"https://westernoverseas.com.au/",
+			"https://www.facebook.com/westernoverseasaustralia/",
+			"https://www.instagram.com/westernoverseascanada/?hl=en",
+			"https://www.youtube.com/WesternOverseas"
+		]
+		}
+		</script>
+
 		<!-- End Google Tag Manager -->
 	<?php } else if (DEFAULT_COUNTRY == 101) { ?>
 		<meta name="google-site-verification" content="hHbGzYKUYkKZiPzPYliiuH_vn_FizdVJJTkaGHnHZE0" />
@@ -212,7 +260,7 @@
 								$news_date = date_format($date, "M d, Y");
 								$news_id = $d->id;
 							?>
-								<li><span><a href="<?php echo base_url('news-article/' . $d->URLslug); ?>"> <?php echo $d->title; ?> <span class="date"><?php echo $news_date; ?></span></a><span class="bn-seperator">|</span>
+								<li><span><a href="<?php echo base_url('news-detail/' . $d->URLslug); ?>"> <?php echo $d->title; ?> <span class="date"><?php echo $news_date; ?></span></a><span class="bn-seperator">|</span>
 									</span></li>
 							<?php } 
 							}//end if

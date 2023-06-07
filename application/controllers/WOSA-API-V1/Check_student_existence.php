@@ -32,7 +32,7 @@ class Check_student_existence extends REST_Controller{
                     $data['error_message'] = [ "success" => 1, "message" => "existing", 'student_id' => $bData['id'], 'active' => $bData['active'], 'fresh' => $bData['fresh'], 'is_otp_verified'=>$bData['is_otp_verified'],'created_at'=>$bData['created'],'UID'=>$bData['UID'] ];
                 }
                 else{
-                    $data['error_message'] = [ "success" => 1, "message" => "existing", 'student_id' => $bData['id'], 'active' => $bData['active'], 'fresh' => $bData['fresh'], 'is_email_verified'=>$bData['is_otp_verified'],'created_at'=>$bData['created'],'UID'=>$bData['UID'] ];
+                    $data['error_message'] = [ "success" => 1, "message" => "existing", 'student_id' => $bData['id'], 'active' => $bData['active'], 'fresh' => $bData['fresh'], 'is_otp_verified'=>$bData['is_otp_verified'],'created_at'=>$bData['created'],'UID'=>$bData['UID'] ];
                 }
                 
             }else{

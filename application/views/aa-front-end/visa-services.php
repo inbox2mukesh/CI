@@ -6,16 +6,17 @@
 <section>
 	<div class="container">
 
-
-	<div class="vd-border">
+	<?php if(!empty($bannerList->error_message->data)) { 
+		$data = $bannerList->error_message->data;
+		?>
+		<div class="vd-border">
 			<div class="owl-carousel-slider image-border">
-				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/visa-services01.webp');?>" class="img-fullwidth"></div>
-				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/visa-services02.webp');?>" class="img-fullwidth"></div>
-				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/visa-services03.webp');?>" class="img-fullwidth"></div>
-				<div class="item"><img src="<?php echo base_url('resources-f/images/slider/visa-services04.webp');?>" class="img-fullwidth"></div>
+				<?php foreach($data as $image) { ?>
+				<div class="item"><img src="<?php echo base_url(VISA_BANNER_IMAGE_PATH.$image->banner_img);?>" class="img-fullwidth"></div>
+				<?php } //end foreach ?>
 			</div>
 		</div>
-
+		<?php } //if condition end ?>
 		<div class="services-content mt-40">
 		<h2 class="font-weight-300 text-uppercase text-center">Our 
 			<span class="text-red font-weight-600">SERVICES<a name="visa-services"></a></span>
@@ -28,7 +29,7 @@
 						foreach ($serviceData->error_message->data as $d) { ?>
 						<div class="col-md-3 col-sm-6">
 						
-								<a href="<?php echo base_url('visa-services/post/'.$d->URLslug);?>">
+								<a href="<?php echo base_url('visa-services/'.$d->URLslug);?>">
 									<div class="services">
 										<div class="img-area"> <img src="<?php echo base_url('uploads/service_image/'.$d->image);?>" class="img-responsive" alt="" title=""> </div>
 										<div class="img-text">

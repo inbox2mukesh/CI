@@ -19,6 +19,7 @@ class Visa_services extends MY_Controller{
         $data['countryCode']=json_decode($this->_curlGetData(base_url(GET_ALL_CNT_CODE_URL), $headers));
          //SERVICE_DATA/enquiry_purpose is same 
         $data['serviceData'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers));
+        $data['bannerList'] = json_decode($this->_curlGetData(base_url(GET_VISA_BANNER_URL), $headers));
         // $data['title'] = 'VISA Service';        
         $this->load->model('Country_model');     
         $data['newsData'] = json_decode($this->_curlGetData(base_url(GET_NEWS_DATA_URL), $headers));

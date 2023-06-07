@@ -1,5 +1,5 @@
 <script src="<?php echo site_url('resources-f/js/jquery-steps.js'); ?>"></script>
-<script src="<?php echo site_url('resources-f/'); ?>js/date-mask.js"></script>
+<script src="<?php echo site_url('resources-f/js/date-mask.js'); ?>"></script>
 <?php
 //echo "<pre>";
 //print_r($OnlinePack);

@@ -8,7 +8,7 @@
 					<ul>
 						<?php foreach ($serviceData->error_message->data as $sd) { ?>
 							<li>
-								<a href="<?php echo base_url('visa-services/' . $sd->URLslug); ?>">
+								<a href="<?php echo base_url('visa-services/post/' . $sd->URLslug); ?>">
 									<?php echo $sd->enquiry_purpose_name; ?>
 								</a>
 							</li>
@@ -153,6 +153,7 @@
 <!--Added by Vikram 6 dec 2022 -->
 <script src="<?php echo site_url(DESIGN_VERSION . '/js/sweetalert2.all.min.js?v=' . JS_CSS_VERSION_F); ?>"></script>
 <script src="<?php echo site_url(DESIGN_VERSION_F . '/js/common.js?v=' . JS_CSS_VERSION_F); ?>"></script>
+<script async src="https://cdn.ampproject.org/v0.js"></script>
 <!-- <script type="text/javascript">
 	(function() {
 		var css = document.createElement('link');

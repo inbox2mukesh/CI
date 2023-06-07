@@ -245,7 +245,8 @@
             u.fname as fnameu,
             u.lname as lnameu,
             u.id as uid,
-            s.ext_remarks
+            s.ext_remarks,
+            sth.user_remarks,
         ');
         $this->db->from('`student_transaction_history` sth');
         $this->db->join('`student_package` s', 's.`student_package_id`= sth.`student_id`', 'left');       

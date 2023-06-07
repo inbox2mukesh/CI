@@ -41,7 +41,7 @@
                     <tr>
 						<td><?php echo $sr; ?></td>
 						<td><?php echo $type.' '.$s['amount']; ?></td>
-                        <td><?php echo $s['remarks'].'|'.$s['ext_remarks']; ?></td>
+                        <td><?php echo $s['remarks'].'|'.$s['user_remarks']; ?></td>
                         <td>
                             <?php if (isset($s['file'])) { ?>
                                 <a href="<?php echo base_url(PACK_HOLD_FILE_PATH . $s['file']); ?>" target="_blank" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Hold application file"><span class="fa fa-file"></span> </a>

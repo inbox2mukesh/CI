@@ -412,8 +412,7 @@ class Our_students extends MY_Controller
                 'EMAIL:'.$this->input->post('email', true), 
                 );           
                    // check student mobile no/email is exist in db or not
-            $response= json_decode($this->_curlGetData(base_url(GET_STUDENT_EXISTENCE_URL), $headers)); 
-            // pr($response,1);          
+            $response= json_decode($this->_curlGetData(base_url(GET_STUDENT_EXISTENCE_URL), $headers));           
             if($response->error_message->success==0 AND $response->error_message->message == 'fresh'){ 
                 //New registration and insert enquiry data api
                 $response_reg = json_decode($this->_curPostData(base_url(SUBMIT_STD_URL), $headers, $params));      
@@ -441,7 +440,6 @@ class Our_students extends MY_Controller
              // CASE 2 : existing user having active=1 and is_otp_verified=1, then  call login process then redirect to checkout page
         elseif($response->error_message->message=="existing" AND $response->error_message->active == 1 AND $response->error_message->is_otp_verified == 1 )
         {  
-           
             //user already found with active status then only new enquiry is created
             unset($_SESSION['lastId_std']);
             //echo "ppppppp";

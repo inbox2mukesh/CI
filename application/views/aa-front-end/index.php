@@ -129,7 +129,7 @@
 				<?php }?>
 
 				<div style="margin-top:40px;">
-				<h2 class="font-weight-400 text-uppercase css1" style="text-align:center;">Who we <span class="text-red font-weight-600 mr-5">Are</span></h2>
+				<h1 class="font-weight-400 text-uppercase css1" style="text-align:center;">Who we <span class="text-red font-weight-600 mr-5">Are</span></h1>
 				<?php if(DEFAULT_COUNTRY==13) { ?>
 				<p class="text-justify">
 				We aim to become your most trusted partner and ally in your journey to a better life through relevant education, a modern curriculum, and state-of-the-art methodologies. Young minds and aspiring seekers of knowledge who hold their aim to imbibe education overseas at the highest in their life are more than welcome. Western Overseas Australia will turn this dream of yours to migrate and settle abroad into a reality.
@@ -376,7 +376,7 @@ foreach($FREE_RESOURCE_CONTENT->error_message->data as $p){
 ?>
 					<!--Start Items-->
 					<div class="card-item-3">
-						<a href="<?php echo base_url()?>articles/post/<?php echo $p->URLslug; ?>">
+						<a href="<?php echo base_url()?>articles/<?php echo $p->URLslug; ?>">
 							<div class="lt-post-img">
 								<div class="img-area"> <img src="<?php echo $p->image;?>" class="img-responsive" alt="" width="237px" height="250px"> </div>
 								<div class="img-text">
@@ -472,7 +472,7 @@ if(!empty($newsData->error_message->data))
 					?>
 					<!--Start Items-->
 					<div class="card-item-3">
-						<a href="<?php echo base_url('news/post/'.$d->URLslug);?>">
+						<a href="<?php echo base_url('news-detail/'.$d->URLslug);?>">
 							<div class="lt-post-img lt-bg">
 								<div class="img-area"> <img src="<?php echo base_url('uploads/news/'.$d->card_image);?>" class="img-responsive" alt="" width="237px" height="250px" > </div>
 								<div class="img-text">

@@ -128,7 +128,7 @@ foreach($FREE_RESOURCE_CONTENT->error_message->data as $p){
 
 					<div class="col-md-4 col-sm-6">
 
-						<a href="<?php echo base_url()?>articles/post/<?php echo $p->URLslug; ?>">
+						<a href="<?php echo base_url()?>articles/<?php echo $p->URLslug; ?>">
 
 							<div class="latest-img">
 

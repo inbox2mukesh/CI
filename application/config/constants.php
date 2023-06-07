@@ -6,7 +6,7 @@
  *
  **/
 global $customJS;
-define('JS_CSS_VERSION', '0.0.17');
+define('JS_CSS_VERSION', '0.0.25');
 define('ADMIN', 'Super Admin');
 ///////////////////////////////////settings start///////////////////////////////////////
 include_once(FCPATH.'application/config/setting-constants.php');
@@ -277,7 +277,7 @@ define('GT','General Training');
 define('ACD_GT', 'Academic and General Training');
 
 //Paginations
-define('RECORDS_PER_PAGE', 1000);
+define('RECORDS_PER_PAGE', 100);
 define('COOKIE_EXPIRY', 86400);
 define('PWD_LEN', 6);
 
@@ -1211,13 +1211,13 @@ define('TEST_PREPARATION_TOPIC_UPDATE', 'Test preparation material topic added')
 define('SERVICE_IMAGE_ALLOWED_TYPES', 'jpg|png|jpeg|webp');
 define('SERVICE_IMAGE_ALLOWED_TYPES_LABEL', '<span class="text-info"> [  <i><b>Allowed File:</b>  jpg, png, jpeg </i>  ] </span>');
 define('SERVICE_IMAGE_PATH', './uploads/service_image/');
+define('VISA_BANNER_IMAGE_PATH', './uploads/banner_image/');
 define('IMMIGRATION_FILE_PATH', './uploads/immigration_tools/');
 define('PROVINCES_FILE_PATH', './uploads/provinces/');
 
 define('NEWS_FILE_PATH', './uploads/news/');
 define('PHOTO_IMAGE_PATH', './uploads/photo/');
 define('VIDEO_IMAGE_PATH', './uploads/video/');
-define('VISA_BANNER_IMAGE_PATH', './uploads/banner_image/');
 
 define('IIMMIGRATION_ALLOWED_TYPES', 'gif|jpg|png|jpeg|webp');
 define('PROVINCES_ALLOWED_TYPES', 'gif|jpg|png|jpeg|webp');
@@ -1227,4 +1227,4 @@ define('NEWS_ALLOWED_TYPES', 'gif|jpg|png|jpeg|webp');
 define('PHOTO_ALLOWED_TYPES', 'gif|jpg|png|jpeg|webp');
 define('AUTO_ENIT_ERP_SOFT', 'ERP Initiated(Soft)');
 define('AUTO_ENIT_ERP_HARD', 'ERP Initiated(Hard)');
-
+define('WOSA_ADMIN_DIR', 'adminController');
