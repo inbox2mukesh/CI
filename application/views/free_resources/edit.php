@@ -422,8 +422,15 @@ $('#freeresourse_edit_form').on('submit', function(e){
 			flag=0;
 		} else { $(".description_err").html(''); }		
 		if(description.length < 300)
-		{			
+		{
+						
 			$(".description_err").html('Description should be minimum of 300 words.');
+			flag=0;
+		} else { $(".description_err").html(''); }
+
+		if(description.length > 2000)
+		{		
+			$(".description_err").html('Description should be maximum of 2000 words.');
 			flag=0;
 		} else { $(".description_err").html(''); }
 		if(keywords == "")

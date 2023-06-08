@@ -8,7 +8,7 @@
 					<ul>
 						<?php foreach ($serviceData->error_message->data as $sd) { ?>
 							<li>
-								<a href="<?php echo base_url('visa-services/post/' . $sd->URLslug); ?>">
+								<a href="<?php echo base_url('visa-services/' . $sd->URLslug); ?>">
 									<?php echo $sd->enquiry_purpose_name; ?>
 								</a>
 							</li>

@@ -36,7 +36,6 @@
 </div>
 <?php ob_start(); ?>
 <script>
-// $(document).ready(function(){
 		
 		$('#upload_banner').on('submit', function(e)
 		{
@@ -48,8 +47,6 @@
 				this.submit();
 			}
 		});
-		
-	//});
 	function checkuploadedcounts(files)
 	{
 		var _URL = window.URL || window.webkitURL;
@@ -59,6 +56,7 @@
 		var objectUrl = _URL.createObjectURL(file);
 		var file_sp = file.name.split('.');
 		var fileext = file_sp[1].toLowerCase();
+		console.log(fileext);
 		var objectUrl = _URL.createObjectURL(file);
 		if(file)
 		{
@@ -69,26 +67,25 @@
 					$('#banner').val('');
 					_URL.revokeObjectURL(objectUrl);
 				}
+				else if(files.length > 5)
+				{
+					$('.banner_err').html('Only 5 files are allowed');
+					$('#banner').val('');
+				}
+				else if(fileext != "webp")
+				{
+					$('.banner_err').html('Only .webp is allowed');
+					$('#banner').val('');
+				}
 				else{
-					return true;
+					$('.banner_err').html('');
 				}
 			};
 			img.src = objectUrl;
 		}
-		else if(files.length > 5)
-		{
-			$('.banner_err').html('Only 5 files are allowed');
-			$('#banner').val('');
-		}
-		else if(fileext != 'webp')
-		{
-			
-			$('.banner_err').html('Only .webp is allowed');
-			$('#banner').val('');
-		}
-		else{
-			$('.banner_err').html('');
-		}
+		
+		
+		
 	}	
 </script>
 

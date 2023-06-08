@@ -1609,7 +1609,7 @@ class Student extends MY_Controller{
                 'subscribed_on' => $subscribed_on,
                 'subscribed_on_str' => strtotime($subscribed_on),
                 'expired_on'    => $expired_on,
-                'expired_on_str' => strtotime($expired_on).' +24 hours',
+                'expired_on_str' => strtotime($expired_on.' +24 hours'),
                 'requested_on' => date("d-m-Y h:i:s A"),
                 'total_paid_ext_tax'=>$amt_ext_tax_paid*100
             );
@@ -2040,7 +2040,7 @@ class Student extends MY_Controller{
                 'subscribed_on' => $subscribed_on,
                 'subscribed_on_str' => strtotime($subscribed_on),
                 'expired_on'    => $expired_on,
-                'expired_on_str' => strtotime($expired_on).' +24 hours',
+                'expired_on_str' => strtotime($expired_on.' +24 hours'),
                 'package_name'    => $package_name,
                 'package_duration'=>$dt,
                 'requested_on' => date("d-m-Y h:i:s A"),

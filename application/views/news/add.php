@@ -168,9 +168,14 @@ $('#news_add_form').on('submit', function(e){
 		} else { $(".body_err").html(''); }
 		if(body.length < 300)
 		{			
-			$(".description_err").html('Description should be minimum of 300 words.');
+			$(".body_err").html('The Body field should be minimum of 300 words.');
 			flag=0;
-		} else { $(".description_err").html(''); }
+		} else { $(".body_err").html(''); }
+		if(body.length > 2000)
+		{		
+			$(".body_err").html('The Body field should be maximum of 2000 words.');
+			flag=0;
+		} else { $(".body_err").html(''); }
 		if($('#keywords').val() == "")
 		{			
 			$(".keywords_err").html('The Keywords is required.');
