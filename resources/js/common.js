@@ -9123,7 +9123,7 @@ function checkWordCountCkEditor(id) {
 		}*/
 	});
 	editornew.on('key', function(evt) {
-		var MaxLengthWord = parseInt('300');
+		var MaxLengthWord = parseInt('2000');
 		var minLengthWord = parseInt('300');
 		setTimeout(function() {
 			var chtml = CKEDITOR.instances[id].getData();
@@ -9137,7 +9137,10 @@ function checkWordCountCkEditor(id) {
 				$("." + id + '_err').html('Enter Message');
 			}
 			if (strWord > 1 && strWord < minLengthWord) {
-				$("." + id + '_err').html('Allowed Maximum ' + minLengthWord + ' Words');
+				$("." + id + '_err').html('You must write minimum ' + minLengthWord + ' Words');
+			}
+			if (strWord > 1 && strWord > MaxLengthWord) {
+				$("." + id + '_err').html('Allowed Maximum ' + MaxLengthWord + ' Words');
 			}
 			if (strWord > MaxLengthWord) {
 				var xxx = strWord - MaxLengthWord;

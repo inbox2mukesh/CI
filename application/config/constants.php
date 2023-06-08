@@ -6,7 +6,7 @@
  *
  **/
 global $customJS;
-define('JS_CSS_VERSION', '0.0.25');
+define('JS_CSS_VERSION', '0.0.26');
 define('ADMIN', 'Super Admin');
 ///////////////////////////////////settings start///////////////////////////////////////
 include_once(FCPATH.'application/config/setting-constants.php');
