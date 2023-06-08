@@ -392,6 +392,7 @@ $('#freeresourse_edit_form').on('submit', function(e){
 		var seo_title = $('#seo_title').val();
 		var seo_desc = $('#seo_desc').val();
 		var old_image=$('#old_image').val();
+		var desc = description.split(' ');
 		if(content_type_id == "")
 		{			
 			$(".content_type_id_err").html('The Content Type field is required.');
@@ -420,16 +421,14 @@ $('#freeresourse_edit_form').on('submit', function(e){
 		{			
 			$(".description_err").html('The Topic field is required.');
 			flag=0;
-		} else { $(".description_err").html(''); }		
-		if(description.length < 300)
-		{
-						
+		} //else { $(".description_err").html(''); }
+		else if(desc.length < 300)
+		{			
 			$(".description_err").html('Description should be minimum of 300 words.');
 			flag=0;
-		} else { $(".description_err").html(''); }
-
-		if(description.length > 2000)
-		{		
+		} //else { $(".description_err").html(''); }
+		else if(desc.length > 2000)
+		{			
 			$(".description_err").html('Description should be maximum of 2000 words.');
 			flag=0;
 		} else { $(".description_err").html(''); }

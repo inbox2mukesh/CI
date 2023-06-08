@@ -10,8 +10,8 @@
                   	<a href="<?php echo site_url('adminController/enquiry_purpose/index'); ?>" class="btn btn-danger btn-sm">Enquiry Purpose List</a><?php } ?>
                </div>
             </div>
-            <?php echo $this->session->flashdata('flsh_msg'); ?>
-            <?php echo form_open_multipart('adminController/enquiry_purpose/add'); ?>
+            <?php echo $this->session->flashdata('flsh_msg'); $attributes = ['name' => 'enquiry_purpose_add', 'id' => 'enquiry_purpose_add'];?>
+            <?php echo form_open_multipart('adminController/enquiry_purpose/add',$attributes); ?>
           	<div class="box-body">
           		<div class="">
 					
@@ -85,6 +85,7 @@
             <div class="form-group has-feedback">
               <textarea name="about_service" class="form-control myckeditor" id="about_service"><?php echo $this->input->post('about_service'); ?></textarea>
               <span class="glyphicon glyphicon-text-size form-control-feedback"></span>
+			  <span class="text-danger about_service_err"><?php echo form_error('about_service');?></span>
             </div>
           </div>
 					<?php
@@ -119,6 +120,33 @@ $(document).ready(function(){
 		checkWordCountCkEditor('about_service');
 		
 	});
+	$('#enquiry_purpose_add').on('submit', function(e){
+        e.preventDefault();
+		// alert('asdfa');
+		var flag=1;	
+		var description = $('#about_service').val();	
+		var desc = description.split(' ');
+		if(description == "")
+		{	
+			$(".about_service_err").html('The Topic field is required.');
+			flag=0;
+		} 
+		else if(desc.length < 300)
+		{			
+			$(".about_service_err").html('Description should be minimum of 300 words.');
+			flag=0;
+		}
+		else if(desc.length > 2000)
+		{			
+			$(".about_service_err").html('Description should be maximum of 2000 words.');
+			flag=0;
+		}
+		else
+		{
+			this.submit();
+			$(".about_service_err").html('');		
+		}
+	})	
 </script>
 
 <?php

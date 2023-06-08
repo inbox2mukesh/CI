@@ -135,7 +135,8 @@ $('#news_add_form').on('submit', function(e){
 		var news_date=$('#news_date').val();
 		var URLslug=$('#URLslug').val();
 		//var body=$('#body').val();		
-		var body=CKEDITOR.instances.body.getData();		
+		var body=CKEDITOR.instances.body.getData();	
+		var desc = body.split(' ');	
 		if(title == "")
 		{			
 			$(".title_err").html('The Title field is required.');
@@ -166,12 +167,12 @@ $('#news_add_form').on('submit', function(e){
 			$(".body_err").html('The Body field is required.');
 			flag=0;
 		} else { $(".body_err").html(''); }
-		if(body.length < 300)
+		if(desc.length < 300)
 		{			
 			$(".body_err").html('The Body field should be minimum of 300 words.');
 			flag=0;
 		} else { $(".body_err").html(''); }
-		if(body.length > 2000)
+		if(desc.length > 2000)
 		{		
 			$(".body_err").html('The Body field should be maximum of 2000 words.');
 			flag=0;

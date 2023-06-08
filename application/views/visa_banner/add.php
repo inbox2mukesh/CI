@@ -17,7 +17,7 @@
 					<div class="col-md-4">
 						<label for="banner" class="control-label">Service Image<span class="text-danger">*</span></label><?php echo WEBP_ALLOWED_TYPES_LABEL;?>
 						<div class="form-group">
-						<input type="file" name="banner[]" value="<?php echo $this->input->post('banner'); ?>" class="form-control input-ui-100" id="banner" multiple onchange="checkuploadedcounts(this.files);" accept=".webp"/>              
+						<input type="file" name="banner[]" value="<?php echo $this->input->post('banner'); ?>" class="form-control input-ui-100" id="banner" multiple onchange="checkuploadedcounts(this.files);checkfiletype(this.files);" accept=".webp"/>              
 						<span class="text-danger banner_err"><?php echo form_error('banner');?></span>             
 						</div>
 					</div>						
@@ -86,6 +86,19 @@
 		
 		
 		
+	}
+	function checkfiletype(files)
+	{
+		var file;
+		file = files[0];
+		var file_sp = file.name.split('.');
+		var fileext = file_sp[1].toLowerCase();
+		if(fileext != "webp")
+		{
+			$('.banner_err').html('Only .webp is allowed');
+			$('#banner').val('');
+		}
+
 	}	
 </script>
 

@@ -132,7 +132,7 @@ class Counseling_session extends MY_Controller{
 		$this->load->model('Counseling_session_model');		
         $this->load->library('pagination');
 		
-		$current_DateTime = date("d-m-Y G:i:0");
+		$current_DateTime = date("d-m-Y h:i:s A");
         $current_DateTimeStr = strtotime($current_DateTime);
         //$current_DateTimeStr_after = $current_DateTimeStr + 3600; #1 Hr
 		$current_DateTimeStr_after=$current_DateTimeStr;
@@ -223,9 +223,8 @@ class Counseling_session extends MY_Controller{
 							$duration = $this->input->post('duration')+1;
 							$time_slot=$this->input->post('counseling_session_time_slots'.$j);
 							$session_date_time_str=strtotime($session_date_new.' '.$time_slot);
-							$session_enddate_time_str=strtotime($session_end_date_new.' '.$time_slot .' +'.$duration.' minutes') ;//strtotime($session_end_date_new.' '.$time_slot);
+							$session_enddate_time_str=strtotime($session_end_date_new.' '.$time_slot .' +'.$duration.'minutes') ;//strtotime($session_end_date_new.' '.$time_slot);
 							$session_date_time=date('Y-m-d H:i:0',$session_date_time_str);
-							
 							$params = array(
 							'active' =>1,
 							'session_type' => $this->input->post('session_title'),
@@ -242,13 +241,11 @@ class Counseling_session extends MY_Controller{
 							'time_slot'=>$time_slot,
 							'counseling_sessions_group_id'=>$counseling_sessions_group_id
 							);
-							// pr($params,1);
 							$id = $this->Counseling_session_model->add_c_session($params);						
 						}
 						
 					}
-				}
-				
+				}				
 				$session_end_date_time_str=$this->Counseling_session_model->getMaxSessionDateTimeStrBYSessionGroupID($counseling_sessions_group_id);
 				$params=array(
 					'session_end_date_time_str' =>$session_enddate_time_str
@@ -263,8 +260,7 @@ class Counseling_session extends MY_Controller{
 					$params['active']=0;
 				}
 				
-				$this->Counseling_session_model->update_counseling_session_group($counseling_sessions_group_id,$params);				
-				
+				$this->Counseling_session_model->update_counseling_session_group($counseling_sessions_group_id,$params);
 			    $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
                 redirect('adminController/counseling_session/index');
 				
