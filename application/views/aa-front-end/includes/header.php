@@ -11,33 +11,69 @@
 	$components = array_filter(explode('/', $path));
 	$page ='';
 	$this->load->helper('static_meta_helper');
-	if(count($components)<=2 && !empty($components))
-	{
-		if(!isset($components[2]))
+	if(ENVIRONMENT=='production'){
+
+		//For Live:
+		if(count($components)<=1 && !empty($components))
 		{
-			$components[2]=$components[1];
+			if(!isset($components[2]))
+			{
+				$components[2]=$components[1];
+			}
+			$page= ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
+			echo get_meta_tag($page);	
+			
 		}
-		$page= ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
-		echo get_meta_tag($page);	
-		
-	}
-	else if(count($components)>=3 && empty(strpos($directoryURI,'our_students')))
-	{		
-	    if(strpos($path,'view'))
-	    {
-	        $page1 = ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
-		    $page_url = ((ENVIRONMENT == 'production'))?$components[3]:$components[4];
-	        
-	    }
-	    else{
-	        $page1 = (ENVIRONMENT == 'production')?$components[1]:$components[2];
-			$page_url = (ENVIRONMENT == 'production')?$components[2]:$components[3];
-	    }		
-		echo dynamic_meta_tag_data($page1,$page_url);
-	}
-	else
-	{
-	    echo get_meta_tag('');	
+		else if(count($components)>=2 && empty(strpos($directoryURI,'our_students')))
+		{		
+		    if(strpos($path,'view'))
+		    {
+		        $page1 = ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
+			    $page_url = ((ENVIRONMENT == 'production'))?$components[3]:$components[4];
+		        
+		    }
+		    else{
+		        $page1 = (ENVIRONMENT == 'production')?$components[1]:$components[2];
+				$page_url = (ENVIRONMENT == 'production')?$components[2]:$components[3];
+		    }		
+			echo dynamic_meta_tag_data($page1,$page_url);
+		}
+		else
+		{
+		    echo get_meta_tag('');	
+		}
+
+	}else{
+		//For testing:
+		if(count($components)<=2 && !empty($components))
+		{
+			if(!isset($components[2]))
+			{
+				$components[2]=$components[1];
+			}
+			$page= ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
+			echo get_meta_tag($page);	
+			
+		}
+		else if(count($components)>=3 && empty(strpos($directoryURI,'our_students')))
+		{		
+		    if(strpos($path,'view'))
+		    {
+		        $page1 = ((ENVIRONMENT == 'production'))?$components[1]:$components[2];
+			    $page_url = ((ENVIRONMENT == 'production'))?$components[3]:$components[4];
+		        
+		    }
+		    else{
+		        $page1 = (ENVIRONMENT == 'production')?$components[1]:$components[2];
+				$page_url = (ENVIRONMENT == 'production')?$components[2]:$components[3];
+		    }		
+			echo dynamic_meta_tag_data($page1,$page_url);
+		}
+		else
+		{
+		    echo get_meta_tag('');	
+		}
+
 	}
 		
 		if(isset($title)){
