@@ -17,6 +17,7 @@ class MY_Controller extends CI_Controller
     function __construct(){
         date_default_timezone_set(TIME_ZONE);
         parent::__construct();
+        $this->session->sess_regenerate(FALSE);
         $this->load->helper(array('cookie', 'url'));
         $this->load->model('Role_model');
         $user = $this->session->userdata(SESSION_VAR);

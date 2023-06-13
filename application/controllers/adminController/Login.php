@@ -33,7 +33,7 @@ class Login extends MY_Controller{
                 $this->session->set_userdata(SESSION_VAR, $res);
                 $datas = $this->session->userdata(SESSION_VAR);
                 foreach($datas as $d){
-                    session_regenerate_id();
+                    $this->session->sess_regenerate(FALSE);
                     $token = $this->_getorderTokens(8);
                     $_SESSION['token'] = $token;                    
                     $_SESSION['employeeCode'] = $d->employeeCode;
