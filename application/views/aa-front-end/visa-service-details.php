@@ -32,7 +32,7 @@
 				</div>
 				<div class="col-md-4 side-info" id="up">				
 					<div class="rt-services">
-										<div class="img-area"> <img src="<?php echo base_url('uploads/service_image/'.$serviceDetails->error_message->data->image);?>" class="img-responsive" alt="" title=""> </div>
+										<div class="img-area"> <img src="<?php echo base_url('uploads/service_image/'.$serviceDetails->error_message->data->image);?>" class="img-responsive" alt="<?php echo $serviceDetails->error_message->data->URLslug?>" title=""> </div>
 										<div class="img-text">
 											<h4><?php echo $serviceDetails->error_message->data->enquiry_purpose_name;?></h4> 
 	   </span> </div>
