@@ -1993,7 +1993,7 @@ class Package_master_model extends CI_Model
             'active' => 0,
             'packCloseReason'=>'Expired'
         );
-        $this->db->where('expired_on_str<=',$today);
+        $this->db->where('expired_on_str<',$today);
         return $this->db->update('student_package',$params);
     } 
 
