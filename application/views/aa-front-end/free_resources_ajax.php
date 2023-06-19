@@ -8,7 +8,7 @@ foreach($FREE_RESOURCE_CONTENT->error_message->data as $p){
                 <div class="img-area"> <img src="<?php echo $p->image;?>" class="img-responsive" alt=""> </div>
                 <div class="img-text">
                   <h4><?php echo ucwords($p->title);?></h4>
-                  <div class="font-weight-600 font-12 text-italic">
+                  <!-- <div class="font-weight-600 font-12 text-italic">
                     <?php echo strtoupper($p->content_type_name);?> <span class="text-theme-colored">(
                     <?php 
 $type="";
@@ -17,7 +17,7 @@ $type="";
                     }
                     echo rtrim($type,', ')?>
                   )</span>
-                  </div>
+                  </div> -->
                   <div class="date mt-10"><?php echo $p->created;?></div>
                   <p><?php echo ucfirst($p->description);?></p>
                 </div>

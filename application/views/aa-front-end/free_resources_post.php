@@ -18,7 +18,7 @@ foreach ($content as $content_data) {
           <!-- <img src="<?php echo $content_image; ?>" class="img-fullwidth"> -->
           <div class="title-heading text-uppercase mt-10">
             <?php echo $content_title; ?></div>
-          <div class="font-weight-600 font-12 text-italic">
+          <!-- <div class="font-weight-600 font-12 text-italic">
             <?php echo strtoupper($content_content_type_name); ?>
             <span class="text-theme-colored">(<?php
                                               $type = "";
@@ -26,7 +26,7 @@ foreach ($content as $content_data) {
                                                 $type .= $pp->topic . ', ';
                                               }
                                               echo rtrim($type, ', ') ?>)</span>
-          </div>
+          </div> -->
           <div class="date"><?php echo $content_created; ?></div>
           <?php //echo ucfirst($content_description);
           ?>

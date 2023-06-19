@@ -138,7 +138,7 @@ foreach($FREE_RESOURCE_CONTENT->error_message->data as $p){
 
 									<h4><?php echo ucwords($p->title);?></h4>
 
-									<div class="font-weight-600 font-12 text-italic">
+									<!-- <div class="font-weight-600 font-12 text-italic">
 
 										<?php echo strtoupper($p->content_type_name);?> <span class="text-theme-colored">(
 
@@ -156,7 +156,7 @@ $type="";
 
 									)</span>
 
-									</div>
+									</div> -->
 
 									<div class="date mt-10"><?php echo $p->created;?></div>
 
