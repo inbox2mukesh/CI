@@ -119,7 +119,7 @@
 			            $description=$this->input->post('description');
 			        ?>
                      <div class="col-md-12">					 
-						<label for="zoom_link" class="control-label">Description<span class="text-danger">*</span></label><span class="text-danger description_err" id="description_err"></span>
+						<label for="zoom_link" class="control-label">Description<span class="text-danger">*</span></label>
 						<div class="form-group">
 						    <textarea id="description" name="description" rows="4" cols="163" placeholder="description..." class="form-control removeerrmessage validatewordcount"><?php echo $description ?></textarea>
 							<span class="text-danger description_err"><?php echo form_error('description');?></span>

@@ -9136,7 +9136,9 @@ function checkWordCountCkEditor(id) {
 			} else {
 				$("." + id + '_err').html('Enter Message');
 			}
-			if (strWord > 1 && strWord < minLengthWord) {
+			if(id=='description'){
+				$("." + id + '_err').html('You must write minimum 30 Words');
+			}else if (strWord > 1 && strWord < minLengthWord) {
 				$("." + id + '_err').html('You must write minimum ' + minLengthWord + ' Words');
 			}
 			if (strWord > 1 && strWord > MaxLengthWord) {

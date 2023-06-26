@@ -464,8 +464,16 @@ foreach ($content as $content_data) {
                 <?php }?>
             </ul>
           </div>
+
         </div>
+		<div class="topFormpanel text-left mt-30 mob-display clearfix">
+					<?php 
+					$service_id=$serviceDetails->error_message->data->id;
+					$enquiry_purpose_name=$serviceDetails->error_message->data->enquiry_purpose_name;
+					include('includes/enquiry_form.php');?>
+				</div>
       </div>
+
     </div>
   </div>
 </section>
