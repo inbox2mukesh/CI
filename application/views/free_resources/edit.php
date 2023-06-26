@@ -419,7 +419,7 @@ $('#freeresourse_edit_form').on('submit', function(e){
 
 		if(description == "")
 		{			
-			$(".description_err").html('The Topic field is required.');
+			$(".description_err").html('The Description field is required.');
 			flag=0;
 		} //else { $(".description_err").html(''); }
 		else if(desc.length < 30)
