@@ -9138,6 +9138,8 @@ function checkWordCountCkEditor(id) {
 			}
 			if(id=='description'){
 				$("." + id + '_err').html('You must write minimum 30 Words');
+			}else if(id=='body'){
+				$("." + id + '_err').html('You must write minimum 5 Words');
 			}else if (strWord > 1 && strWord < minLengthWord) {
 				$("." + id + '_err').html('You must write minimum ' + minLengthWord + ' Words');
 			}
