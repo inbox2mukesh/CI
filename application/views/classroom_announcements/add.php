@@ -180,7 +180,7 @@
 					</div> -->
 
 					<div class="col-md-12">
-						<label for="body" class="control-label">Body</label><span class="text-danger body_err" id="body_err"></span>
+						<label for="body" class="control-label"><span class="text-danger">*</span>Body</label><span class="text-danger body_err" id="body_err"></span>
 						<div class="form-group has-feedback">
 							<textarea name="body" class="form-control removeerrmessage validatewordcount" id="body"><?php echo $this->input->post('body'); ?></textarea>
 							<span class="glyphicon glyphicon-text-size form-control-feedback"></span>
@@ -245,6 +245,8 @@ $('#classroom_ann_add_form').on('submit', function(e){
 		var screenshot=$('#screenshot').val();
 		var lecture_date=$('#lecture_date').val();
 		var video_url=$('#video_url').val();
+		var body=$('#body').val();
+		var body_len = body.split(' ');
 		
 		if(classroom_id == "")
 		{			
@@ -257,6 +259,16 @@ $('#classroom_ann_add_form').on('submit', function(e){
 			flag=0;
 		} else { $(".subject_err").html(''); }
 		
+		if(body == "")
+		{			
+			$(".body_err").html('The Body description field is required.');
+			flag=0;
+		}
+		else if(body_len.length < 5)
+		{			
+			$(".body_err").html('Body description should be minimum of 5 words.');
+			flag=0;
+		}
 			
 		if(flag == 1)
 		{

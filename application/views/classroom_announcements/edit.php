@@ -161,14 +161,13 @@
 					</div>
 
 					<div class="col-md-12">
-						<label for="body" class="control-label">Body</label><span class="text-danger body_err"><?php echo form_error('body');?></span>
+						<label for="body" class="control-label"><span class="text-danger">*</span>Body</label><span class="text-danger body_err"><?php echo form_error('body');?></span>
 						<div class="form-group has-feedback">
 							<textarea name="body" class="form-control removeerrmessage validatewordcount99" id="body"><?php echo ($this->input->post('body') ? $this->input->post('body') : $announcements['body']); ?></textarea>
 							<span class="glyphicon glyphicon-text-size form-control-feedback"></span>
 							<span class="text-danger body_err"><?php echo form_error('body');?></span>
 						</div>
 					</div>
-
 					<div class="col-md-6">
 						<div class="form-group form-checkbox">
 							<input type="checkbox" name="active" value="1" <?php echo ($announcements['active']==1 ? 'checked="checked"' : ''); ?> id='active' />
@@ -220,6 +219,8 @@ $('#classroom_ann_edit_form').on('submit', function(e){
 		var screenshot=$('#screenshot').val();
 		var lecture_date=$('#lecture_date').val();
 		var video_url=$('#video_url').val();
+		var body=$('#body').val();
+		var body_len = body.split(' ');
 		
 		if(classroom_id == "")
 		{			
@@ -232,7 +233,17 @@ $('#classroom_ann_edit_form').on('submit', function(e){
 			flag=0;
 		} else { $(".subject_err").html(''); }
 		
-			
+		if(body == "")
+		{			
+			$(".body_err").html('The Body description field is required.');
+			flag=0;
+		}
+		else if(body_len.length < 5)
+		{			
+			$(".body_err").html('Body description should be minimum of 5 words.');
+			flag=0;
+		}
+		
 		if(flag == 1)
 		{
 			this.submit();			
