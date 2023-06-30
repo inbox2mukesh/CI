@@ -215,7 +215,10 @@
 	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/bootstrap.min.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
 	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/css-plugin-collections.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" media="all">
 	<link href="<?php echo base_url(DESIGN_VERSION_F . '/css/style-main.css?v=' . JS_CSS_VERSION_F); ?>" rel="stylesheet" type="text/css" media="all">
-	
+	<?php
+	$url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	?>
+	<link rel="canonical" href="<?php echo $url;?>">
 	<?php
 		$REQUEST_URI_ARRAY=explode('/',$_SERVER['REQUEST_URI']);
 		
