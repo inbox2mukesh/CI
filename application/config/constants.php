@@ -100,8 +100,8 @@ define('TWT', 'https://twitter.com/westernoverseaa');
 		define('SESSION_VAR', '');
 	}
 	define('STAMP', 'resources-f/images/mock_test_reprt_images/Australia-Stamp.png');
-	define('LOGO', 'resources-f/images/logo-sm-aus.png');
-	define('MAIL_LOGO', 'resources-f/images/logo-sm-aus.png');
+	define('LOGO', 'resources-f/images/logo-sm-aus.webp');
+	define('MAIL_LOGO', 'resources-f/images/logo-sm-aus.webp');
 	define('CURRENCY', 'AUD');
 	define('TIME_ZONE', 'Australia/Adelaide');	
 
