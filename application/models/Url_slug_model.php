@@ -68,7 +68,7 @@
         {
             $tablename = 'test_preparation_material';
         }
-        else if($page == 'visa-services' || $page == 'about-online-coaching')
+        else if($page == 'visa-services' || $page == 'online-coaching')
         {
             $tablename = 'enquiry_purpose_masters';
         }

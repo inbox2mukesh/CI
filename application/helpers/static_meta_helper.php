@@ -111,7 +111,7 @@ if(!function_exists('get_meta_tag_data')){
                 <title>Western Overseas | Deals in different visa domains | Canada</title>
                 ';
             }
-            else if($page=='about-online-coaching'){
+            else if($page=='online-coaching'){
                 $meta = '               
                 <meta name="Explore our online experts` tailored programs for IELTS, PTE, TOEFL, and CELPIP to start a smooth journey for English learning and commence studying in Canada." />
                 <meta name="" />
@@ -143,7 +143,7 @@ if(!function_exists('get_meta_tag_data')){
                 <title>Nowadays it’s difficult to find the right information due to huge resources but we are a trusted source of information to grab the latest news and updates.</title>
                 ';
             }
-            else if($page=='about-online-pack'){
+            else if($page=='online-pack'){
                 $meta = '               
                 <meta name="description" content="Explore our online experts tailored programs for IELTS, PTE, TOEFL, and CELPIP to start a smooth journey for English learning and other proficiency tests." />
                 <meta name="" />
@@ -177,7 +177,7 @@ if(!function_exists('get_meta_tag_data')){
                 <meta name="author" content="" />
                 <title></title>
                 ';
-                if($page=='about-online-coaching'){
+                if($page=='online-coaching'){
                     $meta = '               
                     <meta name="description" content="Are you Confused about choosing IELTS, PTE, TOEFL, and Duolingo? No worries! Western overseas online coaching is the best approach to studying online." />
                     <meta name="keywords" content="IELTS online coaching, PTE online coaching, TOEFL online coaching" />

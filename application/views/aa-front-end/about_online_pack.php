@@ -21,7 +21,7 @@
 						foreach ($serviceData_p->error_message->data as $d) { ?>
 						
 						<div class="col-md-3 col-sm-6">
-								<a href="<?php echo base_url('about-online-coaching/view/'.$d->URLslug);?>">
+								<a href="<?php echo base_url('online-coaching/'.$d->URLslug);?>">
 									<div class="services">
 										<div class="img-area"> <img src="<?php echo base_url('uploads/service_image/'.$d->image);?>" class="img-responsive" alt="" title=""> </div>
 										<div class="img-text">

@@ -29,7 +29,7 @@
 			<div class="column">
 				<h4>Online Coaching</h4>
 				<ul>
-					<li><a href="<?php echo base_url('about-online-coaching'); ?>">About Online Coaching</a></li>
+					<li><a href="<?php echo base_url('online-coaching'); ?>">About Online Coaching</a></li>
 					<li><a href="<?php echo base_url('online-courses'); ?>">Online Courses</a></li>
 					<li><a href="<?php echo base_url('practice-packs'); ?>">Practice Packs</a></li>
 					<?php if (DEFAULT_COUNTRY == 101) { ?>

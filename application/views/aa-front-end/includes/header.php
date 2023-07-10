@@ -344,7 +344,7 @@
 									<li class="menu-item menu-item-has-children header-sub-menu"> <a href="#">Online coaching</a>
 										<ul class="sub-menu">
 											<li class="back"><a href="#">Back</a></li>
-											<li class="menu-item leave-mouse"> <a href="<?php echo base_url('about-online-coaching'); ?>"><img src="<?php echo base_url(DESIGN_VERSION_F . '/images/about-online-pack.svg'); ?>" alt="">About Online Coaching</a> </li>
+											<li class="menu-item leave-mouse"> <a href="<?php echo base_url('online-coaching'); ?>"><img src="<?php echo base_url(DESIGN_VERSION_F . '/images/about-online-pack.svg'); ?>" alt="">About Online Coaching</a> </li>
 											<li class="menu-item leave-mouse"> <a href="<?php echo base_url('online-courses'); ?>"><img src="<?php echo base_url(DESIGN_VERSION_F . '/images/online-course.svg'); ?>" alt="">Online Courses</a> </li>
 											<li class="menu-item leave-mouse"> <a href="<?php echo base_url('practice-packs'); ?>"><img src="<?php echo base_url(DESIGN_VERSION_F . '/images/practice-pack.svg'); ?>" alt="">Practice Packs</a> </li>
 											<li class="menu-item menu-item-has-children header-sub-menu">
