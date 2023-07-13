@@ -49,9 +49,12 @@
         return $this->db->get()->result_array();
     }
 
-    function get_all_enquiry_purpose_active(){       
-        
-        $this->db->select('enquiry_purpose_masters.id,enquiry_purpose_name,about_service,image,URLslug');
+    function get_all_enquiry_purpose_active($erp=null){
+        if($erp){
+            $this->db->select('enquiry_purpose_masters.id,enquiry_purpose_name,image,URLslug');    
+        }else{
+            $this->db->select('enquiry_purpose_masters.id,enquiry_purpose_name,about_service,image,URLslug');
+        }
         $this->db->from('enquiry_purpose_masters');    
         $this->db->join('`enquiry_purpose_division`', 'enquiry_purpose_division.enquiry_purpose_id= enquiry_purpose_masters.id', 'left');
         $this->db->where(array('active'=>1,'division_id'=>2));

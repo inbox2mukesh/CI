@@ -22,7 +22,8 @@ class Get_service_data extends REST_Controller {
         if(!$this->Authenticate($this->input->get_request_header('API-KEY'))) {            
             $data['error_message'] = [ "success" => 2, "message" => UNAUTHORIZED, "data"=>''];
         }else{
-            $bData =  $this->Enquiry_purpose_model->get_all_enquiry_purpose_active();
+            $erp = $this->input->get_request_header('ERP')?1:0;
+            $bData =  $this->Enquiry_purpose_model->get_all_enquiry_purpose_active($erp);
             if(!empty($bData)){
               $data['error_message'] = [ "success" => 1, "message" => "success", "data"=> $bData];    
             }else{
