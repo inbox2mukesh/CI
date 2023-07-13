@@ -141,7 +141,7 @@ class Center_location extends MY_Controller{
                 $longitude  =$this->input->post('longitude');
                 $independent_body = 0;                
             }elseif($independent_body==1){
-                $is_overseas=0;
+                //$is_overseas=0;
                 $country_id=NULL;
                 $state_id=NULL;
                 $city_id=NULL;
