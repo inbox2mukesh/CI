@@ -13,6 +13,7 @@ class Free_resources extends MY_Controller
     }
     function index()
     {
+        redirect('home');
         $data['segment'] = $this->_getURI();
         // $data['title'] = "Articles";
         $headers = array(
