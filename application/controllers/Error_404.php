@@ -27,10 +27,12 @@ class Error_404 extends MY_Controller
     }
     function error_404_redirect()
     {
-    
+        echo '<pre>';
+        print_r($_SERVER);
+        echo '</pre>';
         $REDIRECT_QUERY_STRING = str_replace('/aus-staging','',$_SERVER['REDIRECT_URL']);
         $REDIRECT_QUERY_STRING = str_replace('/aus','',$_SERVER['REDIRECT_URL']);
-
+        echo $REDIRECT_QUERY_STRING; die;
         $badurl = array('/immigration_tools/converter_a','/visa-service-details/student-extension','/visa-services/post/tourist-visa-australia','/visa-services/post/gsm-visa-australia','/visa-service-details/gsm-visa-australia','/articles/post/migration-agent-in-Melbourne-australia','/visa-services/post/partner-visa-australia','/articles/post/migration-agent-in-perth-australia','/visa-services/post/student-visa-australia','/visa-services/post/parent-visa-Australia','/visa-services/post/family-sponsored-visa-australia','/visa-services/post/citizenship-australia','/visa-services/post/employer-sponsored-visa-Australia','/why_australia','/immigration_tools/converter_b','/immigration_tools/geteducation_level/','/immigration_tools/getcandidate_age/');
         if(in_array($REDIRECT_QUERY_STRING,$badurl)){
             redirect('/');
