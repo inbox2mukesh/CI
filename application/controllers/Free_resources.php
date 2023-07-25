@@ -13,8 +13,10 @@ class Free_resources extends MY_Controller
     }
     function index()
     {
-        redirect('/');
         $data['segment'] = $this->_getURI();
+        if($data['segment']=='free_resources'){
+            redirect('/');
+        }
         // $data['title'] = "Articles";
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
