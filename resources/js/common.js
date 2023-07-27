@@ -9039,6 +9039,7 @@ function checkWordCountCkEditor(id) {
 			},
 			{ name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
 			//{ name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+			{ name: 'insert', items: [ 'Table' ] },
 			'/',
 			{
 				name: 'styles',
