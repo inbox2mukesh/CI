@@ -152,7 +152,7 @@ class Online_courses extends MY_Controller
     }
     function Getcategory()
     {
-        redirect('home');
+        redirect('/');
         $test_module_id   = $this->input->post('test_module_id', true);
         $programe_id = $this->input->post('programe_id', true);
         $duration = $this->input->post('duration', true);

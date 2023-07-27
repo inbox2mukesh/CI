@@ -501,7 +501,7 @@ $('#freeresourse_edit_form').on('submit', function(e){
 			}		
 			else {
 				$('.free_resources_section'+i+"_err").html("");
-				//flag=1;
+				flag=1;
 				
 			}	
 		}	

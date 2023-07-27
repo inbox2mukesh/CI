@@ -16,7 +16,7 @@
             <?php 
 			$attributes = ['name' => 'freeresourse_add_form', 'id' => 'freeresourse_add_form'];
 			echo form_open_multipart('adminController/test_preparation_material/add',$attributes); ?>
-			<!-- <form action="<?php echo site_url();?>adminController/Free_resources/add" method="post" enctype="multipart/form-data" onsubmit="return valiform();" name> -->
+			<!-- <form action="<?php //echo site_url();?>adminController/Free_resources/add" method="post" enctype="multipart/form-data" onsubmit="return valiform();" name> -->
 			<?php 	
 			    $content_type_id=$this->input->post('content_type_id');
 			?>
@@ -66,6 +66,7 @@
 					<?php 	
 			            $free_resources_topic=$this->input->post('free_resources_topic[]');
 						#pr($time_slots);
+						$URLslug=$this->input->post('URLslug');
 			        ?>
 					<div class="col-md-6 margin-bottom-20">
 						<label for="event_title" class="control-label"><span class="text-danger">*</span>Url Slug</label>
@@ -94,6 +95,9 @@
 							<span class="text-danger free_resources_topic_err"><?php echo form_error('free_resources_topic[]');?></span>
 						</div>
 					</div>
+					<?php
+					$keywords=$this->input->post('keywords');
+					?>
 					<div class="col-md-6 margin-bottom-20">
 						<label for="keywords" class="control-label"><span class="text-danger">*</span>SEO Keywords</label>
 						<div class="form-group">
@@ -101,6 +105,9 @@
 						<span class="text-danger keywords_err"><?php echo form_error('keywords'); ?></span>
 						</div>
 					</div>
+					<?php
+					$seo_title=$this->input->post('seo_title');
+					?>
 					<div class="col-md-6 margin-bottom-20">
 						<label for="seo_title" class="control-label"><span class="text-danger">*</span>SEO Title</label>
 						<div class="form-group">
@@ -108,13 +115,17 @@
 						<span class="text-danger seo_title_err"><?php echo form_error('seo_title'); ?></span>
 						</div>
 					</div>
-					<div class="col-md-12 margin-bottom-20">
-						<label for="seo_desc" class="control-label"><span class="text-danger">*</span>SEO Description</label>
+					<?php 	
+			           $seo_desc=$this->input->post('seo_desc');
+			        ?>
+                     <div class="col-md-12">
+						<label for="zoom_link" class="control-label">SEO Description<span class="text-danger">*</span></label>
 						<div class="form-group">
-						<textarea name="seo_desc" value="<?php echo (isset($seo_desc) && !empty($seo_title))?$seo_title:''; ?>" class="form-control input-ui-100 removeerrmessage" id="seo_desc" placeholder="SEO Description" rows="4" style="resize:none;"></textarea>
-						<span class="text-danger seo_desc_err"><?php echo form_error('seo_title'); ?></span>
+						    <textarea id="seo_desc" name="seo_desc" rows="4" cols="163" placeholder="seo description..." class=" form-control removeerrmessage" maxlength="100"><?php echo $seo_desc ?></textarea>
+							<span class="text-danger seo_desc_err"><?php echo form_error('seo_desc'); ?></span>
 						</div>
 					</div>
+					
 					<?php 	
 			            $description=$this->input->post('description');
 			        ?>
@@ -412,7 +423,7 @@ $('#freeresourse_add_form').on('submit', function(e){
 			}
 			else {
 				$('.free_resources_section'+i+"_err").html("");
-				//flag=1;
+				flag=1;
 				
 			}
 		
