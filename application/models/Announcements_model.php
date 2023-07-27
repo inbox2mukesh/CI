@@ -34,7 +34,7 @@ class Announcements_model extends CI_Model
         ');
         $currentdate = date('Y-m-d H:i:s');
         $this->db->from('`announcements`');
-        $this->db->where(array('classroom_id'=>$classroom_id,'active'=>1,'start_date >='=>$currentdate));
+        $this->db->where(array('classroom_id' => $classroom_id, 'active' => 1, 'start_date <=' => $currentdate, 'end_date >=' => $currentdate));
         $this->db->order_by('modified', 'DESC');       
         return $this->db->get('')->result_array();
 
