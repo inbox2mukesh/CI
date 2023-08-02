@@ -13,8 +13,44 @@ class Test_preparation_material extends MY_Controller
     }
     function index()
     {
+
         $data['segment'] = $this->_getURI();
-        // $data['title'] = "Test Preparation Material";
+        $data['title'] = "Posts";
+        $headers = array(
+            'API-KEY:'.WOSA_API_KEY,   
+        );
+    
+        $data['TEST_PREPARATION_MATERIAL_CONTENT'] = json_decode($this->_curlGetData(base_url(TEST_PREPARATION_MATERIAL_CONTENT), $headers));        
+        //$data['CATEGORY_LIST'] = json_decode($this->_curlGetData(base_url(GET_ALL_POST_NEWS_PREP_CATEGORY_LIST), $headers));
+        //$data['SUBCATEGORY_LIST'] = json_decode($this->_curlGetData(base_url(GET_ALL_POST_NEWS_PREP_SUBCATEGORY_LIST), $headers));
+
+        $data["total_rows"]     = 0;
+        $data["total_pages"]    = 0;
+        if(isset($data['TEST_PREPARATION_MATERIAL_CONTENT']->error_message->data) && $data['TEST_PREPARATION_MATERIAL_CONTENT']->error_message->data) {
+            $countHeaders           = $headers;
+            $countHeaders[]         = 'COUNT:true';
+            $totalRowsResult        = json_decode($this->_curlGetData(base_url(TEST_PREPARATION_MATERIAL_CONTENT), $countHeaders));
+
+            if(isset($totalRowsResult->error_message->data) && $totalRowsResult->error_message->data) {
+                $totalRows = $totalRowsResult->error_message->data;
+                $data["total_pages"]    = $totalPages = ceil($totalRows / FRONTEND_RECORDS_PER_PAGE);
+            }
+            else {
+                $data["total_pages"]    = 0;
+            }
+        }
+        $data['countryCode'] = json_decode($this->_curlGetData(base_url(GET_ALL_CNT_CODE_URL), $headers));        
+        $data['newsData'] = json_decode($this->_curlGetData(base_url(GET_NEWS_DATA_URL), $headers));    
+        $data['serviceData'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers)); 
+        $data['FREE_RESOURCE_COURSE_LIST'] = json_decode($this->_curlGetData(base_url(GET_TEST_PREPARATION_MATERIAL_COURSE), $headers));
+        $data['FREE_RESOURCE_CONTENT'] = json_decode($this->_curlGetData(base_url(TEST_PREPARATION_MATERIAL_CONTENT), $headers));
+        $data['FREE_RESOURCE_CONTENT_TYPE'] = json_decode($this->_curlGetData(base_url(GET_TEST_PREPARATION_MATERIAL_CONTENT_TYPE), $headers));//content type DD
+        $this->load->view('aa-front-end/includes/header', $data);
+        $this->load->view('aa-front-end/test_preparation_material',$data);
+        $this->load->view('aa-front-end/includes/footer',$data);
+        //$this->auto_frontendCommonFLayout('test_preparation_material',$data); 
+        /*$data['segment'] = $this->_getURI();
+        $data['title'] = "Test Preparation Material";
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
         );
@@ -26,7 +62,7 @@ class Test_preparation_material extends MY_Controller
         $data['FREE_RESOURCE_CONTENT_TYPE'] = json_decode($this->_curlGetData(base_url(GET_TEST_PREPARATION_MATERIAL_CONTENT_TYPE), $headers));//content type DD
         $this->load->view('aa-front-end/includes/header', $data);
         $this->load->view('aa-front-end/test_preparation_material');
-        $this->load->view('aa-front-end/includes/footer');
+        $this->load->view('aa-front-end/includes/footer');*/
     }
     function post($id = 0)
     {
