@@ -244,10 +244,15 @@ trait apiCommonDataTrait
             if (isset($params["params"]) && $params["params"]) {
                 $params["params"] = (object) $params["params"];
             }
-            $modelName    = $controller . "_model";
-            $functionName = "get_" . $controller . "_listing_frontend";
-            $this->load->model($modelName);
-            $response = $this->$modelName->$functionName($params, $count);
+            if($controller == 'free_resources'){
+                $this->load->model('Free_resources_modal');
+                $response = $this->Free_resources_modal->get_free_resources_listing_frontend($params, $count);
+            }else{
+                $modelName    = $controller . "_model";
+                $functionName = "get_" . $controller . "_listing_frontend";
+                $this->load->model($modelName);
+                $response = $this->$modelName->$functionName($params, $count);
+            }
             
         } elseif ($pageType && $type == "accolades_and_associations") {
             $this->load->model("Accolades_and_associations_model");

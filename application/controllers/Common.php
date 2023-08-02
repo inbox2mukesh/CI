@@ -24,21 +24,13 @@ class Common extends MY_Controller
 			$data[$controller] = $this->auto_getFrontendSectionData(['type' => 'ajax_load_more', 'params' => isset($params) && $params ? $params : '', 'controller' => $controller, 'offset' => $offset, 'limit' => $limit, 'country_id' => $this->defaultSelectedCountryID]);
 			$result["total_records"] = 0;
 			$totalRowsResult = $this->auto_getFrontendSectionData(['type' => 'ajax_load_more', 'params' => isset($params) && $params ? $params : '', 'controller' => $controller, 'offset' => $offset, 'limit' => $limit, 'country_id' => $this->defaultSelectedCountryID, 'count' => 1]);
-			
-			/*$aa = $data[$controller]->error_message->data;
-			foreach ($aa  as $key => $c) {
-				$data2['c'] = $this->Test_preparation_material_model->getFreeResourceContentsTopic($c->id);
-				$bData[$key]['Course']= $data2['c'];         
-                     
-			  }
-			  pr($bData);	 
-			  pr($data);*/
 			if (isset($totalRowsResult->error_message->data) && $totalRowsResult->error_message->data) {
 				$totalRows = $totalRowsResult->error_message->data;
 				$result["total_pages"]  = ceil($totalRows / FRONTEND_RECORDS_PER_PAGE);
 				$result["total_records"]  = isset($totalRows) ? $totalRows : 0;
 			}
 			$result["html"] = $this->load->view('aa-front-end/' . $controller . '_load_more', $data, true);
+			
 			echo json_encode($result);
 		}
 	}

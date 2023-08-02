@@ -21,14 +21,32 @@ class Free_resources extends MY_Controller
         $headers = array(
             'API-KEY:' . WOSA_API_KEY,
         );
+        $data["total_rows"]     = 0;
+        $data["total_pages"]    = 0;
         $data['countryCode'] = json_decode($this->_curlGetData(base_url(GET_ALL_CNT_CODE_URL), $headers));        
         $data['newsData'] = json_decode($this->_curlGetData(base_url(GET_NEWS_DATA_URL), $headers));    
         $data['serviceData'] = json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers)); 
         $data['FREE_RESOURCE_CONTENT'] = json_decode($this->_curlGetData(base_url(FREE_RESOURCE_CONTENT), $headers));
         $data['FREE_RESOURCE_COURSE_LIST'] = json_decode($this->_curlGetData(base_url(GET_FREE_RESOURCE_COURSE), $headers));
         $data['FREE_RESOURCE_CONTENT_TYPE'] = json_decode($this->_curlGetData(base_url(GET_FREE_RESOURCE_CONTENT_TYPE), $headers));
+
+        if(isset($data['FREE_RESOURCE_CONTENT']->error_message->data) && $data['FREE_RESOURCE_CONTENT']->error_message->data) {
+            $countHeaders           = $headers;
+            $countHeaders[]         = 'COUNT:true';
+            $totalRowsResult        = json_decode($this->_curlGetData(base_url(FREE_RESOURCE_CONTENT), $countHeaders));
+
+            if(isset($totalRowsResult->error_message->data) && $totalRowsResult->error_message->data) {
+                $totalRows = count($totalRowsResult->error_message->data);
+                $data["total_pages"]    = $totalPages = ceil($totalRows / FRONTEND_RECORDS_PER_PAGE);
+            }
+            else {
+                $data["total_pages"]    = 0;
+            }
+        }
+
+
         $this->load->view('aa-front-end/includes/header', $data);
-        $this->load->view('aa-front-end/free_resources');
+        $this->load->view('aa-front-end/free_resources',$data);
         $this->load->view('aa-front-end/includes/footer');
     }
     function free_resource_post($id = 0)

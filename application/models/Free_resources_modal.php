@@ -88,7 +88,105 @@
         $this->db->limit(12);
         return $this->db->get()->result_array();
     }
+    function get_free_resources_listing_frontend($params=array(),$count=false){
+        //pr($params);
+        //return array("search" => $params["params"]->search_text);
+        $additionaParams =  new StdClass();
+        
+        if(isset($params["params"])) {
+            $additionaParams = (object)$params["params"];
+        }
 
+        if(isset($params["limit"]) && isset($params["offset"]) && !$count) {
+            $this->db->limit($params["limit"], $params["offset"]);
+        }
+        if(isset($additionaParams->testtype_select) && $additionaParams->testtype_select !="")
+        {
+            $test_type = $additionaParams->testtype_select;
+        }
+        if(isset($additionaParams->upload_time) && $additionaParams->upload_time !="")
+        {
+
+            if($additionaParams->upload_time == 'week')
+            {
+                $firstday = date('Y-m-d', strtotime("this week"));  
+                $enddate=date('Y-m-d');    
+            }
+            else if($additionaParams->upload_time == 'month')// this month
+            {
+               $firstday = date('Y-m-01'); // hard-coded '01' for first day
+               $enddate  = date('Y-m-t');
+            }
+            else if($additionaParams->upload_time == '6month')// last 6th month from current month
+            {
+                $firstday = date("Y-m-01", strtotime("-5 months"));                 
+                $enddate  = date('Y-m-t');                
+            }
+            else if($additionaParams->upload_time == 'year')// This year
+            {
+                $firstday = date("Y-01-01");                     
+                $enddate  = date("Y-12-31");
+            }
+            else if($additionaParams->upload_time == 'lastyear')// last year
+            {
+                $firstday = date("Y-01-01", strtotime("-1 year"));                     
+                $enddate  = date("Y-12-31", strtotime("-1 year"));
+            }
+            else if($additionaParams->upload_time == 'previousyear')// all previous year
+            {                
+                $firstday  = date("Y-12-31", strtotime("-1 year"));
+            }
+        }       
+
+        $this->db->select('
+        ctm.content_type_name,
+         fr.id,
+         fr.isPinned,
+         fr.title,
+         fr.description,
+         fr.URLslug,
+         frt.topic_id,
+         tr.topic,
+         CONCAT("'.base_url('./uploads/free_resources/image/').'", fr.image) as image,
+         date_format(fr.modified, "%D %b %Y") as `created`,
+     ');
+     $this->db->from('free_resources_topic_data frt');
+     $this->db->join('free_resources fr', 'fr.id=frt.free_resources_id');
+     $this->db->join('free_resources_topic tr', 'frt.topic_id=tr.topic_id');
+     $this->db->join('content_type_masters ctm', 'ctm.id= fr.content_type_id');
+     if($test_type!=''){
+        $this->db->where('frt.topic_id', $test_type);
+     }
+     $this->db->where('fr.active', 1);
+     $this->db->where('URLslug IS NOT NULL');
+
+
+        
+
+        if(isset($additionaParams->content_type) && $additionaParams->content_type) {
+            $this->db->where('fr.content_type_id', $additionaParams->content_type);
+        }
+
+        if(isset($additionaParams->search_text) && $additionaParams->search_text){
+            $this->db->like('fr.title', $additionaParams->search_text);
+        }
+
+        if(isset($additionaParams->upload_time) && $additionaParams->upload_time != "" && $additionaParams->upload_time != 'previousyear') {
+            $this->db->where('DATE(fr.modified) >=', $firstday);
+            $this->db->where('DATE(fr.modified) <=', $enddate);
+        }
+        if(isset($additionaParams->upload_time) && $additionaParams->upload_time != "" &&  $additionaParams->upload_time == 'previousyear' ) {
+            $this->db->where('DATE(fr.modified) <=', $firstday);
+        }
+
+        //print_r($this->db->last_query()); 
+        if($count) {
+            return $this->db->count_all_results();
+        }
+        else {
+            return $this->db->get()->result_array();
+        }
+    }
     function getFreeResourceFilterTestType($test_type,$content_test_type,$upload_time,$search_text)
     {
         if($upload_time !="")

@@ -180,7 +180,9 @@ $type="";
 
 			<!--End Grid Container-->
 
-			
+			<?php if($total_pages > 1) { ?>
+			<div class="mt-20 text-center load-more-section" data-total-pages="<?php echo $total_pages; ?>" data-offset="<?php echo FRONTEND_RECORDS_PER_PAGE; ?>" data-current-page="1"><a class="btn btn-red btn-flat view-btn" href="javascript:void(0);">Load More Content</a></div>
+			<?php } ?>	
 
 		</div>
 
@@ -203,77 +205,102 @@ $type="";
 <?php }?>
 
 <script>
+	$(document).ready(function(){
+		$('.preloader').fadeIn(1500);
+		$(document).on("click",".load-more-section",function(){
+			var thisObj				 	= $(this);
+			var totalPages 			 	= $(this).data("total-pages");
+			var offset 				 	= $(this).data("offset");
+			var currentPage			  	= $(this).data("current-page");
+			var params 				  	= {}; 
+			params["content_type"] 	   	= $("#contenttype_select").val();
+			params["upload_time"] 	   	= $("#uploadtime_select").val();
+			params["search_text"] 	    = $("#testtype_search").val().trim();
+			params["testtype_select"]   = $("#testtype_select").val();
+			$.ajax({
+				url: "<?php echo WOSA_BASE_URL; ?>common/ajax_load_more",
+				type: "POST",
+				dataType: "json",
+                data: {
+					controller: 'free_resources',
+					offset: offset,
+					params : params
+				},
+				success: function(data){
+                    if(data["html"].indexOf !== 'undefined'){
+						var recordPerPage = '<?php echo FRONTEND_RECORDS_PER_PAGE; ?>';
+						offset = parseInt(offset) + parseInt(recordPerPage);
+						currentPage = currentPage + 1;
+						$("#freeresource_section").append(data["html"]);
+						if(currentPage < totalPages) {
+							thisObj.data("offset",offset);
+							thisObj.data("current-page",currentPage);
+						}
+						else {
+							thisObj.data("offset",offset);
+							thisObj.hide();
+						}
+					}
+				}
+			});
+		});
+	});
+	$(document).on("blur","#testtype_search",function() {
+		$(this).val($(this).val().trim());
+		searchFreeResource();
+	});
+	$(document).on("click",".posts-search-button",function() {
+		searchFreeResource();
+	});
+	function searchFreeResource() {
+		var testtype_select  = $("#testtype_select").val(); 
+		var contenttype_select  = $("#contenttype_select").val();  
+		var uploadtime_select  = $("#uploadtime_select").val();
+ 		var testtype_search  = $("#testtype_search").val();
 
- function searchFreeResource()
+		var offset 						= 0;
+		var params 						= {}; 
+		params["content_type"] 	   	= $("#contenttype_select").val();
+		params["upload_time"] 	   	= $("#uploadtime_select").val();
+		params["search_text"] 	    = $("#testtype_search").val().trim();
+		params["testtype_select"]   = $("#testtype_select").val();
 
-  {       
-
-    var testtype_select  = $("#testtype_select").val(); 
-
-    var contenttype_select  = $("#contenttype_select").val();  
-
-    var uploadtime_select  = $("#uploadtime_select").val();
-
-     var testtype_search  = $("#testtype_search").val();
-
-    
-
-      
-
-    /*var city_select  = $("#city_select").val();
-
-    var branch_select  = $("#branch_select").val();
-
-    var date_select  = $("#date_select").val();*/   
-
-
-
-       $.ajax({
-
-          url: "<?php echo site_url('free_resources/searchFreeResource');?>",
-
-          async : true,
-
-          type: 'post',
-
-          data: {testtype_select:testtype_select,contenttype_select:contenttype_select,uploadtime_select:uploadtime_select,testtype_search:testtype_search},
-
-          success: function(data){
-
-            if(data!=''){
-
-              $('#flter-btm-info').addClass('hide');
-
-              /*$('.processing-res').hide();
-
-              $('.success-res').show();*/
-
-              $('#freeresource_section').html(data);
-
-            }else{
-
-              $('#flter-btm-info').addClass('hide');
-
-              /*$('.processing-res').hide();
-
-              $('.no-res').show();
-
-              $('.success-res').hide();*/
-
-              $('#freeresource_section').html(data);
-
-            }          
-
-          },
-
-          beforeSend: function(){            
-
-            $('#flter-btm-info').removeClass('hide');             
-
-          },
-
-      });   
-
-}
+		$.ajax({
+			url: "<?php echo WOSA_BASE_URL; ?>common/ajax_load_more",
+			async: true,
+			type: 'POST',
+			dataType: "json",
+			data: {
+				controller: 'free_resources',
+				offset: offset,
+				params : params
+			},
+			success: function(data) {
+				if(data["html"].indexOf !== 'undefined' && data["html"].trim() != ''){
+					$('#flter-btm-info').addClass('hide');
+					$('#freeresource_section').html(data["html"]);
+					$(".load-more-section").data("offset",'<?php echo FRONTEND_RECORDS_PER_PAGE; ?>');
+					if(data["total_pages"].indexOf !== 'undefined') {
+						if(data["total_pages"] > 1) {
+							$(".load-more-section").show();
+						}
+						else {
+							$(".load-more-section").hide();
+						}
+						$(".load-more-section").data("total-pages",data["total_pages"]);
+						$(".load-more-section").data("current-page",1);
+					}
+				} else {
+					$('#flter-btm-info').addClass('hide');
+					$('#freeresource_section').html('<div class="grid-card-container"><div class="grid-card"><h2 class="text-red">No Test Prep Material Found</h2></div></div>');
+					$(".load-more-section").hide();
+				}
+			},
+			beforeSend: function() {
+				$('#flter-btm-info').removeClass('hide');
+			},
+		});
+	}
+</script>
 
 </script>
