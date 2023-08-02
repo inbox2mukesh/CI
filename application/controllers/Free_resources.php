@@ -37,6 +37,7 @@ class Free_resources extends MY_Controller
 
             if(isset($totalRowsResult->error_message->data) && $totalRowsResult->error_message->data) {
                 $totalRows = $totalRowsResult->error_message->data;
+                //echo $totalRows; die;
                 $data["total_pages"]    = $totalPages = ceil($totalRows / FRONTEND_RECORDS_PER_PAGE);
             }
             else {
