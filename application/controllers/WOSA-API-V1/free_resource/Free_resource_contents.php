@@ -21,9 +21,16 @@ class Free_resource_contents extends REST_Controller {
     { 
         if(!$this->Authenticate($this->input->get_request_header('API-KEY'))) {            
             $data['error_message'] = [ "success" => 2, "message" => UNAUTHORIZED, "data"=>''];
-        }else{        
-          
-          $bData = $this->Free_resources_modal->getFreeResourceContents();
+        }else{  
+
+          $count  = $this->input->get_request_header('COUNT') ? true : false;
+          $offset = $this->input->get_request_header('OFFSET');
+          $limit  = $this->input->get_request_header('LIMIT');
+
+          $params = array();
+          $params['offset'] = $offset ? $offset : 0;
+          $params['limit']  = $limit ? $limit : FRONTEND_RECORDS_PER_PAGE;
+          $bData = $this->Free_resources_modal->get_free_resources_listing_frontend($params,$count);
           foreach ($bData as $key => $c) {
               $data2['c'] = $this->Free_resources_modal->getFreeResourceContentsTopic($c['id']);
               $bData[$key]['Course']= $data2['c'];                      

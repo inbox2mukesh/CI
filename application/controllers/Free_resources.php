@@ -36,7 +36,7 @@ class Free_resources extends MY_Controller
             $totalRowsResult        = json_decode($this->_curlGetData(base_url(FREE_RESOURCE_CONTENT), $countHeaders));
 
             if(isset($totalRowsResult->error_message->data) && $totalRowsResult->error_message->data) {
-                $totalRows = count($totalRowsResult->error_message->data);
+                $totalRows = $totalRowsResult->error_message->data;
                 $data["total_pages"]    = $totalPages = ceil($totalRows / FRONTEND_RECORDS_PER_PAGE);
             }
             else {
