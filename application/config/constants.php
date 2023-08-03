@@ -278,7 +278,7 @@ define('ACD_GT', 'Academic and General Training');
 
 //Paginations
 define('RECORDS_PER_PAGE', 100);
-define('FRONTEND_RECORDS_PER_PAGE', 10);
+define('FRONTEND_RECORDS_PER_PAGE', 9);
 define('COOKIE_EXPIRY', 86400);
 define('PWD_LEN', 6);
 
