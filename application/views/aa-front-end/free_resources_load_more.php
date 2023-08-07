@@ -4,7 +4,7 @@ if (!empty($free_resources->error_message->data) && isset($free_resources->error
     ?>
       <div class="col-md-4 col-sm-6">
 
-<a href="<?php echo base_url()?>test-preparation-material/<?php echo $p->URLslug; ?>">
+<a href="<?php echo base_url()?>articles/<?php echo $p->URLslug; ?>">
 
   <div class="latest-img">
 
