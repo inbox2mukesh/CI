@@ -180,7 +180,7 @@
         if(isset($additionaParams->upload_time) && $additionaParams->upload_time != "" &&  $additionaParams->upload_time == 'previousyear' ) {
             $this->db->where('DATE(fr.modified) <=', $firstday);
         }
-
+        $this->db->order_by('fr.id', 'DESC');
         //print_r($this->db->last_query()); 
         if($count) {
             return $this->db->count_all_results();
