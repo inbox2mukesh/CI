@@ -313,7 +313,7 @@ class Practice_package_model extends CI_Model
         }else{ }
         $this->db->where(array('pkg.active'=>1,'pkg.publish'=>1,'pkg.country_id'=>$country_id));
         $this->db->group_by('pkg.package_id');
-        $this->db->order_by('pkg.`package_id` DESC');
+        $this->db->order_by('pkg.package_id DESC','pkg.`modified` DESC');
          return  $this->db->get('')->result_array();
         //print_r($this->db->last_query());exit;
     }
