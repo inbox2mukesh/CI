@@ -13,13 +13,7 @@ class Booking extends MY_Controller{
         $this->load->library("session");
 
         $this->load->helper(['url','foumodule_api']);
-        if(ENVIRONMENT != 'production')
-        {
-            require_once('applicationDirX/libraries/stripe-php/init.php');
-        }
-        else{
-            require_once('application/libraries/stripe-php/init.php');
-        }
+        require_once('application/libraries/stripe-php/init.php');
         $this->headers_fourmodule= array('authorization:'.FOURMODULE_KEY);   
     }
 
