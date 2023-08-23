@@ -91,7 +91,11 @@
 
 <p style="padding: 0px; margin: 0px; color: #d72a22; font-weight:500">Payment Information:</p>
 
-
+<?php 
+  $amount_paid = $amount_paid/100;
+  $cgst_amt = $cgst_amt/100;
+  $sgst_amt = $sgst_amt/100;
+  ?>
 <table width="100%" cellpadding="0" cellspacing="1" style="margin-bottom: 10px;font-size: 13px; border:solid 1px #f3eedd">
   <tr>
     <td width="50%" valign="top" style="background-color: #efefef; font-weight:bold; text-align:left;padding:4px;">Amount paid</td>
