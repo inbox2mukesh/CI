@@ -142,10 +142,10 @@ class Buy_pack extends REST_Controller{
                 $classroom_id=NULL;
             }
             $other_discount = $std_data->other_discount;
-            if($other_discount==''){$other_discount=0;}else{$other_discount =$other_discount*100;} 
+            if($other_discount==''){$other_discount=0;}else{$other_discount =$other_discount;} 
 
             $amount_paid = $std_data->amount_paid;
-            if($amount_paid==''){$amount_paid=0;}else{$amount_paid =$amount_paid*100;} 
+            if($amount_paid==''){$amount_paid=0;}else{$amount_paid =$amount_paid;} 
             //wallet case: start
             $use_wallet = $std_data->use_wallet;
                 if($use_wallet){                    
@@ -205,7 +205,7 @@ class Buy_pack extends REST_Controller{
                 'classroom_id'  => $classroom_id,                           
                 'payment_id'    => $std_data->payment_id,
                 'order_id'      => $std_data->order_id,                
-                'amount'        => $discounted_amount*100,
+                'amount'        => $discounted_amount,
                 'other_discount'=> $other_discount,
                 'promocode_used'=> $std_data->promocode,
                 'amount_paid'   => $amount_paid+$paidBywallet,
@@ -225,9 +225,9 @@ class Buy_pack extends REST_Controller{
                 'checkout_token_no'    =>$std_data->checkout_token_no,
                 'country_code'    =>$std_data->country_code,
                 'requested_on' => date("d-m-Y h:i:s A"),
-                'cgst_amt'=>$std_data->cgst_amt*100,
-                'sgst_amt'=>$std_data->sgst_amt*100,
-                'total_paid_ext_tax'=>$std_data->total_paid_ext_tax*100,
+                'cgst_amt'=>$std_data->cgst_amt,
+                'sgst_amt'=>$std_data->sgst_amt,
+                'total_paid_ext_tax'=>$std_data->total_paid_ext_tax,
             );       
             $this->db->insert('student_package', $params2);
 
