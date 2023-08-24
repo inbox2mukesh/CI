@@ -1584,7 +1584,7 @@ class Student extends MY_Controller{
                 'amount'        => $discountedamount,
                 'cgst_amt'      => $cgst_tax*100,
                 'sgst_amt'      => $sgst_tax*100,
-                'total_amt'     => $discounted_amount*100,
+                'total_amt'     => $discounted_amount,
                 'tax_detail'    =>$tax_detail,
                 'waiver_by'     => $this->input->post('waiver_by', TRUE),
                 'other_discount'=> $other_discount,
