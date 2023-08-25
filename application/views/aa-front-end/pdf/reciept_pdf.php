@@ -94,17 +94,17 @@
             ?>
             <div style="clear: both;">
                 <div style=" float: left; width: 50%; padding-bottom: 4px; font-size: 13px; text-transform: uppercase;"><b>CGST@<?php echo $cgst_prcnt ?></b></div>
-                <div style=" float: right;  width: 50%; padding-bottom: 4px; text-align: right; font-size: 13px; text-transform: uppercase; font-weight: 500;"><?php echo $Reciept_data->error_message->data->currency.' '.$cgst_tax.'.00'; ?> </div>
+                <div style=" float: right;  width: 50%; padding-bottom: 4px; text-align: right; font-size: 13px; text-transform: uppercase; font-weight: 500;"><?php echo $Reciept_data->error_message->data->currency.' '.$cgst_tax; ?> </div>
             </div>
             <div style="clear: both; border-bottom:1px dotted #ccc; margin-bottom: 15px;"></div>
             <div style="clear: both;">
                 <div style=" float: left; width: 50%; padding-bottom: 4px; font-size: 13px; text-transform: uppercase;"><b>SGST@<?php echo $sgst_prcnt ?></b></div>
-                <div style=" float: right;  width: 50%; padding-bottom: 4px; text-align: right; font-size: 13px; text-transform: uppercase; font-weight: 500;"><?php echo $Reciept_data->error_message->data->currency.' '.$sgst_tax.'.00'; ?> </div>
+                <div style=" float: right;  width: 50%; padding-bottom: 4px; text-align: right; font-size: 13px; text-transform: uppercase; font-weight: 500;"><?php echo $Reciept_data->error_message->data->currency.' '.$sgst_tax; ?> </div>
             </div>
             <div style="clear: both; border-bottom:1px dotted #ccc; margin-bottom: 15px;"></div>
             <div style="clear: both;">
                 <div style=" float: left; width: 50%; padding-bottom: 4px; font-size: 13px; text-transform: uppercase;"><b>TOTAL PAID</b></div>
-                <div style=" float: right;  width: 50%; padding-bottom: 4px; text-align: right; font-size: 13px; text-transform: uppercase; font-weight: 500;"><?php echo $Reciept_data->error_message->data->currency.' '.$amt_to_pay.'.00'; ?> </div>
+                <div style=" float: right;  width: 50%; padding-bottom: 4px; text-align: right; font-size: 13px; text-transform: uppercase; font-weight: 500;"><?php echo $Reciept_data->error_message->data->currency.' '.$amt_to_pay; ?> </div>
             </div>
             <div style="clear: both; border-bottom:1px dotted #ccc; margin-bottom: 15px;"></div>
 
