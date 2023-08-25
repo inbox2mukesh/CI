@@ -108,18 +108,18 @@
             </div>
             <div style="clear: both; border-bottom:1px dotted #ccc; margin-bottom: 15px;"></div>
 
-            <div style="clear: both;text-align: right;">
+            <!--<div style="clear: both;text-align: right;">
                 <div style=" display:inline; border-bottom:1px dotted #ccc; padding-bottom: 4px; font-size: 13px; text-transform: uppercase;">
                     <?php                   
-                    $numberInput = $Reciept_data->error_message->data->amount_paid;
+                    /*$numberInput = $Reciept_data->error_message->data->amount_paid;
                     $numberInput= intval(str_replace(',', '', $numberInput));
                     $locale = 'en_CA';
                     $fmt = numfmt_create($locale, NumberFormatter::SPELLOUT);
                     $in_words = numfmt_format($fmt, $numberInput);
-                    echo  $Reciept_data->error_message->data->currency.' - ' . $in_words;
+                    echo  $Reciept_data->error_message->data->currency.' - ' . $in_words;*/
                     ?>
                 </div>
-            </div>
+            </div>-->
 
             <div style="clear: both;  margin-bottom: 15px;"></div>
 
