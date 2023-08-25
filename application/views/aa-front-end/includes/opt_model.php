@@ -6,7 +6,7 @@
 						<div class="reg-modal clearfix"> <span class="cross-btn pull-right text-white hide-btn" data-dismiss="modal"><i class="fa fa-close font-20"></i></span>
 							<div class="reg-otp-info text-center text-white ">
 								<h3>Verification Code</h3>
-								<p class="mb-10 font-12">Verification Code has been sent on your email.</p>
+								<p class="mb-10 font-12">Verification Code has been sent on your phone/email.</p>
 								
 									<div class="form-group">
 									<div class="subs-group">

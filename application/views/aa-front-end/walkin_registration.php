@@ -337,7 +337,7 @@
               <?php echo form_open('walkin/walkin_registration/'.$center_name, array('name'=>'walkin-form_otp','id'=>'walkin-form_otp')); ?>
               <div class="reg-otp-info text-center text-white ">
                 <h3>Verification Code</h3>
-                <p class="mb-10 font-12">Verification Code has been sent on your email.</p>
+                <p class="mb-10 font-12">Verification Code has been sent on your phone/email.</p>
                 
                   <div class="form-group">
                   <div class="subs-group" id="main_sec">
