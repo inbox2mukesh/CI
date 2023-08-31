@@ -7143,7 +7143,7 @@ function ValidURL(str,id)
 function validate_file_type(id) {
 	var ext = $('#' + id).val().split('.').pop().toLowerCase();
 	var id_err = id + '_err';
-	if ($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
+	if ($.inArray(ext, ['png', 'jpg', 'jpeg', 'webp']) == -1) {
 		$('.' + id_err).text('Please upload valid file format');
 		$('#' + id).val('');
 		$('#' + id).focus();
@@ -7455,7 +7455,7 @@ function validate_marketing_popup_form() {
 		var media_file = $("#image").val();
 		if (media_file != '') {
 			var ext = $('#image').val().split('.').pop().toLowerCase();
-			if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+			if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg' , 'webp']) == -1) {
 				$('.image_err').text('Please upload valid file format');
 				$('#image').val('');
 				$('#image').focus();
@@ -7471,7 +7471,7 @@ function validate_marketing_popup_form() {
 		var media_file = $("#image").val();
 		if (media_file != '') {
 			var ext = $('#image').val().split('.').pop().toLowerCase();
-			if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+			if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg' , 'webp']) == -1) {
 				$('.image_err').text('Please upload valid file format');
 				$('#image').val('');
 				$('#image').focus();
@@ -7500,7 +7500,8 @@ function validate_marketing_popup_form() {
 	var str = $("#link").val();
 	var regex = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
 	if (!regex.test(str)) {
-		alert("Please enter valid URL.");
+		$('.link_err').text('');
+		$('.link_err').text('Please enter valid URL.');
 		return false;
 	} else {
 		return true;

@@ -181,6 +181,19 @@
 			$("body").addClass("active")
 		}, 1);
 	};
+	$('#marketingpopup').modal('show');
+			window.onload = function () {
+				$("html").addClass("marketing");
+				$("body").addClass("body-marketing");
+			}
+
+			$(document).on("click", "#marketingpopup .close", function(){
+				$(".modal").removeClass("in");
+				$(".modal").removeAttr("style");
+				$(".modal-backdrop").removeClass("in");
+				$("html").removeClass("marketing");
+				$("body").removeClass("body-marketing");
+			})
 </script>
 <script type="text/javascript">
 	$(function() {

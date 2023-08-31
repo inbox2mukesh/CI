@@ -235,7 +235,12 @@
     <li> <a href="<?php echo site_url('adminController/web_banner/index');?>"><i class="fa fa-list"></i> Web Banner</a> </li><?php } */?>
   </ul>
 </li>
-
+<?php
+if ($this->Role_model->_has_access_('marketing_popups', 'index')) { ?>
+    <li> <ul class="treeview-menu"><a href="<?php echo site_url('adminController/marketing_popups/index'); ?>"><i class="fa fa-list-ul"></i> Marketing Popup</a> </ul></li>
+    <?php 
+} 
+?>
 <li> <a href="#"> <i class="fa fa-database text-light"></i><span>Master Inputs </span> </a>
   <ul class="treeview-menu">
   <?php

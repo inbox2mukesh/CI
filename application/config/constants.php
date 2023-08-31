@@ -571,6 +571,7 @@ define('PACKAGE_ALLOWED_TYPES_LABEL', '<span class="text-info"> [  <i><b>Allowed
 define('PROFILE_PIC_ALLOWED_TYPES_LABEL', '<span class="text-info"> [  <i><b>Allowed:</b> jpg, png, jpeg </i>  ] </span>');
 define('PACK_HOLD_ALLOWED_TYPES_LABEL', '<span class="text-info"> [  <i><b>Allowed:</b>jpg, png, jpeg, pdf </i>  ] </span>');
 define('NEWS_ALLOWED_TYPES_LABEL', '<span class="text-info"> [  <i><b>Allowed File:</b>  gif, jpg, png, jpeg </i>  ] </span>');
+define('MARKETING_POPUPS_ALLOWED_TYPES_LABEL', '<span class="text-info"> [ <i><b>Allowed:</b>  jpg, png, jpeg, gif ,webp</i> ] </span>');
 
 
 define('GALLERY_URL_LABEL','Add');
@@ -1219,6 +1220,13 @@ define('PROVINCES_FILE_PATH', './uploads/provinces/');
 define('NEWS_FILE_PATH', './uploads/news/');
 define('PHOTO_IMAGE_PATH', './uploads/photo/');
 define('VIDEO_IMAGE_PATH', './uploads/video/');
+
+define('MARKETING_POPUPS_IMAGE_PATH', './uploads/marketing_popups/');
+define('MARKETING_POPUPS_ALLOWED_TYPES', 'gif|jpg|png|jpeg|webp');
+
+define('MARKETING_POPUP_ADD', 'New marketing popup added');
+define('MARKETING_POPUP_UPDATE', 'Marketing popup updated');
+define('MARKETING_POPUP_DELETE', 'Marketing popup deleted');
 
 define('IIMMIGRATION_ALLOWED_TYPES', 'gif|jpg|png|jpeg|webp');
 define('PROVINCES_ALLOWED_TYPES', 'gif|jpg|png|jpeg|webp');

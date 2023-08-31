@@ -283,9 +283,20 @@
 		<!-- End Google Tag Manager (noscript) -->
 	<?php } else {
 	} ?>
+	<?php
+	$this->load->helper('marketing_helper');
+	$marketingPopupsData =  marketing_popup_data(); 
+	$marketingPopUp = get_cookie('MarketingPopUp');
+	?>
 	<?php include_once('login_model.php'); ?>
 	<?php include_once('registration_model.php'); ?>
 	<?php include_once('forgot_password_model.php'); ?>
+	<?php 
+	if(count($marketingPopupsData)>0 and $marketingPopUp!='no'){
+		include_once('marketing_model.php');
+	}
+	
+	?>
 	<div class="wosa-header">
 		<div class="top-hdr">
 			<div class="w-menu-container">
