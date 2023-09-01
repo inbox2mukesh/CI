@@ -1,5 +1,5 @@
 <!-- Main Slider -->
-<section class="bg-lighter">
+<section class="bg-lighter workshopslider">
 	<div class="carousel slide" data-ride="carousel">
 		<?php if (DEFAULT_COUNTRY == 13) { ?>
 			<div class="owl-carousel-slider">
@@ -55,3 +55,15 @@
 </section>
 
 <!-- End Main Slider -->
+
+<script>
+$( document ).ready(function() {
+	$(".owl-carousel-slider").owlCarousel({
+		items: 1,
+		autoplay: false,
+		nav: false,
+		arrow : false,
+		navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
+	});
+});
+</script>
