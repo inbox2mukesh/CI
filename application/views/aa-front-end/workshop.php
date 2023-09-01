@@ -4,8 +4,8 @@
 		<?php if (DEFAULT_COUNTRY == 13) { ?>
 			<div class="owl-carousel-slider">
 				<div class="carousel-item active">
-					<img class="d-block w-100 desktop-slider lazyload" src="<?php echo base_url('resources-f/images/slider/aus-slider-1.webp'); ?>" alt="" loading="lazy">
-					<img class="d-block w-100 mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/aus-mob-slider-1.webp'); ?>" alt="" loading="lazy">
+					<img class="d-block w-100 desktop-slider lazyload" src="<?php echo base_url('resources-f/images/slider/Australia-IELTS-PTE-Workshop-Website-1902x802-_1_.webp'); ?>" alt="" loading="lazy">
+					<img class="d-block w-100 mobile-slider lazyload" src="<?php echo base_url('resources-f/images/slider/Australia-IELTS-PTE-Workshop-Mobile-Website-_1_.webp'); ?>" alt="" loading="lazy">
 				</div>
 
 			</div>
