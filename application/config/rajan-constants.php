@@ -64,5 +64,5 @@ function is_https() {
     }
 }
 
-define("WORKSHOP_COURSES",['IELTS Academic','IELTS General Training','CD-IELTS Academic','CD-IELTS General Training','CELPIP General','CELPIP General LS','Duolingo','French','German','Italian','OET','PTE Academic','Spanish','Spoken English','TOEFL']);
+define("WORKSHOP_COURSES",['IELTS Academic','IELTS General Training','PTE']);
 ?>
