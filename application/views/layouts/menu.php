@@ -25,6 +25,10 @@
   </ul>
 </li>
 
+<?php if ($this->Role_model->_has_access_('Workshop_booking', 'index')) { ?>
+    <li> <a href="<?php echo site_url('adminController/Workshop_booking/index'); ?>"> <i class="fa fa-users text-light"></i> <span>Workshop Booking List</span> </a></li>
+<?php } ?>
+
 <li> <a href="#"> <i class="fa fa-users text-light"></i> <span>Students</span> </a>
   <ul class="treeview-menu">
     <?php
