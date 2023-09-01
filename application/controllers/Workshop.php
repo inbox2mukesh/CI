@@ -30,6 +30,17 @@ class Workshop extends MY_Controller{
         $data['FREE_RESOURCE_CONTENT'] = json_decode($this->_curlGetData(base_url(FREE_RESOURCE_CONTENT_SHORT), $headers));               
         //SERVICE_DATA/enquiry_purpose is same 
         $data['serviceData']=json_decode($this->_curlGetData(base_url(GET_SERVICE_DATA_URL), $headers));
+
+        $settingsData = json_decode($this->_curlGetData(base_url(GET_WORKSHOP_PAGE_SETTINGS), $headers));
+
+        if(isset($settingsData->error_message->data) && $settingsData->error_message->data) {
+            if($settingsData->error_message->data->active == 0) {
+                redirect("/");
+            }
+        }
+        else {
+            redirect("/");
+        }
         
         $this->load->view('aa-front-end/includes/header',$data);
         $this->load->view('aa-front-end/workshop');

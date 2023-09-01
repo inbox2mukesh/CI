@@ -74,4 +74,49 @@ class Workshop_booking extends MY_Controller{
         $data['_view'] = 'workshop_booking/index';
         $this->load->view('layouts/main',$data);
     }
+
+    function settings() {
+        //access control start
+        $cn = $this->router->fetch_class().''.'.php';
+        $mn = $this->router->fetch_method();        
+        if(!$this->_has_access($cn,$mn)) {redirect('adminController/error_cl/index');}
+
+        $by_user = $_SESSION['UserId'];
+        $active  = $this->input->post("active") ? $this->input->post("active") : 0;
+
+        $settingsData = $this->Workshop_booking_model->getWorkshopPageSettings();
+        $params = ['active' => $active, 'by_user' => $by_user];
+
+        $active = 0;
+        
+        if($this->input->post("submit")) {
+            $this->db->trans_start();
+            if(isset($settingsData["active"])) {
+                $status = $this->Workshop_booking_model->updateWorkshopPageSetting($params,$settingsData["id"]);
+            }
+            else {
+                $status = $this->Workshop_booking_model->addWorkshopPageSetting($params);
+            }
+
+            $this->db->trans_complete();
+
+            if($this->db->trans_status() === FALSE){
+                $this->session->set_flashdata('flsh_msg', TRAN_FAILED_MSG);
+            }elseif($status){
+                $this->session->set_flashdata('flsh_msg', SUCCESS_MSG);
+            }else{
+                $this->session->set_flashdata('flsh_msg', FAILED_MSG);
+            }
+
+            $settingsData = $this->Workshop_booking_model->getWorkshopPageSettings();
+        }
+
+        if(isset($settingsData["active"])) {
+            $active = $settingsData["active"];
+        }
+        $data['active'] = $active;
+        $data['title'] = 'Workshop Page Settings';
+        $data['_view'] = 'workshop_booking/settings';
+        $this->load->view('layouts/main',$data);
+    }
 }

@@ -399,5 +399,19 @@ class Workshop_booking_model extends CI_Model
     //print_r($this->db->last_query());exit;
     }
 
-    
+    function getWorkshopPageSettings() {
+        $this->db->select("id,active");
+        $this->db->from("workshop_page_settings");
+        return $this->db->get('')->row_array();
+    }
+
+    function addWorkshopPageSetting($params) {
+        $this->db->insert('workshop_page_settings',$params);
+        return $this->db->insert_id();
+    }
+
+    function updateWorkshopPageSetting($params,$id) {
+        $this->db->where('id',$id);
+        return $this->db->update('workshop_page_settings',$params);
+    }
 }
