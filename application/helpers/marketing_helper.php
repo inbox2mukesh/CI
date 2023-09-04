@@ -6,6 +6,7 @@ if(!function_exists('marketing_popup_data'))
     function marketing_popup_data()
     {
         $todayTimeStamp = time();
+        $todayTimeStamp = date('d-m-Y');
         $marketingPopupsData = array();
         $ci = &get_instance();
         $ci->load->model('Marketing_popups_model');
@@ -13,7 +14,8 @@ if(!function_exists('marketing_popup_data'))
         if($marketingPopUp==''){
             set_cookie('MarketingPopUp','yes','86400');
             $marketingPopupsData = $ci->Marketing_popups_model->get_all_marketing_popups_active_frontend();
-                if($marketingPopupsData['startDateStr']<=$todayTimeStamp && $marketingPopupsData['endDateStr']>$todayTimeStamp){
+                //if($marketingPopupsData['startDateStr']<=$todayTimeStamp && $marketingPopupsData['endDateStr']>=$todayTimeStamp){
+                    if($marketingPopupsData['start_date']<=$todayTimeStamp && $marketingPopupsData['end_date']>=$todayTimeStamp){
                     return $marketingPopupsData;
             }
             
