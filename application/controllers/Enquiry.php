@@ -33,6 +33,9 @@ class Enquiry extends MY_Controller{
         'dob'=> $this->input->post('dob'),          
 
         );
+
+        $formType = $this->input->post("formType");
+
         $headers = array(
         'API-KEY:'.WOSA_API_KEY, 
         'MOBILE:'.$this->input->post('mobile', true), 
@@ -52,15 +55,28 @@ class Enquiry extends MY_Controller{
                     'message' => $this->input->post('message'),
                     'todayDate'=> $today,
                     );  
+
+                    if ($formType == "workshop" && $this->input->post("course_name")) {
+                        $student_enq_params["formType"] = $formType;
+                        $student_enq_params["course_name"] = $this->input->post("course_name");
+                    }
+
                     $headers_enqq = array(
                         'API-KEY:'.WOSA_API_KEY,                       
                         'SENDEMAIL-FLAG:0',            
                         );                   
                     $response_enq= json_decode($this->_curPostData(base_url(SUBMIT_ENQUIRY_URL), $headers_enqq, $student_enq_params));                      
-                    if($response_enq->error_message->success==1){                   
-                        header('Content-Type: application/json');
-                        $response = ['status'=>2,'enquiry_id'=>$response_enq->error_message->enquiry_id];
-                        echo json_encode($response);               
+                    if($response_enq->error_message->success==1){       
+                        if ($formType == "workshop") {
+                            header('Content-Type: application/json');
+                            $response = ['status'=> 1,'enquiry_id'=>$response_enq->error_message->enquiry_id];
+                            echo json_encode($response);  
+                        }
+                        else {
+                            header('Content-Type: application/json');
+                            $response = ['status'=> 2,'enquiry_id'=>$response_enq->error_message->enquiry_id];
+                            echo json_encode($response);               
+                        }
                     }
                     else{                   
                         header('Content-Type: application/json');
@@ -84,7 +100,13 @@ class Enquiry extends MY_Controller{
             'enquiry_purpose_id' => $this->input->post('enquiry_purpose_id'), 
             'message' => $this->input->post('message'),
             'todayDate'=> $today,
-            );   
+            );
+            
+            if ($formType == "workshop" && $this->input->post("course_name")) {
+                $student_enq_params["formType"] = $formType;
+                $student_enq_params["course_name"] = $this->input->post("course_name");
+            }
+
             $headers_enqq = array(
                 'API-KEY:'.WOSA_API_KEY,                  
                 'SENDEMAIL-FLAG:1',            
@@ -117,6 +139,12 @@ class Enquiry extends MY_Controller{
             'message' => $this->input->post('message'),
             'todayDate'=> $today,
             );  
+
+            if ($formType == "workshop" && $this->input->post("course_name")) {
+                $student_enq_params["formType"] = $formType;
+                $student_enq_params["course_name"] = $this->input->post("course_name");
+            }
+
             $headers_enqq = array(
                 'API-KEY:'.WOSA_API_KEY,                  
                 'SENDEMAIL-FLAG:0',            
@@ -133,11 +161,18 @@ class Enquiry extends MY_Controller{
             $response1= json_decode($this->_curPostData(base_url(UPDATE_OTP), $headers, $student_params));
             if($response1->error_message->success==1)
             {
-                //opt send success
-                //open otp popup                    
-                header('Content-Type: application/json');
-                $response2 = ['status'=>2,'enquiry_id'=>$response_enq1->error_message->enquiry_id];
-                echo json_encode($response2);
+                if ($formType == "workshop") {
+                    header('Content-Type: application/json');
+                    $response2 = ['status'=>1,'enquiry_id'=>$response_enq1->error_message->enquiry_id];
+                    echo json_encode($response2);
+                }
+                else {
+                    //opt send success
+                    //open otp popup                    
+                    header('Content-Type: application/json');
+                    $response2 = ['status'=>2,'enquiry_id'=>$response_enq1->error_message->enquiry_id];
+                    echo json_encode($response2);
+                }
             }
             else 
             {
@@ -157,16 +192,29 @@ class Enquiry extends MY_Controller{
             'enquiry_purpose_id' => $this->input->post('enquiry_purpose_id'), 
             'message' => $this->input->post('message'),
             'todayDate'=> $today,
-            );     
+            );
+            
+            if ($formType == "workshop" && $this->input->post("course_name")) {
+                $student_enq_params["formType"] = $formType;
+                $student_enq_params["course_name"] = $this->input->post("course_name");
+            }
+            
             $headers_enqq = array(
                 'API-KEY:'.WOSA_API_KEY,                  
                 'SENDEMAIL-FLAG:1',            
                 );          
             $response= json_decode($this->_curPostData(base_url(SUBMIT_ENQUIRY_URL), $headers_enqq, $student_enq_params));     
-            if($response->error_message->success==1){                   
-                header('Content-Type: application/json');
-                $response = ['status'=>2,'enquiry_id'=>$response->error_message->enquiry_id];
-                echo json_encode($response);               
+            if($response->error_message->success==1){
+                if ($formType == "workshop") {
+                    header('Content-Type: application/json');
+                    $response = ['status'=>1,'enquiry_id'=>$response->error_message->enquiry_id];
+                    echo json_encode($response);
+                }   
+                else {
+                    header('Content-Type: application/json');
+                    $response = ['status'=>2,'enquiry_id'=>$response->error_message->enquiry_id];
+                    echo json_encode($response);
+                }                               
             }
             else{                   
                 header('Content-Type: application/json');

@@ -2,38 +2,24 @@
 /**
  * @package         WOSA
  * @subpackage      IELTS/PTE..
- * @author          Haroon
+ * @author          Rajan Bansal
  *
  **/
 
  
-class Student_enquiry_model extends CI_Model
+class Workshop_booking_model extends CI_Model
 {
     function __construct()
     {
         parent::__construct();
     }
 
-    function get_all_purpose(){
-
-        $this->db->distinct('');
-        $this->db->select('epm.id,epm.enquiry_purpose_name');
-        $this->db->from('students_enquiry se');        
-        $this->db->join('enquiry_purpose_masters epm', 'epm.id = se.enquiry_purpose_id', 'left');
-        $this->db->where('se.active', 1);
-        $this->db->where('se.formType <>',"workshop");
-        $this->db->or_where('se.formType',NULL);
-        $this->db->order_by('epm.enquiry_purpose_name', 'ASC');
-        return $this->db->get()->result_array();
-    }
-
-    function get_all_enquiryDates(){
+    function get_all_workshop_bookings_dates(){
 
         $this->db->distinct('');
         $this->db->select('todayDate');
         $this->db->from('students_enquiry');
-        $this->db->where('formType <>',"workshop");
-        $this->db->or_where('formType',NULL);
+        $this->db->where('formType',"workshop");
         $this->db->order_by('enquiry_id', 'DESC');
         return $this->db->get()->result_array();
     }
@@ -49,25 +35,22 @@ class Student_enquiry_model extends CI_Model
     /*
      * Get all students enquiry count
      */
-    function get_all_enquiry_count($enquiry_purpose_id)
+    function get_all_workshop_booking_count($enquiry_purpose_id)
     {
         $this->db->from('students_enquiry');
         if($enquiry_purpose_id>0){
            $this->db->where('enquiry_purpose_id',$enquiry_purpose_id); 
         }else{} 
 
-        $this->db->where('formType <>',"workshop");
-        $this->db->or_where('formType',NULL);
-
+        $this->db->where('formType','workshop');
         return $this->db->count_all_results();
     } 
 
-     function get_all_enquiry_count_filterDate($filterDate)
+     function get_all_workshop_booking_count_filterDate($filterDate)
     {
         $this->db->from('students_enquiry');
         $this->db->where('todayDate',$filterDate);
-        $this->db->where('formType <>','workshop');
-        $this->db->or_where('formType',NULL);
+        $this->db->where('formType','workshop');
         return $this->db->count_all_results();
     } 
 
@@ -78,8 +61,7 @@ class Student_enquiry_model extends CI_Model
     {
         $this->db->from('students_enquiry');
         $this->db->where(array('enquiry_purpose_id'=>$enquiry_purpose_id));
-        $this->db->where('formType <>','workshop');
-        $this->db->or_where('formType',NULL);
+        $this->db->where('formType','workshop');
         return $this->db->count_all_results();
     }
 
@@ -90,8 +72,7 @@ class Student_enquiry_model extends CI_Model
     {
         $this->db->from('students_enquiry');
         $this->db->where(array('enquiry_purpose_id'=>$enquiry_purpose_id));
-        $this->db->where('formType <>','workshop');
-        $this->db->or_where('formType',NULL);
+        $this->db->where('formType','workshop');
         return $this->db->count_all_results();
     }
 
@@ -102,8 +83,7 @@ class Student_enquiry_model extends CI_Model
     {
         $this->db->from('students_enquiry');
         $this->db->where(array('enquiry_purpose_id'=>$enquiry_purpose_id));
-        $this->db->where('formType <>','workshop');
-        $this->db->or_where('formType',NULL);
+        $this->db->where('formType','workshop');
         return $this->db->count_all_results();
     }
 
@@ -114,8 +94,7 @@ class Student_enquiry_model extends CI_Model
     {
         $this->db->from('students_enquiry');
         $this->db->where(array('enquiry_purpose_id'=>$enquiry_purpose_id));
-        $this->db->where('formType <>','workshop');
-        $this->db->or_where('formType',NULL);
+        $this->db->where('formType','workshop');
         return $this->db->count_all_results();
     }
 
@@ -126,8 +105,7 @@ class Student_enquiry_model extends CI_Model
     {
         $this->db->from('students_enquiry');
         $this->db->where(array('enquiry_purpose_id'=>$enquiry_purpose_id));
-        $this->db->where('formType <>','workshop');
-        $this->db->or_where('formType',NULL);
+        $this->db->where('formType','workshop');
         return $this->db->count_all_results();
     }
 
@@ -138,13 +116,12 @@ class Student_enquiry_model extends CI_Model
     {
         $this->db->from('students_enquiry');
         $this->db->where(array('isReplied'=>0)); 
-        $this->db->where('formType <>','workshop');
-        $this->db->or_where('formType',NULL);
+        $this->db->where('formType','workshop');
         return $this->db->count_all_results();
     } 
     
 
-    function get_all_enquiry($enquiry_purpose_id,$params = array()){
+    function get_all_workshop_bookings($enquiry_purpose_id,$params = array()){
 
         if(isset($params) && !empty($params))
         {
@@ -161,37 +138,23 @@ class Student_enquiry_model extends CI_Model
             s.`is_otp_verified`,
             s.`country_code`,
             s.`mobile`,
+            se.formType,
+            se.courseName,
             se.`free_demo`,
             se.`isReplied`,
             se.`is_transfered`,
             se.`message`,
             se.`created`,
-            tm.`test_module_name`,
-            pgm.`programe_name`,
-            cl.`center_name`,
-            epm.`enquiry_purpose_name`,
-            cnt.`name` as `country_name`,
-            s.id as student_id,s.UID
-        ');
+            s.id as student_id,
+            s.UID');
         $this->db->from('`students_enquiry` se');
-        $this->db->join('`enquiry_purpose_masters` epm', 'epm.`id`= se.`enquiry_purpose_id`', 'left');
-        $this->db->join('`test_module` tm', 'tm.`test_module_id`= se.`test_module_id`', 'left');
-        $this->db->join('`programe_masters` pgm', 'pgm.`programe_id`= se.`programe_id`', 'left');
-        $this->db->join('`country` cnt', 'cnt.country_id = se.country_id', 'left');
-        $this->db->join('`center_location` cl', 'cl.`center_id`= se.`center_id`', 'left');
         $this->db->join('`students` s', 's.`id`= se.`student_id`', 'left');
-        if($enquiry_purpose_id>0){
-            $this->db->where('se.enquiry_purpose_id',$enquiry_purpose_id);
-        }else{
-            
-        }
-        $this->db->where('se.formType <>','workshop');
-        $this->db->or_where('se.formType',NULL);
-        $this->db->order_by('enquiry_id', 'DESC'); 
+        $this->db->where('se.formType','workshop');
+        $this->db->order_by('se.enquiry_id', 'DESC'); 
         return $this->db->get('')->result_array();
     }
 
-    function get_all_enquiry_filterDate($filterDate,$params = array()){
+    function get_all_workshop_booking_filterDate($filterDate,$params = array()){
 
         if(isset($params) && !empty($params))
         {
@@ -213,15 +176,14 @@ class Student_enquiry_model extends CI_Model
             se.`isReplied`,
             se.`is_transfered`,
             se.`message`,
-            se.`created`,           
-            epm.`enquiry_purpose_name`,            
+            se.`created`,
+            se.`formType`,
+            se.`courseName`           
         ');
         $this->db->from('`students_enquiry` se');
-        $this->db->join('`enquiry_purpose_masters` epm', 'epm.`id`= se.`enquiry_purpose_id`', 'left');
         $this->db->join('`students` s', 's.`id`= se.`student_id`');
         $this->db->where('se.todayDate',$filterDate);
-        $this->db->where('se.formType <>','workshop');
-        $this->db->or_where('se.formType',NULL);
+        $this->db->where('se.formType','workshop');
         $this->db->order_by('enquiry_id', 'DESC'); 
         return $this->db->get('')->result_array();
     }
@@ -260,8 +222,6 @@ class Student_enquiry_model extends CI_Model
         $this->db->join('`center_location` cl', 'cl.`center_id`= se.`center_id`', 'left');
         $this->db->join('`students` s', 's.`mobile`= se.`mobile`', 'left');
         $this->db->where(array('enquiry_purpose_id'=>$enquiry_purpose_id));
-        $this->db->where('se.formType <>','workshop');
-        $this->db->or_where('se.formType',NULL);
         $this->db->order_by('enquiry_id', 'DESC'); 
         return $this->db->get('')->result_array();
     }
@@ -294,8 +254,6 @@ class Student_enquiry_model extends CI_Model
         $this->db->join('`enquiry_purpose_masters` epm', 'epm.`id`= se.`enquiry_purpose_id`', 'left');
         $this->db->join('`students` s', 's.`id`= se.`student_id`', 'left');
         $this->db->where(array('isReplied'=>0)); 
-        $this->db->where('se.formType <>','workshop');
-        $this->db->or_where('se.formType',NULL);
         $this->db->order_by('enquiry_id', 'DESC'); 
         return $this->db->get('')->result_array();
     }
@@ -340,8 +298,6 @@ class Student_enquiry_model extends CI_Model
         $this->db->join('`center_location` cl', 'cl.`center_id`= se.`center_id`', 'left');
         $this->db->join('`students` s', 's.`id`= se.`student_id`', 'left');
         $this->db->where(array('enquiry_id'=> $enquiry_id)); 
-        $this->db->where('se.formType <>','workshop');
-        $this->db->or_where('se.formType',NULL);
         return $this->db->get('')->row_array();
     }    
 
@@ -366,8 +322,6 @@ class Student_enquiry_model extends CI_Model
         $this->db->from('`students_enquiry` se');       
         $this->db->join('`students_enquiry_reply` ser', 'se.`enquiry_id`= ser.`enquiry_id`', 'left');
         $this->db->where(array('se.enquiry_id'=>$enquiry_id));
-        $this->db->where('se.formType <>','workshop');
-        $this->db->or_where('se.formType',NULL);
         $this->db->order_by('ser.created', 'DESC');
         return $this->db->get('')->result_array();
     }    
@@ -383,8 +337,6 @@ class Student_enquiry_model extends CI_Model
         $this->db->from('`students_enquiry` se');       
         $this->db->join('`students_enquiry_reply` ser', 'se.`enquiry_id`= ser.`enquiry_id`', 'left');
         $this->db->where(array('se.student_id'=> $id,'se.programe_id'=> $programe_id,'se.test_module_id'=> $test_module_id));
-        $this->db->where('se.formType <>','workshop');
-        $this->db->or_where('se.formType',NULL);
         $this->db->order_by('ser.created', 'DESC');
         return $this->db->get('')->result_array();
     } 
@@ -447,5 +399,19 @@ class Student_enquiry_model extends CI_Model
     //print_r($this->db->last_query());exit;
     }
 
-    
+    function getWorkshopPageSettings() {
+        $this->db->select("id,active");
+        $this->db->from("workshop_page_settings");
+        return $this->db->get('')->row_array();
+    }
+
+    function addWorkshopPageSetting($params) {
+        $this->db->insert('workshop_page_settings',$params);
+        return $this->db->insert_id();
+    }
+
+    function updateWorkshopPageSetting($params,$id) {
+        $this->db->where('id',$id);
+        return $this->db->update('workshop_page_settings',$params);
+    }
 }

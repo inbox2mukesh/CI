@@ -38,6 +38,11 @@ public function index_post()
             'todayDate' =>$std_data->todayDate,            
             'enquiry_no' =>$enquiry_no,            
         );    
+
+        if(isset($std_data->formType) && $std_data->formType == "workshop" && isset($std_data->course_name) && $std_data->course_name) {
+            $params["formType"] = $std_data->formType;
+            $params["courseName"] = $std_data->course_name;
+        }
         
         $enquiry_id = $this->Student_enquiry_model->add_enquiry($params); 
         if($enquiry_id){

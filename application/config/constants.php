@@ -357,6 +357,9 @@ define('GET_PTE_PP_PACK_URL_LONG', 'WOSA-API-V1/practice_packs/Get_pte_pp_pack_l
 define('GET_SE_PP_PACK_URL_LONG', 'WOSA-API-V1/practice_packs/Get_se_pp_pack_long');
 define('GET_ALL_PP_PACK_URL_LONG', 'WOSA-API-V1/practice_packs/Get_all_pp_pack_long');
 
+//Workshop Page Settings
+define('GET_WORKSHOP_PAGE_SETTINGS','/WOSA-API-V1/Get_workshop_page_settings');
+
 //classroom
 define('GET_CLASSROOM_NAME', 'WOSA-API-V1/classroom/Get_classroom_data');
 

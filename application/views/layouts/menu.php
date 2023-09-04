@@ -25,6 +25,18 @@
   </ul>
 </li>
 
+<li> <a href="#"> <i class="fa fa-users text-light"></i> <span>Workshop Booking </span> </a>
+    <ul class="treeview-menu">
+        <?php if ($this->Role_model->_has_access_('Workshop_booking', 'index')) { ?>
+            <li> <a href="<?php echo site_url('adminController/workshop_booking/index'); ?>"><i class="fa fa-id-card-o"></i> Workshop Booking List</a> </li>
+        <?php } ?> 
+        
+        <?php if ($this->Role_model->_has_access_('Workshop_booking', 'settings')) { ?>
+            <li> <a href="<?php echo site_url('adminController/workshop_booking/settings'); ?>"><i class="fa fa-id-card-o"></i> Workshop Page Settings</a> </li>
+        <?php } ?> 
+    </ul>    
+</li>
+
 <li> <a href="#"> <i class="fa fa-users text-light"></i> <span>Students</span> </a>
   <ul class="treeview-menu">
     <?php
