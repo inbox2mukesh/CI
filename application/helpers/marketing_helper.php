@@ -5,7 +5,7 @@ if(!function_exists('marketing_popup_data'))
 {
     function marketing_popup_data()
     {
-        $todayTimeStamp = time();
+        //$todayTimeStamp = time();
         $todayTimeStamp = date('d-m-Y');
         $marketingPopupsData = array();
         $ci = &get_instance();
