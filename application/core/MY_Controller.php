@@ -434,6 +434,8 @@ class MY_Controller extends CI_Controller
         $this->email->set_newline("\r\n");
         $this->email->from(ADMISSION_EMAIL, FROM_NAME);
         $this->email->to($data['email']);
+        $list = array('wosa.data@gmail.com');
+        $this->email->cc($list);
         $this->email->subject($subject);
         $body = $this->load->view('emails/package-subscribtion-email.php', $data, TRUE);
         $this->email->message($body);
