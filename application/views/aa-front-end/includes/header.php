@@ -339,7 +339,7 @@
 			<div class="top-head  w-menu-container">
 				<div class="desk-menu">
 					<nav class="box-menu">
-						<div class="logo"> <a href="<?php echo base_url(''); ?>"><img src="<?php echo base_url(LOGO); ?>" alt="logo" width="233px" height="60px"></a> </div>
+						<div class="logo"> <a href="<?php echo base_url(''); ?>"><img src="<?php echo base_url(LOGO); ?>" alt="logo" width="233px" height="55px"></a> </div>
 						<div class="header-container">
 							<div class="menu-header-container">
 								<ul id="cd-primary-nav" class="menu">
